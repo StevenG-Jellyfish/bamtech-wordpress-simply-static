@@ -1,4 +1,4 @@
-# Docker WordPress Child Image
+# Bamtech wordpress depoloyment on AWS ECS
 
 This repository contains the wordpress child image. When creating a new WordPress project, you should download a zip of this repository and commit to a new repository.
 
