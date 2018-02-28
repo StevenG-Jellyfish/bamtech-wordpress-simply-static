@@ -1,0 +1,13 @@
+!.gitkeep
+db/db_data/
+wordpress/wp_content/
+wordpress/wp-content/cache/autoptimize/*
+elasticsearch/data/
+logs/
+wordpress/wp-content/uploads/
+wordpress/uploads/
+wordpress/wp-content/cache/
+wordpress/wp-content/themes/twentyfifteen/
+wordpress/wp-content/themes/twentysixteen/
+wordpress/wp-content/themes/twentyseventeen/
+host.env

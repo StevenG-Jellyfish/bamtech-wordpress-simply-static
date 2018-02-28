@@ -1,0 +1,197 @@
+# Translation of Plugins - Glue for Yoast SEO &#38; AMP - Stable (latest release) in English (UK)
+# This file is distributed under the same license as the Plugins - Glue for Yoast SEO &#38; AMP - Stable (latest release) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2017-04-06 18:11:17+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: GlotPress/2.4.0-alpha\n"
+"Language: en_GB\n"
+"Project-Id-Version: Plugins - Glue for Yoast SEO &#38; AMP - Stable (latest release)\n"
+
+#. Author URI of the plugin/theme
+msgid "https://yoast.com"
+msgstr "https://yoast.com"
+
+#. Author of the plugin/theme
+msgid "Joost de Valk"
+msgstr "Joost de Valk"
+
+#. Description of the plugin/theme
+msgid "Makes sure the default WordPress AMP plugin uses the proper Yoast SEO metadata"
+msgstr "Makes sure the default WordPress AMP plugin uses the proper Yoast SEO metadata"
+
+#. Plugin URI of the plugin/theme
+msgid "https://wordpress.org/plugins/glue-for-yoast-seo-amp/"
+msgstr "https://wordpress.org/plugins/glue-for-yoast-seo-amp/"
+
+#. Plugin Name of the plugin/theme
+msgid "Glue for Yoast SEO & AMP"
+msgstr "Glue for Yoast SEO & AMP"
+
+#: classes/views/admin-page.php:140
+msgid "Optionally add a valid google analytics tracking code."
+msgstr "Optionally add a valid Google analytics tracking code."
+
+#: classes/views/admin-page.php:135 classes/views/admin-page.php:141
+msgid "Analytics code"
+msgstr "Analytics code"
+
+#: classes/views/admin-page.php:134
+msgid "Optionally you can override the default AMP tracking code with your own by putting it below:"
+msgstr "Optionally you can override the default AMP tracking code with your own by putting it below:"
+
+#: classes/views/admin-page.php:129
+msgid "Pageviews will be tracked using the following account: %s."
+msgstr "Pageviews will be tracked using the following account: %s."
+
+#: classes/views/admin-page.php:127
+msgid "Make sure to connect your Google Analytics plugin properly."
+msgstr "Make sure to connect your Google Analytics plugin properly."
+
+#: classes/views/admin-page.php:124
+msgid "Because your Google Analytics plugin by Yoast is active, your AMP pages will also be tracked."
+msgstr "Because your Google Analytics plugin by Yoast is active, your AMP pages will also be tracked."
+
+#: classes/views/admin-page.php:120
+msgid "AMP Analytics"
+msgstr "AMP Analytics"
+
+#: classes/views/admin-page.php:112
+msgid "Extra code"
+msgstr "Extra code"
+
+#: classes/views/admin-page.php:111
+msgid "Only %s and %s tags are allowed, other tags will be removed automatically."
+msgstr "Only %s and %s tags are allowed, other tags will be removed automatically."
+
+#: classes/views/admin-page.php:110
+msgid "Extra code in %s"
+msgstr "Extra code in %s"
+
+#: classes/views/admin-page.php:102 classes/views/admin-page.php:103
+msgid "Extra CSS"
+msgstr "Extra CSS"
+
+#: classes/views/admin-page.php:98
+msgid "Border color"
+msgstr "Border colour"
+
+#: classes/views/admin-page.php:97
+msgid "Background color"
+msgstr "Background colour"
+
+#: classes/views/admin-page.php:94
+msgid "Blockquotes"
+msgstr "Blockquotes"
+
+#: classes/views/admin-page.php:89
+msgid "No underline"
+msgstr "No underline"
+
+#: classes/views/admin-page.php:87 classes/views/admin-page.php:88
+msgid "Underline"
+msgstr "Underline"
+
+#: classes/views/admin-page.php:84
+msgid "Hover color"
+msgstr "Hover colour"
+
+#: classes/views/admin-page.php:81
+msgid "Links"
+msgstr "Links"
+
+#: classes/views/admin-page.php:77
+msgid "Post meta info color"
+msgstr "Post meta info colour"
+
+#: classes/views/admin-page.php:76 classes/views/admin-page.php:83
+#: classes/views/admin-page.php:96
+msgid "Text color"
+msgstr "Text colour"
+
+#: classes/views/admin-page.php:75
+msgid "Title color"
+msgstr "Title colour"
+
+#: classes/views/admin-page.php:74
+msgid "AMP Header color"
+msgstr "AMP Header colour"
+
+#: classes/views/admin-page.php:71
+msgid "Content colors"
+msgstr "Content colours"
+
+#: classes/views/admin-page.php:68
+msgid "The image must be at least 696px wide."
+msgstr "The image must be at least 696px wide."
+
+#: classes/views/admin-page.php:67
+msgid "Used when a post doesn't have an image associated with it."
+msgstr "Used when a post doesn't have an image associated with it."
+
+#: classes/views/admin-page.php:66
+msgid "Default image"
+msgstr "Default image"
+
+#: classes/views/admin-page.php:62
+msgid "Must be at least 32px &times; 32px"
+msgstr "Must be at least 32px &times; 32px"
+
+#: classes/views/admin-page.php:61
+msgid "AMP icon"
+msgstr "AMP icon"
+
+#: classes/views/admin-page.php:58
+msgid "Images"
+msgstr "Images"
+
+#: classes/views/admin-page.php:50
+msgid "Currently pages are not supported by the AMP plugin."
+msgstr "Currently pages are not supported by the AMP plugin."
+
+#: classes/views/admin-page.php:49
+msgid "Please note:"
+msgstr "Please note:"
+
+#: classes/views/admin-page.php:39
+msgid "Disabled"
+msgstr "Disabled"
+
+#: classes/views/admin-page.php:38
+msgid "Enabled"
+msgstr "Enabled"
+
+#: classes/views/admin-page.php:25
+msgid "Post is enabled by default, feel free to enable any of them."
+msgstr "Post is enabled by default, feel free to enable any of them."
+
+#: classes/views/admin-page.php:24
+msgid "Generally you'd want this to be your news post types."
+msgstr "Generally you'd want this to be your news post types."
+
+#: classes/views/admin-page.php:23
+msgid "Post types that have AMP support"
+msgstr "Post types that have AMP support"
+
+#: classes/views/admin-page.php:17
+msgid "Analytics"
+msgstr "Analytics"
+
+#: classes/views/admin-page.php:16
+msgid "Design"
+msgstr "Design"
+
+#: classes/views/admin-page.php:15
+msgid "Post types"
+msgstr "Post types"
+
+#: classes/class-backend.php:105
+msgid "Use Logo"
+msgstr "Use Logo"
+
+#: classes/class-backend.php:61 classes/class-backend.php:62
+msgid "AMP"
+msgstr "AMP"
