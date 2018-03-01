@@ -1,3 +1,3 @@
-FROM gcr.io/jellyfish-development-167809/wordpress-db:0.0.0.1
+FROM mysql:5.7
 
-#EXPOSE 3306
+EXPOSE 3306

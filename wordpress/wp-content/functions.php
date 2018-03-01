@@ -34,6 +34,6 @@ function cptui_register_my_cpts() {
     register_post_type( "news", $args );
 }
 
-add_action( 'init', 'cptui_register_my_cpts' );
+//add_action( 'init', 'cptui_register_my_cpts' );
 
 

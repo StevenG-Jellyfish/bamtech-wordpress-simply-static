@@ -68,8 +68,8 @@ define('NONCE_SALT',       getenv('NONCE_SALT'));
  */
 $table_prefix  = getenv('TABLE_PREFIX');
 
-define('WP_HOME', getenv('WP_HOME'));
-define('WP_SITEURL', getenv('WP_SITEURL'));
+define('WP_HOME',getenv('WP_HOME'));
+define('WP_SITEURL',getenv('WP_SITEURL'));
 define('WP_CONTENT_URL', getenv('WP_CONTENT_URL'));
 
 /* Redis */

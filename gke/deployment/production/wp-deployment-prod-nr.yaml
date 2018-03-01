@@ -1,0 +1,203 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  namespace: production
+  name: prod
+  labels:
+    app: nginx
+    tier: backend
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        name: wordpress
+        app: nginx
+        tier: backend
+    spec:
+      containers:
+# -----------------------------------------
+#     Wordpress
+# -----------------------------------------
+      
+      #- image: gcr.io/jellyfish-development-167809/wordpress-child-gke-wordpress:0.0.0
+        imagePullPolicy: Always
+        name: wordpress
+        securityContext:
+          capabilities:
+            add:
+            - SYS_ADMIN
+          privileged: true
+        env:
+        - name: MEMCACHE_SERVER
+          valueFrom:
+            secretKeyRef:
+              key: MEMCACHE_SERVER
+              name: prod-wp-variables
+        - name: BUCKET_NAME
+          valueFrom:
+            secretKeyRef:
+              key: BUCKET_NAME
+              name: prod-wp-variables
+        - name: MAILGUN_DOMAIN
+          valueFrom:
+            secretKeyRef:
+              name: prod-wp-variables
+              key: MAILGUN_DOMAIN
+        - name: MAILGUN_KEY
+          valueFrom:
+            secretKeyRef:
+              name: prod-wp-variables
+              key: MAILGUN_KEY
+        - name: MAILGUN_FROM_EMAIL
+          valueFrom:
+            secretKeyRef:
+              name: prod-wp-variables
+              key: MAILGUN_FROM_EMAIL
+        - name: MAILGUN_FROM_NAME
+          valueFrom:
+            secretKeyRef:
+              name: prod-wp-variables
+              key: MAILGUN_FROM_NAME
+        - name: WP_SITEURL
+          valueFrom:
+            secretKeyRef:
+              name: prod-wp-variables
+              key: WP_SITEURL
+        - name: WP_HOME
+          valueFrom:
+            secretKeyRef:
+              name: prod-wp-variables
+              key: WP_HOME
+        - name: WP_CONTENT_URL
+          valueFrom:
+            secretKeyRef:
+              name: prod-wp-variables
+              key: WP_CONTENT_URL
+        - name: TABLE_PREFIX
+          valueFrom:
+            secretKeyRef:
+              name: prod-wp-variables
+              key: TABLE_PREFIX
+        - name: DB_HOST
+          value: 127.0.0.1:3306
+        - name: DB_NAME
+          value: wordpress
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: prod-sql-credentials
+              key: username
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: prod-sql-credentials
+              key: password
+        - name: WORDPRESS_TITLE
+          valueFrom:
+            secretKeyRef:
+              name: prod-wp-variables
+              key: WORDPRESS_TITLE
+        - name: WORDPRESS_ADMIN_USER
+          valueFrom:
+            secretKeyRef:
+              name: prod-wp-variables
+              key: WORDPRESS_ADMIN_USER
+        - name: WORDPRESS_ADMIN_EMAIL
+          valueFrom:
+            secretKeyRef:
+              name: prod-wp-variables
+              key: WORDPRESS_ADMIN_EMAIL
+        - name: WORDPRESS_ADMIN_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: prod-wp-variables
+              key: WORDPRESS_ADMIN_PASSWORD
+        volumeMounts:
+        - name: wordpress-share
+          mountPath: /var/www/html
+        - name: shared-content
+          mountPath: /mnt
+        - name: cache
+          mountPath: /media/cache
+        - name: uploads
+          mountPath: /media/uploads
+# -----------------------------------------
+#     SQL Proxy
+# -----------------------------------------
+      - image: gcr.io/cloudsql-docker/gce-proxy:1.11
+        name: sqlproxy
+        command: ["/cloud_sql_proxy", "--dir=/cloudsql",
+                  "-instances[PROJECT-ID]:europe-west1:mysql-prod=tcp:3306",
+                  "-credential_file=/secrets/cloudsql/credentials.json"]
+        volumeMounts:
+        - name: prod-sql-instance
+          mountPath: /secrets/cloudsql
+          readOnly: true
+        - name: ssl-certs
+          mountPath: /etc/ssl/certs
+        - name: cloudsql
+          mountPath: /cloudsql
+# -----------------------------------------
+#     Nginx
+# -----------------------------------------
+      #- image: gcr.io/jellyfish-development-167809/sos-wordpress-child-gke-nginx:0.0.53
+        name: nginx
+        imagePullPolicy: Always
+        securityContext:
+          capabilities:
+            add:
+            - SYS_ADMIN
+          privileged: true
+        env:
+        - name: BUCKET_NAME
+          valueFrom:
+            secretKeyRef:
+              key: BUCKET_NAME
+              name: prod-wp-variables
+        ports:
+          - containerPort: 80
+        volumeMounts:
+        - name: wordpress-share
+          mountPath: /var/www/html
+        - name: shared-content
+          mountPath: /mnt
+        - name: nginx-pass
+          mountPath: /home
+        - name: cache
+          mountPath: /media/cache
+        - name: uploads
+          mountPath: /media/uploads
+# -----------------------------------------
+#     Volumes
+# -----------------------------------------
+      volumes:
+      - name: prod-sql-instance
+        secret:
+          secretName: prod-sql-instance
+      - name: cloudsql
+        emptyDir:
+      - name: ssl-certs
+        hostPath:
+          path: /etc/ssl/certs
+      - name: wordpress-share
+        emptyDir: {}
+      - name: shared-content
+        emptyDir: {}
+      - name: nginx-pass
+        configMap:
+          name: nginx-passwd
+          items:
+          - key: nginx-htpasswd
+            path: .htpasswd
+      - name: cache
+        persistentVolumeClaim:
+          claimName: cache
+      - name: uploads
+        persistentVolumeClaim:
+          claimName: uploads
