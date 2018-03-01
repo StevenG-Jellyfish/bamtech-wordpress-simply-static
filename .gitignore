@@ -11,3 +11,6 @@ wordpress/wp-content/themes/twentyfifteen/
 wordpress/wp-content/themes/twentysixteen/
 wordpress/wp-content/themes/twentyseventeen/
 host.env
+.DS_Store
+._.DS_Store
+
