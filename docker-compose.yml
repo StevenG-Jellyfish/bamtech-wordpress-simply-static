@@ -51,7 +51,7 @@ services:
         networks:
             - wpnet
         ports:
-            - "80:80"
+            - "8080:8080"
             #- "443:443"
         restart: always
         volumes:
@@ -60,6 +60,23 @@ services:
             - "./nginx/conf/nginx.conf:/etc/nginx/nginx.conf"
         volumes_from:
             - wordpress
+    varnish: 
+        build: 
+            context: ./varnish
+            dockerfile: Dockerfile
+        depends_on:
+            - nginx
+        env_file: 
+            - ./varnish/varnish.env   
+        hostname: varnish
+        networks:
+            - wpnet
+        ports: 
+            - "80:6081"
+        restart: always
+        
+
+     
 
     # redis:
     #     build:
