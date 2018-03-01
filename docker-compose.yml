@@ -10,8 +10,6 @@ services:
         environment:
             - "MYSQL_ROOT_PASSWORD=jellyfish"
         hostname: db
-        ports:
-            - "3306:3306"
         networks:
             - wpnet
         restart: always
@@ -51,12 +49,10 @@ services:
             - wordpress
         hostname: nginx
         networks:
-            wpnet:
-                aliases:
-                  - fast.*
+            - wpnet
         ports:
             - "80:80"
-            - "443:443"
+            #- "443:443"
         restart: always
         volumes:
             - "./logs/nginx:/var/log/nginx"
@@ -65,20 +61,20 @@ services:
         volumes_from:
             - wordpress
 
-    redis:
-        build:
-            context: ./redis/
-            dockerfile: Dockerfile
-        depends_on:
-            - wordpress
-        env_file:
-            - ./wordpress/wordpress.env
-        hostname: redis
-        networks:
-            - wpnet
-        restart: always
-        volumes:
-            - "./redis/default.conf:/usr/local/etc/redis/redis.conf"
+    # redis:
+    #     build:
+    #         context: ./redis/
+    #         dockerfile: Dockerfile
+    #     depends_on:
+    #         - wordpress
+    #     env_file:
+    #         - ./wordpress/wordpress.env
+    #     hostname: redis
+    #     networks:
+    #         - wpnet
+    #     restart: always
+    #     volumes:
+    #         - "./redis/default.conf:/usr/local/etc/redis/redis.conf"
 
     # memcached:
     #     image: memcached
@@ -89,21 +85,21 @@ services:
     #         - wpnet
     #     restart: always
 
-    elasticsearch:
-        build:
-            context: ./elasticsearch/
-            dockerfile: Dockerfile
-        depends_on:
-            - wordpress
-        hostname: elasticsearch
-        ports:
-            - "127.0.0.1:9200:9200"
-        volumes:
-            - "./elasticsearch/data:/usr/share/elasticsearch/data"
-            - "./elasticsearch/plugins:/usr/share/elasticsearch/plugins"
-        networks:
-            - wpnet
-        restart: always
+    # elasticsearch:
+    #     build:
+    #         context: ./elasticsearch/
+    #         dockerfile: Dockerfile
+    #     depends_on:
+    #         - wordpress
+    #     hostname: elasticsearch
+    #     ports:
+    #         - "127.0.0.1:9200:9200"
+    #     volumes:
+    #         - "./elasticsearch/data:/usr/share/elasticsearch/data"
+    #         - "./elasticsearch/plugins:/usr/share/elasticsearch/plugins"
+    #     networks:
+    #         - wpnet
+    #     restart: always
 
 networks:
     wpnet:

@@ -82,85 +82,84 @@ EOPHP
             --title=${WORDPRESS_TITLE} \
             --admin_user=admin \
             --admin_email=${WORDPRESS_ADMIN_EMAIL} \
-            --admin_password=${WORDPRESS_ADMIN_PASSWORD} \
+            --admin_password=admin_password \
             --skip-email \
             --allow-root
 
         wp core language install --allow-root en_GB --activate
-
-        echo "[ DESC ] Updating default WordPress Options..."
-        wp option update --allow-root blogname "${WORDPRESS_TITLE}"
-        wp option update --allow-root blogdescription "${WORDPRESS_DESCRIPTION}"
-        wp theme activate "${WORDPRESS_TEMPLATE}" --allow-root
-        wp option update --allow-root admin_email "${WORDPRESS_ADMIN_EMAIL}"
-        wp user update --allow-root admin --user_pass="${WORDPRESS_ADMIN_PASSWORD}"
-        wp theme delete --allow-root twentysixteen
-        wp theme delete --allow-root twentyseventeen
-        wp theme delete --allow-root twentyfifteen
-        wp option update --allow-root default_comment_status "${WORDPRESS_COMMENT_STATUS}"
-
-        PLUGINS=(
-            acf-content-analysis-for-yoast-seo
-            acf-to-rest-api
-            #add-to-home-screen
-            advanced-custom-fields
-            all-meta-stats-yoast-seo-addon
-            autoptimize
-            better-amp
-            busted
-            category-to-pages-wud
-            cloudflare
-            contact-form-7
-            custom-post-type-ui
-            debug-objects
-            duplicate-post
-            elasticpress
-            glue-for-yoast-seo-amp
-            google-analytics-for-wordpress
-            hyper-cache
-            imsanity
-            megamenu
-            meta-box-yoast-seo
-            #offline-content
-            #offline-shell
-            redis-cache
-            rest-api
-            #the-events-calendar
-            #the-events-calendar-shortcode
-            w3-total-cache
-            #web-push
-            wordpress-seo
-            wp-statistics
-            wp-sweep
-            yoast-seo-settings-xml-csv-import
-            #woocommerce
-            #woocommerce-gateway-stripe
-        )
-
-        # Loop the the plugins
-        echo "[ DESC ] Installing plugins"
-        for PLUGIN in "${PLUGINS[@]}"; do
-
-            echo "[ DESC ] Checking plugin: $PLUGIN..."
-            wp plugin install --allow-root $PLUGIN --activate || \
-                echo "[ WARNING ] Could not install $PLUGIN" && true
-
-        done
-
-        #wp core update --allow-root
-        #wp core update-db --allow-root
-        #wp plugin update --all --allow-root
-        #wp --info --allow-root
-
     else
         echo "[ DESC ] WordPress core is already installed. Skipping installation."
     fi
+
+    echo "[ DESC ] Updating default WordPress Options..."
+    wp option update --allow-root blogname "${WORDPRESS_TITLE}"
+    wp option update --allow-root blogdescription "${WORDPRESS_DESCRIPTION}"
+    wp theme activate "${WORDPRESS_TEMPLATE}" --allow-root
+    wp option update --allow-root admin_email "${WORDPRESS_ADMIN_EMAIL}"
+    wp theme delete --allow-root twentysixteen
+    wp theme delete --allow-root twentyseventeen
+    wp theme delete --allow-root twentyfifteen
+    wp option update --allow-root default_comment_status "${WORDPRESS_COMMENT_STATUS}"
 
     echo "
     alias ll='ls -lah'
     alias wp='wp --allow-root'
     " > ~/.bashrc
 
+    PLUGINS=(
+        acf-content-analysis-for-yoast-seo
+        acf-to-rest-api
+        #add-to-home-screen
+        advanced-custom-fields
+        all-meta-stats-yoast-seo-addon
+        autoptimize
+        better-amp
+        busted
+        category-to-pages-wud
+        cloudflare
+        contact-form-7
+        custom-post-type-ui
+        debug-objects
+        duplicate-post
+        elasticpress
+        glue-for-yoast-seo-amp
+        google-analytics-for-wordpress
+        hyper-cache
+        imsanity
+        jch-optimize
+        megamenu
+        meta-box-yoast-seo
+        #offline-content
+        #offline-shell
+        redis-cache
+        responsify-wp
+        rest-api
+        #the-events-calendar
+        #the-events-calendar-shortcode
+        w3-total-cache
+        #web-push
+        wordpress-seo
+        wp-statistics
+        wp-sweep
+        yoast-seo-settings-xml-csv-import
+        #woocommerce
+        #woocommerce-gateway-stripe
+    )
+
+    # Loop the the plugins
+    echo "[ DESC ] Installing plugins"
+    for PLUGIN in "${PLUGINS[@]}"; do
+
+        echo "[ DESC ] Checking plugin: $PLUGIN..."
+        wp plugin install --allow-root $PLUGIN --activate || \
+            echo "[ WARNING ] Could not install $PLUGIN" && true
+
+    done
+
+    #wp core update --allow-root
+    #wp core update-db --allow-root
+    #wp plugin update --all --allow-root
+    #wp --info --allow-root
     wp core version --extra --allow-root
 fi
 

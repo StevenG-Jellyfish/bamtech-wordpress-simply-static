@@ -66,18 +66,18 @@ define('NONCE_SALT',       getenv('NONCE_SALT'));
  * You can have multiple installations in one database if you give each
  * a unique prefix. Only numbers, letters, and underscores please!
  */
+
 $table_prefix  = getenv('TABLE_PREFIX');
 
-define('WP_HOME', getenv('WP_HOME'));
-define('WP_SITEURL', getenv('WP_SITEURL'));
+define('WP_HOME',getenv('WP_HOME'));
+define('WP_SITEURL',getenv('WP_SITEURL'));
 define('WP_CONTENT_URL', getenv('WP_CONTENT_URL'));
 
 /* Redis */
 define('WP_REDIS_SCHEME', getenv('WP_REDIS_SCHEME'));
 define('WP_REDIS_HOST', getenv('WP_REDIS_HOST'));
 define('WP_REDIS_PORT', getenv('WP_REDIS_PORT'));
-//define('WP_REDIS_PASSWORD', getenv('WP_REDIS_PASSWORD'));
-//define('WP_REDIS_DATABASE', getenv('WP_REDIS_DATABASE'));
+
 
 define('WP_REDIS_GLOBAL_GROUPS', [
        'blog-details',
@@ -134,8 +134,9 @@ if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROT
 /* That's all, stop editing! Happy blogging. */
 
 /** Absolute path to the WordPress directory. */
-if ( !defined('ABSPATH') )
+if ( !defined('ABSPATH') ){
     define('ABSPATH', dirname(__FILE__) . '/');
+}
 
 /*
 require-wp-settings.php
