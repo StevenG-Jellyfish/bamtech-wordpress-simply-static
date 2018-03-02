@@ -1,6 +1,5 @@
-# New Docker WordPress Base Image
+# Bamtech wordpress dockerized
 #
-#This repository contains the Base Wordpress image. When creating a new WordPress project, you should download a zip of this repository and commit to a new repository.
 
 # Steps to setup the project on local docker: 
 
