@@ -2,59 +2,27 @@
 #
 #This repository contains the Base Wordpress image. When creating a new WordPress project, you should download a zip of this repository and commit to a new repository.
 
-# Setting the environment
-## Gcloud
-1 - You need to have you jellyfish email added into the Google Cloud console
+# Steps to setup the project on local docker: 
 
-Login the google Cloud SDK:
-https://accounts.google.com/o/oauth2/auth?redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&prompt=select_account&response_type=code&client_id=32555940559.apps.googleusercontent.com&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fappengine.admin+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcompute+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Faccounts.reauth&access_type=offline
+set the host.env file:
 
-
-2 - You need to install and unpack the Google SDK depending on your machine: https://cloud.google.com/sdk/downloads
-
-```bash
-curl https://sdk.cloud.google.com | bash
-```
-
-```bash
-exec -l $SHELL
-```
-
-```bash
-gcloud init
-```
-
-```bash
-gcloud docker --authorize-only
-```
-
-# General Commands
-## Running the image
-
-First configure the environment for your local machine (or docker vm)
 ```bash
 cp host.env.default host.env
-nano host.env
 ```
+Modify the host.env to from project.local to localhost
 
-Then, to start (and restart) the environment, run:
-```bash
-./run.py
-```
-
-## Stopping the image
+Start the containers:
 
 ```bash
-./run.py stop
+docker-compose up -d
 ```
+
+1st time this will take a couple of minutes as it will need to build the images and install the required wordpress plugins.
+
+Browser to http://localhost to view the site
 
 ## Help
 
-To see help text run:
-
-```bash
-./run.py -h
-```
 
 # WP CLI
 ## Searching for Plugins
