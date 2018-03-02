@@ -163,4 +163,8 @@ EOPHP
     wp core version --extra --allow-root
 fi
 
+
+wp user update admin --user_pass=jellyfish --allow-root
+
 exec "$@"
+
