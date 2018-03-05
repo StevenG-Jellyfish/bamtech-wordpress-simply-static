@@ -46,7 +46,7 @@ docker-compose up -d
 1st time this will take a couple of minutes as it will need to build the images and install the required wordpress plugins.
 
 Browser to http://localhost to view the site
->>>>>>> master
+
 
 ## Help
 
