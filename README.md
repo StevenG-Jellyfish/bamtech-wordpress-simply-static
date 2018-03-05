@@ -1,4 +1,3 @@
-<<<<<<< master
 # Bamtech Wordpress Dockerized
 
 ![alt text](http://www.multichannel.com/sites/default/files/public/styles/blog_content/public/blog-images/bamtech%20logo_0.jpg)
@@ -25,7 +24,7 @@ https://jellyfish.atlassian.net/wiki/spaces/WIKI/pages/169213981/Set+Docker+CE+o
 On 1st time deployment will take a couple of minutes as it will need to build the images and install the required wordpress plugins.
 
 Browser to http://localhost to view the site, if you see a 502 Gateway error means the deployment still executing, wait few minutes till is completed.
-=======
+
 # Bamtech wordpress dockerized
 #
 
