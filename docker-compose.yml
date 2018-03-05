@@ -26,7 +26,6 @@ services:
             - ./wordpress/wordpress.env
             - ./host.env
         environment:
-            - "WORDPRESS_ADMIN_PASSWORD=password"
             - "db=172.17.0.1"
         hostname: wordpress
         networks:
@@ -51,8 +50,8 @@ services:
         hostname: nginx
         networks:
             - wpnet
-        ports:
-            - "8080:8080"
+        #ports:
+            #- "8080:8080"
             #- "443:443"
         restart: always
         volumes:
