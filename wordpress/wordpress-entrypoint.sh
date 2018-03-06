@@ -149,7 +149,7 @@ EOPHP
 fi
 
 
-wp user update admin --user_pass=jellyfish --allow-root
+wp user update admin --user_pass=${WORDPRESS_ADMIN_PASSWORD} --allow-root
 
 exec "$@"
 
