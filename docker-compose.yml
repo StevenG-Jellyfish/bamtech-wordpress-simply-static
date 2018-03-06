@@ -1,32 +1,32 @@
 version: '2'
 
-services:
-    db:
-        build:
-            context: ./db/
-            dockerfile: Dockerfile
-        env_file:
-            - ./db/db.env
-        environment:
-            - "MYSQL_ROOT_PASSWORD=jellyfish"
-        hostname: db
-        networks:
-            - wpnet
-        restart: always
-        volumes:
-            - "./db/db_data:/var/lib/mysql"
+#services:
+   # db:
+    #    build:
+    #        context: ./db/
+    #        dockerfile: Dockerfile
+    #    env_file:
+    #        - ./db/db.env
+    ##    environment:
+    #        - "MYSQL_ROOT_PASSWORD=jellyfish"
+    #    hostname: db
+    #    networks:
+    #        - wpnet
+    #    restart: always
+    #    volumes:
+    #        - "./db/db_data:/var/lib/mysql"
 
     wordpress:
         build:
             context: ./wordpress/
             dockerfile: Dockerfile
-        depends_on:
-            - db
+     #   depends_on:
+     #       - db
         env_file:
             - ./wordpress/wordpress.env
             - ./host.env
         environment:
-            - "WORDPRESS_ADMIN_PASSWORD=password"
+            - "WORDPRESS_ADMIN_PASSWORD="ek4aexi4Kanigh6"
         hostname: wordpress
         networks:
             - wpnet
