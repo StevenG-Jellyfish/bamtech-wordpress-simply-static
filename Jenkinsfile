@@ -1,31 +1,22 @@
 pipeline {
     // Agent specified as none @ root of pipeline 
     // agent gets specified inside stages
-    agent none
+    agent any
     
     environment {
-        // Git Repo Details
-        REPO = "Bamtech-wordpress"
-        GITORG = "JellyfishGroup/"
-        GIT = "https://api.github.com/repos/"
-        PULL = "git@github.com:"
-        WD= 'home/sites/Bamtech-wordpress'
-    }
-    options {
-        skipDefaultCheckout()   
+        WD= "home/sites/Bamtech-wordpress"
     }
     stages {
-        stage('pull & deploy') {
-            agent none
-
-           
+        stage('rebuild wordpress') {
+            steps {              
                     script {
                          sh "cd ${WD}"
-                         sh "docker-compose down"
-                         sh "git fetch"
-                         sh "docker compose up -d"                         
+                         sh "git pull"
+                         sh "docker-compose build wordpress"
+                         sh "docker-compose up --no-deps -d wordpress"                         
                          echo "Complete!"
                        }
                   }
              }
+    }
 }
