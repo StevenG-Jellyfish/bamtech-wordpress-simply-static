@@ -1,4 +1,6 @@
 !.gitkeep
+
+wordpress/wordpress.env
 db/db_data/
 wordpress/wp_content/
 wordpress/wp-content/cache/autoptimize/*
