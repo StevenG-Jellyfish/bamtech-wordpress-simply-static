@@ -11,10 +11,11 @@ pipeline {
             steps {              
                     script {
                          sh "cd ${WD}"
-                         sh "git pull"
-                         sh "docker-compose build wordpress"
-                         sh "docker-compose up --no-deps -d wordpress"                         
-                         echo "Complete!"
+                         //sh "git pull"
+                        // sh "docker-compose build wordpress"
+                        // sh "docker-compose up --no-deps -d wordpress"                         
+                        sh "ls -lha" 
+                        echo "Complete!"
                        }
                   }
              }
