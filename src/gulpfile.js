@@ -33,6 +33,7 @@ var config = {
     APIKEY:     'NepNXlL2RKHNHVAz9MJReWcBDFMUzohu'
   }
 };
+// TINYPNC::
 // https://tinypng.com/ --> 500 images uploads per month
 // not sure who's api that is but it was poached from silverscript
 
@@ -44,7 +45,16 @@ var paths = {
     scripts:        '../wordpress/wp-content/themes/espnplus/js',
     images:         '../wordpress/wp-content/themes/espnplus/imgs',
     svgs:           '../wordpress/wp-content/themes/espnplus/svgs',
-    svgpng:         '../public_html/wp-content/themes/ssic-deo/imgs/svgs/pngs'
+    svgpng:         '../wordpress/wp-content/themes/espnplus/imgs/svgs/pngs'
+
+/*  preset for AMP theme
+    amp-src:            '../wordpress/wp-content/themes/espnplus-amp/',
+    amp-styles:         '../wordpress/wp-content/themes/espnplus-amp/css',
+    amp-scripts:        '../wordpress/wp-content/themes/espnplus-amp/js',
+    amp-images:         '../wordpress/wp-content/themes/espnplus-amp/imgs',
+    amp-svgs:           '../wordpress/wp-content/themes/espnplus-amp/svgs',
+    amp-svgpng:         '../wordpress/wp-content/themes/espnplus-amp/imgs/svgs/pngs'
+*/
   },
   src: {
     styles:         '_theme/espnplus/scss/style.scss',
@@ -53,21 +63,19 @@ var paths = {
     svgs:           '_svgs/*.svg',
     svgpng:         '_svgs/_fallback/*.png',
     vendor: {
-      styles:       '_sass/vendor/**/*.scss',
-      jquery:       '_javascript/vendor/jquery/3.2.1/jquery.min.js',
-      pholder:      '_javascript/vendor/jquery_placeholder/2.3.1/jquery.placeholder.js',
-      validate:     '_javascript/vendor/jquery_validate/1.14.0/jquery.validate.js',
-      smpl_val:     '_javascript/vendor/jquery_simple-validate/0.3/jquery.simpleValidate.js',
-      bstrap:       '_javascript/vendor/bootstrap/3.3.5/bootstrap.js',
-      tblstack:     '_javascript/vendor/stackable/1.0.2/stacktable_aria.js',
-      unveil:       '_javascript/vendor/jquery_unveil/1.3.0/jquery.unveil.js',
-      // resizer:      '_javascript/vendor/wanker/0.1.2/jquery.wanker.min.js'
+      styles:       '_vendor/sass/**/*.scss',
+      jquery:       '_vendor/js/jquery/3.2.1/jquery.min.js',
+      pholder:      '_vendor/js/jquery_placeholder/2.3.1/jquery.placeholder.js',
+      validate:     '_vendor/js/jquery_validate/1.14.0/jquery.validate.js',
+      smpl_val:     '_vendor/js/jquery_simple-validate/0.3/jquery.simpleValidate.js',
+      bstrap:       '_vendor/js/bootstrap/3.3.5/bootstrap.js',
+      tblstack:     '_vendor/js/stackable/1.0.2/stacktable_aria.js',
+      unveil:       '_vendor/js/jquery_unveil/1.3.0/jquery.unveil.js'
     }
   },
   watch: {
-    cms:            '_sass/theme/cms/*.scss',
-    styles:         '_sass/**/*.scss',
-    scripts:        '_javascript/*.js',
+    styles:         '_theme/**/scss/*.scss',
+    scripts:        '_theme/**/js/*.js',
     images:         '_images/*.{png,gif,jpg}',
     svgs:           '_svgs/*.svg',
     svgpng:         '_svgs/_fallback/*.png'
@@ -96,7 +104,7 @@ function isDev(fn) {
 
 // javascript validation
 gulp.task('js_lint', () => {
-  return gulp.src(['_javascript/*.js', '!_javascript/vendor/**/*.js'], {
+  return gulp.src([paths.src.scripts, !paths.src.vendor], {
       since: gulp.lastRun('js_lint')
     })
     .pipe(jshint())
@@ -109,15 +117,10 @@ gulp.task('javascript', gulp.series('js_lint', () => {
     return gulp.src([
         paths.src.vendor.jquery,
         paths.src.vendor.bstrap,
-        // paths.src.vendor.pholder,
-        // paths.src.vendor.validate,
         paths.src.vendor.smpl_val,
         paths.src.vendor.tblstack,
-        // paths.src.ssic_forms,
-        // paths.src.vendor.resizer,
         paths.src.vendor.unveil,
-        paths.src.scripts,
-        paths.src.scriptsTealium
+        paths.src.scripts
         ])
       // .pipe(debug({title: '[1] Files in Stream:'}))
       .pipe(isDev(sourcemaps.init()))
@@ -139,23 +142,9 @@ gulp.task('sass', () => {
     .pipe(sass().on('error', sass.logError))
     .pipe(cssmin(sassOptions))
     // .pipe(debug({title: '[2] Files in Stream:'}))
-    .pipe(concat('ssic-deo.min.css'))
+    .pipe(concat('espnplus.min.css'))
     .pipe(config.production ? util.noop() : (sourcemaps.write('.')))
     // .pipe(debug({title: '[3] Files in Stream:'}))
-    .pipe(gulp.dest(paths.dist.styles))
-});
-
-// cms specific styling
-gulp.task('cms', () => {
-  return gulp.src(paths.src.cms)
-    .pipe(isDev(sourcemaps.init()))
-    // .pipe(debug({title: 'Files in the stream before gulp-sass:'}))
-    .pipe(sass())
-    .pipe(cssmin())
-    // .pipe(debug({title: 'Files in the stream after gulp-cssmin:'}))
-    .pipe(concat('cms_custom.min.css'))
-    .pipe(config.production ? util.noop() : (sourcemaps.write('.')))
-    // .pipe(debug({title: 'Files in the stream before gulp-dest:'}))
     .pipe(gulp.dest(paths.dist.styles))
 });
 
@@ -183,17 +172,58 @@ gulp.task('svgpng', () => {
     .pipe(gulp.dest(paths.dist.svgpng))
 });
 
+/*
+// AMP'd Tasks //
+// ampd css file generation
+gulp.task('espnplus-amp-css', function() {
+
+  var postCssOpts = [
+      autoprefixer({ browsers: ['last 2 versions', '> 2%'] }),
+      cssnano
+      //mqpacker
+  ];
+  return gulp.src('infosite/ampd/scss/amp-style.scss')
+      .pipe(sourcemaps.init())
+      .pipe(sass().on('error', sass.logError))
+      .pipe(postcss(postCssOpts))
+      .pipe(rename('amp-style.min.css'))
+      .pipe(development(sourcemaps.write('.')))
+      .pipe(development(gulp.dest('../Front-End/styles/infosite/')))
+      .pipe(development(gulp.dest('../Front-End/css/')))
+      .pipe(development(gulp.dest('../public_html/src/Project/Infosite/code/Styles/Infosite/')))
+      .pipe(production(gulp.dest('../public_html/src/Project/Infosite/code/Styles/Infosite/')));
+});
+// ampd inline css into *amp*.html pages	
+gulp.task('inlinesource', function() {
+/ *  var options = { //https://github.com/popeindustries/inline-source#usage
+      attribute: 'amp-custom'
+};
+* /
+
+  //  this will apply any css changes to all amp pages in the directory and rewrite them to the Front-End directory
+  return gulp.src('/ampd/*amp*.html')
+      .pipe(inlinesource())
+      .pipe(gulp.dest('../Front-End/'));
+});
+
+// ampd sequencer
+gulp.task('ampinfo', function() {
+  runSequence(
+      //'clean-js',
+      'espnplus-amp-css',
+      'inlinesource'
+  );
+});
+*/
+
 // inform gulp to run through a series of watchers for its default task
 gulp.task('default', gulp.series(
-  gulp.parallel('images', 'svgs', 'svgpng', 'cms', 'sass', 'javascript'), (done) => {
-    gulp.watch([paths.watch.styles, '!_sass/theme/cms/*.scss'],   
-    gulp.parallel('sass')),
-    gulp.watch(paths.watch.cms,                                   gulp.parallel('cms')),
-    gulp.watch(paths.watch.images,                                gulp.parallel('images')),
-    gulp.watch(paths.watch.svgs,                                  gulp.parallel('svgs')),
-    gulp.watch(paths.watch.svgpng,                                gulp.parallel('svgpng')),
-    gulp.watch([paths.watch.scripts],                              
-    gulp.parallel('js_lint', 'javascript')),
+  gulp.parallel('images', 'svgs', 'svgpng', 'sass', 'javascript'), (done) => {
+    gulp.watch(paths.watch.styles,          gulp.parallel('sass')),
+    gulp.watch(paths.watch.images,          gulp.parallel('images')),
+    gulp.watch(paths.watch.svgs,            gulp.parallel('svgs')),
+    gulp.watch(paths.watch.svgpng,          gulp.parallel('svgpng')),
+    gulp.watch(paths.watch.scripts,       gulp.parallel('js_lint', 'javascript')),
     done();
   }
 ));
