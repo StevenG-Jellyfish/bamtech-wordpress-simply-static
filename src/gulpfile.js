@@ -21,6 +21,7 @@ const util              = require('gulp-util');
 const debug             = require('gulp-debug');
 const svgo              = require('gulp-svgo');
 const autoprefixer      = require('gulp-autoprefixer');
+const inlinesource      = require('gulp-inline-source'); //https://www.npmjs.com/package/gulp-inline-source
 
 // create a boolean for development mode trigger (used for sourcemaps)
 var devMode = true;
@@ -59,7 +60,7 @@ var paths = {
       smpl_val:     '_javascript/vendor/jquery_simple-validate/0.3/jquery.simpleValidate.js',
       bstrap:       '_javascript/vendor/bootstrap/3.3.5/bootstrap.js',
       tblstack:     '_javascript/vendor/stackable/1.0.2/stacktable_aria.js',
-      unveil:       '_javascript/vendor/jquery_unveil/1.3.0/jquery.unveil.js'
+      unveil:       '_javascript/vendor/jquery_unveil/1.3.0/jquery.unveil.js',
       // resizer:      '_javascript/vendor/wanker/0.1.2/jquery.wanker.min.js'
     }
   },
