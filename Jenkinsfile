@@ -4,7 +4,7 @@ pipeline {
     agent any
     
     environment {
-        WD= "home/sites/Bamtech-wordpress"
+        WD= "/home/sites/Bamtech-wordpress"
     }
     stages {
         stage('rebuild wordpress') {
