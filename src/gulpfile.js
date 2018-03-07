@@ -21,7 +21,9 @@ const util              = require('gulp-util');
 const debug             = require('gulp-debug');
 const svgo              = require('gulp-svgo');
 const autoprefixer      = require('gulp-autoprefixer');
-const inlinesource      = require('gulp-inline-source'); //https://www.npmjs.com/package/gulp-inline-source
+const inlinesource      = require('gulp-inline-source'); 
+const browserSync       = require('browser-sync').create();
+//https://www.npmjs.com/package/gulp-inline-source
 
 // create a boolean for development mode trigger (used for sourcemaps)
 var devMode = true;
@@ -68,13 +70,12 @@ var paths = {
     },
     vendor: {
       styles:       '_vendor/scss/**/*.scss',
-      jquery:       '_vendor/js/jquery/3.2.1/jquery.min.js',
-      pholder:      '_vendor/js/jquery_placeholder/2.3.1/jquery.placeholder.js',
-      validate:     '_vendor/js/jquery_validate/1.14.0/jquery.validate.js',
-      smpl_val:     '_vendor/js/jquery_simple-validate/0.3/jquery.simpleValidate.js',
-      bstrap:       '_vendor/js/bootstrap/3.3.5/bootstrap.js',
-      tblstack:     '_vendor/js/stackable/1.0.2/stacktable_aria.js',
-      unveil:       '_vendor/js/jquery_unveil/1.3.0/jquery.unveil.js'
+      jquery:       '_vendor/js/jquery.min.js',
+      bstrap:       '_vendor/js/bootstrap.js',
+      pholder:      '_vendor/js/jquery.placeholder.js',
+      validate:     '_vendor/js/jquery.validate.js',
+      easing:       '_vendor/js/jquery.easing.js',
+      unveil:       '_vendor/js/jquery_unveil/jquery.unveil.js' //https://luis-almeida.github.io/unveil/
     }
   },
   watch: {
@@ -116,7 +117,24 @@ gulp.task('js_lint', () => {
     .pipe(jshint.reporter('jshint-stylish', { beep: true }))
 });
 
-// javascript pipeline
+/* force del of older files
+gulp.task('clean-js', function(cb) {
+  del([
+      '../Front-End/js/*.js',
+      '../Front-End/js/*.map'
+  ], { force: true }, cb)
+});
+*/
+
+// javascript series
+gulp.task('javascript', function() {
+  gulp.series(
+      //'clean-js',
+      'top-javascript',
+      'bottom-javascript'
+  );
+});
+// javascript pipeline - top
 gulp.task('top-javascript', gulp.series('js_lint', () => {
     return gulp.src([
         paths.src.vendor.jquery,
@@ -136,11 +154,12 @@ gulp.task('top-javascript', gulp.series('js_lint', () => {
       // .pipe(debug({title: '[3] Files in Stream:'}))
       .pipe(gulp.dest(paths.dist.scripts))
 }));
+
+// javascript pipeline - bottom
 gulp.task('bottom-javascript', gulp.series('js_lint', () => {
   return gulp.src([
-      paths.src.vendor.smpl_val,
-      paths.src.vendor.tblstack,
       paths.src.vendor.unveil,
+      paths.src.vendor.pholder
       paths.src.scripts + 'espnplus-bottom.js'
       ])
     // .pipe(debug({title: '[1] Files in Stream:'}))
@@ -157,6 +176,13 @@ gulp.task('bottom-javascript', gulp.series('js_lint', () => {
     .pipe(gulp.dest(paths.dist.scripts))
 }));
 
+// scss series
+gulp.task('scss', function() {
+  gulp.series(
+      'critical-sass',
+      'bottom-javascript'
+  );
+});
 // sass/css pipeline - critical
 gulp.task('critical-sass', () => {
   return gulp.src([paths.src.styles, paths.src.vendor.styles])
