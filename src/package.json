@@ -1,14 +1,14 @@
 {
   "private": true,
-  "name": "Bamtech - Wordpress",
+  "name": "BAMTCH-ESPN-WORDPRESS",
   "version": "0.0.1",
   "author": "Jellyfish",
   "description": "ESPN+ Paid Landing – A WordPress Microsite",
-  "readme": "https://github.com/JellyfishGroup/wp_silverscript/blob/master/README.md",
+  "readme": "https://github.com/JellyfishGroup/Bamtech-wordpress/blob/master/README.md",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/JellyfishGroup/wp_silverscript"
+    "url": "https://github.com/JellyfishGroup/Bamtech-wordpress"
   },
   "devDependencies": {
     "del": "^1.2.1",
