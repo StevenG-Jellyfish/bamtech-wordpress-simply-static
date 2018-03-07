@@ -47,7 +47,7 @@ var paths = {
     svgs:           '../wordpress/wp-content/themes/espnplus/svgs',
     svgpng:         '../wordpress/wp-content/themes/espnplus/imgs/svgs/pngs'
 
-/*  preset for AMP theme
+/*  preset for AMP theme -- Add to src and watch if we get there.
     amp-src:            '../wordpress/wp-content/themes/espnplus-amp/',
     amp-styles:         '../wordpress/wp-content/themes/espnplus-amp/css',
     amp-scripts:        '../wordpress/wp-content/themes/espnplus-amp/js',
@@ -62,8 +62,12 @@ var paths = {
     images:         '_images/*.{png,gif,jpg}',
     svgs:           '_svgs/*.svg',
     svgpng:         '_svgs/_fallback/*.png',
+    unmin: {
+      styles:       '_unmin/scss/',
+      scripts:      '_unmin/js/'
+    },
     vendor: {
-      styles:       '_vendor/sass/**/*.scss',
+      styles:       '_vendor/scss/**/*.scss',
       jquery:       '_vendor/js/jquery/3.2.1/jquery.min.js',
       pholder:      '_vendor/js/jquery_placeholder/2.3.1/jquery.placeholder.js',
       validate:     '_vendor/js/jquery_validate/1.14.0/jquery.validate.js',
@@ -113,36 +117,73 @@ gulp.task('js_lint', () => {
 });
 
 // javascript pipeline
-gulp.task('javascript', gulp.series('js_lint', () => {
+gulp.task('top-javascript', gulp.series('js_lint', () => {
     return gulp.src([
         paths.src.vendor.jquery,
         paths.src.vendor.bstrap,
-        paths.src.vendor.smpl_val,
-        paths.src.vendor.tblstack,
-        paths.src.vendor.unveil,
-        paths.src.scripts
+        paths.src.scripts + 'espnplus-top.js'
         ])
       // .pipe(debug({title: '[1] Files in Stream:'}))
       .pipe(isDev(sourcemaps.init()))
       .pipe(cached('javascript'))
+      .pipe(concat('espnplus-top.js'))
+      .pipe(gulp.dest(paths.src.unmin.scripts))
       .pipe(uglify())
       .pipe(remember('javascript'))
       // .pipe(debug({title: '[2] Files in Stream:'}))
-      .pipe(concat('ssic-deo.min.js'))
+      .pipe(concat('espnplus-top.min.js'))
       .pipe(config.production ? util.noop() : (sourcemaps.write('.')))
       // .pipe(debug({title: '[3] Files in Stream:'}))
       .pipe(gulp.dest(paths.dist.scripts))
 }));
+gulp.task('bottom-javascript', gulp.series('js_lint', () => {
+  return gulp.src([
+      paths.src.vendor.smpl_val,
+      paths.src.vendor.tblstack,
+      paths.src.vendor.unveil,
+      paths.src.scripts + 'espnplus-bottom.js'
+      ])
+    // .pipe(debug({title: '[1] Files in Stream:'}))
+    .pipe(isDev(sourcemaps.init()))
+    .pipe(cached('javascript'))
+    .pipe(concat('espnplus-bottom..js'))
+    .pipe(gulp.dest(paths.src.unmin.scripts))
+    .pipe(uglify())
+    .pipe(remember('javascript'))
+    // .pipe(debug({title: '[2] Files in Stream:'}))
+    .pipe(concat('espnplus-bottom.min.js'))
+    .pipe(config.production ? util.noop() : (sourcemaps.write('.')))
+    // .pipe(debug({title: '[3] Files in Stream:'}))
+    .pipe(gulp.dest(paths.dist.scripts))
+}));
 
-// sass/css pipeline
-gulp.task('sass', () => {
+// sass/css pipeline - critical
+gulp.task('critical-sass', () => {
   return gulp.src([paths.src.styles, paths.src.vendor.styles])
     .pipe(isDev(sourcemaps.init()))
     // .pipe(debug({title: '[1] Files in Stream:'}))
     .pipe(sass().on('error', sass.logError))
+    .pipe(concat('espnplus-critical.css'))
+    .pipe(gulp.dest(paths.src.unmin.scss))
     .pipe(cssmin(sassOptions))
     // .pipe(debug({title: '[2] Files in Stream:'}))
-    .pipe(concat('espnplus.min.css'))
+    .pipe(concat('espnplus-critical.min.css'))
+    .pipe(config.production ? util.noop() : (sourcemaps.write('.')))
+    // .pipe(debug({title: '[3] Files in Stream:'}))
+    .pipe(gulp.dest(paths.dist.styles))
+});
+
+// sass/css pipeline - non-critical
+gulp.task('non-critical-sass', () => {
+  return gulp.src([paths.src.styles, paths.src.vendor.styles])
+    .pipe(isDev(sourcemaps.init()))
+    // .pipe(debug({title: '[1] Files in Stream:'}))
+    .pipe(sass().on('error', sass.logError))
+    .pipe(concat('espnplus-non-critical.css'))
+    .pipe(gulp.dest(paths.src.unmin.scss))
+    .pipe(cssmin(sassOptions))
+    // .pipe(debug({title: '[2] Files in Stream:'}))
+    .pipe(concat('espnplus-non-critical.min.css'))
     .pipe(config.production ? util.noop() : (sourcemaps.write('.')))
     // .pipe(debug({title: '[3] Files in Stream:'}))
     .pipe(gulp.dest(paths.dist.styles))
@@ -173,7 +214,7 @@ gulp.task('svgpng', () => {
 });
 
 /*
-// AMP'd Tasks //
+// AMP'd Tasks :: From WALDEN :: Needs to be updated with paths and functions//
 // ampd css file generation
 gulp.task('espnplus-amp-css', function() {
 
@@ -223,7 +264,7 @@ gulp.task('default', gulp.series(
     gulp.watch(paths.watch.images,          gulp.parallel('images')),
     gulp.watch(paths.watch.svgs,            gulp.parallel('svgs')),
     gulp.watch(paths.watch.svgpng,          gulp.parallel('svgpng')),
-    gulp.watch(paths.watch.scripts,       gulp.parallel('js_lint', 'javascript')),
+    gulp.watch(paths.watch.scripts,         gulp.parallel('js_lint', 'javascript')),
     done();
   }
 ));
