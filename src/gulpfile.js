@@ -59,13 +59,13 @@ var paths = {
 */
   },
   src: {
-    critical_styles:         '_theme/espnplus/scss/espnplus-critical.scss',
-    non_critical_styles:     '_theme/espnplus/scss/espnplus-non-critical.scss',
-    top_scripts:             '_theme/espnplus/js/espnplus-top.js',
-    bottom_scripts:          '_theme/espnplus/js/espnplus-bottom.js',
-    images:         '_images/*.{png,gif,jpg}',
-    svgs:           '_svgs/*.svg',
-    svgpng:         '_svgs/_fallback/*.png',
+    critical_styles:          '_themes/espnplus/scss/espnplus-critical.scss',
+    non_critical_styles:      '_themes/espnplus/scss/espnplus-non-critical.scss',
+    top_scripts:              '_themes/espnplus/js/espnplus-top.js',
+    bottom_scripts:           '_themes/espnplus/js/espnplus-bottom.js',
+    images:                   '_images/*.{png,gif,jpg}',
+    svgs:                     '_svgs/*.svg',
+    svgpng:                   '_svgs/_fallback/*.png',
     unmin: {
       styles:       '_unmin/scss/',
       scripts:      '_unmin/js/'
@@ -130,14 +130,16 @@ gulp.task('clean-js', function(cb) {
 
 // javascript series
 gulp.task('javascript', function() {
-  gulp.series(
+  return gulp.series(
       //'clean-js',
       'top-javascript',
-      'bottom-javascript'
+    //  'bottom-javascript'
   );
+  done();
 });
 // javascript pipeline - top
-gulp.task('top-javascript', gulp.series('js_lint', () => {
+//gulp.task('top-javascript', gulp.series('js_lint', () => {
+  gulp.task('top-javascript', function() {
     return gulp.src([
         paths.src.vendor.jquery,
         paths.src.vendor.bstrap,
@@ -145,9 +147,9 @@ gulp.task('top-javascript', gulp.series('js_lint', () => {
         ])
       // .pipe(debug({title: '[1] Files in Stream:'}))
       .pipe(isDev(sourcemaps.init()))
-      .pipe(cached('javascript'))
       .pipe(concat('espnplus-top.js'))
       .pipe(gulp.dest(paths.src.unmin.scripts))
+      .pipe(cached('javascript'))
       .pipe(uglify())
       .pipe(remember('javascript'))
       // .pipe(debug({title: '[2] Files in Stream:'}))
@@ -155,8 +157,8 @@ gulp.task('top-javascript', gulp.series('js_lint', () => {
       .pipe(config.production ? util.noop() : (sourcemaps.write('.')))
       // .pipe(debug({title: '[3] Files in Stream:'}))
       .pipe(gulp.dest(paths.dist.scripts))
-}));
-
+      done();
+});
 // javascript pipeline - bottom
 gulp.task('bottom-javascript', gulp.series('js_lint', () => {
   return gulp.src([
@@ -166,9 +168,9 @@ gulp.task('bottom-javascript', gulp.series('js_lint', () => {
       ])
     // .pipe(debug({title: '[1] Files in Stream:'}))
     .pipe(isDev(sourcemaps.init()))
-    .pipe(cached('javascript'))
     .pipe(concat('espnplus-bottom..js'))
     .pipe(gulp.dest(paths.src.unmin.scripts))
+    .pipe(cached('javascript'))
     .pipe(uglify())
     .pipe(remember('javascript'))
     // .pipe(debug({title: '[2] Files in Stream:'}))
@@ -180,10 +182,11 @@ gulp.task('bottom-javascript', gulp.series('js_lint', () => {
 
 // scss series
 gulp.task('scss', function() {
-  gulp.series(
+  return gulp.series(
       'critical-scss',
-      'non-critical-scss'
+    //  'non-critical-scss'
   );
+  done();
 });
 // sass/css pipeline - critical
 gulp.task('critical-scss', () => {
@@ -192,15 +195,15 @@ gulp.task('critical-scss', () => {
     // .pipe(debug({title: '[1] Files in Stream:'}))
     .pipe(sass().on('error', sass.logError))
     .pipe(concat('espnplus-critical.css'))
-    .pipe(gulp.dest(paths.src.unmin.scss))
+    .pipe(gulp.dest(paths.src.unmin.styles))
     .pipe(cssmin(sassOptions))
     // .pipe(debug({title: '[2] Files in Stream:'}))
     .pipe(concat('espnplus-critical.min.css'))
     .pipe(config.production ? util.noop() : (sourcemaps.write('.')))
     // .pipe(debug({title: '[3] Files in Stream:'}))
-    .pipe(gulp.dest(paths.dist.styles))
+    .pipe(gulp.dest(paths.dist.styles));
+    done();
 });
-
 // sass/css pipeline - non-critical
 gulp.task('non-critical-scss', () => {
   return gulp.src([paths.src.non_critical_styles, paths.src.vendor.styles])
@@ -238,7 +241,8 @@ gulp.task('svgpng', () => {
   return gulp.src(paths.src.svgpng)
     .pipe(newer(paths.dist.svgpng))
     .pipe(tinify(config.tinypng.APIKEY))
-    .pipe(gulp.dest(paths.dist.svgpng))
+    .pipe(gulp.dest(paths.dist.svgpng)
+  )
 });
 
 /*
@@ -287,12 +291,14 @@ gulp.task('ampinfo', function() {
 
 // inform gulp to run through a series of watchers for its default task
 gulp.task('default', gulp.series(
-  gulp.parallel('images', 'svgs', 'svgpng', 'scss', 'javascript'), (done) => {
+  //gulp.parallel('images', 'svgs', 'svgpng', 'scss', 'javascript'), (done) => {
+  gulp.parallel('scss', 'javascript'), (done) => {
     gulp.watch(paths.watch.styles,          gulp.parallel('scss')),
-    gulp.watch(paths.watch.images,          gulp.parallel('images')),
-    gulp.watch(paths.watch.svgs,            gulp.parallel('svgs')),
-    gulp.watch(paths.watch.svgpng,          gulp.parallel('svgpng')),
-    gulp.watch(paths.watch.scripts,         gulp.parallel('js_lint', 'javascript')),
+  //  gulp.watch(paths.watch.images,          gulp.parallel('images')),
+  //  gulp.watch(paths.watch.svgs,            gulp.parallel('svgs')),
+  //  gulp.watch(paths.watch.svgpng,          gulp.parallel('svgpng')),
+  //  gulp.watch(paths.watch.scripts,         gulp.parallel('js_lint', 'javascript')),
+    gulp.watch(paths.watch.scripts,         gulp.parallel('javascript')),
     done();
   }
 ));
