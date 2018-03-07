@@ -42,7 +42,7 @@ var config = {
 // define shorthand path variable references
 var paths = {
   dist:  {
-    src:            '../wordpress/wp-content/themes/espnplus/',
+    src:            '../wordpress/wp-content/themes/espnplus',
     styles:         '../wordpress/wp-content/themes/espnplus/css',
     scripts:        '../wordpress/wp-content/themes/espnplus/js',
     images:         '../wordpress/wp-content/themes/espnplus/imgs',
@@ -59,8 +59,10 @@ var paths = {
 */
   },
   src: {
-    styles:         '_theme/espnplus/scss/style.scss',
-    scripts:        '_theme/espnplus/js/scripts.js',
+    critical_styles:         '_theme/espnplus/scss/espnplus-critical.scss',
+    non_critical_styles:     '_theme/espnplus/scss/espnplus-non-critical.scss',
+    top_scripts:             '_theme/espnplus/js/espnplus-top.js',
+    bottom_scripts:          '_theme/espnplus/js/espnplus-bottom.js',
     images:         '_images/*.{png,gif,jpg}',
     svgs:           '_svgs/*.svg',
     svgpng:         '_svgs/_fallback/*.png',
@@ -139,7 +141,7 @@ gulp.task('top-javascript', gulp.series('js_lint', () => {
     return gulp.src([
         paths.src.vendor.jquery,
         paths.src.vendor.bstrap,
-        paths.src.scripts + 'espnplus-top.js'
+        paths.src.top_scripts
         ])
       // .pipe(debug({title: '[1] Files in Stream:'}))
       .pipe(isDev(sourcemaps.init()))
@@ -159,8 +161,8 @@ gulp.task('top-javascript', gulp.series('js_lint', () => {
 gulp.task('bottom-javascript', gulp.series('js_lint', () => {
   return gulp.src([
       paths.src.vendor.unveil,
-      paths.src.vendor.pholder
-      paths.src.scripts + 'espnplus-bottom.js'
+      paths.src.vendor.pholder,
+      paths.src.bottom_scripts
       ])
     // .pipe(debug({title: '[1] Files in Stream:'}))
     .pipe(isDev(sourcemaps.init()))
@@ -185,7 +187,7 @@ gulp.task('scss', function() {
 });
 // sass/css pipeline - critical
 gulp.task('critical-sass', () => {
-  return gulp.src([paths.src.styles, paths.src.vendor.styles])
+  return gulp.src([paths.src.critical_styles])
     .pipe(isDev(sourcemaps.init()))
     // .pipe(debug({title: '[1] Files in Stream:'}))
     .pipe(sass().on('error', sass.logError))
@@ -201,7 +203,7 @@ gulp.task('critical-sass', () => {
 
 // sass/css pipeline - non-critical
 gulp.task('non-critical-sass', () => {
-  return gulp.src([paths.src.styles, paths.src.vendor.styles])
+  return gulp.src([paths.src.non_critical_styles, paths.src.vendor.styles])
     .pipe(isDev(sourcemaps.init()))
     // .pipe(debug({title: '[1] Files in Stream:'}))
     .pipe(sass().on('error', sass.logError))
