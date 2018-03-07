@@ -81,8 +81,8 @@ var paths = {
     }
   },
   watch: {
-    styles:         '_theme/**/scss/*.scss',
-    scripts:        '_theme/**/js/*.js',
+    styles:         '_themes/**/scss/*.scss',
+    scripts:        '_themes/**/js/*.js',
     images:         '_images/*.{png,gif,jpg}',
     svgs:           '_svgs/*.svg',
     svgpng:         '_svgs/_fallback/*.png'
@@ -129,17 +129,17 @@ gulp.task('clean-js', function(cb) {
 */
 
 // javascript series
-gulp.task('javascript', function() {
-  return gulp.series(
+gulp.task('javascript', (done) => {
+  gulp.series(
       //'clean-js',
-      'top-javascript',
-    //  'bottom-javascript'
+    'top-javascript',
+    'bottom-javascript'
   );
   done();
 });
 // javascript pipeline - top
 //gulp.task('top-javascript', gulp.series('js_lint', () => {
-  gulp.task('top-javascript', function() {
+  gulp.task('top-javascript', () => {
     return gulp.src([
         paths.src.vendor.jquery,
         paths.src.vendor.bstrap,
@@ -157,7 +157,6 @@ gulp.task('javascript', function() {
       .pipe(config.production ? util.noop() : (sourcemaps.write('.')))
       // .pipe(debug({title: '[3] Files in Stream:'}))
       .pipe(gulp.dest(paths.dist.scripts))
-      done();
 });
 // javascript pipeline - bottom
 gulp.task('bottom-javascript', gulp.series('js_lint', () => {
@@ -181,10 +180,10 @@ gulp.task('bottom-javascript', gulp.series('js_lint', () => {
 }));
 
 // scss series
-gulp.task('scss', function() {
-  return gulp.series(
-      'critical-scss',
-    //  'non-critical-scss'
+gulp.task('scss', (done) => {
+  gulp.series(
+    'critical-scss',
+    'non-critical-scss'
   );
   done();
 });
@@ -202,7 +201,6 @@ gulp.task('critical-scss', () => {
     .pipe(config.production ? util.noop() : (sourcemaps.write('.')))
     // .pipe(debug({title: '[3] Files in Stream:'}))
     .pipe(gulp.dest(paths.dist.styles));
-    done();
 });
 // sass/css pipeline - non-critical
 gulp.task('non-critical-scss', () => {
@@ -291,14 +289,14 @@ gulp.task('ampinfo', function() {
 
 // inform gulp to run through a series of watchers for its default task
 gulp.task('default', gulp.series(
-  //gulp.parallel('images', 'svgs', 'svgpng', 'scss', 'javascript'), (done) => {
-  gulp.parallel('scss', 'javascript'), (done) => {
+  gulp.parallel('images', 'svgs', 'svgpng', 'scss', 'javascript'), (done) => {
+  //gulp.parallel('scss', 'javascript'), (done) => {
     gulp.watch(paths.watch.styles,          gulp.parallel('scss')),
-  //  gulp.watch(paths.watch.images,          gulp.parallel('images')),
-  //  gulp.watch(paths.watch.svgs,            gulp.parallel('svgs')),
-  //  gulp.watch(paths.watch.svgpng,          gulp.parallel('svgpng')),
-  //  gulp.watch(paths.watch.scripts,         gulp.parallel('js_lint', 'javascript')),
+    gulp.watch(paths.watch.images,          gulp.parallel('images')),
+    gulp.watch(paths.watch.svgs,            gulp.parallel('svgs')),
+    gulp.watch(paths.watch.svgpng,          gulp.parallel('svgpng')),
+    //gulp.watch(paths.watch.scripts,         gulp.parallel('js_lint', 'javascript')),
     gulp.watch(paths.watch.scripts,         gulp.parallel('javascript')),
     done();
-  }
-));
+  })
+);
