@@ -22,7 +22,7 @@ const debug             = require('gulp-debug');
 const svgo              = require('gulp-svgo');
 const autoprefixer      = require('gulp-autoprefixer');
 const inlinesource      = require('gulp-inline-source'); 
-const browserSync       = require('browser-sync').create();
+//const browserSync       = require('browser-sync').create();
 //https://www.npmjs.com/package/gulp-inline-source
 
 // create a boolean for development mode trigger (used for sourcemaps)
@@ -181,12 +181,12 @@ gulp.task('bottom-javascript', gulp.series('js_lint', () => {
 // scss series
 gulp.task('scss', function() {
   gulp.series(
-      'critical-sass',
-      'bottom-javascript'
+      'critical-scss',
+      'non-critical-scss'
   );
 });
 // sass/css pipeline - critical
-gulp.task('critical-sass', () => {
+gulp.task('critical-scss', () => {
   return gulp.src([paths.src.critical_styles])
     .pipe(isDev(sourcemaps.init()))
     // .pipe(debug({title: '[1] Files in Stream:'}))
@@ -202,7 +202,7 @@ gulp.task('critical-sass', () => {
 });
 
 // sass/css pipeline - non-critical
-gulp.task('non-critical-sass', () => {
+gulp.task('non-critical-scss', () => {
   return gulp.src([paths.src.non_critical_styles, paths.src.vendor.styles])
     .pipe(isDev(sourcemaps.init()))
     // .pipe(debug({title: '[1] Files in Stream:'}))
@@ -287,8 +287,8 @@ gulp.task('ampinfo', function() {
 
 // inform gulp to run through a series of watchers for its default task
 gulp.task('default', gulp.series(
-  gulp.parallel('images', 'svgs', 'svgpng', 'sass', 'javascript'), (done) => {
-    gulp.watch(paths.watch.styles,          gulp.parallel('sass')),
+  gulp.parallel('images', 'svgs', 'svgpng', 'scss', 'javascript'), (done) => {
+    gulp.watch(paths.watch.styles,          gulp.parallel('scss')),
     gulp.watch(paths.watch.images,          gulp.parallel('images')),
     gulp.watch(paths.watch.svgs,            gulp.parallel('svgs')),
     gulp.watch(paths.watch.svgpng,          gulp.parallel('svgpng')),
