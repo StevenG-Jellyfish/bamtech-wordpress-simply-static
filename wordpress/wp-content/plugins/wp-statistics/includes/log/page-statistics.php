@@ -11,6 +11,8 @@ if ( array_key_exists( 'page-uri', $_GET ) ) {
 }
 if ( array_key_exists( 'page-id', $_GET ) ) {
 	$pageid = (int) $_GET['page-id'];
+} else if ( array_key_exists( 'prepage', $_GET ) ) {
+	$pageid = (int) $_GET['prepage'];
 } else {
 	$pageid = null;
 }
@@ -24,11 +26,6 @@ if ( is_object( $post ) ) {
 	$title = $post->post_title;
 } else {
 	$title = "";
-}
-
-$urlfields = "&page-id={$pageid}";
-if ( $pageuri ) {
-	$urlfields .= "&page-uri={$pageuri}";
 }
 
 $daysToDisplay = 20;
@@ -46,22 +43,51 @@ if ( array_key_exists( 'rangeend', $_GET ) ) {
 } else {
 	$rangeend = '';
 }
+
+if ( array_key_exists( 'page-id', $_GET ) ) {
+	$page = intval( $_GET['page-id'] );
+} else {
+	if ( array_key_exists( 'prepage', $_GET ) ) {
+		$page = intval( $_GET['prepage'] );
+	} else {
+		$page = 0;
+	}
+}
+
+$urlfields = '&prepage=' . $pageid;
+$html      = __( 'Select Page', 'wp-statistics' ) . ': ';
+$html      .= wp_dropdown_pages( array( 'selected' => $pageid, 'echo' => 0, 'name' => 'page-id' ) );
+$html      .= '<input type="submit" value="' . __( 'Select', 'wp-statistics' ) . '" class="button-primary">';
+$html      .= '<br>';
 ?>
 <div class="wrap">
-	<?php screen_icon( 'options-general' ); ?>
-    <h2><?php echo __( 'Page Trend for Post ID', 'wp_statistics' ) . ' ' . $pageid . ' - ' . $title; ?></h2>
-
-	<?php wp_statistics_date_range_selector( WP_STATISTICS_PAGES_PAGE, $daysToDisplay, null, null, $urlfields ); ?>
-
+    <h2><?php echo sprintf( __( 'Page Trend for Post ID %s', 'wp-statistics' ), $pageid ) . ' - ' . $title; ?></h2>
+	<?php wp_statistics_date_range_selector( WP_Statistics::$page['pages'], $daysToDisplay, null, null, $urlfields, $html ); ?>
     <div class="postbox-container" id="last-log">
         <div class="metabox-holder">
             <div class="meta-box-sortables">
                 <div class="postbox">
-                    <div class="handlediv" title="<?php _e( 'Click to toggle', 'wp_statistics' ); ?>"><br/></div>
-                    <h3 class="hndle"><span><?php _e( 'Page Trend', 'wp_statistics' ); ?></span></h3>
+					<?php $paneltitle = __( 'Page Trend', 'wp-statistics' ); ?>
+                    <button class="handlediv" type="button" aria-expanded="true">
+						<span class="screen-reader-text"><?php printf(
+								__( 'Toggle panel: %s', 'wp-statistics' ),
+								$paneltitle
+							); ?></span>
+                        <span class="toggle-indicator" aria-hidden="true"></span>
+                    </button>
+                    <h2 class="hndle"><span><?php echo $paneltitle; ?></span></h2>
+
                     <div class="inside">
-						<?php include_once( dirname( __FILE__ ) . '/widgets/page.php' );
-						wp_statistics_generate_page_postbox_content( $pageuri, $pageid, $daysToDisplay, null, $rangestart, $rangeend ); ?>
+						<?php
+						include( WP_Statistics::$reg['plugin-dir'] . 'includes/log/widgets/page.php' );
+						wp_statistics_generate_page_postbox_content(
+							$pageuri,
+							$pageid,
+							$daysToDisplay,
+							null,
+							$rangestart,
+							$rangeend
+						); ?>
                     </div>
                 </div>
             </div>

@@ -107,7 +107,6 @@ EOPHP
     " > ~/.bashrc
 
     PLUGINS=(
-        advanced-custom-fields
         all-meta-stats-yoast-seo-addon
         better-amp
         busted
@@ -123,7 +122,6 @@ EOPHP
         w3-total-cache
         wordpress-seo
         wp-statistics
-        yoast-seo-settings-xml-csv-import
         ithemes-security
         smush-image-compression-and-optimisation
         velvet-blues-update-urls
