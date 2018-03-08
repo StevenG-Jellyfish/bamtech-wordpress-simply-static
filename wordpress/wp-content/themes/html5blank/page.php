@@ -11,7 +11,26 @@
 			<!-- article -->
 			<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
-				<?php the_content(); ?>
+				
+				<?php
+
+				// check if the repeater field has rows of data
+				if( have_rows('section_component_block') ):
+
+ 					// loop through the rows of data
+    				while ( have_rows('section_component_block') ) : the_row();
+
+        				// display a sub field value
+        				the_sub_field('content');
+						the_sub_field('header');
+						the_sub_field('image');
+						echo '<img src="';echo the_sub_field('image'); echo'">';
+						echo "<br>";
+    				endwhile;
+
+				else :
+    // no rows found
+				endif;?>
 
 				<?php comments_template( '', true ); // Remove if you don't want comments ?>
 
