@@ -4,7 +4,7 @@ Plugin Name: Better AMP - WordPress Complete AMP
 Plugin URI: http://demo.betterstudio.com/publisher/amp-demo/
 Description: Add FULL AMP support to your WordPress site.
 Author: Better Studio
-Version: 1.4.0
+Version: 1.7.0
 Author URI: http://betterstudio.com
 */
 
@@ -29,6 +29,7 @@ Author URI: http://betterstudio.com
 // Fire up!
 Better_AMP::get_instance();
 
+
 /**
  * Main class for BetterAMP
  *
@@ -51,7 +52,7 @@ class Better_AMP {
 	 *
 	 * @since 1.0.0
 	 */
-	const VERSION = '1.4.0';
+	const VERSION = '1.7.0';
 
 
 	/**
@@ -131,6 +132,7 @@ class Better_AMP {
 	 * @since 1.0.0
 	 */
 	public function __clone() {
+
 		_doing_it_wrong( __FUNCTION__, __( 'Cloning Better_AMP is forbidden', 'better-amp' ), '' );
 	}
 
@@ -141,6 +143,7 @@ class Better_AMP {
 	 * @since 1.0.0
 	 */
 	public function __wakeup() {
+
 		_doing_it_wrong( __FUNCTION__, __( 'Unserializing Better_AMP is forbidden', 'better-amp' ), '' );
 	}
 
@@ -194,6 +197,7 @@ class Better_AMP {
 	 * @since 1.0.0
 	 */
 	protected function load_text_domain() {
+
 		load_plugin_textdomain( 'better-amp', FALSE, plugin_basename( BETTER_AMP_PATH ) . '/languages' );
 	}
 
@@ -204,6 +208,7 @@ class Better_AMP {
 	 * @since 1.0.0
 	 */
 	protected function include_files() {
+
 		require_once BETTER_AMP_PATH . 'bootstrap.php';
 	}
 
@@ -238,7 +243,7 @@ class Better_AMP {
 
 		// Replace all links inside contents to AMP version.
 		// Stops user to go outside of AMP version.
-		add_filter( 'better-amp/template/include', array( $this, 'replace_internal_links_with_amp_version' ) );
+		add_action( 'wp', array( $this, 'replace_internal_links_with_amp_version' ) );
 
 		// Registers all components scripts into the header style and scripts
 		add_action( 'better-amp/template/enqueue-scripts', array( $this, 'enqueue_components_scripts' ) );
@@ -264,6 +269,9 @@ class Better_AMP {
 		add_filter( 'redirect_canonical', array( $this, '_fix_prevent_extra_redirect_single_pagination' ) );
 
 		add_action( 'request', array( $this, 'fix_search_page_queries' ) );
+
+		// Auto Redirect Mobile Users
+		add_action( 'template_redirect', array( $this, 'auto_redirect_to_amp' ), 1 );
 
 		// Init BF JSON-LD
 		add_action( 'template_redirect', 'Better_AMP::init_json_ld', 1 );
@@ -292,6 +300,7 @@ class Better_AMP {
 		return $results;
 	}
 
+
 	/**
 	 * Fix front page display option to detect homepage
 	 */
@@ -300,6 +309,7 @@ class Better_AMP {
 		add_action( 'pre_option_page_on_front', array( $this, '_return_zero_in_amp' ) );
 		add_action( 'pre_option_show_on_front', array( $this, '_fix_show_on_front' ) );
 	}
+
 
 	/**
 	 * Prevent redirect pages within single post
@@ -318,7 +328,9 @@ class Better_AMP {
 		return $redirect;
 	}
 
+
 	public function admin_hooks() {
+
 		if ( ! is_admin() ) {
 			return;
 		}
@@ -333,16 +345,19 @@ class Better_AMP {
 		add_action( 'admin_menu', array( $this, 'fix_admin_sub_menu' ), 999 );
 	}
 
+
 	/**
 	 * Register rewrite rules and flush permalink in installation
 	 *
 	 * @since 1.0.0
 	 */
 	public function install() {
+
 		$this->add_rewrite();
 
 		set_transient( 'better-amp-flush-rules', TRUE );
 	}
+
 
 	/**
 	 * "Automattic AMP" plugin compatibility
@@ -352,37 +367,64 @@ class Better_AMP {
 	 * @since 1.0.0
 	 */
 	public function redirect_amp_endpoint_url() {
+
 		$amp_qv = defined( 'AMP_QUERY_VAR' ) ? AMP_QUERY_VAR : 'amp';
+
 		if ( get_query_var( $amp_qv, FALSE ) === FALSE ) {
-			return;
+
+			if ( ! is_404() ) { # /amp at the end of some urls cause 404 error
+				return;
+			}
 		}
 
-		$path = bf_get_wp_installation_slug();
+		$is_amp_available = TRUE;
 
-		if ( preg_match( "#^$path/*(.*?)/$amp_qv/*$#", $_SERVER['REQUEST_URI'], $matched ) ) {
-			$new_amp_url = '/' . self::STARTPOINT . '/' . $matched[1];
+		if ( is_singular() ) {
 
-			if ( $new_amp_url && trim( $path . $new_amp_url, '/' ) !== trim( $_SERVER['REQUEST_URI'], '/' ) ) {
+			if ( $post_id = get_queried_object_id() ) {
 
-				wp_redirect( site_url( $new_amp_url ), 301 );
+				$is_amp_available = ! get_post_meta( $post_id, 'disable-better-amp', TRUE ) && ! isset( $this->excluded_posts_id[ $post_id ] );
+			}
+		}
+
+		$path        = bf_get_wp_installation_slug();
+		$request_url = str_replace( $path, '', $_SERVER['REQUEST_URI'] );
+
+		preg_match( "#^/*(.*?)/$amp_qv/*$#", $request_url, $automattic_amp_match );
+
+		if ( ! $is_amp_available ) {
+
+			if ( ! empty( $automattic_amp_match[1] ) ) {
+
+				$redirect_url = site_url( $automattic_amp_match[1] );
+
+			} elseif ( preg_match( "#^/*$amp_qv/+(.*?)/*$#", $request_url, $matched ) ) {
+
+				$redirect_url = site_url( $matched[1] );
+
+			} else {
+
+				$redirect_url = '';
+			}
+
+			if ( $redirect_url ) {
+
+				// todo: use Better_AMP_Content_Sanitizer::transform_to_amp_url
+				wp_redirect( $redirect_url );
 				exit;
 			}
 		}
 
-		if ( is_singular() ) {
-			$post_id = get_queried_object_id();
+		if ( ! empty( $automattic_amp_match[1] ) ) {
 
-			if (
-				get_post_meta( $post_id, 'disable-better-amp', TRUE )
-				||
-				isset( $this->excluded_posts_id[ $post_id ] )
-			) {
 
-				if ( preg_match( "#^$path/*$amp_qv/+(.*?)/*$#", $_SERVER['REQUEST_URI'], $matched ) ) {
+			$new_amp_url = Better_AMP_Content_Sanitizer::transform_to_amp_url( site_url( $automattic_amp_match[1] ) );
+			$new_amp_url = trailingslashit( $new_amp_url );
 
-					wp_redirect( site_url( $matched[1] ) );
-					exit;
-				}
+			if ( $new_amp_url && trim( str_replace( site_url(), '', $new_amp_url ), '/' ) !== trim( $request_url, '/' ) ) {
+
+				wp_redirect( $new_amp_url, 301 );
+				exit;
 			}
 		}
 	}
@@ -413,6 +455,7 @@ class Better_AMP {
 	 * You can add action to 'pre_get_posts' with priority grater than 1000 to change it.
 	 *
 	 * Action: pre_get_posts
+	 *
 	 * @see   isolate_pre_get_posts_end
 	 *
 	 * @since 1.0.0
@@ -433,6 +476,7 @@ class Better_AMP {
 
 	/**
 	 * Rollback the main query vars.
+	 *
 	 * @see   isolate_pre_get_posts_end for more documentation
 	 *
 	 * Action: pre_get_posts
@@ -525,6 +569,7 @@ class Better_AMP {
 	 * @since 1.1
 	 */
 	public function disable_bf_mega_menu( &$walker ) {
+
 		$fields = $walker->get_mega_menu_fields_id();
 
 		unset( $fields['mega_menu'] );
@@ -539,6 +584,7 @@ class Better_AMP {
 	 * @since 1.0.0
 	 */
 	public function add_rewrite() {
+
 		better_amp_add_rewrite_startpoint( self::STARTPOINT, EP_ALL );
 
 		/**
@@ -557,8 +603,10 @@ class Better_AMP {
 	 * @return array
 	 */
 	public function append_index_rewrite_rule() {
+
 		add_rewrite_rule( self::STARTPOINT . '/?$', "index.php?amp=index", 'top' );
 	}
+
 
 	/**
 	 * Callback: Include AMP template file in AMP pages
@@ -580,7 +628,7 @@ class Better_AMP {
 
 		if ( $include = apply_filters( 'better-amp/template/include', $include ) ) {
 			return $include;
-		} else if ( current_user_can( 'switch_themes' ) ) {
+		} elseif ( current_user_can( 'switch_themes' ) ) {
 			wp_die( __( 'Better-AMP Theme Was Not Found!', 'better-amp' ) );
 		} else {
 			return BETTER_AMP_TPL_COMPAT_ABSPATH . '/no-template.php';
@@ -712,6 +760,7 @@ class Better_AMP {
 
 	}
 
+
 	/**
 	 * Transforms HTML content to AMP content
 	 *
@@ -740,6 +789,7 @@ class Better_AMP {
 	 * @since 1.0.0
 	 */
 	public function register_autoload() {
+
 		spl_autoload_register( array( __CLASS__, 'autoload_amp_classes' ) );
 	}
 
@@ -893,6 +943,7 @@ class Better_AMP {
 	 * @since 1.0.0
 	 */
 	public function trigger_component_head() {
+
 		$this->call_components_method( 'head' );
 	}
 
@@ -940,17 +991,20 @@ class Better_AMP {
 
 
 	/**
-	 * Callback: Replaces all website internal links with AMP version
-	 * Filter  : better-amp/template/include
-	 * We used this filter to insure replacement process just fire in AMP version.
+	 * Replaces all website internal links with AMP version
 	 *
-	 * @param string $template
+	 * @hooked wp
 	 *
-	 * @since 1.0.0
+	 * @param WP $wp
 	 *
+	 * @since  1.0.0
 	 * @return string
 	 */
-	public function replace_internal_links_with_amp_version( $template ) {
+	public function replace_internal_links_with_amp_version( $wp ) {
+
+		if ( empty( $wp->query_vars['amp'] ) ) {
+			return;
+		}
 
 		add_filter( 'nav_menu_link_attributes', array( 'Better_AMP_Content_Sanitizer', 'replace_href_with_amp' ) );
 		add_filter( 'the_content', array( 'Better_AMP_Content_Sanitizer', 'transform_all_links_to_amp' ) );
@@ -963,8 +1017,8 @@ class Better_AMP {
 		add_filter( 'attachment_link', array( 'Better_AMP_Content_Sanitizer', 'transform_to_amp_url' ) );
 		add_filter( 'post_type_link', array( 'Better_AMP_Content_Sanitizer', 'transform_to_amp_url' ) );
 
-		return $template;
 	}
+
 
 	/**
 	 * Callback: Starts the collecting output to enable components to add style into head
@@ -985,6 +1039,7 @@ class Better_AMP {
 		ob_start();
 
 	}
+
 
 	/**
 	 * Collect better_amp_head actions and remove those actions
@@ -1045,12 +1100,14 @@ class Better_AMP {
 		echo $prepend, $content;
 	}
 
+
 	/**
 	 * Init metaboxes
 	 *
 	 * @since 1.0.0
 	 */
 	public function metaboxes() {
+
 		if ( is_admin() ) {
 			add_action( 'add_meta_boxes', array( $this, 'append_metaboxes' ) );
 			add_action( 'save_post', array( $this, 'save_metaboxes' ) );
@@ -1064,6 +1121,7 @@ class Better_AMP {
 	 * @since 1.0.0
 	 */
 	public function append_metaboxes() {
+
 		add_meta_box(
 			'better-amp-settings',
 			esc_html__( 'Better AMP Settings', 'better-amp' ),
@@ -1086,6 +1144,7 @@ class Better_AMP {
 	 * @param $post
 	 */
 	public function metabox_output( $post ) {
+
 		?>
 		<div class="inside">
 
@@ -1146,6 +1205,7 @@ class Better_AMP {
 
 	/**
 	 * Fix to change first menu name!
+	 *
 	 * @since 1.0.0
 	 */
 	public function fix_admin_sub_menu() {
@@ -1181,7 +1241,7 @@ class Better_AMP {
 
 
 	/**
-	 * Change most poplular cache plugins in amp version to compaibile with it
+	 * Change most popular cache plugins in amp version to compatible with it
 	 *
 	 * @since 1.0.0
 	 */
@@ -1309,6 +1369,16 @@ class Better_AMP {
 			bf_remove_class_filter( 'image_send_to_editor', 'OT_media_image_no_width_height_Tweak', '_do', 10 );
 		}
 
+
+		/**
+		 * WPO Tweaks
+		 *
+		 * https://servicios.ayudawp.com/
+		 */
+		if ( function_exists( 'wpo_tweaks_init' ) ) {
+			remove_filter( 'script_loader_tag', 'wpo_defer_parsing_of_js' );
+		}
+
 	}
 
 
@@ -1339,6 +1409,7 @@ class Better_AMP {
 		return $title;
 	}
 
+
 	/**
 	 * Sync json-ld data with yoast seo plugin
 	 *
@@ -1364,6 +1435,7 @@ class Better_AMP {
 
 		return $data;
 	}
+
 
 	/**
 	 * Just return false in amp version
@@ -1399,6 +1471,7 @@ class Better_AMP {
 		return $current;
 	}
 
+
 	/**
 	 * Just return 'posts' string in amp version
 	 *
@@ -1422,8 +1495,10 @@ class Better_AMP {
 	 * @param $page_id
 	 */
 	public function set_page_query( $page_id ) {
+
 		query_posts( 'page_id=' . $page_id . '&amp=' . get_query_var( 'amp' ) );
 	}
+
 
 	/**
 	 * Transform allowed posts url to amp
@@ -1450,6 +1525,7 @@ class Better_AMP {
 	 * Fix admin menu margins for better UX
 	 */
 	public function admin_styles() {
+
 		?>
 		<style>
 			.toplevel_page_better-amp-translation .wp-menu-image img {
@@ -1470,6 +1546,133 @@ class Better_AMP {
 			}
 		</style>
 		<?php
+	}
+
+
+	/**
+	 * Get requested page url
+	 *
+	 * @since 1.6.0
+	 * @return string
+	 */
+	public static function get_requested_page_url() {
+
+		if ( isset( $_SERVER['HTTP_HOST'] ) ) {
+
+			$requested_url = is_ssl() ? 'https://' : 'http://';
+			$requested_url .= $_SERVER['HTTP_HOST'];
+			$requested_url .= $_SERVER['REQUEST_URI'];
+
+			return $requested_url;
+		}
+
+		return '';
+	}
+
+
+	/**
+	 * Print script to redirect mobile devices to amp version
+	 *
+	 * @since 1.6.0
+	 */
+	public function print_mobile_redirect_script() {
+
+		$requested_url = self::get_requested_page_url();
+		$amp_permalink = Better_AMP_Content_Sanitizer::transform_to_amp_url( $requested_url );
+
+		if ( ! $requested_url || ! $amp_permalink || $amp_permalink === $requested_url ) {
+			return;
+		}
+
+		?>
+		<script><?php echo include better_amp_min_suffix( BETTER_AMP_PATH . 'js/mobile_redirect', '.js' ); ?></script><?php
+	}
+
+
+	/**
+	 * is any caching plugin install on this WordPress installation
+	 *
+	 * @since 1.6.0
+	 * @return bool
+	 */
+	public function have_cache_plugin() {
+
+		if ( defined( 'WP_CACHE' ) && WP_CACHE ) {
+
+			return TRUE;
+		}
+
+		// Fix for "WP Fastest Cache" plugin
+		if ( $plugins = array_flip( wp_get_active_and_valid_plugins() ) ) {
+
+			return isset( $plugins[ WP_PLUGIN_DIR . '/wp-fastest-cache/wpFastestCache.php' ] );
+		}
+
+		return FALSE;
+	}
+
+
+	/**
+	 * Redirect users to amp version of the page automatically
+	 *
+	 * @since 1.6.0
+	 */
+	public function auto_redirect_to_amp() {
+
+		if ( is_better_amp() ) {
+			return;
+		}
+
+
+		if ( ! apply_filters( 'better-amp/template/auto-redirect', FALSE ) ) {
+			return;
+		}
+
+		if ( ! empty( $_GET['bamp-skip-redirect'] ) || ! empty( $_COOKIE['bamp-skip-redirect'] ) ) {
+
+			if ( ! isset( $_COOKIE['bamp-skip-redirect'] ) ) {
+				setcookie( 'bamp-skip-redirect', TRUE, time() + DAY_IN_SECONDS, '/' );
+			}
+
+			return;
+		} else {
+			if ( isset( $_COOKIE['bamp-skip-redirect'] ) ) {
+				unset( $_COOKIE['bamp-skip-redirect'] );
+			}
+		}
+
+		// if post have not AMP version
+		if ( is_singular() ) {
+
+			$post_id = get_queried_object_id();
+
+			if (
+				get_post_meta( $post_id, 'disable-better-amp', TRUE )
+				||
+				isset( $this->excluded_posts_id[ $post_id ] )
+			) {
+				return;
+			}
+		}
+
+		if ( wp_is_mobile() ) {
+
+			$requested_url = self::get_requested_page_url();
+			$amp_permalink = Better_AMP_Content_Sanitizer::transform_to_amp_url( $requested_url );
+
+			if ( $requested_url && $amp_permalink && $amp_permalink !== $requested_url ) {
+
+				wp_redirect( $amp_permalink );
+				exit;
+			}
+
+		} elseif ( Better_AMP::have_cache_plugin() ) {
+
+			// Adds advanced javascript code to page to redirect page in front end!
+			// Last and safest way to redirect but it will have a little delay!
+			add_action( 'wp_print_scripts', array( $this, 'print_mobile_redirect_script' ) );
+		}
+
 	}
 
 
@@ -1517,6 +1720,7 @@ class Better_AMP {
 	 * Prints meta tags with using Yoast SEO Open Graph feature.
 	 */
 	public function yoast_seo_metatags_compatibility() {
+
 		do_action( 'wpseo_opengraph' );
 	}
 

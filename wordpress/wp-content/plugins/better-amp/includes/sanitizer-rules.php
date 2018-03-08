@@ -2244,4 +2244,27 @@ $rules = array(
 						),
 				),
 		),
+	64 =>
+		array(
+			'tag_name' => 'amp-auto-ads',
+			'attrs'    =>
+				array(
+					0 =>
+						array(
+							'name'      => 'type',
+							'mandatory' => TRUE,
+						),
+				),
+		),
+	65 =>
+		array(
+			'tag_name' => 'span',
+			'attrs'    =>
+				array(
+					0 =>
+						array(
+							'name' => 'rel',
+						),
+				),
+		),
 );

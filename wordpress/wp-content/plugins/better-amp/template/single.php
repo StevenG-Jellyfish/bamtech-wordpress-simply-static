@@ -43,7 +43,7 @@ better_amp_the_post();
 
 			?>
 			<div
-				class="post-thumbnail embeded" <?php better_amp_customizer_hidden_attr( 'better-amp-post-show-thumbnail' ) ?>>
+					class="post-thumbnail embeded" <?php better_amp_customizer_hidden_attr( 'better-amp-post-show-thumbnail' ) ?>>
 				<?php echo $embeded['content'] ?>
 			</div>
 			<?php
@@ -51,7 +51,7 @@ better_amp_the_post();
 
 		if ( $show_image_thumbnail && has_post_thumbnail() ) { ?>
 			<div
-				class="post-thumbnail" <?php better_amp_customizer_hidden_attr( 'better-amp-post-show-thumbnail' ) ?>>
+					class="post-thumbnail" <?php better_amp_customizer_hidden_attr( 'better-amp-post-show-thumbnail' ) ?>>
 				<?php better_amp_the_post_thumbnail( 'better-amp-large' ); ?>
 			</div>
 		<?php } ?>
@@ -62,7 +62,7 @@ better_amp_the_post();
 			$author_ID = get_the_author_meta( 'ID' );
 
 			?>
-			<a href="<?php echo esc_url( get_author_posts_url( $author_ID ) ); ?>"
+			<a href="<?php echo get_author_posts_url( $author_ID ); ?>"
 			   title="<?php better_amp_translation_echo( 'browse_author_articles' ); ?>"
 			   class="post-author-avatar"><?php echo get_avatar( $author_ID, 26 ); ?></a><?php
 
@@ -131,24 +131,46 @@ better_amp_the_post();
 
 better_amp_template_part( 'views/post/social-share' );
 
+if ( better_amp_get_theme_mod( 'better-amp-post-show-related' ) ) {
+	better_amp_template_part( 'views/post/related' );
+}
+
 if ( better_amp_get_theme_mod( 'better-amp-post-show-comment' ) && ( comments_open() || get_comments_number() ) ) { ?>
 	<div class="comments-wrapper"<?php better_amp_customizer_hidden_attr( 'better-amp-post-show-comment' ) ?>>
+		<div class="comment-header clearfix">
 
-		<div class="comments-label strong-label">
-			<i class="fa fa-comments" aria-hidden="true"></i>
-			<?php better_amp_translation_echo( 'comments' ); ?>
+			<div class="comments-label strong-label">
+				<i class="fa fa-comments" aria-hidden="true"></i>
+				<?php better_amp_translation_echo( 'comments' ); ?>
 
-			<span class="counts-label">(<?php echo number_format_i18n( get_comments_number() ); ?>)</span>
+				<span class="counts-label">(<?php echo number_format_i18n( get_comments_number() ); ?>)</span>
 
+			</div>
+
+			<a href="<?php better_amp_comment_link() ?>"
+			   class="button add-comment"><?php better_amp_translation_echo( 'add_comment' ); ?></a>
 		</div>
 
-		<a href="<?php better_amp_comment_link() ?>"
-		   class="button add-comment"><?php better_amp_translation_echo( 'add_comment' ); ?></a>
+		<ul class="comment-list">
+			<?php better_amp_list_comments(); ?>
+		</ul>
 	</div>
+
 	<?php
 
+	if ( get_comment_pages_count() ) { ?>
+		<div class="comments-pagination pagination">
+			<?php better_amp_comments_paginate() ?>
+
+			<span class="page-numbers">
+			<?php printf( better_amp_translation_get( 'comment_page_numbers' ), get_query_var( 'cpage' ) ? absint( get_query_var( 'cpage' ) ) : 1, get_comment_pages_count() ); ?>
+
+		</div>
+		<?php
+	}
 }
 
 better_amp_show_ad_location( 'amp_post_comment_after' );
+
 
 better_amp_get_footer();
