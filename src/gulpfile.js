@@ -130,7 +130,7 @@ gulp.task('clean-js', function(cb) {
 
 // javascript series
 gulp.task('javascript', (done) => {
-  gulp.series(
+  gulp.parallel(
       //'clean-js',
     'top-javascript',
     'bottom-javascript'
@@ -139,7 +139,7 @@ gulp.task('javascript', (done) => {
 });
 // javascript pipeline - top
 //gulp.task('top-javascript', gulp.series('js_lint', () => {
-  gulp.task('top-javascript', () => {
+gulp.task('top-javascript', () => {
     return gulp.src([
         paths.src.vendor.jquery,
         paths.src.vendor.bstrap,
@@ -181,7 +181,7 @@ gulp.task('bottom-javascript', gulp.series('js_lint', () => {
 
 // scss series
 gulp.task('scss', (done) => {
-  gulp.series(
+  gulp.parallel(
     'critical-scss',
     'non-critical-scss'
   );
@@ -295,8 +295,8 @@ gulp.task('default', gulp.series(
     gulp.watch(paths.watch.images,          gulp.parallel('images')),
     gulp.watch(paths.watch.svgs,            gulp.parallel('svgs')),
     gulp.watch(paths.watch.svgpng,          gulp.parallel('svgpng')),
-    //gulp.watch(paths.watch.scripts,         gulp.parallel('js_lint', 'javascript')),
-    gulp.watch(paths.watch.scripts,         gulp.parallel('javascript')),
+    gulp.watch(paths.watch.scripts,         gulp.parallel('js_lint', 'javascript')),
+    //gulp.watch(paths.watch.scripts,         gulp.parallel('javascript')),
     done();
   })
 );

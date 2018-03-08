@@ -1,4 +1,6 @@
 jQuery(function($) {
+  console.log('espnplus bottom.js loaded');
+
   $('input, textarea').placeholder();                                           // load placeholder.js library  for IE9 placeholder text support
   $('.global--customer-testimonial').carousel();                                // enable bootstrap carousel on a specific target
 
