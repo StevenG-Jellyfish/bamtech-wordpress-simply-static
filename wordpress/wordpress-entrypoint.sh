@@ -111,7 +111,6 @@ EOPHP
         better-amp
         busted
         contact-form-7
-        debug-objects
         duplicate-post
         glue-for-yoast-seo-amp
         google-analytics-for-wordpress
@@ -123,8 +122,8 @@ EOPHP
         wordpress-seo
         wp-statistics
         ithemes-security
-        smush-image-compression-and-optimisation
-        velvet-blues-update-urls
+        smush
+        velvet-blues
         wp-s3-offload
         
     )
