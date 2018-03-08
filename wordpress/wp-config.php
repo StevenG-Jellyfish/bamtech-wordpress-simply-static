@@ -1,6 +1,6 @@
 <?php
-/** Enable W3 Total Cache */
-define('WP_CACHE', getenv('WP_CACHE')); // Added by W3 Total Cache
+
+
 
 /**
  * The base configuration for WordPress
