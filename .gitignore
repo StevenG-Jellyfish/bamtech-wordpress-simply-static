@@ -5,7 +5,6 @@ db/db_data/
 wordpress/wp_content/
 wordpress/wp-content/cache/autoptimize/*
 elasticsearch/data/
-logs/
 wordpress/wp-content/uploads/
 wordpress/uploads/
 wordpress/wp-content/cache/
