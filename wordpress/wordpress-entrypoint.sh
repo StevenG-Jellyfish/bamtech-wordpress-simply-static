@@ -115,16 +115,14 @@ EOPHP
         glue-for-yoast-seo-amp
         google-analytics-for-wordpress
         imsanity
-        jch-optimize
         meta-box-yoast-seo
         responsify-wp
         w3-total-cache
         wordpress-seo
         wp-statistics
         ithemes-security
-        smush
-        velvet-blues
-        wp-s3-offload
+        wp-smushit
+        velvet-blues-update-urls
         
     )
 
