@@ -290,7 +290,8 @@ gulp.task('ampinfo', function() {
 
 // inform gulp to run through a series of watchers for its default task
 gulp.task('default', gulp.series(
-  gulp.parallel('images', 'svgs', 'svgpng', 'critical-scss', 'non-critical-scss', 'top-javascript', 'bottom-javascript'), (done) => {
+  gulp.parallel('images', 'svgs', 'svgpng', 'critical-scss', 'non-critical-scss', 'top-javascript', 'bottom-javascript'), 
+  (done) => {
   //gulp.parallel('scss', 'javascript'), (done) => {
     gulp.watch(paths.watch.styles,          gulp.parallel('critical-scss')),
     gulp.watch(paths.watch.styles,          gulp.parallel('non-critical-scss')),
