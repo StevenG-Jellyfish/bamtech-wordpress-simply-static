@@ -149,9 +149,9 @@ gulp.task('top-javascript', () => {
       .pipe(isDev(sourcemaps.init()))
       .pipe(concat('espnplus-top.js'))
       .pipe(gulp.dest(paths.src.unmin.scripts))
-      .pipe(cached('javascript'))
+      .pipe(cached('top-javascript'))
       .pipe(uglify())
-      .pipe(remember('javascript'))
+      .pipe(remember('top-javascript'))
       // .pipe(debug({title: '[2] Files in Stream:'}))
       .pipe(concat('espnplus-top.min.js'))
       .pipe(config.production ? util.noop() : (sourcemaps.write('.')))
@@ -159,7 +159,8 @@ gulp.task('top-javascript', () => {
       .pipe(gulp.dest(paths.dist.scripts))
 });
 // javascript pipeline - bottom
-gulp.task('bottom-javascript', gulp.series('js_lint', () => {
+//gulp.task('bottom-javascript', gulp.series('js_lint', () => {
+gulp.task('bottom-javascript', () => {
   return gulp.src([
       paths.src.vendor.unveil,
       paths.src.vendor.pholder,
@@ -169,15 +170,15 @@ gulp.task('bottom-javascript', gulp.series('js_lint', () => {
     .pipe(isDev(sourcemaps.init()))
     .pipe(concat('espnplus-bottom..js'))
     .pipe(gulp.dest(paths.src.unmin.scripts))
-    .pipe(cached('javascript'))
+    .pipe(cached('bottom-javascript'))
     .pipe(uglify())
-    .pipe(remember('javascript'))
+    .pipe(remember('bottom-avascript'))
     // .pipe(debug({title: '[2] Files in Stream:'}))
     .pipe(concat('espnplus-bottom.min.js'))
     .pipe(config.production ? util.noop() : (sourcemaps.write('.')))
     // .pipe(debug({title: '[3] Files in Stream:'}))
     .pipe(gulp.dest(paths.dist.scripts))
-}));
+});
 
 // scss series
 gulp.task('scss', (done) => {
@@ -209,7 +210,7 @@ gulp.task('non-critical-scss', () => {
     // .pipe(debug({title: '[1] Files in Stream:'}))
     .pipe(sass().on('error', sass.logError))
     .pipe(concat('espnplus-non-critical.css'))
-    .pipe(gulp.dest(paths.src.unmin.scss))
+    .pipe(gulp.dest(paths.src.unmin.styles))
     .pipe(cssmin(sassOptions))
     // .pipe(debug({title: '[2] Files in Stream:'}))
     .pipe(concat('espnplus-non-critical.min.css'))
@@ -289,13 +290,17 @@ gulp.task('ampinfo', function() {
 
 // inform gulp to run through a series of watchers for its default task
 gulp.task('default', gulp.series(
-  gulp.parallel('images', 'svgs', 'svgpng', 'scss', 'javascript'), (done) => {
+  gulp.parallel('images', 'svgs', 'svgpng', 'critical-scss', 'non-critical-scss', 'top-javascript', 'bottom-javascript'), (done) => {
   //gulp.parallel('scss', 'javascript'), (done) => {
-    gulp.watch(paths.watch.styles,          gulp.parallel('scss')),
+    gulp.watch(paths.watch.styles,          gulp.parallel('critical-scss')),
+    gulp.watch(paths.watch.styles,          gulp.parallel('non-critical-scss')),
     gulp.watch(paths.watch.images,          gulp.parallel('images')),
     gulp.watch(paths.watch.svgs,            gulp.parallel('svgs')),
     gulp.watch(paths.watch.svgpng,          gulp.parallel('svgpng')),
-    gulp.watch(paths.watch.scripts,         gulp.parallel('js_lint', 'javascript')),
+    //gulp.watch(paths.watch.scripts,         gulp.parallel('js_lint', 'top-javascript')),
+    //gulp.watch(paths.watch.scripts,         gulp.parallel('js_lint', 'bottom-javascript')),
+    gulp.watch(paths.watch.scripts,         gulp.parallel('top-javascript')),
+    gulp.watch(paths.watch.scripts,         gulp.parallel('bottom-javascript')),
     //gulp.watch(paths.watch.scripts,         gulp.parallel('javascript')),
     done();
   })
