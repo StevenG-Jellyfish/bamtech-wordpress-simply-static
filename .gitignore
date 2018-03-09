@@ -6,6 +6,8 @@ wordpress/wp_content/
 wordpress/wp-content/cache/autoptimize/*
 elasticsearch/data/
 logs/
+logs/nginx/access.log
+logs/nginx/error.log
 wordpress/wp-content/uploads/
 wordpress/uploads/
 wordpress/wp-content/cache/
