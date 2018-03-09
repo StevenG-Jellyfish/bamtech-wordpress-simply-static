@@ -6,7 +6,9 @@ function wp_statistics_generate_map_postbox_content( $ISOCountryCode ) {
 	if ( $WP_Statistics->get_option( 'geoip' ) && ! $WP_Statistics->get_option( 'disable_map' ) ) { ?>
         <div id="map_canvas"></div>
 
-		<?php $result = $wpdb->get_row( "SELECT * FROM `{$wpdb->prefix}statistics_visitor` WHERE last_counter = '{$WP_Statistics->Current_Date('Y-m-d')}'" ); ?>
+		<?php $result = $wpdb->get_row(
+			"SELECT * FROM `{$wpdb->prefix}statistics_visitor` WHERE last_counter = '{$WP_Statistics->Current_Date('Y-m-d')}'"
+		); ?>
         <script type="text/javascript">
             var country_pin = Array();
             var country_color = Array();
@@ -26,7 +28,7 @@ function wp_statistics_generate_map_postbox_content( $ISOCountryCode ) {
 						(
 							'location' => $new_r->location,
 							'agent'    => $new_r->agent,
-							'ip'       => $new_r->ip
+							'ip'       => $new_r->ip,
 						);
 					}
 				}
@@ -53,7 +55,7 @@ function wp_statistics_generate_map_postbox_content( $ISOCountryCode ) {
 							"firefox",
 							"msie",
 							"opera",
-							"safari"
+							"safari",
 						) ) !== false
 					) {
 						$agent = "<img src='" . plugins_url( 'wp-statistics/assets/images/' ) . $markets['agent'] . ".png' class='log-tools' title='{$markets['agent']}'/>";
@@ -62,7 +64,7 @@ function wp_statistics_generate_map_postbox_content( $ISOCountryCode ) {
 					}
 
 					if ( substr( $markets['ip'], 0, 6 ) == '#hash#' ) {
-						$markets['ip'] = __( '#hash#', 'wp_statistics' );
+						$markets['ip'] = __( '#hash#', 'wp-statistics' );
 					}
 
 					$get_ipp[ $markets['location'] ][] = "<p>{$agent} {$markets['ip']}</p>";

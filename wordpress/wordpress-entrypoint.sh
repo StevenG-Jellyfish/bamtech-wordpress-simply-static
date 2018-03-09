@@ -107,27 +107,22 @@ EOPHP
     " > ~/.bashrc
 
     PLUGINS=(
-        advanced-custom-fields
         all-meta-stats-yoast-seo-addon
         better-amp
         busted
         contact-form-7
-        debug-objects
         duplicate-post
         glue-for-yoast-seo-amp
         google-analytics-for-wordpress
         imsanity
-        jch-optimize
         meta-box-yoast-seo
         responsify-wp
         w3-total-cache
         wordpress-seo
         wp-statistics
-        yoast-seo-settings-xml-csv-import
         ithemes-security
-        smush-image-compression-and-optimisation
+        wp-smushit
         velvet-blues-update-urls
-        wp-s3-offload
         
     )
 

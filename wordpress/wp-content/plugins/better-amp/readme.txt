@@ -3,8 +3,8 @@ Contributors: betterstudio
 Donate link: http://betterstudio.com/
 Tags: amp,accelerated mobile pages, mobile theme, google amp
 Requires at least: 3.0
-Tested up to: 4.7.2
-Stable tag: 4.7.2
+Tested up to: 4.8.0
+Stable tag: 4.8.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -50,6 +50,73 @@ Also BetterAMP supports the /amp/ in the end of url to cover "Automatic AMP" plu
 5. Page (Contact page) + 404 page
 
 == Changelog ==
+
+= 1.7.0 =
+- Fixed: RTL Ads issue. Thanks @Igor @Issa
+- Fixed: WPML issues with AMP urls by excluding language subdirectories. Thanks @david.g
+
+- Improved: "WPO Tweaks" plugin compatibility.
+- Add: Pretty Links Plugin Compatibility
+
+
+= 1.6.3 =
+- Fixed: Validation issue about WordPress update.
+
+
+= 1.6.2 =
+- Improved: AMP codes improved.
+- Fixed: Infinite redirect to AMP version in subdirectory wp installations.
+
+
+= 1.6.1 =
+- Improved: Style improved.
+
+= 1.6.0 =
+- Added: Full WPML support added to AMP.
+- Added: Auto redirect to AMP for mobile visitors added (compatible with all cache plugins).
+- Added: "Google Auto Ad" compatibility added.
+- Added: New fields for adding custom code in head, body start and end of page.
+- Added: Favicon support added.
+- Added: Option to enable/disable header sticky feature.
+
+- Improved: Admin panel usability improved.
+- Improved: Codes improved.
+- Improved: Will not redirect visitor to amp for "None AMP Link"  at footer! Thanks @Karl
+
+- Fixed: Custom CSS was not after all css codes.
+
+- Devs: @better-amp/template/body/start action added.
+- Devs: Gulp.js file updated.
+
+= 1.5.3 =
+- Fixed: Third Party plugins a URL compatibility. Thanks @Karl
+- Fixed: Content sanitizer improved to support special type of video tag.
+
+
+= 1.5.2 =
+- Improved: WooCommerce outdated functions updated.
+
+
+= 1.5.1 =
+- Added: Related posts added (6 algorithm to show related posts)
+- Added: Comments will be shown in AMP.
+- Added: Option to change share links to short/normal link.
+- Added: CSS validator added for custom css and element css!
+- Added: "WP Speed Grades" plugin compatibility added.
+- Added: "WP-Optimize" plugin compatibility.
+- Added: "Speed Booster Pack" plugin compatibility.
+- Added: NextGEN Gallery Support
+- Added: Comments pagination support added.
+
+- Improved: Related posts moved after share buttons.
+
+- Fixed: Incorrect AMP Author Avatar url (plugin conflict).
+- Fixed: iFrames height not comes from iFrame tag!
+- Fixed: Posts "hentry" class removed for better SEO results.
+- Fixed: "Auto URL Convertor" field description fixed.
+- Fixed: Exclude auto convert link only works for one pattern!
+- Fixed: single featured images goes out of box in mobile.
+
 
 = 1.4.0 =
 - Added: AMP "Above The Fold" plugin compatibility added.

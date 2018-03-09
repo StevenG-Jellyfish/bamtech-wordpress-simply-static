@@ -189,6 +189,20 @@ function better_amp_customize_register( $wp_customizer ) {
 
 
 	/**
+	 * 1.4 Sticky Header
+	 */
+	$wp_customizer->add_setting( 'better-amp-header-sticky', array(
+		'transport' => 'postMessage',
+		'default'   => better_amp_get_default_theme_setting( 'better-amp-header-sticky' ),
+	) );
+	$wp_customizer->add_control( new AMP_Customize_Switch_Control( $wp_customizer, 'better-amp-header-sticky', array(
+		'label'    => __( 'Sticky Header', 'better-amp' ),
+		'section'  => 'better-amp-header-section',
+		'priority' => 14,
+	) ) );
+
+
+	/**
 	 * 2. Add Sidebar section
 	 */
 	$wp_customizer->add_section( 'better-amp-sidebar-section', array(
@@ -458,7 +472,48 @@ function better_amp_customize_register( $wp_customizer ) {
 
 
 	/**
-	 * 5.3 Divider
+	 * 5.3 Show Related Posts
+	 */
+	$wp_customizer->add_setting( 'better-amp-post-show-related', array(
+		'default'   => better_amp_get_default_theme_setting( 'better-amp-post-show-related' ),
+		'transport' => 'postMessage',
+	) );
+	$wp_customizer->add_control( new AMP_Customize_Switch_Control( $wp_customizer, 'better-amp-post-show-related', array(
+		'label'    => __( 'Show Related Posts', 'better-amp' ),
+		'section'  => 'better-amp-post-section',
+		'priority' => 4,
+	) ) );
+	$wp_customizer->add_setting( 'better-amp-post-related-algorithm', array(
+		'default'   => better_amp_get_default_theme_setting( 'better-amp-post-related-algorithm' ),
+		'transport' => 'postMessage',
+	) );
+	$wp_customizer->add_control( 'better-amp-post-related-algorithm', array(
+		'label'    => __( 'Related Posts Algorithm', 'better-amp' ),
+		'section'  => 'better-amp-post-section',
+		'priority' => 5,
+		'type'     => 'select',
+		'choices'  => array(
+			'cat'            => __( 'by Category', 'better-amp' ),
+			'tag'            => __( 'by Tag', 'better-amp' ),
+			'author'         => __( 'by Author', 'better-amp' ),
+			'cat-tag'        => __( 'by Category & Tag', 'better-amp' ),
+			'cat-tag-author' => __( 'by Category, Tag & Author', 'better-amp' ),
+			'random'         => __( 'Randomly', 'better-amp' ),
+		)
+	) );
+	$wp_customizer->add_setting( 'better-amp-post-related-count', array(
+		'default'   => better_amp_get_default_theme_setting( 'better-amp-post-related-count' ),
+		'transport' => 'postMessage',
+	) );
+
+	$wp_customizer->add_control( 'better-amp-post-related-count', array(
+		'label'    => __( 'Related Posts Count', 'better-amp' ),
+		'section'  => 'better-amp-post-section',
+		'priority' => 4,
+	) );
+
+	/**
+	 * 5.4 Divider
 	 */
 	$wp_customizer->add_setting( 'better-amp-post-divider-1', array() );
 	$wp_customizer->add_control( new AMP_Customize_Divider_Control( $wp_customizer, 'better-amp-post-divider-1', array(
@@ -467,7 +522,7 @@ function better_amp_customize_register( $wp_customizer ) {
 	) ) );
 
 	/**
-	 * 5.4 Show Share Box
+	 * 5.5 Show Share Box
 	 */
 	$wp_customizer->add_setting( 'better-amp-post-social-share-show', array(
 		'transport' => 'postMessage',
@@ -485,7 +540,7 @@ function better_amp_customize_register( $wp_customizer ) {
 	) );
 
 	/**
-	 * 5.5 Show share count
+	 * 5.6 Show share count
 	 */
 	$wp_customizer->add_setting( 'better-amp-post-social-share-count', array(
 		'transport' => 'postMessage',
@@ -505,7 +560,7 @@ function better_amp_customize_register( $wp_customizer ) {
 
 
 	/**
-	 * 5.6 Social share sorter
+	 * 5.7 Social share sorter
 	 */
 	$wp_customizer->add_setting( 'better-amp-post-social-share', array(
 		'default'   => better_amp_get_default_theme_setting( 'better-amp-post-social-share' ),
@@ -519,7 +574,7 @@ function better_amp_customize_register( $wp_customizer ) {
 
 
 	/**
-	 * 5.7 Social share for page
+	 * 5.8 Social share for page
 	 */
 	$wp_customizer->add_setting( 'better-amp-page-social-share-show', array(
 		'transport' => 'postMessage',
@@ -537,7 +592,26 @@ function better_amp_customize_register( $wp_customizer ) {
 	) );
 
 	/**
-	 * 5.8 Featured Video/Audio meta key
+	 * 5.9 Share link format
+	 */
+	$wp_customizer->add_setting( 'better-amp-post-social-share-link-format', array(
+		'transport' => 'postMessage',
+		'default'   => better_amp_get_default_theme_setting( 'better-amp-post-social-share-link-format' ),
+	) );
+	$wp_customizer->add_control( 'better-amp-post-social-share-link-format', array(
+		'label'    => __( 'Share box link format?', 'better-amp' ),
+		'section'  => 'better-amp-post-section',
+		'priority' => 12,
+		'type'     => 'select',
+		'choices'  => array(
+			'standard' => __( 'Standard wordpress permalink', 'better-amp' ),
+			'short'    => __( 'Short link', 'better-amp' ),
+		)
+	) );
+
+
+	/**
+	 * 5.10 Featured Video/Audio meta key
 	 */
 	$wp_customizer->add_setting( 'better-amp-featured-va-key', array(
 		'transport' => 'postMessage',
@@ -750,7 +824,7 @@ function better_amp_customize_register( $wp_customizer ) {
 	 * 9. Additional CSS
 	 */
 	$wp_customizer->add_section( 'better-amp-css-section', array(
-		'title'    => __( 'Additional CSS', 'better-amp' ),
+		'title'    => __( 'Custom CSS Code', 'better-amp' ),
 		'priority' => 15,
 		'panel'    => 'better-amp-panel'
 	) );
@@ -774,11 +848,50 @@ function better_amp_customize_register( $wp_customizer ) {
 
 
 	/**
-	 * 10. Additional CSS
+	 * 11. Custom Code
+	 */
+	$wp_customizer->add_section( 'better-amp-custom-code-section', array(
+		'title'    => __( 'Custom HTML Code', 'better-amp' ),
+		'priority' => 16,
+		'panel'    => 'better-amp-panel'
+	) );
+	$wp_customizer->add_setting( 'better-amp-code-head', array(
+		'default' => better_amp_get_default_theme_setting( 'better-amp-code-head' ),
+	) );
+	$wp_customizer->add_control( 'better-amp-code-head', array(
+		'label'       => __( 'Codes between &#x3C;head&#x3E; and &#x3C;/head&#x3E; tags', 'better-amp' ),
+		'section'     => 'better-amp-custom-code-section',
+		'priority'    => 29,
+		'type'        => 'textarea',
+		'description' => __( 'Please be careful. Bad codes can make invalidation issue for your AMP pages.', 'better-amp' ),
+	) );
+	$wp_customizer->add_setting( 'better-amp-code-body-start', array(
+		'default' => better_amp_get_default_theme_setting( 'better-amp-code-body-start' ),
+	) );
+	$wp_customizer->add_control( 'better-amp-code-body-start', array(
+		'label'       => __( 'Codes right after &#x3C;body&#x3E; tag', 'better-amp' ),
+		'section'     => 'better-amp-custom-code-section',
+		'priority'    => 29,
+		'type'        => 'textarea',
+		'description' => __( 'Please be careful. Bad codes can make invalidation issue for your AMP pages.', 'better-amp' ),
+	) );
+	$wp_customizer->add_setting( 'better-amp-code-body-stop', array(
+		'default' => better_amp_get_default_theme_setting( 'better-amp-code-body-stop' ),
+	) );
+	$wp_customizer->add_control( 'better-amp-code-body-stop', array(
+		'label'       => __( 'Codes right before &#x3C;/body&#x3E; tag', 'better-amp' ),
+		'section'     => 'better-amp-custom-code-section',
+		'priority'    => 29,
+		'type'        => 'textarea',
+		'description' => __( 'Please be careful. Bad codes can make invalidation issue for your AMP pages.', 'better-amp' ),
+	) );
+
+	/**
+	 * 10. Advanced Settings
 	 */
 	$wp_customizer->add_section( 'better-amp-advanced-section', array(
 		'title'    => __( 'Advanced Settings', 'better-amp' ),
-		'priority' => 15,
+		'priority' => 17,
 		'panel'    => 'better-amp-panel'
 	) );
 
@@ -791,10 +904,30 @@ function better_amp_customize_register( $wp_customizer ) {
 	$wp_customizer->add_control( 'better-amp-exclude-urls', array(
 		'label'       => __( 'Exclude URL From Auto Converting', 'better-amp' ),
 		'section'     => 'better-amp-advanced-section',
-		'priority'    => 28,
+		'priority'    => 20,
 		'type'        => 'textarea',
-		'description' => __( 'You can exclude URL\'s of your site to prevent converting them into AMP URL inside your site. You can use * in the end of URL to exclude all URL\'s that start with it. Eg. <strong>yoursite.com/test/*</strong><br><br> You can add multiple URL\s in multiple lines.', 'better-amp' ),
+		'description' => sprintf(
+			__( 'You can exclude URL\'s of your site to prevent converting them into AMP URL inside your site. You can use * in the end of URL to exclude all URL\'s that start with it. Eg. <strong>%stest/*</strong><br><br> You can add multiple URL\s in multiple lines.', 'better-amp' ),
+			home_url( '/' )
+		),
 	) );
+
+
+	/**
+	 * 10.2 Mobile redirect
+	 */
+	$wp_customizer->add_setting( 'better-amp-mobile-auto-redirect', array(
+		'default' => better_amp_get_default_theme_setting( 'better-amp-mobile-auto-redirect' ),
+	) );
+
+	$wp_customizer->add_control( new AMP_Customize_Switch_Control( $wp_customizer, 'better-amp-mobile-auto-redirect', array(
+		'label'       => __( 'Show AMP for Mobile Visitors', 'better-amp' ),
+		'description' => __( 'All mobile visitor will be redirected to AMP version of site automatically. Works with all cache plugins.', 'better-amp' ),
+		'section'     => 'better-amp-advanced-section',
+		'priority'    => 25,
+	) ) );
+
+
 }
 
 add_action( 'admin_menu', 'better_amp_add_customizer_admin_link', 999 );

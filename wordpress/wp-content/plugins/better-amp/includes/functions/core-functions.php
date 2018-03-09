@@ -21,10 +21,10 @@ if ( ! function_exists( 'is_better_amp' ) ) {
 	function is_better_amp( $wp_query = NULL, $default = FALSE ) {
 
 		if ( $wp_query instanceof WP_Query ) {
-			return $wp_query->get( Better_AMP::STARTPOINT, $default );
+			return (bool) $wp_query->get( Better_AMP::STARTPOINT, $default );
 		}
 
-		if ( did_action( 'template_redirect' ) ) {
+		if ( did_action( 'template_redirect' ) && ! is_404() ) {
 
 			global $wp_query;
 
@@ -32,7 +32,7 @@ if ( ! function_exists( 'is_better_amp' ) ) {
 			if ( is_null( $wp_query ) ) {
 				return FALSE;
 			} else {
-				return $wp_query->get( Better_AMP::STARTPOINT, $default );
+				return (bool) $wp_query->get( Better_AMP::STARTPOINT, $default );
 			}
 
 		} else {
@@ -40,7 +40,7 @@ if ( ! function_exists( 'is_better_amp' ) ) {
 			$path   = bf_get_wp_installation_slug();
 			$amp_qv = defined( 'AMP_QUERY_VAR' ) ? AMP_QUERY_VAR : 'amp';
 
-			return preg_match( "#^$path/*(.*?)/$amp_qv/+#", $_SERVER['REQUEST_URI'] );
+			return (bool) preg_match( "#^$path/*(.*?)/$amp_qv/*#", $_SERVER['REQUEST_URI'] );
 		}
 	}
 
@@ -84,7 +84,7 @@ function better_amp_register_component( $component_class, $settings = array() ) 
 		$better_amp_registered_components[] = compact( 'component_class', 'settings' ); // maybe need add some extra indexes like __FILE__ in the future!
 
 		return TRUE;
-	} catch ( Exception $e ) {
+	} catch( Exception $e ) {
 
 		return new WP_Error( 'error', $e->getMessage() );
 	}
@@ -147,6 +147,7 @@ function better_amp_enqueue_script( $handle, $src = '', $deps = array(), $media 
  * @return bool
  */
 function better_amp_script_is( $handle, $list = 'enqueued' ) {
+
 	return (bool) better_amp_scripts()->query( $handle, $list );
 }
 
@@ -158,6 +159,7 @@ function better_amp_script_is( $handle, $list = 'enqueued' ) {
  * @since 1.0.0
  */
 function better_amp_print_scripts() {
+
 	better_amp_scripts()->do_items();
 }
 
@@ -169,6 +171,7 @@ function better_amp_print_scripts() {
  * @since 1.0.0
  */
 function better_amp_enqueue_scripts() {
+
 	do_action( 'better-amp/template/enqueue-scripts' );
 }
 
@@ -232,6 +235,7 @@ function better_amp_enqueue_style( $handle, $src = '', $deps = array(), $ver = F
  * @return bool
  */
 function better_amp_style_is( $handle, $list = 'enqueued' ) {
+
 	return (bool) better_amp_styles()->query( $handle, $list );
 }
 
@@ -266,6 +270,7 @@ function better_amp_enqueue_ad( $ad_type = 'adsense' ) {
  * @since 1.0.0
  */
 function better_amp_print_styles() {
+
 	better_amp_styles()->do_items();
 }
 
@@ -292,6 +297,8 @@ function better_amp_add_inline_style( $data, $handle = '' ) {
 		), '1.0.0' );
 		$data = trim( preg_replace( '#<style[^>]*>(.*)</style>#is', '$1', $data ) );
 	}
+
+	$data = preg_replace( '/\s*!\s*important/', '', $data ); // Remove !important
 
 	better_amp_styles()->add_inline_style( $handle, $data );
 }
@@ -368,21 +375,11 @@ function better_amp_enqueue_block_style( $handle, $file = '', $rtl = TRUE ) {
 		return TRUE;
 	}
 
-	static $suffix;
-
-	if ( ! $suffix ) {
-		if ( ( defined( 'WP_DEBUG' ) && WP_DEBUG ) || ( defined( 'BF_DEV_MODE' ) && BF_DEV_MODE ) ) {
-			$suffix = '.css';
-		} else {
-			$suffix = '.min.css';
-		}
-	}
+	better_amp_enqueue_inline_style( better_amp_min_suffix( $file, '.css' ), $handle );
 
 	if ( $rtl && is_rtl() ) {
-		better_amp_enqueue_inline_style( $file . '.rtl' . $suffix, $handle . '-rtl' );
+		better_amp_enqueue_inline_style( better_amp_min_suffix( $file . '.rtl', '.css' ), $handle . '-rtl' );
 	}
-
-	better_amp_enqueue_inline_style( $file . $suffix, $handle );
 
 	return $printed_files[ $file ] = TRUE;
 }
@@ -434,14 +431,14 @@ function better_amp_customize_preview_init( $customize_manager ) {
  *
  * @since 1.0.0
  *
- * @return string|void
+ * @param array $args
+ *
+ * @return string
  */
-function better_amp_guess_none_amp_url() {
+function better_amp_guess_none_amp_url( $args = array() ) {
 
-	static $none_amp_url;
-
-	if ( $none_amp_url ) {
-		return $none_amp_url;
+	if ( ! isset( $_SERVER['SCRIPT_FILENAME'] ) ) { // todo: fix missing SCRIPT_FILENAME in cron
+		return '';
 	}
 
 	$abspath_fix         = str_replace( '\\', '/', ABSPATH );
@@ -486,6 +483,13 @@ function better_amp_guess_none_amp_url() {
 		$none_amp_url = site_url( $matched[1] );
 	} else {
 		$none_amp_url = site_url();
+	}
+
+	// Change query args from outside
+	if ( isset( $args['query-args'] ) && is_array( $args['query-args'] ) ) {
+		foreach ( $args['query-args'] as $arg ) {
+			$none_amp_url = add_query_arg( $arg[0], $arg[1], $none_amp_url );
+		}
 	}
 
 	return $none_amp_url;
@@ -569,6 +573,7 @@ if ( ! function_exists( 'better_amp_translation_echo' ) ) {
 	 * @param $key
 	 */
 	function better_amp_translation_echo( $key ) {
+
 		echo better_amp_translation_get( $key );
 	}
 }
@@ -612,6 +617,7 @@ function better_amp_css_sanitizer( $css ) {
  * @return string
  */
 function better_amp_unparse_url( $parsed_url ) {
+
 	$scheme   = isset( $parsed_url['scheme'] ) ? $parsed_url['scheme'] . '://' : '';
 	$host     = isset( $parsed_url['host'] ) ? $parsed_url['host'] : '';
 	$port     = isset( $parsed_url['port'] ) ? ':' . $parsed_url['port'] : '';
@@ -621,6 +627,13 @@ function better_amp_unparse_url( $parsed_url ) {
 	$path     = isset( $parsed_url['path'] ) ? $parsed_url['path'] : '';
 	$query    = isset( $parsed_url['query'] ) ? '?' . $parsed_url['query'] : '';
 	$fragment = isset( $parsed_url['fragment'] ) ? '#' . $parsed_url['fragment'] : '';
+
+	//
+	// schema has to be relative when there is no schema but host was defined!
+	//
+	if ( ! empty( $parsed_url['host'] ) && empty( $parsed_url['scheme'] ) ) {
+		$scheme = '//';
+	}
 
 	return "$scheme$user$pass$host$port$path$query$fragment";
 }
@@ -650,7 +663,7 @@ if ( ! function_exists( 'bf_get_wp_installation_slug' ) ) {
 			// Strip off any file/query params in the path
 			$path = preg_replace( '#/[^/]*$#i', '', $_SERVER['PHP_SELF'] );
 
-		} else if ( FALSE !== strpos( $_SERVER['SCRIPT_FILENAME'], $abspath_fix ) ) {
+		} elseif ( FALSE !== strpos( $_SERVER['SCRIPT_FILENAME'], $abspath_fix ) ) {
 			// Request is hitting a file inside ABSPATH
 			$directory = str_replace( ABSPATH, '', $script_filename_dir );
 			// Strip off the sub directory, and any file/query params
