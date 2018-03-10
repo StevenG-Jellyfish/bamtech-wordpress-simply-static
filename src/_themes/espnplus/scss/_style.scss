@@ -1,0 +1,29 @@
+
+// bootstrap overrides
+
+$yellow:        #F9B300 !default;
+$primary:       $yellow !default;
+
+.btn.btn-primary {
+    padding: 15px 30px;
+    background-color: #F9B300;
+    border: none;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: black;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    -o-border-radius: 0px;
+    border-radius: 0px;
+    border: 0px;
+
+    &:hover,
+    &:active {
+        background-color: white;
+        color: black;
+    } // active & hover
+
+} //.btn-primary 
+
+
+// global elements

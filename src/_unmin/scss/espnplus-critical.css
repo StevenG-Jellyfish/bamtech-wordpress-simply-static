@@ -876,6 +876,9 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
     width: 100%;
     height: 100%;
     z-index: 1; }
+    .jumbotron .jubmotron-background video {
+      width: 100%;
+      max-width: 1280px; }
   .jumbotron .container {
     position: relative;
     width: 100%;
@@ -893,6 +896,8 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
     margin-bottom: 3rem; }
     .jumbotron .jumbotron-logo img {
       height: 80px; }
+  .jumbotron .btn {
+    margin-top: 1.875rem; }
   .jumbotron p {
     color: white; }
     .jumbotron p.lead {
