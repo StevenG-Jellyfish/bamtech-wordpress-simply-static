@@ -61,13 +61,16 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
     
     .jumbotron-logo {
       margin-bottom: 3rem;
+
       img {
         height: 80px;
       }
     } // .jumbotron-logo
 
     .btn {
-      margin-
+      margin-top: 1.875rem;
+
+      //  *** need to have the bottom right corner cut off
     }
 
     p {
