@@ -81,7 +81,7 @@ var paths = {
     }
   },
   watch: {
-    styles:         '_themes/**/scss/*.scss',
+    styles:         '_themes/**/scss/**/*.scss',
     scripts:        '_themes/**/js/*.js',
     images:         '_images/*.{png,gif,jpg}',
     svgs:           '_svgs/*.svg',
@@ -205,7 +205,7 @@ gulp.task('critical-scss', () => {
 });
 // sass/css pipeline - non-critical
 gulp.task('non-critical-scss', () => {
-  return gulp.src([paths.src.non_critical_styles, paths.src.vendor.styles])
+  return gulp.src([paths.src.non_critical_styles])
     .pipe(isDev(sourcemaps.init()))
     // .pipe(debug({title: '[1] Files in Stream:'}))
     .pipe(sass().on('error', sass.logError))

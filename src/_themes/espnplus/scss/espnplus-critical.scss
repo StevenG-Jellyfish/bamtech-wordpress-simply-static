@@ -111,7 +111,11 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 /*--------------------------------------------------------------
 # JF Components
 --------------------------------------------------------------*/
+
+@import "style";
+
 /*--------------------------------------------------------------
 # component_spotlight
 --------------------------------------------------------------*/
+
 @import "component_spotlight/component_spotlight";
