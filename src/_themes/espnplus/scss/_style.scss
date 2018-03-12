@@ -20,8 +20,8 @@ $primary:       $yellow !default;
     -o-border-radius: 0px;
     border-radius: 0px;
     border: 0px;
-    font-size: 12px;
-    font-weight: 600;
+    font-size: 1.125rem;
+    font-weight: 400;
     font-style: normal;
     text-transform: uppercase;
     line-height: 48px;
@@ -36,6 +36,8 @@ $primary:       $yellow !default;
 // global elements
 body {
     background-color: black;
+    font-weight: 16px;
+    line-height: 1.500rem; 
 }
 //Wrapper for CTA with corner knockout
 .espn-cta-container {
@@ -50,11 +52,11 @@ body {
         position: relative;
         display: inline-block;
         overflow: hidden;    
-        width: 255px;
+        width: 286px;
         height: 48px;
         margin: 0 -10px 0 -25px;
         padding: 0 0 0 0;
-        background-color: #F9B300;
+        background-color: $primary;
         -webkit-transform: skew(-45deg);
             -ms-transform: skew(-45deg);
                 transform: skew(-45deg);

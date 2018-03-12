@@ -844,8 +844,8 @@ object {
   -o-border-radius: 0px;
   border-radius: 0px;
   border: 0px;
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 1.125rem;
+  font-weight: 400;
   font-style: normal;
   text-transform: uppercase;
   line-height: 48px;
@@ -855,7 +855,9 @@ object {
   transform: skew(45deg); }
 
 body {
-  background-color: black; }
+  background-color: black;
+  font-weight: 16px;
+  line-height: 1.500rem; }
 
 .espn-cta-container {
   position: relative;
@@ -868,7 +870,7 @@ body {
     position: relative;
     display: inline-block;
     overflow: hidden;
-    width: 255px;
+    width: 286px;
     height: 48px;
     margin: 0 -10px 0 -25px;
     padding: 0 0 0 0;
@@ -918,41 +920,60 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
   .jumbotron .container {
     position: relative;
     width: 100%;
-    padding: 78px 265px;
+    padding: 58px 265px;
     text-align: center;
     z-index: 2; }
+  .jumbotron .jumbotron-login {
+    position: absolute;
+    display: inline-block;
+    top: -14px;
+    right: 44px;
+    font-size: 0.875rem;
+    text-align: right;
+    text-decoration: none;
+    color: #fefefe; }
   .jumbotron .jumbotron-heading {
-    font-size: 1.5rem;
+    font-size: 1.875rem;
     font-weight: 600;
+    letter-spacing: -0.019rem;
+    line-height: 3.000rem;
     color: white; }
     .jumbotron .jumbotron-heading em {
       font-style: normal;
-      color: #F9B42A; }
+      color: #F9B300; }
   .jumbotron .jumbotron-logo {
     margin-bottom: 3rem; }
     .jumbotron .jumbotron-logo img {
-      height: 80px; }
+      width: 392px;
+      height: 76px; }
   .jumbotron .btn {
-    margin-top: 1.875rem; }
+    margin-top: 1.875rem;
+    font-size: 1.125rem; }
   .jumbotron p {
     color: white; }
     .jumbotron p.lead {
-      font-size: 1.875rem; }
+      font-size: 2.500rem;
+      letter-spacing: -0.025rem;
+      line-height: 3.000rem; }
     .jumbotron p.below-cta a {
+      font-size: 1.250rem;
       color: white; }
 
 /*--------------------------------------------------------------
 # component_section
 --------------------------------------------------------------*/
 /*!
-Theme Name          : espnplus
-Stub Name           :  component_section.scss 
+Theme Name          :   espnplus
+Stub Name           :   component_section.scss 
 Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/feature.html
 */
 section.section {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 0; }
+  padding: 0;
+  font-size: 1.000rem;
+  font-weight: 400;
+  line-height: 1.500rem; }
   section.section .row.flexbox {
     position: relative;
     display: flex;
@@ -962,22 +983,22 @@ section.section {
     width: 100%;
     max-width: 1280px;
     margin: 0;
-    padding: 0;
-    outline: 1px soild yellow; }
+    padding: 0; }
     section.section .row.flexbox .copy-container {
       display: inline-block;
       max-width: 400px;
       margin: 0 50px;
       padding: 0; }
       section.section .row.flexbox .copy-container .featurette-heading {
-        font-size: 1.500rem;
-        font-weight: 300;
-        line-height: 1; }
+        font-size: 2.000rem;
+        font-weight: 600;
+        letter-spacing: -0.010rem;
+        line-height: 2.750rem; }
       section.section .row.flexbox .copy-container:before {
         content: '';
         position: relative;
         display: block;
-        top: -10px;
+        top: 5px;
         width: 60px;
         height: 4px;
         background-color: #F9B300; }
@@ -1023,6 +1044,21 @@ section.section {
     transform: skewY(2.5deg);
     transform-origin: 100%;
     z-index: 2; }
+  section.section.even:first-child:before {
+    content: '';
+    position: relative;
+    display: block;
+    top: 0;
+    right: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
+    background: inherit;
+    transform: skewY(0deg);
+    transform-origin: 100%;
+    z-index: 2; }
   section.section.even:after {
     content: '';
     position: relative;
@@ -1036,5 +1072,20 @@ section.section {
     padding: 0;
     background: inherit;
     transform: skewY(-2.5deg);
+    transform-origin: 100%;
+    z-index: 2; }
+  section.section.even:last-child:after {
+    content: '';
+    position: relative;
+    display: block;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
+    background: inherit;
+    transform: skewY(0deg);
     transform-origin: 100%;
     z-index: 2; }
