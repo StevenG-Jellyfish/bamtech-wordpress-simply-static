@@ -41,21 +41,23 @@ $primary:       $yellow !default;
 .espn-cta-container {
     position: relative;
     display: inline-block;
-    overflow: hidden;   
+    overflow: hidden;    
     margin: 0 auto; 
+    padding: 0 0 0 0;
     text-align: center;
 
     .parallelogram {
         position: relative;
+        display: inline-block;
         overflow: hidden;    
         width: 255px;
         height: 48px;
         margin: 0 -10px 0 -25px;
+        padding: 0 0 0 0;
         background-color: #F9B300;
         -webkit-transform: skew(-45deg);
             -ms-transform: skew(-45deg);
                 transform: skew(-45deg);
-        z-index: 2;
         
         &:hover,
         &:active {
