@@ -32,15 +32,20 @@ Component Souce: http://jf-style-guide.sgel6.dev.jellyfish.local/hero.html
     <div class="container">
         <h1 class="jumbotron-heading">{{ spotlight_overlogo_text }} <em>MORE</em></h1>
         <div class="jumbotron-logo">
-            <img src="../../_images/theme/ESPN_Plus.png"> <!-- replace src with {{spotlight_logo_image}} -->
+            <img src="../../_images/theme/ESPN_Plus.png"> <!--*** replace src with {{spotlight_logo_image}} -->
         </div>
         <p class="lead">
             The NEW {{ spotlight_main_text }} ESPN.<br>
             Live Sports, ESPN Originals, Only $4.99 a month.
         </p>
-        <p>
-            <a href="{{ spotlight_cta_link }}" class="btn btn-primary espn-cta" style="background-color: {{ spotlight_cta_background_color }}; color: {{ spotlight_cta_text_color }};">{{ spotlight_cta_text }}</a>
-        </p>
+        <div class="espn-cta-container">
+            <div id="parallelogram">
+                <a href="{{ spotlight_cta_link }}" class="btn btn-primary espn-cta">{{ spotlight_cta_text }}</a>
+                <!--*** Add in phase II if we put color controls into admin:
+                    style="background-color: {{ spotlight_cta_background_color }}; color: {{ spotlight_cta_text_color }};" 
+                -->
+            </div>
+        </div>
         <p class="below-cta">
             {{ spotlight_belowcta_text }} <a href="#">terms</a>.
         </p>
