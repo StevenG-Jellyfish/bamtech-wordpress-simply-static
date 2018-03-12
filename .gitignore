@@ -5,6 +5,8 @@ db/db_data/
 wordpress/wp_content/
 wordpress/wp-content/cache/autoptimize/*
 elasticsearch/data/
+logs/nginx/access.log
+logs/nginx/error.log
 wordpress/wp-content/uploads/
 wordpress/uploads/
 wordpress/wp-content/cache/
@@ -14,5 +16,10 @@ wordpress/wp-content/themes/twentyseventeen/
 host.env
 .DS_Store
 ._.DS_Store
+src/_fonts/
+src/_images/
+src/_unmin/
 src/_vendor/
+src/_video/
+src/node_modules/
 

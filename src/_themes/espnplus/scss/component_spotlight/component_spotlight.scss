@@ -1,0 +1,91 @@
+/*!
+Theme Name          :   espnplus
+Stub Name           :   component_spotlight.scss 
+Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.html
+*/
+
+:root {
+    --jumbotron-padding-y: 3rem;
+  }
+  
+  .jumbotron {
+    position: relative;
+    display: block;
+    width: 100%;
+    max-width: 1280px;
+    padding-top: var(--jumbotron-padding-y);
+    padding-bottom: var(--jumbotron-padding-y);
+    margin: 0 auto;
+    background-color: black;
+  
+    @media (min-width: 768px) {
+      .jumbotron {
+        padding-top: calc(var(--jumbotron-padding-y) * 2);
+        padding-bottom: calc(var(--jumbotron-padding-y) * 2);
+      }
+    }
+
+    .jubmotron-background {
+      position: absolute;
+      display: block;
+      top: 0px;
+      left: 0px;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+
+      video {
+        width: 100%;
+        max-width: 1280px;
+      }
+    } // .jubmotron-background
+
+    .container {
+      position: relative;
+      width: 100%;
+      padding: 78px 265px;
+      text-align: center;
+      z-index: 2;
+    }
+
+    .jumbotron-heading {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: white;
+
+      em {
+        font-style: normal;
+        color: #F9B42A;      
+      }
+    } //.jumbotron-heading
+    
+    .jumbotron-logo {
+      margin-bottom: 3rem;
+
+      img {
+        height: 80px;
+      }
+    } // .jumbotron-logo
+
+    .btn {
+      margin-top: 1.875rem;
+
+      //  *** need to have the bottom right corner cut off
+    }
+
+    p {
+      color: white;
+      
+      &.lead {
+        font-size: 1.875rem;
+      } //.lead
+
+      &.below-cta {
+
+        a {
+          color: white;
+        }
+      } 
+    } // p
+
+  } // .jumbotron
