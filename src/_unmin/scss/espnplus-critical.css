@@ -937,3 +937,57 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
       font-size: 1.875rem; }
     .jumbotron p.below-cta a {
       color: white; }
+
+/*--------------------------------------------------------------
+# component_section
+--------------------------------------------------------------*/
+/*!
+Theme Name          : espnplus
+Stub Name           :  component_section.scss 
+Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/feature.html
+*/
+section.section {
+  margin: 0 0 0 0;
+  padding: 0 50px; }
+  section.section .row.flexbox {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 1280px;
+    outline: 1px soild yellow; }
+    section.section .row.flexbox .copy-container {
+      display: inline-block;
+      max-width: 400px;
+      margin: 0 50px;
+      padding: 0 0 0 0; }
+      section.section .row.flexbox .copy-container .featurette-heading {
+        font-size: 1.500rem;
+        font-weight: 300;
+        line-height: 1; }
+      section.section .row.flexbox .copy-container:before {
+        content: '';
+        position: relative;
+        display: block;
+        top: -10px;
+        width: 60px;
+        height: 4px;
+        background-color: #F9B300; }
+    section.section .row.flexbox .media-container {
+      display: inline-block;
+      max-width: 400px;
+      margin: 0 50px;
+      padding: 0 0 0 0; }
+  section.section.odd .row.flexbox {
+    flex-wrap: wrap; }
+  section.section.odd a {
+    color: black; }
+  section.section.even {
+    background-color: black;
+    color: white; }
+    section.section.even .row.flexbox {
+      flex-direction: row-reverse;
+      flex-wrap: wrap-reverse; }
+    section.section.even a {
+      color: white; }

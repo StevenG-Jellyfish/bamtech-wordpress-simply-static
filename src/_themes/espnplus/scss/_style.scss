@@ -29,9 +29,7 @@ $primary:       $yellow !default;
     -webkit-transform: skew(45deg);
         -ms-transform: skew(45deg);
             transform: skew(45deg);
-
-    
-
+            
 } //.btn-primary 
 
 
@@ -65,6 +63,6 @@ $primary:       $yellow !default;
             color: black;
         } // active & hover
 
-    }
+    } // .parallelogram
 
-}
+} // .espn-cta-container

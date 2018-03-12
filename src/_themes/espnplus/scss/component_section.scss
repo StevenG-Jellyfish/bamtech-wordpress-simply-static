@@ -1,0 +1,80 @@
+/*!
+Theme Name          : espnplus
+Stub Name           :  component_section.scss 
+Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/feature.html
+*/
+
+
+section.section {
+  margin: 0 0 0 0;
+  padding: 0 50px;
+
+  .row.flexbox {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 1280px;
+    outline: 1px soild yellow;
+
+    .copy-container {
+      display: inline-block;
+      max-width: 400px;
+      margin: 0 50px;
+      padding: 0 0 0 0;
+
+      .featurette-heading {
+        font-size: 1.500rem;
+        font-weight: 300;
+        line-height: 1;
+      } // featurette-heading
+
+      &:before {
+        content: '';
+        position: relative;
+        display: block;
+        top: -10px;
+        width:  60px;
+        height: 4px;
+        background-color: $primary;
+
+      } // &:before >> yellow corner border
+
+    } // .copy-container
+
+    .media-container {
+      display: inline-block;
+      max-width: 400px;
+      margin: 0 50px;
+      padding: 0 0 0 0;
+    } // .media-container
+
+  } // .row
+
+  &.odd {
+    .row.flexbox {
+      flex-wrap: wrap;
+    } // . row.flexbox
+
+    a {
+      color: black;
+    }
+
+  } // .odd
+  
+  &.even {
+    background-color: black;
+    color: white;
+
+    .row.flexbox {
+      flex-direction: row-reverse;
+      flex-wrap: wrap-reverse;
+    } // .row.flexbox
+
+    a {
+      color: white;
+    }
+  } // .even
+
+} // section.section
