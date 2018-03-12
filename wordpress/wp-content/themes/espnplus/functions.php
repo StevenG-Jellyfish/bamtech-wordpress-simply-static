@@ -159,3 +159,11 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
 
+/**
+* ADD Main menu for CPT UI 
+*/
+add_menu_page('Headers', 'Components', 'manage_options', 'components', 'url_replace', 'dashicons-layout', 3);
+function url_replace(){
+	wp_redirect( 'edit.php?post_type=header' );
+}
+
