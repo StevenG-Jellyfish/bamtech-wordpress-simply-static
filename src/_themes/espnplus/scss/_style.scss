@@ -5,53 +5,64 @@ $yellow:        #F9B300 !default;
 $primary:       $yellow !default;
 
 .btn.btn-primary {
-    position: relative;
+    position: absolute;
     display: inline-block;
-    top:-30px;
-    left:-30px;
-    right:-30px;
-    bottom:-30px;
+    top: -30px;
+    left: -0px;
     width: 100%;
     height: 100%;
-    padding: 15px 30px;
+    margin: 0 10px 0 10px;
+    padding: 0 0 0 0;
     background-color: transparent;
     border: none;
     -webkit-border-radius: 0px;
     -moz-border-radius: 0px;
     -o-border-radius: 0px;
     border-radius: 0px;
-    -webkit-transform: skew(-20deg);
-    -moz-transform: skew(-20deg);
-    -o-transform: skew(-20deg);
     border: 0px;
+    font-size: 12px;
     font-weight: 600;
+    font-style: normal;
     text-transform: uppercase;
+    line-height: 48px;
     color: black;
-    z-index: 1;
+    -webkit-transform: skew(45deg);
+        -ms-transform: skew(45deg);
+            transform: skew(45deg);
 
-    &:hover,
-    &:active {
-        background-color: white;
-        color: black;
-    } // active & hover
+    
 
 } //.btn-primary 
 
+
+// global elements
+
+//Wrapper for CTA with corner knockout
 .espn-cta-container {
     position: relative;
     display: inline-block;
-    top: 0;
-    left: 0;
-    background-color: #F9B300;
-    -webkit-transform-origin: 100% 0;
-    -ms-transform-origin: 100% 0;
-    transform-origin: 100% 0;
-    -webkit-transform: skew(-45deg);
-    -ms-transform: skew(-45deg);
-    transform: skew(-45deg);
-    z-index: 2;
-    outline: 1px solid red;
+    overflow: hidden;   
+    margin: 0 auto; 
+    text-align: center;
+
+    .parallelogram {
+        position: relative;
+        overflow: hidden;    
+        width: 255px;
+        height: 48px;
+        margin: 0 -10px 0 -25px;
+        background-color: #F9B300;
+        -webkit-transform: skew(-45deg);
+            -ms-transform: skew(-45deg);
+                transform: skew(-45deg);
+        z-index: 2;
+        
+        &:hover,
+        &:active {
+            background-color: white;
+            color: black;
+        } // active & hover
+
+    }
 
 }
-
-// global elements
