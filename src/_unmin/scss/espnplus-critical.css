@@ -183,12 +183,12 @@ sup {
   top: -.5em; }
 
 a {
-  color: #ffc107;
+  color: #F9B300;
   text-decoration: none;
   background-color: transparent;
   -webkit-text-decoration-skip: objects; }
   a:hover {
-    color: #ba8b00;
+    color: #ad7c00;
     text-decoration: underline; }
 
 a:not([href]):not([tabindex]) {
@@ -995,32 +995,6 @@ template {
 /*--------------------------------------------------------------
 # JF Components
 --------------------------------------------------------------*/
-.btn.btn-primary {
-  position: absolute;
-  display: inline-block;
-  top: -30px;
-  left: -0px;
-  width: 100%;
-  height: 100%;
-  margin: 0 10px 0 10px;
-  padding: 0 0 0 0;
-  background-color: transparent;
-  border: none;
-  -webkit-border-radius: 0px;
-  -moz-border-radius: 0px;
-  -o-border-radius: 0px;
-  border-radius: 0px;
-  border: 0px;
-  font-size: 1.125rem;
-  font-weight: 400;
-  font-style: normal;
-  text-transform: uppercase;
-  line-height: 48px;
-  color: black;
-  -webkit-transform: skew(45deg);
-  -ms-transform: skew(45deg);
-  transform: skew(45deg); }
-
 body {
   background-color: black;
   font-weight: 16px;
@@ -1041,13 +1015,120 @@ body {
     height: 48px;
     margin: 0 -10px 0 -25px;
     padding: 0 0 0 0;
-    background-color: #ffc107;
+    background-color: #F9B300;
     -webkit-transform: skew(-45deg);
     -ms-transform: skew(-45deg);
     transform: skew(-45deg); }
     .espn-cta-container .parallelogram:hover, .espn-cta-container .parallelogram:active {
       background-color: white;
       color: black; }
+  .espn-cta-container .btn.btn-primary {
+    position: absolute;
+    display: inline-block;
+    top: -30px;
+    left: -0px;
+    width: 100%;
+    height: 100%;
+    margin: 0 10px 0 10px;
+    padding: 0 0 0 0;
+    background-color: transparent;
+    border: none;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    -o-border-radius: 0px;
+    border-radius: 0px;
+    border: 0px;
+    font-size: 1.125rem;
+    font-weight: 400;
+    font-style: normal;
+    text-transform: uppercase;
+    line-height: 48px;
+    color: black;
+    -webkit-transform: skew(45deg);
+    -ms-transform: skew(45deg);
+    transform: skew(45deg); }
+
+/*!
+Theme Name: espnplus
+Stub Name:  global_header.scss 
+*/
+#masthead {
+  background: #fff;
+  height: 77px;
+  text-align: left; }
+
+.site-branding {
+  width: 30%;
+  display: inline-block;
+  border: 1px solid #ccc;
+  float: left; }
+
+.site-header a img {
+  max-height: 22px;
+  width: auto;
+  margin-top: 28px;
+  margin-left: 75px; }
+
+#site-navigation {
+  width: 60%;
+  display: inline-block;
+  border: 1px solid #ccc;
+  text-align: right; }
+
+#primary-menu {
+  list-style: none; }
+
+#primary-menu li {
+  float: left; }
+
+.espn-cta-btn-container {
+  font-family: PlayoffProCond-Medium, arial;
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  margin: 0 auto;
+  padding: 0 0 0 0;
+  text-align: center; }
+  .espn-cta-btn-container .parallelogram {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    width: 286px;
+    height: 48px;
+    margin: 0 -10px 0 -25px;
+    padding: 0 0 0 0;
+    background-color: #F9B300;
+    -webkit-transform: skew(-45deg);
+    -ms-transform: skew(-45deg);
+    transform: skew(-45deg); }
+    .espn-cta-btn-container .parallelogram:hover, .espn-cta-btn-container .parallelogram:active {
+      background-color: black;
+      color: white; }
+  .espn-cta-btn-container .btn.btn-primary {
+    position: absolute;
+    display: inline-block;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0 10px 0 10px;
+    padding: 0 0 0 0;
+    background-color: transparent;
+    border: none;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    -o-border-radius: 0px;
+    border-radius: 0px;
+    border: 0px;
+    font-size: 1.125rem;
+    font-weight: 400;
+    font-style: normal;
+    text-transform: uppercase;
+    line-height: 48px;
+    color: black;
+    -webkit-transform: skew(45deg);
+    -ms-transform: skew(45deg);
+    transform: skew(45deg); }
 
 /*--------------------------------------------------------------
 # component_spotlight
@@ -1107,7 +1188,7 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
     color: white; }
     .jumbotron .jumbotron-heading em {
       font-style: normal;
-      color: #ffc107; }
+      color: #F9B300; }
   .jumbotron .jumbotron-logo {
     margin-bottom: 3rem; }
     .jumbotron .jumbotron-logo img {
@@ -1168,7 +1249,7 @@ section.section {
         top: 5px;
         width: 60px;
         height: 4px;
-        background-color: #ffc107; }
+        background-color: #F9B300; }
     section.section .row.flexbox .media-container {
       display: inline-block;
       max-width: 400px;
@@ -1257,6 +1338,16 @@ section.section {
     transform-origin: 100%;
     z-index: 2; }
 
+@font-face {
+  font-family: 'PlayoffProCond-Medium';
+  src: url("fonts/PlayoffProCond-Medium.woff");
+  src: url("fonts/PlayoffProCond-Medium.woff2"); }
+
+@font-face {
+  font-family: 'PlayoffProCond-MediumItalic';
+  src: url("fonts/PlayoffProCond-MediumItalic.woff");
+  src: url("fonts/PlayoffProCond-MediumItalic.woff2"); }
+
 #page {
   text-align: center; }
 
@@ -1266,7 +1357,7 @@ section.section {
 .container-fluid {
   max-width: 1280px;
   margin: 0 auto;
-  border: 1px solid #ccc; }
+  padding: 0; }
 
 .site-description {
   background-color: #ccc; }

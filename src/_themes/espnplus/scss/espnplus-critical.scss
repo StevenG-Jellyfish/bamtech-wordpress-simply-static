@@ -141,6 +141,7 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 --------------------------------------------------------------*/
 
 @import "style";
+@import "global_header";
 
 /*--------------------------------------------------------------
 # component_spotlight
@@ -153,6 +154,9 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 --------------------------------------------------------------*/
 
 @import "component_section";
+@import "fonts";
+//
+//
 #page {
     text-align: center;
 }
@@ -164,7 +168,8 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 .container-fluid {
     max-width: 1280px;
     margin: 0 auto;
-    border: 1px solid #ccc;
+    padding: 0;
+    // border: 1px solid #ccc;
 }
 
 .site-description {

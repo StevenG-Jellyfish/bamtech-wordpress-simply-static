@@ -386,10 +386,11 @@ textarea {
  * Correct the cursor style of increment and decrement buttons in Chrome.
  */
 
-[type="number"]::-webkit-inner-spin-button,
+
+/* [type="number"]::-webkit-inner-spin-button,
 [type="number"]::-webkit-outer-spin-button {
     height: auto;
-}
+} */
 
 
 /**
@@ -581,24 +582,26 @@ hr {
     margin-bottom: 1.5em;
 }
 
-ul,
+
+/* ul,
 ol {
     margin: 0 0 1.5em 3em;
 }
 
 ul {
     list-style: disc;
-}
+} */
 
 ol {
     list-style: decimal;
 }
 
-li>ul,
+
+/* li>ul,
 li>ol {
     margin-bottom: 0;
     margin-left: 1.5em;
-}
+} */
 
 dt {
     font-weight: bold;
@@ -921,7 +924,8 @@ a:hover, a:active {
 # Clearings
 --------------------------------------------------------------*/
 
-.clear:before,
+
+/* .clear:before,
 .clear:after,
 .entry-content:before,
 .entry-content:after,
@@ -945,7 +949,7 @@ a:hover, a:active {
 .site-content:after,
 .site-footer:after {
     clear: both;
-}
+} */
 
 
 /*--------------------------------------------------------------
