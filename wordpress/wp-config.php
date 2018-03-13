@@ -5,6 +5,8 @@ define('WP_CACHE', true); // Added by W3 Total Cache
 
 
 
+
+
 /**
  * The base configuration for WordPress
  *
