@@ -6,6 +6,7 @@ wordpress/wp_content/
 wordpress/wp-content/cache/autoptimize/*
 */advance-cahce.php
 elasticsearch/data/
+*/advance-cahce.php
 logs/nginx/access.log
 logs/nginx/error.log
 wordpress/wp-content/uploads/
