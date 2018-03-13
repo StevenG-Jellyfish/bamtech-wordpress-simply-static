@@ -4,6 +4,7 @@ wordpress/wordpress.env
 db/db_data/
 wordpress/wp_content/
 wordpress/wp-content/cache/autoptimize/*
+*/advance-cahce.php
 elasticsearch/data/
 logs/nginx/access.log
 logs/nginx/error.log
