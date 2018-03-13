@@ -1053,15 +1053,18 @@ Theme Name: espnplus
 Stub Name:  global_header.scss 
 */
 #masthead {
-  background: #fff;
+  background: white;
   height: 77px;
-  text-align: left; }
+  text-align: left;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex; }
 
 .site-branding {
-  width: 30%;
   display: inline-block;
-  border: 1px solid #ccc;
-  float: left; }
+  flex: 1 100%; }
 
 .site-header a img {
   max-height: 22px;
@@ -1070,19 +1073,32 @@ Stub Name:  global_header.scss
   margin-left: 75px; }
 
 #site-navigation {
-  width: 60%;
   display: inline-block;
-  border: 1px solid #ccc;
-  text-align: right; }
+  height: 77px;
+  flex: 1 100%; }
 
 #primary-menu {
-  list-style: none; }
+  margin-top: 14px;
+  list-style: none;
+  margin-bottom: 0;
+  margin-right: 55px;
+  display: flex;
+  justify-content: flex-end; }
 
 #primary-menu li {
-  float: left; }
+  height: 48px; }
+
+.menu-item {
+  margin-left: 38px;
+  min-width: 40px;
+  font-family: PlayoffProCond-MediumItalic, arial; }
+
+.menu-item a {
+  margin-top: 10px;
+  display: inline-block;
+  color: black; }
 
 .espn-cta-btn-container {
-  font-family: PlayoffProCond-Medium, arial;
   position: relative;
   display: inline-block;
   overflow: hidden;
@@ -1090,6 +1106,7 @@ Stub Name:  global_header.scss
   padding: 0 0 0 0;
   text-align: center; }
   .espn-cta-btn-container .parallelogram {
+    font-family: PlayoffProCond-Medium, arial;
     position: relative;
     display: inline-block;
     overflow: hidden;
@@ -1105,6 +1122,7 @@ Stub Name:  global_header.scss
       background-color: black;
       color: white; }
   .espn-cta-btn-container .btn.btn-primary {
+    cursor: pointer;
     position: absolute;
     display: inline-block;
     top: 0;
@@ -1340,13 +1358,13 @@ section.section {
 
 @font-face {
   font-family: 'PlayoffProCond-Medium';
-  src: url("fonts/PlayoffProCond-Medium.woff");
-  src: url("fonts/PlayoffProCond-Medium.woff2"); }
+  src: url(http://bamtech.local/wp-content/themes/espnplus/css/fonts/PlayoffProCond-Medium.woff);
+  src: url(http://bamtech.local/wp-content/themes/espnplus/css/fonts/PlayoffProCond-Medium.woff2); }
 
 @font-face {
   font-family: 'PlayoffProCond-MediumItalic';
-  src: url("fonts/PlayoffProCond-MediumItalic.woff");
-  src: url("fonts/PlayoffProCond-MediumItalic.woff2"); }
+  src: url(http://bamtech.local/wp-content/themes/espnplus/css/fonts/PlayoffProCond-MediumItalic.woff);
+  src: url(http://bamtech.local/wp-content/themes/espnplus/css/fonts/PlayoffProCond-MediumItalic.woff2); }
 
 #page {
   text-align: center; }

@@ -4,21 +4,24 @@ Stub Name:  global_header.scss
 */
 
 #masthead {
-    background: $white;
+    background: white;
     height: 77px;
     text-align: left;
-}
-
-header {
-    //  height: 77px;
+    //justify-content: flex-start | flex-end;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
 }
 
 .site-branding {
     // height: 177px;
-    width: 30%;
+    // width: 25%;
     display: inline-block;
-    border: 1px solid #ccc;
-    float: left;
+    // outline: 1px solid #ccc;
+    // float: left;
+    flex: 1 100%;
 }
 
 .site-header {
@@ -31,23 +34,52 @@ header {
 }
 
 #site-navigation {
-    width: 60%;
+    // width: 68%;
     display: inline-block;
-    border: 1px solid #ccc;
-    text-align: right;
+    // outline: 1px solid #ccc;
+    // float: right;
+    height: 77px;
+    flex: 1 100%;
 }
 
 #primary-menu {
+    margin-top: 14px;
     list-style: none;
+    // float: right;
+    margin-bottom: 0;
+    margin-right: 55px;
+    display: flex;
+    justify-content: flex-end;
 }
 
 #primary-menu li {
-    float: left;
+    // float: left;
+    // outline: 1px solid #ccc;
+    height: 48px;
 }
 
+.menu-item {
+    margin-left: 38px;
+    min-width: 40px;
+    font-family: PlayoffProCond-MediumItalic, arial;
+    // display: inline-block;
+}
+
+.menu-item a {
+    margin-top: 10px;
+    display: inline-block;
+    // font-family: PlayoffProCond-MediumItalic, arial;
+    // font-size: 0.875rem;
+    color: black;
+    // height: 48px;
+}
+
+// #primary-menu li a {
+//     height: 77px;
+//     vertical-align: center;
+// }
 //Wrapper for CTA with corner knockout
 .espn-cta-btn-container {
-    font-family: PlayoffProCond-Medium, arial;
     position: relative;
     display: inline-block;
     overflow: hidden;
@@ -55,6 +87,7 @@ header {
     padding: 0 0 0 0;
     text-align: center;
     .parallelogram {
+        font-family: PlayoffProCond-Medium, arial;
         position: relative;
         display: inline-block;
         overflow: hidden;
@@ -73,6 +106,7 @@ header {
         } // active & hover
     } // .parallelogram
     .btn.btn-primary {
+        cursor: pointer;
         position: absolute;
         display: inline-block;
         top: 0;
