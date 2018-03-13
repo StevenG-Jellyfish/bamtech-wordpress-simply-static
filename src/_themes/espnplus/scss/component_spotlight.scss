@@ -43,19 +43,32 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
     .container {
       position: relative;
       width: 100%;
-      padding: 78px 265px;
+      padding: 58px 265px;
       text-align: center;
       z-index: 2;
     }
 
+    .jumbotron-login {
+      position: absolute;
+      display: inline-block;
+      top: -14px;
+      right: 44px;
+      font-size: 0.875rem;
+      text-align: right;
+      text-decoration: none;
+      color: #fefefe;
+    }
+
     .jumbotron-heading {
-      font-size: 1.5rem;
+      font-size: 1.875rem;
       font-weight: 600;
+      letter-spacing: -0.019rem;
+      line-height: 3.000rem;
       color: white;
 
       em {
         font-style: normal;
-        color: #F9B42A;      
+        color: $primary;      
       }
     } //.jumbotron-heading
     
@@ -63,12 +76,14 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
       margin-bottom: 3rem;
 
       img {
-        height: 80px;
+        width: 392px;  
+        height: 76px;
       }
     } // .jumbotron-logo
 
     .btn {
       margin-top: 1.875rem;
+      font-size: 1.125rem;
 
       //  *** need to have the bottom right corner cut off
     }
@@ -77,12 +92,15 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
       color: white;
       
       &.lead {
-        font-size: 1.875rem;
+        font-size: 2.500rem;
+        letter-spacing: -0.025rem;
+        line-height: 3.000rem;
       } //.lead
 
       &.below-cta {
 
         a {
+          font-size: 1.250rem;
           color: white;
         }
       } 
