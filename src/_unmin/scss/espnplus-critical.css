@@ -992,32 +992,6 @@ template {
 /*--------------------------------------------------------------
 # JF Components
 --------------------------------------------------------------*/
-.btn.btn-primary {
-  position: absolute;
-  display: inline-block;
-  top: -30px;
-  left: -0px;
-  width: 100%;
-  height: 100%;
-  margin: 0 10px 0 10px;
-  padding: 0 0 0 0;
-  background-color: transparent;
-  border: none;
-  -webkit-border-radius: 0px;
-  -moz-border-radius: 0px;
-  -o-border-radius: 0px;
-  border-radius: 0px;
-  border: 0px;
-  font-size: 1.125rem;
-  font-weight: 400;
-  font-style: normal;
-  text-transform: uppercase;
-  line-height: 48px;
-  color: black;
-  -webkit-transform: skew(45deg);
-  -ms-transform: skew(45deg);
-  transform: skew(45deg); }
-
 body {
   max-width: 100%;
   margin: 0 0 0 0;
@@ -1048,6 +1022,31 @@ body {
     .espn-cta-container .parallelogram:hover, .espn-cta-container .parallelogram:active {
       background-color: white;
       color: black; }
+  .espn-cta-container .btn.btn-primary {
+    position: absolute;
+    display: inline-block;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0 10px 0 10px;
+    padding: 0 0 0 0;
+    background-color: transparent;
+    border: none;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    -o-border-radius: 0px;
+    border-radius: 0px;
+    border: 0px;
+    font-size: 1.125rem;
+    font-weight: 400;
+    font-style: normal;
+    text-transform: uppercase;
+    line-height: 48px;
+    color: black;
+    -webkit-transform: skew(45deg);
+    -ms-transform: skew(45deg);
+    transform: skew(45deg); }
 
 @media (max-width: 767px) {
   .espn-cta-container {
@@ -1195,6 +1194,9 @@ Stub Name           :   component_section.scss
 Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/feature.html
 */
 section.section {
+  position: relative;
+  display: block;
+  width: 100%;
   max-width: 1280px;
   margin: 0 auto;
   padding: 0;
@@ -1392,3 +1394,64 @@ section.section {
     transform: skewY(0deg);
     transform-origin: 100%;
     z-index: 2; }
+
+/*--------------------------------------------------------------
+# component_section
+--------------------------------------------------------------*/
+/*!
+Theme Name: espnplus
+Stub Name:  global_league_accordion.scss 
+*/
+section.league-toc {
+  position: relative;
+  display: block;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0;
+  font-size: 1.000rem;
+  font-weight: 400;
+  line-height: 1.500rem;
+  background-color: black; }
+  section.league-toc .container {
+    margin: 3.375rem;
+    padding: 0 0 0 0;
+    border-top: 1px solid #191919; }
+    section.league-toc .container .copyright {
+      margin: 3.375rem 0 1.5rem 0;
+      color: #636363; }
+    section.league-toc .container .card {
+      display: inline-block;
+      width: 45%;
+      max-width: 45%; }
+      section.league-toc .container .card:nth-child(even) {
+        margin: 0 5% 0 0; }
+      section.league-toc .container .card:nth-child(even) {
+        margin: 0 0 0 5%; }
+      section.league-toc .container .card .card-header {
+        background-color: #191919; }
+        section.league-toc .container .card .card-header a {
+          text-decoration: none; }
+          section.league-toc .container .card .card-header a h5 {
+            position: relative;
+            margin: 0 0 0 0;
+            padding: 0 1.282em;
+            font-weight: 400;
+            line-height: 2.563rem;
+            color: #636363; }
+            section.league-toc .container .card .card-header a h5 i.fa {
+              position: absolute;
+              display: block;
+              top: 0px;
+              right: 1rem;
+              width: 1rem;
+              height: 1rem;
+              color: #636363; }
+              section.league-toc .container .card .card-header a h5 i.fa:before {
+                content: 'V'; }
+      section.league-toc .container .card .card-body {
+        margin: 0 0 0 0;
+        padding: 1.282em;
+        border-top: 1px solid #636363;
+        background-color: #191919;
+        color: #636363; }
