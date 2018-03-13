@@ -42,71 +42,80 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 	## Captions
 	## Galleries
 --------------------------------------------------------------*/
-@import "../../../_vendor/scss/variables-site/variables-site";
-@import "../../../_vendor/scss/mixins/mixins-master";
+//@import "../../../_vendor/scss/variables-site/variables-site";
+//@import "../../../_vendor/scss/mixins/mixins-master";
 
 /*--------------------------------------------------------------
 # Normalize
 --------------------------------------------------------------*/
-@import "../../../_vendor/scss/normalize";
+//@import "../../../_vendor/scss/normalize";
 
 /*--------------------------------------------------------------
 # Typography
 --------------------------------------------------------------*/
-@import "../../../_vendor/scss/typography/typography";
+//@import "../../../_vendor/scss/typography/typography";
 
 /*--------------------------------------------------------------
 # Elements
 --------------------------------------------------------------*/
-@import "../../../_vendor/scss/elements/elements";
+//@import "../../../_vendor/scss/elements/elements";
 
 /*--------------------------------------------------------------
 # Forms
 --------------------------------------------------------------*/
-@import "../../../_vendor/scss/forms/forms";
+//@import "../../../_vendor/scss/forms/forms";
 
 /*--------------------------------------------------------------
 # Navigation
 --------------------------------------------------------------*/
-@import "../../../_vendor/scss/navigation/navigation";
+//@import "../../../_vendor/scss/navigation/navigation";
 
 /*--------------------------------------------------------------
 # Accessibility
 --------------------------------------------------------------*/
-@import "../../../_vendor/scss/modules/accessibility";
+//@import "../../../_vendor/scss/modules/accessibility";
 
 /*--------------------------------------------------------------
 # Alignments
 --------------------------------------------------------------*/
-@import "../../../_vendor/scss/modules/alignments";
+//@import "../../../_vendor/scss/modules/alignments";
 
 /*--------------------------------------------------------------
 # Clearings
 --------------------------------------------------------------*/
-@import "../../../_vendor/scss/modules/clearings";
+//@import "../../../_vendor/scss/modules/clearings";
 
 /*--------------------------------------------------------------
 # Widgets
 --------------------------------------------------------------*/
-@import "../../../_vendor/scss/site/secondary/widgets";
+//@import "../../../_vendor/scss/site/secondary/widgets";
 
 /*--------------------------------------------------------------
 # Content
 --------------------------------------------------------------*/
-@import "../../../_vendor/scss/site/site";
+//@import "../../../_vendor/scss/site/site";
 
 /*--------------------------------------------------------------
 # Infinite scroll
 --------------------------------------------------------------*/
-@import "../../../_vendor/scss/modules/infinite-scroll";
+//@import "../../../_vendor/scss/modules/infinite-scroll";
 
 /*--------------------------------------------------------------
 # Media
 --------------------------------------------------------------*/
-@import "../../../_vendor/scss/media/media";
+//@import "../../../_vendor/scss/media/media";
 
 
-
+@import "../../../_vendor/scss/bootstrap/functions";
+@import "../../../_vendor/scss/bootstrap/variables";
+@import "../../../_vendor/scss/bootstrap/mixins";
+// @import "../../../_vendor/scss/bootstrap/root";
+@import "../../../_vendor/scss/bootstrap/reboot";
+// @import "../../../_vendor/scss/bootstrap/type";
+@import "../../../_vendor/scss/bootstrap/grid";
+@import "../../../_vendor/scss/bootstrap/jumbotron";
+// @import "../../../_vendor/scss/bootstrap/utilities";
+@import "../../../_vendor/scss/bootstrap/print";
 
 /*--------------------------------------------------------------
 # JF Components
@@ -118,9 +127,6 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 # component_spotlight
 --------------------------------------------------------------*/
 
-<<<<<<< HEAD
-@import "component_spotlight/component_spotlight";
-=======
 @import "component_spotlight";
 
 /*--------------------------------------------------------------
@@ -128,4 +134,3 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 --------------------------------------------------------------*/
 
 @import "component_section";
->>>>>>> 7c4be71b9629ac737bec2c727483a862d13c358c

@@ -35,6 +35,9 @@ $primary:       $yellow !default;
 
 // global elements
 body {
+    max-width: 100%;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
     background-color: black;
     font-weight: 16px;
     line-height: 1.500rem; 
@@ -44,7 +47,7 @@ body {
     position: relative;
     display: inline-block;
     overflow: hidden;    
-    margin: 0 auto; 
+    margin: 3.000rem auto 1.750rem auto; 
     padding: 0 0 0 0;
     text-align: center;
 
@@ -70,3 +73,9 @@ body {
     } // .parallelogram
 
 } // .espn-cta-container
+
+@media (max-width: 767px) {
+  .espn-cta-container {
+    margin: 1.5rem auto .750rem auto;
+  } // .espn-cta-container
+} // max-width: 767px
