@@ -13,20 +13,21 @@ jQuery(document).ready(function() {
         // Variables
         var windowHeight = jQuery(window).height();
 
-        // Find the value of 90% of the viewport height
-        var ninetypercent = .9 * windowHeight;
-
         // When the document is scrolled ninety percent, toggle the classes
-        // Does not work in iOS 7 or below
-        // Hasn't been tested in iOS 8
+
+        var jumbotronheight = jQuery('.jumbotron').height();
+        var windowheight = jQuery(window).height();
         jQuery(document).scroll(function() {
 
             // Store the document scroll function in a variable
-            var y = jQuery(this).scrollTop();
+            // var y = jQuery(this).scrollTop();
+
+            var scrollTop = jQuery(window).scrollTop();
 
             // If the document is scrolled 90%
-            if (y > ninetypercent) {
-
+            // if (y > ninetypercent) {
+            if (scrollTop > 600) {
+                // console.log("ok" + windowheight);
                 // Add the "sticky" class
                 jQuery('header').addClass('sticky');
             } else {

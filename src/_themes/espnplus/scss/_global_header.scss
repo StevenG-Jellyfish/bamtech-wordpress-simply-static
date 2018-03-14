@@ -4,9 +4,14 @@ Stub Name:  global_header.scss
 */
 
 #masthead {
-    background: white;
     width: 100%;
-    max-width: 1280px;
+    // max-width: 1280px;
+    z-index: 16777271;
+    display: inline-block;
+    text-align: center;
+    // border: 1px solid #ccc;
+    // opacity: 0.9;
+    // margin: 0 auto;
     // position: relative;
     // display: inline-block;
     // left: 0;
@@ -18,6 +23,17 @@ Stub Name:  global_header.scss
     // display: -ms-flexbox;
     // display: -webkit-flex;
     // display: flex;
+}
+
+@keyframes slide-down {
+    0% {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+    100% {
+        opacity: 0.9;
+        transform: translateY(0);
+    }
 }
 
 .sticky {
@@ -34,10 +50,20 @@ Stub Name:  global_header.scss
     flex: 1 100%;
 }
 
+.headerbox {
+    display: block;
+    background: white;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1280px;
+    height: 77px;
+}
+
 .site-header {
-    //background: white;
+    // border: 1px solid #ccc;
     height: 77px;
     text-align: left;
+    // background: white;
     //justify-content: flex-start | flex-end;
     display: -webkit-box;
     display: -moz-box;
@@ -75,6 +101,10 @@ Stub Name:  global_header.scss
     // float: left;
     // outline: 1px solid #ccc;
     height: 48px;
+}
+
+.site-title {
+    display: none;
 }
 
 .menu-item {
