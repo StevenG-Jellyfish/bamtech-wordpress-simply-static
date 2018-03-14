@@ -143,8 +143,6 @@ EOPHP
     #wp plugin update --all --allow-root
     #wp --info --allow-root
     wp core version --extra --allow-root
-fi
-
 
 wp user update admin --user_pass=${WORDPRESS_ADMIN_PASSWORD} --allow-root
 
@@ -153,5 +151,7 @@ ln -s /media/uploads /var/www/html/wp-content/uploads
 
 rm /var/www/html/wp-content/cache
 ln -s /media/uploads /var/www/html/wp-content/cache
+
+fi
 
 exec "$@"
