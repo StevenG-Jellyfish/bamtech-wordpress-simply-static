@@ -144,13 +144,11 @@ EOPHP
     #wp --info --allow-root
     wp core version --extra --allow-root
 
-wp user update admin --user_pass=${WORDPRESS_ADMIN_PASSWORD} --allow-root
-
-rm /var/www/html/wp-content/uploads
-ln -s /media/uploads /var/www/html/wp-content/uploads
-
-rm /var/www/html/wp-content/cache
+rm -rf /var/www/html/wp-content/uploads
 ln -s /media/uploads /var/www/html/wp-content/cache
+
+rm -rf /var/www/html/wp-content/cache
+ln -s /media/uploads /var/www/html/wp-content/uploads
 
 fi
 
