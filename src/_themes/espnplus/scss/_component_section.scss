@@ -6,6 +6,9 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/feature.
 
 
 section.section {
+  position: relative;
+  display: block;
+  width: 100%;
   max-width: 1280px;
   margin: 0 auto;
   padding: 0;
