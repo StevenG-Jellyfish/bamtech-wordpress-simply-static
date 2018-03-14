@@ -1,4 +1,3 @@
-
 // bootstrap overrides
 
 $yellow:                    #F9B300 !default;
@@ -18,36 +17,34 @@ body {
     padding: 0 0 0 0;
     background-color: black;
     font-weight: 16px;
-    line-height: 1.500rem; 
+    line-height: 1.500rem;
 }
+
 //Wrapper for CTA with corner knockout
 .espn-cta-container {
     position: relative;
     display: inline-block;
-    overflow: hidden;    
-    margin: 3.000rem auto 1.750rem auto; 
+    overflow: hidden;
+    margin: 0 auto;
     padding: 0 0 0 0;
     text-align: center;
-
     .parallelogram {
         position: relative;
         display: inline-block;
-        overflow: hidden;    
+        overflow: hidden;
         width: 286px;
         height: 48px;
         margin: 0 -10px 0 -25px;
         padding: 0 0 0 0;
         background-color: $primary;
         -webkit-transform: skew(-45deg);
-            -ms-transform: skew(-45deg);
-                transform: skew(-45deg);
-        
+        -ms-transform: skew(-45deg);
+        transform: skew(-45deg);
         &:hover,
         &:active {
             background-color: white;
             color: black;
         } // active & hover
-
     } // .parallelogram
 
     .btn.btn-primary {
@@ -55,6 +52,7 @@ body {
         display: inline-block;
         top: 0;
         left: 0;
+
         width: 100%;
         height: 100%;
         margin: 0 10px 0 10px;
