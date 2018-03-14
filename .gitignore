@@ -4,6 +4,7 @@ wordpress/wordpress.env
 db/db_data/
 wordpress/wp_content/
 wordpress/wp-content/cache/autoptimize/*
+*/advance-cahce.php
 elasticsearch/data/
 */advance-cahce.php
 logs/nginx/access.log
@@ -17,10 +18,10 @@ wordpress/wp-content/themes/twentyseventeen/
 host.env
 .DS_Store
 ._.DS_Store
-# src/_fonts/*
-# src/_images/*
+src/_fonts/*
+src/_images/*
 src/_unmin/*
 src/_vendor/*
-# src/_video/*
+src/_video/*
 src/node_modules/*
 

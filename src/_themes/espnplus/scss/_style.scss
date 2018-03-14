@@ -3,6 +3,9 @@ $yellow: #F9B300 !default;
 $primary: $yellow !default;
 // global elements
 body {
+    max-width: 100%;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
     background-color: black;
     font-weight: 16px;
     line-height: 1.500rem;
