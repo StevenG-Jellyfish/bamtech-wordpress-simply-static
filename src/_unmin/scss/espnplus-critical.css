@@ -1443,7 +1443,7 @@ section.league-toc {
   section.league-toc .container {
     margin: 3.375rem;
     padding: 0 0 0 0;
-    border-top: 1px solid #191919; }
+    border-top: 1px solid #636363; }
     section.league-toc .container .copyright {
       margin: 3.375rem 0 1.5rem 0;
       color: #636363; }
@@ -1477,6 +1477,7 @@ section.league-toc {
               section.league-toc .container .card .card-header a h5 i.fa:before {
                 content: 'V'; }
       section.league-toc .container .card .card-body {
+        display: none;
         margin: 0 0 0 0;
         padding: 1.282em;
         border-top: 1px solid #636363;

@@ -19,7 +19,7 @@ section.league-toc {
     .container {
         margin: 3.375rem;
         padding: 0 0 0 0;
-        border-top: 1px solid $espn-accordion-bg-grey;
+        border-top: 1px solid $espn-accordion-txt-grey;
 
         .copyright {
             margin: 3.375rem 0 1.5rem 0;
@@ -75,6 +75,7 @@ section.league-toc {
             } // .card-header
 
             .card-body {
+                display: none;
                 margin: 0 0 0 0;
                 padding: 1.282em;
                 border-top: 1px solid $espn-accordion-txt-grey;
