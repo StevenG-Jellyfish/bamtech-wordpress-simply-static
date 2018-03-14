@@ -12,6 +12,16 @@ if(!get_field('component_icon_and_text')){
 get_header();
 get_template_part('template-parts/components/header');
 get_template_part('template-parts/components/spotlight');
+get_template_part('template-parts/components/section');
+get_template_part('template-parts/components/section2');
+get_template_part('template-parts/components/section3');
+get_template_part('template-parts/components/section4');
+get_template_part('template-parts/components/section5');
+get_template_part('template-parts/components/section6');
+get_template_part('template-parts/components/section7');
+get_template_part('template-parts/components/section8');
+get_template_part('template-parts/components/section9');
+get_template_part('template-parts/components/section10');
 ?>
 <section id="rfi" class="section-wpr two-column-rfi">
 	<div class="container">

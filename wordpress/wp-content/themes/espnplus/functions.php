@@ -177,5 +177,23 @@ function my_custom_menu_page(){
 }
 add_action('admin_menu', 'my_custom_menu_page');
 
+/**
+* custom image sizes
+**/
+// Add other useful image sizes for use through Add Media modal
+add_image_size( 'bamtech-small-width', 420 );
+add_image_size( 'bamtech-medium-width', 768);
+add_image_size( 'bamtech-large-width', 990 );
+
+// Register the three useful image sizes for use in Add Media modal
+add_filter( 'image_size_names_choose', 'wpshout_custom_sizes' );
+function wpshout_custom_sizes( $sizes ) {
+    return array_merge( $sizes, array(
+        'bamtech-small-width' => __( 'Bamtech Small Width' ),
+        'bamtech-medium-width' => __( 'Bamtech Medium Width' ),
+        'bamtech-large-width' => __( 'Bamtech Large Width' ),
+    ) );
+}
+
 
 

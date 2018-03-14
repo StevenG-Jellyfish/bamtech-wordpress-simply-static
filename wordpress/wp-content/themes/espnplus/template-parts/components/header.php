@@ -43,35 +43,7 @@
 				}
 	  	?>
 	    </div>
-		<?php
-			$phone_number = Phone::get();
-			if (empty($phone_number)) {
-                if (Phone::isMobile()) {
-                    $phone_number = get_field('header_mobile_phone_number', $component) ?: get_field('header_phone_number', $component);
-                } else {
-                    $phone_number = get_field('header_phone_number', $component);
-                }
-			}
-			$phone = preg_replace('/\D+/', '', $phone_number);
-		?>
-	    <div class="navbar-cta hidden-xs">
-	    	<div class="navbar-cta--phone">
-	    		<a href="tel:<?php echo $phone; ?>">
-	    			<span class="icon-phone"></span>
-	    			<?php echo $phone_number; ?>
-	    		</a>
-	    	</div>
-	    	<?php
-	    	 if(get_field('header_primary_cta', $component)){
-	    	 ?>
-	    	 <div class="navbar-cta--request">
-	    		<a href="<?php echo get_field('header_primary_cta_url', $component); ?>" data-offset="123" class="btn btn-default"><?php echo get_field('header_primary_cta_text', $component); ?></a> 
-	    	</div>
-	    	 <?php
-	    	 }
-	    	 ?>
-	    	
-	    </div>
+		
 	  </div>
 	</nav>
 </header>
