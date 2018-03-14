@@ -20,6 +20,7 @@ Normalizing styles have been helped along thanks to the fine work of
 Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 */
 
+
 /*--------------------------------------------------------------
 >>> TABLE OF CONTENTS:
 ----------------------------------------------------------------
@@ -42,72 +43,90 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 	## Captions
 	## Galleries
 --------------------------------------------------------------*/
+
 //@import "../../../_vendor/scss/variables-site/variables-site";
 //@import "../../../_vendor/scss/mixins/mixins-master";
 
 /*--------------------------------------------------------------
 # Normalize
 --------------------------------------------------------------*/
+
 //@import "../../../_vendor/scss/normalize";
 
 /*--------------------------------------------------------------
 # Typography
 --------------------------------------------------------------*/
+
 //@import "../../../_vendor/scss/typography/typography";
 
 /*--------------------------------------------------------------
 # Elements
 --------------------------------------------------------------*/
+
 //@import "../../../_vendor/scss/elements/elements";
 
 /*--------------------------------------------------------------
 # Forms
 --------------------------------------------------------------*/
+
 //@import "../../../_vendor/scss/forms/forms";
 
 /*--------------------------------------------------------------
 # Navigation
 --------------------------------------------------------------*/
-//@import "../../../_vendor/scss/navigation/navigation";
+
+// @import "../../../_vendor/scss/navigation/navigation";
 
 /*--------------------------------------------------------------
 # Accessibility
 --------------------------------------------------------------*/
-//@import "../../../_vendor/scss/modules/accessibility";
+
+// @import "../../../_vendor/scss/modules/accessibility";
 
 /*--------------------------------------------------------------
 # Alignments
 --------------------------------------------------------------*/
-//@import "../../../_vendor/scss/modules/alignments";
+
+// @import "../../../_vendor/scss/modules/alignments";
 
 /*--------------------------------------------------------------
 # Clearings
 --------------------------------------------------------------*/
-//@import "../../../_vendor/scss/modules/clearings";
+
+// @import "../../../_vendor/scss/modules/clearings";
 
 /*--------------------------------------------------------------
 # Widgets
 --------------------------------------------------------------*/
-//@import "../../../_vendor/scss/site/secondary/widgets";
+
+// @import "../../../_vendor/scss/site/secondary/widgets";
 
 /*--------------------------------------------------------------
 # Content
 --------------------------------------------------------------*/
-//@import "../../../_vendor/scss/site/site";
+
+// @import "../../../_vendor/scss/site/site";
 
 /*--------------------------------------------------------------
 # Infinite scroll
 --------------------------------------------------------------*/
-//@import "../../../_vendor/scss/modules/infinite-scroll";
+
+// @import "../../../_vendor/scss/modules/infinite-scroll";
 
 /*--------------------------------------------------------------
 # Media
 --------------------------------------------------------------*/
-//@import "../../../_vendor/scss/media/media";
 
+// @import "../../../_vendor/scss/media/media";
+
+/*--------------------------------------------------------------
+# Media
+--------------------------------------------------------------*/
 
 @import "../../../_vendor/scss/bootstrap/functions";
-@import "../../../_vendor/scss/bootstrap/variables";
+//
+@import "variables";
+//
 @import "../../../_vendor/scss/bootstrap/mixins";
 // @import "../../../_vendor/scss/bootstrap/root";
 @import "../../../_vendor/scss/bootstrap/reboot";
@@ -122,6 +141,7 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 --------------------------------------------------------------*/
 
 @import "style";
+@import "global_header";
 
 /*--------------------------------------------------------------
 # component_spotlight
@@ -134,3 +154,32 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 --------------------------------------------------------------*/
 
 @import "component_section";
+// @import "fonts";
+//
+//
+#page {
+    text-align: center;
+}
+
+.content-area {
+    text-align: left;
+}
+
+.container-fluid {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0;
+    // border: 1px solid #ccc;
+}
+
+.site-description {
+    background-color: #ccc;
+}
+
+//
+.site-branding {
+    text-align: left;
+    // img {
+    //     outline: none;
+    // }
+}
