@@ -1155,3 +1155,15 @@ object {
 .gallery-caption {
 	display: block;
 } */
+
+@font-face {
+    font-family: 'PlayoffProCond-Medium';
+    src: url('./css/fonts/PlayoffProCond-Medium.woff');
+    src: url('./css/fonts/PlayoffProCond-Medium.woff2');
+}
+
+@font-face {
+    font-family: 'PlayoffProCond-MediumItalic';
+    src: url('./css/PlayoffProCond-MediumItalic.woff');
+    src: url('./css/fonts/PlayoffProCond-MediumItalic.woff2');
+}
