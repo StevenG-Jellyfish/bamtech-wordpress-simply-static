@@ -120,7 +120,6 @@ EOPHP
         w3-total-cache
         wordpress-seo
         wp-statistics
-        ithemes-security
         wp-smushit
         velvet-blues-update-urls
         

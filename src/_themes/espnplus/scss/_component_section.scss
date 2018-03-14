@@ -1,0 +1,174 @@
+/*!
+Theme Name          :   espnplus
+Stub Name           :   component_section.scss 
+Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/feature.html
+*/
+
+
+section.section {
+  position: relative;
+  display: block;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0;
+  font-size: 1.000rem;
+  font-weight: 400;
+  line-height: 1.500rem;
+
+  .row.flexbox {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 1280px;
+    margin: 0;
+    padding: 0;
+
+    .copy-container {
+      display: inline-block;
+      max-width: 400px;
+      margin: 0 50px;
+      padding: 0;
+
+      .featurette-heading {
+        font-size: 2.000rem;
+        font-weight: 600;
+        letter-spacing: -0.010rem;
+        line-height: 2.750rem;
+      } // featurette-heading
+
+      &:before {
+        content: '';
+        position: relative;
+        display: block;
+        top: 5px;
+        width:  60px;
+        height: 4px;
+        background-color: $primary;
+
+      } // &:before >> yellow corner border
+
+    } // .copy-container
+
+    .media-container {
+      display: inline-block;
+      max-width: 400px;
+      margin: 0 50px;
+      padding: 0;
+    } // .media-container
+
+  } // .row
+
+  &.odd {
+    padding: 100px 0;
+    background-color: white;
+    color: black;
+
+    .row.flexbox {
+      flex-direction: row;
+      flex-wrap: wrap;
+    } // . row.flexbox
+
+    a {
+      color: black;
+    }
+
+  } // .odd
+
+  &.odd:first-child {
+    padding-top: 0;
+  } // &.odd:first-child
+
+  &.odd:last-child {
+    padding-bottom: 0;
+  } // &.odd:last-child
+
+  &.even {
+    padding: 0;
+    background-color: black;
+    color: white;
+
+    .row.flexbox {
+      flex-direction: row-reverse;
+      flex-wrap: wrap-reverse;
+
+    } // .row.flexbox
+
+    a {
+      color: white;
+    }
+
+  } // .even
+  
+  &.even:before {
+    content: '';
+    position: relative;
+    display: block;
+    top: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    margin: 0;
+    padding: 0;
+    background: inherit;
+    transform: skewY(2.5deg);
+    transform-origin: 100%;
+    z-index: 2;
+  } // &.even:before >> top angled BG
+
+  &.even:first-child:before {
+    content: '';
+    position: relative;
+    display: block;
+    top: 0;
+    right: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
+    background: inherit;
+    transform: skewY(0deg);
+    transform-origin: 100%;
+    z-index: 2;
+  } // &.even:before >> top angled BG
+  
+  &.even:after {
+    content: '';
+    position: relative;
+    display: block;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    margin: 0;
+    padding: 0;
+    background: inherit;
+    transform: skewY(-2.5deg);
+    transform-origin: 100%;
+    z-index: 2;
+  } //&.even:after >> bottom angled BG
+  
+  &.even:last-child:after {
+    content: '';
+    position: relative;
+    display: block;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
+    background: inherit;
+    transform: skewY(0deg);
+    transform-origin: 100%;
+    z-index: 2;
+  } //&.even:after >> bottom angled BG
+
+} // section.section
