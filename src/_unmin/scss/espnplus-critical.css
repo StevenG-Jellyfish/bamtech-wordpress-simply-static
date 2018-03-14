@@ -1322,6 +1322,7 @@ section.section {
       margin: 0 50px;
       padding: 0; }
       section.section .row.flexbox .copy-container .featurette-heading {
+        font-family: PlayoffProCond-MediumItalic, arial;
         font-size: 2.000rem;
         font-weight: 600;
         letter-spacing: -0.010rem;
@@ -1447,42 +1448,53 @@ section.league-toc {
     section.league-toc .container .copyright {
       margin: 3.375rem 0 1.5rem 0;
       color: #636363; }
-    section.league-toc .container .card {
-      display: inline-block;
-      width: 45%;
-      max-width: 45%; }
-      section.league-toc .container .card:nth-child(even) {
-        margin: 0 5% 0 0; }
-      section.league-toc .container .card:nth-child(even) {
-        margin: 0 0 0 5%; }
-      section.league-toc .container .card .card-header {
-        background-color: #191919; }
-        section.league-toc .container .card .card-header a {
-          text-decoration: none; }
-          section.league-toc .container .card .card-header a h5 {
-            position: relative;
-            margin: 0 0 0 0;
-            padding: 0 1.282em;
-            font-weight: 400;
-            line-height: 2.563rem;
-            color: #636363; }
-            section.league-toc .container .card .card-header a h5 i.fa {
-              position: absolute;
-              display: block;
-              top: 0px;
-              right: 1rem;
-              width: 1rem;
-              height: 1rem;
+    section.league-toc .container .accordion {
+      display: flex; }
+      section.league-toc .container .accordion .card {
+        display: inline-block;
+        width: 45%;
+        max-width: 45%; }
+        section.league-toc .container .accordion .card:nth-child(even) {
+          margin: 0 5% 0 0; }
+        section.league-toc .container .accordion .card:nth-child(even) {
+          margin: 0 0 0 5%; }
+        section.league-toc .container .accordion .card .collapse {
+          max-height: 0px;
+          opacity: 0;
+          transition: max-height 500ms, opacity 300ms;
+          -webkit-transition: max-height 500ms, opacity 300ms; }
+        section.league-toc .container .accordion .card .collapse.show {
+          max-height: 300px;
+          opacity: 1;
+          transition: max-height 0, opacity 300ms;
+          -webkit-transition: max-height 0, opacity 300ms; }
+        section.league-toc .container .accordion .card .card-header {
+          background-color: #191919; }
+          section.league-toc .container .accordion .card .card-header a {
+            text-decoration: none; }
+            section.league-toc .container .accordion .card .card-header a h5 {
+              position: relative;
+              margin: 0 0 0 0;
+              padding: 0 1.282em;
+              font-weight: 400;
+              line-height: 2.563rem;
               color: #636363; }
-              section.league-toc .container .card .card-header a h5 i.fa:before {
-                content: 'V'; }
-      section.league-toc .container .card .card-body {
-        display: none;
-        margin: 0 0 0 0;
-        padding: 1.282em;
-        border-top: 1px solid #636363;
-        background-color: #191919;
-        color: #636363; }
+              section.league-toc .container .accordion .card .card-header a h5 i.fa {
+                position: absolute;
+                display: block;
+                top: 0px;
+                right: 1rem;
+                width: 1rem;
+                height: 1rem;
+                color: #636363; }
+                section.league-toc .container .accordion .card .card-header a h5 i.fa:before {
+                  content: 'V'; }
+        section.league-toc .container .accordion .card .card-body {
+          margin: 0 0 0 0;
+          padding: 1.282em;
+          border-top: 1px solid #636363;
+          background-color: #191919;
+          color: #636363; }
 
 #page {
   text-align: center; }
