@@ -1061,6 +1061,18 @@ Stub Name:  global_header.scss
 */
 #masthead {
   background: white;
+  width: 100%;
+  max-width: 1280px; }
+
+.sticky {
+  position: fixed;
+  top: 0; }
+
+.site-branding {
+  display: inline-block;
+  flex: 1 100%; }
+
+.site-header {
   height: 77px;
   text-align: left;
   display: -webkit-box;
@@ -1068,16 +1080,11 @@ Stub Name:  global_header.scss
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex; }
-
-.site-branding {
-  display: inline-block;
-  flex: 1 100%; }
-
-.site-header a img {
-  max-height: 22px;
-  width: auto;
-  margin-top: 28px;
-  margin-left: 75px; }
+  .site-header a img {
+    max-height: 20px;
+    width: 104px;
+    margin-top: 28px;
+    margin-left: 75px; }
 
 #site-navigation {
   display: inline-block;
@@ -1499,3 +1506,8 @@ section.league-toc {
 
 .site-branding {
   text-align: left; }
+
+.temp-spotlight {
+  width: 100%;
+  height: 600px;
+  background: #999; }

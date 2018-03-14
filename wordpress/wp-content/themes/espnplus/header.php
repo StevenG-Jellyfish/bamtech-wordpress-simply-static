@@ -21,8 +21,10 @@
 		include('css/espnplus-critical.min.css');
 	?>
 	</style>
+	<link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri().'/bootstrap.min.css'; ?>">
   	<noscript>
-  		<link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri().'/style.css'; ?>">
+		  <link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri().'/bootstrap.min.css'; ?>">
+		  <link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri().'/style.css'; ?>">
   	</noscript>
 	<?php wp_head(); ?>
 	
@@ -33,7 +35,8 @@
 	<div class="container-fluid">
 	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'espnplus' ); ?></a>
 
-	<header id="masthead" class="site-header">
+	<header id="masthead" class="">
+		<div class="site-header">
 		<div class="site-branding">
 			<?php
 			the_custom_logo();
@@ -61,6 +64,8 @@
 			) );
 			?>
 		</nav><!-- #site-navigation -->
+		</div>
 	</header><!-- #masthead -->
+	
 
 	<div id="content" class="site-content">
