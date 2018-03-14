@@ -1520,16 +1520,29 @@ section.league-toc {
     section.league-toc .container .copyright {
       margin: 3.375rem 0 1.5rem 0;
       color: #636363; }
+    @media (max-width: 767px) {
+      section.league-toc .container .copyright {
+        margin: 2.375rem 0 1em 0; } }
     section.league-toc .container .accordion {
-      display: flex; }
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+      padding: 0; }
       section.league-toc .container .accordion .card {
         display: inline-block;
         width: 45%;
-        max-width: 45%; }
-        section.league-toc .container .accordion .card:nth-child(even) {
+        max-width: 45%;
+        padding: 0; }
+        section.league-toc .container .accordion .card:nth-child(odd) {
           margin: 0 5% 0 0; }
         section.league-toc .container .accordion .card:nth-child(even) {
           margin: 0 0 0 5%; }
+        @media (max-width: 767px) {
+          section.league-toc .container .accordion .card:nth-child(even), section.league-toc .container .accordion .card:nth-child(odd) {
+            margin: .5em 0;
+            padding: 0; } }
         section.league-toc .container .accordion .card .collapse {
           max-height: 0px;
           opacity: 0;
@@ -1567,6 +1580,25 @@ section.league-toc {
           border-top: 1px solid #636363;
           background-color: #191919;
           color: #636363; }
+      @media (max-width: 767px) {
+        section.league-toc .container .accordion .card {
+          display: block;
+          width: 90%;
+          max-width: 90%;
+          margin: .5em 0;
+          padding: 0;
+          text-align: center; } }
+    @media (max-width: 767px) {
+      section.league-toc .container .accordion {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin: 0;
+        padding: 0; } }
+  @media (max-width: 767px) {
+    section.league-toc .container {
+      width: 85%;
+      margin: 3.375rem 1.5em; } }
 
 #page {
   text-align: center; }
