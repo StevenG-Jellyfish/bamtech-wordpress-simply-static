@@ -123,7 +123,6 @@ EOPHP
         w3-total-cache
         wordpress-seo
         wp-statistics
-        ithemes-security
         wp-smushit
         velvet-blues-update-urls
         
@@ -148,6 +147,7 @@ fi
 
 
 wp user update admin --user_pass=${WORDPRESS_ADMIN_PASSWORD} --allow-root
+
 rm /var/www/html/wp-content/uploads
 ln -s /media/uploads /var/www/html/wp-content/uploads
 
@@ -155,4 +155,3 @@ rm /var/www/html/wp-content/cache
 ln -s /media/uploads /var/www/html/wp-content/cache
 
 exec "$@"
-
