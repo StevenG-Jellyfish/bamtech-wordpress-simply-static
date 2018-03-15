@@ -10,7 +10,7 @@ section.terms-conditions {
     max-width: 100%;
     margin: 0;
     padding: 2.125rem 0;
-    background-color: #F9B300;
+    background-color: $espn-toc-bg-grey;
 
     .container {
         display: block;   
@@ -21,9 +21,25 @@ section.terms-conditions {
         padding: 0;
 
         p {
-            width: 85%;
-            margin: 0 auto;    
+            width: 80%;
+            margin: 0 auto;   
+            font-size: 0.938rem;
+            line-height: 1.250rem; 
+            text-align: center;
+            color: $espn-toc-txt-grey;
+
+            a {
+                color: $espn-toc-txt-grey;
+                text-decoration: underline;
+            }
         }
+
+        @media (max-width: 767px) {
+            p {
+                font-size: 0.750rem;
+                line-height: 1.125rem;
+            } // p
+        } // max-width: 767px
 
     } // .container
 
