@@ -128,12 +128,37 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 @import "variables";
 //
 @import "../../../_vendor/scss/bootstrap/mixins";
-// @import "../../../_vendor/scss/bootstrap/root";
+@import "../../../_vendor/scss/bootstrap/root";
 @import "../../../_vendor/scss/bootstrap/reboot";
-// @import "../../../_vendor/scss/bootstrap/type";
+@import "../../../_vendor/scss/bootstrap/type";
+@import "../../../_vendor/scss/bootstrap/images";
+@import "../../../_vendor/scss/bootstrap/code";
 @import "../../../_vendor/scss/bootstrap/grid";
+@import "../../../_vendor/scss/bootstrap/tables";
+@import "../../../_vendor/scss/bootstrap/forms";
+@import "../../../_vendor/scss/bootstrap/buttons";
+@import "../../../_vendor/scss/bootstrap/transitions";
+@import "../../../_vendor/scss/bootstrap/dropdown";
+@import "../../../_vendor/scss/bootstrap/button-group";
+@import "../../../_vendor/scss/bootstrap/input-group";
+@import "../../../_vendor/scss/bootstrap/custom-forms";
+@import "../../../_vendor/scss/bootstrap/nav";
+@import "../../../_vendor/scss/bootstrap/navbar";
+@import "../../../_vendor/scss/bootstrap/card";
+@import "../../../_vendor/scss/bootstrap/breadcrumb";
+@import "../../../_vendor/scss/bootstrap/pagination";
+@import "../../../_vendor/scss/bootstrap/badge";
 @import "../../../_vendor/scss/bootstrap/jumbotron";
-// @import "../../../_vendor/scss/bootstrap/utilities";
+@import "../../../_vendor/scss/bootstrap/alert";
+@import "../../../_vendor/scss/bootstrap/progress";
+@import "../../../_vendor/scss/bootstrap/media";
+@import "../../../_vendor/scss/bootstrap/list-group";
+@import "../../../_vendor/scss/bootstrap/close";
+@import "../../../_vendor/scss/bootstrap/modal";
+@import "../../../_vendor/scss/bootstrap/tooltip";
+@import "../../../_vendor/scss/bootstrap/popover";
+@import "../../../_vendor/scss/bootstrap/carousel";
+@import "../../../_vendor/scss/bootstrap/utilities";
 @import "../../../_vendor/scss/bootstrap/print";
 
 /*--------------------------------------------------------------
@@ -160,19 +185,15 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 --------------------------------------------------------------*/
 
 @import "global_league_accordion";
-
 // bootstrap overrides
-
-$yellow:        #F9B300 !default;
-$primary:       $yellow !default;
-
-$espn-grey:     #636363;
-
+$yellow: #F9B300 !default;
+$primary: $yellow !default;
+$espn-grey: #636363;
 // @import "fonts";
 //
 //
 #page {
-    text-align: center;
+    // text-align: center;
 }
 
 .content-area {
@@ -183,6 +204,7 @@ $espn-grey:     #636363;
     max-width: 1280px;
     margin: 0 auto;
     padding: 0;
+    @include media-breakpoint-down(sm) {}
     // border: 1px solid #ccc;
 }
 
@@ -196,4 +218,10 @@ $espn-grey:     #636363;
     // img {
     //     outline: none;
     // }
+}
+
+.temp-spotlight {
+    width: 100%;
+    height: 600px;
+    background: #999;
 }
