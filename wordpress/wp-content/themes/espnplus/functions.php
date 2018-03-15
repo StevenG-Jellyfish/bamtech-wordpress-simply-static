@@ -122,6 +122,12 @@ add_action( 'widgets_init', 'espnplus_widgets_init' );
 function espnplus_scripts() {
 	wp_enqueue_style( 'espnplus-style', get_stylesheet_uri() );
 
+	wp_enqueue_script( 'espnplus-jquery', get_template_directory_uri() . '/js/jquery-3.3.1.min.js', array(), '20151215', true );
+
+	wp_enqueue_script( 'espnplus-popper', get_template_directory_uri() . '/js/popper.min.js', array(), '20151215', true );
+
+	wp_enqueue_script( 'espnplus-bootstrap', get_template_directory_uri() . '/js/bootstrap.min.js', array(), '20151215', true );
+
 	wp_enqueue_script( 'espnplus-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20151215', true );
 
 	wp_enqueue_script( 'espnplus-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20151215', true );
