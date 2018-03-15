@@ -37,6 +37,7 @@ if ($component !== false) {
      *  @ device_link
      */ 
     ?>
+  
   <!--  Cut just this for the component -->
 
 <section class="devices-bar">
@@ -46,7 +47,6 @@ if ($component !== false) {
         </h3>
 
         <div class="devices-container">  
-            <?php foreach($section_ids as $section_id) {?>
             <div class="device">
                 <a href="#{{ device_link }}">
                     <img class="device-image" src="../_svgs/apple.svg">
@@ -55,8 +55,32 @@ if ($component !== false) {
                     </p>
                 </a>
             </div>
-            <?php } ?>
+            <div class="device">
+                <a href="#{{ device_link }}">
+                    <img class="device-image" src="../_svgs/apple.svg">
+                    <p class="device-copy">
+                        iPhone / iPad
+                    </p>
+                </a>
+            </div>
+            <div class="device">
+                <a href="#{{ device_link }}">
+                    <img class="device-image" src="../_svgs/amazon-fire-tv.svg">
+                    <p class="device-copy">
+                        Amazon FireTV
+                    </p>
+                </a>
+            </div>
+            <div class="device">
+                <a href="#{{ device_link }}">
+                    <img class="device-image" src="../_svgs/apple.svg">
+                    <p class="device-copy">
+                        iPhone / iPad
+                    </p>
+                </a>
+            </div>
         </div>    
+
     </div>
 </section>
 <!--  //End Cut -->
