@@ -11,7 +11,7 @@ jQuery(document).ready(function() {
     jQuery(window).resize(function() {
 
         // Variables
-        var windowHeight = jQuery(window).height();
+       // var windowHeight = jQuery(window).height();
 
         // When the document is scrolled ninety percent, toggle the classes
 
