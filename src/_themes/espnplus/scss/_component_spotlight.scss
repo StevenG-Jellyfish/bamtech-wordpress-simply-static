@@ -79,7 +79,9 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
         display: inline-block;
         top: -14px;
         right: 44px;
+        font-family: PlayoffProCond-BoldItalic, arial;
         font-size: 0.875rem;
+        font-weight: 700;
         text-align: right;
         text-decoration: none;
         color: #fefefe;
@@ -91,8 +93,9 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
         } // .jumbotron-login
     } // max-width: 767px
     .jumbotron-heading {
+        font-family: PlayoffProCond-Bold, arial;
         font-size: 1.875rem;
-        font-weight: 600;
+        font-weight: 700;
         letter-spacing: -0.019rem;
         line-height: 3.000rem;
         color: white;
@@ -132,7 +135,9 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
     }
     @media (max-width: 767px) {
         .btn {
+            font-family: PlayoffProCond-Bold, arial;
             font-size: 1.125rem;
+            font-weight: 700;
             line-height: 2.750rem;
         } // .btn
     } // max-width: 767px
@@ -147,7 +152,9 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
         } //.lead
         @media (max-width: 767px) {
             &.lead {
+                font-family: PlayoffProCond-Bold, arial;
                 font-size: 1.500rem;
+                font-weight: 700;
                 line-height: 1.750rem;
             } // &.lead
         } // max-width: 767px
