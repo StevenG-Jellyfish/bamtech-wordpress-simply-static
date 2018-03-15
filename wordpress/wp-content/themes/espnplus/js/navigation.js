@@ -5,54 +5,58 @@
  * 
  */
 
-jQuery(document).ready(function() {
+// jQuery(document).ready(function() {
 
-    // Even when the window is resized, run this code.
-    jQuery(window).resize(function() {
+//     // Even when the window is resized, run this code.
+//     jQuery(window).resize(function() {
 
-        // Variables
-        // var windowHeight = jQuery(window).height();
+//         // Variables
+//         // var windowHeight = jQuery(window).height();
 
-        // When the document is scrolled ninety percent, toggle the classes
+//         // When the document is scrolled ninety percent, toggle the classes
 
-        //  var jumbotronheight = jQuery('.jumbotron').height();
-        // var windowheight = jQuery(window).height();
-        jQuery(document).scroll(function() {
+//         //  var jumbotronheight = jQuery('.jumbotron').height();
+//         // var windowheight = jQuery(window).height();
+//         jQuery(document).scroll(function() {
 
-            // Store the document scroll function in a variable
-            // var y = jQuery(this).scrollTop();
-            var scrollTop = jQuery(window).scrollTop();
+//             // Store the document scroll function in a variable
+//             // var y = jQuery(this).scrollTop();
+//             var scrollTop = jQuery(window).scrollTop();
 
-            // If the document is scrolled 90%
-            // if (y > ninetypercent) {
-            if (scrollTop > 600) {
-                // console.log("ok" + windowheight);
-                // Add the "sticky" class
-                jQuery('header').addClass('sticky');
-            } else {
-                // Else remove it.
-                jQuery('header').removeClass('sticky ');
-            }
-        });
+//             // If the document is scrolled 90%
+//             // if (y > ninetypercent) {
+//             if (scrollTop > 600) {
+//                 // console.log("ok" + windowheight);
+//                 // Add the "sticky" class
+//                 jQuery('header').addClass('sticky');
+//             } else {
+//                 // Else remove it.
+//                 jQuery('header').removeClass('sticky ');
+//             }
+//         });
 
-        // Call it on resize.
-    }).resize();
+//         // Call it on resize.
+//     }).resize();
 
-}); // jQuery
+// }); // jQuery
 
 // ------------ Header nav ------------ //
 
-// $(function() {
-//     $("header").before($("#masthead").clone().addClass("sticky"));
-//     $(window).scroll(function() {
-//         if ($(window).scrollTop() >= 600) {
-//             $('#masthead.sticky').addClass('slideDown');
-//         } else {
-//             $('#masthead.sticky').removeClass('slideDown');
-//         }
+$(document).ready(function() {
+    var header = $("header");
 
-//     });
-// });
+    $(window).scroll(function() {
+        if ($(window).scrollTop() > $(window).height()) {
+            header.addClass("sticky");
+            header.slideDown();
+        } else {
+            // header.removeClass("sticky");
+            header.slideUp(400, function() {
+                header.removeClass("sticky");
+            });
+        }
+    });
+});
 
 // ------------ Header nav ------------ //
 
