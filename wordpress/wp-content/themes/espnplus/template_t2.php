@@ -35,6 +35,7 @@ get_template_part('template-parts/components/section_0');
 		</div>
 	</div>
 </section>
+
 <?php
 if(get_field('component_text_and_media')){
 	get_template_part('template-parts/components/text-and-media');

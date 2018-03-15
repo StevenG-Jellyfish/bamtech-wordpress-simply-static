@@ -19,6 +19,7 @@
 	</footer><!-- #colophon -->
 </div><!-- #page -->
 </div>
+<link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri().'/css/espnplus-non-critical.min.css'; ?>">
 <?php wp_footer(); ?>
 
 </body>
