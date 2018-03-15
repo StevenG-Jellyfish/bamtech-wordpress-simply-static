@@ -13,25 +13,40 @@
 ?>
 
 <!-- SPOTLIGHT -->
-<section class="spotlight">
-	<div class="container">
-		<div class="clearfix spotlight__copy-wpr">
-			<div class="spotlight__copy">
-				<div>
-					<h1 class="text--white"><?php echo get_field('spotlight_h1', $component); ?></h1>
-					<?php 
-					if(get_field('spotlight_supporting_content', $component)){
-					?>
-					<p class="text--white"><?php echo get_field('spotlight_supporting_content', $component);?></p>
-					<?php
-					}
-					?>	
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="spotlight__image" style="background-image: url(<?php echo get_field('spotlight_image', $component);?>)"></div>
+<section class="jumbotron text-center">
+    <div class="container">
+        <h1 class="jumbotron-heading"><?php echo get_field('spotlight_overlogo_text', $component);?> <em>MORE</em></h1>
+        <div class="jumbotron-logo">
+			<?php $image = get_field('spotlight_logo_image', $component);?>
+            <img src="<?echo $image['sizes']['medium'];?>"> <!--*** replace src with {{spotlight_logo_image}} -->
+        </div>
+        <p class="lead">
+            The NEW <?php echo get_field('spotlight_main_text', $component);?> ESPN.<br>
+            Live Sports, ESPN Originals, Only $4.99 a month.
+        </p>
+        <div class="espn-cta-container">
+            <div class="parallelogram">
+                <a href="{{ spotlight_cta_link }}" class="btn btn-primary espn-cta"><?php echo get_field('spotlight_cta_text', $component);?></a>
+                <!--*** Add in phase II if we put color controls into admin:
+                    style="background-color: {{ spotlight_cta_background_color }}; color: {{ spotlight_cta_text_color }};" 
+                -->
+            </div>
+        </div>
+        <p class="below-cta">
+		<?php echo get_field('spotlight_belowcta_text', $component);?> <a href="#">terms</a>.
+        </p>
+    </div>
+    <div class="container-fluid jubmotron-background">
+        <div class="embed-responsive embed-responsive-16by9 div_style">
+            <video id="background-movie" preload autoplay>
+                <source src="../../_video/001_ALL_7Pannel_021618.mp4" type="video/mp4">
+                <source src="../../_video/001_ALL_7Pannel_021618.mp4" type="video/ogg">
+                <img src="../../_images/001_ALL_7Pannel_021618.png" title="Your browser does not support the <video> tag">
+            </video>
+        </div>
+    </div>
 </section>
 <!-- SPOTLIGHT ###-->
 <?php
- }
+ 
+}
