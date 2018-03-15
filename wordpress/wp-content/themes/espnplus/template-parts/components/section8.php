@@ -23,9 +23,11 @@
             </div>
             <div class="col-md-6 media-container">    
                 <picture> <!--*** {{ section image at various media settings (presets form the admin) }} -->
-                    <source media="(min-width: 990px)" srcset="../_images/theme/ep_valueProp_Logos_multi.png">
-                    <source media="(min-width: 768px)" srcset="../_images/theme/ep_valueProp_Logos_multi.png">
-                    <source media="(min-width: 420px)" srcset="../_images/theme/ep_valueProp_Logos_multi.png">
+                <?php $image = get_field('section_image', $component);
+                ?>
+                    <source media="(min-width: 990px)" srcset="<?echo $image['sizes']['medium_large'];?>">
+                    <source media="(min-width: 768px)" srcset="<?echo $image['sizes']['medium'];?>">
+                    <source media="(min-width: 420px)" srcset="<?echo $image['sizes']['large'];?>">
                     <source media="(min-width: 0px)" srcset="../_images/theme/ep_valueProp_Logos_multi.png">
                     
                     <img class="featurette-image img-fluid mx-auto" src="../_images/theme/ep_valueProp_Logos_multi.png">

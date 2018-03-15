@@ -17,7 +17,8 @@
     <div class="container">
         <h1 class="jumbotron-heading"><?php echo get_field('spotlight_overlogo_text', $component);?> <em>MORE</em></h1>
         <div class="jumbotron-logo">
-            <img src="<?php echo get_field('spotlight_logo_image', $component);?>"> <!--*** replace src with {{spotlight_logo_image}} -->
+			<?php $image = get_field('spotlight_logo_image', $component);?>
+            <img src="<?echo $image['sizes']['medium'];?>"> <!--*** replace src with {{spotlight_logo_image}} -->
         </div>
         <p class="lead">
             The NEW <?php echo get_field('spotlight_main_text', $component);?> ESPN.<br>
