@@ -7,7 +7,7 @@ Stub Name:  global_league_accordion.scss
 section.league-toc {
     position: relative;
     display: block;
-    width: 100%;
+    width: 90%;
     max-width: 1280px;
     margin: 0 auto;
     padding: 0;
@@ -17,9 +17,11 @@ section.league-toc {
     background-color: black;
 
     .container {
-        margin: 3.375rem;
+        width: 100%;
+        max-width: 100%;
+        margin: 3.375rem 0 3.375rem 0;
         padding: 0 0 0 0;
-        border-top: 1px solid $espn-accordion-bg-grey;
+        border-top: 1px solid $espn-accordion-txt-grey;
 
         .copyright {
             margin: 3.375rem 0 1.5rem 0;
@@ -27,61 +29,123 @@ section.league-toc {
 
         } // .copyright
 
-        .card {
-            display: inline-block;
-            width: 45%;
-            max-width: 45%;
+        @media (max-width: 767px) { // mobile
+            .copyright {
+                margin: 2.375rem 0 1em 0;
+            } // .copyright {  
+        } // max-width: 767px
 
-            &:nth-child(even) {
-                margin: 0 5% 0 0;
-            }
-            &:nth-child(even) {
-                margin: 0 0 0 5%;
-            }
+        .accordion {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            width: 100%;
+            margin: 0;
+            padding: 0;
 
-            .card-header {
-                background-color: $espn-accordion-bg-grey;
-
-                a {
-                    text-decoration: none;
-                    h5 { 
-                        position: relative;
-                        margin: 0 0 0 0;
-                        padding: 0 1.282em;
-                        font-weight: 400;
-                        line-height: 2.563rem;
-                        color: $espn-accordion-txt-grey;
-
-                        i.fa {
-                            position: absolute;
-                            display: block;
-                            top: 0px;
-                            right: 1rem;
-                            width: 1rem;
-                            height: 1rem;
-                            color: $espn-accordion-txt-grey;
-                        
-                            &:before {
-                                content: 'V';
-                            }
-
-                        } // i.fa
-
-
-                    } // h5
-
-                } // a
-
-            } // .card-header
-
-            .card-body {
+            .card {
+                display: inline-block;
+                width: 45%;
+                max-width: 45%;
                 margin: 0 0 0 0;
-                padding: 1.282em;
-                border-top: 1px solid $espn-accordion-txt-grey;
-                background-color: $espn-accordion-bg-grey;
-                color: $espn-accordion-txt-grey;
-            } //.card-body
-        } // .card
+                padding: 0;
+                background-color: transparent;
+                border: 0px;
+
+                &:nth-child(odd) {
+                    margin: 0 5% 0 0;
+                }
+                &:nth-child(even) {
+                    margin: 0 0 0 5%;
+                }
+
+                @media (max-width: 767px) { // mobile
+                    &:nth-child(even),
+                    &:nth-child(odd) {
+                        margin: .5em 0;
+                        padding: 0;
+                    } // &:nth-child(even), &:nth-child(odd)
+                } // max-width: 767px
+
+                .collapse {
+                    max-height: 0px;
+                    opacity: 0;
+                    transition: max-height 500ms, opacity 300ms;
+                    -webkit-transition: max-height 500ms, opacity 300ms;
+                }   
+                .collapse.show {
+                    max-height: 300px;
+                    opacity: 1;
+                    transition: max-height 0, opacity 300ms;
+                    -webkit-transition: max-height 0, opacity 300ms;
+                }  
+                .card-header {
+                    background-color: $espn-accordion-bg-grey;
+
+                    a {
+                        text-decoration: none;
+                        h5 { 
+                            position: relative;
+                            margin: 0 0 0 0;
+                            padding: 0 1.282em;
+                            font-weight: 400;
+                            line-height: 2.563rem;
+                            color: $espn-accordion-txt-grey;
+
+                            i.fa {
+                                position: absolute;
+                                display: block;
+                                top: 0px;
+                                right: 1rem;
+                                width: 1rem;
+                                height: 1rem;
+                                color: $espn-accordion-txt-grey;
+                            
+                                &:before {
+                                    content: 'V';
+                                }
+
+                            } // i.fa
+
+
+                        } // h5
+
+                    } // a
+
+                } // .card-header
+
+                .card-body {
+                    margin: 0 0 0 0;
+                    padding: 1.282em;
+                    border-top: 1px solid $espn-accordion-txt-grey;
+                    background-color: $espn-accordion-bg-grey;
+                    color: $espn-accordion-txt-grey;
+                } //.card-body
+            } // .card
+
+            @media (max-width: 767px) { // mobile
+                .card {
+                    display: block;
+                    width: 100%;
+                    max-width: 100%;
+                    margin: .5em 0;
+                    padding: 0;
+                    text-align: center;
+                } // .card 
+            } // max-width: 767px
+
+        } // .accordion    
+
+        @media (max-width: 767px) { // mobile
+            .accordion {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                margin: 0;
+                padding: 0;
+            } // .accordion {  
+        } // max-width: 767px
+
     } // .container
 
 } // section.league-toc

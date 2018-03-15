@@ -75,6 +75,8 @@ var paths = {
             jquery: '_vendor/js/jquery.min.js',
             bstrap: '_vendor/js/bootstrap.js',
             pholder: '_vendor/js/jquery.placeholder.js',
+            utils: '_vendor/js/bootstrap/src/util.js',
+            collapse: '_vendor/js/bootstrap/src/collapse.js',
             validate: '_vendor/js/jquery.validate.js',
             easing: '_vendor/js/jquery.easing.js',
             unveil: '_vendor/js/jquery_unveil/jquery.unveil.js' //https://luis-almeida.github.io/unveil/
@@ -141,8 +143,8 @@ gulp.task('javascript', (done) => {
 //gulp.task('top-javascript', gulp.series('js_lint', () => {
 gulp.task('top-javascript', () => {
     return gulp.src([
-            paths.src.vendor.jquery,
-            paths.src.vendor.bstrap,
+            //paths.src.vendor.jquery,
+            //paths.src.vendor.bstrap,
             paths.src.top_scripts
         ])
         // .pipe(debug({title: '[1] Files in Stream:'}))
@@ -162,13 +164,13 @@ gulp.task('top-javascript', () => {
 //gulp.task('bottom-javascript', gulp.series('js_lint', () => {
 gulp.task('bottom-javascript', () => {
     return gulp.src([
-            paths.src.vendor.unveil,
-            paths.src.vendor.pholder,
+            //paths.src.vendor.unveil,
+            //paths.src.vendor.pholder,
             paths.src.bottom_scripts
         ])
         // .pipe(debug({title: '[1] Files in Stream:'}))
         .pipe(isDev(sourcemaps.init()))
-        .pipe(concat('espnplus-bottom..js'))
+        .pipe(concat('espnplus-bottom.js'))
         .pipe(gulp.dest(paths.src.unmin.scripts))
         .pipe(cached('bottom-javascript'))
         .pipe(uglify())

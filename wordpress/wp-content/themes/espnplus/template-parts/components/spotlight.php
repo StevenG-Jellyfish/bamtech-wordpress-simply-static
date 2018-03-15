@@ -17,7 +17,8 @@
     <div class="container">
         <h1 class="jumbotron-heading"><?php echo get_field('spotlight_overlogo_text', $component);?> <em>MORE</em></h1>
         <div class="jumbotron-logo">
-            <img src="<?php echo get_field('spotlight_logo_image', $component);?>"> <!--*** replace src with {{spotlight_logo_image}} -->
+			<?php $image = get_field('spotlight_logo_image', $component);?>
+            <img src="<?echo $image['sizes']['medium'];?>"> <!--*** replace src with {{spotlight_logo_image}} -->
         </div>
         <p class="lead">
             The NEW <?php echo get_field('spotlight_main_text', $component);?> ESPN.<br>
@@ -25,7 +26,8 @@
         </p>
         <div class="espn-cta-container">
             <div class="parallelogram">
-                <a href="{{ spotlight_cta_link }}" class="btn btn-primary espn-cta"><?php echo get_field('spotlight_cta_text', $component);?></a>
+				<?$link = get_field('spotlight_cta_link', $component);?>
+                <a href="<?echo $link['url'];?>" class="btn btn-primary espn-cta"><?php echo get_field('spotlight_cta_text', $component);?></a>
                 <!--*** Add in phase II if we put color controls into admin:
                     style="background-color: {{ spotlight_cta_background_color }}; color: {{ spotlight_cta_text_color }};" 
                 -->
@@ -34,12 +36,13 @@
         <p class="below-cta">
 		<?php echo get_field('spotlight_belowcta_text', $component);?> <a href="#">terms</a>.
         </p>
-    </div>
+	</div>
+	<?$video = get_field('spotlight_background-video', $component);?>
     <div class="container-fluid jubmotron-background">
         <div class="embed-responsive embed-responsive-16by9 div_style">
             <video id="background-movie" preload autoplay>
-                <source src="../../_video/001_ALL_7Pannel_021618.mp4" type="video/mp4">
-                <source src="../../_video/001_ALL_7Pannel_021618.mp4" type="video/ogg">
+                <source src="<?echo $video['url'];?>" type="video/mp4">
+                <source src="<?echo $video['url'];?>" type="video/ogg">
                 <img src="../../_images/001_ALL_7Pannel_021618.png" title="Your browser does not support the <video> tag">
             </video>
         </div>

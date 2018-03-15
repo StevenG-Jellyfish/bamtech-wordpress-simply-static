@@ -4,16 +4,41 @@ Stub Name:  global_header.scss
 */
 
 #masthead {
-    background: white;
-    height: 77px;
-    text-align: left;
-    //justify-content: flex-start | flex-end;
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
+    width: 100%;
+    // max-width: 1280px;
+    z-index: 16777271;
+    display: inline-block;
+    text-align: center;
+    // border: 1px solid #ccc;
+    // opacity: 0.9;
+    // margin: 0 auto;
+    // position: relative;
+    // display: inline-block;
+    // left: 0;
+    // height: 77px;
+    // text-align: left;
+    // //justify-content: flex-start | flex-end;
+    // display: -webkit-box;
+    // display: -moz-box;
+    // display: -ms-flexbox;
+    // display: -webkit-flex;
+    // display: flex;
+}
 
+@keyframes slide-down {
+    0% {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+    100% {
+        opacity: 0.9;
+        transform: translateY(0);
+    }
+}
+
+.sticky {
+    position: fixed;
+    top: 0;
 }
 
 .site-branding {
@@ -23,18 +48,34 @@ Stub Name:  global_header.scss
     // outline: 1px solid #ccc;
     // float: left;
     flex: 1 100%;
+}
 
+.headerbox {
+    display: block;
+    background: white;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1280px;
+    height: 77px;
 }
 
 .site-header {
+    // border: 1px solid #ccc;
+    height: 77px;
+    text-align: left;
+    // background: white;
+    //justify-content: flex-start | flex-end;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
     a img {
-        max-height: 22px;
-        width: auto;
+        max-height: 20px;
+        width: 104px;
         margin-top: 28px;
         margin-left: 75px;
-    
     }
-
 }
 
 #site-navigation {
@@ -44,7 +85,6 @@ Stub Name:  global_header.scss
     // float: right;
     height: 77px;
     flex: 1 100%;
-
 }
 
 #primary-menu {
@@ -55,14 +95,16 @@ Stub Name:  global_header.scss
     margin-right: 55px;
     display: flex;
     justify-content: flex-end;
-
 }
 
 #primary-menu li {
     // float: left;
     // outline: 1px solid #ccc;
     height: 48px;
+}
 
+.site-title {
+    display: none;
 }
 
 .menu-item {
@@ -70,7 +112,6 @@ Stub Name:  global_header.scss
     min-width: 40px;
     font-family: PlayoffProCond-MediumItalic, arial;
     // display: inline-block;
-
 }
 
 .menu-item a {
@@ -80,7 +121,6 @@ Stub Name:  global_header.scss
     // font-size: 0.875rem;
     color: black;
     // height: 48px;
-
 }
 
 // #primary-menu li a {
@@ -105,16 +145,14 @@ Stub Name:  global_header.scss
         margin: 0 -10px 0 -25px;
         padding: 0 0 0 0;
         background-color: $primary;
-    webkit-transform: skew(-45deg);
-    ms-transform: skew(-45deg);
+        webkit-transform: skew(-45deg);
+        ms-transform: skew(-45deg);
         transform: skew(-45deg);
         &:hover,
         &:active {
             background-color: black;
             color: white;
-        
         } // active & hover
-    
     } // .parallelogram
     .btn.btn-primary {
         cursor: pointer;
@@ -128,9 +166,9 @@ Stub Name:  global_header.scss
         padding: 0 0 0 0;
         background-color: transparent;
         border: none;
-    webkit-border-radius: 0px;
-    moz-border-radius: 0px;
-    o-border-radius: 0px;
+        webkit-border-radius: 0px;
+        moz-border-radius: 0px;
+        o-border-radius: 0px;
         border-radius: 0px;
         border: 0px;
         font-size: 1.125rem;
@@ -139,10 +177,8 @@ Stub Name:  global_header.scss
         text-transform: uppercase;
         line-height: 48px;
         color: black;
-    webkit-transform: skew(45deg);
-    ms-transform: skew(45deg);
+        webkit-transform: skew(45deg);
+        ms-transform: skew(45deg);
         transform: skew(45deg);
-    
     } //.btn-primary 
-
 } // .espn-cta-container
