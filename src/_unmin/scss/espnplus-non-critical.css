@@ -158,9 +158,11 @@ section.devices-bar {
   width: 100%;
   max-width: 100%;
   margin: 0;
-  padding: 0;
+  padding: 2.125rem 0;
   background-color: #F9B300; }
   section.devices-bar .container {
+    display: block;
+    position: relative;
     width: 100%;
     max-width: 100%;
     margin: 0;
@@ -169,19 +171,26 @@ section.devices-bar {
       display: block;
       width: 100%;
       max-width: 100%;
-      margin: 2.125rem 0;
+      margin: 0;
       padding: 0;
+      font-family: PlayoffProCond-Bold, arial;
+      font-size: 2.000rem;
+      font-weight: 700;
+      letter-spacing: 0.010rem;
+      line-height: 2.750rem;
       text-align: center; }
     section.devices-bar .container .devices-container {
       display: flex;
+      flex-wrap: wrap;
       flex-direction: row;
-      justify-content: center; }
+      justify-content: center;
+      margin-top: 2.125rem; }
       section.devices-bar .container .devices-container .device {
         display: inline-block;
         margin: 0 2.25rem;
         text-align: center; }
         section.devices-bar .container .devices-container .device img {
-          height: 3em; }
+          height: 2.625rem; }
         section.devices-bar .container .devices-container .device p.device-copy {
           margin: .75rem 0;
           padding: .5rem 0;
