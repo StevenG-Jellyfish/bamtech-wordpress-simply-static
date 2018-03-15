@@ -40,6 +40,31 @@ jQuery(document).ready(function() {
 
 }); // jQuery
 
+// ------------ Header nav ------------ //
+
+// $(function() {
+//     $("header").before($("#masthead").clone().addClass("sticky"));
+//     $(window).scroll(function() {
+//         if ($(window).scrollTop() >= 600) {
+//             $('#masthead.sticky').addClass('slideDown');
+//         } else {
+//             $('#masthead.sticky').removeClass('slideDown');
+//         }
+
+//     });
+// });
+
+// ------------ Header nav ------------ //
+
+
+
+
+
+
+
+
+
+
 // ( function() {
 // 	var container, button, menu, links, i, len;
 
