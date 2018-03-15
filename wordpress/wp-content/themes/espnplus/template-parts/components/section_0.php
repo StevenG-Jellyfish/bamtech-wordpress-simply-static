@@ -37,10 +37,12 @@ if ($component !== false) {
      *  @ section_body
      *  @ section_image
      */ 
+    $count = 0;
     foreach($section_ids as $section_id) {
+    $odd_even = ++$count % 2 ? "even" : "odd";
     ?>
         <!-- SECTION -->
-        <section class="section even">
+        <section class="section <?echo $odd_even;?>">
             <div class="container">
                 <div class="row flexbox">
                     
