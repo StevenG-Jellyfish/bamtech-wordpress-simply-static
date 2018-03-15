@@ -15,6 +15,7 @@ get_header();
 get_template_part('template-parts/components/header');
 get_template_part('template-parts/components/spotlight');
 get_template_part('template-parts/components/section_0');
+get_template_part('template-parts/components/device');
 get_template_part('template-parts/components/league-accordion');
 
 get_template_part('template-parts/components/footer');
