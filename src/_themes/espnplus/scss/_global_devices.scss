@@ -1,0 +1,57 @@
+/*!
+Theme Name: espnplus
+Stub Name:  global_devices.scss 
+*/
+
+section.devices-bar {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #F9B300;
+
+    .container {
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        padding: 0;
+        
+        .devices-header {
+            display: block;
+            width: 100%;
+            max-width: 100%;
+            margin: 2.125rem 0;
+            padding: 0;
+            text-align: center;
+            
+        } // .devices-header
+
+        .devices-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+
+            .device {
+                display: inline-block;
+                margin: 0 2.25rem;
+                text-align: center;
+                
+                img {
+                    height: 3em;                   
+
+                } // img
+
+                p.device-copy {
+                    margin: .75rem 0;
+                    padding: .5rem 0;
+                    border-top: 2px solid black;
+                    font-weight: 700;
+                    color: black;
+                }
+            } // .device
+
+        } // .devices-container    
+
+    } // .container
+
+} // section.devices-bar

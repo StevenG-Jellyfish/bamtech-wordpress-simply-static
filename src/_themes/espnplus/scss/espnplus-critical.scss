@@ -20,6 +20,7 @@ Normalizing styles have been helped along thanks to the fine work of
 Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 */
 
+
 /*--------------------------------------------------------------
 >>> TABLE OF CONTENTS:
 ----------------------------------------------------------------
@@ -42,85 +43,135 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 	## Captions
 	## Galleries
 --------------------------------------------------------------*/
-@import "../../../_vendor/scss/variables-site/variables-site";
-@import "../../../_vendor/scss/mixins/mixins-master";
+
+//@import "../../../_vendor/scss/variables-site/variables-site";
+//@import "../../../_vendor/scss/mixins/mixins-master";
 
 /*--------------------------------------------------------------
 # Normalize
 --------------------------------------------------------------*/
-@import "../../../_vendor/scss/normalize";
+
+//@import "../../../_vendor/scss/normalize";
 
 /*--------------------------------------------------------------
 # Typography
 --------------------------------------------------------------*/
-@import "../../../_vendor/scss/typography/typography";
+
+//@import "../../../_vendor/scss/typography/typography";
 
 /*--------------------------------------------------------------
 # Elements
 --------------------------------------------------------------*/
-@import "../../../_vendor/scss/elements/elements";
+
+//@import "../../../_vendor/scss/elements/elements";
 
 /*--------------------------------------------------------------
 # Forms
 --------------------------------------------------------------*/
-@import "../../../_vendor/scss/forms/forms";
+
+//@import "../../../_vendor/scss/forms/forms";
 
 /*--------------------------------------------------------------
 # Navigation
 --------------------------------------------------------------*/
-@import "../../../_vendor/scss/navigation/navigation";
+
+// @import "../../../_vendor/scss/navigation/navigation";
 
 /*--------------------------------------------------------------
 # Accessibility
 --------------------------------------------------------------*/
-@import "../../../_vendor/scss/modules/accessibility";
+
+// @import "../../../_vendor/scss/modules/accessibility";
 
 /*--------------------------------------------------------------
 # Alignments
 --------------------------------------------------------------*/
-@import "../../../_vendor/scss/modules/alignments";
+
+// @import "../../../_vendor/scss/modules/alignments";
 
 /*--------------------------------------------------------------
 # Clearings
 --------------------------------------------------------------*/
-@import "../../../_vendor/scss/modules/clearings";
+
+// @import "../../../_vendor/scss/modules/clearings";
 
 /*--------------------------------------------------------------
 # Widgets
 --------------------------------------------------------------*/
-@import "../../../_vendor/scss/site/secondary/widgets";
+
+// @import "../../../_vendor/scss/site/secondary/widgets";
 
 /*--------------------------------------------------------------
 # Content
 --------------------------------------------------------------*/
-@import "../../../_vendor/scss/site/site";
+
+// @import "../../../_vendor/scss/site/site";
 
 /*--------------------------------------------------------------
 # Infinite scroll
 --------------------------------------------------------------*/
-@import "../../../_vendor/scss/modules/infinite-scroll";
+
+// @import "../../../_vendor/scss/modules/infinite-scroll";
 
 /*--------------------------------------------------------------
 # Media
 --------------------------------------------------------------*/
-@import "../../../_vendor/scss/media/media";
 
+// @import "../../../_vendor/scss/media/media";
 
+/*--------------------------------------------------------------
+# Media
+--------------------------------------------------------------*/
 
+@import "../../../_vendor/scss/bootstrap/functions";
+//
+@import "variables";
+//
+@import "../../../_vendor/scss/bootstrap/mixins";
+@import "../../../_vendor/scss/bootstrap/root";
+@import "../../../_vendor/scss/bootstrap/reboot";
+@import "../../../_vendor/scss/bootstrap/type";
+@import "../../../_vendor/scss/bootstrap/images";
+@import "../../../_vendor/scss/bootstrap/code";
+@import "../../../_vendor/scss/bootstrap/grid";
+@import "../../../_vendor/scss/bootstrap/tables";
+@import "../../../_vendor/scss/bootstrap/forms";
+@import "../../../_vendor/scss/bootstrap/buttons";
+@import "../../../_vendor/scss/bootstrap/transitions";
+@import "../../../_vendor/scss/bootstrap/dropdown";
+@import "../../../_vendor/scss/bootstrap/button-group";
+@import "../../../_vendor/scss/bootstrap/input-group";
+@import "../../../_vendor/scss/bootstrap/custom-forms";
+@import "../../../_vendor/scss/bootstrap/nav";
+@import "../../../_vendor/scss/bootstrap/navbar";
+@import "../../../_vendor/scss/bootstrap/card";
+@import "../../../_vendor/scss/bootstrap/breadcrumb";
+@import "../../../_vendor/scss/bootstrap/pagination";
+@import "../../../_vendor/scss/bootstrap/badge";
+@import "../../../_vendor/scss/bootstrap/jumbotron";
+@import "../../../_vendor/scss/bootstrap/alert";
+@import "../../../_vendor/scss/bootstrap/progress";
+@import "../../../_vendor/scss/bootstrap/media";
+@import "../../../_vendor/scss/bootstrap/list-group";
+@import "../../../_vendor/scss/bootstrap/close";
+@import "../../../_vendor/scss/bootstrap/modal";
+@import "../../../_vendor/scss/bootstrap/tooltip";
+@import "../../../_vendor/scss/bootstrap/popover";
+@import "../../../_vendor/scss/bootstrap/carousel";
+@import "../../../_vendor/scss/bootstrap/utilities";
+@import "../../../_vendor/scss/bootstrap/print";
 
 /*--------------------------------------------------------------
 # JF Components
 --------------------------------------------------------------*/
 
 @import "style";
+@import "global_header";
 
 /*--------------------------------------------------------------
 # component_spotlight
 --------------------------------------------------------------*/
 
-<<<<<<< HEAD
-@import "component_spotlight/component_spotlight";
-=======
 @import "component_spotlight";
 
 /*--------------------------------------------------------------
@@ -128,4 +179,49 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 --------------------------------------------------------------*/
 
 @import "component_section";
->>>>>>> 7c4be71b9629ac737bec2c727483a862d13c358c
+
+// bootstrap overrides
+$yellow: #F9B300 !default;
+$primary: $yellow !default;
+$espn-device-black: #010000;
+$espn-fotter-txt-grey: #787878;
+$espn-toc-bg-grey: #252525;
+$espn-toc-txt-grey: #c5c9d1;
+$espn-accordion-bg-grey: #191919;
+$espn-accordion-txt-grey: #636363;
+// @import "fonts";
+//
+//
+#page {
+    // text-align: center;
+}
+
+.content-area {
+    text-align: left;
+}
+
+.container-fluid {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0;
+    @include media-breakpoint-down(sm) {}
+    // border: 1px solid #ccc;
+}
+
+.site-description {
+    background-color: #ccc;
+}
+
+//
+.site-branding {
+    text-align: left;
+    // img {
+    //     outline: none;
+    // }
+}
+
+.temp-spotlight {
+    width: 100%;
+    height: 600px;
+    background: #999;
+}
