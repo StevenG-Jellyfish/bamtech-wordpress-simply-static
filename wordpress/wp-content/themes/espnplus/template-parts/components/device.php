@@ -1,39 +1,44 @@
-<!--
-/*!
-Theme Name: espnplus
-Stub Name:  global_devices.html 
+<?php
+/**
+* Device component
+*
+* @package lincolntech
 */
--->
 
+$page_id = get_query_var('page_override_id');
 
-<!DOCTYPE html>
-<html lang="en">
+if (empty($page_id)) {
+    $page_id = get_the_ID();
+}
+ 
+/* 
+*  Assign repeater field to $component variable
+*/ 
+$component = get_field('component_device', $page_id);
 
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="manifest" href="manifest.json" />
-  <meta name="description" content="">
-  <meta name="author" content="">
+/* 
+*  Verify if repeater value is empty
+*  Then store the repeater component sections ids in a new array
+*/ 
+if ($component !== false) {
+    
+    //print_r($component);
+    $section_ids = array();
+    
+    foreach($component as $value){
+        $section_ids[] = $value['component_device_item'];
+    }
+    //print_r($section_ids);
 
-
-  <link rel="stylesheet" href="../_unmin/scss/espnplus-critical.css" type="text/css" />
-  <link rel="stylesheet" href="../_unmin/scss/espnplus-non-critical.css" type="text/css" />
-
-  <script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  <script src="../_unmin/js/espnplus-top.js"></script>
-  <script src="../_unmin/js/espnplus-bottom.js"></script>
-
-<body>
-
-
-<!--  Cut just this for the component -->
+    
+    /* 
+     *  Loop $section_ids array and pull each values in respectives areas
+     *  @ device_image
+     *  @ device_link
+     */ 
+    ?>
+  
+  <!--  Cut just this for the component -->
 
 <section class="devices-bar">
     <div class="container">
@@ -80,5 +85,5 @@ Stub Name:  global_devices.html
 </section>
 <!--  //End Cut -->
 
-</body>
-</html>
+    <?php 
+}
