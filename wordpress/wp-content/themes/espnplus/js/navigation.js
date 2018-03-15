@@ -22,7 +22,7 @@ jQuery(document).ready(function() {
             // Store the document scroll function in a variable
             // var y = jQuery(this).scrollTop();
 
-            var scrollTop = jQuery(window).scrollTop();
+           // var scrollTop = jQuery(window).scrollTop();
 
             // If the document is scrolled 90%
             // if (y > ninetypercent) {
