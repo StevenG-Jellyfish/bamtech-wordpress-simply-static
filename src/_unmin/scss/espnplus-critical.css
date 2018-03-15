@@ -1297,15 +1297,17 @@ Stub Name           :   component_section.scss
 Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/feature.html
 */
 section.section {
-  position: relative;
-  display: block;
-  width: 100%;
   max-width: 1280px;
   margin: 0 auto;
   padding: 0;
   font-size: 1.000rem;
   font-weight: 400;
   line-height: 1.500rem; }
+  section.section .container {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0; }
   section.section .row.flexbox {
     position: relative;
     display: flex;
@@ -1317,15 +1319,27 @@ section.section {
     margin: 0;
     padding: 0; }
     section.section .row.flexbox .copy-container {
-      display: inline-block;
-      max-width: 400px;
-      margin: 0 50px;
+      display: block;
+      width: 40%;
+      margin: 0 5%;
       padding: 0; }
       section.section .row.flexbox .copy-container .featurette-heading {
         font-size: 2.000rem;
         font-weight: 600;
         letter-spacing: -0.010rem;
         line-height: 2.750rem; }
+      @media (max-width: 767px) {
+        section.section .row.flexbox .copy-container .featurette-heading {
+          margin-bottom: 2rem;
+          font-size: 1.250rem;
+          line-height: 1.375rem;
+          text-align: center; } }
+      @media (min-width: 768px) and (max-width: 990px) {
+        section.section .row.flexbox .copy-container .featurette-heading {
+          margin-bottom: 2rem;
+          font-size: 1.875rem;
+          line-height: 2.125rem;
+          text-align: left; } }
       section.section .row.flexbox .copy-container:before {
         content: '';
         position: relative;
@@ -1333,12 +1347,42 @@ section.section {
         top: 5px;
         width: 60px;
         height: 4px;
+        margin: 0 0 1.500rem 0;
         background-color: #F9B300; }
+      @media (max-width: 767px) {
+        section.section .row.flexbox .copy-container:before {
+          margin: 0 auto 1.500rem auto;
+          height: 2px; } }
+    @media (max-width: 767px) {
+      section.section .row.flexbox .copy-container {
+        width: 90%;
+        margin: 0 5%;
+        text-align: center; } }
+    @media (min-width: 768px) {
+      section.section .row.flexbox .copy-container {
+        flex: 0 0 30%; } }
     section.section .row.flexbox .media-container {
-      display: inline-block;
-      max-width: 400px;
-      margin: 0 50px;
+      display: block;
+      width: 40%;
+      margin: 0 5%;
       padding: 0; }
+      section.section .row.flexbox .media-container picture,
+      section.section .row.flexbox .media-container img {
+        width: 100%;
+        max-width: 100%; }
+    @media (max-width: 767px) {
+      section.section .row.flexbox .media-container {
+        width: 90%;
+        margin: 0 5%;
+        text-align: center; } }
+
+@media (max-width: 767px) and (min-width: 768px) {
+  section.section .row.flexbox .media-container {
+    flex: 0 0 30%; } }
+    @media (max-width: 767px) {
+      section.section .row.flexbox picture,
+      section.section .row.flexbox img {
+        max-width: 100%; } }
   section.section.odd {
     padding: 100px 0;
     background-color: white;
@@ -1346,12 +1390,22 @@ section.section {
     section.section.odd .row.flexbox {
       flex-direction: row;
       flex-wrap: wrap; }
+    @media (max-width: 767px) {
+      section.section.odd .row.flexbox {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap; } }
     section.section.odd a {
       color: black; }
+  @media (max-width: 767px) {
+    section.section.odd {
+      padding-top: 2rem;
+      padding-bottom: 2rem; } }
   section.section.odd:first-child {
-    padding-top: 0; }
+    padding-top: 2rem; }
   section.section.odd:last-child {
-    padding-bottom: 0; }
+    padding-top: 2rem;
+    padding-bottom: 2rem; }
   section.section.even {
     padding: 0;
     background-color: black;
@@ -1359,8 +1413,21 @@ section.section {
     section.section.even .row.flexbox {
       flex-direction: row-reverse;
       flex-wrap: wrap-reverse; }
+    @media (max-width: 767px) {
+      section.section.even .row.flexbox {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap; } }
     section.section.even a {
       color: white; }
+  @media (max-width: 767px) {
+    section.section.even {
+      padding-top: 0;
+      padding-bottom: 0; } }
+  section.section.even:first-child {
+    padding-top: 2rem; }
+  section.section.even:last-child {
+    padding-bottom: 2rem; }
   section.section.even:before {
     content: '';
     position: relative;
@@ -1376,6 +1443,9 @@ section.section {
     transform: skewY(2.5deg);
     transform-origin: 100%;
     z-index: 2; }
+  @media (max-width: 767px) {
+    section.section.even:before {
+      height: 40px; } }
   section.section.even:first-child:before {
     content: '';
     position: relative;
@@ -1406,6 +1476,9 @@ section.section {
     transform: skewY(-2.5deg);
     transform-origin: 100%;
     z-index: 2; }
+  @media (max-width: 767px) {
+    section.section.even:after {
+      height: 40px; } }
   section.section.even:last-child:after {
     content: '';
     position: relative;
@@ -1443,45 +1516,89 @@ section.league-toc {
   section.league-toc .container {
     margin: 3.375rem;
     padding: 0 0 0 0;
-    border-top: 1px solid #191919; }
+    border-top: 1px solid #636363; }
     section.league-toc .container .copyright {
       margin: 3.375rem 0 1.5rem 0;
       color: #636363; }
-    section.league-toc .container .card {
-      display: inline-block;
-      width: 45%;
-      max-width: 45%; }
-      section.league-toc .container .card:nth-child(even) {
-        margin: 0 5% 0 0; }
-      section.league-toc .container .card:nth-child(even) {
-        margin: 0 0 0 5%; }
-      section.league-toc .container .card .card-header {
-        background-color: #191919; }
-        section.league-toc .container .card .card-header a {
-          text-decoration: none; }
-          section.league-toc .container .card .card-header a h5 {
-            position: relative;
-            margin: 0 0 0 0;
-            padding: 0 1.282em;
-            font-weight: 400;
-            line-height: 2.563rem;
-            color: #636363; }
-            section.league-toc .container .card .card-header a h5 i.fa {
-              position: absolute;
-              display: block;
-              top: 0px;
-              right: 1rem;
-              width: 1rem;
-              height: 1rem;
+    @media (max-width: 767px) {
+      section.league-toc .container .copyright {
+        margin: 2.375rem 0 1em 0; } }
+    section.league-toc .container .accordion {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+      padding: 0; }
+      section.league-toc .container .accordion .card {
+        display: inline-block;
+        width: 45%;
+        max-width: 45%;
+        padding: 0; }
+        section.league-toc .container .accordion .card:nth-child(odd) {
+          margin: 0 5% 0 0; }
+        section.league-toc .container .accordion .card:nth-child(even) {
+          margin: 0 0 0 5%; }
+        @media (max-width: 767px) {
+          section.league-toc .container .accordion .card:nth-child(even), section.league-toc .container .accordion .card:nth-child(odd) {
+            margin: .5em 0;
+            padding: 0; } }
+        section.league-toc .container .accordion .card .collapse {
+          max-height: 0px;
+          opacity: 0;
+          transition: max-height 500ms, opacity 300ms;
+          -webkit-transition: max-height 500ms, opacity 300ms; }
+        section.league-toc .container .accordion .card .collapse.show {
+          max-height: 300px;
+          opacity: 1;
+          transition: max-height 0, opacity 300ms;
+          -webkit-transition: max-height 0, opacity 300ms; }
+        section.league-toc .container .accordion .card .card-header {
+          background-color: #191919; }
+          section.league-toc .container .accordion .card .card-header a {
+            text-decoration: none; }
+            section.league-toc .container .accordion .card .card-header a h5 {
+              position: relative;
+              margin: 0 0 0 0;
+              padding: 0 1.282em;
+              font-weight: 400;
+              line-height: 2.563rem;
               color: #636363; }
-              section.league-toc .container .card .card-header a h5 i.fa:before {
-                content: 'V'; }
-      section.league-toc .container .card .card-body {
-        margin: 0 0 0 0;
-        padding: 1.282em;
-        border-top: 1px solid #636363;
-        background-color: #191919;
-        color: #636363; }
+              section.league-toc .container .accordion .card .card-header a h5 i.fa {
+                position: absolute;
+                display: block;
+                top: 0px;
+                right: 1rem;
+                width: 1rem;
+                height: 1rem;
+                color: #636363; }
+                section.league-toc .container .accordion .card .card-header a h5 i.fa:before {
+                  content: 'V'; }
+        section.league-toc .container .accordion .card .card-body {
+          margin: 0 0 0 0;
+          padding: 1.282em;
+          border-top: 1px solid #636363;
+          background-color: #191919;
+          color: #636363; }
+      @media (max-width: 767px) {
+        section.league-toc .container .accordion .card {
+          display: block;
+          width: 90%;
+          max-width: 90%;
+          margin: .5em 0;
+          padding: 0;
+          text-align: center; } }
+    @media (max-width: 767px) {
+      section.league-toc .container .accordion {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin: 0;
+        padding: 0; } }
+  @media (max-width: 767px) {
+    section.league-toc .container {
+      width: 85%;
+      margin: 3.375rem 1.5em; } }
 
 #page {
   text-align: center; }
