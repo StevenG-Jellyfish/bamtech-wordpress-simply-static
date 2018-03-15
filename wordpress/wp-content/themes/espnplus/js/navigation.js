@@ -11,18 +11,17 @@ jQuery(document).ready(function() {
     jQuery(window).resize(function() {
 
         // Variables
-        var windowHeight = jQuery(window).height();
+        // var windowHeight = jQuery(window).height();
 
         // When the document is scrolled ninety percent, toggle the classes
-
-        var jumbotronheight = jQuery('.jumbotron').height();
-        var windowheight = jQuery(window).height();
+        var scrollTop = jQuery(window).scrollTop();
+        //  var jumbotronheight = jQuery('.jumbotron').height();
+        // var windowheight = jQuery(window).height();
         jQuery(document).scroll(function() {
 
             // Store the document scroll function in a variable
             // var y = jQuery(this).scrollTop();
 
-            var scrollTop = jQuery(window).scrollTop();
 
             // If the document is scrolled 90%
             // if (y > ninetypercent) {
