@@ -6449,6 +6449,16 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
 # component_section
 --------------------------------------------------------------*/
 /*!
+Theme Name: espnplus
+Stub Name:  global_footer_link.scss 
+*/
+#page {
+  text-align: center; }
+
+.footer-links {
+  border: 1px solid #ccc; }
+
+/*!
 Theme Name          :   espnplus
 Stub Name           :   component_section.scss 
 Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/feature.html

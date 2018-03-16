@@ -28,7 +28,7 @@ $(document).ready(function() {
       });
 
     $(window).scroll(function() {
-        console.log('window' + $(window).scrollTop());
+       // console.log('window' + $(window).scrollTop());
         if ($(window).scrollTop() > 140){
             header.removeClass("d-none");
         }
