@@ -1148,35 +1148,6 @@ pre {
 .table-striped tbody tr:nth-of-type(odd) {
   background-color: rgba(0, 0, 0, 0.05); }
 
-<<<<<<< HEAD
-.espn-cta-container {
-  position: relative;
-  display: inline-block;
-  overflow: hidden;
-  margin: 0 auto;
-  padding: 0 0 0 0;
-  text-align: center; }
-  .espn-cta-container .parallelogram {
-    position: relative;
-    display: inline-block;
-    overflow: hidden;
-    width: 286px;
-    height: 48px;
-    margin: 0 -10px 0 -25px;
-    padding: 0 0 0 0;
-    background-color: #F9B300;
-    -webkit-transform: skew(-45deg);
-    -ms-transform: skew(-45deg);
-    transform: skew(-45deg); }
-    .espn-cta-container .parallelogram:hover, .espn-cta-container .parallelogram:active {
-      background-color: white;
-      color: black; }
-  .espn-cta-container .btn.btn-primary {
-    position: absolute;
-    display: inline-block;
-    top: 0;
-    left: 0;
-=======
 .table-hover tbody tr:hover {
   background-color: rgba(0, 0, 0, 0.075); }
 
@@ -1306,7 +1277,6 @@ pre {
 @media (max-width: 339.98px) {
   .table-responsive-sm {
     display: block;
->>>>>>> 8f252fa1a2b206772f132a6b2240de265ba59f06
     width: 100%;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
@@ -1381,125 +1351,8 @@ pre {
     background-color: #e9ecef;
     opacity: 1; }
 
-<<<<<<< HEAD
-@media (max-width: 767px) {
-  .espn-cta-container {
-    margin: 1.5rem auto .750rem auto; } }
-
-/*!
-Theme Name: espnplus
-Stub Name:  global_header.scss 
-*/
-#masthead {
-  background: white;
-  height: 77px;
-  text-align: left;
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex; }
-
-.site-branding {
-  display: inline-block;
-  flex: 1 100%; }
-
-.site-header a img {
-  max-height: 22px;
-  width: auto;
-  margin-top: 28px;
-  margin-left: 75px; }
-
-#site-navigation {
-  display: inline-block;
-  height: 77px;
-  flex: 1 100%; }
-
-#primary-menu {
-  margin-top: 14px;
-  list-style: none;
-  margin-bottom: 0;
-  margin-right: 55px;
-  display: flex;
-  justify-content: flex-end; }
-
-#primary-menu li {
-  height: 48px; }
-
-.menu-item {
-  margin-left: 38px;
-  min-width: 40px;
-  font-family: PlayoffProCond-MediumItalic, arial; }
-
-.menu-item a {
-  margin-top: 10px;
-  display: inline-block;
-  color: black; }
-
-.espn-cta-btn-container {
-  position: relative;
-  display: inline-block;
-  overflow: hidden;
-  margin: 0 auto;
-  padding: 0 0 0 0;
-  text-align: center; }
-  .espn-cta-btn-container .parallelogram {
-    font-family: PlayoffProCond-Medium, arial;
-    position: relative;
-    display: inline-block;
-    overflow: hidden;
-    width: 286px;
-    height: 48px;
-    margin: 0 -10px 0 -25px;
-    padding: 0 0 0 0;
-    background-color: #F9B300;
-    webkit-transform: skew(-45deg);
-    ms-transform: skew(-45deg);
-    transform: skew(-45deg); }
-    .espn-cta-btn-container .parallelogram:hover, .espn-cta-btn-container .parallelogram:active {
-      background-color: black;
-      color: white; }
-  .espn-cta-btn-container .btn.btn-primary {
-    cursor: pointer;
-    position: absolute;
-    display: inline-block;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    margin: 0 10px 0 10px;
-    padding: 0 0 0 0;
-    background-color: transparent;
-    border: none;
-    webkit-border-radius: 0px;
-    moz-border-radius: 0px;
-    o-border-radius: 0px;
-    border-radius: 0px;
-    border: 0px;
-    font-size: 1.125rem;
-    font-weight: 400;
-    font-style: normal;
-    text-transform: uppercase;
-    line-height: 48px;
-    color: black;
-    webkit-transform: skew(45deg);
-    ms-transform: skew(45deg);
-    transform: skew(45deg); }
-
-/*--------------------------------------------------------------
-# component_spotlight
---------------------------------------------------------------*/
-/*!
-Theme Name          :   espnplus
-Stub Name           :   component_spotlight.scss 
-Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.html
-*/
-:root {
-  --jumbotron-padding-y: 3rem; }
-=======
 select.form-control:not([size]):not([multiple]) {
   height: calc(2.25rem + 2px); }
->>>>>>> 8f252fa1a2b206772f132a6b2240de265ba59f06
 
 select.form-control:focus::-ms-value {
   color: #495057;
@@ -6260,14 +6113,14 @@ body {
   font-weight: 16px;
   line-height: 1.500rem; }
 
-Wrapper for CTA with corner knockout .espn-cta-container {
+.espn-cta-container {
   position: relative;
   display: inline-block;
   overflow: hidden;
   margin: 0 auto;
   padding: 0 0 0 0;
   text-align: center; }
-  Wrapper for CTA with corner knockout .espn-cta-container .parallelogram {
+  .espn-cta-container .parallelogram {
     position: relative;
     display: inline-block;
     overflow: hidden;
@@ -6279,10 +6132,10 @@ Wrapper for CTA with corner knockout .espn-cta-container {
     -webkit-transform: skew(-45deg);
     -ms-transform: skew(-45deg);
     transform: skew(-45deg); }
-    Wrapper for CTA with corner knockout .espn-cta-container .parallelogram:hover, Wrapper for CTA with corner knockout .espn-cta-container .parallelogram:active {
+    .espn-cta-container .parallelogram:hover, .espn-cta-container .parallelogram:active {
       background-color: white;
       color: black; }
-  Wrapper for CTA with corner knockout .espn-cta-container .btn.btn-primary {
+  .espn-cta-container .btn.btn-primary {
     position: absolute;
     display: inline-block;
     top: 0;
@@ -6317,89 +6170,50 @@ Theme Name: espnplus
 Stub Name:  global_header.scss 
 */
 #masthead {
-  width: 100%;
-  z-index: 16777270;
-  display: inline-block;
-  text-align: center; }
-
-#masthead-stick {
-  width: 100%;
-  z-index: 16777271;
-  text-align: center; }
-
-.sticky {
-  position: fixed;
-  top: 0; }
-
-.site-branding {
-  display: inline-block;
-  flex: 1 100%; }
-  @media (max-width: 580px) {
-    .site-branding {
-      display: none;
-      flex: none; } }
-
-.headerbox {
-  display: block;
   background: white;
-  margin: 0 auto;
-  width: 100%;
-  max-width: 1280px;
-  height: 77px; }
-
-.site-header {
   height: 77px;
   text-align: left;
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
   display: -webkit-flex;
-  display: flex;
-  justify-content: space-between; }
-  .site-header a img {
-    max-height: 20px;
-    width: 104px;
-    margin-top: 28px;
-    margin-left: 75px; }
+  display: flex; }
 
-.main-navigation {
+.site-branding {
+  display: inline-block;
+  flex: 1 100%; }
+
+.site-header a img {
+  max-height: 22px;
+  width: auto;
+  margin-top: 28px;
+  margin-left: 75px; }
+
+#site-navigation {
   display: inline-block;
   height: 77px;
   flex: 1 100%; }
-  .main-navigation ul {
-    padding: 0px; }
 
-.menu {
+#primary-menu {
   margin-top: 14px;
   list-style: none;
   margin-bottom: 0;
   margin-right: 55px;
   display: flex;
-  flex-direction: row;
   justify-content: flex-end; }
-  .menu .menu-item {
-    height: 48px;
-    font-family: PlayoffProCond-MediumItalic, arial; }
-  .menu .menu-item a {
-    margin-top: 10px;
-    display: inline-block;
-    color: black; }
-  .menu .menu-item:nth-child(2) {
-    width: 42px;
-    margin-left: 38px; }
-  @media (max-width: 580px) {
-    .menu {
-      flex-direction: row-reverse;
-      margin-right: 20px;
-      margin-left: 20px; }
-      .menu .menu-item {
-        flex: 1 100%;
-        margin: 0; }
-      .menu .menu-item:nth-child(2) {
-        margin-left: 0; } }
 
-.site-title {
-  display: none; }
+#primary-menu li {
+  height: 48px; }
+
+.menu-item {
+  margin-left: 38px;
+  min-width: 40px;
+  font-family: PlayoffProCond-MediumItalic, arial; }
+
+.menu-item a {
+  margin-top: 10px;
+  display: inline-block;
+  color: black; }
 
 .espn-cta-btn-container {
   position: relative;
@@ -6595,6 +6409,78 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
 /*--------------------------------------------------------------
 # component_section
 --------------------------------------------------------------*/
+/*!
+Theme Name: espnplus
+Stub Name:  global_footer_link.scss 
+*/
+#page {
+  text-align: center; }
+
+.espn-lang {
+  border: 1px solid #ccc;
+  width: 30%; }
+  .espn-lang .logo img {
+    width: 74px;
+    height: 38px;
+    margin-bottom: 60px; }
+  .espn-lang .select-wrap {
+    border-radius: 36px;
+    display: inline-block;
+    overflow: hidden;
+    background: black;
+    border: 1px solid #cccccc; }
+    .espn-lang .select-wrap input, .espn-lang .select-wrap button, .espn-lang .select-wrap select, .espn-lang .select-wrap optgroup, .espn-lang .select-wrap textarea {
+      background: black;
+      color: white;
+      outline: none;
+      font-family: arial;
+      font-size: 0.6875rem;
+      line-height: 2.9375rem; }
+    .espn-lang .select-wrap .lang-select {
+      border-radius: 36px;
+      width: 140px;
+      height: 40px;
+      border: 0px;
+      outline: none;
+      font-family: arial;
+      font-size: 0.6875rem;
+      line-height: 2.9375rem; }
+      .espn-lang .select-wrap .lang-select option {
+        background: black;
+        color: white;
+        outline: none;
+        border: none; }
+
+.espn-links {
+  border: 1px solid #ccc;
+  width: 70%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row; }
+  .espn-links .link {
+    width: 33.33%;
+    font-family: arial;
+    font-size: 0.8125rem;
+    line-height: 2.9375rem;
+    color: #787878;
+    text-align: left;
+    padding: 0.25rem; }
+    .espn-links .link a:link {
+      font-family: arial;
+      font-size: 0.8125rem;
+      line-height: 2.9375rem;
+      color: #787878;
+      font-weight: normal; }
+
+.footer-links {
+  border: 1px solid #ccc; }
+  .footer-links .link-container {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap; }
+
 /*!
 Theme Name          :   espnplus
 Stub Name           :   component_section.scss 

@@ -37,7 +37,8 @@ section.league-toc {
 
         .accordion {
             display: flex;
-            flex-direction: row;
+            flex-direction: column;
+            flex-wrap: wrap;
             justify-content: center;
             width: 100%;
             margin: 0;
@@ -47,22 +48,22 @@ section.league-toc {
                 display: inline-block;
                 width: 45%;
                 max-width: 45%;
-                margin: 0 0 0 0;
+                margin: 0 0 1.282rem 0;
                 padding: 0;
                 background-color: transparent;
                 border: 0px;
 
                 &:nth-child(odd) {
-                    margin: 0 5% 0 0;
+                    margin: 0 5% 1.282rem 0;
                 }
                 &:nth-child(even) {
-                    margin: 0 0 0 5%;
+                    margin: 0 0 1.282rem 5%;
                 }
 
                 @media (max-width: 767px) { // mobile
                     &:nth-child(even),
                     &:nth-child(odd) {
-                        margin: .5em 0;
+                        margin: .5rem 0;
                         padding: 0;
                     } // &:nth-child(even), &:nth-child(odd)
                 } // max-width: 767px
@@ -74,7 +75,7 @@ section.league-toc {
                     -webkit-transition: max-height 500ms, opacity 300ms;
                 }   
                 .collapse.show {
-                    max-height: 300px;
+                    max-height: 100%;
                     opacity: 1;
                     transition: max-height 0, opacity 300ms;
                     -webkit-transition: max-height 0, opacity 300ms;
@@ -87,7 +88,7 @@ section.league-toc {
                         h5 { 
                             position: relative;
                             margin: 0 0 0 0;
-                            padding: 0 1.282em;
+                            padding: 0 1.282rem;
                             font-weight: 400;
                             line-height: 2.563rem;
                             color: $espn-accordion-txt-grey;
@@ -115,8 +116,9 @@ section.league-toc {
                 } // .card-header
 
                 .card-body {
-                    margin: 0 0 0 0;
-                    padding: 1.282em;
+                    display: inline-block;
+                    margin: 0 0 1.282rem 0;
+                    padding: 1.282rem;
                     border-top: 1px solid $espn-accordion-txt-grey;
                     background-color: $espn-accordion-bg-grey;
                     color: $espn-accordion-txt-grey;
@@ -128,7 +130,7 @@ section.league-toc {
                     display: block;
                     width: 100%;
                     max-width: 100%;
-                    margin: .5em 0;
+                    margin: .5rem 0;
                     padding: 0;
                     text-align: center;
                 } // .card 
@@ -141,7 +143,7 @@ section.league-toc {
                 display: flex;
                 flex-direction: row;
                 flex-wrap: wrap;
-                margin: 0;
+                margin: .5rem 0;
                 padding: 0;
             } // .accordion {  
         } // max-width: 767px

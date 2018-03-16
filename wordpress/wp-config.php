@@ -1,7 +1,7 @@
 <?php
-
 /** Enable W3 Total Cache */
-define('WP_CACHE', false); // Added by W3 Total Cache
+define('WP_CACHE', true); // Added by W3 Total Cache
+
 
 /**
  * The base configuration for WordPress
@@ -143,3 +143,8 @@ if ( !defined('ABSPATH') ){
 require-wp-settings.php
 */
 require_once(ABSPATH . 'wp-settings.php');
+
+/*
+* Prevent automatic core update
+*/
+define( 'WP_AUTO_UPDATE_CORE', false );
