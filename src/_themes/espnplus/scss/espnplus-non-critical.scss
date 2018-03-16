@@ -43,6 +43,9 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 	## Captions
 	## Galleries
 --------------------------------------------------------------*/
+/* ---------------------- */
+@import "../../../_vendor/scss/fontawesome/fontawesome";
+/* ---------------------- */
 
 // bootstrap overrides
 $yellow: #F9B300 !default;
@@ -72,3 +75,4 @@ $espn-accordion-txt-grey: #636363;
 --------------------------------------------------------------*/
 
 @import "global_toc";
+

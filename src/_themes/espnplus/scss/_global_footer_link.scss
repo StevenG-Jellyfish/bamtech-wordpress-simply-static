@@ -15,32 +15,31 @@ Stub Name:  global_footer_link.scss
     }
     .select-wrap {
         border-radius:36px;
+        height:36px;
         display:inline-block;
         overflow:hidden;
         background:black;
-        border:1px solid #cccccc;
+        border:1px solid #787878;
         input, button, select, optgroup, textarea {
             background:black;
-            color:white;
+            color:#787878;
             outline:none;
+            border:black 0px;
             font-family:arial;
             font-size:0.6875rem;
             line-height:2.9375rem;
-        }
-        .lang-select {
-            border-radius:36px;
-            width:140px;
-            height:40px;
-            border:0px;
-            outline:none;
-            font-family:arial;
-            font-size:0.6875rem;
             line-height:2.9375rem;
-            // background:black;
-            // color:white;
+            width:120px;
+            height:36px;
+            // display:inline-block;
+            // padding: 10px 10px 12px 11px;
+            margin-bottom:6px;
+            margin-left:8px;
             option {
+                // padding-bottom:6px;
+                // padding-left:10px;
                 background:black;
-                color:white;
+                color:#787878;
                 outline:none;
                 border:none;
             }

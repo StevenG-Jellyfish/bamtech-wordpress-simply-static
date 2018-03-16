@@ -45,7 +45,8 @@ if ($component !== false) {
         <h3 class="devices-header">
             {{ devices-header}}
         </h3>
-
+        <i class="far fa-angle-down" style="color:white"></i>
+        <i class="far fa-address-book" style="color:white"></i>
         <div class="devices-container">  
             <div class="device">
                 <a href="#{{ device_link }}">
