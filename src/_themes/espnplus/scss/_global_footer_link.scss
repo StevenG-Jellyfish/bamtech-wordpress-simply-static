@@ -2,26 +2,35 @@
 Theme Name: espnplus
 Stub Name:  global_footer_link.scss 
 */
-#page {
-   text-align:center;
-}
+
 .espn-lang {
-    border:1px solid #ccc;
-    width:30%;
-    .logo img {
-        margin-top:38px;
+   // border:1px solid #ccc;
+   // width:20%;
+    // flex:1 100;
+    flex-basis:30%;
+    text-align:left;
+
+    .logo {
+      //  border:1px dotted #FFFF00;
+        text-align:left;
+        img {
+        margin-top:26px;
+        margin-left:0px;
         width:74px;
         height:38px;
-        margin-bottom:60px;
-        border:1px dotted #FFFF00;
-    }
+        margin-bottom:30px;
+       // border:1px dashed #FFFF00;
+        }
+    }   
     .select-wrap {
         border-radius:36px;
         height:36px;
+        margin-left:0px;
+        margin-right:20px;
         display:inline-block;
         overflow:hidden;
         background:black;
-        border:1px solid #787878;
+       // border:1px solid #787878;
         input, button, select, optgroup, textarea {
             background:black;
             color:#787878;
@@ -29,8 +38,6 @@ Stub Name:  global_footer_link.scss
             border:black 0px;
             font-family:arial;
             font-size:0.6875rem;
-            line-height:2.9375rem;
-            line-height:2.9375rem;
             width:120px;
             height:36px;
             // display:inline-block;
@@ -49,8 +56,11 @@ Stub Name:  global_footer_link.scss
     }
 }
 .espn-links {
-    border:1px solid #ccc;
-    width:70%;
+   // border:1px solid #ccc;
+    //width:70%;
+   // flex:1 100;
+   margin-top:40px;
+   flex-basis:auto;
     display:flex;
     flex-wrap: wrap;
     flex-direction:row;
@@ -58,7 +68,8 @@ Stub Name:  global_footer_link.scss
         width: 33.33%;
         font-family:arial;
         font-size:0.8125rem;
-        line-height:2.9375rem;
+       // line-height:2.9375rem;
+       line-height:0.8125rem;
         color:#787878;
         text-align:left;
         padding:0.25rem;
@@ -67,21 +78,38 @@ Stub Name:  global_footer_link.scss
         a:link {
             font-family:arial;
             font-size:0.8125rem;
-            line-height:2.9375rem;
+            line-height:0.8125rem;
             color:#787878;
             font-weight:normal;
         }
     }
 }
 .footer-links {
-    .link-container {
-        width:100%;
-        margin:0;
-        padding:0;
-        display:flex;
-        flex-wrap: wrap;
-    }
-    border:1px solid #ccc;
+    position: relative;
+    display: inline-block;
+    width: 90%;
+   // max-width: 1280px;
+   // margin: 0 auto;
+   // padding: 0;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5rem;
+    background-color: #000;
+        .container {
+            width: 100%;
+        max-width: 100%;
+        // margin: 3.375rem 0 3.375rem 0;
+        padding: 0;
+    //  border-top: 1px solid #636363;
+            // width:100%;
+        // margin:0;
+            // padding:0;
+            display:flex;
+            flex-wrap: wrap;
+            flex-wrap: nowrap;
+            flex-direction: row;
+        }
+  //  border:1px solid #ccc;
     a:link {
 
     }
