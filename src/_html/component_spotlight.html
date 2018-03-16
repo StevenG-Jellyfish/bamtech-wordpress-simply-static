@@ -66,21 +66,23 @@ Component Souce: http://jf-style-guide.sgel6.dev.jellyfish.local/hero.html
             <div class="container-fluid jubmotron-background">
                 <div class="embed-responsive embed-responsive-16by9 div_style">
                     <video id="background-movie" preload autoplay>
-                <!--*** replace src with {{spotlight_background-video}} -->
-                <source src="../_video/Genertic_3x4.mp4" 
-                        type="video/mp4" media="(max-width:767px)"> 
-                <source src="../_video/Genertic_16x9.mp4" 
-                        type="video/mp4" media="(min-width:768px)">
-                        
-                <picture> <!--*** {{ section image at various media settings (presets form the admin) }} -->
-                    <source media="(max-width: 767px)" srcset="../_images/theme/Genertic_3X4.png">
-                    <source media="(min-width: 768px)" srcset="../_images/theme/Genertic_16x9.png">
-                    <img src="../_images/theme/Genertic_16x9.png" title="Your browser does not support the <video> tag">
-                </picture>
+                        <!--*** replace src with {{spotlight_background-video}} -->
+                        <source src="../_video/Genertic_16x9.mp4" 
+                            type="video/mp4" media="(min-width:768px)">
+                        <source src="../_video/Genertic_3x4.mp4" 
+                                type="video/mp4" media="(max-width:767px)"> 
+                                
+                        <picture> <!--*** {{ section image at various media settings (presets form the admin) }} -->
+                            <source media="(min-width: 768px)"      
+                                srcset="../_images/theme/Genertic_16x9.png">
+                            <source media="(max-width: 767px)"  
+                                    srcset="../_images/theme/Genertic_3X4.png">
+                            <img src="../_images/theme/Genertic_16x9.png" title="Your browser does not support the &lt; video &gt; tag">
+                        </picture>
 
-                <img src="../_images/theme/Genertic_16x9.png" title="Your browser does not support the <video> tag">
-                <!--*** replace src with {{spotlight_background_image}} -->
-            </video>
+                        <img src="../_images/theme/Genertic_16x9.png" title="Your browser does not support the &lt; video &gt; tag">
+                        <!--*** replace src with {{spotlight_background_image}} -->
+                    </video>
                 </div>
             </div>
         </section>

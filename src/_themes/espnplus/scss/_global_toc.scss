@@ -3,8 +3,6 @@ Theme Name: espnplus
 Stub Name:  global_toc.scss 
 */
 
-
-
 section.terms-conditions {
     width: 100%;
     max-width: 100%;
@@ -20,6 +18,7 @@ section.terms-conditions {
         margin: 0;
         padding: 0;
 
+        div,
         p {
             width: 80%;
             margin: 0 auto;   

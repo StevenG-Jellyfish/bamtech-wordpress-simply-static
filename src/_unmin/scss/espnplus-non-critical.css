@@ -2793,15 +2793,15 @@ section.league-toc {
     border-top: 1px solid #636363; }
     section.league-toc .container .copyright {
       margin: 3.375rem 0 1.5rem 0;
+      text-align: left;
       color: #636363; }
     @media (max-width: 767px) {
       section.league-toc .container .copyright {
         margin: 2.375rem 0 1em 0; } }
     section.league-toc .container .accordion {
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       flex-wrap: wrap;
-      justify-content: center;
       width: 100%;
       margin: 0;
       padding: 0; }
@@ -2841,24 +2841,31 @@ section.league-toc {
               padding: 0 1.282rem;
               font-weight: 400;
               line-height: 2.563rem;
+              text-align: left;
               color: #636363; }
+              section.league-toc .container .accordion .card .card-header a h5 p {
+                margin: 0;
+                padding: 0; }
               section.league-toc .container .accordion .card .card-header a h5 i.fa {
                 position: absolute;
                 display: block;
-                top: 0px;
+                top: 0;
                 right: 1rem;
                 width: 1rem;
                 height: 1rem;
+                line-height: 2.563rem;
                 color: #636363; }
-                section.league-toc .container .accordion .card .card-header a h5 i.fa:before {
-                  content: 'V'; }
         section.league-toc .container .accordion .card .card-body {
           display: inline-block;
           margin: 0 0 1.282rem 0;
           padding: 1.282rem;
           border-top: 1px solid #636363;
           background-color: #191919;
+          text-align: left;
           color: #636363; }
+          section.league-toc .container .accordion .card .card-body p {
+            margin: 0;
+            padding: 0; }
       @media (max-width: 767px) {
         section.league-toc .container .accordion .card {
           display: block;
@@ -2954,6 +2961,7 @@ section.terms-conditions {
     max-width: 100%;
     margin: 0;
     padding: 0; }
+    section.terms-conditions .container div,
     section.terms-conditions .container p {
       width: 80%;
       margin: 0 auto;
@@ -2961,6 +2969,7 @@ section.terms-conditions {
       line-height: 1.250rem;
       text-align: center;
       color: #c5c9d1; }
+      section.terms-conditions .container div a,
       section.terms-conditions .container p a {
         color: #c5c9d1;
         text-decoration: underline; }

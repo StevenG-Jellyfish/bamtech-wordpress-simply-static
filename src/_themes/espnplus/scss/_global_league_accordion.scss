@@ -25,6 +25,7 @@ section.league-toc {
 
         .copyright {
             margin: 3.375rem 0 1.5rem 0;
+            text-align: left;
             color: $espn-accordion-txt-grey;
 
         } // .copyright
@@ -37,9 +38,8 @@ section.league-toc {
 
         .accordion {
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
             flex-wrap: wrap;
-            justify-content: center;
             width: 100%;
             margin: 0;
             padding: 0;
@@ -91,21 +91,23 @@ section.league-toc {
                             padding: 0 1.282rem;
                             font-weight: 400;
                             line-height: 2.563rem;
+                            text-align: left;
                             color: $espn-accordion-txt-grey;
+
+                            p {
+                                margin: 0;
+                                padding: 0;
+                            }
 
                             i.fa {
                                 position: absolute;
                                 display: block;
-                                top: 0px;
+                                top: 0;
                                 right: 1rem;
                                 width: 1rem;
                                 height: 1rem;
+                                line-height: 2.563rem;
                                 color: $espn-accordion-txt-grey;
-                            
-                                &:before {
-                                    content: 'V';
-                                }
-
                             } // i.fa
 
 
@@ -121,7 +123,14 @@ section.league-toc {
                     padding: 1.282rem;
                     border-top: 1px solid $espn-accordion-txt-grey;
                     background-color: $espn-accordion-bg-grey;
+                    text-align: left;
                     color: $espn-accordion-txt-grey;
+                            
+                    p {
+                        margin: 0;
+                        padding: 0;
+                    }
+
                 } //.card-body
             } // .card
 
