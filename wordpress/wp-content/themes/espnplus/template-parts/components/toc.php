@@ -33,7 +33,9 @@ if ($component !== false) {
     <div class="container">
 
         <p>
-        <?php echo get_field('toc_body', $component);?>
+        <?php 
+            echo the_field('toc_body',$component);
+        ?>
         </p> 
     </div> 
     <!-- // container -->
