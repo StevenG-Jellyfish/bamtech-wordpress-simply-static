@@ -75,7 +75,7 @@ section.league-toc {
                     -webkit-transition: max-height 500ms, opacity 300ms;
                 }   
                 .collapse.show {
-                    max-height: 300px;
+                    max-height: 100%;
                     opacity: 1;
                     transition: max-height 0, opacity 300ms;
                     -webkit-transition: max-height 0, opacity 300ms;
