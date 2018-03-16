@@ -4,7 +4,8 @@ wordpress/wordpress.env
 db/db_data/
 wordpress/wp_content/
 wordpress/wp-content/cache/autoptimize/*
-wordpress/wp-content/advance-cache.php
+wordpress/wp-content/advanced-cache.php
+wordpress/wp-content/cache/
 elasticsearch/data/
 logs/nginx/access.log
 logs/nginx/error.log

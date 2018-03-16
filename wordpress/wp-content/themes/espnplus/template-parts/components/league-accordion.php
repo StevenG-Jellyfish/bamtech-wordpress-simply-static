@@ -78,7 +78,7 @@ if ($component !== false) {
                         </div>
                         <!-- // Accordion card -->
                 
-                    <?php $acc_count++; } ?>
+                    <?php $acc_count++;} ?>
 
                     
         
