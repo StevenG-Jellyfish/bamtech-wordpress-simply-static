@@ -2799,7 +2799,7 @@ section.league-toc {
         margin: 2.375rem 0 1em 0; } }
     section.league-toc .container .accordion {
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
       flex-wrap: wrap;
       justify-content: center;
       width: 100%;
