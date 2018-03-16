@@ -6680,7 +6680,7 @@ section.section {
   section.section.even:last-child:after {
     content: '';
     position: relative;
-    display: block;
+    display: none;
     bottom: 0;
     right: 0;
     left: 0;
@@ -6691,7 +6691,7 @@ section.section {
     background: inherit;
     transform: skewY(0deg);
     transform-origin: 100%;
-    z-index: 2; }
+    z-index: -1; }
 
 #page {
   text-align: center; }
