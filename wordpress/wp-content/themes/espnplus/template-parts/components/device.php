@@ -45,8 +45,6 @@ if ($component !== false) {
         <h3 class="devices-header">
             Available on All Your Favorite Supported Devices
         </h3>
-        <i class="far fa-angle-down" style="color:white"></i>
-        <i class="far fa-address-book" style="color:white"></i>
         <div class="devices-container">  
 
         <?php foreach($section_ids as $section_id) {?>
