@@ -6171,17 +6171,14 @@ Stub Name:  global_header.scss
 */
 #masthead {
   width: 100%;
-  z-index: 16777271;
+  z-index: 16777270;
   display: inline-block;
   text-align: center; }
 
-@keyframes slide-down {
-  0% {
-    opacity: 0;
-    transform: translateY(-100%); }
-  100% {
-    opacity: 0.9;
-    transform: translateY(0); } }
+#masthead-stick {
+  width: 100%;
+  z-index: 16777271;
+  text-align: center; }
 
 .sticky {
   position: fixed;
@@ -6190,6 +6187,10 @@ Stub Name:  global_header.scss
 .site-branding {
   display: inline-block;
   flex: 1 100%; }
+  @media (max-width: 580px) {
+    .site-branding {
+      display: none;
+      flex: none; } }
 
 .headerbox {
   display: block;
@@ -6206,41 +6207,52 @@ Stub Name:  global_header.scss
   display: -moz-box;
   display: -ms-flexbox;
   display: -webkit-flex;
-  display: flex; }
+  display: flex;
+  justify-content: space-between; }
   .site-header a img {
     max-height: 20px;
     width: 104px;
     margin-top: 28px;
     margin-left: 75px; }
 
-#site-navigation {
+.main-navigation {
   display: inline-block;
   height: 77px;
   flex: 1 100%; }
+  .main-navigation ul {
+    padding: 0px; }
 
-#primary-menu {
+.menu {
   margin-top: 14px;
   list-style: none;
   margin-bottom: 0;
   margin-right: 55px;
   display: flex;
+  flex-direction: row;
   justify-content: flex-end; }
-
-#primary-menu li {
-  height: 48px; }
+  .menu .menu-item {
+    height: 48px;
+    font-family: PlayoffProCond-MediumItalic, arial; }
+  .menu .menu-item a {
+    margin-top: 10px;
+    display: inline-block;
+    color: black; }
+  .menu .menu-item:nth-child(2) {
+    width: 42px;
+    margin-left: 38px; }
+  @media (max-width: 580px) {
+    .menu {
+      flex-direction: row-reverse;
+      margin-right: 20px;
+      margin-left: 20px; }
+      .menu .menu-item {
+        flex: 1 100%;
+        margin: 0; }
+      .menu .menu-item:nth-child(2) {
+        margin-left: 0; } }
 
 .site-title {
   display: none; }
-
-.menu-item {
-  margin-left: 38px;
-  min-width: 40px;
-  font-family: PlayoffProCond-MediumItalic, arial; }
-
-.menu-item a {
-  margin-top: 10px;
-  display: inline-block;
-  color: black; }
 
 .espn-cta-btn-container {
   position: relative;
@@ -6655,7 +6667,37 @@ section.section {
 .site-branding {
   text-align: left; }
 
-.temp-spotlight {
-  width: 100%;
-  height: 600px;
-  background: #999; }
+/* Text meant only for screen readers. */
+.screen-reader-text {
+  border: 0;
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(50%);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute !important;
+  width: 1px;
+  word-wrap: normal !important;
+  /* Many screen reader and browser combinations announce broken words as they would appear visually. */ }
+
+.screen-reader-text:focus {
+  background-color: #f1f1f1;
+  border-radius: 3px;
+  box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
+  clip: auto !important;
+  clip-path: none;
+  color: #21759b;
+  display: block;
+  font-size: 14px;
+  font-size: 0.875rem;
+  font-weight: bold;
+  height: auto;
+  left: 5px;
+  line-height: normal;
+  padding: 15px 23px 14px;
+  text-decoration: none;
+  top: 5px;
+  width: auto;
+  z-index: 100000;
+  /* Above WP toolbar. */ }
