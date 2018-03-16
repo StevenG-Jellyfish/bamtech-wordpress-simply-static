@@ -49,7 +49,7 @@
                     <p class="site-description"><?php echo $espnplus_description; /* WPCS: xss ok. */ ?></p>
                 <?php endif; ?>
             </div><!-- .site-branding -->		
-            <nav id="site-navigation" class="main-navigation">
+            <nav class="main-navigation">
                 <!-- <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'espnplus' ); ?></button> -->
                 <?php
                 wp_nav_menu( array(

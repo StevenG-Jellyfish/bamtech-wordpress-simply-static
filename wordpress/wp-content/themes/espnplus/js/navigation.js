@@ -5,40 +5,57 @@
  * 
  */
 
-jQuery(document).ready(function() {
+// ------------ Header nav ------------ //
 
-    // Even when the window is resized, run this code.
-    jQuery(window).resize(function() {
+$(document).ready(function() {
+    var jumbotron = $('.jumbotron').height();
+    var jumbotronsize = jumbotron + 77;
+    //
+   // console.log('jumbotron start height ' + jumbotron);
+    //
+    $( window ).resize(function() {
+        jumbotron = $('.jumbotron').height();
+        jumbotronsize = jumbotron + 77;
+      });
 
-        // Variables
-        // var windowHeight = jQuery(window).height();
+    var header = $("header").clone().attr('id', 'masthead-stick').attr('class', 'd-none').insertAfter("#masthead");
+    // var header = $("#masthead-stick");
+    header.find("#primary-menu").attr("id","primary-menu"+"-stick");
+    header.find('li').each(function(){
+        if(this.id){
+          this.id = this.id+"-stick";
+        }
+      });
 
-        // When the document is scrolled ninety percent, toggle the classes
-        var scrollTop = jQuery(window).scrollTop();
-        //  var jumbotronheight = jQuery('.jumbotron').height();
-        // var windowheight = jQuery(window).height();
-        jQuery(document).scroll(function() {
+    $(window).scroll(function() {
+       // console.log('window' + $(window).scrollTop());
+        if ($(window).scrollTop() > 140){
+            header.removeClass("d-none");
+        }
+        //if ($(window).scrollTop() > $(window).height()) {
+            if ($(window).scrollTop() > jumbotronsize) {
+        // if ($(window).scrollTop() > elementOffset {
+            header.addClass("sticky");
+            header.slideDown();
+        } else {
+            // header.removeClass("sticky");
+            header.slideUp(400, function() {
+                header.removeClass("sticky");
+            });
+        }
+    });
+});
 
-            // Store the document scroll function in a variable
-            // var y = jQuery(this).scrollTop();
+// ------------ Header nav ------------ //
 
 
-            // If the document is scrolled 90%
-            // if (y > ninetypercent) {
-            if (scrollTop > 600) {
-                // console.log("ok" + windowheight);
-                // Add the "sticky" class
-                jQuery('header').addClass('sticky');
-            } else {
-                // Else remove it.
-                jQuery('header').removeClass('sticky ');
-            }
-        });
 
-        // Call it on resize.
-    }).resize();
 
-}); // jQuery
+
+
+
+
+
 
 // ( function() {
 // 	var container, button, menu, links, i, len;

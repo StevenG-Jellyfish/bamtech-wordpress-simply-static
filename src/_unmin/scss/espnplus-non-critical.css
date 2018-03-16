@@ -148,7 +148,7 @@ section.league-toc {
         padding: 0; } }
 
 /*--------------------------------------------------------------
-# component_section
+# global_devices
 --------------------------------------------------------------*/
 /*!
 Theme Name: espnplus
@@ -158,9 +158,11 @@ section.devices-bar {
   width: 100%;
   max-width: 100%;
   margin: 0;
-  padding: 0;
+  padding: 2.125rem 0;
   background-color: #F9B300; }
   section.devices-bar .container {
+    display: block;
+    position: relative;
     width: 100%;
     max-width: 100%;
     margin: 0;
@@ -169,22 +171,72 @@ section.devices-bar {
       display: block;
       width: 100%;
       max-width: 100%;
-      margin: 2.125rem 0;
+      margin: 0;
       padding: 0;
+      font-family: PlayoffProCond-Bold, arial;
+      font-size: 2.000rem;
+      font-weight: 700;
+      letter-spacing: 0.010rem;
+      line-height: 2.750rem;
       text-align: center; }
+    @media (max-width: 767px) {
+      section.devices-bar .container .devices-header {
+        font-size: 1.250rem;
+        line-height: 1.375rem; } }
     section.devices-bar .container .devices-container {
       display: flex;
+      flex-wrap: wrap;
       flex-direction: row;
-      justify-content: center; }
+      justify-content: center;
+      margin-top: 2.125rem; }
       section.devices-bar .container .devices-container .device {
         display: inline-block;
         margin: 0 2.25rem;
         text-align: center; }
         section.devices-bar .container .devices-container .device img {
-          height: 3em; }
+          height: 2.625rem; }
         section.devices-bar .container .devices-container .device p.device-copy {
           margin: .75rem 0;
           padding: .5rem 0;
           border-top: 2px solid black;
           font-weight: 700;
           color: black; }
+        @media (max-width: 767px) {
+          section.devices-bar .container .devices-container .device p.device-copy {
+            font-size: 0.750rem;
+            line-height: 1.125rem; } }
+
+/*--------------------------------------------------------------
+# global_toc
+--------------------------------------------------------------*/
+/*!
+Theme Name: espnplus
+Stub Name:  global_toc.scss 
+*/
+section.terms-conditions {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 2.125rem 0;
+  background-color: #252525; }
+  section.terms-conditions .container {
+    display: block;
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0; }
+    section.terms-conditions .container p {
+      width: 80%;
+      margin: 0 auto;
+      font-size: 0.938rem;
+      line-height: 1.250rem;
+      text-align: center;
+      color: #c5c9d1; }
+      section.terms-conditions .container p a {
+        color: #c5c9d1;
+        text-decoration: underline; }
+    @media (max-width: 767px) {
+      section.terms-conditions .container p {
+        font-size: 0.750rem;
+        line-height: 1.125rem; } }
