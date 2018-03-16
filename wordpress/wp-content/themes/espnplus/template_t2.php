@@ -12,7 +12,6 @@ if(get_field('component_text_and_media')){
 
 get_header();
 
-get_template_part('template-parts/components/header');
 get_template_part('template-parts/components/spotlight');
 get_template_part('template-parts/components/section_0');
 get_template_part('template-parts/components/device');
