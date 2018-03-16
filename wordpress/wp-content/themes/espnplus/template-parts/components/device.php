@@ -45,7 +45,6 @@ if ($component !== false) {
         <h3 class="devices-header">
             Available on All Your Favorite Supported Devices
         </h3>
-
         <div class="devices-container">  
 
         <?php foreach($section_ids as $section_id) {?>
