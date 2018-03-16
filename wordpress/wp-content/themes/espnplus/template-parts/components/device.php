@@ -43,43 +43,24 @@ if ($component !== false) {
 <section class="devices-bar">
     <div class="container">
         <h3 class="devices-header">
-            {{ devices-header}}
+            Available on All Your Favorite Supported Devices
         </h3>
         <i class="far fa-angle-down" style="color:white"></i>
         <i class="far fa-address-book" style="color:white"></i>
         <div class="devices-container">  
+
+        <?php foreach($section_ids as $section_id) {?>
             <div class="device">
-                <a href="#{{ device_link }}">
-                    <img class="device-image" src="../_svgs/apple.svg">
+            <?php $link = get_field('device_link', $section_id);?>
+                <a href="<?php echo $link;?>">
+                    <?php $image = get_field('device_image', $section_id);?>
+                    <img class="device-image" src="<?echo $image['sizes']['medium'];?>">
                     <p class="device-copy">
-                        iPhone / iPad
+                        <?php echo get_field('device_text', $section_id);?>
                     </p>
                 </a>
             </div>
-            <div class="device">
-                <a href="#{{ device_link }}">
-                    <img class="device-image" src="../_svgs/apple.svg">
-                    <p class="device-copy">
-                        iPhone / iPad
-                    </p>
-                </a>
-            </div>
-            <div class="device">
-                <a href="#{{ device_link }}">
-                    <img class="device-image" src="../_svgs/amazon-fire-tv.svg">
-                    <p class="device-copy">
-                        Amazon FireTV
-                    </p>
-                </a>
-            </div>
-            <div class="device">
-                <a href="#{{ device_link }}">
-                    <img class="device-image" src="../_svgs/apple.svg">
-                    <p class="device-copy">
-                        iPhone / iPad
-                    </p>
-                </a>
-            </div>
+        <?php } ?>
         </div>    
 
     </div>
