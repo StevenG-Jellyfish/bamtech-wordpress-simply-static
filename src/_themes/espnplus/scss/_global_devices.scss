@@ -2,3 +2,80 @@
 Theme Name: espnplus
 Stub Name:  global_devices.scss 
 */
+
+section.devices-bar {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 2.125rem 0;
+    background-color: $yellow;
+
+    .container {
+        display: block;   
+        position: relative;     
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        padding: 0;
+        
+        .devices-header {
+            display: block;
+            width: 100%;
+            max-width: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: PlayoffProCond-Bold, arial;
+            font-size: 2.000rem;
+            font-weight: 700;
+            letter-spacing: 0.010rem;
+            line-height: 2.750rem;
+            text-align: center;
+            
+        } // .devices-header
+
+        @media (max-width: 767px) {
+            .devices-header {
+                font-size: 1.250rem;
+                line-height: 1.375rem;
+            } // .devices-header
+        } // max-width: 767px
+
+        .devices-container {
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: row;
+            justify-content: center;
+            margin-top: 2.125rem;
+
+            .device {
+                display: inline-block;
+                margin: 0 2.25rem;
+                text-align: center;
+                
+                img {
+                    height: 2.625rem;                   
+
+                } // img
+
+                p.device-copy {
+                    margin: .75rem 0;
+                    padding: .5rem 0;
+                    border-top: 2px solid black;
+                    font-weight: 700;
+                    color: black;
+                } // p.device-copy 
+
+                @media (max-width: 767px) {
+                    p.device-copy {
+                        font-size: 0.750rem;
+                        line-height: 1.125rem;
+                    } // .devices-header
+                } // max-width: 767px
+
+            } // .device
+
+        } // .devices-container    
+
+    } // .container
+
+} // section.devices-bar

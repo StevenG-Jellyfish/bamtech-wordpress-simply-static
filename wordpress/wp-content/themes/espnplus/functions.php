@@ -122,6 +122,12 @@ add_action( 'widgets_init', 'espnplus_widgets_init' );
 function espnplus_scripts() {
 	wp_enqueue_style( 'espnplus-style', get_stylesheet_uri() );
 
+	wp_enqueue_script( 'espnplus-jquery', get_template_directory_uri() . '/js/jquery-3.3.1.min.js', array(), '20151215', true );
+
+	wp_enqueue_script( 'espnplus-popper', get_template_directory_uri() . '/js/popper.min.js', array(), '20151215', true );
+
+	wp_enqueue_script( 'espnplus-bootstrap', get_template_directory_uri() . '/js/bootstrap.min.js', array(), '20151215', true );
+
 	wp_enqueue_script( 'espnplus-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20151215', true );
 
 	wp_enqueue_script( 'espnplus-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20151215', true );
@@ -162,8 +168,32 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 /**
 * ADD Main menu for CPT UI 
 */
-add_menu_page('Headers', 'Components', 'manage_options', 'components', 'url_replace', 'dashicons-layout', 3);
 function url_replace(){
-	wp_redirect( 'edit.php?post_type=header' );
+	wp_redirect('edit.php?post_type=header');
 }
+
+function my_custom_menu_page(){
+   add_menu_page('Headers', 'Components', 'manage_options', 'components', 'url_replace', 'dashicons-layout', 3);
+}
+add_action('admin_menu', 'my_custom_menu_page');
+
+/**
+* custom image sizes
+**/
+// Add other useful image sizes for use through Add Media modal
+add_image_size( 'bamtech-small-width', 420 );
+add_image_size( 'bamtech-medium-width', 768);
+add_image_size( 'bamtech-large-width', 990 );
+
+// Register the three useful image sizes for use in Add Media modal
+add_filter( 'image_size_names_choose', 'wpshout_custom_sizes' );
+function wpshout_custom_sizes( $sizes ) {
+    return array_merge( $sizes, array(
+        'bamtech-small-width' => __( 'Bamtech Small Width' ),
+        'bamtech-medium-width' => __( 'Bamtech Medium Width' ),
+        'bamtech-large-width' => __( 'Bamtech Large Width' ),
+    ) );
+}
+
+
 
