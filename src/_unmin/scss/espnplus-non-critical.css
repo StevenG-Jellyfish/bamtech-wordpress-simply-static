@@ -2961,6 +2961,7 @@ section.terms-conditions {
     max-width: 100%;
     margin: 0;
     padding: 0; }
+    section.terms-conditions .container div,
     section.terms-conditions .container p {
       width: 80%;
       margin: 0 auto;
@@ -2968,6 +2969,7 @@ section.terms-conditions {
       line-height: 1.250rem;
       text-align: center;
       color: #c5c9d1; }
+      section.terms-conditions .container div a,
       section.terms-conditions .container p a {
         color: #c5c9d1;
         text-decoration: underline; }
