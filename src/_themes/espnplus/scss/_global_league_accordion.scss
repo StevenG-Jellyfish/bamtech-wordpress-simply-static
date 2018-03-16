@@ -37,6 +37,7 @@ section.league-toc {
 
         .accordion {
             display: flex;
+            flex: 1;
             flex-direction: column;
             flex-wrap: wrap;
             justify-content: center;
@@ -46,6 +47,7 @@ section.league-toc {
 
             .card {
                 display: inline-block;
+                flex: 1;
                 width: 45%;
                 max-width: 45%;
                 margin: 0 0 1.282rem 0;
