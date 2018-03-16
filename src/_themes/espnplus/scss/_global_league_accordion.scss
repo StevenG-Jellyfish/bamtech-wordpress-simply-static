@@ -37,17 +37,16 @@ section.league-toc {
 
         .accordion {
             display: flex;
-            flex: 1;
-            flex-direction: column;
+            flex-direction: row;
             flex-wrap: wrap;
             justify-content: center;
+            align-items: flex-start;
             width: 100%;
             margin: 0;
             padding: 0;
 
             .card {
                 display: inline-block;
-                flex: 1;
                 width: 45%;
                 max-width: 45%;
                 margin: 0 0 1.282rem 0;
@@ -103,11 +102,6 @@ section.league-toc {
                                 width: 1rem;
                                 height: 1rem;
                                 color: $espn-accordion-txt-grey;
-                            
-                                &:before {
-                                    content: 'V';
-                                }
-
                             } // i.fa
 
 

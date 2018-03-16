@@ -238,7 +238,7 @@ section.section {
   &.even:first-child:before {
     content: '';
     position: relative;
-    display: block;
+    display: none;
     top: 0;
     right: 0;
     left: 0;
@@ -249,7 +249,7 @@ section.section {
     background: inherit;
     transform: skewY(0deg);
     transform-origin: 100%;
-    z-index: 2;
+    z-index: -1;
   } // &.even:before >> top angled BG
   
   &.even:after {
