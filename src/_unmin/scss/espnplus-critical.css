@@ -6449,6 +6449,78 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
 # component_section
 --------------------------------------------------------------*/
 /*!
+Theme Name: espnplus
+Stub Name:  global_footer_link.scss 
+*/
+#page {
+  text-align: center; }
+
+.espn-lang {
+  border: 1px solid #ccc;
+  width: 30%; }
+  .espn-lang .logo img {
+    width: 74px;
+    height: 38px;
+    margin-bottom: 60px; }
+  .espn-lang .select-wrap {
+    border-radius: 36px;
+    display: inline-block;
+    overflow: hidden;
+    background: black;
+    border: 1px solid #cccccc; }
+    .espn-lang .select-wrap input, .espn-lang .select-wrap button, .espn-lang .select-wrap select, .espn-lang .select-wrap optgroup, .espn-lang .select-wrap textarea {
+      background: black;
+      color: white;
+      outline: none;
+      font-family: arial;
+      font-size: 0.6875rem;
+      line-height: 2.9375rem; }
+    .espn-lang .select-wrap .lang-select {
+      border-radius: 36px;
+      width: 140px;
+      height: 40px;
+      border: 0px;
+      outline: none;
+      font-family: arial;
+      font-size: 0.6875rem;
+      line-height: 2.9375rem; }
+      .espn-lang .select-wrap .lang-select option {
+        background: black;
+        color: white;
+        outline: none;
+        border: none; }
+
+.espn-links {
+  border: 1px solid #ccc;
+  width: 70%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row; }
+  .espn-links .link {
+    width: 33.33%;
+    font-family: arial;
+    font-size: 0.8125rem;
+    line-height: 2.9375rem;
+    color: #787878;
+    text-align: left;
+    padding: 0.25rem; }
+    .espn-links .link a:link {
+      font-family: arial;
+      font-size: 0.8125rem;
+      line-height: 2.9375rem;
+      color: #787878;
+      font-weight: normal; }
+
+.footer-links {
+  border: 1px solid #ccc; }
+  .footer-links .link-container {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap; }
+
+/*!
 Theme Name          :   espnplus
 Stub Name           :   component_section.scss 
 Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/feature.html
