@@ -42,7 +42,7 @@ if ($component !== false) {
     <div class="link-container">
         <div class="espn-lang">
             <div class="logo">
-                <img src="../svgs/E+_logo.svg" alt="ESPN plus logo">
+                <img src="<?php echo get_template_directory_uri(); ?>/imgs/E+_logo.svg" alt="ESPN plus logo">
             </div>
             <div class="select-wrap">
                 <select name="lang-select">
