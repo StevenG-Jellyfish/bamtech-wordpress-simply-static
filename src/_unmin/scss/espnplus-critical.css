@@ -6113,14 +6113,14 @@ body {
   font-weight: 16px;
   line-height: 1.500rem; }
 
-Wrapper for CTA with corner knockout .espn-cta-container {
+.espn-cta-container {
   position: relative;
   display: inline-block;
   overflow: hidden;
   margin: 0 auto;
   padding: 0 0 0 0;
   text-align: center; }
-  Wrapper for CTA with corner knockout .espn-cta-container .parallelogram {
+  .espn-cta-container .parallelogram {
     position: relative;
     display: inline-block;
     overflow: hidden;
@@ -6132,10 +6132,10 @@ Wrapper for CTA with corner knockout .espn-cta-container {
     -webkit-transform: skew(-45deg);
     -ms-transform: skew(-45deg);
     transform: skew(-45deg); }
-    Wrapper for CTA with corner knockout .espn-cta-container .parallelogram:hover, Wrapper for CTA with corner knockout .espn-cta-container .parallelogram:active {
+    .espn-cta-container .parallelogram:hover, .espn-cta-container .parallelogram:active {
       background-color: white;
       color: black; }
-  Wrapper for CTA with corner knockout .espn-cta-container .btn.btn-primary {
+  .espn-cta-container .btn.btn-primary {
     position: absolute;
     display: inline-block;
     top: 0;
