@@ -41,8 +41,9 @@ if ($component !== false) {
   <section class="footer-links">
     <div class="link-container">
         <div class="espn-lang">
+        <!-- <i class="fa fa-angle-down rotate-icon"></i> -->
             <div class="logo">
-                <img src="../svgs/E+_logo.svg" alt="ESPN plus logo">
+                <img src="<?php echo get_template_directory_uri(); ?>/imgs/E+_logo.svg" alt="ESPN plus logo">
             </div>
             <div class="select-wrap">
                 <select name="lang-select">
