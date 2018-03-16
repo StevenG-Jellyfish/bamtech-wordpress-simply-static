@@ -2,3 +2,85 @@
 Theme Name: espnplus
 Stub Name:  global_footer_link.scss 
 */
+#page {
+   text-align:center;
+}
+.espn-lang {
+    border:1px solid #ccc;
+    width:30%;
+    .logo img {
+        width:74px;
+        height:38px;
+        margin-bottom:60px;
+    }
+    .select-wrap {
+        border-radius:36px;
+        display:inline-block;
+        overflow:hidden;
+        background:black;
+        border:1px solid #cccccc;
+        input, button, select, optgroup, textarea {
+            background:black;
+            color:white;
+            outline:none;
+            font-family:arial;
+            font-size:0.6875rem;
+            line-height:2.9375rem;
+        }
+        .lang-select {
+            border-radius:36px;
+            width:140px;
+            height:40px;
+            border:0px;
+            outline:none;
+            font-family:arial;
+            font-size:0.6875rem;
+            line-height:2.9375rem;
+            // background:black;
+            // color:white;
+            option {
+                background:black;
+                color:white;
+                outline:none;
+                border:none;
+            }
+        }
+    }
+}
+.espn-links {
+    border:1px solid #ccc;
+    width:70%;
+    display:flex;
+    flex-wrap: wrap;
+    flex-direction:row;
+    .link {
+        width: 33.33%;
+        font-family:arial;
+        font-size:0.8125rem;
+        line-height:2.9375rem;
+        color:#787878;
+        text-align:left;
+        padding:0.25rem;
+
+        a:link {
+            font-family:arial;
+            font-size:0.8125rem;
+            line-height:2.9375rem;
+            color:#787878;
+            font-weight:normal;
+        }
+    }
+}
+.footer-links {
+    .link-container {
+        width:100%;
+        margin:0;
+        padding:0;
+        display:flex;
+        flex-wrap: wrap;
+    }
+    border:1px solid #ccc;
+    a:link {
+
+    }
+}
