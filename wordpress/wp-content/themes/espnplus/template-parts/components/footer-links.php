@@ -39,7 +39,7 @@ if ($component !== false) {
     ?>
   
   <section class="footer-links">
-    <div class="link-container">
+    <div class="container">
         <div class="espn-lang">
         <!-- <i class="fa fa-angle-down rotate-icon"></i> -->
             <div class="logo">
