@@ -63,7 +63,7 @@ if ($component !== false) {
                             <div class="card-header" role="tab" id="heading<?php echo $pos_class[$acc_count]; ?>">
                                 <a data-toggle="collapse" data-parent="#league-toc-accordion" href="#collapse<?php echo $pos_class[$acc_count]; ?>" aria-expanded="false" aria-controls="collapse<?php echo $pos_class[$acc_count]; ?>">
                                     <h5 class="mb-0">
-                                        <?php echo get_field('league_accordion_text', $section_id);?> <i class="fa fa-angle-down rotate-icon"></i>
+                                        <?php echo get_field('league_accordion_text', $section_id);?> <i class="fa fa-chevron-down"></i></i>
                                     </h5>
                                 </a>
                             </div>
