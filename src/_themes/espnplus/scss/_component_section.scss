@@ -35,6 +35,11 @@ section.section {
       width: 40%;
       margin: 0 5%;
       padding: 0;
+      text-align: left;
+
+      p {
+        text-align: left;
+      }
 
       .featurette-heading {
         font-family: PlayoffProCond-Bold, arial;
@@ -42,6 +47,7 @@ section.section {
         font-weight: 700;
         letter-spacing: -0.010rem;
         line-height: 2.750rem;
+        text-align: left;
       } // featurette-heading
 
       @media (max-width: 767px) { // mobile
@@ -291,5 +297,17 @@ section.section {
     transform-origin: 100%;
     z-index: -1;
   } //&.even:after >> bottom angled BG
+  &.even.first-section {
+    padding: 1.750rem 0 0 0;
+  } // &.first-section
+  &.even.first-section:before {
+    display: none;
+  } // &.first-section
+  &.even.last-section {
+    padding: 0 0 1.750rem 0;
+  } // &.last-section 
+  &.even.last-section:after {
+    display: none;
+  } // &.last-section 
 
 } // section.section
