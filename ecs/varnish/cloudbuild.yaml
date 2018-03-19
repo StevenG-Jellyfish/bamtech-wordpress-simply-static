@@ -1,0 +1,19 @@
+#Build Steps
+steps:
+    - name: 'gcr.io/cloud-builders/docker'
+      args: [
+        'build',
+        '-t', 'gcr.io/$PROJECT_ID/varnish:latest',
+        '-t', 'gcr.io/$PROJECT_ID/varnish:$TAG_NAME',
+        '.']
+      waitFor: ['-']
+      dir: '.'
+      id: 'varnish'
+
+# Images for GCB to check for:
+images:
+    # Tagged with LATEST
+    - 'gcr.io/$PROJECT_ID/varnish'
+
+    # Tagged with Git Tag
+    - 'gcr.io/$PROJECT_ID/varnish:$TAG_NAME'
