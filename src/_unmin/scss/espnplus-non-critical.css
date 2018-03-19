@@ -2817,7 +2817,6 @@ section.league-toc {
           width: 100%;
           max-width: 100%;
           margin: 0 0 1.282rem 0;
-          margin-top: auto;
           padding: 0;
           background-color: transparent;
           border: 0px; }
@@ -2875,14 +2874,6 @@ section.league-toc {
             section.league-toc .container .accordion-container .accordion .card .card-body p {
               margin: 0;
               padding: 0; }
-        @media (max-width: 767px) {
-          section.league-toc .container .accordion-container .accordion .card {
-            display: block;
-            width: 100%;
-            max-width: 100%;
-            margin: .5rem 0;
-            padding: 0;
-            text-align: center; } }
         section.league-toc .container .accordion-container .accordion:nth-child(odd) {
           margin: 0 2.5% 1.282rem 0; }
         section.league-toc .container .accordion-container .accordion:nth-child(even) {
@@ -2893,11 +2884,21 @@ section.league-toc {
             padding: 0; } }
       @media (max-width: 767px) {
         section.league-toc .container .accordion-container .accordion {
-          display: flex;
-          flex-direction: row;
-          flex-wrap: wrap;
-          margin: .5rem 0;
-          padding: 0; } }
+          display: block;
+          width: 100%;
+          max-width: 100%;
+          margin: 0 0 .5rem 0;
+          padding: 0;
+          text-align: center; }
+          section.league-toc .container .accordion-container .accordion:last-child {
+            margin: 0 0 0 0; } }
+    @media (max-width: 767px) {
+      section.league-toc .container .accordion-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin: .5rem 0;
+        padding: 0; } }
 
 /*--------------------------------------------------------------
 # global_devices
