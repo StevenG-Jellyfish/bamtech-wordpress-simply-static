@@ -2,7 +2,7 @@
 /**
 * Toc component
 *
-* @package lincolntech
+* @package Bamtech ESPN+
 */
 
 $page_id = get_query_var('page_override_id');
@@ -26,21 +26,14 @@ if ($component !== false) {
      *  @ toc_body
      */ 
     ?>
-  
-<!--  Cut just this for the component -->
 
-<section class="terms-conditions">
-    <div class="container">
-
-        <p>
-        <?php 
-            echo the_field('toc_body',$component);
-        ?>
-        </p> 
-    </div> 
-    <!-- // container -->
-</section>
-<!-- // section -->
-
+    <section class="terms-conditions">
+       
+        <div class="container">
+            <p><?php the_field('toc_body',$component,false);?></p>
+        </div> 
+       
+    </section>
+    <!-- // section -->
 <?php 
 }
