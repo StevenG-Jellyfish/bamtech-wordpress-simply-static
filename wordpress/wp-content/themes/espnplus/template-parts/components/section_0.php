@@ -40,9 +40,15 @@ if ($component !== false) {
     $count = 0;
     foreach($section_ids as $section_id) {
     $odd_even = ++$count % 2 ? "even" : "odd";
+
+    
+    if ($section_id === end($section_ids))
+        echo $class = " last-section";
+
     ?>
         <!-- SECTION -->
-        <section class="section <?echo $odd_even;?>">
+        <section class="section <?echo $odd_even; if ($section_id === reset($section_ids)) {echo " first-section";}if ($section_id === end($section_ids))
+        {echo " last-section";}?>">
             <div class="container">
                 <div class="row flexbox">
                     
