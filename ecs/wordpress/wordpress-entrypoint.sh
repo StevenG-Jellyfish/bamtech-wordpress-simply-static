@@ -145,10 +145,10 @@ EOPHP
     wp core version --extra --allow-root
 
 rm -rf /var/www/html/wp-content/uploads
-ln -s /media/uploads /var/www/html/wp-content/cache
+ln -s /media/uploads /var/www/html/wp-content/
 
 rm -rf /var/www/html/wp-content/cache
-ln -s /media/uploads /var/www/html/wp-content/uploads
+ln -s /media/uploads /var/www/html/wp-content/
 
 fi
 
