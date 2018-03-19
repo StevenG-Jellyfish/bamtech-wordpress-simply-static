@@ -38,10 +38,10 @@ if ($component !== false) {
      */ 
     ?>
   
-  <section class="footer-links">
+<section class="footer-links">
     <div class="container">
         <div class="espn-lang">
-        <!-- <i class="fa fa-angle-down rotate-icon"></i> -->
+    <!-- <i class="fa fa-angle-down rotate-icon"></i> -->
             <div class="logo">
                 <img src="<?php echo get_template_directory_uri(); ?>/imgs/E+_logo.svg" alt="ESPN plus logo">
             </div>
@@ -51,25 +51,19 @@ if ($component !== false) {
                         <option value="http://bamtech-build.jellyfish.local/es">Spanish</option>
                 </select>
             </div>
+    </div>
+    <div class="espn-links">
+        <?php 
+        foreach($section_ids as $section_id) {
             
-            <div class="espn-links">
-
-                <?php 
-                foreach($section_ids as $section_id) {
-                  
-                  $link = get_field('footer_link_URL', $section_id);
-                ?>
-                <div class="link">
-                    <a href="<?php echo $link;?>"><?php echo get_field('footer_link_text', $section_id);?></a>
-                </div>
-
-                <?php }?>
-
-            </div>
-
-        </div> 
-    </section>
+            $link = get_field('footer_link_URL', $section_id);
+        ?>
+        <div class="link">
+            <a href="<?php echo $link;?>"><?php echo get_field('footer_link_text', $section_id);?></a>
+        </div>
+        <?php }?>
+    </div> 
+</section>
 <!-- // section --> 
-
 <?php 
 }
