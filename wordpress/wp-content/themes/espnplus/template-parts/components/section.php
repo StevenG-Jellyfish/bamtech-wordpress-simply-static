@@ -43,7 +43,7 @@ if ($component !== false) {
     ?>
         <!-- SECTION -->
         <section class="section <?echo $odd_even; if ($section_id === reset($section_ids)) {echo " first-section";}if ($section_id === end($section_ids))
-        {echo " last-section";}?>">?>">
+        {echo " last-section";}?>">
             <div class="container">
                 <div class="row flexbox">
                     
