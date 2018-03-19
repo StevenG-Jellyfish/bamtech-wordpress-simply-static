@@ -42,8 +42,7 @@
 		?>
 	</div>
 
-	<footer class="entry-footer">
-		
-	</footer>
-
+	<footer class="entry-footer"></footer>
+	
 </article>
+
