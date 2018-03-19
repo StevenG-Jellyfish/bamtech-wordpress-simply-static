@@ -2798,89 +2798,106 @@ section.league-toc {
     @media (max-width: 767px) {
       section.league-toc .container .copyright {
         margin: 2.375rem 0 1em 0; } }
-    section.league-toc .container .accordion {
+    section.league-toc .container .accordion-container {
       display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
+      flex-flow: row wrap;
       width: 100%;
       margin: 0;
-      padding: 0; }
-      section.league-toc .container .accordion .card {
-        display: inline-block;
+      padding: 0;
+      vertical-align: top; }
+      section.league-toc .container .accordion-container .accordion {
+        position: inline-block;
         width: 45%;
         max-width: 45%;
-        margin: 0 0 1.282rem 0;
+        margin: 0;
         padding: 0;
-        background-color: transparent;
-        border: 0px; }
-        section.league-toc .container .accordion .card:nth-child(odd) {
-          margin: 0 5% 1.282rem 0; }
-        section.league-toc .container .accordion .card:nth-child(even) {
-          margin: 0 0 1.282rem 5%; }
-        @media (max-width: 767px) {
-          section.league-toc .container .accordion .card:nth-child(even), section.league-toc .container .accordion .card:nth-child(odd) {
-            margin: .5rem 0;
-            padding: 0; } }
-        section.league-toc .container .accordion .card .collapse {
-          max-height: 0px;
-          opacity: 0;
-          transition: max-height 500ms, opacity 300ms;
-          -webkit-transition: max-height 500ms, opacity 300ms; }
-        section.league-toc .container .accordion .card .collapse.show {
-          max-height: 100%;
-          opacity: 1;
-          transition: max-height 0, opacity 300ms;
-          -webkit-transition: max-height 0, opacity 300ms; }
-        section.league-toc .container .accordion .card .card-header {
-          background-color: #191919; }
-          section.league-toc .container .accordion .card .card-header a {
-            text-decoration: none; }
-            section.league-toc .container .accordion .card .card-header a h5 {
-              position: relative;
-              margin: 0 0 0 0;
-              padding: 0 1.282rem;
-              font-weight: 400;
-              line-height: 2.563rem;
-              text-align: left;
-              color: #636363; }
-              section.league-toc .container .accordion .card .card-header a h5 p {
-                margin: 0;
-                padding: 0; }
-              section.league-toc .container .accordion .card .card-header a h5 i.fa {
-                position: absolute;
-                display: block;
-                top: 0;
-                right: 1rem;
-                width: 1rem;
-                height: 1rem;
-                line-height: 2.563rem;
-                color: #636363; }
-        section.league-toc .container .accordion .card .card-body {
-          display: inline-block;
-          margin: 0 0 1.282rem 0;
-          padding: 1.282rem;
-          border-top: 1px solid #636363;
-          background-color: #191919;
-          text-align: left;
-          color: #636363; }
-          section.league-toc .container .accordion .card .card-body p {
-            margin: 0;
-            padding: 0; }
-      @media (max-width: 767px) {
-        section.league-toc .container .accordion .card {
-          display: block;
+        vertical-align: top; }
+        section.league-toc .container .accordion-container .accordion .card {
+          position: inline-block;
           width: 100%;
           max-width: 100%;
-          margin: .5rem 0;
+          margin: 0 0 1.282rem 0;
+          margin-top: auto;
           padding: 0;
-          text-align: center; } }
-    @media (max-width: 767px) {
-      section.league-toc .container .accordion {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        margin: .5rem 0;
-        padding: 0; } }
+          background-color: transparent;
+          border: 0px; }
+          section.league-toc .container .accordion-container .accordion .card .collapse {
+            height: 0px;
+            max-height: 0px;
+            opacity: 0;
+            transition: max-height 500ms, opacity 300ms;
+            -webkit-transition: max-height 500ms, opacity 300ms; }
+          section.league-toc .container .accordion-container .accordion .card .collapse.show {
+            height: 100%;
+            max-height: 100%;
+            opacity: 1;
+            transition: max-height 0, opacity 300ms;
+            -webkit-transition: max-height 0, opacity 300ms; }
+          section.league-toc .container .accordion-container .accordion .card .card-header {
+            margin: 0;
+            padding: 0;
+            background-color: #191919; }
+            section.league-toc .container .accordion-container .accordion .card .card-header a {
+              margin: 0;
+              padding: 0;
+              text-decoration: none; }
+              section.league-toc .container .accordion-container .accordion .card .card-header a h5 {
+                position: relative;
+                margin: 0 0 0 0;
+                padding: 0 1.282rem;
+                font-size: 0.938rem;
+                font-weight: 400;
+                line-height: 2.563rem;
+                text-align: left;
+                color: #636363; }
+                section.league-toc .container .accordion-container .accordion .card .card-header a h5 p {
+                  margin: 0;
+                  padding: 0; }
+                section.league-toc .container .accordion-container .accordion .card .card-header a h5 i.fa {
+                  position: absolute;
+                  display: block;
+                  top: 0;
+                  right: 1rem;
+                  width: 1rem;
+                  height: 1rem;
+                  margin: 0;
+                  padding: 0;
+                  line-height: 2.563rem;
+                  color: #636363; }
+          section.league-toc .container .accordion-container .accordion .card .card-body {
+            display: block;
+            margin: 0 0 1.282rem 0;
+            padding: 1.282rem;
+            border-top: 1px solid #636363;
+            background-color: #191919;
+            text-align: left;
+            color: #636363; }
+            section.league-toc .container .accordion-container .accordion .card .card-body p {
+              margin: 0;
+              padding: 0; }
+        @media (max-width: 767px) {
+          section.league-toc .container .accordion-container .accordion .card {
+            display: block;
+            width: 100%;
+            max-width: 100%;
+            margin: .5rem 0;
+            padding: 0;
+            text-align: center; } }
+        section.league-toc .container .accordion-container .accordion:nth-child(odd) {
+          margin: 0 2.5% 1.282rem 0; }
+        section.league-toc .container .accordion-container .accordion:nth-child(even) {
+          margin: 0 0 1.282rem 2.5%; }
+        @media (max-width: 767px) {
+          section.league-toc .container .accordion-container .accordion:nth-child(even), section.league-toc .container .accordion-container .accordion:nth-child(odd) {
+            margin: .5rem 0;
+            padding: 0; } }
+      @media (max-width: 767px) {
+        section.league-toc .container .accordion-container .accordion {
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          margin: .5rem 0;
+          padding: 0; } }
 
 /*--------------------------------------------------------------
 # global_devices

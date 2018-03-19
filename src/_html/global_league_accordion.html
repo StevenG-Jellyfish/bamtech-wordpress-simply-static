@@ -51,15 +51,16 @@ Component Souce: http://jf-style-guide.sgel6.dev.jellyfish.local/hero.html
         <!--*** replace this script with php -->
         <div class="copyright">&copy;<script>var d = new Date(); document.write( d.getFullYear() ); </script> ESPN </div>
 
+        <div class="accordion-container">
             <!--Accordion wrapper-->
-            <div class="accordion" id="league-toc-accordion" role="tablist" aria-multiselectable="true">
+            <div class="accordion" id="league-toc-accordion1" role="tablist" aria-multiselectable="true">
 
                 <!-- Accordion card -->
                 <div class="card">
             
                     <!-- Card header -->
                     <div class="card-header" role="tab" id="headingOne">
-                        <a data-toggle="collapse" data-parent="#league-toc-accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                        <a data-toggle="collapse" data-parent="#league-toc-accordion1" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                             <h5 class="mb-0">
                                 Collapsible Group Item #1 <i class="fa fa-angle-down rotate-icon"></i>
                             </h5>
@@ -67,7 +68,7 @@ Component Souce: http://jf-style-guide.sgel6.dev.jellyfish.local/hero.html
                     </div>
                     <!-- // Card header -->
                     <!-- Card body -->
-                    <div id="collapseOne" class="collapse" role="tabpanel" aria-labelledby="headingOne" data-parent="#league-toc-accordion">
+                    <div id="collapseOne" class="collapse" role="tabpanel" aria-labelledby="headingOne" data-parent="#league-toc-accordion1">
                         <div class="card-body">
                             Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute,
                             non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch
@@ -87,7 +88,7 @@ Component Souce: http://jf-style-guide.sgel6.dev.jellyfish.local/hero.html
             
                     <!-- Card header -->
                     <div class="card-header" role="tab" id="headingTwo">
-                        <a class="collapsed" data-toggle="collapse" data-parent="#league-toc-accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        <a class="collapsed" data-toggle="collapse" data-parent="#league-toc-accordion1" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                             <h5 class="mb-0">
                                 Collapsible Group Item #2 <i class="fa fa-angle-down rotate-icon"></i>
                             </h5>
@@ -95,7 +96,7 @@ Component Souce: http://jf-style-guide.sgel6.dev.jellyfish.local/hero.html
                     </div>
                     <!-- // Card header -->            
                     <!-- Card body -->
-                    <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo" data-parent="#league-toc-accordion">
+                    <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo" data-parent="#league-toc-accordion1">
                         <div class="card-body">
                             Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute,
                             non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch
@@ -109,13 +110,15 @@ Component Souce: http://jf-style-guide.sgel6.dev.jellyfish.local/hero.html
                     <!-- // Card body -->
                 </div>
                 <!-- // Accordion card -->
+            </div>
+            <div class="accordion" id="league-toc-accordion2" role="tablist" aria-multiselectable="true">
 
                 <!-- Accordion card -->
                 <div class="card">
             
                     <!-- Card header -->
                     <div class="card-header" role="tab" id="heading3">
-                        <a data-toggle="collapse" data-parent="#league-toc-accordion" href="#collapse3" aria-expanded="false" aria-controls="collapseOne">
+                        <a data-toggle="collapse" data-parent="#league-toc-accordion2" href="#collapse3" aria-expanded="false" aria-controls="collapseOne">
                             <h5 class="mb-0">
                                 Collapsible Group Item #3 <i class="fa fa-angle-down rotate-icon"></i>
                             </h5>
@@ -123,7 +126,7 @@ Component Souce: http://jf-style-guide.sgel6.dev.jellyfish.local/hero.html
                     </div>
                     <!-- // Card header -->
                     <!-- Card body -->
-                    <div id="collapse3" class="collapse" role="tabpanel" aria-labelledby="heading3" data-parent="#league-toc-accordion">
+                    <div id="collapse3" class="collapse" role="tabpanel" aria-labelledby="heading3" data-parent="#league-toc-accordion2">
                         <div class="card-body">
                             Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute,
                             non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch
@@ -143,7 +146,7 @@ Component Souce: http://jf-style-guide.sgel6.dev.jellyfish.local/hero.html
             
                     <!-- Card header -->
                     <div class="card-header" role="tab" id="heading4">
-                        <a class="collapsed" data-toggle="collapse" data-parent="#league-toc-accordion" href="#collapse4" aria-expanded="false" aria-controls="collapse4">
+                        <a class="collapsed" data-toggle="collapse" data-parent="#league-toc-accordion2" href="#collapse4" aria-expanded="false" aria-controls="collapse4">
                             <h5 class="mb-0">
                                 Collapsible Group Item #4 <i class="fa fa-angle-down rotate-icon"></i>
                             </h5>
@@ -151,7 +154,7 @@ Component Souce: http://jf-style-guide.sgel6.dev.jellyfish.local/hero.html
                     </div>
                     <!-- // Card header -->            
                     <!-- Card body -->
-                    <div id="collapse4" class="collapse" role="tabpanel" aria-labelledby="heading4" data-parent="#league-toc-accordion">
+                    <div id="collapse4" class="collapse" role="tabpanel" aria-labelledby="heading4" data-parent="#league-toc-accordion2">
                         <div class="card-body">
                             Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute,
                             non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch
@@ -168,6 +171,8 @@ Component Souce: http://jf-style-guide.sgel6.dev.jellyfish.local/hero.html
 
             </div>
             <!--// Accordion wrapper-->
+        </div> 
+        <!-- // accordion-container -->
     </div>    
 </section>
 <!--  //End Cut -->
