@@ -48,10 +48,11 @@ if ($component !== false) {
                 </div>
 
                 <div class="select-wrap">
-                    <select name="lang-select">
-                        <option value="en">English</option>
-                        <option value="es">Spanish</option>
-                    </select>
+                    <?php 
+                    if ( function_exists('icl_object_id') ) {
+                        do_action('wpml_add_language_selector');
+                    }
+                    ?>
                 </div>
 
             </div>
