@@ -114,8 +114,9 @@ pipeline {
                     sh "ecs deploy ${UATCLUSTER} ${UAT}-${WORDPRESS} -i ${WORDPRESS} ${GCR}${REPO}-ecs-${WORDPRESS}:$TAG " 
                     // User Input to complete.
                     }
-                //slackSend channel: '#deploy', color: 'good', message: "Please access > (<${env.BUILD_URL}|Open>) and accept or decline build to continue..."
-                //input message: "Image ${WORDPRESS}:$TAG has been released to stage, please test and confirm..."
+                    //slackSend channel: '#deploy', color: 'good', message: "Please access > (<${env.BUILD_URL}|Open>) and accept or decline build to continue..."
+                   //input message: "Image ${WORDPRESS}:$TAG has been released to stage, please test and confirm..."
+                }            
             }
         }
     }
