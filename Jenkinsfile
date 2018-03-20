@@ -57,8 +57,9 @@ pipeline {
                 }
             }
         }
-        post {
-            failure {
+    }
+    post {
+        failure {
 
 /* COMMENTED OUT AS NO DEPLOY IS USED HERE
                 slackSend channel: '#deploy', color: 'danger', message: "Image ${NAME}:$TAG FAILED to deploy, Visit > (<${env.RUN_DISPLAY_URL}|Open>) for details"
