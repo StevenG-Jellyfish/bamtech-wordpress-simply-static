@@ -74,6 +74,11 @@ if [[ "$1" == apache2* ]] || [ "$1" == php-fpm ]; then
 
     $mysql->close();
 EOPHP
+
+#disabling problematic plugin during deployment and will re-enable at the end
+   wp plugin deactivate --allow-root sitepress-multilingual-cms 
+   
+   
     ln -s /mnt/uploads /var/www/html/wp-content/uploads
     # Set the default language to english
     if ! $(wp core is-installed --allow-root); then
@@ -151,5 +156,9 @@ rm -rf /var/www/html/wp-content/cache
 ln -s /media/cache /var/www/html/wp-content/
 
 fi
+
+
+wp plugin activate --allow-root sitepress-multilingual-cms
+wp user update admin --user_pass=${WORDPRESS_ADMIN_PASSWORD} --allow-root
 
 exec "$@"
