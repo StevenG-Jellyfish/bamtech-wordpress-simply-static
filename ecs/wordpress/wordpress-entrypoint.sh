@@ -159,6 +159,6 @@ fi
 
 
 wp plugin activate --allow-root sitepress-multilingual-cms
-wp user update admin --user_pass=${WORDPRESS_ADMIN_PASSWORD} --allow-root
+
 
 exec "$@"
