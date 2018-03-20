@@ -11,8 +11,11 @@ pipeline {
         GCR = "gcr.io/jellyfish-development-167809/"
         NAME = "bamtech"
         WORDPRESS = "wordpress"
-        NGINX = "nginx"
-        VARNISH = "varnish"
+        
+        /* Images that do not usually get built..
+         NGINX = "nginx"
+         VARNISH = "varnish"
+        */
     }
 
     options {
@@ -54,11 +57,24 @@ pipeline {
                         def TAG=readFile('tags')
                         sh "git clone ${PULL}:${GITORG}${REPO}.git --depth 1 -b $TAG"
                         
-                        // build wordpress
+                        // build Wordpress
                         sh "cd ${REPO}; docker build -f DockerfileWP . -t ${GCR}${REPO}-ecs-${WORDPRESS}:$TAG" 
                         sh "gcloud docker -- push ${GCR}${REPO}-ecs-${WORDPRESS}; cd ../"
-                        sh "./tagger.sh ${GCR} ${REPO} $TAG"
-
+                        sh "./tagger.sh ${GCR} ${REPO} ${WORDPRESS} $TAG"
+                        
+                        /* Images that do not usually get built..
+                        // build Nginx
+                        sh "cd ${REPO}; docker build -f DockerfileWP . -t ${GCR}${REPO}-ecs-${NGINX}:$TAG"
+                        sh "gcloud docker -- push ${GCR}${REPO}-ecs-${NGINX}; cd ../"
+                        sh "./tagger.sh ${GCR} ${REPO} ${NGINX} $TAG"
+                        
+                        // build Varnish
+                        sh "cd ${REPO}; docker build -f DockerfileVSH . -t ${GCR}${REPO}-ecs-${VARNISH}:$TAG"
+                        sh "gcloud docker -- push ${GCR}${REPO}-ecs-${VARNISH}; cd ../"
+                        sh "./tagger.sh ${GCR} ${REPO} ${VARNISH} $TAG"
+                        */
+                        
+                      
                         // Tidy up
                         sh "docker images -q |xargs docker rmi -f"
                         sh "sudo rm -rf ${REPO};"
