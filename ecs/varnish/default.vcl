@@ -21,7 +21,7 @@ sub vcl_recv {
 
         # Setting http headers for backend
         set req.http.X-Forwarded-For = client.ip;
-    	set req.http.X-Forwarded-Proto = "https";
+    	set req.http.X-Forwarded-Proto = "http";
 
     	# Unset headers that might cause us to cache duplicate infos
     	unset req.http.Accept-Language;
@@ -36,7 +36,7 @@ sub vcl_recv {
 	  	}
 	  	if ( std.port(server.ip) == 6080) {
 
-		set req.http.x-redir = "https://" + req.http.host + req.url;
+		set req.http.x-redir = "http://" + req.http.host + req.url;
                 return (synth(750, "Moved permanently"));
         }
 

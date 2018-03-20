@@ -43,19 +43,18 @@ if ($component !== false) {
     ?>
         <!-- SECTION -->
         <section class="section <?echo $odd_even; if ($section_id === reset($section_ids)) {echo " first-section";}if ($section_id === end($section_ids))
-        {echo " last-section";}?>">?>">
+        {echo " last-section";}?>">
             <div class="container">
                 <div class="row flexbox">
                     
                     <div class="col-md-6 copy-container">
                         
-                        <h2 class="featurette-heading">EVEN featurette heading. 
-                            <span class="text-muted">It'll blow your mind.</span>
+                        <h2 class="featurette-heading">
                             <?php echo get_field('section_header', $section_id);?>
                         </h2>
 
                         <p class="lead">
-                            <?php echo get_field('section_body', $section_id);?> <a href="#">Fusce dapibus</a>, tellus ac cursus commodo.
+                            <?php echo get_field('section_body', $section_id);?>
                         </p>
                     </div>
 

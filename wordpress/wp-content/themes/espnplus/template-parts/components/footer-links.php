@@ -48,7 +48,11 @@ if ($component !== false) {
                 </div>
 
                 <div class="select-wrap">
-                    <?php 
+                    <?php
+                    /*
+                    *    WPML Language selector, Will show anly if WPML active 
+                    *    (otherwise if not will break the FE with Warnings and errors)
+                    */ 
                     if ( function_exists('icl_object_id') ) {
                         do_action('wpml_add_language_selector');
                     }
@@ -57,24 +61,22 @@ if ($component !== false) {
 
             </div>
             
+        
             <div class="espn-links">
-
                 <?php 
                 foreach($section_ids as $section_id) {
-                  
-                  $link = get_field('footer_link_URL', $section_id);
+                    
+                    $link = get_field('footer_link_URL', $section_id);
                 ?>
                 <div class="link">
                     <a href="<?php echo $link;?>"><?php echo get_field('footer_link_text', $section_id);?></a>
                 </div>
-
                 <?php }?>
-
             </div>
+            
+        </div>    
 
-        </div> 
     </section>
-<!-- // section --> 
-
+    <!-- // section --> 
 <?php 
 }
