@@ -58,7 +58,6 @@
                     <img src="<?php echo $video_image['sizes']['medium'];?>" title="Your browser does not support the <video> tag">
                 </video>
             </div>
-            
         </div>
 
     </section>
