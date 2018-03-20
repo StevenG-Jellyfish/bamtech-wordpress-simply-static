@@ -38,42 +38,32 @@ if ($component !== false) {
      */ 
     ?>
   
-    <section class="footer-links">
-        <div class="container">
-            
-            <div class="espn-lang">
-           
-                <div class="logo">
-                    <img src="<?php echo get_template_directory_uri(); ?>/imgs/E+_logo.svg" alt="ESPN plus logo">
-                </div>
-
-                <div class="select-wrap">
-                    <select name="lang-select">
-                        <option value="en">English</option>
-                        <option value="es">Spanish</option>
-                    </select>
-                </div>
-
+<section class="footer-links">
+    <div class="container">
+        <div class="espn-lang">
+    <!-- <i class="fa fa-angle-down rotate-icon"></i> -->
+            <div class="logo">
+                <img src="<?php echo get_template_directory_uri(); ?>/imgs/E+_logo.svg" alt="ESPN plus logo">
             </div>
-            
-            <div class="espn-links">
-
-                <?php 
-                foreach($section_ids as $section_id) {
-                  
-                  $link = get_field('footer_link_URL', $section_id);
-                ?>
-                <div class="link">
-                    <a href="<?php echo $link;?>"><?php echo get_field('footer_link_text', $section_id);?></a>
-                </div>
-
-                <?php }?>
-
+            <div class="select-wrap">
+                <select id="lang-selection" name="lang-select">
+                        <option value="http://bamtech-build.jellyfish.local/">English (US)</option>
+                        <option value="http://bamtech-build.jellyfish.local/es">Spanish</option>
+                </select>
             </div>
-
-        </div> 
-    </section>
+    </div>
+    <div class="espn-links">
+        <?php 
+        foreach($section_ids as $section_id) {
+            
+            $link = get_field('footer_link_URL', $section_id);
+        ?>
+        <div class="link">
+            <a href="<?php echo $link;?>"><?php echo get_field('footer_link_text', $section_id);?></a>
+        </div>
+        <?php }?>
+    </div> 
+</section>
 <!-- // section --> 
-
 <?php 
 }
