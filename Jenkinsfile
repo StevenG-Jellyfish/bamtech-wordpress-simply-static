@@ -97,7 +97,6 @@ pipeline {
                   message: "Image ${WORDPRESS} deployed successfully to to stage, Please access > (<${env.RUN_DISPLAY_URL}|Open>) and accept or decline build to continue.."
 
              input message: "Image ${WORDPRESS} has been released to stage, please test and confirm..."
-            }
-        }
-    }
+          }
+     }     
 }
