@@ -17,7 +17,8 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
     padding-bottom: var(--jumbotron-padding-y);
     margin: 0 auto;
     background-color: black;
-    /*  
+    overflow: hidden;
+/*  
     @media (min-width: 767px) {
       .jumbotron {
         padding-top: calc(var(--jumbotron-padding-y) * 2);
@@ -33,7 +34,6 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
         left: 0px;
         width: 100%;
         max-width: 1280px;
-        height: 100%;
         margin: 0 0 0 0;
         padding: 0 0 0 0;
         z-index: 1;
@@ -141,7 +141,7 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
             line-height: 2.750rem;
         } // .btn
     } // max-width: 767px
-    p {
+    div {
         margin: 0 0 0 0;
         padding: 0 0 0 0;
         color: white;
