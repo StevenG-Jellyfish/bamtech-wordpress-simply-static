@@ -4,7 +4,7 @@ pipeline {
     
     // Git Repo Details
     environment {
-        REPO = "bamtech-wordpress-child4"
+        REPO = "bamtech-wordpress-child"
         GITORG = "JellyfishGroup/"
         GIT = "https://api.github.com/repos/"
         PULL = "git@github.com"
@@ -51,14 +51,16 @@ pipeline {
                         sh "git clone ${PULL}:${GITORG}${REPO}.git --depth 1 -b $TAG"
                         
                         // build wordpress
-                        sh "cd ${REPO}; docker build ./php -t ${GCR}${REPO}-gke-wordpress:$TAG" 
-                        sh "gcloud docker -- push ${GCR}${REPO}-gke-wordpress; cd ../"
+                        sh "cd ${REPO}; docker build -f DockerfileWP . -t ${GCR}${REPO}-ecs-wordpress:$TAG" 
+                        sh "gcloud docker -- push ${GCR}${REPO}-ecs-wordpress; cd ../"
+                        sh "gcloud container images add-tag ${GCR}${REPO}-ecs-wordpress:$TAG ${GCR}${REPO}-ecs-wordpress:latest"
                     }
                 }
             }
         }
-        post {
-            failure {
+    }
+    post {
+        failure {
 
 /* COMMENTED OUT AS NO DEPLOY IS USED HERE
                 slackSend channel: '#deploy', color: 'danger', message: "Image ${NAME}:$TAG FAILED to deploy, Visit > (<${env.RUN_DISPLAY_URL}|Open>) for details"
