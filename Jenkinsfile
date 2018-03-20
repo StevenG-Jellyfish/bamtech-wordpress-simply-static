@@ -92,7 +92,7 @@ pipeline {
             agent {
                 node {
                     label 'ecs_deployer'
-                    customWorkspace '/var/jenkins_home/shared/kube_deployer'
+                    customWorkspace '/var/jenkins_home/shared/ecs_deployer'
                 }
             }
              
