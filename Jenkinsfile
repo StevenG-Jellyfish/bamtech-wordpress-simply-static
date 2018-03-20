@@ -4,7 +4,7 @@ pipeline {
     
     // Git Repo Details
     environment {
-        REPO = "bamtech-wordpress-child4"
+        REPO = "bamtech-wordpress-child"
         GITORG = "JellyfishGroup/"
         GIT = "https://api.github.com/repos/"
         PULL = "git@github.com"
