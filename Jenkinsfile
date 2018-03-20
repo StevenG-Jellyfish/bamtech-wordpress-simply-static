@@ -37,7 +37,7 @@ pipeline {
                                 [$class: 'StringBinding', credentialsId: 'TOKEN', variable: 'API_TOKEN'],
                                 [$class: 'FileBinding', credentialsId: 'DEPLOY_KEY', variable: 'key'],
                                 [$class: 'FileBinding', credentialsId: 'AUTH', variable: 'run'],
-                                [$class: 'FileBinding', credentialsId: 'TAGGER', variable 'tagger']]) {
+                                [$class: 'FileBinding', credentialsId: 'TAGGER', variable: 'tagger']]) {
 
                     // Build step grab release TAG and build/push images with new tag ID
                     // Then run cleanup on agents
