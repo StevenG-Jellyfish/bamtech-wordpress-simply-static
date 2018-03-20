@@ -53,7 +53,7 @@ pipeline {
                         // build wordpress
                         sh "cd ${REPO}; docker build -f DockerfileWP . -t ${GCR}${REPO}-ecs-wordpress:$TAG" 
                         sh "gcloud docker -- push ${GCR}${REPO}-ecs-wordpress; cd ../"
-                        sh "gcloud beta container images add-tags ${GCR}${REPO}-ecs-wordpress:$TAG ${GCR}${REPO}-ecs-wordpress:latest"
+                        sh "gcloud beta container images add-tag ${GCR}${REPO}-ecs-wordpress:$TAG ${GCR}${REPO}-ecs-wordpress:latest"
 
                         // Tidy up
                         sh "docker images -q |xargs docker rmi -f"
