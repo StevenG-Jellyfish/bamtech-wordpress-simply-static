@@ -2560,6 +2560,12 @@ section.devices-bar {
           border-top: 2px solid black;
           font-weight: 700;
           color: black; }
+          section.devices-bar .container .devices-container .device p.device-copy span {
+            display: block;
+            margin: 0;
+            padding: 0;
+            font-size: .500rem;
+            line-height: .750rem; }
         @media (max-width: 767px) {
           section.devices-bar .container .devices-container .device p.device-copy {
             font-size: 0.750rem;

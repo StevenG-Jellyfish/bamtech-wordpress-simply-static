@@ -58,11 +58,19 @@ section.devices-bar {
                 } // img
 
                 p.device-copy {
-                    margin: .75rem 0;
+                margin: .75rem 0;
                     padding: .5rem 0;
                     border-top: 2px solid black;
                     font-weight: 700;
                     color: black;
+
+                    span {
+                        display: block;
+                        margin: 0;
+                        padding: 0;
+                        font-size: .500rem;
+                        line-height: .750rem;
+                    }
                 } // p.device-copy 
 
                 @media (max-width: 767px) {
