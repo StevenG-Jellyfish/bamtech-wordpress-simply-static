@@ -4,6 +4,9 @@ set -euo pipefail
 
 source /mnt/env/local.env
 
+MEM=${MEMCACHE_SERVER}
+OLDMEM=127.0.0.1:11211
+
 cp -vR /home/wordpress/* /var/www/html/ &> /dev/null
 chown -R www-data: /media/uploads
 chown -R www-data: /var/www/html
@@ -159,6 +162,10 @@ fi
 
 
 wp plugin activate --allow-root sitepress-multilingual-cms
+
+# Insert JSON master.php
+    echo "find and replace memcache variables master.php.."
+    sed -i 's/'"$OLDMEM"'/'"$MEM"'/' /var/www/html/wp-content/w3tc-config/master.php &&  chmod 444 /var/www/html/wp-content/w3tc-config/master.php
 
 
 exec "$@"
