@@ -100,6 +100,7 @@ pipeline {
             steps {
                 withCredentials([
                                 [$class: 'StringBinding', credentialsId: 'TOKEN', variable: 'API_TOKEN'],
+                                [$class: 'FileBinding', credentialsId: 'ECS_DEPLOY', variable: 'DEPLOYER'],
                                 [$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'BAM_AWS', accessKeyVariable: 'BAM_ACCESS', secretKeyVariable: 'BAM_SECRET']]) {
                 // send slack notification that deploy stage has started
                 slackSend channel: '#deploy', color: 'good', message: "Image ${WORDPRESS} deploy has started > (<${env.RUN_DISPLAY_URL}|Open>) for details"
@@ -107,11 +108,8 @@ pipeline {
                 script {
                     sh "curl -sS -H 'Authorization: token  ${API_TOKEN}' ${GIT}${GITORG}${REPO}/releases | jq  -r '.[].tag_name'| head -1 > tags"
                     def TAG=readFile('tags')
-                    sh "export AWS_DEFAULT_REGION=${REGION}"
-                    sh "export AWS_ACCESS_KEY_ID=${env.BAM_ACCESS}"
-                    sh "export AWS_SECRET_ACCESS_KEY=${env.BAM_SECRET}"
-                    sh "export AWS_DEFAULT_OUTPUT=json" 
-                    sh "ecs deploy ${UATCLUSTER} ${UAT}-${WORDPRESS} -i ${WORDPRESS} ${GCR}${REPO}-ecs-${WORDPRESS}:$TAG " 
+                    sh "sudo cp ${env.DEPLOYER} ecs.sh; sudo chmod +x ecs.sh; sudo chown jenkins: ecs.sh"
+                    sh "./ecs.sh ${env.BAM_ACCESS} ${env.BAM_SECRET} ${REGION} ${GCR} ${REPO} $TAG ${WORDPRESS} ${UATCLUSTER} ${UAT}"
                     // User Input to complete.
                     }
                     //slackSend channel: '#deploy', color: 'good', message: "Please access > (<${env.BUILD_URL}|Open>) and accept or decline build to continue..."
