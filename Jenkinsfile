@@ -51,8 +51,9 @@ pipeline {
                         sh "git clone ${PULL}:${GITORG}${REPO}.git --depth 1 -b $TAG"
                         
                         // build wordpress
-                        sh "cd ${REPO}; docker build ./php -t ${GCR}${REPO}-gke-wordpress:$TAG" 
-                        sh "gcloud docker -- push ${GCR}${REPO}-gke-wordpress; cd ../"
+                        sh "cd ${REPO}; docker build -f DockerfileWP . -t ${GCR}${REPO}-ecs-wordpress:$TAG" 
+                        sh "gcloud docker -- push ${GCR}${REPO}-ecs-wordpress; cd ../"
+                        sh "gcloud container images add-tag ${GCR}${REPO}-ecs-wordpress:$TAG ${GCR}${REPO}-ecs-wordpress:latest"
                     }
                 }
             }
