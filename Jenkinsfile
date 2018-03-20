@@ -135,7 +135,6 @@ pipeline {
              /*
              input message: "Image ${WORDPRESS} has been released to stage, please test and confirm..."
               */
-              }
-          }     
-     }
+            }
+      }     
 }
