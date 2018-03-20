@@ -1,0 +1,257 @@
+/*!
+Theme Name: espnplus
+Theme URI: http://underscores.me/
+Author: Jellyfish
+Author URI: http://jellyfish.net
+Description: ESPN + streaming service
+Version: 1.0.0
+License: GNU General Public License v2 or later
+License URI: LICENSE
+Text Domain: espnplus
+Tags: custom-background, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready
+
+This theme, like WordPress, is licensed under the GPL.
+Use it to make something cool, have fun, and share what you've learned with others.
+
+espnplus is based on Underscores https://underscores.me/, (C) 2012-2017 Automattic, Inc.
+Underscores is distributed under the terms of the GNU GPL v2 or later.
+
+Normalizing styles have been helped along thanks to the fine work of
+Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
+*/
+
+
+/*--------------------------------------------------------------
+>>> TABLE OF CONTENTS:
+----------------------------------------------------------------
+# Normalize
+# Typography
+# Elements
+# Forms
+# Navigation
+	## Links
+	## Menus
+# Accessibility
+# Alignments
+# Clearings
+# Widgets
+# Content
+	## Posts and pages
+	## Comments
+# Infinite scroll
+# Media
+	## Captions
+	## Galleries
+--------------------------------------------------------------*/
+
+//@import "../../../_vendor/scss/variables-site/variables-site";
+//@import "../../../_vendor/scss/mixins/mixins-master";
+
+/*--------------------------------------------------------------
+# Normalize
+--------------------------------------------------------------*/
+
+//@import "../../../_vendor/scss/normalize";
+
+/*--------------------------------------------------------------
+# Typography
+--------------------------------------------------------------*/
+
+//@import "../../../_vendor/scss/typography/typography";
+
+/*--------------------------------------------------------------
+# Elements
+--------------------------------------------------------------*/
+
+//@import "../../../_vendor/scss/elements/elements";
+
+/*--------------------------------------------------------------
+# Forms
+--------------------------------------------------------------*/
+
+//@import "../../../_vendor/scss/forms/forms";
+
+/*--------------------------------------------------------------
+# Navigation
+--------------------------------------------------------------*/
+
+// @import "../../../_vendor/scss/navigation/navigation";
+
+/*--------------------------------------------------------------
+# Accessibility
+--------------------------------------------------------------*/
+
+// @import "../../../_vendor/scss/modules/accessibility";
+
+/*--------------------------------------------------------------
+# Alignments
+--------------------------------------------------------------*/
+
+// @import "../../../_vendor/scss/modules/alignments";
+
+/*--------------------------------------------------------------
+# Clearings
+--------------------------------------------------------------*/
+
+// @import "../../../_vendor/scss/modules/clearings";
+
+/*--------------------------------------------------------------
+# Widgets
+--------------------------------------------------------------*/
+
+// @import "../../../_vendor/scss/site/secondary/widgets";
+
+/*--------------------------------------------------------------
+# Content
+--------------------------------------------------------------*/
+
+// @import "../../../_vendor/scss/site/site";
+
+/*--------------------------------------------------------------
+# Infinite scroll
+--------------------------------------------------------------*/
+
+// @import "../../../_vendor/scss/modules/infinite-scroll";
+
+/*--------------------------------------------------------------
+# Media
+--------------------------------------------------------------*/
+
+// @import "../../../_vendor/scss/media/media";
+
+/*--------------------------------------------------------------
+# Media
+--------------------------------------------------------------*/
+
+@import "../../../_vendor/scss/bootstrap/functions";
+//
+@import "variables";
+//
+@import "../../../_vendor/scss/bootstrap/mixins";
+@import "../../../_vendor/scss/bootstrap/root";
+@import "../../../_vendor/scss/bootstrap/reboot";
+@import "../../../_vendor/scss/bootstrap/type";
+@import "../../../_vendor/scss/bootstrap/images";
+@import "../../../_vendor/scss/bootstrap/code";
+@import "../../../_vendor/scss/bootstrap/grid";
+@import "../../../_vendor/scss/bootstrap/tables";
+@import "../../../_vendor/scss/bootstrap/forms";
+@import "../../../_vendor/scss/bootstrap/buttons";
+@import "../../../_vendor/scss/bootstrap/transitions";
+@import "../../../_vendor/scss/bootstrap/dropdown";
+@import "../../../_vendor/scss/bootstrap/button-group";
+@import "../../../_vendor/scss/bootstrap/input-group";
+@import "../../../_vendor/scss/bootstrap/custom-forms";
+@import "../../../_vendor/scss/bootstrap/nav";
+@import "../../../_vendor/scss/bootstrap/navbar";
+@import "../../../_vendor/scss/bootstrap/card";
+@import "../../../_vendor/scss/bootstrap/breadcrumb";
+@import "../../../_vendor/scss/bootstrap/pagination";
+@import "../../../_vendor/scss/bootstrap/badge";
+@import "../../../_vendor/scss/bootstrap/jumbotron";
+@import "../../../_vendor/scss/bootstrap/alert";
+@import "../../../_vendor/scss/bootstrap/progress";
+@import "../../../_vendor/scss/bootstrap/media";
+@import "../../../_vendor/scss/bootstrap/list-group";
+@import "../../../_vendor/scss/bootstrap/close";
+@import "../../../_vendor/scss/bootstrap/modal";
+@import "../../../_vendor/scss/bootstrap/tooltip";
+@import "../../../_vendor/scss/bootstrap/popover";
+@import "../../../_vendor/scss/bootstrap/carousel";
+@import "../../../_vendor/scss/bootstrap/utilities";
+@import "../../../_vendor/scss/bootstrap/print";
+
+/*--------------------------------------------------------------
+# JF Components
+--------------------------------------------------------------*/
+
+@import "style";
+@import "global_header";
+
+/*--------------------------------------------------------------
+# component_spotlight
+--------------------------------------------------------------*/
+
+@import "component_spotlight";
+
+/*--------------------------------------------------------------
+# component_section
+--------------------------------------------------------------*/
+@import "global_footer_link";
+
+@import "component_section";
+// bootstrap overrides
+$yellow: #F9B300 !default;
+$primary: $yellow !default;
+$espn-device-black: #010000;
+$espn-fotter-txt-grey: #787878;
+$espn-toc-bg-grey: #252525;
+$espn-toc-txt-grey: #c5c9d1;
+$espn-accordion-bg-grey: #191919;
+$espn-accordion-txt-grey: #636363;
+// @import "fonts";
+//
+//
+#page {
+    text-align: center;
+}
+
+.content-area {
+    text-align: left;
+}
+
+.container-fluid {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0;
+   // @include media-breakpoint-down(sm) {}
+    // border: 1px solid #ccc;
+}
+
+.site-description {
+    background-color: #ccc;
+}
+
+//
+.site-branding {
+    text-align: left;
+}
+
+
+/* Text meant only for screen readers. */
+
+.screen-reader-text {
+    border: 0;
+    clip: rect(1px, 1px, 1px, 1px);
+    clip-path: inset(50%);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute !important;
+    width: 1px;
+    word-wrap: normal !important;
+    /* Many screen reader and browser combinations announce broken words as they would appear visually. */
+}
+
+.screen-reader-text:focus {
+    background-color: #f1f1f1;
+    border-radius: 3px;
+    box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
+    clip: auto !important;
+    clip-path: none;
+    color: #21759b;
+    display: block;
+    font-size: 14px;
+    font-size: 0.875rem;
+    font-weight: bold;
+    height: auto;
+    left: 5px;
+    line-height: normal;
+    padding: 15px 23px 14px;
+    text-decoration: none;
+    top: 5px;
+    width: auto;
+    z-index: 100000;
+    /* Above WP toolbar. */
+}

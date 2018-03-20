@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Duplicate Post - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2017-04-05 05:43:39+0000\n"
+"PO-Revision-Date: 2017-12-06 02:08:42+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -10,6 +10,22 @@ msgstr ""
 "X-Generator: GlotPress/2.4.0-alpha\n"
 "Language: en_GB\n"
 "Project-Id-Version: Plugins - Duplicate Post - Stable (latest release)\n"
+
+#: duplicate-post-admin.php:280
+msgid "Current user is not allowed to copy posts."
+msgstr "Current user is not allowed to copy posts."
+
+#: duplicate-post-admin.php:195
+msgid "Check out the new documentation"
+msgstr "Check out the new documentation"
+
+#: duplicate-post-admin.php:194
+msgid "Serving the WordPress community since November 2007."
+msgstr "Serving the WordPress community since November 2007."
+
+#: duplicate-post-admin.php:194
+msgid "Duplicate Post turns 10!"
+msgstr "Duplicate Post turns 10!"
 
 #. Plugin URI of the plugin/theme
 msgid "https://duplicate-post.lopo.it/"
@@ -19,21 +35,13 @@ msgstr "https://duplicate-post.lopo.it/"
 msgid "you probably want this unchecked, unless you have very special requirements"
 msgstr "you probably want this unchecked, unless you have very special requirements"
 
-#: duplicate-post-admin.php:653 duplicate-post-options.php:91
+#: duplicate-post-admin.php:652 duplicate-post-options.php:91
 msgid "Documentation"
 msgstr "Documentation"
 
 #: duplicate-post-admin.php:196
 msgid "Help me develop the plugin and provide support by <a href=\"%s\">donating even a small sum</a>."
 msgstr "Help me develop the plugin and provide support by <a href=\"%s\">donating even a small sum</a>."
-
-#: duplicate-post-admin.php:195
-msgid "Duplicate Post is now also compatible with WPML!"
-msgstr "Duplicate Post is now also compatible with WPML!"
-
-#: duplicate-post-admin.php:194
-msgid "Check out the new documentation for Duplicate Post!"
-msgstr "Check out the new documentation for Duplicate Post!"
 
 #: duplicate-post-options.php:378
 msgid "Show update notice"
@@ -80,7 +88,11 @@ msgstr "Donate whatever sum you choose, even just 10¢."
 msgid "Help me develop the plugin, add new features and improve support!"
 msgstr "Help me develop the plugin, add new features and improve support!"
 
-#: duplicate-post-admin.php:664
+#: duplicate-post-admin.php:195
+msgid "Please <a href=\"%s\">review the settings</a> to make sure it works as you expect."
+msgstr "Please <a href=\"%s\">review the settings</a> to make sure it works as you expect."
+
+#: duplicate-post-admin.php:663
 msgid "%s item copied."
 msgid_plural "%s items copied."
 msgstr[0] "%s item copied."
@@ -178,11 +190,11 @@ msgstr "Permissions"
 msgid "What to copy"
 msgstr "What to copy"
 
-#: duplicate-post-admin.php:555
+#: duplicate-post-admin.php:559
 msgid "Untitled"
 msgstr "Untitled"
 
-#: duplicate-post-admin.php:536
+#: duplicate-post-admin.php:540
 msgid "Copy features for this post type are not enabled in options page"
 msgstr "Copy features for this post type are not enabled in options page"
 
@@ -266,7 +278,7 @@ msgstr "Comma-separated list of meta fields that must not be copied"
 msgid "Do not copy these fields"
 msgstr "Do not copy these fields"
 
-#. #-#-#-#-#  tmp-duplicate-post.pot (Duplicate Post 3.2)  #-#-#-#-#
+#. #-#-#-#-#  duplicate-post-code.pot (Duplicate Post 3.2.1)  #-#-#-#-#
 #. Plugin Name of the plugin/theme
 #: duplicate-post-options.php:46
 msgid "Duplicate Post"
@@ -280,15 +292,15 @@ msgstr "Duplicate Post Options"
 msgid "Translate"
 msgstr "Translate"
 
-#: duplicate-post-admin.php:654
+#: duplicate-post-admin.php:653
 msgid "Donate"
 msgstr "Donate"
 
-#: duplicate-post-admin.php:319
+#: duplicate-post-admin.php:323
 msgid "Copy creation failed, could not find original:"
 msgstr "Copy creation failed, could not find original:"
 
-#: duplicate-post-admin.php:280
+#: duplicate-post-admin.php:284
 msgid "No post to duplicate has been supplied!"
 msgstr "No post to duplicate has been supplied!"
 
@@ -302,7 +314,7 @@ msgstr "New Draft"
 msgid "Copy to a new draft"
 msgstr "Copy to a new draft"
 
-#: duplicate-post-admin.php:234 duplicate-post-admin.php:688
+#: duplicate-post-admin.php:234 duplicate-post-admin.php:687
 msgid "Clone"
 msgstr "Clone"
 

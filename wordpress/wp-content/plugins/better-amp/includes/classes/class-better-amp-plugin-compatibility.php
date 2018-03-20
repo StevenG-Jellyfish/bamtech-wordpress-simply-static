@@ -2,6 +2,7 @@
 
 Better_AMP_Plugin_Compatibility::init();
 
+
 /**
  * Third Party Plugins Compatibility
  *
@@ -16,10 +17,21 @@ class Better_AMP_Plugin_Compatibility {
 	 */
 	public static $plugins = array();
 
+
 	/**
 	 * Initialization
 	 */
 	public static function init() {
+
+		/**
+		 * WPML Plugin
+		 *
+		 * @link  https://wpml.org
+		 *
+		 * @since 1.6.0
+		 */
+
+		add_action( 'init', array( __CLASS__, 'fix_wpml_template_hooks' ) );
 
 		if ( ! is_better_amp() ) {
 			return;
@@ -60,15 +72,59 @@ class Better_AMP_Plugin_Compatibility {
 		}
 
 
-		self::$plugins = NULL; // Clear memory
+		/**
+		 * WP-Optimize Plugin
+		 * https://wordpress.org/plugins/wp-optimize/
+		 */
+		if ( class_exists( 'WP_Optimize' ) ) {
+			bf_remove_class_action( 'plugins_loaded', 'WP_Optimize', 'plugins_loaded', 1 );
+		}
 
 
 		/**
-		 *  Custom Permalinks
+		 * WP Speed Grades Lite
+		 *
+		 * http://www.wp-speed.com/
+		 */
+		if ( defined( 'WP_SPEED_GRADES_VERSION' ) ) {
+			add_action( 'init', array( 'Better_AMP_Plugin_Compatibility', 'pre_init' ), 0 );
+		}
+
+
+		self::$plugins = NULL; // Clear memory
+
+		add_action( 'plugins_loaded', 'Better_AMP_Plugin_Compatibility::plugins_loaded' );
+
+
+		/**
+		 * WPML Plugin
+		 *
+		 * @link  https://wpml.org
+		 *
+		 * @since 1.6.0
 		 */
 
-		add_action( 'plugins_loaded', 'Better_AMP_Plugin_Compatibility::custom_permalinks_init' );
+		add_action( 'template_redirect', array( __CLASS__, 'fix_wpml_template_hooks' ) );
 
+
+		/**
+		 * Pretty Links Compatibility
+		 *
+		 * @link  https://wordpress.org/plugins/pretty-link/
+		 * @since 1.7.0
+		 */
+
+		add_filter( 'prli-check-if-slug', 'Better_AMP_Plugin_Compatibility::pretty_links_compatibility', 2, 2 );
+
+	}
+
+
+	/**
+	 * Pre init action
+	 */
+	public static function pre_init() {
+
+		remove_action( 'init', 'wpspgrpro_init_minify_html', 1 );
 	}
 
 
@@ -78,6 +134,7 @@ class Better_AMP_Plugin_Compatibility {
 	 * http://convertplug.com/
 	 */
 	public static function convert_plug() {
+
 		bf_remove_class_filter( 'the_content', 'Convert_Plug', 'cp_add_content', 10 );
 	}
 
@@ -113,14 +170,32 @@ class Better_AMP_Plugin_Compatibility {
 
 
 	/**
-	 * Initialize Custom permalinks support
+	 * Plugin loaded hook
 	 */
-	public static function custom_permalinks_init() {
+	public static function plugins_loaded() {
 
-		// Guess is custom permalinks installed and active
-		if ( function_exists( 'custom_permalinks_request' ) ) {
+		/**
+		 * Initialize Custom permalinks support
+		 */
+		if ( function_exists( 'custom_permalinks_request' ) ) { // Guess is custom permalinks installed and active
 			add_filter( 'request', 'Better_AMP_Plugin_Compatibility::custom_permalinks', 15 );
 		}
+
+		/**
+		 * NextGEN Gallery Compatibility
+		 */
+
+		add_filter( 'run_ngg_resource_manager', '__return_false', 999 );
+
+
+		/**
+		 * WPML Compatibility
+		 */
+		if ( defined( 'WPML_PLUGIN_BASENAME' ) && WPML_PLUGIN_BASENAME ) {
+
+			add_action( 'wpml_is_redirected', '__return_false' );
+		}
+
 	}
 
 
@@ -168,4 +243,83 @@ class Better_AMP_Plugin_Compatibility {
 
 		return $query_vars;
 	} // custom_permalinks
+
+
+	/**
+	 * WPML plugin compatibility fixes
+	 */
+	public static function fix_wpml_template_hooks() {
+
+		global $wpml_language_resolution;
+
+		/**
+		 * @var SitePress $sitepress
+		 */
+		$sitepress = isset( $GLOBALS['sitepress'] ) ? $GLOBALS['sitepress'] : '';
+		$callback  = array( $sitepress, 'display_wpml_footer' );
+
+		if ( ! $sitepress || ! $sitepress instanceof SitePress ) {
+			return;
+		}
+
+
+		if ( has_action( 'wp_footer', $callback ) ) {
+
+			add_action( 'better-amp/template/footer', $callback );
+		}
+
+		if ( $sitepress->get_setting( 'language_negotiation_type' ) == '1' ) {
+
+			add_filter( 'better-amp/transformer/exclude-subdir', array(
+				$wpml_language_resolution,
+				'get_active_language_codes'
+			) );
+		}
+	}
+
+
+	/**
+	 * Drop amp start-point from pretty link slug
+	 *
+	 * @param bool|object $is_pretty_link
+	 * @param string      $slug
+	 *
+	 * @since 1.7.0
+	 * @return bool|object
+	 */
+	public static function pretty_links_compatibility( $is_pretty_link, $slug ) {
+
+		if ( isset( $GLOBALS['prli_link'] ) && $GLOBALS['prli_link'] instanceof PrliLink ) {
+
+			if ( preg_match( '#^/*' . Better_AMP::STARTPOINT . '/+(.+)$#i', $slug, $match ) ) {
+
+				/**
+				 * @var PrliLink $instance
+				 */
+				$instance = $GLOBALS['prli_link'];
+				$callback = array( $instance, 'getOneFromSlug' );
+
+				if ( is_callable( $callback ) ) {
+
+					return call_user_func( $callback, $match[1] );
+				}
+			}
+		}
+
+		return $is_pretty_link;
+	}
+}
+
+
+/**
+ * Speed Booster Pack
+ * https://wordpress.org/plugins/speed-booster-pack/
+ */
+if ( is_better_amp() && ! class_exists( 'Speed_Booster_Pack_Core' ) ) {
+	/**
+	 * Disables plugin fucntionality by overriding "Speed_Booster_Pack_Core" class
+	 */
+	class Speed_Booster_Pack_Core {
+
+	}
 }

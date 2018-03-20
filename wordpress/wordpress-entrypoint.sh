@@ -107,43 +107,22 @@ EOPHP
     " > ~/.bashrc
 
     PLUGINS=(
-        acf-content-analysis-for-yoast-seo
-        acf-to-rest-api
-        #add-to-home-screen
-        advanced-custom-fields
         all-meta-stats-yoast-seo-addon
-        autoptimize
         better-amp
         busted
-        category-to-pages-wud
-        cloudflare
         contact-form-7
-        custom-post-type-ui
-        debug-objects
         duplicate-post
-        elasticpress
         glue-for-yoast-seo-amp
         google-analytics-for-wordpress
-        hyper-cache
         imsanity
-        jch-optimize
-        megamenu
         meta-box-yoast-seo
-        #offline-content
-        #offline-shell
-        redis-cache
         responsify-wp
-        rest-api
-        #the-events-calendar
-        #the-events-calendar-shortcode
         w3-total-cache
-        #web-push
         wordpress-seo
         wp-statistics
-        wp-sweep
-        yoast-seo-settings-xml-csv-import
-        #woocommerce
-        #woocommerce-gateway-stripe
+        wp-smushit
+        velvet-blues-update-urls
+        
     )
 
     # Loop the the plugins
@@ -164,7 +143,7 @@ EOPHP
 fi
 
 
-wp user update admin --user_pass=jellyfish --allow-root
+wp user update admin --user_pass=${WORDPRESS_ADMIN_PASSWORD} --allow-root
 
 exec "$@"
 

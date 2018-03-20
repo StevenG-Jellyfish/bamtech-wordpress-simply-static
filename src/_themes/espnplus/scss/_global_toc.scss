@@ -1,0 +1,45 @@
+/*!
+Theme Name: espnplus
+Stub Name:  global_toc.scss 
+*/
+
+section.terms-conditions {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 2.125rem 0;
+    background-color: $espn-toc-bg-grey;
+
+    .container {
+        display: block;   
+        position: relative;     
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        padding: 0;
+
+        div,
+        p {
+            width: 80%;
+            margin: 0 auto;   
+            font-size: 0.938rem;
+            line-height: 1.250rem; 
+            text-align: center;
+            color: $espn-toc-txt-grey;
+
+            a {
+                color: $espn-toc-txt-grey;
+                text-decoration: underline;
+            }
+        }
+
+        @media (max-width: 767px) {
+            p {
+                font-size: 0.750rem;
+                line-height: 1.125rem;
+            } // p
+        } // max-width: 767px
+
+    } // .container
+
+} // .section.terms-conditions 
