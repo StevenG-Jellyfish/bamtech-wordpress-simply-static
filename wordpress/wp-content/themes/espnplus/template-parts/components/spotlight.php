@@ -19,7 +19,7 @@
     <section class="jumbotron text-center">
         <div class="container">
             
-            <h1 class="jumbotron-heading"><?php echo get_field('spotlight_overlogo_text', $component);?> <em>MORE</em></h1>
+            <h1 class="jumbotron-heading"><?php echo get_field('spotlight_overlogo_text', $component);?></h1>
             
             <div class="jumbotron-logo">
     			<?php $image = get_field('spotlight_logo_image', $component);?>
@@ -27,8 +27,7 @@
             </div>
            
             <p class="lead">
-                The NEW <?php echo get_field('spotlight_main_text', $component);?> ESPN.<br>
-                Live Sports, ESPN Originals, Only $4.99 a month.
+                <?php echo get_field('spotlight_main_text', $component);?><br>
             </p>
             
             <div class="espn-cta-container">
@@ -42,7 +41,7 @@
             </div>
             
             <p class="below-cta">
-    		<?php echo get_field('spotlight_belowcta_text', $component);?> <a href="#">terms</a>.
+    		<?php echo get_field('spotlight_belowcta_text', $component);?>
             </p>
     	
         </div>
@@ -55,10 +54,10 @@
                 <video id="background-movie" preload autoplay>
                     <source src="<?php echo $video['url'];?>" type="video/mp4">
                     <source src="<?php echo $video['url'];?>" type="video/ogg">
-                    <img src="../../_images/001_ALL_7Pannel_021618.png" title="Your browser does not support the <video> tag">
+                    <?php $video_image = get_field('spotlight_video_image', $component);?>
+                    <img src="<?php echo $video_image['sizes']['medium'];?>" title="Your browser does not support the <video> tag">
                 </video>
             </div>
-            
         </div>
 
     </section>
