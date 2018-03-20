@@ -108,8 +108,8 @@ pipeline {
                     sh "curl -sS -H 'Authorization: token  ${API_TOKEN}' ${GIT}${GITORG}${REPO}/releases | jq  -r '.[].tag_name'| head -1 > tags"
                     def TAG=readFile('tags')
                     sh "export AWS_DEFAULT_REGION=${REGION}"
-                    sh "export AWS_ACCESS_KEY_ID=${env.accessKeyVariable}"
-                    sh "export AWS_SECRET_ACCESS_KEY=${env.secretKeyVariable}"
+                    sh "export AWS_ACCESS_KEY_ID=${env.BAM_ACCESS}"
+                    sh "export AWS_SECRET_ACCESS_KEY=${env.BAM_SECRET}"
                     sh "export AWS_DEFAULT_OUTPUT=json" 
                     sh "ecs deploy ${UATCLUSTER} ${UAT}-${WORDPRESS} -i ${WORDPRESS} ${GCR}${REPO}-ecs-${WORDPRESS}:$TAG " 
                     // User Input to complete.
