@@ -10,6 +10,9 @@ pipeline {
         PULL = "git@github.com"
         GCR = "gcr.io/jellyfish-development-167809/"
         NAME = "bamtech"
+        WORDPRESS = "wordpress"
+        NGINX = "nginx"
+        VARNISH = "varnish"
     }
 
     options {
@@ -42,7 +45,7 @@ pipeline {
                     // Build step grab release TAG and build/push images with new tag ID
                     // Then run cleanup on agents
                     // send slack notification that build steps has started:
-                    slackSend channel: '#deploy', color: 'good', message: "Image ${NAME} build has started > (<${env.RUN_DISPLAY_URL}|Open>) for details"
+                    slackSend channel: '#deploy', color: 'good', message: "Project ${NAME} Image ${WORDPRESS} build has started > (<${env.RUN_DISPLAY_URL}|Open>) for details"
                 
                     script {
                         sh "sudo cp ${env.key} jelly.json;sudo cp ${env.run} auth.sh;sudo cp ${env.tagger} tagger.sh"
@@ -52,8 +55,8 @@ pipeline {
                         sh "git clone ${PULL}:${GITORG}${REPO}.git --depth 1 -b $TAG"
                         
                         // build wordpress
-                        sh "cd ${REPO}; docker build -f DockerfileWP . -t ${GCR}${REPO}-ecs-wordpress:$TAG" 
-                        sh "gcloud docker -- push ${GCR}${REPO}-ecs-wordpress; cd ../"
+                        sh "cd ${REPO}; docker build -f DockerfileWP . -t ${GCR}${REPO}-ecs-${WORDPRESS}:$TAG" 
+                        sh "gcloud docker -- push ${GCR}${REPO}-ecs-${WORDPRESS}; cd ../"
                         sh "./tagger.sh ${GCR} ${REPO} $TAG"
 
                         // Tidy up
@@ -63,32 +66,22 @@ pipeline {
                 }
             }
         }
-    }
-    post {
-        failure {
-
-/* COMMENTED OUT AS NO DEPLOY IS USED HERE
-            slackSend channel: '#deploy', color: 'danger', message: "Image ${NAME}:$TAG FAILED to deploy, Visit > (<${env.RUN_DISPLAY_URL}|Open>) for details"
-*/
-                
-            // clean the bodies
-            script {
-                sh "docker images -q |xargs docker rmi -f"
-                sh "sudo rm -rf ${REPO};"
-            }
-        }
+        post {
+              failure {
+                 slackSend channel: '#deploy',
+                     color: 'danger',
+                     message: "Image ${WORDPRESS} FAILED to deploy, Visit > (<${env.RUN_DISPLAY_URL}|Open>) for details"
+                     }
               
                 
-        success {
+              success {
+                 slackSend channel: '#deploy',
+                     color: 'good',
+                     message: "Image ${WORDPRESS} deployed successfully to to stage, Please access > (<${env.RUN_DISPLAY_URL}|Open>) and accept or decline build to continue.."
 
-/* COMMENTED OUT AS NO DEPLOY IS USED HERE
-        slackSend channel: '#deploy', color: 'good', message: "Image ${NAME}:$TAG deployed successfully to to stage, Please access > (<${env.RUN_DISPLAY_URL}|Open>) and accept or decline build to continue.."
-*/                                
-         // clean the bodies
-            script {
-                sh "docker images -q |xargs docker rmi -f"
-                sh "sudo rm -rf ${REPO};"
-            }
-        }
+                 input message: "Image ${WORDPRESS} has been released to stage, please test and confirm..."
+                 }
+             }
+         }
     }
 }
