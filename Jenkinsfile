@@ -36,7 +36,8 @@ pipeline {
                 withCredentials([
                                 [$class: 'StringBinding', credentialsId: 'TOKEN', variable: 'API_TOKEN'],
                                 [$class: 'FileBinding', credentialsId: 'DEPLOY_KEY', variable: 'key'],
-                                [$class: 'FileBinding', credentialsId: 'AUTH', variable: 'run']]) {
+                                [$class: 'FileBinding', credentialsId: 'AUTH', variable: 'run'],
+                                [$class: 'FileBinding', credentialsId: 'TAGGER', variable 'tagger']]) {
 
                     // Build step grab release TAG and build/push images with new tag ID
                     // Then run cleanup on agents
@@ -44,8 +45,8 @@ pipeline {
                     slackSend channel: '#deploy', color: 'good', message: "Image ${NAME} build has started > (<${env.RUN_DISPLAY_URL}|Open>) for details"
                 
                     script {
-                        sh "sudo cp ${env.key} jelly.json;sudo cp ${env.run} auth.sh"
-                        sh "sudo chmod +x auth.sh; sudo chown jenkins: auth.sh; sudo chown jenkins:  jelly.json; ./auth.sh "
+                        sh "sudo cp ${env.key} jelly.json;sudo cp ${env.run} auth.sh;sudo cp ${env.tagger} tagger.sh"
+                        sh "sudo chmod +x auth.sh; sudo chown jenkins: auth.sh; sudo chown jenkins:  jelly.json; ./auth.sh;sudo chmod +x tagger.sh; sudo chown jenkins: tagger.sh"
                         sh "curl -sS -H 'Authorization: token  ${API_TOKEN}' ${GIT}${GITORG}${REPO}/releases | jq  -r '.[].tag_name'| head -1 > tags"
                         def TAG=readFile('tags')
                         sh "git clone ${PULL}:${GITORG}${REPO}.git --depth 1 -b $TAG"
@@ -53,7 +54,7 @@ pipeline {
                         // build wordpress
                         sh "cd ${REPO}; docker build -f DockerfileWP . -t ${GCR}${REPO}-ecs-wordpress:$TAG" 
                         sh "gcloud docker -- push ${GCR}${REPO}-ecs-wordpress; cd ../"
-                        sh "yes | gcloud container images add-tag ${GCR}${REPO}-ecs-wordpress:$TAG \ ${GCR}${REPO}-ecs-wordpress:latest"
+                        sh "./tagger.sh ${GCR} ${REPO} $TAG"
 
                         // Tidy up
                         sh "docker images -q |xargs docker rmi -f"
