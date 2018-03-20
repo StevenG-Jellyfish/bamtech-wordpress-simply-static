@@ -62,27 +62,26 @@ pipeline {
         failure {
 
 /* COMMENTED OUT AS NO DEPLOY IS USED HERE
-                slackSend channel: '#deploy', color: 'danger', message: "Image ${NAME}:$TAG FAILED to deploy, Visit > (<${env.RUN_DISPLAY_URL}|Open>) for details"
+            slackSend channel: '#deploy', color: 'danger', message: "Image ${NAME}:$TAG FAILED to deploy, Visit > (<${env.RUN_DISPLAY_URL}|Open>) for details"
 */
                 
-                // clean the bodies
-                script {
-                    sh "docker images -q |xargs docker rmi -f"
-                    sh "sudo rm -rf ${REPO};"
-                }
+            // clean the bodies
+            script {
+                sh "docker images -q |xargs docker rmi -f"
+                sh "sudo rm -rf ${REPO};"
             }
+        }
               
                 
-            success {
+        success {
 
 /* COMMENTED OUT AS NO DEPLOY IS USED HERE
-                slackSend channel: '#deploy', color: 'good', message: "Image ${NAME}:$TAG deployed successfully to to stage, Please access > (<${env.RUN_DISPLAY_URL}|Open>) and accept or decline build to continue.."
+        slackSend channel: '#deploy', color: 'good', message: "Image ${NAME}:$TAG deployed successfully to to stage, Please access > (<${env.RUN_DISPLAY_URL}|Open>) and accept or decline build to continue.."
 */                                
-                // clean the bodies
-                script {
-                    sh "docker images -q |xargs docker rmi -f"
-                    sh "sudo rm -rf ${REPO};"
-                }
+         // clean the bodies
+            script {
+                sh "docker images -q |xargs docker rmi -f"
+                sh "sudo rm -rf ${REPO};"
             }
         }
     }
