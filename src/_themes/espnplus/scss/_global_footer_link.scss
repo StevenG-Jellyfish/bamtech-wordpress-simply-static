@@ -25,7 +25,120 @@ Stub Name:  global_footer_link.scss
        // border:1px dashed #FFFF00;
         }
     }   
+    // new lang select
+    .wpml-ls-legacy-dropdown {
+       width:140px;
+        // max-width:80%;
+    }
     
+    .wpml-ls-legacy-dropdown>ul {
+        position:relative;
+       // padding:0;margin:0 !important;
+        padding:0;margin:0;
+        list-style-type:none;
+    }
+    .wpml-ls-legacy-dropdown .wpml-ls-current-language:hover .wpml-ls-sub-menu,.wpml-ls-legacy-dropdown .wpml-ls-current-language:focus .wpml-ls-sub-menu{
+        visibility:visible;
+    }
+    .wpml-ls-legacy-dropdown .wpml-ls-item{
+        padding:0;
+        margin:0;
+        list-style-type:none;
+    }
+    .wpml-ls-legacy-dropdown a {
+        display:block;
+        text-decoration:none;
+        color:$espn-fotter-txt-grey;
+        border:1px solid $espn-fotter-txt-grey;
+        background-color:black;
+        padding:11px;
+        line-height:1;
+        border-radius:36px;
+        height:36px;
+        font-family:arial;
+        font-size:0.6875rem;
+    }
+    .wpml-ls-legacy-dropdown a span {
+        vertical-align:middle
+    }.wpml-ls-legacy-dropdown a.wpml-ls-item-toggle {
+        position:relative;
+        padding-right:calc(10px + .7em + .7em);
+    }
+    .rtl .wpml-ls-legacy-dropdown a.wpml-ls-item-toggle {
+        padding-right:10px;
+        padding-left:calc(10px + .7em + .7em);
+    }
+    .wpml-ls-legacy-dropdown a.wpml-ls-item-toggle:after {
+        font-family: "FontAwesome";
+        content:"\f107"; 
+        font-size: 32px;
+        color:$espn-fotter-txt-grey;
+        font-weight:100;
+        -webkit-text-stroke: 1px #000;
+        // vertical-align:middle;
+        top:2px;
+        margin:0;
+        padding:0;
+        // vertical-align:top;
+        // display:inline-block;
+        // border:.35em solid transparent;
+        // border:none;
+       // border:1px solid #fff;
+        // border-top:.5em solid;
+              // vertical-align:top;
+        display:inline-block;
+        border:0em solid transparent;
+        border:none;
+       // border:1px solid #fff;
+        border-top:0 solid;
+        position:absolute;
+        // right:0px;
+        right:10px;
+       // background:#fff;
+      //  top:calc(50% - .175em)
+    }
+    .rtl .wpml-ls-legacy-dropdown a.wpml-ls-item-toggle:after {
+        right:auto;
+        left:10px;
+    }
+    .wpml-ls-legacy-dropdown a:hover,.wpml-ls-legacy-dropdown a:focus,.wpml-ls-legacy-dropdown .wpml-ls-current-language:hover>a {
+        color:$espn-fotter-txt-grey;
+        background:black;
+    }
+    .wpml-ls-legacy-dropdown .wpml-ls-sub-menu {
+        visibility:hidden;
+        position:absolute;
+        top:100%;
+        right:0;
+        left:0;
+        border-top:0px solid #000;
+        padding:0;
+        margin:0;
+        list-style-type:none;z-index:101;
+    }
+    .wpml-ls-legacy-dropdown .wpml-ls-sub-menu a {
+        border-width:1px;
+        //border-radius:0px;
+        // margin-left:2px;
+        // margin-right:2px;
+        border-radius:36px;
+    }
+    .wpml-ls-legacy-dropdown .wpml-ls-flag {
+        display:inline;
+        vertical-align:middle;
+        width:18px;
+        height:12px;
+    }
+    .wpml-ls-legacy-dropdown .wpml-ls-flag+span {
+        margin-left:.4em;
+    }
+    .rtl .wpml-ls-legacy-dropdown .wpml-ls-flag+span {
+        margin-left:0;
+        margin-right:.4em;
+    }
+    
+
+    // old lang select
     .select-wrap {
         border-radius:36px;
         height:36px;

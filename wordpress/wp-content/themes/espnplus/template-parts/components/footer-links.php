@@ -45,12 +45,13 @@ if ($component !== false) {
             <div class="logo">
                 <img src="<?php echo get_template_directory_uri(); ?>/imgs/E+_logo.svg" alt="ESPN plus logo">
             </div>
-            <div class="select-wrap">
-                <select id="lang-selection" name="lang-select">
+            <!-- <div class="select-wrap"> -->
+                <?php if( dynamic_sidebar('lang-select')) : else : endif ; ?>
+                <!-- <select id="lang-selection" name="lang-select">
                         <option value="http://bamtech-build.jellyfish.local/">English (US)</option>
                         <option value="http://bamtech-build.jellyfish.local/es">Spanish</option>
-                </select>
-            </div>
+                </select> -->
+            <!-- </div> -->
     </div>
     <div class="espn-links">
         <?php 
