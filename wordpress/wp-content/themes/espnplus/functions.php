@@ -113,6 +113,17 @@ function espnplus_widgets_init() {
 		'before_title'  => '<h2 class="widget-title">',
 		'after_title'   => '</h2>',
 	) );
+	//
+	register_sidebar( array(
+		'name'          => esc_html__( 'LangSelect', 'espnplus' ),
+		'id'            => 'lang-select',
+		'description'   => esc_html__( 'Add widgets here.', 'espnplus' ),
+		'before_widget' => '<section id="%1$s" class="widget %2$s">',
+		'after_widget'  => '</section>',
+		'before_title'  => '<h2 class="widget-title">',
+		'after_title'   => '</h2>',
+	) );
+	//
 }
 add_action( 'widgets_init', 'espnplus_widgets_init' );
 
@@ -200,4 +211,6 @@ function wpshout_custom_sizes( $sizes ) {
 */
 add_filter( 'auto_update_plugin', '__return_false' );
 add_filter( 'auto_update_theme', '__return_false' );
+/* -------- */
+
 

@@ -48,18 +48,15 @@ if ($component !== false) {
                 </div>
 
                 <div class="select-wrap">
-                    <?php
-                    /*
-                    *    WPML Language selector, Will show anly if WPML active 
-                    *    (otherwise if not will break the FE with Warnings and errors)
-                    */ 
-                    if ( function_exists('icl_object_id') ) {
-                        do_action('wpml_add_language_selector');
-                    }
-                    ?>
+                    <?php 
+                        if (is_active_sidebar('lang-select')){
+                            dynamic_sidebar('lang-select');
+                        }
+                    ?>   
                 </div>
 
             </div>
+
             
         
             <div class="espn-links">
@@ -73,7 +70,7 @@ if ($component !== false) {
                 </div>
                 <?php }?>
             </div>
-            
+        
         </div>    
 
     </section>
