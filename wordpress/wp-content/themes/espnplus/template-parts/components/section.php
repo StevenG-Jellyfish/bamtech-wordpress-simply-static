@@ -49,23 +49,20 @@ if ($component !== false) {
                     
                     <div class="col-md-6 copy-container">
                         
-                        <h2 class="featurette-heading">
-                            <?php echo get_field('section_header', $section_id);?>
-                        </h2>
+                        <h2 class="featurette-heading"><?php the_field('section_header', $section_id,false);?></h2>
 
-                        <p class="lead">
-                            <?php echo get_field('section_body', $section_id);?>
-                        </p>
+                        <p class="lead"><?php the_field('section_body', $section_id,false);?></p>
+
                     </div>
 
                     <div class="col-md-6 media-container">    
                         <!--*** {{ section image at various media settings (presets form the admin) }} -->
                         <picture> 
-                            <?php $image = get_field('section_image', $section_id);?>
+                            <?php $image = get_field('section_image', $section_id); ?>
 
-                            <source media="(min-width: 990px)" srcset="<?echo $image['sizes']['medium_large'];?>">
-                            <source media="(min-width: 768px)" srcset="<?echo $image['sizes']['medium'];?>">
-                            <source media="(min-width: 420px)" srcset="<?echo $image['sizes']['large'];?>">
+                            <source media="(min-width: 990px)" srcset="<?echo $image['sizes']['bamtech-large-width'];?>">
+                            <source media="(min-width: 768px)" srcset="<?echo $image['sizes']['bamtech-medium-width'];?>">
+                            <source media="(min-width: 420px)" srcset="<?echo $image['sizes']['bamtech-small-width'];?>">
                             <source media="(min-width: 0px)" srcset="../_images/theme/ep_valueProp_Logos_multi.png">
                             
                             <img class="featurette-image img-fluid mx-auto" src="../_images/theme/ep_valueProp_Logos_multi.png">
