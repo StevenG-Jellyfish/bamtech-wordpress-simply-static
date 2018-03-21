@@ -137,7 +137,7 @@ EOPHP
         
     )
 
-    # Loop the the plugins
+    #Loop the the plugins
     echo "[ DESC ] Installing plugins"
     for PLUGIN in "${PLUGINS[@]}"; do
 

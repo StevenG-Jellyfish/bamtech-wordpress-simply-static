@@ -67,7 +67,7 @@ pipeline {
                         sh "gcloud docker -- push ${GCR}${REPO}-ecs-${WORDPRESS}; cd ../"
                         sh "./tagger.sh ${GCR} ${REPO} ${WORDPRESS} $TAG"
                         
-                        /* Images that do not usually get built..
+                        // Images that do not usually get built..
                         // build Nginx
                         sh "cd ${REPO}; docker build -f DockerfileWP . -t ${GCR}${REPO}-ecs-${NGINX}:$TAG"
                         sh "gcloud docker -- push ${GCR}${REPO}-ecs-${NGINX}; cd ../"
@@ -77,7 +77,7 @@ pipeline {
                         sh "cd ${REPO}; docker build -f DockerfileVSH . -t ${GCR}${REPO}-ecs-${VARNISH}:$TAG"
                         sh "gcloud docker -- push ${GCR}${REPO}-ecs-${VARNISH}; cd ../"
                         sh "./tagger.sh ${GCR} ${REPO} ${VARNISH} $TAG"
-                        */
+                        
                         
                       
                         // Tidy up
