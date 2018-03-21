@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: suzie-varnish
+ * Plugin Name: Varnish purge
  * Plugin URI: http://jellyfish.co.uk
  * Description: This plugin enables / purges Varnish content
  * Version: 1.0.0
@@ -9,13 +9,50 @@
  * License: GPL2
  */
 
+add_action( 'admin_menu', 'exec_varnish' , 10, 3);
 
 
-add_action( 'init', 'exec_varnish' , 10, 3);
+function exec_varnish(){
+	
+	/*
+	*  Add Submenu to settings main manu 
+	*/
+	add_submenu_page( 'options-general.php', 'Varnish purge', 'Varnish purge', 'manage_options', 'varnish-purge','varnish_purge_callback');
 
-function exec_varnish() {
+}
 
-	$obj = new Varnish();
+function varnish_purge_callback(){
+
+    $status_flag = false;
+    $error_flag = false;
+    $active =  (isset($_POST['varnish_hidden']))? $_POST['varnish_hidden'] : false;
+
+    if($active == 'Y') {
+        
+    //Purge Varnish cache
+    //$obj = new Varnish();
+    
+    /*
+    *  ENV VARS
+    *  ==================
+    *  SITE_URL
+    *  VARNISH_PATH
+    *  VARNISH_ENABLED
+    *  VARNISH_TOKEN
+    *  VARNISH_AWS
+    *  VARNISH_AWS_LB
+    *  VARNISH_AWS_REGION
+    */
+
+    $status_flag = true;
+    
+    } else {
+        //Normal page display
+        $status_flag = false;
+    }
+
+
+    include('varnish-form.php');
 }
 
 /**
@@ -123,3 +160,4 @@ class Varnish
         }
     }
 }
+?>
