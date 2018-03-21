@@ -6322,8 +6322,10 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
   max-width: 1280px;
   padding-top: var(--jumbotron-padding-y);
   padding-bottom: var(--jumbotron-padding-y);
+  padding: 0 0 0 0;
   margin: 0 auto;
   background-color: black;
+  overflow: hidden;
   /*  
     @media (min-width: 767px) {
       .jumbotron {
@@ -6340,7 +6342,6 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
     left: 0px;
     width: 100%;
     max-width: 1280px;
-    height: 100%;
     margin: 0 0 0 0;
     padding: 0 0 0 0;
     z-index: 1; }
@@ -6375,9 +6376,9 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
   .jumbotron .jumbotron-login {
     position: absolute;
     display: inline-block;
-    top: -14px;
+    top: 24px;
     right: 44px;
-    font-family: PlayoffProCond-BoldItalic, arial;
+    font-family: PlayoffProCond-MediumItalic, arial;
     font-size: 0.875rem;
     font-weight: 700;
     text-align: right;
@@ -6388,7 +6389,7 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
       top: -24px;
       right: 24px; } }
   .jumbotron .jumbotron-heading {
-    font-family: PlayoffProCond-Bold, arial;
+    font-family: PlayoffProCond-Medium, arial;
     font-size: 1.875rem;
     font-weight: 700;
     letter-spacing: -0.019rem;
@@ -6413,33 +6414,42 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
   @media (max-width: 767px) {
     .jumbotron .jumbotron-logo {
       margin-bottom: 1.5rem; } }
-  .jumbotron .btn {
-    margin-top: 1.875rem;
-    font-size: 1.125rem; }
-  @media (max-width: 767px) {
-    .jumbotron .btn {
-      font-family: PlayoffProCond-Bold, arial;
-      font-size: 1.125rem;
-      font-weight: 700;
-      line-height: 2.750rem; } }
+  .jumbotron .espn-cta-container {
+    margin-top: 1.875rem; }
+    .jumbotron .espn-cta-container .btn {
+      font-family: PlayoffProCond-Medium, arial;
+      font-size: 1.125rem; }
+    @media (max-width: 767px) {
+      .jumbotron .espn-cta-container .btn {
+        font-family: PlayoffProCond-Medium, arial;
+        font-size: 1.125rem;
+        font-weight: 700;
+        line-height: 2.750rem; } }
   .jumbotron p {
     margin: 0 0 0 0;
     padding: 0 0 0 0;
     color: white; }
     .jumbotron p.lead {
+      font-family: PlayoffProCond-Medium, arial;
       font-size: 2.500rem;
       letter-spacing: -0.025rem;
       line-height: 3.000rem; }
     @media (max-width: 767px) {
       .jumbotron p.lead {
-        font-family: PlayoffProCond-Bold, arial;
+        font-family: PlayoffProCond-Medium, arial;
         font-size: 1.500rem;
         font-weight: 700;
         line-height: 1.750rem; } }
     .jumbotron p.below-cta {
+      font-family: PlayoffProCond-Medium, arial;
       font-size: 1.250rem; }
-      .jumbotron p.below-cta a {
-        color: white; }
+      .jumbotron p.below-cta a:link,
+      .jumbotron p.below-cta a:visited,
+      .jumbotron p.below-cta a:active,
+      .jumbotron p.below-cta a:hover {
+        font-family: PlayoffProCond-Medium, arial;
+        text-decoration: underline !important;
+        color: white !important; }
     @media (max-width: 767px) {
       .jumbotron p.below-cta {
         font-size: 0.750rem;
@@ -6666,7 +6676,7 @@ section.section {
       section.section .row.flexbox .copy-container p {
         text-align: left; }
       section.section .row.flexbox .copy-container .featurette-heading {
-        font-family: PlayoffProCond-Bold, arial;
+        font-family: PlayoffProCond-Medium, arial;
         font-size: 2.000rem;
         font-weight: 700;
         letter-spacing: -0.010rem;

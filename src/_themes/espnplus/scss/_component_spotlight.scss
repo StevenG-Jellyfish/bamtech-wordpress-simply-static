@@ -15,9 +15,11 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
     max-width: 1280px;
     padding-top: var(--jumbotron-padding-y);
     padding-bottom: var(--jumbotron-padding-y);
+    padding: 0 0 0 0;
     margin: 0 auto;
     background-color: black;
-    /*  
+    overflow: hidden;
+/*  
     @media (min-width: 767px) {
       .jumbotron {
         padding-top: calc(var(--jumbotron-padding-y) * 2);
@@ -33,10 +35,10 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
         left: 0px;
         width: 100%;
         max-width: 1280px;
-        height: 100%;
         margin: 0 0 0 0;
         padding: 0 0 0 0;
         z-index: 1;
+
         video {
             display: inline-block;
             width: 100%;
@@ -46,17 +48,21 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
             video {
                 width: 100%;
                 max-width: 767px;
+
                 source {
                     width: 100%;
                     max-width: 767px;
                 }
+
                 img {
                     width: 100%;
                     max-width: 767px;
                 }
             } // video
         } // max-width: 767px
+
     } // .jubmotron-background
+
     .container {
         position: relative;
         width: 100%;
@@ -74,12 +80,13 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
             padding: .5rem 0;
         } // .container
     } // max-width: 767px
+
     .jumbotron-login {
         position: absolute;
         display: inline-block;
-        top: -14px;
+        top: 24px;
         right: 44px;
-        font-family: PlayoffProCond-BoldItalic, arial;
+        font-family: PlayoffProCond-MediumItalic, arial;
         font-size: 0.875rem;
         font-weight: 700;
         text-align: right;
@@ -92,17 +99,20 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
             right: 24px;
         } // .jumbotron-login
     } // max-width: 767px
+
     .jumbotron-heading {
-        font-family: PlayoffProCond-Bold, arial;
+        font-family: PlayoffProCond-Medium, arial;
         font-size: 1.875rem;
         font-weight: 700;
         letter-spacing: -0.019rem;
         line-height: 3.000rem;
         color: white;
+
         em {
             font-style: normal;
             color: $primary;
         }
+
     } //.jumbotron-heading
     @media (max-width: 767px) {
         .jumbotron-heading {
@@ -110,8 +120,10 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
             letter-spacing: -0.013rem;
         } // .jumbotron-heading
     } // max-width: 767px
+
     .jumbotron-logo {
         margin-bottom: 3rem;
+
         img {
             width: 392px;
             height: 76px;
@@ -122,46 +134,62 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
                 height: 44px;
             } // img
         } // max-width: 767px
+
     } // .jumbotron-logo
     @media (max-width: 767px) {
         .jumbotron-logo {
             margin-bottom: 1.5rem;
         } // .jumbotron-logo
     } // max-width: 767px
-    .btn {
+
+    .espn-cta-container {
         margin-top: 1.875rem;
-        font-size: 1.125rem;
-        //  *** need to have the bottom right corner cut off
-    }
-    @media (max-width: 767px) {
-        .btn {
-            font-family: PlayoffProCond-Bold, arial;
+
+        .btn {            
+            font-family: PlayoffProCond-Medium, arial;            
             font-size: 1.125rem;
-            font-weight: 700;
-            line-height: 2.750rem;
-        } // .btn
-    } // max-width: 767px
+        }
+        @media (max-width: 767px) {
+            .btn {
+                font-family: PlayoffProCond-Medium, arial;
+                font-size: 1.125rem;
+                font-weight: 700;
+                line-height: 2.750rem;
+            } // .btn
+        } // max-width: 767px
+    } // .espn-cta-container
+
     p {
         margin: 0 0 0 0;
         padding: 0 0 0 0;
         color: white;
+
         &.lead {
+            font-family: PlayoffProCond-Medium, arial;
             font-size: 2.500rem;
             letter-spacing: -0.025rem;
             line-height: 3.000rem;
         } //.lead
         @media (max-width: 767px) {
             &.lead {
-                font-family: PlayoffProCond-Bold, arial;
+                font-family: PlayoffProCond-Medium, arial;
                 font-size: 1.500rem;
                 font-weight: 700;
                 line-height: 1.750rem;
             } // &.lead
         } // max-width: 767px
+
         &.below-cta {
+            font-family: PlayoffProCond-Medium, arial;
             font-size: 1.250rem;
-            a {
-                color: white;
+
+            a:link,
+            a:visited,
+            a:active,
+            a:hover {
+                font-family: PlayoffProCond-Medium, arial;
+                text-decoration: underline !important;
+                color: white !important;
             }
         }
         @media (max-width: 767px) {
@@ -170,5 +198,7 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
                 line-height: 1.125rem;
             } // &.below-cta
         } // max-width: 767px
+
     } // p
+
 } // .jumbotron
