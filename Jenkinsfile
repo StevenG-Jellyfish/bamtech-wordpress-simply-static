@@ -118,8 +118,6 @@ pipeline {
                     sh "sudo rm -rf *"
                     // User Input to complete.
                     }
-                    slackSend channel: '#deploy', color: 'good', message: "Please access > (<${env.BUILD_URL}|Open>) and accept or decline build to continue..."
-                    input message: "Image ${WORDPRESS}:$TAG has been released to ${UAT}, please test and confirm..."
                 }            
             }
         }
@@ -154,8 +152,6 @@ pipeline {
                     sh "sudo rm -rf *"
                     // User Input to complete.
                     }
-                    slackSend channel: '#deploy', color: 'good', message: "Deployment to ${PROD} has completed"
-                   //input message: "Image ${WORDPRESS}:$TAG has been released to stage, please test and confirm..."
                 }            
             }
         }
