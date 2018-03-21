@@ -27,6 +27,9 @@ sub vcl_recv {
     	unset req.http.Accept-Language;
     	unset req.http.User-Agent;
 
+	#temperarily disable cache
+	return (pipe);
+	
 	# The purge...no idea if this works
 		if (req.method == "PURGE") {
 		    if (!client.ip ~ purge) {
