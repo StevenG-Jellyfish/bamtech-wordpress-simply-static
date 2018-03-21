@@ -6240,7 +6240,8 @@ Stub Name:  global_header.scss
     color: black; }
   .menu .menu-item a:active,
   .menu .menu-item a:hover {
-    color: white; }
+    color: black;
+    text-decoration: underline; }
   .menu .menu-item:nth-child(2) {
     width: 42px;
     margin-left: 38px; }
@@ -6254,6 +6255,12 @@ Stub Name:  global_header.scss
         margin: 0; }
       .menu .menu-item:nth-child(2) {
         margin-left: 0; } }
+  .menu #menu-item-320.menu-item a:link,
+  .menu #menu-item-320.menu-item a:visited,
+  .menu #menu-item-320.menu-item a:active,
+  .menu #menu-item-320.menu-item a:hover {
+    margin-top: 0;
+    display: none; }
 
 .site-title {
   display: none; }
@@ -6281,7 +6288,8 @@ Stub Name:  global_header.scss
     .espn-cta-btn-container .parallelogram:hover, .espn-cta-btn-container .parallelogram:active {
       background-color: black;
       color: white; }
-  .espn-cta-btn-container .btn.btn-primary {
+  .espn-cta-btn-container .btn.btn-primary:link,
+  .espn-cta-btn-container .btn.btn-primary:visited {
     cursor: pointer;
     position: absolute;
     display: inline-block;
@@ -6307,6 +6315,10 @@ Stub Name:  global_header.scss
     webkit-transform: skew(45deg);
     ms-transform: skew(45deg);
     transform: skew(45deg); }
+  .espn-cta-btn-container .btn.btn-primary:active,
+  .espn-cta-btn-container .btn.btn-primary:hover {
+    text-decoration: none;
+    color: white; }
 
 /*--------------------------------------------------------------
 # component_spotlight
@@ -6758,8 +6770,12 @@ section.section {
         display: flex;
         flex-direction: row;
         flex-wrap: wrap; } }
-    section.section.odd a {
-      color: black; }
+    section.section.odd a:link,
+    section.section.odd a:visited,
+    section.section.odd a:active,
+    section.section.odd a:hover {
+      color: black;
+      text-decoration: underline; }
   @media (max-width: 767px) {
     section.section.odd {
       padding-top: 2rem;
@@ -6781,8 +6797,12 @@ section.section {
         display: flex;
         flex-direction: row;
         flex-wrap: wrap; } }
-    section.section.even a {
-      color: white; }
+    section.section.even a:link,
+    section.section.even a:visited,
+    section.section.even a:active,
+    section.section.even a:hover {
+      color: white;
+      text-decoration: underline; }
   @media (max-width: 767px) {
     section.section.even {
       padding-top: 0;
