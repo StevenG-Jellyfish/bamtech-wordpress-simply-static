@@ -38,32 +38,32 @@ if ($component !== false) {
      */ 
     ?>
   
-    <!--  Cut just this for the component -->
+   
 
     <section class="devices-bar">
         <div class="container">
             <h3 class="devices-header">
-                Available on All Your Favorite Supported Devices
+                 <?php echo  __( 'Available on All Your Favorite Supported Devices', 'espnplus' ); ?>
             </h3>
             <div class="devices-container">  
 
             <?php foreach($section_ids as $section_id) {?>
+                
                 <div class="device">
-                <?php $link = get_field('device_link', $section_id);?>
-                    <a href="<?php echo $link;?>">
-                        <?php $image = get_field('device_image', $section_id);?>
-                        <img class="device-image" src="<?echo $image['sizes']['medium'];?>">
-                        <p class="device-copy">
-                            <?php echo get_field('device_text', $section_id);?>
-                        </p>
-                    </a>
+                
+                    <?php $image = get_field('device_image', $section_id);?>
+                    <img class="device-image" src="<?echo $image['sizes']['medium'];?>" alt="<?php echo the_field('device_text', $section_id,false);?>">
+                    <p class="device-copy"><?php echo the_field('device_text', $section_id,false);?></p>
+                    
                 </div>
+
             <?php } ?>
+
             </div>    
 
         </div>
     </section>
-    <!--  //End Cut -->
+   
 
 <?php 
 }
