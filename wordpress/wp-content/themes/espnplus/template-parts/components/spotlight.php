@@ -19,6 +19,8 @@
     <section class="jumbotron text-center">
         <div class="container">
             
+            <a class="jumbotron-login" href="#login">Log In</a>
+            
             <h1 class="jumbotron-heading"><?php the_field('spotlight_overlogo_text', $component);?></h1>
             
             <div class="jumbotron-logo">
