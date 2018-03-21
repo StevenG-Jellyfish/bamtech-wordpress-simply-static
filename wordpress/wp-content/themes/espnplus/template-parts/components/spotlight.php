@@ -47,7 +47,7 @@
         <div class="container-fluid jubmotron-background">
 
             <div class="embed-responsive embed-responsive-16by9 div_style">
-                <video id="background-movie" preload autoplay>
+                <video id="background-movie" preload autoplay loop>
                     <source src="<?php echo $video['url'];?>" type="video/mp4">
                     <source src="<?php echo $video['url'];?>" type="video/ogg">
                     <?php $video_image = get_field('spotlight_video_image', $component);?>
