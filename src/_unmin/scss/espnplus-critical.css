@@ -6373,11 +6373,12 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
       max-width: 767px;
       margin: 0;
       padding: .5rem 0; } }
-  .jumbotron .jumbotron-login {
+  .jumbotron .jumbotron-login:link,
+  .jumbotron .jumbotron-login:visited {
     position: absolute;
     display: inline-block;
     top: 24px;
-    right: 44px;
+    right: 62px;
     font-family: PlayoffProCond-MediumItalic, arial !important;
     font-size: 0.875rem;
     font-weight: 700;
@@ -6386,8 +6387,11 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
     color: #fefefe; }
   @media (max-width: 767px) {
     .jumbotron .jumbotron-login {
-      top: -24px;
+      top: 14px;
       right: 24px; } }
+  .jumbotron .jumbotron-login:active,
+  .jumbotron .jumbotron-login:hover {
+    text-decoration: underline; }
   .jumbotron .jumbotron-heading {
     font-family: PlayoffProCond-Medium, arial !important;
     font-size: 1.875rem;
