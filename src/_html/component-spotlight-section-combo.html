@@ -1,0 +1,228 @@
+<!--
+/*!
+Theme Name: espnplus
+Stub Name:  component_spotlight.html 
+Component Souce: http://jf-style-guide.sgel6.dev.jellyfish.local/hero.html
+*/
+-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="manifest" href="manifest.json" />
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+
+    <link rel="stylesheet" href="../_unmin/scss/espnplus-critical.css" type="text/css" />
+    <link rel="stylesheet" href="../_unmin/scss/espnplus-non-critical.css" type="text/css" />
+
+    <script
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="../_unmin/js/espnplus-top.js"></script>
+    <script src="../_unmin/js/espnplus-bottom.js"></script>
+
+    <body>
+
+
+        <!--  Cut just this for the component -->
+        <section class="jumbotron text-center">
+            <div class="container">
+                <a class="jumbotron-login" href="#login">Log In</a>
+                <h1 class="jumbotron-heading">{{ spotlight_overlogo_text }} <em>MORE</em></h1>
+                <div class="jumbotron-logo">
+                    <img class="espn-white" src="../_svgs/ESPN+_logo_white.svg">
+                    <!--*** replace src with {{spotlight_logo_image}} -->
+                </div>
+                <div class="lead">
+                    The NEW {{ spotlight_main_text }} ESPN.<br> Live Sports, ESPN Originals, Only $4.99 a month.
+                </div>
+                <div class="espn-cta-container">
+                    <div class="parallelogram">
+                        <a href="{{ spotlight_cta_link }}" class="btn btn-primary espn-cta">{{ spotlight_cta_text }}</a>
+                        <!--*** Add in phase II if we put color controls into admin:
+                        style="background-color: {{ spotlight_cta_background_color }}; color: {{ spotlight_cta_text_color }};" 
+                        -->
+                    </div>
+                </div>
+                <div class="below-cta">
+                    <p>{{ spotlight_belowcta_text }} <a href="#">terms</a>.</p>
+                </div>
+            </div>
+            <div class="container-fluid jubmotron-background">
+                <div class="embed-responsive embed-responsive-16by9 div_style">
+                    <video id="background-movie"  class="embed-responsive-item" preload autoplay>
+                        <!--*** replace src with {{spotlight_background-video}} -->
+                        <source src="../_video/Genertic_16x9.mp4" 
+                            type="video/mp4" media="(min-width:768px)">
+                        <source src="../_video/Genertic_3x4.mp4" 
+                                type="video/mp4" media="(max-width:767px)"> 
+                                
+                        <picture> <!--*** {{ section image at various media settings (presets form the admin) }} -->
+                            <source media="(min-width: 768px)"      
+                                srcset="../_images/theme/Genertic_16x9.png">
+                            <source media="(max-width: 767px)"  
+                                    srcset="../_images/theme/Genertic_3X4.png">
+                            <img src="../_images/theme/Genertic_16x9.png" title="Your browser does not support the &lt; video &gt; tag">
+                        </picture>
+
+                        <img src="../_images/theme/Genertic_16x9.png" title="Your browser does not support the &lt; video &gt; tag">
+                        <!--*** replace src with {{spotlight_background_image}} -->
+                    </video>
+                </div>
+            </div>
+        </section>
+        <!--  //End Cut -->
+
+
+        <!--  Cut just this for the component -->
+
+<section class="section even first-section">
+        <div class="container">
+            <div class="row flexbox">
+                <div class="col-md-6 copy-container">
+                    <h2 class="featurette-heading">EVEN featurette heading. <span class="text-muted">It'll blow your mind.</span> {{ section_header }}</h2>
+    
+                    <p class="lead">{{ section_body }} Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. <a href="#">Fusce dapibus</a>, tellus ac cursus commodo.</p>
+                </div>
+                <div class="col-md-6 media-container">    
+                    <picture> <!--*** {{ section image at various media settings (presets form the admin) }} -->
+                        <source media="(min-width: 990px)" srcset="../_images/theme/ep_valueProp_Logos_multi.png">
+                        <source media="(min-width: 768px)" srcset="../_images/theme/ep_valueProp_Logos_multi-med.png">
+                        <source media="(min-width: 420px)" srcset="../_images/theme/ep_valueProp_Logos_multi-sm.png">
+                        <source media="(min-width: 0px)" srcset="../_images/theme/ep_valueProp_Logos_multi.png">
+                        
+                        <img class="featurette-image img-fluid mx-auto" src="../_images/theme/ep_valueProp_Logos_multi.png">
+                    </picture>
+                    <!-- {{ //section_image }} -->
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!--  //End Cut -->
+    
+    <!--  Cut just this for the component -->
+    
+    <section class="section odd">
+        <div class="container">
+            <div class="row flexbox">
+                <div class="col-md-6 copy-container">
+                    <h2 class="featurette-heading">ODD featurette heading. <span class="text-muted">It'll blow your mind.</span> {{ section_header }}</h2>
+    
+                    <p class="lead">{{ section_body }} Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. <a href="#">Fusce dapibus</a>, tellus ac cursus commodo.</p>
+                </div>
+                <div class="col-md-6 media-container">
+                    <picture> <!--*** {{ section image at various media settings (presets form the admin) }} -->
+                        <source media="(min-width: 990px)" srcset="../_images/theme/ep_valueProp_Logos_multi.png">
+                        <source media="(min-width: 768px)" srcset="../_images/theme/ep_valueProp_Logos_multi-med.png">
+                        <source media="(min-width: 420px)" srcset="../_images/theme/ep_valueProp_Logos_multi-sm.png">
+                        <source media="(min-width: 0px)" srcset="../_images/theme/ep_valueProp_Logos_multi.png">
+                        
+                        <img class="featurette-image img-fluid mx-auto" src="../_images/theme/ep_valueProp_Logos_multi.png">
+                    </picture>
+                    <!-- {{ //section_image }} -->
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!--  //End Cut -->
+    
+    <!--  Cut just this for the component -->
+    
+    <section class="section even">
+        <div class="container">
+            <div class="row flexbox">
+                <div class="col-md-6 copy-container">
+                    <h2 class="featurette-heading">EVEN featurette heading. <span class="text-muted">It'll blow your mind.</span> {{ section_header }}</h2>
+    
+                    <p class="lead">{{ section_body }} Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. <a href="#">Fusce dapibus</a>, tellus ac cursus commodo.</p>
+                </div>
+                <div class="col-md-6 media-container">    
+                    <picture> <!--*** {{ section image at various media settings (presets form the admin) }} -->
+                        <source media="(min-width: 990px)" srcset="../_images/theme/ep_valueProp_Logos_multi.png">
+                        <source media="(min-width: 768px)" srcset="../_images/theme/ep_valueProp_Logos_multi-med.png">
+                        <source media="(min-width: 420px)" srcset="../_images/theme/ep_valueProp_Logos_multi-sm.png">
+                        <source media="(min-width: 0px)" srcset="../_images/theme/ep_valueProp_Logos_multi.png">
+                        
+                        <img class="featurette-image img-fluid mx-auto" src="../_images/theme/ep_valueProp_Logos_multi.png">
+                    </picture>
+                    <!-- {{ //section_image }} -->
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!--  //End Cut -->
+    
+    
+    <!--  Cut just this for the component -->
+    
+    <section class="section odd">
+        <div class="container">
+            <div class="row flexbox">
+                <div class="col-md-6 copy-container">
+                    <h2 class="featurette-heading">ODD featurette heading. <span class="text-muted">It'll blow your mind.</span> {{ section_header }}</h2>
+    
+                    <p class="lead">{{ section_body }} Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. <a href="#">Fusce dapibus</a>, tellus ac cursus commodo.</p>
+                </div>
+                <div class="col-md-6 media-container">
+                    <picture> <!--*** {{ section image at various media settings (presets form the admin) }} -->
+                        <source media="(min-width: 990px)" srcset="../_images/theme/ep_valueProp_Logos_multi.png">
+                        <source media="(min-width: 768px)" srcset="../_images/theme/ep_valueProp_Logos_multi-med.png">
+                        <source media="(min-width: 420px)" srcset="../_images/theme/ep_valueProp_Logos_multi-sm.png">
+                        <source media="(min-width: 0px)" srcset="../_images/theme/ep_valueProp_Logos_multi.png">
+                        
+                        <img class="featurette-image img-fluid mx-auto" src="../_images/theme/ep_valueProp_Logos_multi.png">
+                    </picture>
+                    <!-- {{ //section_image }} -->
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!--  //End Cut -->
+    
+    <!--  Cut just this for the component -->
+    
+    <section class="section even last-section">
+        <div class="container">
+            <div class="row flexbox">
+                <div class="col-md-6 copy-container">
+                    <h2 class="featurette-heading">EVEN featurette heading. <span class="text-muted">It'll blow your mind.</span> {{ section_header }}</h2>
+    
+                    <p class="lead">{{ section_body }} Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. <a href="#">Fusce dapibus</a>, tellus ac cursus commodo.</p>
+                </div>
+                <div class="col-md-6 media-container">
+                    <picture> <!--*** {{ section image at various media settings (presets form the admin) }} -->
+                        <source media="(min-width: 990px)" srcset="../_images/theme/ep_valueProp_Logos_multi.png">
+                        <source media="(min-width: 768px)" srcset="../_images/theme/ep_valueProp_Logos_multi-med.png">
+                        <source media="(min-width: 420px)" srcset="../_images/theme/ep_valueProp_Logos_multi-sm.png">
+                        <source media="(min-width: 0px)" srcset="../_images/theme/ep_valueProp_Logos_multi.png">
+                        
+                        <img class="featurette-image img-fluid mx-auto" src="../_images/theme/ep_valueProp_Logos_multi.png">
+                    </picture>
+                    <!-- {{ //section_image }} -->
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!--  //End Cut -->
+    
+    <div style="background-color: yellow; height: 100px;"></div>
+
+
+    </body>
+
+</html>
