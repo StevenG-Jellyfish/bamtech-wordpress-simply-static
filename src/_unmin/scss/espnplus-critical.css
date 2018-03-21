@@ -6770,8 +6770,12 @@ section.section {
         display: flex;
         flex-direction: row;
         flex-wrap: wrap; } }
-    section.section.odd a {
-      color: black; }
+    section.section.odd a:link,
+    section.section.odd a:visited,
+    section.section.odd a:active,
+    section.section.odd a:hover {
+      color: black;
+      text-decoration: underline; }
   @media (max-width: 767px) {
     section.section.odd {
       padding-top: 2rem;
@@ -6793,8 +6797,12 @@ section.section {
         display: flex;
         flex-direction: row;
         flex-wrap: wrap; } }
-    section.section.even a {
-      color: white; }
+    section.section.even a:link,
+    section.section.even a:visited,
+    section.section.even a:active,
+    section.section.even a:hover {
+      color: white;
+      text-decoration: underline; }
   @media (max-width: 767px) {
     section.section.even {
       padding-top: 0;

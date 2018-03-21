@@ -154,10 +154,14 @@ section.section {
         flex-direction: row;
         flex-wrap: wrap;
       } // .row.flexbox {  
-    } // max-width: 767px
+    } // max-width: 767px 
 
-    a {
+    a:link,
+    a:visited,
+    a:active,
+    a:hover {
       color: black;
+      text-decoration: underline;
     }
 
   } // .odd
@@ -197,8 +201,12 @@ section.section {
       } // .row.flexbox {  
     } // max-width: 767px
 
-    a {
+    a:link,
+    a:visited,
+    a:active,
+    a:hover {
       color: white;
+      text-decoration: underline;
     } // a
 
   } // .even
