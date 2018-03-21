@@ -10,14 +10,14 @@
  */
 
 ?>
-	</div><!-- #content -->
+	</div>
 
 	<footer id="colophon" class="site-footer">
 		<div class="site-info">
 			
-		</div><!-- .site-info -->
-	</footer><!-- #colophon -->
-</div><!-- #page -->
+		</div>
+	</footer>
+</div>
 </div>
 <link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri().'/css/espnplus-non-critical.min.css'; ?>">
 <?php wp_footer(); ?>

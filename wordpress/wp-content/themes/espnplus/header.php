@@ -64,19 +64,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     ?>
                     <p class="site-description"><?php echo $espnplus_description; /* WPCS: xss ok. */ ?></p>
                 <?php endif; ?>
-            </div><!-- .site-branding -->		
+            </div>
             <nav class="main-navigation">
-                <!-- <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'espnplus' ); ?></button> -->
+                
                 <?php
                 wp_nav_menu( array(
                     'theme_location' => 'menu-1',
                     'menu_id'        => 'primary-menu',
                 ) );
                 ?>
-            </nav><!-- #site-navigation -->
+            </nav>
             </div>
         </div>
-    </header><!-- #masthead -->
+    </header>
     <div class="container-fluid">
     <a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'espnplus' ); ?></a>
     
