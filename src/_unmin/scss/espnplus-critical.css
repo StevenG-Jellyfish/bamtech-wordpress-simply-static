@@ -6424,27 +6424,27 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
         font-size: 1.125rem;
         font-weight: 700;
         line-height: 2.750rem; } }
-  .jumbotron div {
+  .jumbotron p {
     margin: 0 0 0 0;
     padding: 0 0 0 0;
     color: white; }
-    .jumbotron div.lead {
+    .jumbotron p.lead {
       font-size: 2.500rem;
       letter-spacing: -0.025rem;
       line-height: 3.000rem; }
     @media (max-width: 767px) {
-      .jumbotron div.lead {
+      .jumbotron p.lead {
         font-family: PlayoffProCond-Medium, arial;
         font-size: 1.500rem;
         font-weight: 700;
         line-height: 1.750rem; } }
-    .jumbotron div.below-cta {
+    .jumbotron p.below-cta {
       font-size: 1.250rem; }
-      .jumbotron div.below-cta a {
+      .jumbotron p.below-cta a {
         text-decoration: underline;
         color: white; }
     @media (max-width: 767px) {
-      .jumbotron div.below-cta {
+      .jumbotron p.below-cta {
         font-size: 0.750rem;
         line-height: 1.125rem; } }
 
