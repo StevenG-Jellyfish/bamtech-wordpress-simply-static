@@ -87,7 +87,7 @@ pipeline {
                 }
             }
         }
-        stage('Deploy') {
+        stage('DeployUat') {
             // Deploy stage agent selector
             agent {
                 node {
@@ -118,7 +118,43 @@ pipeline {
                     sh "sudo rm -rf *"
                     // User Input to complete.
                     }
-                    //slackSend channel: '#deploy', color: 'good', message: "Please access > (<${env.BUILD_URL}|Open>) and accept or decline build to continue..."
+                    slackSend channel: '#deploy', color: 'good', message: "Please access > (<${env.BUILD_URL}|Open>) and accept or decline build to continue..."
+                    input message: "Image ${WORDPRESS}:$TAG has been released to ${UAT}, please test and confirm..."
+                }            
+            }
+        }
+        stage('DeployProd') {
+            // Deploy stage agent selector
+            agent {
+                node {
+                    label 'ecs_deployer'
+                    customWorkspace '/var/jenkins_home/shared/ecs_deployer'
+                }
+            }
+             
+            //// Deploy step use jenkins master credentials to pull tag
+            steps {
+                withCredentials([
+                                [$class: 'StringBinding', credentialsId: 'TOKEN', variable: 'API_TOKEN'],
+                                [$class: 'FileBinding', credentialsId: 'ECS_DEPLOY', variable: 'DEPLOYER'],
+                                [$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'BAM_AWS', accessKeyVariable: 'BAM_ACCESS', secretKeyVariable: 'BAM_SECRET']]) {
+                // send slack notification that deploy stage has started
+                slackSend channel: '#deploy', color: 'good', message: "Image ${WORDPRESS} deploy has started in ${PROD}> (<${env.RUN_DISPLAY_URL}|Open>) for details"
+                // Deploy step grab release TAG set image id and deploy new revisions
+                script {
+                    sh "curl -sS -H 'Authorization: token  ${API_TOKEN}' ${GIT}${GITORG}${REPO}/releases | jq  -r '.[].tag_name'| head -1 > tags"
+                    def TAG=readFile('tags')
+                    
+                    // Export keys and start deployment
+                    sh "sudo cp ${env.DEPLOYER} ecs.sh; sudo chmod +x ecs.sh; sudo chown jenkins: ecs.sh"
+                    sh "echo 'export AWS_SECRET_ACCESS_KEY=${env.BAM_SECRET}\nexport AWS_ACCESS_KEY_ID=${env.BAM_ACCESS}\nexport AWS_DEFAULT_REGION=${REGION}\nexport AWS_DEFAULT_OUTPUT=json' >> aws.env"
+                    sh ". ./aws.env ; ecs deploy ${PRODCLUSTER} ${PROD}-${WORDPRESS} --image ${WORDPRESS} ${GCR}${REPO}-ecs-${WORDPRESS}:latest"
+                    
+                    // Clean up
+                    sh "sudo rm -rf *"
+                    // User Input to complete.
+                    }
+                    slackSend channel: '#deploy', color: 'good', message: "Deployment to ${PROD} has completed"
                    //input message: "Image ${WORDPRESS}:$TAG has been released to stage, please test and confirm..."
                 }            
             }
