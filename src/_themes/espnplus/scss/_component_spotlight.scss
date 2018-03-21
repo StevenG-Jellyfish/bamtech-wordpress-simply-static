@@ -183,7 +183,10 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
             font-family: PlayoffProCond-Medium, arial;
             font-size: 1.250rem;
 
-            a {
+            a:link,
+            a:visited,
+            a:active,
+            a:hover {
                 font-family: PlayoffProCond-Medium, arial;
                 text-decoration: underline !important;
                 color: white !important;

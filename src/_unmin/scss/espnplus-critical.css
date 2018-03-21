@@ -6443,7 +6443,10 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
     .jumbotron p.below-cta {
       font-family: PlayoffProCond-Medium, arial;
       font-size: 1.250rem; }
-      .jumbotron p.below-cta a {
+      .jumbotron p.below-cta a:link,
+      .jumbotron p.below-cta a:visited,
+      .jumbotron p.below-cta a:active,
+      .jumbotron p.below-cta a:hover {
         font-family: PlayoffProCond-Medium, arial;
         text-decoration: underline !important;
         color: white !important; }
