@@ -110,7 +110,7 @@ pipeline {
                     def TAG=readFile('tags')
                     sh "sudo cp ${env.DEPLOYER} ecs.sh; sudo chmod +x ecs.sh; sudo chown jenkins: ecs.sh"
                     sh "echo 'export AWS_SECRET_ACCESS_KEY=${env.BAM_SECRET}\nexport AWS_ACCESS_KEY_ID=${env.BAM_ACCESS}\nexport AWS_DEFAULT_REGION=${REGION}\nexport AWS_DEFAULT_OUTPUT=json' >> aws.env"
-                    sh ". ./aws.env ; ./ecs.sh ${GCR} ${REPO} $TAG ${WORDPRESS} ${UATCLUSTER} ${UAT}"
+                    sh ". ./aws.env ; ecs deploy ${UATCLUSTER} ${UAT}-${WORDPRESS} --image ${WORDPRESS} ${GCR}${REPO}-ecs-${WORDPRESS}:$TAG"
                     // User Input to complete.
                     }
                     //slackSend channel: '#deploy', color: 'good', message: "Please access > (<${env.BUILD_URL}|Open>) and accept or decline build to continue..."
