@@ -6259,8 +6259,7 @@ Stub Name:  global_header.scss
   .menu #menu-item-320.menu-item a:visited,
   .menu #menu-item-320.menu-item a:active,
   .menu #menu-item-320.menu-item a:hover {
-    margin-top: 0;
-    display: none; }
+    margin-top: 0; }
 
 .site-title {
   display: none; }
