@@ -19,8 +19,8 @@
     <section class="jumbotron text-center">
         <div class="container">
             
-            <a class="jumbotron-login" href="#login">Log In</a>
-            
+            <a class="jumbotron-login" href="https://secure.web.plus.espn.com">Log In</a>
+
             <h1 class="jumbotron-heading"><?php the_field('spotlight_overlogo_text', $component);?></h1>
             
             <div class="jumbotron-logo">
