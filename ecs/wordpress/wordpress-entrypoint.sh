@@ -79,7 +79,8 @@ if [[ "$1" == apache2* ]] || [ "$1" == php-fpm ]; then
 EOPHP
 
 #disabling problematic plugin during deployment and will re-enable at the end
-   wp plugin deactivate --allow-root sitepress-multilingual-cms 
+   wp plugin deactivate --allow-root sitepress-multilingual-cms
+   wp plugin deactivate --allow-root w3-total-cache
    
    
     ln -s /mnt/uploads /var/www/html/wp-content/uploads
