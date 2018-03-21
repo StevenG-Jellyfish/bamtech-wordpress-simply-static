@@ -6417,6 +6417,7 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
   .jumbotron .espn-cta-container {
     margin-top: 1.875rem; }
     .jumbotron .espn-cta-container .btn {
+      font-family: PlayoffProCond-Medium, arial;
       font-size: 1.125rem; }
     @media (max-width: 767px) {
       .jumbotron .espn-cta-container .btn {
@@ -6429,6 +6430,7 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
     padding: 0 0 0 0;
     color: white; }
     .jumbotron p.lead {
+      font-family: PlayoffProCond-Medium, arial;
       font-size: 2.500rem;
       letter-spacing: -0.025rem;
       line-height: 3.000rem; }
@@ -6439,10 +6441,12 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
         font-weight: 700;
         line-height: 1.750rem; } }
     .jumbotron p.below-cta {
+      font-family: PlayoffProCond-Medium, arial;
       font-size: 1.250rem; }
       .jumbotron p.below-cta a {
-        text-decoration: underline;
-        color: white; }
+        font-family: PlayoffProCond-Medium, arial;
+        text-decoration: underline !important;
+        color: white !important; }
     @media (max-width: 767px) {
       .jumbotron p.below-cta {
         font-size: 0.750rem;
