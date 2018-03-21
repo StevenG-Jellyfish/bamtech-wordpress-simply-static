@@ -6602,6 +6602,12 @@ Stub Name:  global_footer_link.scss
       line-height: 0.8125rem;
       color: #787878;
       font-weight: normal; }
+    .espn-links .link a:active {
+      font-family: arial;
+      font-size: 0.8125rem;
+      line-height: 0.8125rem;
+      color: #787878;
+      font-weight: normal; }
 
 .footer-links {
   position: relative;

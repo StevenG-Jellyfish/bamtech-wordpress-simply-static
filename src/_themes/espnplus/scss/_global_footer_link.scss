@@ -246,6 +246,13 @@ Stub Name:  global_footer_link.scss
             color:$espn-fotter-txt-grey;
             font-weight:normal;
         }
+        a:active {
+            font-family:arial;
+            font-size:0.8125rem;
+            line-height:0.8125rem;
+            color:$espn-fotter-txt-grey;
+            font-weight:normal;
+        }
     }
 }
 .footer-links {
