@@ -47,13 +47,15 @@ if ($component !== false) {
                     <img src="<?php echo get_template_directory_uri(); ?>/imgs/E+_logo.svg" alt="ESPN plus logo">
                 </div>
 
+               
+                <?php if (is_active_sidebar('lang-select')){ ?>
+                            
                 <div class="select-wrap">
-                    <?php 
-                        if (is_active_sidebar('lang-select')){
-                            dynamic_sidebar('lang-select');
-                        }
-                    ?>   
+                    <?php dynamic_sidebar('lang-select'); ?>
                 </div>
+                
+                <?php } ?>   
+               
 
             </div>
 
@@ -74,6 +76,6 @@ if ($component !== false) {
         </div>    
 
     </section>
-    <!-- // section --> 
+    
 <?php 
 }

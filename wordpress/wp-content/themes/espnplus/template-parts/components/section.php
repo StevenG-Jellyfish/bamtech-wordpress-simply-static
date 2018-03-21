@@ -41,7 +41,7 @@ if ($component !== false) {
     foreach($section_ids as $section_id) {
     $odd_even = ++$count % 2 ? "even" : "odd";
     ?>
-        <!-- SECTION -->
+       
         <section class="section <?echo $odd_even; if ($section_id === reset($section_ids)) {echo " first-section";}if ($section_id === end($section_ids))
         {echo " last-section";}?>">
             <div class="container">
@@ -56,7 +56,7 @@ if ($component !== false) {
                     </div>
 
                     <div class="col-md-6 media-container">    
-                        <!--*** {{ section image at various media settings (presets form the admin) }} -->
+                       
                         <picture> 
                             <?php $image = get_field('section_image', $section_id); ?>
 
@@ -65,15 +65,15 @@ if ($component !== false) {
                             <source media="(min-width: 420px)" srcset="<?echo $image['sizes']['bamtech-small-width'];?>">
                             <source media="(min-width: 0px)" srcset="../_images/theme/ep_valueProp_Logos_multi.png">
                             
-                            <img class="featurette-image img-fluid mx-auto" src="../_images/theme/ep_valueProp_Logos_multi.png">
+                            <img class="featurette-image img-fluid mx-auto" src="../_images/theme/ep_valueProp_Logos_multi.png" alt="ESPN+">
                         </picture>
-                        <!-- {{ //section_image }} -->
+                       
                     </div>
 
                 </div>
             </div>
         </section>
-        <!-- SECTION ###-->
+      
 
     <?php 
     } 

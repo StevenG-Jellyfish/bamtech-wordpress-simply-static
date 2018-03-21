@@ -15,34 +15,28 @@
  if ($component !== false) {
 ?>
 
-    <!-- SPOTLIGHT -->
+   
     <section class="jumbotron text-center">
         <div class="container">
             
-            <h1 class="jumbotron-heading"><?php echo get_field('spotlight_overlogo_text', $component);?></h1>
+            <h1 class="jumbotron-heading"><?php the_field('spotlight_overlogo_text', $component);?></h1>
             
             <div class="jumbotron-logo">
     			<?php $image = get_field('spotlight_logo_image', $component);?>
-                <img src="<?php echo $image['sizes']['medium'];?>"> <!--*** replace src with {{spotlight_logo_image}} -->
+                <img src="<?php echo $image['sizes']['medium'];?>" alt="ESPN+"> 
             </div>
            
-            <p class="lead">
-                <?php echo get_field('spotlight_main_text', $component);?><br>
-            </p>
+            <p class="lead"><?php the_field('spotlight_main_text', $component, false);?></p>
             
             <div class="espn-cta-container">
                 <div class="parallelogram">
     				<?$link = get_field('spotlight_cta_link', $component);?>
-                    <a href="<?php echo $link['url'];?>" class="btn btn-primary espn-cta"><?php echo get_field('spotlight_cta_text', $component);?></a>
-                    <!--*** Add in phase II if we put color controls into admin:
-                        style="background-color: {{ spotlight_cta_background_color }}; color: {{ spotlight_cta_text_color }};" 
-                    -->
+                    <a href="<?php echo $link['url'];?>" class="btn btn-primary espn-cta"><?php the_field('spotlight_cta_text', $component,false);?></a>
+                   
                 </div>
             </div>
             
-            <p class="below-cta">
-    		<?php echo get_field('spotlight_belowcta_text', $component);?>
-            </p>
+            <p class="below-cta"><?php the_field('spotlight_belowcta_text', $component,false);?></p>
     	
         </div>
     	
@@ -55,12 +49,12 @@
                     <source src="<?php echo $video['url'];?>" type="video/mp4">
                     <source src="<?php echo $video['url'];?>" type="video/ogg">
                     <?php $video_image = get_field('spotlight_video_image', $component);?>
-                    <img src="<?php echo $video_image['sizes']['medium'];?>" title="Your browser does not support the <video> tag">
+                    <img src="<?php echo $video_image['sizes']['medium'];?>" title="Your browser does not support the <video> tag" alt="ESPN+">
                 </video>
             </div>
         </div>
 
     </section>
-    <!-- SPOTLIGHT ###-->
+   
 <?php
 }
