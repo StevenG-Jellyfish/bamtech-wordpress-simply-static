@@ -109,7 +109,8 @@ pipeline {
                     sh "curl -sS -H 'Authorization: token  ${API_TOKEN}' ${GIT}${GITORG}${REPO}/releases | jq  -r '.[].tag_name'| head -1 > tags"
                     def TAG=readFile('tags')
                     sh "sudo cp ${env.DEPLOYER} ecs.sh; sudo chmod +x ecs.sh; sudo chown jenkins: ecs.sh"
-                    sh "./ecs.sh ${env.BAM_ACCESS} ${env.BAM_SECRET} ${REGION} ${GCR} ${REPO} $TAG ${WORDPRESS} ${UATCLUSTER} ${UAT}"
+                    sh "echo 'export AWS_SECRET_ACCESS_KEY=${env.BAM_SECRET}\nexport AWS_ACCESS_KEY_ID=${env.BAM_ACCESS}\nexport AWS_DEFAULT_REGION=${REGION}\nexport AWS_DEFAULT_OUTPUT=json' >> aws.env"
+                    sh "source aws.env ; ./ecs.sh ${GCR} ${REPO} $TAG ${WORDPRESS} ${UATCLUSTER} ${UAT}"
                     // User Input to complete.
                     }
                     //slackSend channel: '#deploy', color: 'good', message: "Please access > (<${env.BUILD_URL}|Open>) and accept or decline build to continue..."
