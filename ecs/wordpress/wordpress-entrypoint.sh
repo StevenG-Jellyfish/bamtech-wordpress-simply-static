@@ -4,6 +4,9 @@ set -euo pipefail
 
 source /mnt/env/local.env
 
+MEM=${MEMCACHE_SERVER}
+OLDMEM=127.0.0.1:11211
+
 cp -vR /home/wordpress/* /var/www/html/ &> /dev/null
 chown -R www-data: /media/uploads
 chown -R www-data: /var/www/html
@@ -74,6 +77,11 @@ if [[ "$1" == apache2* ]] || [ "$1" == php-fpm ]; then
 
     $mysql->close();
 EOPHP
+
+#disabling problematic plugin during deployment and will re-enable at the end
+   wp plugin deactivate --allow-root sitepress-multilingual-cms 
+   
+   
     ln -s /mnt/uploads /var/www/html/wp-content/uploads
     # Set the default language to english
     if ! $(wp core is-installed --allow-root); then
@@ -151,5 +159,13 @@ rm -rf /var/www/html/wp-content/cache
 ln -s /media/cache /var/www/html/wp-content/
 
 fi
+
+
+wp plugin activate --allow-root sitepress-multilingual-cms
+
+# Insert JSON master.php
+    echo "find and replace memcache variables master.php.."
+    sed -i 's/'"$OLDMEM"'/'"$MEM"'/' /var/www/html/wp-content/w3tc-config/master.php &&  chmod 444 /var/www/html/wp-content/w3tc-config/master.php
+
 
 exec "$@"
