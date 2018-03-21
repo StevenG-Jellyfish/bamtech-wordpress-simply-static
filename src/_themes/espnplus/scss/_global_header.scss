@@ -87,10 +87,15 @@ Stub Name:  global_header.scss
         font-family: PlayoffProCond-MediumItalic, arial;
         // border:1px solid #ccc;
     }
-    .menu-item a {
+    .menu-item a:link,
+    .menu-item a:visited, {
         margin-top: 10px;
         display: inline-block;
         color: black;
+    }
+    .menu-item a:active,
+    .menu-item a:hover, {
+        color: white;
     }
     .menu-item:nth-child(2) {
         width:42px;

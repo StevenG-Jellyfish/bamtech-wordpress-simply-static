@@ -6233,10 +6233,14 @@ Stub Name:  global_header.scss
   .menu .menu-item {
     height: 48px;
     font-family: PlayoffProCond-MediumItalic, arial; }
-  .menu .menu-item a {
+  .menu .menu-item a:link,
+  .menu .menu-item a:visited {
     margin-top: 10px;
     display: inline-block;
     color: black; }
+  .menu .menu-item a:active,
+  .menu .menu-item a:hover {
+    color: white; }
   .menu .menu-item:nth-child(2) {
     width: 42px;
     margin-left: 38px; }
