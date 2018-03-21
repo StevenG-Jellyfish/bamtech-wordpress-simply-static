@@ -81,11 +81,12 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
         } // .container
     } // max-width: 767px
 
-    .jumbotron-login {
+    .jumbotron-login:link,
+    .jumbotron-login:visited {
         position: absolute;
         display: inline-block;
         top: 24px;
-        right: 44px;
+        right: 62px;
         font-family: PlayoffProCond-MediumItalic, arial !important;
         font-size: 0.875rem;
         font-weight: 700;
@@ -95,10 +96,15 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
     }
     @media (max-width: 767px) {
         .jumbotron-login {
-            top: -24px;
+            top: 14px;
             right: 24px;
         } // .jumbotron-login
     } // max-width: 767px
+
+    .jumbotron-login:active,
+    .jumbotron-login:hover {
+        text-decoration: underline;
+    }
 
     .jumbotron-heading {
         font-family: PlayoffProCond-Medium, arial !important;
