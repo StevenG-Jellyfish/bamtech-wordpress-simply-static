@@ -24,10 +24,11 @@ Stub Name:  global_footer_link.scss
         margin-bottom:30px;
        // border:1px dashed #FFFF00;
         }
-    }   
+    }  
+} 
     // new lang select
     .wpml-ls-legacy-dropdown {
-       width:140px;
+       width:140px !important;
         // max-width:80%;
     }
     
@@ -36,9 +37,11 @@ Stub Name:  global_footer_link.scss
        // padding:0;margin:0 !important;
         padding:0;margin:0;
         list-style-type:none;
+        background-color:black;
     }
     .wpml-ls-legacy-dropdown .wpml-ls-current-language:hover .wpml-ls-sub-menu,.wpml-ls-legacy-dropdown .wpml-ls-current-language:focus .wpml-ls-sub-menu{
         visibility:visible;
+        background-color:black;
     }
     .wpml-ls-legacy-dropdown .wpml-ls-item{
         padding:0;
@@ -48,10 +51,10 @@ Stub Name:  global_footer_link.scss
     .wpml-ls-legacy-dropdown a {
         display:block;
         text-decoration:none;
-        color:$espn-fotter-txt-grey;
+        color:$espn-fotter-txt-grey !important;
         border:1px solid $espn-fotter-txt-grey;
-        background-color:black;
-        padding:11px;
+        background-color:black !important;
+        padding:11px !important;
         line-height:1;
         border-radius:36px;
         height:36px;
@@ -69,16 +72,16 @@ Stub Name:  global_footer_link.scss
         padding-left:calc(10px + .7em + .7em);
     }
     .wpml-ls-legacy-dropdown a.wpml-ls-item-toggle:after {
-        font-family: "FontAwesome";
-        content:"\f107"; 
+        font-family: "FontAwesome" !important;
+        content:"\f107" !important; 
         font-size: 28px;
         color:$espn-fotter-txt-grey;
         font-weight:100;
         -webkit-text-stroke: 1px #000;
         // vertical-align:middle;
-        top:2px;
-        margin:0;
-        padding:0;
+        top:2px !important;
+        margin:0 !important;
+        padding:0 !important;
         // vertical-align:top;
         // display:inline-block;
         // border:.35em solid transparent;
@@ -86,14 +89,14 @@ Stub Name:  global_footer_link.scss
        // border:1px solid #fff;
         // border-top:.5em solid;
               // vertical-align:top;
-        display:inline-block;
-        border:0em solid transparent;
-        border:none;
+        display:inline-block !important;
+       // border:0em solid transparent !important;
+        border:none !important;
        // border:1px solid #fff;
-        border-top:0 solid;
-        position:absolute;
+        border-top:none !important;
+        position:absolute !important;
         // right:0px;
-        right:10px;
+        right:10px !important;
        // background:#fff;
       //  top:calc(50% - .175em)
     }
@@ -102,8 +105,8 @@ Stub Name:  global_footer_link.scss
         left:10px;
     }
     .wpml-ls-legacy-dropdown a:hover,.wpml-ls-legacy-dropdown a:focus,.wpml-ls-legacy-dropdown .wpml-ls-current-language:hover>a {
-        color:$espn-fotter-txt-grey;
-        background:black;
+        color:$espn-fotter-txt-grey !important;
+        background-color:black !important;
     }
     .wpml-ls-legacy-dropdown .wpml-ls-sub-menu {
         visibility:hidden;
@@ -111,17 +114,21 @@ Stub Name:  global_footer_link.scss
         top:100%;
         right:0;
         left:0;
-        border-top:0px solid #000;
+        border-top:0px solid #000 !important;
         padding:0;
         margin:0;
-        list-style-type:none;z-index:101;
+        list-style-type:none;
+        z-index:101;
     }
     .wpml-ls-legacy-dropdown .wpml-ls-sub-menu a {
         border-width:1px;
         //border-radius:0px;
         // margin-left:2px;
         // margin-right:2px;
+       // padding-top:
         border-radius:36px;
+        background-color:black;
+        color:$espn-fotter-txt-grey !important;
     }
     .wpml-ls-legacy-dropdown .wpml-ls-flag {
         display:inline;
@@ -139,60 +146,60 @@ Stub Name:  global_footer_link.scss
     
 
     // old lang select
-    .select-wrap {
-        border-radius:36px;
-        height:36px;
-        margin-left:0px;
-        margin-right:20px;
-        display:inline-block;
-        overflow:hidden;
-        background:black;
-        border:1px solid $espn-fotter-txt-grey;
-        position:relative;
-        color:$espn-fotter-txt-grey;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        &:after {
-            content:"\f107";   
-            font-family: "FontAwesome";
-            font-size: 32px;
-            color:$espn-fotter-txt-grey;
-            font-weight:100;
-            -webkit-text-stroke: 1px #000;
-           // background:#f46842;
-            right:16px; top:6px;
-            position:absolute;
-            // padding:0 0 2px;
-           // position:absolute;
-            pointer-events:none;
-        }
-        select, optgroup {
-            background:black;
-            color:#787878;
-            outline:none;
-            border:black 0px;
-            font-family:arial;
-            font-size:0.6875rem;
-            width:120px;
-            height:36px;
-            -webkit-appearance:none;
-            -moz-appearance:none;
-            appearance:none;
-            // display:inline-block;
-            // padding: 10px 10px 12px 11px;
-            margin-bottom:6px;
-            margin-left:16px;
-            option {
-                // padding-bottom:6px;
-                // padding-left:10px;
-                background:black;
-                color:$espn-fotter-txt-grey;
-                outline:none;
-                border:none;
-            }
-        }
-    }
-}
+    // .select-wrap {
+    //     border-radius:36px;
+    //     height:36px;
+    //     margin-left:0px;
+    //     margin-right:20px;
+    //     display:inline-block;
+    //     overflow:hidden;
+    //     background:black;
+    //     border:1px solid $espn-fotter-txt-grey;
+    //     position:relative;
+    //     color:$espn-fotter-txt-grey;
+    //     -webkit-font-smoothing: antialiased;
+    //     -moz-osx-font-smoothing: grayscale;
+    //     &:after {
+    //         content:"\f107";   
+    //         font-family: "FontAwesome";
+    //         font-size: 32px;
+    //         color:$espn-fotter-txt-grey;
+    //         font-weight:100;
+    //         -webkit-text-stroke: 1px #000;
+    //        // background:#f46842;
+    //         right:16px; top:6px;
+    //         position:absolute;
+    //         // padding:0 0 2px;
+    //        // position:absolute;
+    //         pointer-events:none;
+    //     }
+    //     select, optgroup {
+    //         background:black;
+    //         color:#787878;
+    //         outline:none;
+    //         border:black 0px;
+    //         font-family:arial;
+    //         font-size:0.6875rem;
+    //         width:120px;
+    //         height:36px;
+    //         -webkit-appearance:none;
+    //         -moz-appearance:none;
+    //         appearance:none;
+    //         // display:inline-block;
+    //         // padding: 10px 10px 12px 11px;
+    //         margin-bottom:6px;
+    //         margin-left:16px;
+    //         option {
+    //             // padding-bottom:6px;
+    //             // padding-left:10px;
+    //             background:black;
+    //             color:$espn-fotter-txt-grey;
+    //             outline:none;
+    //             border:none;
+    //         }
+    //     }
+    // }
+// }
 .espn-links {
    // border:1px solid #ccc;
     //width:70%;
@@ -226,6 +233,20 @@ Stub Name:  global_footer_link.scss
         }
 
         a:link {
+            font-family:arial;
+            font-size:0.8125rem;
+            line-height:0.8125rem;
+            color:$espn-fotter-txt-grey;
+            font-weight:normal;
+        }
+        a:visited {
+            font-family:arial;
+            font-size:0.8125rem;
+            line-height:0.8125rem;
+            color:$espn-fotter-txt-grey;
+            font-weight:normal;
+        }
+        a:active {
             font-family:arial;
             font-size:0.8125rem;
             line-height:0.8125rem;
