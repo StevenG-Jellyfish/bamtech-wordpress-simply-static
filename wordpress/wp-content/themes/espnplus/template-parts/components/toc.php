@@ -34,6 +34,6 @@ if ($component !== false) {
         </div> 
        
     </section>
-    <!-- // section -->
+   
 <?php 
 }

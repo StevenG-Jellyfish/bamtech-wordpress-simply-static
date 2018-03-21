@@ -44,10 +44,10 @@ function card($acc_count, $section_id) {
     $text = get_field('league_accordion_text', $section_id);  
     $body = get_field('league_accordion_body', $section_id);
     $output = <<< EndHTML
-            <!-- Accordion card -->
+          
             <div class="card">
         
-                <!-- Card header -->
+               
                 <div class="card-header" role="tab" id="heading$acc_count">
                     <a data-toggle="collapse" data-parent="#league-toc-accordion" href="#collapse$acc_count" aria-expanded="false" aria-controls="collapse$acc_count">
                         <h5 class="mb-0">
@@ -55,19 +55,18 @@ function card($acc_count, $section_id) {
                         </h5>
                     </a>
                 </div>
-                <!-- // Card header -->
-                <!-- Card body -->
+               
                 <div id="collapse$acc_count" class="collapse" role="tabpanel" aria-labelledby="heading$acc_count" data-parent="#league-toc-accordion">
                     <div class="card-body">
                         $body
                     </div>
                 </div>
-                <!-- // Card body -->
+               
             </div>
-            <!-- // Accordion card -->
+           
 EndHTML;
 return $output;
-} //card()
+} 
 
 
 $leftCol='';
@@ -81,16 +80,16 @@ foreach($section_ids as $section_id) {
         
     }
     $acc_count++;
-} //foreach
+} 
 
 ?>
 
 
-    <!--  Cut just this for the component -->
+   
     <section class="league-toc">
         <div class="container">
 
-            <!--*** replace this script with php -->
+           
             <div class="copyright">&copy;<script>var d = new Date(); document.write( d.getFullYear() ); </script> ESPN </div>
 
             <div class="accordion-container">
@@ -102,11 +101,11 @@ foreach($section_ids as $section_id) {
                 </div>    
 
             </div>
-            <!--// accordion wrapper-->
+           
         </div>    
-         <!--// container -->
+       
     </section>
-    <!--  //End Cut -->
+   
 
 <?php 
 }
