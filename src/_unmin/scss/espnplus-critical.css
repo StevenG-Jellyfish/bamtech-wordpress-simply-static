@@ -6466,128 +6466,104 @@ Stub Name:  global_footer_link.scss
       width: 74px;
       height: 38px;
       margin-bottom: 30px; }
-  .espn-lang .wpml-ls-legacy-dropdown {
-    width: 140px; }
-  .espn-lang .wpml-ls-legacy-dropdown > ul {
-    position: relative;
-    padding: 0;
-    margin: 0;
-    list-style-type: none; }
-  .espn-lang .wpml-ls-legacy-dropdown .wpml-ls-current-language:hover .wpml-ls-sub-menu, .espn-lang .wpml-ls-legacy-dropdown .wpml-ls-current-language:focus .wpml-ls-sub-menu {
-    visibility: visible; }
-  .espn-lang .wpml-ls-legacy-dropdown .wpml-ls-item {
-    padding: 0;
-    margin: 0;
-    list-style-type: none; }
-  .espn-lang .wpml-ls-legacy-dropdown a {
-    display: block;
-    text-decoration: none;
-    color: #787878;
-    border: 1px solid #787878;
-    background-color: black;
-    padding: 11px;
-    line-height: 1;
-    border-radius: 36px;
-    height: 36px;
-    font-family: arial;
-    font-size: 0.6875rem; }
-  .espn-lang .wpml-ls-legacy-dropdown a span {
-    vertical-align: middle; }
-  .espn-lang .wpml-ls-legacy-dropdown a.wpml-ls-item-toggle {
-    position: relative;
-    padding-right: calc(10px + .7em + .7em); }
-  .espn-lang .rtl .wpml-ls-legacy-dropdown a.wpml-ls-item-toggle {
-    padding-right: 10px;
-    padding-left: calc(10px + .7em + .7em); }
-  .espn-lang .wpml-ls-legacy-dropdown a.wpml-ls-item-toggle:after {
-    font-family: "FontAwesome";
-    content: "\f107";
-    font-size: 28px;
-    color: #787878;
-    font-weight: 100;
-    -webkit-text-stroke: 1px #000;
-    top: 2px;
-    margin: 0;
-    padding: 0;
-    display: inline-block;
-    border: 0em solid transparent;
-    border: none;
-    border-top: 0 solid;
-    position: absolute;
-    right: 10px; }
-  .espn-lang .rtl .wpml-ls-legacy-dropdown a.wpml-ls-item-toggle:after {
-    right: auto;
-    left: 10px; }
-  .espn-lang .wpml-ls-legacy-dropdown a:hover, .espn-lang .wpml-ls-legacy-dropdown a:focus, .espn-lang .wpml-ls-legacy-dropdown .wpml-ls-current-language:hover > a {
-    color: #787878;
-    background: black; }
-  .espn-lang .wpml-ls-legacy-dropdown .wpml-ls-sub-menu {
-    visibility: hidden;
-    position: absolute;
-    top: 100%;
-    right: 0;
-    left: 0;
-    border-top: 0px solid #000;
-    padding: 0;
-    margin: 0;
-    list-style-type: none;
-    z-index: 101; }
-  .espn-lang .wpml-ls-legacy-dropdown .wpml-ls-sub-menu a {
-    border-width: 1px;
-    border-radius: 36px; }
-  .espn-lang .wpml-ls-legacy-dropdown .wpml-ls-flag {
-    display: inline;
-    vertical-align: middle;
-    width: 18px;
-    height: 12px; }
-  .espn-lang .wpml-ls-legacy-dropdown .wpml-ls-flag + span {
-    margin-left: .4em; }
-  .espn-lang .rtl .wpml-ls-legacy-dropdown .wpml-ls-flag + span {
-    margin-left: 0;
-    margin-right: .4em; }
-  .espn-lang .select-wrap {
-    border-radius: 36px;
-    height: 36px;
-    margin-left: 0px;
-    margin-right: 20px;
-    display: inline-block;
-    overflow: hidden;
-    background: black;
-    border: 1px solid #787878;
-    position: relative;
-    color: #787878;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale; }
-    .espn-lang .select-wrap:after {
-      content: "\f107";
-      font-family: "FontAwesome";
-      font-size: 32px;
-      color: #787878;
-      font-weight: 100;
-      -webkit-text-stroke: 1px #000;
-      right: 16px;
-      top: 6px;
-      position: absolute;
-      pointer-events: none; }
-    .espn-lang .select-wrap select, .espn-lang .select-wrap optgroup {
-      background: black;
-      color: #787878;
-      outline: none;
-      border: black 0px;
-      font-family: arial;
-      font-size: 0.6875rem;
-      width: 120px;
-      height: 36px;
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      appearance: none;
-      margin-bottom: 6px;
-      margin-left: 16px; }
-      .espn-lang .select-wrap select option, .espn-lang .select-wrap optgroup option {
-        background: black;
-        color: #787878;
-        outline: none;
-        border: none; }
+
+.wpml-ls-legacy-dropdown {
+  width: 140px !important; }
+
+.wpml-ls-legacy-dropdown > ul {
+  position: relative;
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  background-color: black; }
+
+.wpml-ls-legacy-dropdown .wpml-ls-current-language:hover .wpml-ls-sub-menu, .wpml-ls-legacy-dropdown .wpml-ls-current-language:focus .wpml-ls-sub-menu {
+  visibility: visible;
+  background-color: black; }
+
+.wpml-ls-legacy-dropdown .wpml-ls-item {
+  padding: 0;
+  margin: 0;
+  list-style-type: none; }
+
+.wpml-ls-legacy-dropdown a {
+  display: block;
+  text-decoration: none;
+  color: #787878 !important;
+  border: 1px solid #787878;
+  background-color: black !important;
+  padding: 11px !important;
+  line-height: 1;
+  border-radius: 36px;
+  height: 36px;
+  font-family: arial;
+  font-size: 0.6875rem; }
+
+.wpml-ls-legacy-dropdown a span {
+  vertical-align: middle; }
+
+.wpml-ls-legacy-dropdown a.wpml-ls-item-toggle {
+  position: relative;
+  padding-right: calc(10px + .7em + .7em); }
+
+.rtl .wpml-ls-legacy-dropdown a.wpml-ls-item-toggle {
+  padding-right: 10px;
+  padding-left: calc(10px + .7em + .7em); }
+
+.wpml-ls-legacy-dropdown a.wpml-ls-item-toggle:after {
+  font-family: "FontAwesome" !important;
+  content: "\f107" !important;
+  font-size: 28px;
+  color: #787878;
+  font-weight: 100;
+  -webkit-text-stroke: 1px #000;
+  top: 2px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: inline-block !important;
+  border: none !important;
+  border-top: none !important;
+  position: absolute !important;
+  right: 10px !important; }
+
+.rtl .wpml-ls-legacy-dropdown a.wpml-ls-item-toggle:after {
+  right: auto;
+  left: 10px; }
+
+.wpml-ls-legacy-dropdown a:hover, .wpml-ls-legacy-dropdown a:focus, .wpml-ls-legacy-dropdown .wpml-ls-current-language:hover > a {
+  color: #787878 !important;
+  background-color: black !important; }
+
+.wpml-ls-legacy-dropdown .wpml-ls-sub-menu {
+  visibility: hidden;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  left: 0;
+  border-top: 0px solid #000 !important;
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  z-index: 101; }
+
+.wpml-ls-legacy-dropdown .wpml-ls-sub-menu a {
+  border-width: 1px;
+  border-radius: 36px;
+  background-color: black;
+  color: #787878 !important; }
+
+.wpml-ls-legacy-dropdown .wpml-ls-flag {
+  display: inline;
+  vertical-align: middle;
+  width: 18px;
+  height: 12px; }
+
+.wpml-ls-legacy-dropdown .wpml-ls-flag + span {
+  margin-left: .4em; }
+
+.rtl .wpml-ls-legacy-dropdown .wpml-ls-flag + span {
+  margin-left: 0;
+  margin-right: .4em; }
 
 .espn-links {
   margin-top: 20px;
@@ -6615,6 +6591,12 @@ Stub Name:  global_footer_link.scss
       .espn-links .link {
         width: 100%; } }
     .espn-links .link a:link {
+      font-family: arial;
+      font-size: 0.8125rem;
+      line-height: 0.8125rem;
+      color: #787878;
+      font-weight: normal; }
+    .espn-links .link a:visited {
       font-family: arial;
       font-size: 0.8125rem;
       line-height: 0.8125rem;
