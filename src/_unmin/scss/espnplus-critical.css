@@ -3887,7 +3887,6 @@ Stub Name:  global_header.scss
         margin: 0; }
       .menu .menu-item:nth-child(2) {
         margin-left: 0; } }
-
   @media (max-width: 480px) {
     .menu {
       flex-direction: row-reverse;
@@ -4025,6 +4024,11 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
         height: auto;
         object-fit: cover; }
     @media (max-width: 767px) and (orientation: portrait) {
+      .jumbotron .jubmotron-background #embed-responsive-16by9 {
+        display: none; }
+      .jumbotron .jubmotron-background #embed-responsive-4by3 {
+        display: block; } }
+    @media (max-width: 667px) and (orientation: landscape) {
       .jumbotron .jubmotron-background #embed-responsive-16by9 {
         display: none; }
       .jumbotron .jubmotron-background #embed-responsive-4by3 {
