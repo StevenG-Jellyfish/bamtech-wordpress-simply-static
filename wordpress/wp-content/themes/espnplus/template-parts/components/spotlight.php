@@ -48,10 +48,22 @@
 
             <div class="embed-responsive embed-responsive-16by9 div_style">
                 <video id="background-movie" preload autoplay loop>
-                    <source src="<?php echo $video['url'];?>" type="video/mp4">
-                    <source src="<?php echo $video['url'];?>" type="video/ogg">
+
+                    <source src="<?php echo $video['url'];?>" 
+                        type="video/mp4" media="screen and (min-width:768px)">
+                    <source src="<?php echo $video['url'];?>" 
+                        type="video/mp4" media="screen and (max-width:767px)"> 
+                            
+                    <picture> <!--*** {{ section image at various media settings (presets form the admin) }} -->
+                        <source media="screen and (min-width: 768px)"      
+                            srcset="<?php echo $video_image['sizes']['medium'];?>">
+                        <source media="screen and (max-width: 767px)"  
+                                srcset="<?php echo $video_image['sizes']['medium'];?>">
+                        <img src="<?php echo $video_image['sizes']['medium'];?>" title="Your browser does not support the <video> tag" alt="ESPN+">
+                    </picture>
+
                     <?php $video_image = get_field('spotlight_video_image', $component);?>
-                    <img src="<?php echo $video_image['sizes']['medium'];?>" title="Your browser does not support the <video> tag" alt="ESPN+">
+                    
                 </video>
             </div>
         </div>

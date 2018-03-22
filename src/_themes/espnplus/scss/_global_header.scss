@@ -114,12 +114,6 @@ Stub Name:  global_header.scss
             margin-left:0;
         }
     }
-    #menu-item-320.menu-item a:link,
-    #menu-item-320.menu-item a:visited,
-    #menu-item-320.menu-item a:active,
-    #menu-item-320.menu-item a:hover {
-        margin-top: 0;
-    }
 }
 
 .site-title {
@@ -153,6 +147,14 @@ Stub Name:  global_header.scss
             color: white;
         } // active & hover
     } // .parallelogram
+
+    a:link,
+    a:visited,
+    a:active,
+    a:hover {
+        display: none;
+        margin-top: 0;
+    }
     .btn.btn-primary:link,
     .btn.btn-primary:visited {
         cursor: pointer;

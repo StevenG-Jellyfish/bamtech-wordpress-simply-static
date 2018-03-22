@@ -6255,11 +6255,6 @@ Stub Name:  global_header.scss
         margin: 0; }
       .menu .menu-item:nth-child(2) {
         margin-left: 0; } }
-  .menu #menu-item-320.menu-item a:link,
-  .menu #menu-item-320.menu-item a:visited,
-  .menu #menu-item-320.menu-item a:active,
-  .menu #menu-item-320.menu-item a:hover {
-    margin-top: 0; }
 
 .site-title {
   display: none; }
@@ -6287,6 +6282,12 @@ Stub Name:  global_header.scss
     .espn-cta-btn-container .parallelogram:hover, .espn-cta-btn-container .parallelogram:active {
       background-color: black;
       color: white; }
+  .espn-cta-btn-container a:link,
+  .espn-cta-btn-container a:visited,
+  .espn-cta-btn-container a:active,
+  .espn-cta-btn-container a:hover {
+    display: none;
+    margin-top: 0; }
   .espn-cta-btn-container .btn.btn-primary:link,
   .espn-cta-btn-container .btn.btn-primary:visited {
     cursor: pointer;
