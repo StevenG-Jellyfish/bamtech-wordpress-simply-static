@@ -18,10 +18,10 @@ pipeline {
         PROD = "prod"
         TIMEOUT = "900"
         
-        /* Images that do not usually get built..
+        // Images that do not usually get built..
          NGINX = "nginx"
          VARNISH = "varnish"
-        */
+        
     }
 
     options {
