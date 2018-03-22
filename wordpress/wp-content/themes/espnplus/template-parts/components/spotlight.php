@@ -51,7 +51,7 @@
         <div class="container-fluid jubmotron-background">
 
             <div id="embed-responsive-16by9" class="">
-                <video id="background-movie"  class="embed-responsive-item" autoplay="autoplay" loop="loop" muted>
+                <video id="background-movie"  class="embed-responsive-item" preload="preload" autoplay="autoplay" loop="loop" muted>
 
                     <source src="<?php echo $video['url'];?>" 
                         type="video/mp4" media="screen and (min-width:768px)">
@@ -62,7 +62,7 @@
             </div>
 
             <div id="embed-responsive-4by3" class="">
-                <video id="background-movie"  class="embed-responsive-item" autoplay="autoplay" loop="loop" muted>
+                <video id="background-movie"  class="embed-responsive-item" preload="preload" autoplay="autoplay" loop="loop" muted>
                     
                     <source src="<?php echo $small_video['url'];?>" 
                         type="video/mp4" media="screen and (max-width:767px)"> 
