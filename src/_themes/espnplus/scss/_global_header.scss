@@ -114,6 +114,7 @@ Stub Name:  global_header.scss
             margin-left:0;
         }
     }
+
     @media (max-width: 480px) {
         flex-direction: row-reverse;
         margin-right: 10px;
@@ -126,6 +127,7 @@ Stub Name:  global_header.scss
         margin-top: 0;
         display: none;
     }
+
 }
 
 .site-title {
@@ -159,6 +161,14 @@ Stub Name:  global_header.scss
             color: white;
         } // active & hover
     } // .parallelogram
+
+    a:link,
+    a:visited,
+    a:active,
+    a:hover {
+        display: none;
+        margin-top: 0;
+    }
     .btn.btn-primary:link,
     .btn.btn-primary:visited {
         cursor: pointer;
