@@ -43,9 +43,9 @@ Component Souce: http://jf-style-guide.sgel6.dev.jellyfish.local/hero.html
                     <img class="espn-white" src="../_svgs/ESPN+_logo_white.svg">
                     <!--*** replace src with {{spotlight_logo_image}} -->
                 </div>
-                <div class="lead">
+                <p class="lead">
                     The NEW {{ spotlight_main_text }} ESPN.<br> Live Sports, ESPN Originals, Only $4.99 a month.
-                </div>
+                </p>
                 <div class="espn-cta-container">
                     <div class="parallelogram">
                         <a href="{{ spotlight_cta_link }}" class="btn btn-primary espn-cta">{{ spotlight_cta_text }}</a>
@@ -54,29 +54,28 @@ Component Souce: http://jf-style-guide.sgel6.dev.jellyfish.local/hero.html
                         -->
                     </div>
                 </div>
-                <div class="below-cta">
-                    <p>{{ spotlight_belowcta_text }} <a href="#">terms</a>.</p>
-                </div>
+                <p class="below-cta">
+                    {{ spotlight_belowcta_text }} <a href="#">terms</a>.
+                </p>
             </div>
             <div class="container-fluid jubmotron-background">
-                <div class="embed-responsive embed-responsive-16by9 div_style">
-                    <video id="background-movie"  class="embed-responsive-item" preload autoplay loop>
-                        <!--*** replace src with {{spotlight_background-video}} -->
-                        <source src="../_video/Genertic_16x9.mp4" 
-                            type="video/mp4" media="(min-width:768px)">
-                        <source src="../_video/Genertic_3x4.mp4" 
-                                type="video/mp4" media="(max-width:767px)"> 
-                                
-                        <picture> <!--*** {{ section image at various media settings (presets form the admin) }} -->
-                            <source media="(min-width: 768px)"      
-                                srcset="../_images/theme/Genertic_16x9.png">
-                            <source media="(max-width: 767px)"  
-                                    srcset="../_images/theme/Genertic_3X4.png">
-                            <img src="../_images/theme/Genertic_16x9.png" title="Your browser does not support the &lt; video &gt; tag">
-                        </picture>
 
-                        <img src="../_images/theme/Genertic_16x9.png" title="Your browser does not support the &lt; video &gt; tag">
-                        <!--*** replace src with {{spotlight_background_image}} -->
+                <div id="embed-responsive-16by9" class="">
+                    <video id="background-movie" class="embed-responsive-item" autoplay="autoplay" loop="loop" muted="">
+    
+                        <source src="http://bamtech.sg.local/wp-content/uploads/Genertic_16x9_250kbps-1.mp4" type="video/mp4" media="screen and (min-width:768px)">
+    
+                        <img src="http://bamtech.sg.local/wp-content/uploads/Genertic_3X4-768x1024.png" title="Your browser does not support the <video> tag" alt="ESPN+">
+                        
+                    </video>
+                </div>
+    
+                <div id="embed-responsive-4by3" class="">
+                    <video id="background-movie" class="embed-responsive-item" autoplay="autoplay" loop="loop" muted="">
+                        <source src="http://bamtech.sg.local/wp-content/uploads/Genertic_3x4_250kbps-2.mp4" type="video/mp4" media="screen and (max-width:767px)"> 
+    
+                        <img src="http://bamtech.sg.local/wp-content/uploads/Genertic_3X4-225x300.png" title="Your browser does not support the <video> tag" alt="ESPN+">
+                        
                     </video>
                 </div>
             </div>

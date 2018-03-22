@@ -6336,45 +6336,55 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
   display: block;
   width: 100%;
   max-width: 1280px;
-  padding-top: var(--jumbotron-padding-y);
-  padding-bottom: var(--jumbotron-padding-y);
   padding: 0 0 0 0;
   margin: 0 auto;
   background-color: black;
   overflow: hidden;
-  /*  
+  /*
     @media (min-width: 767px) {
       .jumbotron {
         padding-top: calc(var(--jumbotron-padding-y) * 2);
         padding-bottom: calc(var(--jumbotron-padding-y) * 2);
       } // .jumbotron
     } // min-width: 767px
-*/ }
+    */ }
   .jumbotron .jubmotron-background {
     position: absolute;
     display: block;
-    background-color: #999;
+    background-color: black;
     top: 0px;
     left: 0px;
     width: 100%;
     max-width: 1280px;
+    height: auto;
     margin: 0 0 0 0;
     padding: 0 0 0 0;
     z-index: 1; }
+    .jumbotron .jubmotron-background #embed-responsive-16by9 {
+      display: block; }
+    .jumbotron .jubmotron-background #embed-responsive-4by3 {
+      display: none; }
     .jumbotron .jubmotron-background video {
       display: inline-block;
       width: 100%;
-      max-width: 1280px; }
-    @media (max-width: 767px) {
-      .jumbotron .jubmotron-background video {
+      max-width: 1280px;
+      height: auto;
+      object-fit: cover; }
+      .jumbotron .jubmotron-background video source {
         width: 100%;
-        max-width: 767px; }
-        .jumbotron .jubmotron-background video source {
-          width: 100%;
-          max-width: 767px; }
-        .jumbotron .jubmotron-background video img {
-          width: 100%;
-          max-width: 767px; } }
+        max-width: 1280px;
+        height: auto;
+        object-fit: cover; }
+      .jumbotron .jubmotron-background video img {
+        width: 100%;
+        max-width: 1280px;
+        height: auto;
+        object-fit: cover; }
+    @media (max-width: 767px) and (orientation: portrait) {
+      .jumbotron .jubmotron-background #embed-responsive-16by9 {
+        display: none; }
+      .jumbotron .jubmotron-background #embed-responsive-4by3 {
+        display: block; } }
   .jumbotron .container {
     position: relative;
     width: 100%;
@@ -6402,9 +6412,15 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
     text-decoration: none;
     color: #fefefe; }
   @media (max-width: 767px) {
-    .jumbotron .jumbotron-login {
-      top: 14px;
-      right: 24px; } }
+    .jumbotron .jumbotron-login:link {
+      position: relative;
+      display: block;
+      float: none;
+      clear: both;
+      top: .500rem;
+      right: 24px;
+      width: 100%;
+      text-align: right; } }
   .jumbotron .jumbotron-login:active,
   .jumbotron .jumbotron-login:hover {
     text-decoration: underline; }
@@ -6455,7 +6471,10 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
       font-size: 2.500rem;
       letter-spacing: -0.025rem;
       line-height: 3.000rem; }
-    @media (max-width: 767px) {
+    @media screen and (min-width: 825px) and (max-width: 960px) {
+      .jumbotron p.lead {
+        font-size: 2.000rem; } }
+    @media (max-width: 824px) {
       .jumbotron p.lead {
         font-family: PlayoffProCond-Medium, arial !important;
         font-size: 1.500rem;
