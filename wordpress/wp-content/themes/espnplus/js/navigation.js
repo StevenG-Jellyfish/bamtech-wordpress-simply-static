@@ -47,11 +47,3 @@ $(document).ready(function() {
 });
 
 // ------------ Header nav ------------ //
-
-// ------------ Lang select ------------ //
-
-document.getElementById("lang-selection").onchange = function() {
-    if (this.selectedIndex!==0) {
-        window.location.href = this.value;
-    }        
-};
