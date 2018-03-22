@@ -63,8 +63,7 @@ if ($component !== false) {
                             <source media="(min-width: 990px)" srcset="<?echo $image['sizes']['bamtech-large-width'];?>">
                             <source media="(min-width: 768px)" srcset="<?echo $image['sizes']['bamtech-medium-width'];?>">
                             <source media="(min-width: 420px)" srcset="<?echo $image['sizes']['bamtech-small-width'];?>">
-                            <source media="(min-width: 0px)" srcset="../_images/theme/ep_valueProp_Logos_multi.png">
-                            
+                            <source media="(min-width: 0px)" srcset="<?echo $image['sizes']['bamtech-small-width'];?>">
                             <img class="featurette-image img-fluid mx-auto" src="../_images/theme/ep_valueProp_Logos_multi.png" alt="ESPN+">
                         </picture>
                        

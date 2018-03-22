@@ -42,14 +42,17 @@
     	
         </div>
     	
-        <?$video = get_field('spotlight_background-video', $component);?>
+        <?php 
+            $video = get_field('spotlight_background-video', $component);
+            $small_video = get_field('spotlight_background_small_video', $component);
+        ?>
         
         <div class="container-fluid jubmotron-background">
 
             <div class="embed-responsive embed-responsive-16by9 div_style">
                 <video id="background-movie" preload autoplay loop>
-                    <source src="<?php echo $video['url'];?>" type="video/mp4">
-                    <source src="<?php echo $video['url'];?>" type="video/ogg">
+                    <source src="<?php echo $video['url'];?>" type="video/mp4" media="(min-width:768px)">
+                    <source src="<?php echo $small_video['url'];?>" type="video/mp4" media="(max-width:767px)"> 
                     <?php $video_image = get_field('spotlight_video_image', $component);?>
                     <img src="<?php echo $video_image['sizes']['medium'];?>" title="Your browser does not support the <video> tag" alt="ESPN+">
                 </video>
