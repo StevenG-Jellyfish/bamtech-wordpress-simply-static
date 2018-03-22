@@ -145,9 +145,9 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 /*--------------------------------------------------------------
 # component_section
 --------------------------------------------------------------*/
-@import "global_footer_link";
 
 @import "component_section";
+
 // bootstrap overrides
 $yellow: #F9B300 !default;
 $primary: $yellow !default;
