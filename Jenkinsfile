@@ -16,11 +16,12 @@ pipeline {
         PRODCLUSTER = "ecsProdCluster"
         UAT = "uat"
         PROD = "prod"
+        TIMEOUT = "900"
         
-        /* Images that do not usually get built..
+        // Images that do not usually get built..
          NGINX = "nginx"
          VARNISH = "varnish"
-        */
+        
     }
 
     options {
@@ -66,27 +67,28 @@ pipeline {
                         sh "cd ${REPO}; docker build -f DockerfileWP . -t ${GCR}${REPO}-ecs-${WORDPRESS}:$TAG" 
                         sh "gcloud docker -- push ${GCR}${REPO}-ecs-${WORDPRESS}; cd ../"
                         sh "./tagger.sh ${GCR} ${REPO} ${WORDPRESS} $TAG"
+                        sh "docker images -q |xargs docker rmi -f"
                         
                         // Images that do not usually get built..
                         //* build Nginx
-                        //sh "cd ${REPO}; docker build -f DockerfileWP . -t ${GCR}${REPO}-ecs-${NGINX}:$TAG"
-                        //sh "gcloud docker -- push ${GCR}${REPO}-ecs-${NGINX}; cd ../"
-                        //sh "./tagger.sh ${GCR} ${REPO} ${NGINX} $TAG"
+                        sh "cd ${REPO}; docker build -f DockerfileNGX . -t ${GCR}${REPO}-ecs-${NGINX}:$TAG"
+                        sh "gcloud docker -- push ${GCR}${REPO}-ecs-${NGINX}; cd ../"
+                        sh "./tagger.sh ${GCR} ${REPO} ${NGINX} $TAG"
+                        sh "docker images -q |xargs docker rmi -f"
                         
                         // build Varnish
-                        //sh "cd ${REPO}; docker build -f DockerfileVSH . -t ${GCR}${REPO}-ecs-${VARNISH}:$TAG"
-                        //sh "gcloud docker -- push ${GCR}${REPO}-ecs-${VARNISH}; cd ../"
-                        //sh "./tagger.sh ${GCR} ${REPO} ${VARNISH} $TAG"
-                        
-                        
-                      
-                        // Tidy up
+                        sh "cd ${REPO}; docker build -f DockerfileVSH . -t ${GCR}${REPO}-ecs-${VARNISH}:$TAG"
+                        sh "gcloud docker -- push ${GCR}${REPO}-ecs-${VARNISH}; cd ../"
+                        sh "./tagger.sh ${GCR} ${REPO} ${VARNISH} $TAG"
                         sh "docker images -q |xargs docker rmi -f"
+                        
+                        // Tidy up
                         sh "sudo rm -rf ${REPO};"
                     }
                 }
             }
         }
+ 
         stage('DeployUat') {
             // Deploy stage agent selector
             agent {
@@ -112,11 +114,11 @@ pipeline {
                     // Export keys and start deployment
                     sh "sudo cp ${env.DEPLOYER} ecs.sh; sudo chmod +x ecs.sh; sudo chown jenkins: ecs.sh"
                     sh "echo 'export AWS_SECRET_ACCESS_KEY=${env.BAM_SECRET}\nexport AWS_ACCESS_KEY_ID=${env.BAM_ACCESS}\nexport AWS_DEFAULT_REGION=${REGION}\nexport AWS_DEFAULT_OUTPUT=json' >> aws.env"
-                    sh ". ./aws.env ; ecs deploy ${UATCLUSTER} ${UAT}-${WORDPRESS} --image ${WORDPRESS} ${GCR}${REPO}-ecs-${WORDPRESS}:latest --timeout 800"
+                    sh ". ./aws.env ; ecs deploy ${UATCLUSTER} ${UAT}-${WORDPRESS} --image ${WORDPRESS} ${GCR}${REPO}-ecs-${WORDPRESS}:latest --timeout ${TIMEOUT}"
                     
                     // Clean up
                     sh "sudo rm -rf *"
-                    // User Input to complete.
+                    
                     }
                 }            
             }
@@ -132,12 +134,13 @@ pipeline {
                       slackSend channel: '#deploy',
                           color: 'good',
                           message: "Image ${WORDPRESS} deployed successfully to to stage, Please access > (<${env.RUN_DISPLAY_URL}|Open>) and accept or decline build to continue.."
-               /*
-             input message: "Image ${WORDPRESS} has been released to stage, please test and confirm..."
-              */
+               
+                      input message: "Image ${WORDPRESS} has been released to ${UAT}, please test and confirm..."
+              
                 }
             }
         }
+        /*
         stage('DeployProd') {
             // Deploy stage agent selector
             agent {
@@ -183,9 +186,10 @@ pipeline {
                          color: 'good',
                          message: "Image ${WORDPRESS} deployed successfully to to stage, Please access > (<${env.RUN_DISPLAY_URL}|Open>) and accept or decline build to continue.."
              
-                     input message: "Image ${WORDPRESS} has been released to stage, please test and confirm..."
+                     input message: "Image ${WORDPRESS} has been released to ${PROD}, please test and confirm..."
                      }
                 }
            }
+           */
       }     
 }

@@ -28,7 +28,7 @@ sub vcl_recv {
     	unset req.http.User-Agent;
 
 	#temperarily disable cache
-	return (pipe);
+	#return (pipe);
 	
 	# The purge...no idea if this works
 		if (req.method == "PURGE") {
@@ -108,7 +108,8 @@ sub vcl_backend_response {
         set beresp.http.cache-control = "max-age=900";
 
         # Set how long Varnish will keep it
-        set beresp.ttl = 1w;
+        #set beresp.ttl = 1w;
+	set beresp.ttl = 1h;
 
         # marker for vcl_deliver to reset Age:
         set beresp.http.magicmarker = "1";
@@ -123,7 +124,8 @@ sub vcl_backend_response {
 
 	# long ttl for assets
   	if (bereq.url ~ "\.(gif|jpg|jpeg|swf|ttf|css|js|flv|mp3|mp4|pdf|ico|png)(\?.*|)$") {
-	    set beresp.ttl = 365d;
+	    #set beresp.ttl = 365d;
+	    set beresp.ttl = 1h;
 
 }
  set beresp.grace = 1w;
