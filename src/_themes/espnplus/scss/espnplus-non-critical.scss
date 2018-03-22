@@ -44,7 +44,8 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 	## Galleries
 --------------------------------------------------------------*/
 /* ---------------------- */
-@import "../../../_vendor/scss/fontawesome/font-awesome";
+@import "font-awesome";
+// @import "../../../_vendor/scss/fontawesome/font-awesome";
 /* ---------------------- */
 
 // bootstrap overrides
