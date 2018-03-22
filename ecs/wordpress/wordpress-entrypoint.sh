@@ -133,7 +133,7 @@ EOPHP
         wordpress-seo
         wp-statistics
         wp-smushit
-        velvet-blues-update-urls
+        #velvet-blues-update-urls
         
     )
 
@@ -153,20 +153,16 @@ EOPHP
     #wp --info --allow-root
     wp core version --extra --allow-root
 
-rm -rf /var/www/html/wp-content/uploads
-ln -s /media/uploads /var/www/html/wp-content/
-
-rm -rf /var/www/html/wp-content/cache
-ln -s /media/cache /var/www/html/wp-content/
-
 fi
 
 
 wp plugin activate --allow-root sitepress-multilingual-cms
+rm -rf /var/www/html/wp-content/uploads
+ln -s /media/uploads /var/www/html/wp-content/
 
 # Insert JSON master.php
-    echo "find and replace memcache variables master.php.."
-    sed -i 's/'"$OLDMEM"'/'"$MEM"'/' /var/www/html/wp-content/w3tc-config/master.php &&  chmod 444 /var/www/html/wp-content/w3tc-config/master.php
+echo "find and replace memcache variables master.php.."
+sed -i 's/'"$OLDMEM"'/'"$MEM"'/' /var/www/html/wp-content/w3tc-config/master.php &&  chmod 444 /var/www/html/wp-content/w3tc-config/master.php
 
 
 exec "$@"
