@@ -71,7 +71,7 @@ pipeline {
                         
                         // Images that do not usually get built..
                         //* build Nginx
-                        sh "cd ${REPO}; docker build -f DockerfileWP . -t ${GCR}${REPO}-ecs-${NGINX}:$TAG"
+                        sh "cd ${REPO}; docker build -f DockerfileNGX . -t ${GCR}${REPO}-ecs-${NGINX}:$TAG"
                         sh "gcloud docker -- push ${GCR}${REPO}-ecs-${NGINX}; cd ../"
                         sh "./tagger.sh ${GCR} ${REPO} ${NGINX} $TAG"
                         sh "docker images -q |xargs docker rmi -f"
