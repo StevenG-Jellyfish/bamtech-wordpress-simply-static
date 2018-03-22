@@ -44,7 +44,8 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 	## Galleries
 --------------------------------------------------------------*/
 /* ---------------------- */
-@import "../../../_vendor/scss/fontawesome/font-awesome";
+@import "font-awesome";
+// @import "../../../_vendor/scss/fontawesome/font-awesome";
 /* ---------------------- */
 
 // bootstrap overrides
@@ -57,11 +58,6 @@ $espn-toc-txt-grey: #c5c9d1;
 $espn-accordion-bg-grey: #191919;
 $espn-accordion-txt-grey: #636363;
 
-/*--------------------------------------------------------------
-# global_league_accordion
---------------------------------------------------------------*/
-
-@import "global_league_accordion";
 
 /*--------------------------------------------------------------
 # global_devices
@@ -69,10 +65,22 @@ $espn-accordion-txt-grey: #636363;
 
 @import "global_devices";
 
-
 /*--------------------------------------------------------------
 # global_toc
 --------------------------------------------------------------*/
 
 @import "global_toc";
+
+/*--------------------------------------------------------------
+# global_footer_link
+--------------------------------------------------------------*/
+
+@import "global_footer_link";
+
+/*--------------------------------------------------------------
+# global_league_accordion
+--------------------------------------------------------------*/
+
+@import "global_league_accordion";
+
 

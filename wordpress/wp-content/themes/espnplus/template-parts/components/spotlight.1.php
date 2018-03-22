@@ -42,33 +42,16 @@
     	
         </div>
     	
-        <?php 
-            $video = get_field('spotlight_background-video', $component);
-            $small_video = get_field('spotlight_background_small_video', $component);
-            $video_image = get_field('spotlight_video_image', $component);
-        ?>
+        <?$video = get_field('spotlight_background-video', $component);?>
         
         <div class="container-fluid jubmotron-background">
 
-            <div id="embed-responsive-16by9" class="">
-                <video id="background-movie"  class="embed-responsive-item" preload="preload" autoplay="autoplay" loop="loop" muted>
-
-                    <source src="<?php echo $video['url'];?>" 
-                        type="video/mp4" media="screen and (min-width:768px)">
-
-                    <img src="<?php echo $video_image['sizes']['large'];?>" title="Your browser does not support the &lt;video&gt; tag" alt="ESPN+">
-                    
-                </video>
-            </div>
-
-            <div id="embed-responsive-4by3" class="">
-                <video id="background-movie"  class="embed-responsive-item" preload="preload" autoplay="autoplay" loop="loop" muted>
-                    
-                    <source src="<?php echo $small_video['url'];?>" 
-                        type="video/mp4" media="screen and (max-width:767px)"> 
-
-                    <img src="<?php echo $video_image['sizes']['medium'];?>" title="Your browser does not support the &lt;video&gt; tag" alt="ESPN+">
-                    
+            <div class="embed-responsive embed-responsive-16by9 div_style">
+                <video id="background-movie" preload autoplay loop> 
+                    <source src="<?php echo $video['url'];?>" type="video/mp4" media="(min-width:768px)">
+                    <source src="<?php echo $small_video['url'];?>" type="video/mp4" media="(max-width:767px)"> 
+                    <?php $video_image = get_field('spotlight_video_image', $component);?>
+                    <img src="<?php echo $video_image['sizes']['medium'];?>" title="Your browser does not support the <video> tag" alt="ESPN+">
                 </video>
             </div>
         </div>

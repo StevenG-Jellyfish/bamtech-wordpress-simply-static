@@ -123,43 +123,11 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 # Media
 --------------------------------------------------------------*/
 
-@import "../../../_vendor/scss/bootstrap/functions";
+
 //
-@import "variables";
+@import "bootstrap";
 //
-@import "../../../_vendor/scss/bootstrap/mixins";
-@import "../../../_vendor/scss/bootstrap/root";
-@import "../../../_vendor/scss/bootstrap/reboot";
-@import "../../../_vendor/scss/bootstrap/type";
-@import "../../../_vendor/scss/bootstrap/images";
-@import "../../../_vendor/scss/bootstrap/code";
-@import "../../../_vendor/scss/bootstrap/grid";
-@import "../../../_vendor/scss/bootstrap/tables";
-@import "../../../_vendor/scss/bootstrap/forms";
-@import "../../../_vendor/scss/bootstrap/buttons";
-@import "../../../_vendor/scss/bootstrap/transitions";
-@import "../../../_vendor/scss/bootstrap/dropdown";
-@import "../../../_vendor/scss/bootstrap/button-group";
-@import "../../../_vendor/scss/bootstrap/input-group";
-@import "../../../_vendor/scss/bootstrap/custom-forms";
-@import "../../../_vendor/scss/bootstrap/nav";
-@import "../../../_vendor/scss/bootstrap/navbar";
-@import "../../../_vendor/scss/bootstrap/card";
-@import "../../../_vendor/scss/bootstrap/breadcrumb";
-@import "../../../_vendor/scss/bootstrap/pagination";
-@import "../../../_vendor/scss/bootstrap/badge";
-@import "../../../_vendor/scss/bootstrap/jumbotron";
-@import "../../../_vendor/scss/bootstrap/alert";
-@import "../../../_vendor/scss/bootstrap/progress";
-@import "../../../_vendor/scss/bootstrap/media";
-@import "../../../_vendor/scss/bootstrap/list-group";
-@import "../../../_vendor/scss/bootstrap/close";
-@import "../../../_vendor/scss/bootstrap/modal";
-@import "../../../_vendor/scss/bootstrap/tooltip";
-@import "../../../_vendor/scss/bootstrap/popover";
-@import "../../../_vendor/scss/bootstrap/carousel";
-@import "../../../_vendor/scss/bootstrap/utilities";
-@import "../../../_vendor/scss/bootstrap/print";
+
 
 /*--------------------------------------------------------------
 # JF Components
@@ -177,9 +145,9 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 /*--------------------------------------------------------------
 # component_section
 --------------------------------------------------------------*/
-@import "global_footer_link";
 
 @import "component_section";
+
 // bootstrap overrides
 $yellow: #F9B300 !default;
 $primary: $yellow !default;

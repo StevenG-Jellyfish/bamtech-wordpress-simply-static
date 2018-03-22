@@ -11,6 +11,8 @@
     "url": "https://github.com/JellyfishGroup/Bamtech-wordpress"
   },
   "devDependencies": {
+    "bootstrap": "^4.0.0",
+    "font-awesome": "4.7.0",
     "del": "^1.2.1",
     "gulp": "github:gulpjs/gulp#4.0",
     "gulp-autoprefixer": "^4.0.0",
