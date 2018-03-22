@@ -114,6 +114,11 @@ Stub Name:  global_header.scss
             margin-left:0;
         }
     }
+    @media (max-width: 480px) {
+        flex-direction: row-reverse;
+        margin-right: 10px;
+        margin-left: 10px;
+    }
     #menu-item-320.menu-item a:link,
     #menu-item-320.menu-item a:visited,
     #menu-item-320.menu-item a:active,
