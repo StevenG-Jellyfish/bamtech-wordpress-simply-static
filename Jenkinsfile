@@ -67,22 +67,22 @@ pipeline {
                         sh "cd ${REPO}; docker build -f DockerfileWP . -t ${GCR}${REPO}-ecs-${WORDPRESS}:$TAG" 
                         sh "gcloud docker -- push ${GCR}${REPO}-ecs-${WORDPRESS}; cd ../"
                         sh "./tagger.sh ${GCR} ${REPO} ${WORDPRESS} $TAG"
+                        sh "docker images -q |xargs docker rmi -f"
                         
                         // Images that do not usually get built..
                         //* build Nginx
                         sh "cd ${REPO}; docker build -f DockerfileWP . -t ${GCR}${REPO}-ecs-${NGINX}:$TAG"
                         sh "gcloud docker -- push ${GCR}${REPO}-ecs-${NGINX}; cd ../"
                         sh "./tagger.sh ${GCR} ${REPO} ${NGINX} $TAG"
+                        sh "docker images -q |xargs docker rmi -f"
                         
                         // build Varnish
                         sh "cd ${REPO}; docker build -f DockerfileVSH . -t ${GCR}${REPO}-ecs-${VARNISH}:$TAG"
                         sh "gcloud docker -- push ${GCR}${REPO}-ecs-${VARNISH}; cd ../"
                         sh "./tagger.sh ${GCR} ${REPO} ${VARNISH} $TAG"
-                        
-                        
-                      
-                        // Tidy up
                         sh "docker images -q |xargs docker rmi -f"
+                        
+                        // Tidy up
                         sh "sudo rm -rf ${REPO};"
                     }
                 }
