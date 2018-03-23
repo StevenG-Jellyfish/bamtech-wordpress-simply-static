@@ -2547,16 +2547,15 @@ section.league-toc {
       padding: 0;
       vertical-align: top; }
       section.league-toc .container .accordion-container .accordion {
-        position: inline-block;
-        width: 45%;
-        max-width: 45%;
+        width: 50%;
+        max-width: 50%;
         margin: 0;
         padding: 0;
         vertical-align: top; }
         section.league-toc .container .accordion-container .accordion .card {
           position: inline-block;
-          width: 100%;
-          max-width: 100%;
+          width: 95%;
+          max-width: 95%;
           margin: 0 0 1.282rem 0;
           padding: 0;
           background-color: transparent;
@@ -2615,10 +2614,12 @@ section.league-toc {
             section.league-toc .container .accordion-container .accordion .card .card-body p {
               margin: 0;
               padding: 0; }
-        section.league-toc .container .accordion-container .accordion:nth-child(odd) {
-          margin: 0 2.5% 1.282rem 0; }
+        section.league-toc .container .accordion-container .accordion:nth-child(odd) .card {
+          float: left; }
         section.league-toc .container .accordion-container .accordion:nth-child(even) {
-          margin: 0 0 1.282rem 2.5%; }
+          right: 0; }
+          section.league-toc .container .accordion-container .accordion:nth-child(even) .card {
+            float: right; }
         @media (max-width: 767px) {
           section.league-toc .container .accordion-container .accordion:nth-child(even), section.league-toc .container .accordion-container .accordion:nth-child(odd) {
             margin: .5rem 0;
@@ -2630,9 +2631,7 @@ section.league-toc {
           max-width: 100%;
           margin: 0 0 .5rem 0;
           padding: 0;
-          text-align: center; }
-          section.league-toc .container .accordion-container .accordion:last-child {
-            margin: 0 0 0 0; } }
+          text-align: center; } }
     @media (max-width: 767px) {
       section.league-toc .container .accordion-container {
         display: flex;
