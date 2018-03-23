@@ -19,6 +19,9 @@ sub vcl_recv {
 	# Only a single backend
         set req.backend_hint= default;
 
+	# Breaks Varnish in vcl_recv ...
+        # set resp.http.Access-Control-Allow-Origin = "*";
+
         # Setting http headers for backend
         set req.http.X-Forwarded-For = client.ip;
     	set req.http.X-Forwarded-Proto = "http";
