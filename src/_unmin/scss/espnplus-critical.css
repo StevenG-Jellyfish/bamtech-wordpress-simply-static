@@ -4103,13 +4103,13 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
       margin-bottom: 1.5rem; } }
   .jumbotron .espn-cta-container {
     margin-top: 1.875rem;
-    font-family: PlayoffProCond-Medium, arial !important; }
+    font-family: PlayoffProCond-Medium, arial; }
     .jumbotron .espn-cta-container .btn.btn-primary {
-      font-family: PlayoffProCond-Medium, arial !important;
+      font-family: PlayoffProCond-Medium, arial;
       font-size: 1.125rem; }
     @media (max-width: 767px) {
       .jumbotron .espn-cta-container .btn.btn-primary {
-        font-family: PlayoffProCond-Medium, arial !important;
+        font-family: PlayoffProCond-Medium, arial;
         font-size: 1.125rem;
         font-weight: 700;
         line-height: 2.750rem; } }
