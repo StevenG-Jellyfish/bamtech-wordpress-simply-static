@@ -3841,7 +3841,7 @@ Stub Name:  global_header.scss
   display: -webkit-flex;
   display: flex;
   justify-content: space-between; }
-  .site-header a img {
+  .site-header img {
     max-height: 20px;
     width: 104px;
     margin-top: 28px;

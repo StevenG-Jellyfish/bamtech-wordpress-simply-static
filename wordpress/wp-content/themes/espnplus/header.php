@@ -49,7 +49,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="site-header">
             <div class="site-branding">
                 <?php
-                the_custom_logo();
+                $espnLogo = wp_get_attachment_image_src( get_theme_mod( 'custom_logo' ) );
+                echo '<img src="'.$espnLogo[0].'" alt="ESPN+">';
+
                 if ( is_front_page() && is_home() ) :
                     ?>
                     <h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
