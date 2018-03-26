@@ -186,7 +186,8 @@ pipeline {
              
                      input message: "Image's ${WORDPRESS}, ${NGINX} and ${VARNISH} have been released to ${PROD}, please test and confirm..."
                      }
-                }
-           }
-      }     
+                 }
+             }
+         }     
+     }
 }
