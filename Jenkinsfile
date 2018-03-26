@@ -136,8 +136,8 @@ pipeline {
                           message: "Image's ${WORDPRESS}, ${NGINX} and ${VARNISH} deployed successfully to to stage, Please access > (<${env.RUN_DISPLAY_URL}|Open>) and accept or decline build to continue.."
                
                       input message: "Image's ${WORDPRESS}, ${NGINX} and ${VARNISH} have been released to ${UAT}, please test and confirm..."
-              
-                }
+                  }
+               }
             }
             stage('DeployProd') {
             // Deploy stage agent selector
@@ -185,9 +185,8 @@ pipeline {
                          message: "All images deployed successfully to to production, Please access > (<${env.RUN_DISPLAY_URL}|Open>) and accept or decline build to continue.."
              
                      input message: "Image's ${WORDPRESS}, ${NGINX} and ${VARNISH} have been released to ${PROD}, please test and confirm..."
-                     }
-                 }
-             }
-         }     
-     }
+                    }
+               }
+          }
+     }     
 }
