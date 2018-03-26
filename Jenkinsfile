@@ -164,7 +164,7 @@ pipeline {
                     // Export keys and start deployment
                     sh "sudo cp ${env.DEPLOYER} ecs.sh; sudo chmod +x ecs.sh; sudo chown jenkins: ecs.sh"
                     sh "echo 'export AWS_SECRET_ACCESS_KEY=${env.BAM_SECRET}\nexport AWS_ACCESS_KEY_ID=${env.BAM_ACCESS}\nexport AWS_DEFAULT_REGION=${REGION}\nexport AWS_DEFAULT_OUTPUT=json' >> aws.env"
-                    sh ". ./aws.env ; ecs deploy ${PRODCLUSTER} ${UAT}-${WORDPRESS} --image ${WORDPRESS} ${GCR}${REPO}-ecs-${WORDPRESS}:latest --timeout ${TIMEOUT}"
+                    sh ". ./aws.env ; ecs deploy ${PRODCLUSTER} ${PROD}-${WORDPRESS} --image ${WORDPRESS} ${GCR}${REPO}-ecs-${WORDPRESS}:latest --timeout ${TIMEOUT}"
                     
                     // Clean up
                     sh "sudo rm -rf *"
