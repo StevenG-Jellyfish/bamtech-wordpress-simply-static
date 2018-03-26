@@ -2623,7 +2623,10 @@ section.league-toc {
         @media (max-width: 767px) {
           section.league-toc .container .accordion-container .accordion:nth-child(even), section.league-toc .container .accordion-container .accordion:nth-child(odd) {
             margin: .5rem 0;
-            padding: 0; } }
+            padding: 0; }
+            section.league-toc .container .accordion-container .accordion:nth-child(even) .card, section.league-toc .container .accordion-container .accordion:nth-child(odd) .card {
+              width: 100%;
+              max-width: 100%; } }
       @media (max-width: 767px) {
         section.league-toc .container .accordion-container .accordion {
           display: block;

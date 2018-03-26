@@ -143,8 +143,11 @@ Stub Name:  global_header.scss
 //Wrapper for CTA with corner knockout
 
 .menu-main-menu-container .espn-cta-container {
-    a{
+    a {
         display:none;
+    }
+    @media (max-width: 767px) {
+        margin: 0;
     }
     // text-align: center;
     .parallelogram {
