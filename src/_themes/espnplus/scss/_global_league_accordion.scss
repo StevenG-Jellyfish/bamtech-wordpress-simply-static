@@ -161,6 +161,10 @@ section.league-toc {
                     &:nth-child(odd) {
                         margin: .5rem 0;
                         padding: 0;
+                        .card {
+                            width:100%;
+                            max-width:100%;
+                        }
                     } // &:nth-child(even), &:nth-child(odd)
                 } // max-width: 767px
             } // .accordion    
