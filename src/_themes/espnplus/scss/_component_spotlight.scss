@@ -19,6 +19,9 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
     margin: 0 auto;
     background-color: black;
     overflow: hidden;
+    border-radius:0;
+    -moz-border-radius:0;
+    -webkit-border-radius:0;
   /*
     @media (min-width: 767px) {
       .jumbotron {
@@ -112,7 +115,7 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
         display: inline-block;
         top: 24px;
         right: 62px;
-        font-family: PlayoffProCond-MediumItalic, arial !important;
+        font-family: PlayoffProCond-MediumItalic, arial;
         font-size: 0.875rem;
         font-weight: 700;
         text-align: right;
@@ -138,7 +141,7 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
     }
 
     .jumbotron-heading {
-        font-family: PlayoffProCond-Medium, arial !important;
+        font-family: PlayoffProCond-Medium, arial;
         font-size: 1.875rem;
         font-weight: 700;
         letter-spacing: -0.019rem;
@@ -181,15 +184,15 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
 
     .espn-cta-container {
         margin-top: 1.875rem;
-        font-family: PlayoffProCond-Medium, arial !important;
+        font-family: PlayoffProCond-Medium, arial;
 
         .btn.btn-primary {            
-            font-family: PlayoffProCond-Medium, arial !important;           
+            font-family: PlayoffProCond-Medium, arial;           
             font-size: 1.125rem;
         }
         @media (max-width: 767px) {
             .btn.btn-primary {
-                font-family: PlayoffProCond-Medium, arial !important;
+                font-family: PlayoffProCond-Medium, arial;
                 font-size: 1.125rem;
                 font-weight: 700;
                 line-height: 2.750rem;
@@ -203,7 +206,7 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
         color: white;
 
         &.lead {
-            font-family: PlayoffProCond-Medium, arial !important;
+            font-family: PlayoffProCond-Medium, arial;
             font-size: 2.500rem;
             letter-spacing: -0.025rem;
             line-height: 3.000rem;
@@ -215,7 +218,7 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
         }
         @media (max-width: 824px) {
             &.lead {
-                font-family: PlayoffProCond-Medium, arial !important;
+                font-family: PlayoffProCond-Medium, arial;
                 font-size: 1.500rem;
                 font-weight: 700;
                 line-height: 1.750rem;
@@ -223,16 +226,16 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
         } // max-width: 767px
 
         &.below-cta {
-            font-family: PlayoffProCond-Medium, arial !important;
+            font-family: PlayoffProCond-Medium, arial;
             font-size: 1.250rem;
 
             a:link,
             a:visited,
             a:active,
             a:hover {
-                font-family: PlayoffProCond-Medium, arial !important;
-                text-decoration: underline !important;
-                color: white !important;
+                font-family: PlayoffProCond-Medium, arial;
+                text-decoration: underline;
+                color: white;
             }
         }
         @media (max-width: 767px) {

@@ -44,6 +44,7 @@ body {
         } // active & hover
     } // .parallelogram
     .btn.btn-primary {
+        font-family: PlayoffProCond-Medium, arial;
         position: absolute;
         display: inline-block;
         top: 0;
@@ -75,3 +76,8 @@ body {
         margin: 1.5rem auto .750rem auto;
     } // .espn-cta-container
 } // max-width: 767px
+
+//
+.btn {
+    transition:none;
+}
