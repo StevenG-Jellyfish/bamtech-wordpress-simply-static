@@ -54,7 +54,7 @@ pipeline {
                     // Build step grab release TAG and build/push images with new tag ID
                     // Then run cleanup on agents
                     // send slack notification that build steps has started:
-                    slackSend channel: '#deploy', color: 'good', message: "Project ${NAME} Image ${WORDPRESS} build has started > (<${env.RUN_DISPLAY_URL}|Open>) for details"
+                    slackSend channel: '#deploy', color: 'good', message: "Project ${NAME} has started building images > (<${env.RUN_DISPLAY_URL}|Open>) for details"
                 
                     script {
                         sh "sudo cp ${env.key} jelly.json;sudo cp ${env.run} auth.sh;sudo cp ${env.tagger} tagger.sh"
@@ -105,7 +105,7 @@ pipeline {
                                 [$class: 'FileBinding', credentialsId: 'ECS_DEPLOY', variable: 'DEPLOYER'],
                                 [$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'BAM_AWS', accessKeyVariable: 'BAM_ACCESS', secretKeyVariable: 'BAM_SECRET']]) {
                 // send slack notification that deploy stage has started
-                slackSend channel: '#deploy', color: 'good', message: "Image ${WORDPRESS} deploy has started > (<${env.RUN_DISPLAY_URL}|Open>) for details"
+                slackSend channel: '#deploy', color: 'good', message: "All image's have started deployment to UAT > (<${env.RUN_DISPLAY_URL}|Open>) for details"
                 // Deploy step grab release TAG set image id and deploy new revisions
                 script {
                     sh "curl -sS -H 'Authorization: token  ${API_TOKEN}' ${GIT}${GITORG}${REPO}/releases | jq  -r '.[].tag_name'| head -1 > tags"
@@ -133,15 +133,13 @@ pipeline {
                   success {
                       slackSend channel: '#deploy',
                           color: 'good',
-                          message: "Image ${WORDPRESS} deployed successfully to to stage, Please access > (<${env.RUN_DISPLAY_URL}|Open>) and accept or decline build to continue.."
+                          message: "Image's ${WORDPRESS}, ${NGINX} and ${VARNISH} deployed successfully to to stage, Please access > (<${env.RUN_DISPLAY_URL}|Open>) and accept or decline build to continue.."
                
-                      input message: "Image ${WORDPRESS} has been released to ${UAT}, please test and confirm..."
-              
-                }
+                      input message: "Image's ${WORDPRESS}, ${NGINX} and ${VARNISH} have been released to ${UAT}, please test and confirm..."
+                  }
+               }
             }
-        }
-        /*
-        stage('DeployProd') {
+            stage('DeployProd') {
             // Deploy stage agent selector
             agent {
                 node {
@@ -157,7 +155,7 @@ pipeline {
                                 [$class: 'FileBinding', credentialsId: 'ECS_DEPLOY', variable: 'DEPLOYER'],
                                 [$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'BAM_AWS', accessKeyVariable: 'BAM_ACCESS', secretKeyVariable: 'BAM_SECRET']]) {
                 // send slack notification that deploy stage has started
-                slackSend channel: '#deploy', color: 'good', message: "Image ${WORDPRESS} deploy has started in ${PROD}> (<${env.RUN_DISPLAY_URL}|Open>) for details"
+                slackSend channel: '#deploy', color: 'good', message: "All image's have started deployment to production > (<${env.RUN_DISPLAY_URL}|Open>) for details"
                 // Deploy step grab release TAG set image id and deploy new revisions
                 script {
                     sh "curl -sS -H 'Authorization: token  ${API_TOKEN}' ${GIT}${GITORG}${REPO}/releases | jq  -r '.[].tag_name'| head -1 > tags"
@@ -166,30 +164,29 @@ pipeline {
                     // Export keys and start deployment
                     sh "sudo cp ${env.DEPLOYER} ecs.sh; sudo chmod +x ecs.sh; sudo chown jenkins: ecs.sh"
                     sh "echo 'export AWS_SECRET_ACCESS_KEY=${env.BAM_SECRET}\nexport AWS_ACCESS_KEY_ID=${env.BAM_ACCESS}\nexport AWS_DEFAULT_REGION=${REGION}\nexport AWS_DEFAULT_OUTPUT=json' >> aws.env"
-                    sh ". ./aws.env ; ecs deploy ${PRODCLUSTER} ${PROD}-${WORDPRESS} --image ${WORDPRESS} ${GCR}${REPO}-ecs-${WORDPRESS}:latest --timeout 800"
+                    sh ". ./aws.env ; ecs deploy ${PRODCLUSTER} ${PROD}-${WORDPRESS} --image ${WORDPRESS} ${GCR}${REPO}-ecs-${WORDPRESS}:latest --timeout ${TIMEOUT}"
                     
                     // Clean up
                     sh "sudo rm -rf *"
-                    // User Input to complete.
+                    
                     }
-                }            
+                }              
             }
             post {
                   failure {
                      slackSend channel: '#deploy',
                          color: 'danger',
-                         message: "Image ${WORDPRESS} FAILED to deploy, Visit > (<${env.RUN_DISPLAY_URL}|Open>) for details"
+                         message: "Image's ${WORDPRESS}, ${NGINX} and ${VARNISH} FAILED to deploy, Visit > (<${env.RUN_DISPLAY_URL}|Open>) for details"
                          }
               
                   success {
                      slackSend channel: '#deploy',
                          color: 'good',
-                         message: "Image ${WORDPRESS} deployed successfully to to stage, Please access > (<${env.RUN_DISPLAY_URL}|Open>) and accept or decline build to continue.."
+                         message: "All images deployed successfully to to production, Please access > (<${env.RUN_DISPLAY_URL}|Open>) and accept or decline build to continue.."
              
-                     input message: "Image ${WORDPRESS} has been released to ${PROD}, please test and confirm..."
-                     }
-                }
-           }
-           */
-      }     
+                     input message: "Image's ${WORDPRESS}, ${NGINX} and ${VARNISH} have been released to ${PROD}, please test and confirm..."
+                    }
+               }
+          }
+     }     
 }
