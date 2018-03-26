@@ -39,23 +39,25 @@ section.league-toc {
         .accordion-container {
             display: flex;  
             flex-flow: row wrap;
+            // justify-content: center;
             width: 100%;
             margin: 0;
             padding: 0;
             vertical-align: top;
+            // border:1px solid #ccc;
             
             .accordion {
-                position: inline-block;
-                width: 45%;
-                max-width: 45%; 
+                // position: inline-block;
+                width: 50%;
+                max-width: 50%; 
                 margin: 0;
                 padding: 0;
                 vertical-align: top;
 
                 .card {
                     position: inline-block;
-                    width: 100%;
-                    max-width: 100%;
+                    width: 95%;
+                    max-width: 95%;
                     margin: 0 0 1.282rem 0;
                     padding: 0;
                     background-color: transparent;
@@ -137,10 +139,21 @@ section.league-toc {
                 
 
                 &:nth-child(odd) {
-                    margin: 0 2.5% 1.282rem 0;
+                    // margin: 0 2.5% 1.282rem 0;
+                    // float:left;
+                   // align-self:flex-start;
+                   .card {
+                    float: left;
+                    }
                 }
                 &:nth-child(even) {
-                    margin: 0 0 1.282rem 2.5%;
+                    // margin: 0 0 1.282rem 2.5%;
+                    right:0;
+                    .card {
+                        float: right;
+                    }
+                    // float:right;
+                   // align-self:flex-end;
                 }
 
                 @media (max-width: 767px) { // mobile
@@ -161,12 +174,17 @@ section.league-toc {
                     padding: 0;
                     text-align: center;
 
-                    &:last-child {
-                        margin: 0 0 0 0;
-                    }
+                    // &:last-child {
+                    //     margin: 0 0 0 0;
+                    // }
                 } // .accordion 
                 
             } // max-width: 767px
+            // #league-toc-accordion2 {
+            //     //text-align: right;
+            //     // float: right;
+            // }
+
         } // .accordion-container
 
         @media (max-width: 767px) { // mobile
