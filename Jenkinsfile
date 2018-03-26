@@ -16,7 +16,7 @@ pipeline {
         PRODCLUSTER = "ecsProdCluster"
         UAT = "uat"
         PROD = "prod"
-        TIMEOUT = "900"
+        TIMEOUT = "1200"
         
         // Images that do not usually get built..
          NGINX = "nginx"
