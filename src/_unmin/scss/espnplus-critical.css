@@ -3909,6 +3909,10 @@ Stub Name:  global_header.scss
 .menu-main-menu-container .espn-cta-container a {
   display: none; }
 
+@media (max-width: 767px) {
+  .menu-main-menu-container .espn-cta-container {
+    margin: 0; } }
+
 .menu-main-menu-container .espn-cta-container .parallelogram {
   margin: 0 -10px 0 -25px;
   color: black; }
