@@ -51,51 +51,47 @@ if ($component !== false) {
 ?>
 
 <div id="page" class="site">
-    <header id="masthead" class="">
 
-        <div class="headerbox">
-            <div class="site-header">
-                <div class="site-branding">
+<header id="masthead" class="">
+    <div class="headerbox">
+        <div class="site-header">
+            <div class="site-branding">
+                <?php 
+                    echo '<img src="';
+                    the_field('header_logo', $component);
+                    echo '" alt="ESPN+">';
 
-                    <img src="<?php echo $header_logo;?>" alt="ESPN+">
-                    
-                    <?php if ( is_front_page() && is_home() ) :?>
-                        
-                        <h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-                    
-                    <?php else: ?>
-                        
-                        <p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
-
-                    <?php endif;
-
-                    
-                    if ( $espnplus_description || is_customize_preview() ) :?>
-
-                        <p class="site-description"><?php echo $espnplus_description;?></p>
-                    
-                    <?php endif; ?>
-
-                </div>
-
-
-                <nav class="main-navigation">
-                    
-                    <div class="menu-main-menu-container">
-    					<ul id="primary-menu" class="menu">
-    						<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-320">
-    								<div class="espn-cta-container">
-    									<div class="parallelogram">
-    										<a href="<?php echo $header_cta_link;?>" class="btn btn-primary"><?php echo $header_cta_text;?></a>
-    									</div>
-    								</div>	
-    						</li>
-                            <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-319">
-    							<a href="<?php echo $header_login_url;?>"><?php echo $header_login_text;?></a>
-    						</li>
-    					</ul>
-    				</div> 
-    			</nav>
+                if ( is_front_page() && is_home() ) :
+                    ?>
+                    <h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
+                    <?php
+                else :
+                    ?>
+                    <p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
+                    <?php
+                endif;
+                $espnplus_description = get_bloginfo( 'description', 'display' );
+                if ( $espnplus_description || is_customize_preview() ) :
+                    ?>
+                    <p class="site-description"><?php echo $espnplus_description; /* WPCS: xss ok. */ ?></p>
+                <?php endif; ?>
+            </div>
+            <nav class="main-navigation">
+                <div class="menu-main-menu-container">
+					<ul id="primary-menu" class="menu">
+                        <li class="menu-item">
+                                <div class="espn-cta-container">
+                                    <div class="parallelogram">
+                                    <a href="<?php the_field('header_cta_link', $component);?>" class="btn btn-primary"><?php the_field('header_cta_text', $component);?></a>
+                                    </div>
+                                </div>
+                        </li>
+                        <li class="menu-item">
+                            <a href="<?php the_field('header_login_url', $component);?>"><?php the_field('header_login_text', $component);?></a>
+                        </li>
+					</ul>
+				</div>       
+				</nav>
             </div>
         </div>
     </header>
