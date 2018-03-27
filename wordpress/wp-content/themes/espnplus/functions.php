@@ -152,7 +152,7 @@ function espnplus_scripts() {
 
 	// wp_enqueue_script( 'espnplus-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20151215', true );
 
-	wp_enqueue_script( 'espnplus-top', get_template_directory_uri() . '/js/espnplus-top.min.js', array(), '20151215', false );
+	// wp_enqueue_script( 'espnplus-top', get_template_directory_uri() . '/js/espnplus-top.min.js', array(), '20151215', false );
 
 	wp_enqueue_script( 'espnplus-bottom', get_template_directory_uri() . '/js/espnplus-bottom.min.js', array(), '20151215', true );
 
