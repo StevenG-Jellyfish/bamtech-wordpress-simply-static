@@ -153,7 +153,7 @@ gulp.task('javascript', (done) => {
 gulp.task('top-javascript', () => {
     return gulp.src([
            //  paths.src.vendor.jquery,
-            paths.src.vendor.navigation,
+            // paths.src.vendor.navigation,
             // paths.src.vendor.bstrap,
             paths.src.top_scripts
         ])
@@ -176,7 +176,7 @@ gulp.task('bottom-javascript', () => {
     return gulp.src([
             //paths.src.vendor.unveil,
             //paths.src.vendor.pholder,
-            
+            paths.src.vendor.navigation,
             paths.src.vendor.popper,
             paths.src.vendor.bstrap,
            // paths.src.vendor.bstrapindex,
