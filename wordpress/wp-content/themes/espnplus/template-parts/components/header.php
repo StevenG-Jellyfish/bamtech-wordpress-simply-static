@@ -37,9 +37,9 @@ if ($component !== false) {
         <div class="site-header">
             <div class="site-branding">
                 <?php 
-								echo '<img src="';
-								the_field('header_logo', $component);
-								echo '" alt="ESPN+">';
+                    echo '<img src="';
+                    the_field('header_logo', $component);
+                    echo '" alt="ESPN+">';
 
                 if ( is_front_page() && is_home() ) :
                     ?>
@@ -57,24 +57,23 @@ if ($component !== false) {
                 <?php endif; ?>
             </div>
             <nav class="main-navigation">
-                
                 <div class="menu-main-menu-container">
-									<ul id="primary-menu" class="menu">
-										<li id="menu-item-320" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-320">
-											<a>
-												<div class="espn-cta-container">
-												 <div class="parallelogram">
-												  <a href="<?php the_field('header_cta_link', $component);?>" class="btn btn-primary"><?php the_field('header_cta_text', $component);?></a>
-												 </div>
-												</div>
-											</a>
-										</li>
-                    <li id="menu-item-319" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-319">
-											<a href="<?php the_field('header_login_url', $component);?>"><?php the_field('header_login_text', $component);?></a>
-										</li>
-									</ul>
-								</div>       
-							</nav>
+					<ul id="primary-menu" class="menu">
+                        <li class="menu-item">
+                            <a>
+                                <div class="espn-cta-container">
+                                    <div class="parallelogram">
+                                    <a href="<?php the_field('header_cta_link', $component);?>" class="btn btn-primary"><?php the_field('header_cta_text', $component);?></a>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="<?php the_field('header_login_url', $component);?>"><?php the_field('header_login_text', $component);?></a>
+                        </li>
+					</ul>
+				</div>       
+				</nav>
             </div>
         </div>
     </header>

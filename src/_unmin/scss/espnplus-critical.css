@@ -3690,7 +3690,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    margin: 0px 0px 0px 6px;
+    margin: 2px 0px 0px 6px;
     padding: 0 0 0 0;
     background-color: transparent;
     border: none;
@@ -3705,6 +3705,7 @@ body {
     text-transform: uppercase;
     line-height: 48px;
     color: black;
+    letter-spacing: normal;
     -webkit-transform: skew(45deg);
     -ms-transform: skew(45deg);
     transform: skew(45deg); }
@@ -3928,31 +3929,6 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
       max-width: 767px;
       margin: 0;
       padding: .5rem 0; } }
-  .jumbotron .jumbotron-login:link,
-  .jumbotron .jumbotron-login:visited {
-    position: absolute;
-    display: inline-block;
-    top: 24px;
-    right: 62px;
-    font-family: PlayoffProCond-MediumItalic, arial;
-    font-size: 0.875rem;
-    font-weight: 700;
-    text-align: right;
-    text-decoration: none;
-    color: #fefefe; }
-  @media (max-width: 767px) {
-    .jumbotron .jumbotron-login:link {
-      position: relative;
-      display: block;
-      float: none;
-      clear: both;
-      top: .500rem;
-      right: 24px;
-      width: 100%;
-      text-align: right; } }
-  .jumbotron .jumbotron-login:active,
-  .jumbotron .jumbotron-login:hover {
-    text-decoration: underline; }
   .jumbotron .jumbotron-heading {
     font-family: PlayoffProCond-Medium, arial;
     font-size: 1.875rem;
@@ -3985,12 +3961,6 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
     .jumbotron .espn-cta-container .btn.btn-primary {
       font-family: PlayoffProCond-Medium, arial;
       font-size: 1.125rem; }
-    @media (max-width: 767px) {
-      .jumbotron .espn-cta-container .btn.btn-primary {
-        font-family: PlayoffProCond-Medium, arial;
-        font-size: 1.125rem;
-        font-weight: 700;
-        line-height: 2.750rem; } }
   .jumbotron p {
     margin: 0 0 0 0;
     padding: 0 0 0 0;
@@ -3999,7 +3969,8 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
       font-family: PlayoffProCond-Medium, arial;
       font-size: 2.500rem;
       letter-spacing: -0.025rem;
-      line-height: 3.000rem; }
+      line-height: 3.000rem;
+      padding: 0px 10px 0px 10px; }
     @media screen and (min-width: 825px) and (max-width: 960px) {
       .jumbotron p.lead {
         font-size: 2.000rem; } }
