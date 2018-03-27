@@ -72,14 +72,23 @@ var paths = {
         },
         vendor: {
             styles: '_vendor/scss/**/*.scss',
-            jquery: '_vendor/js/jquery.min.js',
-            bstrap: '_vendor/js/bootstrap.js',
-            pholder: '_vendor/js/jquery.placeholder.js',
-            utils: '_vendor/js/bootstrap/src/util.js',
-            collapse: '_vendor/js/bootstrap/src/collapse.js',
-            validate: '_vendor/js/jquery.validate.js',
-            easing: '_vendor/js/jquery.easing.js',
-            unveil: '_vendor/js/jquery_unveil/jquery.unveil.js' //https://luis-almeida.github.io/unveil/
+            // jquery: '_vendor/js/jquery.min.js',
+            navigation: '_themes/espnplus/js/navigation.js',
+            // jquery: './node_modules/jquery/dist/jquery.js',
+            popper: '_vendor/js/popper.js',
+            // bstrap: '_vendor/js/bootstrap.js',
+            bstrap: './node_modules/bootstrap/dist/js/bootstrap.js',
+            // pholder: '_vendor/js/jquery.placeholder.js',
+            utils: './node_modules/bootstrap/js/dist/util.js',
+            // collapse: '_vendor/js/bootstrap/src/collapse.js',
+            bstrapindex:'./node_modules/bootstrap/js/dist/index.js',
+            button: './node_modules/bootstrap/js/dist/button.js',
+            dropdown: './node_modules/bootstrap/js/dist/dropdown.js',
+            collapse: './node_modules/bootstrap/js/dist/collapse.js',
+            // validate: '_vendor/js/jquery.validate.js',
+            // easing: '_vendor/js/jquery.easing.js',
+            skiplink: '_vendor/js/skip-link-focus-fix.js'
+            // unveil: '_vendor/js/jquery_unveil/jquery.unveil.js' //https://luis-almeida.github.io/unveil/
         }
     },
     watch: {
@@ -143,8 +152,9 @@ gulp.task('javascript', (done) => {
 //gulp.task('top-javascript', gulp.series('js_lint', () => {
 gulp.task('top-javascript', () => {
     return gulp.src([
-            //paths.src.vendor.jquery,
-            //paths.src.vendor.bstrap,
+           //  paths.src.vendor.jquery,
+            // paths.src.vendor.navigation,
+            // paths.src.vendor.bstrap,
             paths.src.top_scripts
         ])
         // .pipe(debug({title: '[1] Files in Stream:'}))
@@ -166,6 +176,15 @@ gulp.task('bottom-javascript', () => {
     return gulp.src([
             //paths.src.vendor.unveil,
             //paths.src.vendor.pholder,
+            paths.src.vendor.navigation,
+            paths.src.vendor.popper,
+            paths.src.vendor.bstrap,
+           // paths.src.vendor.bstrapindex,
+            paths.src.vendor.utils,
+           // paths.src.vendor.button,
+           // paths.src.vendor.dropdown,
+            paths.src.vendor.collapse,
+            paths.src.vendor.skiplink,
             paths.src.bottom_scripts
         ])
         // .pipe(debug({title: '[1] Files in Stream:'}))
