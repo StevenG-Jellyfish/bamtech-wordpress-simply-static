@@ -101,7 +101,7 @@ Stub Name:  global_header.scss
     }
     .menu-item a:active,
     .menu-item a:hover, {
-        color: black;
+        color: white;
         text-decoration: underline;
     }
     .menu-item:nth-child(2) {
@@ -168,7 +168,7 @@ Stub Name:  global_header.scss
     a:visited,
     a:active,
     a:hover {
-        display: none;
+       // display: none;
         margin-top: 0;
     }
  //.btn-primary 

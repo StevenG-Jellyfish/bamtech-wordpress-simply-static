@@ -3792,7 +3792,7 @@ Stub Name:  global_header.scss
     color: black; }
   .menu .menu-item a:active,
   .menu .menu-item a:hover {
-    color: black;
+    color: white;
     text-decoration: underline; }
   .menu .menu-item:nth-child(2) {
     width: 42px;
@@ -3837,7 +3837,6 @@ Stub Name:  global_header.scss
 .menu-main-menu-container .espn-cta-container a:visited,
 .menu-main-menu-container .espn-cta-container a:active,
 .menu-main-menu-container .espn-cta-container a:hover {
-  display: none;
   margin-top: 0; }
 
 .menu-main-menu-container .espn-cta-container .btn.btn-primary:active,
