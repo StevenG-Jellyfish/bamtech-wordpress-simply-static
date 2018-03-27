@@ -87,6 +87,32 @@ pipeline {
                     }
                 }
             }
+
+            post {
+                  failure {
+                      slackSend channel: '#deploy',
+                          color: 'danger',
+                          message: "Image ${WORDPRESS} FAILED to build, Visit > (<${env.RUN_DISPLAY_URL}|Open>) for details"
+                    }
+              
+                
+                  success {
+                      slackSend channel: '#deploy',
+                          color: 'good',
+                          message: "Image's ${WORDPRESS}, ${NGINX} and ${VARNISH} were built successfully , Please access > (<${env.RUN_DISPLAY_URL}|Open>) for more details"
+                  }
+
+                  always {
+ 
+                    script {
+
+                      sh "rm -rf /var/jenkins_home/shared/docker_ctb/"
+
+                    }
+
+
+                  }
+               }
         }
  
         stage('DeployUat') {
@@ -137,6 +163,18 @@ pipeline {
                
                       input message: "Image's ${WORDPRESS}, ${NGINX} and ${VARNISH} have been released to ${UAT}, please test and confirm..."
                   }
+
+                   always {
+ 
+                    script {
+
+                      sh "rm -rf /var/jenkins_home/shared/ecs_deployer"
+
+                    }
+
+
+                  }
+
                }
             }
             stage('DeployProd') {
