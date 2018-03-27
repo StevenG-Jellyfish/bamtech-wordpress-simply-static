@@ -15,21 +15,40 @@ if (empty($page_id)) {
 *  Assign repeater field to $component variable
 */ 
 $component = get_field('component_header', $page_id);
+$espnplus_description = get_bloginfo( 'description', 'display' );
 
 /* 
 *  Verify if repeater value is empty
 *  Then store the repeater component sections ids in a new array
 */ 
 if ($component !== false) {
+    
     /* 
-     *  Loop $section_ids array and pull each values in respectives areas
-     *  @ header_logo
-		 *  @ header_cta_text
-		 *  @ header_cta_link
-		 *  @ header_login_url
-		 *  @ header_login_text
-     */ 
-    ?>
+    *  Loop $section_ids array and pull each values in respectives areas
+    *  @ header_logo
+	*  @ header_cta_text
+	*  @ header_cta_link
+	*  @ header_login_url
+	*  @ header_login_text
+    */ 
+
+    $header_cta_link= get_field('header_cta_link', $component);
+    $header_cta_text= get_field('header_cta_text', $component);
+    $header_login_url= get_field('header_login_url', $component);
+    $header_login_text= get_field('header_login_text', $component);
+    $header_logo= get_field('header_logo', $component);
+
+}else{ 
+
+    //reset values to avoid breaking the page
+    $header_cta_link= '';
+    $header_cta_text= '';
+    $header_login_url= '';
+    $header_login_text= '';
+    $header_logo= '';
+}
+
+?>
 
 <div id="page" class="site">
 <header id="masthead" class="">
@@ -76,12 +95,13 @@ if ($component !== false) {
 				</nav>
             </div>
         </div>
+
     </header>
+
     <div class="container-fluid">
-    <a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'espnplus' ); ?></a>
+
+        <a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'espnplus' ); ?></a>
     
-    <div id="content" class="site-content">
+        <div id="content" class="site-content">
 
    
-<?php 
-}
