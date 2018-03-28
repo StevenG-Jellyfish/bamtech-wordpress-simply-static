@@ -51,18 +51,26 @@ section.devices-bar {
                 display: inline-block;
                 margin: 0 2.25rem;
                 text-align: center;
+                @media (max-width: 420px) {
+                   width:100%;
+                 // clear:both;
+                }
                 
                 img {
                     height: 2.625rem;                   
-
+                    max-width:140px;
+                    margin-bottom: .75rem;
                 } // img
 
-                p.device-copy {
-                margin: .75rem 0;
+                .device-copy {
+                    display:block;
+                    margin:0 auto;
+                    // margin: .75rem 0;
                     padding: .5rem 0;
                     border-top: 2px solid black;
                     font-weight: 700;
                     color: black;
+                    max-width:140px;
 
                     span {
                         display: block;

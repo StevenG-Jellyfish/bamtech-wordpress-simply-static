@@ -101,7 +101,7 @@ Stub Name:  global_header.scss
     }
     .menu-item a:active,
     .menu-item a:hover, {
-        color: black;
+        color: white;
         text-decoration: underline;
     }
     .menu-item:nth-child(2) {
@@ -126,13 +126,13 @@ Stub Name:  global_header.scss
         margin-right: 10px;
         margin-left: 10px;
     }
-    #menu-item-320.menu-item a:link,
-    #menu-item-320.menu-item a:visited,
-    #menu-item-320.menu-item a:active,
-    #menu-item-320.menu-item a:hover {
-        margin-top: 0;
-        display: none;
-    }
+    // #menu-item-320.menu-item a:link,
+    // #menu-item-320.menu-item a:visited,
+    // #menu-item-320.menu-item a:active,
+    // #menu-item-320.menu-item a:hover {
+    //     margin-top: 0;
+    //     display: none;
+    // }
 
 }
 
@@ -168,7 +168,6 @@ Stub Name:  global_header.scss
     a:visited,
     a:active,
     a:hover {
-        display: none;
         margin-top: 0;
     }
  //.btn-primary 

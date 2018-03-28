@@ -1,85 +1,3 @@
-/*!
-Theme Name: espnplus
-Theme URI: http://underscores.me/
-Author: Jellyfish
-Author URI: http://jellyfish.net
-Description: ESPN + streaming service
-Version: 1.0.0
-License: GNU General Public License v2 or later
-License URI: LICENSE
-Text Domain: espnplus
-Tags: custom-background, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready
-
-This theme, like WordPress, is licensed under the GPL.
-Use it to make something cool, have fun, and share what you've learned with others.
-
-espnplus is based on Underscores https://underscores.me/, (C) 2012-2017 Automattic, Inc.
-Underscores is distributed under the terms of the GNU GPL v2 or later.
-
-Normalizing styles have been helped along thanks to the fine work of
-Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
-*/
-/*--------------------------------------------------------------
->>> TABLE OF CONTENTS:
-----------------------------------------------------------------
-# Normalize
-# Typography
-# Elements
-# Forms
-# Navigation
-	## Links
-	## Menus
-# Accessibility
-# Alignments
-# Clearings
-# Widgets
-# Content
-	## Posts and pages
-	## Comments
-# Infinite scroll
-# Media
-	## Captions
-	## Galleries
---------------------------------------------------------------*/
-/*--------------------------------------------------------------
-# Normalize
---------------------------------------------------------------*/
-/*--------------------------------------------------------------
-# Typography
---------------------------------------------------------------*/
-/*--------------------------------------------------------------
-# Elements
---------------------------------------------------------------*/
-/*--------------------------------------------------------------
-# Forms
---------------------------------------------------------------*/
-/*--------------------------------------------------------------
-# Navigation
---------------------------------------------------------------*/
-/*--------------------------------------------------------------
-# Accessibility
---------------------------------------------------------------*/
-/*--------------------------------------------------------------
-# Alignments
---------------------------------------------------------------*/
-/*--------------------------------------------------------------
-# Clearings
---------------------------------------------------------------*/
-/*--------------------------------------------------------------
-# Widgets
---------------------------------------------------------------*/
-/*--------------------------------------------------------------
-# Content
---------------------------------------------------------------*/
-/*--------------------------------------------------------------
-# Infinite scroll
---------------------------------------------------------------*/
-/*--------------------------------------------------------------
-# Media
---------------------------------------------------------------*/
-/*--------------------------------------------------------------
-# Media
---------------------------------------------------------------*/
 :root {
   --blue: #007bff;
   --indigo: #6610f2;
@@ -3734,9 +3652,6 @@ a.text-dark:hover, a.text-dark:focus {
   .table-bordered td {
     border: 1px solid #ddd !important; } }
 
-/*--------------------------------------------------------------
-# JF Components
---------------------------------------------------------------*/
 body {
   max-width: 100%;
   margin: 0 0 0 0;
@@ -3775,7 +3690,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    margin: 0 10px 0 10px;
+    margin: 2px 0px 0px 6px;
     padding: 0 0 0 0;
     background-color: transparent;
     border: none;
@@ -3790,6 +3705,7 @@ body {
     text-transform: uppercase;
     line-height: 48px;
     color: black;
+    letter-spacing: normal;
     -webkit-transform: skew(45deg);
     -ms-transform: skew(45deg);
     transform: skew(45deg); }
@@ -3876,7 +3792,7 @@ Stub Name:  global_header.scss
     color: black; }
   .menu .menu-item a:active,
   .menu .menu-item a:hover {
-    color: black;
+    color: white;
     text-decoration: underline; }
   .menu .menu-item:nth-child(2) {
     width: 42px;
@@ -3896,12 +3812,6 @@ Stub Name:  global_header.scss
       flex-direction: row-reverse;
       margin-right: 10px;
       margin-left: 10px; } }
-  .menu #menu-item-320.menu-item a:link,
-  .menu #menu-item-320.menu-item a:visited,
-  .menu #menu-item-320.menu-item a:active,
-  .menu #menu-item-320.menu-item a:hover {
-    margin-top: 0;
-    display: none; }
 
 .site-title {
   display: none; }
@@ -3927,7 +3837,6 @@ Stub Name:  global_header.scss
 .menu-main-menu-container .espn-cta-container a:visited,
 .menu-main-menu-container .espn-cta-container a:active,
 .menu-main-menu-container .espn-cta-container a:hover {
-  display: none;
   margin-top: 0; }
 
 .menu-main-menu-container .espn-cta-container .btn.btn-primary:active,
@@ -3935,9 +3844,6 @@ Stub Name:  global_header.scss
   text-decoration: none;
   color: white; }
 
-/*--------------------------------------------------------------
-# component_spotlight
---------------------------------------------------------------*/
 /*!
 Theme Name          :   espnplus
 Stub Name           :   component_spotlight.scss 
@@ -4022,31 +3928,6 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
       max-width: 767px;
       margin: 0;
       padding: .5rem 0; } }
-  .jumbotron .jumbotron-login:link,
-  .jumbotron .jumbotron-login:visited {
-    position: absolute;
-    display: inline-block;
-    top: 24px;
-    right: 62px;
-    font-family: PlayoffProCond-MediumItalic, arial;
-    font-size: 0.875rem;
-    font-weight: 700;
-    text-align: right;
-    text-decoration: none;
-    color: #fefefe; }
-  @media (max-width: 767px) {
-    .jumbotron .jumbotron-login:link {
-      position: relative;
-      display: block;
-      float: none;
-      clear: both;
-      top: .500rem;
-      right: 24px;
-      width: 100%;
-      text-align: right; } }
-  .jumbotron .jumbotron-login:active,
-  .jumbotron .jumbotron-login:hover {
-    text-decoration: underline; }
   .jumbotron .jumbotron-heading {
     font-family: PlayoffProCond-Medium, arial;
     font-size: 1.875rem;
@@ -4079,12 +3960,6 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
     .jumbotron .espn-cta-container .btn.btn-primary {
       font-family: PlayoffProCond-Medium, arial;
       font-size: 1.125rem; }
-    @media (max-width: 767px) {
-      .jumbotron .espn-cta-container .btn.btn-primary {
-        font-family: PlayoffProCond-Medium, arial;
-        font-size: 1.125rem;
-        font-weight: 700;
-        line-height: 2.750rem; } }
   .jumbotron p {
     margin: 0 0 0 0;
     padding: 0 0 0 0;
@@ -4093,7 +3968,8 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
       font-family: PlayoffProCond-Medium, arial;
       font-size: 2.500rem;
       letter-spacing: -0.025rem;
-      line-height: 3.000rem; }
+      line-height: 3.000rem;
+      padding: 0px 10px 0px 10px; }
     @media screen and (min-width: 825px) and (max-width: 960px) {
       .jumbotron p.lead {
         font-size: 2.000rem; } }
@@ -4118,9 +3994,6 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
         font-size: 0.750rem;
         line-height: 1.125rem; } }
 
-/*--------------------------------------------------------------
-# component_section
---------------------------------------------------------------*/
 /*!
 Theme Name          :   espnplus
 Stub Name           :   component_section.scss 
