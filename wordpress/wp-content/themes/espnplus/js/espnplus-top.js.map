@@ -1,0 +1,1 @@
+{"version":3,"names":[],"mappings":"","sources":["espnplus-top.js"],"sourcesContent":["jQuery(function($) {\n  //console.log('espnplus-top.js loaded');\n\n  // execute the following functions when the DOM returns the 'DOMContentLoaded' status (render tree built)\n  $(document).ready(function() {\n   \n  });  // doc.ready\n});"],"file":"espnplus-top.js"}
