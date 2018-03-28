@@ -41,9 +41,9 @@
 	<!-- End Google Tag Manager -->
 
     <!-- Adobe Tracking -->
-    <script language="JavaScript" type="text/javascript" src="http://bamtech-build.jellyfish.local/adobetracking/VisitorAPI.js"></script>
-    <script language="JavaScript" type="text/javascript" src="http://bamtech-build.jellyfish.local/adobetracking/omniturePlugins.js"></script>
-    <script language="JavaScript" type="text/javascript" src="http://bamtech-build.jellyfish.local/adobetracking/uuid.js"></script>
+    <script language="JavaScript" type="text/javascript" src="<?php echo get_home_url(); ?>/adobetracking/VisitorAPI.js"></script>
+    <script language="JavaScript" type="text/javascript" src="<?php echo get_home_url(); ?>/adobetracking/omniturePlugins.js"></script>
+    <script language="JavaScript" type="text/javascript" src="<?php echo get_home_url(); ?>/adobetracking/uuid.js"></script>
     <!-- End Adobe Tracking -->
 
     <meta charset="<?php bloginfo( 'charset' ); ?>">

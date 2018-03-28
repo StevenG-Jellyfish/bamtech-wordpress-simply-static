@@ -40,7 +40,7 @@ loadCSS('<?php echo get_stylesheet_directory_uri().'/css/espnplus-non-critical.m
 
 <!-- Adobe Tracking -->
 <script language="JavaScript" type="text/javascript" 
-src="http://bamtech-build.jellyfish.local/adobetracking/AppMeasurement.js"></script>
+src="<?php echo get_home_url(); ?>/adobetracking/AppMeasurement.js"></script>
 		
 		<script language="JavaScript" type="text/javascript">
 		
