@@ -19,6 +19,7 @@ services:
         restart: always
         volumes:
             - "./wordpress/wordpress-entrypoint.sh:/usr/local/bin/wordpress-entrypoint.sh"
+	    - "./wordpress/adobetracking:./wordpress/adobetracking"
             - "./wordpress/wp-config.php:/var/www/html/wp-config.php"
             - "./wordpress/db-config.php:/var/www/html/db-config.php"
             - "./wordpress/wp-content:/var/www/html/wp-content"
