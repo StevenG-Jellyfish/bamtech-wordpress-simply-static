@@ -20,6 +20,7 @@ $component = get_field('component_toc', $page_id);
 *  Verify if repeater value is empty
 *  Then store the repeater component sections ids in a new array
 */ 
+
 if ($component !== false) {
     /* 
      *  Loop $section_ids array and pull each values in respectives areas
@@ -27,13 +28,13 @@ if ($component !== false) {
      */ 
     ?>
 
-    <section class="terms-conditions">
+        <section class="terms-conditions">
        
-        <div class="container">
-            <p><?php the_field('toc_body',$component,false);?></p>
-        </div> 
-       
-    </section>
+            <div class="container">
+                <p><?php the_field('toc_body',$component,false);?></p>
+            </div>
+        </section>
+
    
 <?php 
 }
