@@ -146,6 +146,10 @@ sub vcl_backend_response {
 
     }
 
+
+    set beresp.http.Expires = "-1";
+    set beresp.http.Cache-Control = "no-cache, must-revalidate, max-age=0";
+
     # A TTL of 1h
     set beresp.ttl = 30m;
 
