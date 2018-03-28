@@ -1,198 +1,190 @@
 vcl 4.0;
-import directors;
-import std;
 
-
-backend
-default {
+backend default {
     .host = "nginx";
     .port = "8080";
 }
 
 acl purge {
+
     "localhost";
     "127.0.0.1";
+
 }
 
-
+# This function is used when a request is send by a HTTP client (Browser)
 sub vcl_recv {
 
 
-    set req.backend_hint =  default;
-    set req.http.X-Forwarded-For = client.ip;
-    set req.http.X-Forwarded-Proto = "http";
+    if ( req.url ~ "admin-ajax" ) {
 
-    unset req.http.Accept-Language;
-    unset req.http.User-Agent;
+        if (req.http.Cookie ~ "wordpress_logged_in") {
 
-    if (req.method == "PURGE") {
-        if (!client.ip~purge) {
-            return (synth(405, "Not allowed."));
+            return (pass) ;
+
         }
-        return (purge);
-    }
-    if (std.port(server.ip) == 6080) {
 
-        set req.http.x-redir = "http://" + req.http.host + req.url;
-        return (synth(750, "Moved permanently"));
+        return (hash);
     }
 
-    
-    #drop cookies and params from static assets
-    if (req.url~"\.(gif|jpg|jpeg|swf|ttf|css|js|flv|mp3|mp4|pdf|ico|png)(\?.*|)$") {
-        unset req.http.cookie;
-        set req.url = regsub(req.url, "\?.*$", "");
+
+
+    # --- WordPress specific configuration
+    if (req.url ~ "wp-(login|admin)(?!/admin-ajax)") {
+
+        return (pass);
+
     }
 
-    #    drop tracking params
-    if (req.url~"\?(utm_(campaign|medium|source|term)|adParams|client|cx|eid|fbid|feed|ref(id|src)?|v(er|iew))=") {
-        set req.url = regsub(req.url, "\?.*$", "");
-    }
+    include "/etc/varnish/cfg/purge.cfg";
+    include "/etc/varnish/cfg/cookie_clean.cfg";
 
-    # #pass wp - admin urls
-    if (req.url~"(wp-login|wp-admin)" || req.url~"preview=true" || req.url~"xmlrpc.php") {
+
+    # Post requests will not be cached
+    if (req.http.Authorization || req.method == "POST") {
         return (pass);
     }
 
-    #    pass wp - admin cookies
-    if (req.http.cookie) {
-        if (req.http.cookie~"(wordpress_|wp-settings-)") {
-            return (pass);
-        } else {
-            unset req.http.cookie;
-        }
+    # Bypass cache if wp admin or preview is true
+    if ( req.url ~ "wp-(login|admin(?!/admin-ajax)|preview=true)") {
+        return (pass);
     }
+
+
+    include "/etc/varnish/cfg/gzip.cfg";
+
+    # Cache all others requests
+    return (hash);
 }
 
-sub vcl_backend_response {
-    #retry a few times if backend is down
-    if (beresp.status == 503 && bereq.retries < 5) {
-        return (retry);
-    }
-
-    if (bereq.http.Cookie~"(UserID|_session)") {
-        #if we get a session cookie...caching is a no - go
-        set beresp.http.X-Cacheable = "NO:Got Session";
-        set beresp.uncacheable = true;
-        return (deliver);
-
-    }
-    elsif(beresp.ttl <= 0 s) {
-        #Varnish determined the object was not cacheable
-        set beresp.http.X-Cacheable = "NO:Not Cacheable";
-
-    }
-    elsif(beresp.http.set-cookie) {
-        #You dont wish to cache content for logged in users
-        set beresp.http.X-Cacheable = "NO:Set-Cookie";
-        set beresp.uncacheable = true;
-        return (deliver);
-
-    }
-    elsif(beresp.http.Cache-Control~"private") {
-        #You are respecting the Cache - Control = private header from the backend
-        set beresp.http.X-Cacheable = "NO:Cache-Control=private";
-        set beresp.uncacheable = true;
-        return (deliver);
-
-    } else {
-        #Varnish determined the object was cacheable
- #       set beresp.http.X-Cacheable = "YES";
-
-        
-        #Remove Expires from backend, it 's not long enough
-        unset beresp.http.expires;
-
-        
-        #Set the clients TTL on this object
-#        set beresp.http.cache-control = "max-age=900";
-
-        
-        #Set how long Varnish will keep it# set beresp.ttl = 1 w;
-        set beresp.ttl = 600 s;
-
-        
-        #marker for vcl_deliver to reset Age:
-            set beresp.http.magicmarker = "1";
-    }
-
-    
-    #unset cookies from backendresponse
-    if (!(bereq.url~"(wp-login|wp-admin)")) {
-        set beresp.http.X-UnsetCookies = "TRUE";
-        unset beresp.http.set-cookie;
-        set beresp.ttl = 1 h;
-    }
-
-    
-    #long ttl for assets
-    if (bereq.url~"\.(gif|jpg|jpeg|swf|ttf|css|js|flv|mp3|mp4|pdf|ico|png)(\?.*|)$") {#
-        set beresp.ttl = 365 d;
-        set beresp.ttl = 1 h;
-
-    }
-    set beresp.grace = 1 w;
-
+sub vcl_pipe {
+    return (pipe);
 }
 
+sub vcl_pass {
+    return (fetch);
+}
+
+# The data on which the hashing will take place
 sub vcl_hash {
-    if (req.http.X-Forwarded-Proto) {
-        hash_data(req.http.X-Forwarded-Proto);
+
+    hash_data(req.url);
+
+    if (req.http.host) {
+        hash_data(req.http.host);
+    } else {
+        hash_data(server.ip);
     }
+
+    # If the client supports compression, keep that in a different cache
+    if (req.http.Accept-Encoding) {
+            hash_data(req.http.Accept-Encoding);
+    }
+
+    return (lookup);
 }
 
-sub vcl_backend_error {
-    #display custom error page if backend down
-    if (beresp.status == 503 && bereq.retries == 3) {
-        synthetic(std.fileread("/etc/varnish/error503.html"));
-        return (deliver);
-    }
-}
+# This function is used when a request is sent by our backend (Nginx server)
+sub vcl_backend_response {
 
-sub vcl_synth {
-    #redirect for http
-    if (resp.status == 750) {
-        set resp.status = 301;
-        set resp.http.Location = req.http.x-redir;
-        return (deliver);
-    }
-    #display custom error page if backend down
-    if (resp.status == 503) {
-        synthetic(std.fileread("/etc/varnish/error503.html"));
-        return (deliver);
-    }
-}
+    # Remove some headers we never want to see
+    unset beresp.http.Server;
+    unset beresp.http.X-Powered-By;
 
+    # For static content strip all backend cookies
+    if (bereq.url ~ "\.(css|js|png|gif|jp(e?)g)|swf|ico") {
+        unset beresp.http.cookie;
+    }
+
+    # Don't store backend
+    if (bereq.url ~ "wp-(login|admin)(?!/admin-ajax)" || bereq.url ~ "preview=true") {
+        set beresp.uncacheable = true;
+        set beresp.ttl = 30s;
+        return (deliver);
+    }
+
+
+    # Only allow cookies to be set if we're in admin area
+    if (!(bereq.url ~ "(wp-login|wp-admin|preview=true)")) {
+            unset beresp.http.set-cookie;
+    }
+
+    # don't cache response to posted requests or those with basic auth
+    if ( bereq.method == "POST" || bereq.http.Authorization ) {
+        set beresp.uncacheable = true;
+        return (deliver);
+    }
+
+    if ( beresp.status > 400 && beresp.status != 404 ) {
+        unset beresp.http.Expires;
+        unset beresp.http.Pragma;
+        set beresp.uncacheable = true;
+        set beresp.ttl = 30s;
+        return (deliver);
+    }
+
+
+    if ( bereq.url ~ "/wp\-admin/admin\-ajax\.php" ){
+
+
+        if (bereq.http.Cookie ~ "wordpress_logged_in") {
+            set beresp.uncacheable = true;
+            return (deliver);
+        }
+
+
+        unset beresp.http.Expires;
+        unset beresp.http.Pragma;
+
+         # Marker for vcl_deliver to reset Age: /
+        set beresp.http.magicmarker = "1";
+
+        set beresp.ttl = 5m;
+        set beresp.grace = 5m;
+
+        return (deliver);
+
+    }
+
+    # A TTL of 1h
+    set beresp.ttl = 30m;
+
+    # Define the default grace period to serve cached content
+    set beresp.grace = 20s;
+
+    return (deliver);
+}
 
 sub vcl_deliver {
-    #oh noes backend is down
-    if (resp.status == 503) {
-        return (restart);
-    }
-    if (resp.http.magicmarker) {#
-        #Remove the magic marker
+
+    if (resp.http.magicmarker) {
         unset resp.http.magicmarker;
-
-        
-        #By definition we have a fresh object
-        set resp.http.age = "0";
+        set resp.http.Age = "0";
     }
+
     if (obj.hits > 0) {
-        set resp.http.X-Cache = "HIT";
+        set resp.http.X-Cache = "cached";
+    } else {
+        set resp.http.x-Cache = "uncached";
     }
-    else {
-        set resp.http.X-Cache = "MISS";
-    }
-    set resp.http.Access-Control-Allow-Origin = "*";
-}
-sub vcl_hit {
-    if (req.method == "PURGE") {
-        return (synth(200, "OK"));
-    }
+
+    # Remove some headers: PHP version
+    unset resp.http.X-Powered-By;
+
+    # Remove some headers: Apache version & OS
+    unset resp.http.Server;
+
+    # Remove some heanders: Varnish
+    unset resp.http.Via;
+    unset resp.http.X-Varnish;
+
+    return (deliver);
 }
 
-sub vcl_miss {
-    if (req.method == "PURGE") {
-        return (synth(404, "Not cached"));
-    }
+sub vcl_init {
+    return (ok);
+}
+
+sub vcl_fini {
+    return (ok);
 }
