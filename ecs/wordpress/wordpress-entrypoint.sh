@@ -118,6 +118,10 @@ EOPHP
     alias wp='wp --allow-root'
     " > ~/.bashrc
 
+
+
+# Disable this code temperarily
+: <<'COMMENT'
     PLUGINS=(
         all-meta-stats-yoast-seo-addon
         better-amp
@@ -146,6 +150,9 @@ EOPHP
             echo "[ WARNING ] Could not install $PLUGIN" && true
 
     done
+COMMENT
+
+
 
     #wp core update --allow-root
     #wp core update-db --allow-root
