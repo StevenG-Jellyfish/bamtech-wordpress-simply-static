@@ -111,8 +111,6 @@ EOPHP
 
     PLUGINS=(
         all-meta-stats-yoast-seo-addon
-        better-amp
-        busted
         contact-form-7
         duplicate-post
         glue-for-yoast-seo-amp
@@ -122,10 +120,7 @@ EOPHP
         responsify-wp
         w3-total-cache
         wordpress-seo
-        wp-statistics
-        wp-smushit
-        velvet-blues-update-urls
-        
+        wp-statistics        
     )
 
     # Loop the the plugins
