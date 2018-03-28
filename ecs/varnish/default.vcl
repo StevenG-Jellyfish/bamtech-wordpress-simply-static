@@ -18,13 +18,12 @@ acl purge {
 sub vcl_recv {
 
 
-    set req.backend_hint =
-        default;
-    set req.http.X - Forwarded - For = client.ip;
-    set req.http.X - Forwarded - Proto = "http";
+    set req.backend_hint =  default;
+    set req.http.X-Forwarded-For = client.ip;
+    set req.http.X-Forwarded-Proto = "http";
 
-    unset req.http.Accept - Language;
-    unset req.http.User - Agent;
+    unset req.http.Accept-Language;
+    unset req.http.User-Agent;
 
     if (req.method == "PURGE") {
         if (!client.ip~purge) {
@@ -34,31 +33,28 @@ sub vcl_recv {
     }
     if (std.port(server.ip) == 6080) {
 
-        set req.http.x - redir = "http://" + req.http.host + req.url;
+        set req.http.x-redir = "http://" + req.http.host + req.url;
         return (synth(750, "Moved permanently"));
     }
 
-    #
-    drop cookies and params from static assets
+    
+    #drop cookies and params from static assets
     if (req.url~"\.(gif|jpg|jpeg|swf|ttf|css|js|flv|mp3|mp4|pdf|ico|png)(\?.*|)$") {
         unset req.http.cookie;
         set req.url = regsub(req.url, "\?.*$", "");
     }
 
-    #
-    drop tracking params
+    #    drop tracking params
     if (req.url~"\?(utm_(campaign|medium|source|term)|adParams|client|cx|eid|fbid|feed|ref(id|src)?|v(er|iew))=") {
         set req.url = regsub(req.url, "\?.*$", "");
     }
 
-    #
-    pass wp - admin urls
+    # #pass wp - admin urls
     if (req.url~"(wp-login|wp-admin)" || req.url~"preview=true" || req.url~"xmlrpc.php") {
         return (pass);
     }
 
-    #
-    pass wp - admin cookies
+    #    pass wp - admin cookies
     if (req.http.cookie) {
         if (req.http.cookie~"(wordpress_|wp-settings-)") {
             return (pass);
@@ -68,71 +64,68 @@ sub vcl_recv {
     }
 }
 
-sub vcl_backend_response {#
-    retry a few times
-    if backend is down
+sub vcl_backend_response {
+    #retry a few times if backend is down
     if (beresp.status == 503 && bereq.retries < 5) {
         return (retry);
     }
 
-    if (bereq.http.Cookie~"(UserID|_session)") {#
-        if we get a session cookie...caching is a no - go
-        set beresp.http.X - Cacheable = "NO:Got Session";
+    if (bereq.http.Cookie~"(UserID|_session)") {
+        #if we get a session cookie...caching is a no - go
+        set beresp.http.X-Cacheable = "NO:Got Session";
         set beresp.uncacheable = true;
         return (deliver);
 
     }
-    elsif(beresp.ttl <= 0 s) {#
-        Varnish determined the object was not cacheable
-        set beresp.http.X - Cacheable = "NO:Not Cacheable";
+    elsif(beresp.ttl <= 0 s) {
+        #Varnish determined the object was not cacheable
+        set beresp.http.X-Cacheable = "NO:Not Cacheable";
 
     }
-    elsif(beresp.http.set - cookie) {#
-        You don 't wish to cache content for logged in users
-        set beresp.http.X - Cacheable = "NO:Set-Cookie";
+    elsif(beresp.http.set-cookie) {
+        #You dont wish to cache content for logged in users
+        set beresp.http.X-Cacheable = "NO:Set-Cookie";
         set beresp.uncacheable = true;
         return (deliver);
 
     }
-    elsif(beresp.http.Cache - Control~"private") {#
-        You are respecting the Cache - Control = private header from the backend
-        set beresp.http.X - Cacheable = "NO:Cache-Control=private";
+    elsif(beresp.http.Cache-Control~"private") {
+        #You are respecting the Cache - Control = private header from the backend
+        set beresp.http.X-Cacheable = "NO:Cache-Control=private";
         set beresp.uncacheable = true;
         return (deliver);
 
-    } else {#
-        Varnish determined the object was cacheable
-        set beresp.http.X - Cacheable = "YES";
+    } else {
+        #Varnish determined the object was cacheable
+ #       set beresp.http.X-Cacheable = "YES";
 
-        #
-        Remove Expires from backend, it 's not long enough
+        
+        #Remove Expires from backend, it 's not long enough
         unset beresp.http.expires;
 
-        #
-        Set the clients TTL on this object
-        set beresp.http.cache - control = "max-age=900";
+        
+        #Set the clients TTL on this object
+#        set beresp.http.cache-control = "max-age=900";
 
-        #
-        Set how long Varnish will keep it# set beresp.ttl = 1 w;
-        set beresp.ttl = 1 h;
+        
+        #Set how long Varnish will keep it# set beresp.ttl = 1 w;
+        set beresp.ttl = 600 s;
 
-        #
-        marker
-        for vcl_deliver to reset Age:
+        
+        #marker for vcl_deliver to reset Age:
             set beresp.http.magicmarker = "1";
     }
 
-    #
-    unset cookies from backendresponse
+    
+    #unset cookies from backendresponse
     if (!(bereq.url~"(wp-login|wp-admin)")) {
-        set beresp.http.X - UnsetCookies = "TRUE";
-        unset beresp.http.set - cookie;
+        set beresp.http.X-UnsetCookies = "TRUE";
+        unset beresp.http.set-cookie;
         set beresp.ttl = 1 h;
     }
 
-    #
-    long ttl
-    for assets
+    
+    #long ttl for assets
     if (bereq.url~"\.(gif|jpg|jpeg|swf|ttf|css|js|flv|mp3|mp4|pdf|ico|png)(\?.*|)$") {#
         set beresp.ttl = 365 d;
         set beresp.ttl = 1 h;
@@ -143,30 +136,27 @@ sub vcl_backend_response {#
 }
 
 sub vcl_hash {
-    if (req.http.X - Forwarded - Proto) {
-        hash_data(req.http.X - Forwarded - Proto);
+    if (req.http.X-Forwarded-Proto) {
+        hash_data(req.http.X-Forwarded-Proto);
     }
 }
 
-sub vcl_backend_error {#
-    display custom error page
-    if backend down
+sub vcl_backend_error {
+    #display custom error page if backend down
     if (beresp.status == 503 && bereq.retries == 3) {
         synthetic(std.fileread("/etc/varnish/error503.html"));
         return (deliver);
     }
 }
 
-sub vcl_synth {#
-    redirect
-    for http
+sub vcl_synth {
+    #redirect for http
     if (resp.status == 750) {
         set resp.status = 301;
-        set resp.http.Location = req.http.x - redir;
+        set resp.http.Location = req.http.x-redir;
         return (deliver);
-    }#
-    display custom error page
-    if backend down
+    }
+    #display custom error page if backend down
     if (resp.status == 503) {
         synthetic(std.fileread("/etc/varnish/error503.html"));
         return (deliver);
@@ -174,26 +164,26 @@ sub vcl_synth {#
 }
 
 
-sub vcl_deliver {#
-    oh noes backend is down
+sub vcl_deliver {
+    #oh noes backend is down
     if (resp.status == 503) {
         return (restart);
     }
     if (resp.http.magicmarker) {#
-        Remove the magic marker
+        #Remove the magic marker
         unset resp.http.magicmarker;
 
-        #
-        By definition we have a fresh object
+        
+        #By definition we have a fresh object
         set resp.http.age = "0";
     }
     if (obj.hits > 0) {
-        set resp.http.X - Cache = "HIT";
+        set resp.http.X-Cache = "HIT";
     }
     else {
-        set resp.http.X - Cache = "MISS";
+        set resp.http.X-Cache = "MISS";
     }
-    set resp.http.Access - Control - Allow - Origin = "*";
+    set resp.http.Access-Control-Allow-Origin = "*";
 }
 sub vcl_hit {
     if (req.method == "PURGE") {

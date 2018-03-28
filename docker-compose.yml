@@ -54,7 +54,7 @@ services:
         depends_on:
             - nginx
         env_file:
-            - ./varnish/varnish.env
+            - ./ecs/varnish/varnish.env
         hostname: varnish
         networks:
             - wpnet
