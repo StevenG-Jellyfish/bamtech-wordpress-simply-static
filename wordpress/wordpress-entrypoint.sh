@@ -113,7 +113,6 @@ EOPHP
         all-meta-stats-yoast-seo-addon
         contact-form-7
         duplicate-post
-        glue-for-yoast-seo-amp
         google-analytics-for-wordpress
         imsanity
         meta-box-yoast-seo
