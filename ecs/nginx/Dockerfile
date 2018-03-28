@@ -7,12 +7,6 @@ RUN ln -sf /dev/stdout /var/log/nginx/access.log \
     && mkdir -p /usr/share/nginx/cache/fcgi
 
 
-<<<<<<< HEAD
-EXPOSE 80
-=======
-#EXPOSE 8080
->>>>>>> build
 
-STOPSIGNAL SIGQUIT
 
 CMD ["nginx", "-g", "daemon off;"]
