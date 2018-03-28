@@ -87,6 +87,8 @@ pipeline {
                     }
                 }
             }
+
+           
         }
  
         stage('DeployUat') {
@@ -137,6 +139,7 @@ pipeline {
                
                       input message: "Image's ${WORDPRESS}, ${NGINX} and ${VARNISH} have been released to ${UAT}, please test and confirm..."
                   }
+
                }
             }
             stage('DeployProd') {
