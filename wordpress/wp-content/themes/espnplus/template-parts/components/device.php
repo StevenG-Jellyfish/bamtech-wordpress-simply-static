@@ -15,6 +15,7 @@ if (empty($page_id)) {
 *  Assign repeater field to $component variable
 */ 
 $component = get_field('component_device', $page_id);
+$device_header = get_field('component_device_header', $page_id);
 
 /* 
 *  Verify if repeater value is empty
@@ -43,7 +44,7 @@ if ($component !== false) {
     <section class="devices-bar">
         <div class="container">
             <h3 class="devices-header">
-                 <?php echo  __( 'Available on All Your Favorite Supported Devices', 'espnplus' ); ?>
+                 <?php echo  $device_header; ?>
             </h3>
             <div class="devices-container">  
 
