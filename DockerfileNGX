@@ -13,7 +13,7 @@ RUN ln -sf /dev/stdout /var/log/nginx/access.log \
     
 
 
-EXPOSE 8080
+#EXPOSE 8080
 
 STOPSIGNAL SIGQUIT
 

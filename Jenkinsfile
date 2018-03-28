@@ -87,10 +87,27 @@ pipeline {
                     }
                 }
             }
-
-           
-        }
- 
+            post {
+                  failure {
+                      slackSend channel: '#deploy',
+                          color: 'danger',
+                          message: "Image's ${WORDPRESS}, ${NGINX} and ${VARNISH} FAILED to build, Visit > (<${env.RUN_DISPLAY_URL}|Open>) for details"
+                    }
+              
+                
+                  success {
+                      slackSend channel: '#deploy',
+                          color: 'good',
+                          message: "Image's ${WORDPRESS}, ${NGINX} and ${VARNISH} SUCCESSFULLY built, Please visit > (<${env.RUN_DISPLAY_URL}|Open>) for details"
+                      
+                  always {
+                      script {
+                          sh "pwd" 
+                        }        
+                    }        
+                }
+            }
+        } 
         stage('DeployUat') {
             // Deploy stage agent selector
             agent {
@@ -139,7 +156,6 @@ pipeline {
                
                       input message: "Image's ${WORDPRESS}, ${NGINX} and ${VARNISH} have been released to ${UAT}, please test and confirm..."
                   }
-
                }
             }
             stage('DeployProd') {
