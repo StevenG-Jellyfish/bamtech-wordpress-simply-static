@@ -3761,11 +3761,23 @@ Stub Name:  global_header.scss
   display: -webkit-flex;
   display: flex;
   justify-content: space-between; }
-  .site-header img {
+  .site-header .site-branding img {
     max-height: 20px;
     width: 104px;
     margin-top: 28px;
     margin-left: 75px; }
+
+.site-header.center {
+  text-align: center; }
+  .site-header.center .site-branding {
+    text-align: center; }
+    .site-header.center .site-branding img {
+      margin: 28px auto;
+      width: 104px; }
+    @media (max-width: 580px) {
+      .site-header.center .site-branding {
+        display: flex;
+        flex: 1 100%; } }
 
 .main-navigation {
   display: inline-block;
