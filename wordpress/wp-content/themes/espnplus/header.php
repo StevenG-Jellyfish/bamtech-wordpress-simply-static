@@ -40,6 +40,11 @@
 	})(window,document,'script','dataLayer','GTM-M97M4JF');</script>
 	<!-- End Google Tag Manager -->
 
+    <!-- Adobe Tracking -->
+    <script language="JavaScript" type="text/javascript" src="http://bamtech-build.jellyfish.local/adobetracking/VisitorAPI.js"></script>
+    <script language="JavaScript" type="text/javascript" src="http://bamtech-build.jellyfish.local/adobetracking/omniturePlugins.js"></script>
+    <script language="JavaScript" type="text/javascript" src="http://bamtech-build.jellyfish.local/adobetracking/uuid.js"></script>
+    <!-- End Adobe Tracking -->
 
     <meta charset="<?php bloginfo( 'charset' ); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
