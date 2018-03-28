@@ -52,63 +52,38 @@ if ($component !== false) {
 
 <div id="page" class="site">
     <header id="masthead" class="">
-
         <div class="headerbox">
-            <div class="site-header">
-
-                
-                <div class="site-branding">
-
-                    <img src="<?php echo $header_logo;?>" alt="ESPN+">
-                    
-                    <?php if ( is_front_page() && is_home() ) :?>
-                        
-                        <h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-                    
-                    <?php else: ?>
-                        
-                        <p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
-
-                    <?php endif;
-
-                    
-                    if ( $espnplus_description || is_customize_preview() ) :?>
-
-                        <p class="site-description"><?php echo $espnplus_description;?></p>
-                    
-                    <?php endif; ?>
-
+            <?php if ( empty($header_cta_text) && empty($header_login_text) ) :?>
+                <div class="site-header center">
+                    <div class="site-branding">
+                        <img src="<?php echo $header_logo;?>" alt="ESPN+">
+                    </div> 
                 </div>
-
-
-                <nav class="main-navigation">
-                    
-                    <div class="menu-main-menu-container">
-                        <ul id="primary-menu" class="menu">
-
-                            <li id="menu-item-320" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-320">
-                                
+            <?php else: ?>
+                <div class="site-header">
+                    <div class="site-branding">
+                        <img src="<?php echo $header_logo;?>" alt="ESPN+">
+                    </div>
+                    <nav class="main-navigation">
+                        <div class="menu-main-menu-container">
+                            <ul id="primary-menu" class="menu">
+                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-320">
                                     <div class="espn-cta-container">
                                         <div class="parallelogram">
                                             <a href="<?php echo $header_cta_link;?>" class="btn btn-primary"><?php echo $header_cta_text;?></a>
                                         </div>
                                     </div>
-                                
-                            </li>
-                            
-                            <li id="menu-item-319" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-319">
-                                <a href="<?php echo $header_login_url;?>"><?php echo $header_login_text;?></a>
-                            </li>
-
-                        </ul>
-                    </div> 
-
-                </nav>
-
-
-            </div>
+                                </li>
+                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-319">
+                                    <a href="<?php echo $header_login_url;?>"><?php echo $header_login_text;?></a>
+                                </li>
+                            </ul>
+                        </div> 
+                    </nav>
+                </div>
+            <?php endif; ?>
+                <!-- </div> -->
         </div>
-
     </header>
 
     <div class="container-fluid">
