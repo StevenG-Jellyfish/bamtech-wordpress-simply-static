@@ -1,49 +1,5 @@
 @charset "UTF-8";
 /*!
-Theme Name: espnplus non-critical
-Theme URI: http://underscores.me/
-Author: Jellyfish
-Author URI: http://jellyfish.net
-Description: ESPN + streaming service
-Version: 1.0.0
-License: GNU General Public License v2 or later
-License URI: LICENSE
-Text Domain: espnplus
-Tags: custom-background, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready
-
-This theme, like WordPress, is licensed under the GPL.
-Use it to make something cool, have fun, and share what you've learned with others.
-
-espnplus is based on Underscores https://underscores.me/, (C) 2012-2017 Automattic, Inc.
-Underscores is distributed under the terms of the GNU GPL v2 or later.
-
-Normalizing styles have been helped along thanks to the fine work of
-Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
-*/
-/*--------------------------------------------------------------
->>> TABLE OF CONTENTS:
-----------------------------------------------------------------
-# Normalize
-# Typography
-# Elements
-# Forms
-# Navigation
-	## Links
-	## Menus
-# Accessibility
-# Alignments
-# Clearings
-# Widgets
-# Content
-	## Posts and pages
-	## Comments
-# Infinite scroll
-# Media
-	## Captions
-	## Galleries
---------------------------------------------------------------*/
-/* ---------------------- */
-/*!
  *  Font Awesome 4.7.0 by @davegandy - http://fontawesome.io - @fontawesome
  *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
  */
@@ -2220,10 +2176,6 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
   overflow: visible;
   clip: auto; }
 
-/* ---------------------- */
-/*--------------------------------------------------------------
-# global_devices
---------------------------------------------------------------*/
 /*!
 Theme Name: espnplus
 Stub Name:  global_devices.scss 
@@ -2267,15 +2219,22 @@ section.devices-bar {
         display: inline-block;
         margin: 0 2.25rem;
         text-align: center; }
+        @media (max-width: 420px) {
+          section.devices-bar .container .devices-container .device {
+            width: 100%; } }
         section.devices-bar .container .devices-container .device img {
-          height: 2.625rem; }
-        section.devices-bar .container .devices-container .device p.device-copy {
-          margin: .75rem 0;
+          height: 2.625rem;
+          max-width: 140px;
+          margin-bottom: .75rem; }
+        section.devices-bar .container .devices-container .device .device-copy {
+          display: block;
+          margin: 0 auto;
           padding: .5rem 0;
           border-top: 2px solid black;
           font-weight: 700;
-          color: black; }
-          section.devices-bar .container .devices-container .device p.device-copy span {
+          color: black;
+          max-width: 140px; }
+          section.devices-bar .container .devices-container .device .device-copy span {
             display: block;
             margin: 0;
             padding: 0;
@@ -2286,9 +2245,6 @@ section.devices-bar {
             font-size: 0.750rem;
             line-height: 1.125rem; } }
 
-/*--------------------------------------------------------------
-# global_toc
---------------------------------------------------------------*/
 /*!
 Theme Name: espnplus
 Stub Name:  global_toc.scss 
@@ -2323,9 +2279,6 @@ section.terms-conditions {
         font-size: 0.750rem;
         line-height: 1.125rem; } }
 
-/*--------------------------------------------------------------
-# global_footer_link
---------------------------------------------------------------*/
 /*!
 Theme Name: espnplus
 Stub Name:  global_footer_link.scss 
@@ -2508,9 +2461,6 @@ Stub Name:  global_footer_link.scss
         flex-direction: column;
         flex-wrap: wrap; } }
 
-/*--------------------------------------------------------------
-# global_league_accordion
---------------------------------------------------------------*/
 /*!
 Theme Name: espnplus
 Stub Name:  global_league_accordion.scss 
