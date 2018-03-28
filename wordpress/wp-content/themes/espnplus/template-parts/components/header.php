@@ -26,10 +26,10 @@ if ($component !== false) {
     /* 
     *  Loop $section_ids array and pull each values in respectives areas
     *  @ header_logo
-	*  @ header_cta_text
-	*  @ header_cta_link
-	*  @ header_login_url
-	*  @ header_login_text
+    *  @ header_cta_text
+    *  @ header_cta_link
+    *  @ header_login_url
+    *  @ header_login_text
     */ 
 
     $header_cta_link= get_field('header_cta_link', $component);
@@ -84,26 +84,26 @@ if ($component !== false) {
                 <nav class="main-navigation">
                     
                     <div class="menu-main-menu-container">
-    					<ul id="primary-menu" class="menu">
+                        <ul id="primary-menu" class="menu">
 
-    						<li id="menu-item-320" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-320">
-    							
-    								<div class="espn-cta-container">
-    									<div class="parallelogram">
-    										<a href="<?php echo $header_cta_link;?>" class="btn btn-primary"><?php echo $header_cta_text;?></a>
-    									</div>
-    								</div>
-    							
-    						</li>
+                            <li id="menu-item-320" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-320">
+                                
+                                    <div class="espn-cta-container">
+                                        <div class="parallelogram">
+                                            <a href="<?php echo $header_cta_link;?>" class="btn btn-primary"><?php echo $header_cta_text;?></a>
+                                        </div>
+                                    </div>
+                                
+                            </li>
                             
                             <li id="menu-item-319" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-319">
-    							<a href="<?php echo $header_login_url;?>"><?php echo $header_login_text;?></a>
-    						</li>
+                                <a href="<?php echo $header_login_url;?>"><?php echo $header_login_text;?></a>
+                            </li>
 
-    					</ul>
-    				</div> 
+                        </ul>
+                    </div> 
 
-    			</nav>
+                </nav>
 
 
             </div>
