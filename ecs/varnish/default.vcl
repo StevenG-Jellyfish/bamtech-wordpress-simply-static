@@ -92,8 +92,11 @@ sub vcl_backend_response {
     unset beresp.http.X-Powered-By;
 
     # For static content strip all backend cookies
-    if (bereq.url ~ "\.(css|js|png|gif|jp(e?)g)|swf|ico") {
+    if (bereq.url ~ "\.(ogg|ogv|svg|svgz|webp|eot|otf|woff(2?)|mp4|ttf|css|rss|atom|js|jp(e?)g|gif|png|ico|zip|tgz|gz|rar|bz2|doc|xls|exe|ppt|tar|mid|midi|wav|bmp|rtf)") {
         unset beresp.http.cookie;
+        set beresp.http.Cache-Control = "public, max-age=31536000";
+        set beresp.ttl = 24h;
+        return (deliver);
     }
 
     # Don't store backend
@@ -119,8 +122,6 @@ sub vcl_backend_response {
         unset beresp.http.Expires;
         unset beresp.http.Pragma;
         set beresp.uncacheable = true;
-        set beresp.ttl = 30s;
-        return (deliver);
     }
 
 
@@ -139,22 +140,24 @@ sub vcl_backend_response {
          # Marker for vcl_deliver to reset Age: /
         set beresp.http.magicmarker = "1";
 
-        set beresp.ttl = 5m;
-        set beresp.grace = 5m;
+        set beresp.ttl = 10m;
+        set beresp.grace = 10m;
 
         return (deliver);
 
     }
 
-
-    set beresp.http.Expires = "-1";
-    set beresp.http.Cache-Control = "no-cache, must-revalidate, max-age=0";
+    unset beresp.http.Expires;
+    unset beresp.http.Pragma;
+    unset beresp.http.Cache-Control
+    unset beresp.http.set-cookie;
+    unset resp.http.Age;
 
     # A TTL of 1h
-    set beresp.ttl = 30m;
+    set beresp.ttl = 3600s;
 
     # Define the default grace period to serve cached content
-    set beresp.grace = 20s;
+    set beresp.grace = 3600s;
 
     return (deliver);
 }
@@ -163,13 +166,18 @@ sub vcl_deliver {
 
     if (resp.http.magicmarker) {
         unset resp.http.magicmarker;
-        set resp.http.Age = "0";
+        #set resp.http.Age = "0";
+
+        # tell cdn to cache for 1 minute 
+        # if set in vcl_backend_response then varnish will not cache the content
+        # for longer than max-age
+        set beresp.http.Cache-Control = "public, max-age=60";
     }
 
     if (obj.hits > 0) {
-        set resp.http.X-Cache = "cached";
+        set resp.http.X-Cache-Varnish = "cached";
     } else {
-        set resp.http.x-Cache = "uncached";
+        set resp.http.x-Cache-Varnish = "uncached";
     }
 
     # Remove some headers: PHP version
@@ -182,7 +190,6 @@ sub vcl_deliver {
     unset resp.http.Via;
     unset resp.http.X-Varnish;
 
-    return (deliver);
 }
 
 sub vcl_init {
