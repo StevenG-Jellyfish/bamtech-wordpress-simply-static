@@ -42,11 +42,8 @@ Stub Name:  global_header.scss
 }
 
 .site-header {
-    // border: 1px solid #ccc;
     height: 77px;
     text-align: left;
-    // background: white;
-    //justify-content: flex-start | flex-end;
     display: -webkit-box;
     display: -moz-box;
     display: -ms-flexbox;
@@ -54,21 +51,41 @@ Stub Name:  global_header.scss
     display: flex;
     justify-content: space-between;
 
-    // @media (max-width: 640px) {
-    //     justify-content: center;
-    // }
-    // a img {
-    //     max-height: 20px;
-    //     width: 104px;
-    //     margin-top: 28px;
-    //     margin-left: 75px;
-    // }
-    img {
+    .site-branding img {
         max-height: 20px;
         width: 104px;
         margin-top: 28px;
         margin-left: 75px;
     }
+}
+.site-header.center {
+   // height: 77px;
+    text-align: center;
+    // display: -webkit-box;
+    // display: -moz-box;
+    // display: -ms-flexbox;
+    // display: -webkit-flex;
+    // display: flex;
+    // justify-content: space-between;
+    .site-branding {
+        text-align: center;
+        img {
+            margin:28px auto;
+            width: 104px;
+          //  margin-top: 28px;
+        }
+        @media (max-width: 580px) {
+            display:flex;
+            flex: 1 100%;
+        }
+    }
+
+    // .site-branding img {
+    //     max-height: 20px;
+    //     width: 104px;
+    //     margin-top: 28px;
+    //     margin-left: 75px;
+    // }
 }
 
 .main-navigation {
