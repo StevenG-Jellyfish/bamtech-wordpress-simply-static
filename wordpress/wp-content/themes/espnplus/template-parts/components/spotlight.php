@@ -30,13 +30,15 @@
            
             <p class="lead"><?php the_field('spotlight_main_text', $component, false);?></p>
             
+            <?php if (!empty(get_field('spotlight_cta_link', $component))){?>
             <div class="espn-cta-container">
                 <div class="parallelogram">
-    				<?$link = get_field('spotlight_cta_link', $component);?>
+                    
                     <a href="<?php echo $link['url'];?>" class="btn btn-primary espn-cta"><?php the_field('spotlight_cta_text', $component,false);?></a>
-                   
+                    
                 </div>
             </div>
+            <?php }?>
             
             <p class="below-cta"><?php the_field('spotlight_belowcta_text', $component,false);?></p>
     	
