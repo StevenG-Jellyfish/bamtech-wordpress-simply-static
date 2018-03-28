@@ -39,7 +39,7 @@
                 </div>
             </div>
             <?php }?>
-            
+
             <p class="below-cta"><?php the_field('spotlight_belowcta_text', $component,false);?></p>
     	
         </div>
