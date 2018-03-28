@@ -19,6 +19,7 @@ $GLOBALS['better_amp_theme_core_query'] = NULL;
 if ( ! function_exists( 'better_amp_locate_template' ) ) {
 	/**
 	 * Retrieve the name of the highest priority amp template file that exists.
+	 *
 	 * @see   locate_template for more doc
 	 *
 	 * @param string|array $template_names Template file(s) to search for, in order.
@@ -648,6 +649,7 @@ if ( ! function_exists( 'better_amp_head' ) ) {
 	 * @since 1.0.0
 	 */
 	function better_amp_head() {
+
 		do_action( 'better-amp/template/head' );
 	}
 }
@@ -660,6 +662,7 @@ if ( ! function_exists( 'better_amp_footer' ) ) {
 	 * @since 1.0.0
 	 */
 	function better_amp_footer() {
+
 		do_action( 'better-amp/template/footer' );
 	}
 }
@@ -674,6 +677,7 @@ if ( ! function_exists( 'better_amp_body_class' ) ) {
 	 * @since 1.0.0
 	 */
 	function better_amp_body_class( $class = '' ) {
+
 		echo 'class="' . join( ' ', get_body_class( $class ) ) . '"';
 	}
 }
@@ -759,6 +763,7 @@ if ( ! function_exists( 'better_amp_get_template_info' ) ) {
 	 * Get active amp theme information
 	 *
 	 * array {
+	 *
 	 * @type string     $Version      Template Semantic Version  Number {@link http://semver.org/}
 	 * @type string     $ScreenShot   -optional: screenshot.png- Relative Path to ScreenShot.
 	 * @type int|string $MaxWidth     -optional:600- Maximum Template Container Width.
@@ -775,6 +780,7 @@ if ( ! function_exists( 'better_amp_get_template_info' ) ) {
 	 * @return array
 	 */
 	function better_amp_get_template_info() {
+
 		return wp_parse_args(
 			apply_filters( 'better-amp/template/active-template', array() ),
 			array(
@@ -832,6 +838,7 @@ if ( ! function_exists( 'better_amp_guess_height' ) ) {
 	 * @return int
 	 */
 	function better_amp_guess_height() {
+
 		return better_amp_get_container_width() * 0.75;
 	}
 }
@@ -885,6 +892,7 @@ if ( ! function_exists( 'better_amp_hw_attr' ) ) {
 	 * @return int
 	 */
 	function better_amp_hw_attr( $width = '', $height = '' ) {
+
 		echo better_amp_get_hw_attr( $width, $height );
 	}
 }
@@ -910,6 +918,27 @@ if ( ! function_exists( 'better_amp_get_comment_link' ) ) {
 	}
 }
 
+if ( ! function_exists( 'better_amp_comment_reply_link' ) ) {
+	/**
+	 * Retrieve the HTML content for reply to comment link.
+	 *
+	 * @param array $args @see comment_reply_link for documentation
+	 *
+	 * @since 1.5.0
+	 * @return void|false|string
+	 */
+	function better_amp_comment_reply_link( $args = array() ) {
+
+		$current_value                                      = Better_AMP_Content_Sanitizer::$enable_url_transform;
+		Better_AMP_Content_Sanitizer::$enable_url_transform = FALSE;
+
+		$result                                             = comment_reply_link( $args );
+		Better_AMP_Content_Sanitizer::$enable_url_transform = $current_value;
+
+		return $result;
+	}
+}
+
 
 if ( ! function_exists( 'better_amp_comment_link' ) ) {
 	/**
@@ -920,6 +949,7 @@ if ( ! function_exists( 'better_amp_comment_link' ) ) {
 	 * @return int
 	 */
 	function better_amp_comment_link() {
+
 		echo esc_attr( better_amp_get_comment_link() );
 	}
 }
@@ -984,7 +1014,7 @@ if ( ! function_exists( 'better_amp_get_canonical_url' ) ) {
 				}
 			}
 
-		} else if ( is_search() ) {
+		} elseif ( is_search() ) {
 
 			$search_query = get_search_query();
 
@@ -1097,18 +1127,25 @@ if ( ! function_exists( 'better_amp_get_search_page_url' ) ) {
 	/**
 	 * Get AMP index page url
 	 *
-	 * @param string $path Optional. Path relative to the site URL. Default empty.
-	 *
-	 * @since 1.0.0
+	 * @param string $path      Optional. Path relative to the site URL. Default empty.
+	 * @param string $before_sp .     Custom string to append before amp start point. Default empty.
 	 *
 	 * @return string
+	 * @since 1.0.0
+	 *
 	 */
-	function better_amp_site_url( $path = '' ) {
+	function better_amp_site_url( $path = '', $before_sp = '' ) {
 
-		$url = site_url( '/' . Better_AMP::STARTPOINT );
+		$url = site_url( '/' );
+		//
+		$url .= $before_sp ? trailingslashit( $before_sp ) : '';
+		$url .= Better_AMP::STARTPOINT;
 
 		if ( $path ) {
-			$url .= $path;
+
+			$path = ltrim( $path, '/' );
+			$url  .= "/$path";
+
 		}
 
 		return $url;
@@ -1240,11 +1277,12 @@ if ( ! function_exists( 'better_amp_fix_customizer_statics' ) ) {
  * Better-AMP Template functions
  *
  * We used wordpress core functions and renamed some get_* functions to better_amp_*
+ *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  * @see  wp-includes/template.php
  *
- * |            Original Name           |               AMP Name               |
- * | ---------------------------------- | ------------------------------------ |
+ * |           Original Name            |                  AMP Name                  |
+ * | ---------------------------------- | ------------------------------------------ |
  * |   get_embed_template               |     better_amp_embed_template              |
  * |   get_404_template                 |     better_amp_404_template                |
  * |   get_search_template              |     better_amp_search_template             |
@@ -1313,6 +1351,7 @@ if ( ! function_exists( 'better_amp_404_template' ) ) {
 	 * @return string Full path to 404 template file.
 	 */
 	function better_amp_404_template() {
+
 		return better_amp_locate_template( '404.php' );
 	}
 }
@@ -1329,6 +1368,7 @@ if ( ! function_exists( 'better_amp_search_template' ) ) {
 	 * @return string Full path to search template file.
 	 */
 	function better_amp_search_template() {
+
 		return better_amp_locate_template( 'search.php' );
 	}
 }
@@ -1345,6 +1385,7 @@ if ( ! function_exists( 'better_amp_front_page_template' ) ) {
 	 * @return string Full path to front page template file.
 	 */
 	function better_amp_front_page_template() {
+
 		return better_amp_locate_template( 'front-page.php' );
 	}
 }
@@ -1379,6 +1420,7 @@ if ( ! function_exists( 'better_amp_home_template' ) ) {
 	 * @return string Full path to home template file.
 	 */
 	function better_amp_home_template() {
+
 		$templates = array( 'home.php', 'index.php' );
 
 		return better_amp_locate_template( $templates );
@@ -1593,6 +1635,7 @@ if ( ! function_exists( 'better_amp_singular_template' ) ) {
 	 * @return string Full path to singular template file
 	 */
 	function better_amp_singular_template() {
+
 		return better_amp_locate_template( 'singular.php' );
 	}
 }
@@ -1688,6 +1731,7 @@ if ( ! function_exists( 'better_amp_date_template' ) ) {
 	 * @return string Full path to date template file.
 	 */
 	function better_amp_date_template() {
+
 		return better_amp_locate_template( 'date.php' );
 	}
 }
@@ -1702,6 +1746,7 @@ if ( ! function_exists( 'better_amp_paged_template' ) ) {
 	 * @return string Full path to paged template file.
 	 */
 	function better_amp_paged_template() {
+
 		return better_amp_locate_template( 'paged.php' );
 	}
 }
@@ -1716,6 +1761,7 @@ if ( ! function_exists( 'better_amp_index_template' ) ) {
 	 * @return string Full path to index template file.
 	 */
 	function better_amp_index_template() {
+
 		return better_amp_locate_template( 'index.php' );
 	}
 }
@@ -1750,6 +1796,7 @@ if ( ! function_exists( 'better_amp_template_part' ) ) {
 	 * @since 1.0.0
 	 */
 	function better_amp_template_part( $slug, $name = NULL ) {
+
 		$templates = array();
 		$name      = (string) $name;
 		if ( '' !== $name ) {
@@ -1772,6 +1819,7 @@ if ( ! function_exists( 'better_amp_get_search_page_url' ) ) {
 	 * @return string
 	 */
 	function better_amp_get_search_page_url() {
+
 		return esc_url( add_query_arg( 's', '', better_amp_site_url() ) );
 	}
 }
@@ -1829,6 +1877,7 @@ if ( ! function_exists( 'better_amp_element_uni_id' ) ) {
 	 * @return string
 	 */
 	function better_amp_element_uni_id() {
+
 		return uniqid( 'element-' . rand() . '-' );
 	}
 }
@@ -2166,7 +2215,11 @@ if ( ! function_exists( 'better_amp_post_classes' ) ) {
 
 		$class[] = 'clearfx';
 
-		echo 'class="' . join( ' ', $class ) . '"';
+		$class = str_replace( 'hentry', '', join( ' ', $class ) );
+
+		echo 'class="' . $class . '"';
+
+		unset( $class );
 	}
 }
 
@@ -2376,7 +2429,8 @@ if ( ! function_exists( 'better_amp_social_shares_count' ) ) {
 			return bf_social_shares_count( $sites );
 		}
 
-		$sites = array_intersect_key( $sites, array( // Valid sites
+		$sites = array_intersect_key( $sites, array(
+			// Valid sites
 			'facebook'    => '',
 			'twitter'     => '',
 			'google_plus' => '',
@@ -2420,14 +2474,14 @@ if ( ! function_exists( 'better_amp_social_shares_count' ) ) {
 		}
 
 		if ( $update_cache ) { // Update cache storage if needed
-			$current_page = bf_social_share_guss_current_page();
+			$current_page = better_amp_social_share_guss_current_page();
 
 			foreach ( $sites as $site_id => $is_active ) {
 				if ( ! $is_active ) {
 					continue;
 				}
 
-				$count_number = bf_social_share_fetch_count( $site_id, $current_page['page_permalink'] );
+				$count_number = better_amp_social_share_fetch_count( $site_id, $current_page['page_permalink'] );
 
 				update_post_meta( $post_id, 'bs_social_share_' . $site_id, $count_number );
 
@@ -2459,18 +2513,56 @@ if ( ! function_exists( 'better_amp_social_share_guss_current_page' ) ) {
 	 */
 	function better_amp_social_share_guss_current_page() {
 
-		$page_permalink = better_amp_guess_none_amp_url();
+		$page_permalink  = '';
+		$need_short_link = better_amp_get_theme_mod( 'better-amp-post-social-share-link-format' ) === 'short';
 
 		if ( is_home() || is_front_page() ) {
 			$page_title = get_bloginfo( 'name' );
 		} elseif ( is_single( get_the_ID() ) && ! ( is_front_page() ) ) {
 			$page_title = get_the_title();
+
+			if ( $need_short_link ) {
+				$page_permalink = wp_get_shortlink();
+			}
+
 		} elseif ( is_page() ) {
 			$page_title = get_the_title();
+
+			if ( $need_short_link ) {
+				$page_permalink = wp_get_shortlink();
+			}
+
 		} elseif ( is_category() || is_tag() || is_tax() ) {
 			$page_title = single_term_title( '', FALSE );
+
+			if ( $need_short_link ) {
+
+				$queried_object = get_queried_object();
+
+				if ( ! empty( $queried_object->taxonomy ) ) {
+
+					if ( 'category' == $queried_object->taxonomy ) {
+						$page_permalink = "?cat=$queried_object->term_id";
+					} else {
+						$tax = get_taxonomy( $queried_object->taxonomy );
+
+						if ( $tax->query_var ) {
+							$page_permalink = "?$tax->query_var=$queried_object->slug";
+						} else {
+							$page_permalink = "?taxonomy=$queried_object->taxonomy&term=$queried_object->term_id";
+						}
+					}
+
+					$page_permalink = home_url( $page_permalink );
+				}
+			}
+
 		} else {
 			$page_title = get_bloginfo( 'name' );
+		}
+
+		if ( ! $page_permalink ) {
+			$page_permalink = better_amp_guess_none_amp_url();
 		}
 
 		return compact( 'page_title', 'page_permalink' );
@@ -2661,6 +2753,7 @@ if ( ! function_exists( 'better_amp_customizer_hidden_attr' ) ) {
 	 * @param $theme_mod
 	 */
 	function better_amp_customizer_hidden_attr( $theme_mod ) {
+
 		if ( better_amp_is_customize_preview() && ! better_amp_get_theme_mod( $theme_mod, FALSE ) ) {
 			echo ' style="display:none"';
 		}
@@ -2674,6 +2767,7 @@ if ( ! function_exists( 'better_amp_language_attributes' ) ) {
 	 * @since 1.0.0
 	 */
 	function better_amp_language_attributes() {
+
 		$attributes = array();
 
 		if ( function_exists( 'is_rtl' ) && is_rtl() ) {
@@ -2682,6 +2776,7 @@ if ( ! function_exists( 'better_amp_language_attributes' ) ) {
 
 		if ( $lang = get_bloginfo( 'language' ) ) {
 			$attributes[] = "lang=\"$lang\"";
+
 		}
 
 		$output = implode( ' ', $attributes );
@@ -2726,7 +2821,6 @@ if ( ! function_exists( 'better_amp_get_post_parent' ) ) {
 }
 
 if ( ! function_exists( 'better_amp_is_static_home_page' ) ) {
-
 	/**
 	 * Is current page static home page
 	 *
@@ -2737,5 +2831,241 @@ if ( ! function_exists( 'better_amp_is_static_home_page' ) ) {
 
 		return is_home() && apply_filters( 'better-amp/template/show-on-front', 'posts' ) === 'page' &&
 		       apply_filters( 'better-amp/template/page-on-front', 0 );
+	}
+}
+
+if ( ! function_exists( 'better_amp_comments_template' ) ) {
+	/**
+	 * Retrieves comments template path in the current or parent template.
+	 *
+	 * @since 1.5.0
+	 */
+	function better_amp_comments_template() {
+
+		better_amp_locate_template( 'comments.php', TRUE );
+	}
+}
+
+if ( ! function_exists( 'better_amp_list_comments' ) ) {
+	/**
+	 * List comments for a particular post.
+	 *
+	 * @see   wp_list_comments for more documentation
+	 *
+	 * @param string|array $args               wp_list_comments first argument
+	 * @param array        $comment_query_args comment query arguments
+	 *
+	 * @global WP_Query    $wp_query           Global WP_Query instance.
+	 * @return string|void
+	 * @since 1.5.0
+	 *
+	 */
+	function better_amp_list_comments( $args = array(), $comment_query_args = array() ) {
+
+		global $wp_query;
+
+		$post_id = get_the_ID();
+
+		$comment_args = array(
+			'orderby'       => 'comment_date_gmt',
+			'order'         => 'ASC',
+			'status'        => 'approve',
+			'post_id'       => $post_id,
+			'no_found_rows' => FALSE,
+		);
+
+		if ( empty( $args['callback'] ) && better_amp_locate_template( 'comment-item.php' ) ) {
+			$args['callback']     = 'better_amp_comment_item';
+			$args['end-callback'] = 'better_amp_comment_item_end';
+		}
+
+		$comments = new WP_Comment_Query( array_merge( $comment_args, $comment_query_args ) );
+
+		/**
+		 * Filters the comments array.
+		 *
+		 * @see comments_template
+		 *
+		 * @param array $comments Array of comments supplied to the comments template.
+		 * @param int   $post_ID  Post ID.
+		 */
+		$comments_list = apply_filters( 'comments_array', $comments->comments, $post_id );
+
+		// Save comments list to comments property of the main query to enable wordpress core
+		// function such as get_next_comments_link works in comments page
+		$wp_query->comments = $comments_list;
+
+		return wp_list_comments( $args );
+	}
+}
+
+if ( ! function_exists( 'better_amp_comments_paginate' ) ) {
+	/**
+	 * Displays pagination links for the comments on the current post.
+	 *
+	 * @see   wp_list_comments for more documentation
+	 *
+	 * @since 1.5.0
+	 *
+	 */
+	function better_amp_comments_paginate() {
+
+		// Nav texts with RTL support
+		if ( is_rtl() ) {
+			$prev = '<i class="fa fa-angle-double-right"></i> ' . better_amp_translation_get( 'comment_previous' );
+			$next = better_amp_translation_get( 'comment_next' ) . ' <i class="fa fa-angle-double-left"></i>';
+		} else {
+			$next = better_amp_translation_get( 'comment_next' ) . ' <i class="fa fa-angle-double-right"></i>';
+			$prev = '<i class="fa fa-angle-double-left"></i> ' . better_amp_translation_get( 'comment_previous' );
+		}
+
+		previous_comments_link( $prev );
+
+		next_comments_link( $next );
+	}
+}
+
+
+if ( ! function_exists( 'better_amp_comment_item' ) ) {
+
+	/**
+	 * Load comment-item.php file in the current or parent template.
+	 *
+	 * @since 1.5.0
+	 *
+	 * @param WP_Comment_Query $comment
+	 */
+	function better_amp_comment_item( $comment ) {
+
+		static $path;
+
+		if ( is_null( $path ) ) {
+			$path = better_amp_locate_template( 'comment-item.php' );
+		}
+
+		if ( $path ) {
+			include $path;
+		}
+	}
+}
+
+
+if ( ! function_exists( 'better_amp_comment_item_end' ) ) {
+	/**
+	 * Print li closing tag
+	 *
+	 * @since 1.5.0
+	 */
+	function better_amp_comment_item_end() {
+
+		echo '</li>';
+	}
+}
+
+
+if ( ! function_exists( 'better_amp_related_posts_query_args' ) ) {
+	/**
+	 * Get Related Posts
+	 *
+	 * @param integer      $count  number of posts to return
+	 * @param string       $type
+	 * @param integer|null $post_id
+	 * @param array        $params query extra arguments
+	 *
+	 * @return array  query args array
+	 */
+	function better_amp_related_posts_query_args( $count = 5, $type = 'cat', $post_id = NULL, $params = array() ) {
+
+		$post = get_post( $post_id );
+
+		if ( ! $post_id && isset( $post->ID ) ) {
+			$post_id = $post->ID;
+		}
+
+		$args = array(
+			'posts_per_page'      => $count,
+			'post__not_in'        => array( $post_id ),
+			'ignore_sticky_posts' => TRUE,
+		);
+
+		switch ( $type ) {
+
+			case 'cat':
+				$args['category__in'] = wp_get_post_categories( $post_id );
+				break;
+
+			case 'tag':
+				$tag_in = wp_get_object_terms( $post_id, 'post_tag', array( 'fields' => 'ids' ) );
+				if ( $tag_in && ! is_wp_error( $tag_in ) ) {
+
+					$args['tag__in'] = $tag_in;
+				}
+				break;
+
+			case 'author':
+				if ( isset( $post->post_author ) ) {
+					$args['author'] = $post->post_author;
+				}
+				break;
+
+			case 'cat-tag':
+				$args['category__in'] = wp_get_post_categories( $post_id );
+				$args['tag__in']      = wp_get_object_terms( $post_id, 'post_tag', array( 'fields' => 'ids' ) );
+				break;
+
+			case 'cat-tag-author':
+				$args['category__in'] = wp_get_post_categories( $post_id );
+
+				if ( isset( $post->post_author ) ) {
+					$args['author'] = $post->post_author;
+				}
+
+				$tag_in = wp_get_object_terms( $post_id, 'post_tag', array( 'fields' => 'ids' ) );
+
+				if ( $tag_in && ! is_wp_error( $tag_in ) ) {
+					$args['tag__in'] = $tag_in;
+				}
+				break;
+
+			case 'rand':
+			case 'random':
+			case 'randomly':
+				$args['orderby'] = 'rand';
+				break;
+
+		}
+
+		if ( $params ) {
+			$args = array_merge( $args, $params );
+		}
+
+		return $args;
+
+	} // better_amp_related_posts_query_args
+} // if
+
+
+if ( ! function_exists( 'better_amp_min_suffix' ) ) {
+	/**
+	 * Returns appropriate suffix for static files (min or not)
+	 *
+	 * @param string $before
+	 * @param string $after
+	 *
+	 * @return string
+	 */
+	function better_amp_min_suffix( $before = '', $after = '' ) {
+
+		static $suffix;
+
+		if ( ! $suffix ) {
+			if ( ( defined( 'WP_DEBUG' ) && WP_DEBUG ) || ( defined( 'BF_DEV_MODE' ) && BF_DEV_MODE ) ) {
+				$suffix = '';
+			} else {
+				$suffix = '.min';
+			}
+		}
+
+		return "$before$suffix$after";
 	}
 }

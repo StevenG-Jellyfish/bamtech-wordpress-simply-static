@@ -1,20 +1,21 @@
 === WP Statistics ===
-Contributors: mostafa.s1990, GregRoss
+Contributors: mostafa.s1990, GregRoss, dedidata
 Donate link: https://wp-statistics.com/donate/
-Tags: statistics, stats, visit, visitors, chart, browser, blog, today, yesterday, week, month, year, total, post, page, sidebar, summary, hits, pagerank, google, alexa, live visit
+Tags: analytics, wordpress analytics, stats, statistics, visit, visitors, hits, chart, browser, today, yesterday, week, month, year, total, post, page, sidebar, google, live visit, search word, agent, google analytics, webmasters, google webmasters, geoip, location
 Requires at least: 3.0
-Tested up to: 4.8
-Stable tag: 12.0.7
-License: GPL3
+Tested up to: 4.9
+Stable tag: 12.3.5
+License: GPLv3
+License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-Complete statistics for your WordPress site.
+Complete WordPress Analytics and Statistics for your site!
 
 == Description ==
 A comprehensive plugin for your WordPress visitor statistics, come visit us at our [website](https://wp-statistics.com) for all the latest news and information.
 
-Track statistics for your WordPress site without depending on external services and uses arrogate data whenever possible to respect your users privacy.
+Track Statistics for your WordPress site without depending on external services and uses arrogate data whenever possible to respect your users privacy.
 
-On screen statistics presented as graphs are easily viewed through the WordPress admin interface.
+On screen Statistics presented as graphs are easily viewed through the WordPress admin interface.
 
 This product includes GeoLite2 data created by MaxMind, available from https://www.maxmind.com.
 
@@ -38,9 +39,12 @@ This product includes GeoLite2 data created by MaxMind, available from https://w
 * Comprehensive Admin Manual
 
 = Translations =
-WP Statistics has been translated in to many languages, for the current list and contributors, please visit the [translators](https://wp-statistics.com/translators/) page on [wp-statistics.com](https://wp-statistics.com/).
+WP Statistics has been translated in to many languages, for the current list and contributors, please visit the [translate page](https://translate.wordpress.org/projects/wp-plugins/wp-statistics).
 
 Translations are done by people just like you, help make WP Statistics available to more people around the world and [do a translation](https://wp-statistics.com/translations/) today!
+
+= Contributing and Reporting Bugs =
+WP-Statistics is being developed on GitHub, If you’re interested in contributing to plugin, Please look at [Github page](https://github.com/wp-statistics/wp-statistics)
 
 = Support =
 We're sorry you're having problem with WP Statistics and we're happy to help out.  Here are a few things to do before contacting us:
@@ -64,7 +68,6 @@ And a few things to double-check:
 Still not having any luck? Open a new thread on one of the support forums and we'll respond as soon as possible.
 
 * [English Support Forum](https://wordpress.org/support/plugin/wp-statistics)
-* [Persian Support Forum](https://forum.wp-parsi.com/forum/17-%D9%85%D8%B4%DA%A9%D9%84%D8%A7%D8%AA-%D8%AF%DB%8C%DA%AF%D8%B1/)
 
 == Installation ==
 1. Upload `wp-statistics` to the `/wp-content/plugins/` directory.
@@ -268,29 +271,142 @@ If you have done an upgrade and you can no longer access your site due to the pa
 You may also downgrade to WP Statistics 10.3 as a temporary measure, but no new fixes or features will be added to that version and you should move to a newer version of PHP as soon as possible.  You can download the 10.3 here: https://downloads.wordpress.org/plugin/wp-statistics.10.3.zip
 
 == Screenshots ==
-1. View stats page.
-2. View latest search words.
-3. View recent visitors page.
-4. View top referrer site page.
-5. Optimization page.
-6. Settings page.
-7. Widget page.
-8. View Top Browsers page.
-9. View latest Hits Statistics page.
-10. View latest search engine referrers Statistics page.
+1. Overview
+2. Browsers Statistics
+3. Top Countries
+4. Hit Statistics
+5. Top pages
+6. Category Statistics
+7. Search Engine Referral Statistics
+8. Last Search Words
+9. Dashboard widgets
+10. Theme widget
 
 == Upgrade Notice ==
-= 12.0.5 =
+= 12.0.9 =
 This is a security fix, please update immediately.
 
 == Changelog ==
+= 12.3.5 =
+* Improvement: Isolation Browscap cache processes to reduce memory usage.
+* Improvement: Include `file.php` and `pluggable.php` in GeoIP downloader when is not exists.
+* Fixed: GeoIP database update problem. Added an alternative server for download database when impossible access to maxmind.com
+
+= 12.3.4 =
+* Updated: Browscap to v3.1.0 and fixed some issues.
+* Improvement: Memory usage in the plugin when the Browscap is enabled.
+* Improvement: Cache system and update Browscap database.
+
+= 12.3.2 =
+* Added: New feature! Show Hits on the single posts/pages.
+* Added: Pages Dropdown in the page stats.
+* Fixed: Menu bar for both frontend & backend.
+* Fixed: Issue to create the object of the main class.
+* Fixed: Issue to get page title in empty search words option.
+* Fixed: Issue to show date range in the charts.
+
+= 12.3.1 =
+* We're sorry about last issues. Now you can update to new version to resolve the problems.
+* Updated: Composer libraries.
+* Fixed: A minor bug in `get_referrer_link`.
+* Improvement: `wp_doing_cron` function, Check before call if is not exist.
+* Fixed: Issue to get IP in Hits class.
+* Fixed: Issue to get prefix table in searched phrases postbox.
+* Fixed: Issue in Browscap, Used the original Browscap library in the plugin.
+* If you have any problem, don't forget to send the report to our web site's [contact form](https://wp-statistics.com/contact/).
+
+= 12.3 =
+* The new version proves itself more than twice as faster because we had a lot of changes in the plugin.
+* Improvement: Management processes and front-end have been separated for more speed.
+* Improvement: MySQL Queries and used multi-index for `wp_statistics_pages`.
+* Improvement: Top Referring widget in Big data. Used Transient cache to build this widget data.
+* Fixed: Issue in checking the Cron request.
+* Fixed: Issue in i18n strings. The `load_plugin_textdomain` missed.
+* Fixed: issue in generating query string in some state pages.
+* Fixed: issue in admin widget. The `id` in label missed and used `get_field_id` method to get a correct id.
+* Fixed: Admin bar menu icon.
+* Updated: Chart.js library to v2.7.1
+
+= 12.2.1 =
+* Fixed: Issue to `add_column` callback.
+
+= 12.2 =
+* The new version proves itself more than twice as faster because we had a lot of changes in the plugin.
+* Improvement: Many functions converted to classes.
+* Improvement: Export data on the optimization page.
+* Improvement: Constants, Include files.
+* Improvement: Setting/Optimization page stylesheet and removed jQuery UI to generate tabs.
+* Added: Top Search Words in the plugin.
+* Fixed: Some notices error.
+* Removed: Some unused variables.
+* Removed: Force English option feature in the plugin.
+* Thanks [Farhad Sakhaei](https://dedidata.com/) To help us with these changes.
+
+= 12.1.3 =
+* We're sorry about last issues. Now you can update to new version to resolve conflict issues.
+* Fixed: Chart conflict issues with other libraries.
+* Fixed: Chart height issue in css.
+* Fixed: Correct numbering for pages > 1 in Top Referring page. [#22](https://github.com/wp-statistics/wp-statistics/pull/22/files)
+* Fixed: Don't run the SQL if `$reffer` is not set. [#21](https://github.com/wp-statistics/wp-statistics/pull/21)
+* Fixed: Refferer url scheme. [#24](https://github.com/wp-statistics/wp-statistics/pull/24) Thanks [Farhad Sakhaei](https://github.com/Dedi-Data)
+* Fixed: Network menu icon.
+
+= 12.1.0 =
+* Added: Awesome charts! The Chartjs library used in the plugin for show charts.
+* Updated: Missed flags icons. (Curaçao, Saint Lucia, Turkmenistan, Kosovo, Saint Martin, Saint Barthélemy and Mayotte)
+* Updated: Countries code.
+* Updated: Settings and Optimization page styles.
+* Fixed: Showing data on the Browsers, Platforms and browsers version charts.
+* Fixed: Postbox container width in Logs page.
+* Removed: `WP_STATISTICS_MIN_EXT` define for load `.min` version in css/js.
+* Removed: Additional assets and the assets cleaned up.
+
+= 12.0.12.1 =
+* Fixed: PHP syntax error for array brackets when the PHP < 5.4
+
+= 12.0.12 =
+* Added: Add-ons page! The Add-ons add functionality to your WP-Statistics. [Click here](https://wp-statistics.com/add-ons/) to see current Add-ons.
+* Fixed: Translations issue.
+* Updated: GeoIP library to v2.6.0
+* Updated: admin.min.css
+
+= 12.0.11 =
+* Release Date: August 17, 2017
+* Fixed: links issue in the last visitors page.
+* Fixed: i18n issues (hardcoded strings, missing or incorrect textdomains).
+* Updated: admin CSS style. set `with` for Hits column in posts/pages list.
+* Updated: Improve consistency, best practices and correct typos in translation strings.
+* Updated: More, Reload and Toggle arrow buttons in metaboxes are consistent with WP core widget metaboxes, with screen-reader-text and key navigation. by [Pedro Mendonça](https://profiles.wordpress.org/pedromendonca/).
+
+= 12.0.10 =
+* Release Date: July 24, 2017
+* Added: UptimeRobot to the default robots list.
+* Fixed: Uses `esc_attr()` for cleaning `$_GET` in referrers page.
+* Removed: `screen_icon()` function from the plugin. (This function has been deprecated).
+
+= 12.0.9 =
+* Release Date: July 3, 2017
+* Fixed: XSS issue with agent and ip in visitors page, Thanks Ryan Dewhurst from Dewhurst Security Team.
+* Updated: GeoIP library to v2.5.0
+* Updated: Maxmind-db reader library to v1.1.3
+
+= 12.0.8.1 =
+* Release Date: July 2, 2017
+* Fixed: load languages file. please visit [translations page](https://wp-statistics.com/translations/) to help translation.
+
+= 12.0.8 =
+* Release Date: June 29, 2017
+* Fixed: SQL Injection vulnerability, thanks John Castro for reporting issue from sucuri.net Team.
+* Added: new hook (`wp_statistics_final_text_report_email`) in email reporting.
+* Removed: all language files from the language folder. Translations have moved to [translate.wordpress.org](https://translate.wordpress.org/projects/wp-plugins/wp-statistics).
+
 = 12.0.7 =
 * Release Date: June 8, 2017
 * WordPress 4.8 compatibility
-* Updated WP-Statistics logo! Thanks [Arin Hacopian](http://aringrafix.com/) for design the logo.
-* Remove manual file and moved to [wp-statistics.com/category/documentation](http://wp-statistics.com/category/documentation)
-* Fixed items show issue in referring page.
-* Fixed recent visitor link in dashboard widget.
+* Updated: WP-Statistics logo! Thanks [Arin Hacopian](http://aringrafix.com/) for design the logo.
+* Removed: manual file and moved to [wp-statistics.com/category/documentation](http://wp-statistics.com/category/documentation)
+* Fixed: items show issue in referring page.
+* Fixed: recent visitor link in dashboard widget.
 
 = 12.0.6 =
 * Release Date: April 27, 2017

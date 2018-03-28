@@ -1,0 +1,179 @@
+/*!
+Theme Name: espnplus
+Stub Name:  global_header.scss 
+*/
+
+#masthead {
+    width: 100%;
+    z-index: 16777270;
+    display: inline-block;
+    text-align: center;
+
+}
+#masthead-stick {
+    width: 100%;
+    z-index: 16777271;
+    text-align: center;
+}
+
+&.sticky {
+    position: fixed;
+    top: 0;
+}
+
+.site-branding {
+    display: inline-block;
+    // outline: 1px solid #ccc;
+    // float: left;
+    flex: 1 100%;
+    @media (max-width: 580px) {
+        display:none;
+        flex:none;
+    }
+}
+
+.headerbox {
+    display: block;
+    background: white;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1280px;
+    height: 77px;
+}
+
+.site-header {
+    // border: 1px solid #ccc;
+    height: 77px;
+    text-align: left;
+    // background: white;
+    //justify-content: flex-start | flex-end;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    justify-content: space-between;
+
+    // @media (max-width: 640px) {
+    //     justify-content: center;
+    // }
+    // a img {
+    //     max-height: 20px;
+    //     width: 104px;
+    //     margin-top: 28px;
+    //     margin-left: 75px;
+    // }
+    img {
+        max-height: 20px;
+        width: 104px;
+        margin-top: 28px;
+        margin-left: 75px;
+    }
+}
+
+.main-navigation {
+    display: inline-block;
+    height: 77px;
+    flex: 1 100%;
+    ul {
+        padding:0px;
+    }
+}
+.menu {
+    margin-top: 14px;
+    list-style: none;
+    margin-bottom: 0;
+    margin-right: 55px;
+    display: flex;
+    flex-direction: row;
+    // border:1px solid #ccc;
+    justify-content: flex-end;
+    .menu-item {
+        height: 48px;
+        font-family: PlayoffProCond-MediumItalic, arial;
+        // border:1px solid #ccc;
+    }
+    .menu-item a:link,
+    .menu-item a:visited, {
+        margin-top: 10px;
+        display: inline-block;
+        color: black;
+    }
+    .menu-item a:active,
+    .menu-item a:hover, {
+        color: white;
+        text-decoration: underline;
+    }
+    .menu-item:nth-child(2) {
+        width:42px;
+        margin-left:38px;
+    }
+    @media (max-width: 580px) {
+        flex-direction: row-reverse;
+        margin-right: 20px;
+        margin-left: 20px;
+        .menu-item {
+            flex:1 100%;
+            margin:0;
+        }
+        .menu-item:nth-child(2) {
+            margin-left:0;
+        }
+    }
+
+    @media (max-width: 480px) {
+        flex-direction: row-reverse;
+        margin-right: 10px;
+        margin-left: 10px;
+    }
+    // #menu-item-320.menu-item a:link,
+    // #menu-item-320.menu-item a:visited,
+    // #menu-item-320.menu-item a:active,
+    // #menu-item-320.menu-item a:hover {
+    //     margin-top: 0;
+    //     display: none;
+    // }
+
+}
+
+.site-title {
+    display: none;
+}
+
+//Wrapper for CTA with corner knockout
+
+.menu-main-menu-container .espn-cta-container {
+    a {
+        display:none;
+    }
+    @media (max-width: 767px) {
+        margin: 0;
+    }
+    // text-align: center;
+    .parallelogram {
+        margin: 0 -10px 0 -25px;
+        color:black;
+        a:nth-child(2) {
+            display:block;
+            color:black;
+        }
+        &:hover,
+        &:active {
+            background-color: black;
+            color: white;
+        } // active & hover
+    } // .parallelogram
+
+    a:link,
+    a:visited,
+    a:active,
+    a:hover {
+        margin-top: 0;
+    }
+ //.btn-primary 
+    .btn.btn-primary:active,
+    .btn.btn-primary:hover {
+        text-decoration: none;
+        color: white;
+    } 
+} // .espn-cta-container

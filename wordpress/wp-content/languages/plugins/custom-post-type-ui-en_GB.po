@@ -1670,7 +1670,7 @@ msgstr "Follow on Twitter:"
 msgid "%s version %s by %s"
 msgstr "%s version %s by %s"
 
-#. #-#-#-#-#  tmp-custom-post-type-ui.pot (Custom Post Type UI 1.5.3) 
+#. #-#-#-#-#  custom-post-type-ui-code.pot (Custom Post Type UI 1.5.5) 
 #. #-#-#-#-#
 #. Plugin Name of the plugin/theme
 #: inc/about.php:34 inc/utility.php:103

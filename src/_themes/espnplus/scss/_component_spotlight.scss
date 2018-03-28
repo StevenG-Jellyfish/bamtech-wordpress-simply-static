@@ -1,0 +1,251 @@
+/*!
+Theme Name          :   espnplus
+Stub Name           :   component_spotlight.scss 
+Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.html
+*/
+
+:root {
+    --jumbotron-padding-y: 3rem;
+}
+
+.jumbotron {
+    position: relative;
+    display: block;
+    width: 100%;
+    max-width: 1280px;
+    //padding-top: var(--jumbotron-padding-y);
+    //padding-bottom: var(--jumbotron-padding-y);
+    padding: 0 0 0 0;
+    margin: 0 auto;
+    background-color: black;
+    overflow: hidden;
+    border-radius:0;
+    -moz-border-radius:0;
+    -webkit-border-radius:0;
+  /*
+    @media (min-width: 767px) {
+      .jumbotron {
+        padding-top: calc(var(--jumbotron-padding-y) * 2);
+        padding-bottom: calc(var(--jumbotron-padding-y) * 2);
+      } // .jumbotron
+    } // min-width: 767px
+    */
+
+    .jubmotron-background {
+        position: absolute;
+        display: block;
+        background-color: black;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        max-width: 1280px;
+        height: auto;
+        margin: 0 0 0 0;
+        padding: 0 0 0 0;
+        z-index: 1;
+
+        #embed-responsive-16by9 {
+            display: block;
+        }
+        #embed-responsive-4by3 {
+            display: none;
+        }  
+
+        video {
+            display: inline-block;
+            width: 100%;
+            max-width: 1280px;
+            height: auto;
+            object-fit: cover;
+
+            source {
+                width: 100%;
+                max-width: 1280px;
+                height: auto;
+                object-fit: cover;
+            }
+
+            img {
+                width: 100%;
+                max-width: 1280px;
+                height: auto;
+                object-fit: cover;
+            }
+        }
+        @media (max-width: 767px) and (orientation: portrait) {
+            #embed-responsive-16by9 {
+                display: none;
+            }
+            #embed-responsive-4by3 {
+                display: block;
+            }
+        } // max-width: 767px
+        @media (max-width: 667px) and (orientation: landscape) {
+            #embed-responsive-16by9 {
+                display: none;
+            }
+            #embed-responsive-4by3 {
+                display: block;
+            }
+        } // max-width: 667px
+
+    } // .jubmotron-background
+
+    .container {
+        position: relative;
+        width: 100%;
+        max-width: 1280px;
+        margin: 0 0 0 0;
+        padding: 58px 5%;
+        text-align: center;
+        z-index: 2;
+    }
+    @media (max-width: 767px) {
+        .container {
+            width: 100%;
+            max-width: 767px;
+            margin: 0;
+            padding: .5rem 0;
+        } // .container
+    } // max-width: 767px
+
+    // .jumbotron-login:link,
+    // .jumbotron-login:visited {
+    //     position: absolute;
+    //     display: inline-block;
+    //     top: 24px;
+    //     right: 62px;
+    //     font-family: PlayoffProCond-MediumItalic, arial;
+    //     font-size: 0.875rem;
+    //     font-weight: 700;
+    //     text-align: right;
+    //     text-decoration: none;
+    //     color: #fefefe;
+    // }
+    // @media  (max-width: 767px) {
+    //     .jumbotron-login:link {
+    //         position: relative;
+    //         display: block;
+    //         float: none;
+    //         clear: both;
+    //         top: .500rem;
+    //         right: 24px;
+    //         width: 100%;
+    //         text-align: right;
+    //     } // .jumbotron-login
+    // } // max-width: 767px
+
+    // .jumbotron-login:active,
+    // .jumbotron-login:hover {
+    //     text-decoration: underline;
+    // }
+
+    .jumbotron-heading {
+        font-family: PlayoffProCond-Medium, arial;
+        font-size: 1.875rem;
+        font-weight: 700;
+        letter-spacing: -0.019rem;
+        line-height: 3.000rem;
+        color: white;
+
+        em {
+            font-style: normal;
+            color: $primary;
+        }
+
+    } //.jumbotron-heading
+    @media (max-width: 767px) {
+        .jumbotron-heading {
+            font-size: 1.250rem;
+            letter-spacing: -0.013rem;
+        } // .jumbotron-heading
+    } // max-width: 767px
+
+    .jumbotron-logo {
+        margin-bottom: 3rem;
+
+        img {
+            width: 392px;
+            height: 76px;
+        }
+        @media (max-width: 767px) {
+            img {
+                width: 214px;
+                height: 44px;
+            } // img
+        } // max-width: 767px
+
+    } // .jumbotron-logo
+    @media (max-width: 767px) {
+        .jumbotron-logo {
+            margin-bottom: 1.5rem;
+        } // .jumbotron-logo
+    } // max-width: 767px
+
+    .espn-cta-container {
+        margin-top: 1.875rem;
+        font-family: PlayoffProCond-Medium, arial;
+
+        .btn.btn-primary {            
+            font-family: PlayoffProCond-Medium, arial;           
+            font-size: 1.125rem;
+        }
+        // @media (max-width: 767px) {
+        //     .btn.btn-primary {
+        //         font-family: PlayoffProCond-Medium, arial;
+        //         font-size: 1.125rem;
+        //         // font-weight: 700;
+        //         // line-height: 2.750rem;
+        //     } // .btn
+        // } // max-width: 767px
+    } // .espn-cta-container
+
+    p {
+        margin: 0 0 0 0;
+        padding: 0 0 0 0;
+        color: white;
+
+        &.lead {
+            font-family: PlayoffProCond-Medium, arial;
+            font-size: 2.500rem;
+            letter-spacing: -0.025rem;
+            line-height: 3.000rem;
+            padding:0px 10px 0px 10px;
+        } //.lead
+        @media screen and (min-width: 825px) and (max-width: 960px) { //564
+            &.lead  {
+                font-size: 2.000rem;
+            } // &.lead 
+        }
+        @media (max-width: 824px) {
+            &.lead {
+                font-family: PlayoffProCond-Medium, arial;
+                font-size: 1.500rem;
+                font-weight: 700;
+                line-height: 1.750rem;
+            } // &.lead
+        } // max-width: 767px
+
+        &.below-cta {
+            font-family: PlayoffProCond-Medium, arial;
+            font-size: 1.250rem;
+
+            a:link,
+            a:visited,
+            a:active,
+            a:hover {
+                font-family: PlayoffProCond-Medium, arial;
+                text-decoration: underline;
+                color: white;
+            }
+        }
+        @media (max-width: 767px) {
+            &.below-cta {
+                font-size: 0.750rem;
+                line-height: 1.125rem;
+            } // &.below-cta
+        } // max-width: 767px
+
+    } // p
+
+} // .jumbotron

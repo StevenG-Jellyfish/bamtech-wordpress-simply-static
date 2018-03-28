@@ -1,5 +1,5 @@
 <?php exit; ?>{
-    "version": "0.9.5.4",
+    "version": "0.9.6",
     "cluster.messagebus.debug": false,
     "cluster.messagebus.enabled": false,
     "cluster.messagebus.sns.region": "",
@@ -155,6 +155,10 @@
         "wp-.*\\.php",
         "index\\.php"
     ],
+    "pgcache.reject.categories": [],
+    "pgcache.reject.tags": [],
+    "pgcache.reject.authors": [],
+    "pgcache.reject.custom": [],
     "pgcache.reject.ua": [],
     "pgcache.reject.cookie": [
         "wptouch_switch_toggle"
@@ -184,6 +188,32 @@
     "pgcache.prime.limit": 10,
     "pgcache.prime.sitemap": "",
     "pgcache.prime.post.enabled": false,
+    "pgcache.cookiegroups.enabled": false,
+    "pgcache.cookiegroups.groups": {
+        "mobile": {
+            "enabled": false,
+            "cache": true,
+            "cookies": [
+                "wptouch-pro-view=mobile",
+                "wptouch-pro-cache-state=mobile"
+            ]
+        },
+        "loggedin": {
+            "enabled": false,
+            "cache": true,
+            "cookies": [
+                "wordpress_logged_in_.*"
+            ]
+        },
+        "subscribers": {
+            "enabled": false,
+            "cache": true,
+            "cookies": [
+                "role=subscriber",
+                "role=member"
+            ]
+        }
+    },
     "stats.enabled": false,
     "minify.configuration_overloaded": false,
     "minify.enabled": false,
@@ -293,7 +323,7 @@
     "cdn.includes.enable": true,
     "cdn.includes.files": "*.css;*.js;*.gif;*.png;*.jpg;*.xml",
     "cdn.theme.enable": true,
-    "cdn.theme.files": "*.css;*.js;*.gif;*.png;*.jpg;*.ico;*.ttf;*.otf,*.woff,*.less",
+    "cdn.theme.files": "*.css;*.js;*.gif;*.png;*.jpg;*.ico;*.ttf;*.otf;*.woff;*.woff2;*.less",
     "cdn.minify.enable": true,
     "cdn.custom.enable": true,
     "cdn.custom.files": [
@@ -315,6 +345,8 @@
     "cdn.autoupload.enabled": false,
     "cdn.autoupload.interval": 3600,
     "cdn.canonical_header": false,
+    "cdn.admin.media_library": false,
+    "cdn.cors_header": true,
     "cdn.ftp.host": "",
     "cdn.ftp.type": "",
     "cdn.ftp.user": "",
@@ -336,12 +368,14 @@
     "cdn.s3.key": "",
     "cdn.s3.secret": "",
     "cdn.s3.bucket": "",
+    "cdn.s3.bucket.location": "us-east-1",
     "cdn.s3.cname": [],
     "cdn.s3.ssl": "auto",
     "cdn.s3_compatible.api_host": "auto",
     "cdn.cf.key": "",
     "cdn.cf.secret": "",
     "cdn.cf.bucket": "",
+    "cdn.cf.bucket.location": "us-east-1",
     "cdn.cf.id": "",
     "cdn.cf.cname": [],
     "cdn.cf.ssl": "auto",
@@ -371,13 +405,6 @@
     "cdn.azure.ssl": "auto",
     "cdn.mirror.domain": [],
     "cdn.mirror.ssl": "auto",
-    "cdn.netdna.alias": "",
-    "cdn.netdna.consumerkey": "",
-    "cdn.netdna.consumersecret": "",
-    "cdn.netdna.authorization_key": "",
-    "cdn.netdna.domain": [],
-    "cdn.netdna.ssl": "auto",
-    "cdn.netdna.zone_id": 0,
     "cdn.maxcdn.authorization_key": "",
     "cdn.maxcdn.domain": [],
     "cdn.maxcdn.ssl": "auto",
@@ -413,6 +440,9 @@
         "{plugins_dir}\/wp-fb-autoconnect\/facebook-platform\/channel.html"
     ],
     "cdn.reject.ssl": false,
+    "cdnfsd.enabled": false,
+    "cdnfsd.engine": "",
+    "cdnfsd.debug": false,
     "varnish.configuration_overloaded": false,
     "varnish.enabled": false,
     "varnish.debug": false,
@@ -428,12 +458,12 @@
     ],
     "browsercache.cssjs.last_modified": true,
     "browsercache.cssjs.compression": true,
-    "browsercache.cssjs.expires": false,
+    "browsercache.cssjs.expires": true,
     "browsercache.cssjs.lifetime": 31536000,
-    "browsercache.cssjs.nocookies": false,
+    "browsercache.cssjs.nocookies": true,
     "browsercache.cssjs.cache.control": false,
     "browsercache.cssjs.cache.policy": "cache_public_maxage",
-    "browsercache.cssjs.etag": false,
+    "browsercache.cssjs.etag": true,
     "browsercache.cssjs.w3tc": false,
     "browsercache.cssjs.replace": false,
     "browsercache.cssjs.querystring": false,
@@ -443,17 +473,17 @@
     "browsercache.html.lifetime": 3600,
     "browsercache.html.cache.control": false,
     "browsercache.html.cache.policy": "cache_public_maxage",
-    "browsercache.html.etag": false,
+    "browsercache.html.etag": true,
     "browsercache.html.w3tc": false,
     "browsercache.html.replace": false,
     "browsercache.other.last_modified": true,
     "browsercache.other.compression": true,
-    "browsercache.other.expires": false,
+    "browsercache.other.expires": true,
     "browsercache.other.lifetime": 31536000,
-    "browsercache.other.nocookies": false,
+    "browsercache.other.nocookies": true,
     "browsercache.other.cache.control": false,
     "browsercache.other.cache.policy": "cache_public_maxage",
-    "browsercache.other.etag": false,
+    "browsercache.other.etag": true,
     "browsercache.other.w3tc": false,
     "browsercache.other.replace": false,
     "browsercache.other.querystring": false,
@@ -614,9 +644,8 @@
             ]
         }
     },
-    "common.edge": false,
     "common.support": "",
-    "common.track_usage": true,
+    "common.track_usage": false,
     "common.tweeted": false,
     "config.check": true,
     "config.path": "",
@@ -624,6 +653,7 @@
     "widget.latest_news.items": 5,
     "widget.pagespeed.enabled": true,
     "widget.pagespeed.key": "",
+    "widget.pagespeed.key.restrict.referrer": "",
     "widget.pagespeed.show_in_admin_bar": false,
     "timelimit.email_send": 180,
     "timelimit.varnish_purge": 300,
@@ -638,10 +668,14 @@
     "timelimit.domain_rename": 120,
     "timelimit.minify_recommendations": 600,
 <<<<<<< HEAD
+<<<<<<< HEAD
     "common.instance_id": 1712451246,
 =======
     "common.instance_id": 2063686490,
 >>>>>>> 73a4f7bbac4d2dc89e0baee389fd4a26fae0ae88
+=======
+    "common.instance_id": 437906502,
+>>>>>>> 97be800a67f15be73b6b6a81edfa08d5c942e8e1
     "common.force_master": true,
     "extensions.active": {
         "newrelic": "w3-total-cache\/Extension_NewRelic_Plugin.php",
