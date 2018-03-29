@@ -19,6 +19,14 @@ RUN mkdir -p /usr/src/php/ext/redis \
     && echo 'redis' >> /usr/src/php-available-exts \
     && docker-php-ext-install redis
 
+RUN set -ex && \
+    apk add --no-cache --virtual .memcached-deps zlib-dev libmemcached-dev cyrus-sasl-dev git && \
+    docker-php-source extract && \
+    git clone --branch php7 https://github.com/php-memcached-dev/php-memcached /usr/src/php/ext/memcached/ && \
+    docker-php-ext-install memcached && \
+    apk add --no-cache --virtual .memcached-runtime-deps libmemcached-libs && \
+    apk del .memcached-deps
+
 RUN mkdir /home/wordpress/
 RUN mkdir /media/cache && chmod 777 -R /media/cache
 RUN mkdir /media/uploads && chmod 777 -R /media/uploads
