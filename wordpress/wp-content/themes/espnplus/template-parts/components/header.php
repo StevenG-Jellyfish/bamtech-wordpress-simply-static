@@ -67,14 +67,14 @@ if ($component !== false) {
                     <nav class="main-navigation">
                         <div class="menu-main-menu-container">
                             <ul id="primary-menu" class="menu">
-                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-320">
+                                <li class="menu-item">
                                     <div class="espn-cta-container">
                                         <div class="parallelogram">
                                             <a href="<?php echo $header_cta_link;?>" class="btn btn-primary"><?php echo $header_cta_text;?></a>
                                         </div>
                                     </div>
                                 </li>
-                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-319">
+                                <li class="menu-item login-link">
                                     <a href="<?php echo $header_login_url;?>"><?php echo $header_login_text;?></a>
                                 </li>
                             </ul>
