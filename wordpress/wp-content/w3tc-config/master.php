@@ -1,4 +1,5 @@
-<?php exit; ?>{
+<?php $x=false; if($x===true){ ?>
+{
     "version": "0.9.5.4",
     "cluster.messagebus.debug": false,
     "cluster.messagebus.enabled": false,
@@ -669,3 +670,4 @@
         "engine": ""
     }
 }
+<?php } ?>
