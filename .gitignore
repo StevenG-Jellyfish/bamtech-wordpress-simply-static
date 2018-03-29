@@ -1,5 +1,6 @@
 !.gitkeep
 
+build.sh
 wordpress/wordpress.env
 db/db_data/
 wordpress/wp_content/
