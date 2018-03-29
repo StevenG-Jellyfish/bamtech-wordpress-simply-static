@@ -149,7 +149,7 @@ sub vcl_backend_response {
 
     unset beresp.http.Expires;
     unset beresp.http.Pragma;
-    unset beresp.http.Cache-Control
+    unset beresp.http.Cache-Control;
     unset beresp.http.set-cookie;
     unset resp.http.Age;
 
