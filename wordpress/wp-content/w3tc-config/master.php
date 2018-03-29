@@ -194,7 +194,7 @@
     "pgcache.prime.post.enabled": "0",
     "stats.enabled": "0",
     "minify.configuration_overloaded": false,
-    "minify.enabled": "1",
+    "minify.enabled": "0",
     "minify.auto": "1",
     "minify.debug": "0",
     "minify.engine": "memcached",
