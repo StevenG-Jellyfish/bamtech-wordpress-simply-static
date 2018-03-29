@@ -125,14 +125,12 @@ sub vcl_backend_response {
     }
 
 
+    if (bereq.http.Cookie ~ "wordpress_logged_in") {
+        set beresp.uncacheable = true;
+        return (deliver);
+    }
+
     if ( bereq.url ~ "/wp\-admin/admin\-ajax\.php" ){
-
-
-        if (bereq.http.Cookie ~ "wordpress_logged_in") {
-            set beresp.uncacheable = true;
-            return (deliver);
-        }
-
 
         unset beresp.http.Expires;
         unset beresp.http.Pragma;
@@ -147,11 +145,11 @@ sub vcl_backend_response {
 
     }
 
+    set beresp.http.magicmarker = "1";
     unset beresp.http.Expires;
     unset beresp.http.Pragma;
     unset beresp.http.Cache-Control;
     unset beresp.http.set-cookie;
-    unset resp.http.Age;
 
     # A TTL of 1h
     set beresp.ttl = 3600s;
@@ -164,24 +162,34 @@ sub vcl_backend_response {
 
 sub vcl_deliver {
 
+    
     if (resp.http.magicmarker) {
         unset resp.http.magicmarker;
+
         #set resp.http.Age = "0";
 
         # tell cdn to cache for 1 minute 
         # if set in vcl_backend_response then varnish will not cache the content
         # for longer than max-age
-        set beresp.http.Cache-Control = "public, max-age=60";
+        set resp.http.Cache-Control = "public, max-age=60";
     }
 
     if (obj.hits > 0) {
+
         set resp.http.X-Cache-Varnish = "cached";
+        set resp.http.X-Cache-Age = resp.http.Age;
+
     } else {
+
         set resp.http.x-Cache-Varnish = "uncached";
+
     }
 
     # Remove some headers: PHP version
     unset resp.http.X-Powered-By;
+
+    # remove age header
+    unset resp.http.Age;
 
     # Remove some headers: Apache version & OS
     unset resp.http.Server;
