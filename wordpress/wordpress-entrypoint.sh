@@ -109,6 +109,7 @@ EOPHP
     alias wp='wp --allow-root'
     " > ~/.bashrc
 
+: <<'COMMENT'
     PLUGINS=(
         all-meta-stats-yoast-seo-addon
         contact-form-7
@@ -131,7 +132,7 @@ EOPHP
             echo "[ WARNING ] Could not install $PLUGIN" && true
 
     done
-
+COMMENT
     #wp core update --allow-root
     #wp core update-db --allow-root
     #wp plugin update --all --allow-root

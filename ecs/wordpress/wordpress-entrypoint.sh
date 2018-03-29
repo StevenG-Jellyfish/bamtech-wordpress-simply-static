@@ -158,18 +158,21 @@ COMMENT
     #wp core update-db --allow-root
     #wp plugin update --all --allow-root
     #wp --info --allow-root
+
+    # Insert JSON master.php
+    echo "find and replace memcache variables master.php.."
+    sed -i 's/'"$OLDMEM"'/'"$MEM"'/' /var/www/html/wp-content/w3tc-config/master.php &&  chmod 444 /var/www/html/wp-content/w3tc-config/master.php 
+    sed -i '' 's;"pgcache.enabled": "0",;"pgcache.enabled": "1",;g' /var/www/html/wp-content/w3tc-config/master.php
+    sed -i '' 's;"minify.enabled": "0",;"minify.enabled": "1",;g' /var/www/html/wp-content/w3tc-config/master.php
+
+    # && chattr +i /var/www/html/wp-content/w3tc-config/master.php
+    wp plugin activate --allow-root sitepress-multilingual-cms
+    
+    # Symlinking directories
+    rm -rf /var/www/html/wp-content/uploads
+    ln -s /media/uploads /var/www/html/wp-content/
     wp core version --extra --allow-root
 
 fi
-
-
-wp plugin activate --allow-root sitepress-multilingual-cms
-rm -rf /var/www/html/wp-content/uploads
-ln -s /media/uploads /var/www/html/wp-content/
-
-# Insert JSON master.php
-echo "find and replace memcache variables master.php.."
-sed -i 's/'"$OLDMEM"'/'"$MEM"'/' /var/www/html/wp-content/w3tc-config/master.php &&  chmod 444 /var/www/html/wp-content/w3tc-config/master.php
-
 
 exec "$@"
