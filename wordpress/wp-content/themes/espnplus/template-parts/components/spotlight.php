@@ -31,6 +31,7 @@
             <p class="lead"><?php the_field('spotlight_main_text', $component, false);?></p>
             
             <?php if (!empty(get_field('spotlight_cta_link', $component))){?>
+            <?php $link=get_field('spotlight_cta_link', $component);?>
             <div class="espn-cta-container">
                 <div class="parallelogram">
                     
