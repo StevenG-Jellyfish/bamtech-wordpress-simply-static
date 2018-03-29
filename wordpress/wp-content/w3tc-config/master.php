@@ -96,7 +96,7 @@
     "objectcache.lifetime": 180,
     "objectcache.purge.all": false,
     "pgcache.configuration_overloaded": false,
-    "pgcache.enabled": "1",
+    "pgcache.enabled": "0",
     "pgcache.comment_cookie_ttl": "1800",
     "pgcache.debug": "0",
     "pgcache.engine": "memcached",
