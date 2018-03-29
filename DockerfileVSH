@@ -1,13 +1,13 @@
+
 FROM alpine:latest
 MAINTAINER "mohammed.mudhir@jellyfish.local "
 
 RUN apk --update add varnish bash && rm -rf /var/cache/apk/*
-RUN mkdir -p /mnt/env/
 
-COPY /ecs/varnish/varnish-entrypoint.sh /usr/local/bin/varnish-entrypoint.sh
-COPY /ecs/varnish/varnish.env /mnt/env/varnish.env
-COPY /ecs/varnish/default.vcl /etc/varnish/default.vcl
+ADD ecs/varnish/cfg /etc/varnish/cfg
+COPY ecs/varnish/varnish-entrypoint.sh /usr/local/bin/varnish-entrypoint.sh
+COPY ecs/varnish/default.vcl /etc/varnish/default.vcl
 
-EXPOSE 6108
 
+EXPOSE 80
 ENTRYPOINT ["varnish-entrypoint.sh"]
