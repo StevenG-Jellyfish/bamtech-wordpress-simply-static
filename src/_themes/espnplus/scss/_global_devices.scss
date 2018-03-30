@@ -51,15 +51,20 @@ section.devices-bar {
                 display: inline-block;
                 margin: 0 2.25rem;
                 text-align: center;
+               // border:1px solid #ccc;
                 @media (max-width: 420px) {
                    width:100%;
                  // clear:both;
                 }
                 
                 img {
-                    height: 2.625rem;                   
-                    max-width:140px;
-                    margin-bottom: .75rem;
+                    height: 2.625rem;
+                    width:auto;
+                    padding-bottom:.75rem;
+                    margin-left:auto;
+                    margin-right:auto;
+                    //display:inline-block;
+                    position:relative;
                 } // img
 
                 .device-copy {
