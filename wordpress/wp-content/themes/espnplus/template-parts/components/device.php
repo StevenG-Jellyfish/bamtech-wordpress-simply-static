@@ -51,12 +51,14 @@ if ($component !== false) {
             <?php foreach($section_ids as $section_id) {?>
                 
                 <div class="device">
-                
-                    <?php $image = get_field('device_image', $section_id);?>
-                    <img class="device-image" src="<?echo $image['sizes']['medium'];?>" alt="<?php echo the_field('device_text', $section_id,false);?>">
-                    <p class="device-copy"><?php echo the_field('device_text', $section_id,false);?></p>
-                    
-                </div>
+                    <div class="device-img">
+                        <?php $image = get_field('device_image', $section_id);?>
+                        <img class="device-image" src="<?echo $image['sizes']['medium'];?>" alt="<?php echo the_field('device_text', $section_id,false);?>">
+                    </div>
+                    <div class="device-copy">
+                        <?php echo the_field('device_text', $section_id,false);?>
+                    </div>
+                 </div>
 
             <?php } ?>
 
