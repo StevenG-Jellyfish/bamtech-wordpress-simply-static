@@ -2236,7 +2236,7 @@ section.devices-bar {
           border-top: 2px solid black;
           font-weight: 700;
           color: black;
-          max-width: 140px; }
+          min-width: 140px; }
           section.devices-bar .container .devices-container .device .device-copy span {
             display: block;
             margin: 0;
