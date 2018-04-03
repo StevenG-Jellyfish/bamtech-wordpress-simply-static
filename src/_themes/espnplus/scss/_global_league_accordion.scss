@@ -19,7 +19,7 @@ section.league-toc {
     .container {
         width: 100%;
         max-width: 100%;
-        margin: 3.375rem 0 3.375rem 0;
+        margin: 0 0 3.375rem 0;
         padding: 0 0 0 0;
         border-top: 1px solid $espn-accordion-txt-grey;
 
@@ -159,7 +159,7 @@ section.league-toc {
                 @media (max-width: 767px) { // mobile
                     &:nth-child(even),
                     &:nth-child(odd) {
-                        margin: .5rem 0;
+                      //  margin: .5rem 0;
                         padding: 0;
                         .card {
                             width:100%;
@@ -174,7 +174,7 @@ section.league-toc {
                     display: block;
                     width: 100%;
                     max-width: 100%;
-                    margin: 0 0 .5rem 0;
+                   // margin: 0 0 .5rem 0;
                     padding: 0;
                     text-align: center;
 
@@ -196,7 +196,7 @@ section.league-toc {
                 display: flex;
                 flex-direction: row;
                 flex-wrap: wrap;
-                margin: .5rem 0;
+             //   margin: .5rem 0;
                 padding: 0;
 
             } // .accordion-container
