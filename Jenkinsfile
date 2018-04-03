@@ -105,9 +105,8 @@ pipeline {
                           sh "echo ${workspace}"
                           sh "rm -rf *"
                         }               
-                   }
-             }
-        } 
+                }
+        }
         stage('DeployUat') {
             // Deploy stage agent selector
             agent {
