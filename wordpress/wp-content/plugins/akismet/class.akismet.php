@@ -30,6 +30,7 @@ class Akismet {
 
 		add_action( 'akismet_scheduled_delete', array( 'Akismet', 'delete_old_comments' ) );
 		add_action( 'akismet_scheduled_delete', array( 'Akismet', 'delete_old_comments_meta' ) );
+
 		add_action( 'akismet_schedule_cron_recheck', array( 'Akismet', 'cron_recheck' ) );
 
 		add_action( 'comment_form',  array( 'Akismet',  'add_comment_nonce' ), 1 );
@@ -37,6 +38,7 @@ class Akismet {
 		add_action( 'admin_head-edit-comments.php', array( 'Akismet', 'load_form_js' ) );
 		add_action( 'comment_form', array( 'Akismet', 'load_form_js' ) );
 		add_action( 'comment_form', array( 'Akismet', 'inject_ak_js' ) );
+
 
 		add_filter( 'comment_moderation_recipients', array( 'Akismet', 'disable_moderation_emails_if_unreachable' ), 1000, 2 );
 		add_filter( 'pre_comment_approved', array( 'Akismet', 'last_comment_status' ), 10, 2 );
@@ -347,6 +349,7 @@ class Akismet {
 
 			foreach ( $comment_ids as $comment_id ) {
 				do_action( 'delete_comment', $comment_id );
+
 			}
 
 			// Prepared as strings since comment_id is an unsigned BIGINT, and using %d will constrain the value to the maximum signed BIGINT.
@@ -368,7 +371,7 @@ class Akismet {
 
 		$interval = apply_filters( 'akismet_delete_commentmeta_interval', 15 );
 
-		# enfore a minimum of 1 day
+
 		$interval = absint( $interval );
 		if ( $interval < 1 )
 			$interval = 1;
@@ -383,6 +386,7 @@ class Akismet {
 
 			foreach ( $comment_ids as $comment_id ) {
 				delete_comment_meta( $comment_id, 'akismet_as_submitted' );
+
 			}
 
 			do_action( 'akismet_delete_commentmeta_batch', count( $comment_ids ) );
@@ -391,6 +395,7 @@ class Akismet {
 		if ( apply_filters( 'akismet_optimize_table', ( mt_rand(1, 5000) == 11), $wpdb->commentmeta ) ) // lucky number
 			$wpdb->query("OPTIMIZE TABLE {$wpdb->commentmeta}");
 	}
+
 
 	// how many approved comments does this author have?
 	public static function get_user_comments_approved( $user_id, $comment_author_email, $comment_author, $comment_author_url ) {
@@ -533,10 +538,6 @@ class Akismet {
 		if ( get_comment_meta( $comment->comment_ID, 'akismet_rechecking' ) )
 			return;
 		
-		global $current_user;
-		$reporter = '';
-		if ( is_object( $current_user ) )
-			$reporter = $current_user->user_login;
 
 		// Assumption alert:
 		// We want to submit comments to Akismet only when a moderator explicitly spams or approves it - not if the status
@@ -544,6 +545,7 @@ class Akismet {
 		// determine why the transition_comment_status action was triggered.  And there are several different ways by which
 		// to spam and unspam comments: bulk actions, ajax, links in moderation emails, the dashboard, and perhaps others.
 		// We'll assume that this is an explicit user action if certain POST/GET variables exist.
+
 		if ( ( isset( $_POST['status'] ) && in_array( $_POST['status'], array( 'spam', 'unspam' ) ) ) ||
 			 ( isset( $_POST['spam'] )   && (int) $_POST['spam'] == 1 ) ||
 			 ( isset( $_POST['unspam'] ) && (int) $_POST['unspam'] == 1 ) ||
@@ -551,6 +553,7 @@ class Akismet {
 			 ( isset( $_GET['action'] )  && in_array( $_GET['action'], array( 'spam', 'unspam', 'spamcomment', 'unspamcomment', ) ) ) ||
 			 ( isset( $_POST['action'] ) && in_array( $_POST['action'], array( 'editedcomment' ) ) ) ||
 			 ( isset( $_GET['for'] ) && ( 'jetpack' == $_GET['for'] ) ) // Moderation via WP.com notifications/WP app/etc.
+
 		 ) {
 			if ( $new_status == 'spam' && ( $old_status == 'approved' || $old_status == 'unapproved' || !$old_status ) ) {
 				return self::submit_spam_comment( $comment->comment_ID );
@@ -688,7 +691,9 @@ class Akismet {
 		foreach ( (array) $comment_errors as $comment_id ) {
 			// if the comment no longer exists, or is too old, remove the meta entry from the queue to avoid getting stuck
 			$comment = get_comment( $comment_id );
+
 			if ( !$comment || strtotime( $comment->comment_date_gmt ) < strtotime( "-15 days" ) ) {
+
 				delete_comment_meta( $comment_id, 'akismet_error' );
 				delete_comment_meta( $comment_id, 'akismet_delayed_moderation_email' );
 				continue;
@@ -1104,6 +1109,7 @@ class Akismet {
 		wp_enqueue_script( 'akismet-form' );
 	}
 	
+
 	public static function inject_ak_js( $fields ) {
 		echo '<p style="display: none;">';
 		echo '<input type="hidden" id="ak_js" name="ak_js" value="' . mt_rand( 0, 250 ) . '"/>';
@@ -1184,7 +1190,9 @@ p {
 	 * @static
 	 */
 	public static function plugin_deactivation( ) {
+
 		return self::deactivate_key( self::get_api_key() );
+
 	}
 	
 	/**
