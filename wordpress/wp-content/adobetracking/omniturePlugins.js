@@ -1,6 +1,4 @@
-define(function(){
-
-    function loadPlugins(s) {
+function loadPlugins(s) {
         /************************* PLUGINS FUNCTIONS ************************/
         /*
          * Plugin Utility
@@ -51,8 +49,5 @@ define(function(){
         //s = _loadMediaModule(s);
 
         return s;
-    }
-    return {
-        loadPlugins: loadPlugins
-    };
-});
+}  
+
