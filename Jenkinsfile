@@ -211,8 +211,9 @@ pipeline {
                     
                   always {
                         sh "echo ${workspace}"
-                        sh "rm -rf *"   
-                    }
-              }
-       }       
+                        sh "rm -rf *"
+                   }          
+               }
+          }    
+     }       
 }
