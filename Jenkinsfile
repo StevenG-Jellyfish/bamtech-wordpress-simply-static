@@ -101,8 +101,7 @@ pipeline {
                           message: "Image's ${WORDPRESS}, ${NGINX} and ${VARNISH} SUCCESSFULLY built, Please visit > (<${env.RUN_DISPLAY_URL}|Open>) for details"
                       
                   always {
-                      script {
-                          sh "pwd" 
+                          sh "echo ${workspace}" 
                         }        
                     }        
                 }
