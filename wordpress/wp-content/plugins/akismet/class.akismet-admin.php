@@ -92,10 +92,12 @@ class Akismet_Admin {
 
 	public static function load_menu() {
 		if ( class_exists( 'Jetpack' ) ) {
+
 			$hook = add_submenu_page( 'jetpack', __( 'Akismet' , 'akismet'), __( 'Akismet' , 'akismet'), 'manage_options', 'akismet-key-config', array( 'Akismet_Admin', 'display_page' ) );
 		}
 		else {
 			$hook = add_options_page( __('Akismet', 'akismet'), __('Akismet', 'akismet'), 'manage_options', 'akismet-key-config', array( 'Akismet_Admin', 'display_page' ) );
+
 		}
 		
 		if ( $hook ) {
@@ -725,9 +727,11 @@ class Akismet_Admin {
 		return self::check_server_connectivity( $cache_timeout );
 	}
 
+
 	public static function get_number_spam_waiting() {
 		global $wpdb;
 		return (int) $wpdb->get_var( "SELECT COUNT(*) FROM {$wpdb->commentmeta} WHERE meta_key = 'akismet_error'" );
+
 	}
 
 	public static function get_page_url( $page = 'config' ) {
@@ -814,7 +818,9 @@ class Akismet_Admin {
 	public static function display_spam_check_warning() {
 		Akismet::fix_scheduled_recheck();
 
+
 		if ( wp_next_scheduled('akismet_schedule_cron_recheck') > time() && self::get_number_spam_waiting() > 0 ) {
+
 			$link_text = apply_filters( 'akismet_spam_check_warning_link_text', sprintf( __( 'Please check your <a href="%s">Akismet configuration</a> and contact your web host if problems persist.', 'akismet'), esc_url( self::get_page_url() ) ) );
 			Akismet::view( 'notice', array( 'type' => 'spam-check', 'link_text' => $link_text ) );
 		}
@@ -1061,8 +1067,10 @@ class Akismet_Admin {
 		if ( !$xml->isError() ) {
 			$responses = $xml->getResponse();
 			if ( count( $responses ) > 1 ) {
+
 				$api_key = array_shift( $responses[0] );
 				$user_id = (int) array_shift( $responses[1] );
+
 				return compact( 'api_key', 'user_id' );
 			}
 		}
@@ -1100,4 +1108,6 @@ class Akismet_Admin {
 		
 		return $all_plugins;
 	}
+
 }
+

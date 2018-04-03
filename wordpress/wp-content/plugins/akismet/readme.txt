@@ -1,9 +1,11 @@
+
 === Akismet ===
 Contributors: matt, ryan, andy, mdawaffe, tellyworth, josephscott, lessbloat, eoigal, cfinke, automattic, jgs
 Tags: akismet, comments, spam, antispam, anti-spam, anti spam, comment moderation, comment spam, contact form spam, spam comments
 Requires at least: 4.0
 Tested up to: 4.8.1
 Stable tag: 4.0
+
 License: GPLv2 or later
 
 Akismet checks your comments and contact form submissions against our global database of spam to protect you and your site from malicious content.

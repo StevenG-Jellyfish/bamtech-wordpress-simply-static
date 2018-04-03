@@ -29,7 +29,8 @@ body {
         position: relative;
         display: inline-block;
         overflow: hidden;
-        width: 286px;
+       // width: 286px;
+        // width:400px;
         height: 48px;
         margin: 0 -10px 0 -25px;
         padding: 0 0 0 0;
@@ -45,14 +46,17 @@ body {
     } // .parallelogram
     .btn.btn-primary {
         font-family: PlayoffProCond-Medium, arial;
-        position: absolute;
-        display: inline-block;
+        //position: absolute;
+        position: relative;
+        // display: inline-block;
+        display: block;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        margin: 2px 0px 0px 6px;
-        padding: 0 0 0 0;
+        margin: 0px 0px 0px 6px;
+       // padding: 0 0 0 0;
+       padding: 0 1.75rem;
         background-color: transparent;
         border: none;
         -webkit-border-radius: 0px;
@@ -70,6 +74,9 @@ body {
         -webkit-transform: skew(45deg);
         -ms-transform: skew(45deg);
         transform: skew(45deg);
+        @media(max-width: 628px) {
+            font-size: .9rem;
+        }
     } //.btn-primary 
 } // .espn-cta-container
 @media (max-width: 767px) {
