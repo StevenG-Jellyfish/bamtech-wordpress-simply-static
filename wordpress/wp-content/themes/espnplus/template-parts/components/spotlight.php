@@ -13,6 +13,10 @@
  $component = get_field('component_spotlight', $page_id);
  
  if ($component !== false) {
+
+    // ADD tracking code to variable content
+    $temporal = get_field('spotlight_belowcta_text', $component,false);
+    $tracking_added = str_replace('">', '" onClick="var s=s_gi(\'wdgespncomdev\');s.linkTrackVars=\'\';s.tl(this,\'o\',\'Body - Terms & Conditions\')">', $temporal);
 ?>
 
    
@@ -35,13 +39,13 @@
             <div class="espn-cta-container">
                 <div class="parallelogram">
                     
-                    <a href="<?php echo $link['url'];?>" class="btn btn-primary espn-cta"><?php the_field('spotlight_cta_text', $component,false);?></a>
+                    <a href="<?php echo $link['url'];?>" class="btn btn-primary espn-cta" onClick="var s=s_gi('wdgespncomdev');s.linkTrackVars='';s.tl(this,'o','Body - CTA Free Trial')"><?php the_field('spotlight_cta_text', $component,false);?></a>
                     
                 </div>
             </div>
             <?php }?>
 
-            <p class="below-cta"><?php the_field('spotlight_belowcta_text', $component,false);?></p>
+            <p class="below-cta"><?php echo $tracking_added;?></p>
     	
         </div>
     	
