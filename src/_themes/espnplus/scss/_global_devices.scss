@@ -34,6 +34,9 @@ section.devices-bar {
             text-align: center;
             
         } // .devices-header
+        .device-small-text {
+            font-size: 1.1rem;
+        }
 
         @media (max-width: 767px) {
             .devices-header {
