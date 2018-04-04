@@ -100,9 +100,8 @@
         s_omni.contextData["league"] = "no league";
         s_omni.contextData["edition"] = "en-us";
 
-        var s_code=s_omni.t();if(s_code)document.write(s_code)//-->
-
-        
+        var s_code=s_omni.t();if(s_code)document.write(s_code);//-->
+ 
     </script>
 
 <!-- Google Tag Manager (noscript) -->
