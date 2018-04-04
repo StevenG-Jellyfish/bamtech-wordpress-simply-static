@@ -2205,6 +2205,8 @@ section.devices-bar {
       letter-spacing: 0.010rem;
       line-height: 2.750rem;
       text-align: center; }
+    section.devices-bar .container .device-small-text {
+      font-size: 1.1rem; }
     @media (max-width: 767px) {
       section.devices-bar .container .devices-header {
         font-size: 1.250rem;
