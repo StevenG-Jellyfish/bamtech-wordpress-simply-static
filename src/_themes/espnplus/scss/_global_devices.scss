@@ -35,6 +35,7 @@ section.devices-bar {
             
         } // .devices-header
         .device-small-text {
+            font-family: PlayoffProCond-Medium, arial;
             font-size: 1.1rem;
         }
 
@@ -43,6 +44,9 @@ section.devices-bar {
                 font-size: 1.250rem;
                 line-height: 1.375rem;
             } // .devices-header
+            .device-small-text {
+                font-size: .8rem;
+            }
         } // max-width: 767px
 
         .devices-container {
