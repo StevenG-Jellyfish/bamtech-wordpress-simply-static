@@ -44,7 +44,6 @@
     <script language="JavaScript" type="text/javascript" src="<?php echo get_home_url(); ?>/wp-content/adobetracking/VisitorAPI.js"></script>
     <script language="JavaScript" type="text/javascript" src="<?php echo get_home_url(); ?>/wp-content/adobetracking/omniturePlugins.js"></script>
     <script language="JavaScript" type="text/javascript" src="<?php echo get_home_url(); ?>/wp-content/adobetracking/AppMeasurement.js"></script>
-    <script language="JavaScript" type="text/javascript" src="<?php echo get_home_url(); ?>/wp-content/adobetracking/uuid.js"></script>
    
 
     <!-- End Adobe Tracking -->
