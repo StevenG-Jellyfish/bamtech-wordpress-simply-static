@@ -1,4 +1,33 @@
 /*
+ Configuration
+*/
+var s_omni = new AppMeasurement();
+s_omni.account="wdgespncomdev";
+
+s_omni.trackDownloadLinks = true;
+s_omni.trackExternalLinks = true;
+s_omni.trackInlineStats = true;
+s_omni.linkInternalFilters = "javascript:,espnplus.com,localhost";
+s_omni.linkLeaveQueryString = false;
+s_omni.linkTrackVars = "None";
+s_omni.linkTrackEvents = "None";
+s_omni.cookieDomainPeriods = "2";
+s_omni.usePlugins = false;
+s_omni.currencyCode = "USD";
+s_omni.visitorNamespace = "espn";
+s_omni.trackingServer = "w88.espn.com";
+s_omni.trackingServerSecure = "sw88.espn.com";
+s_omni.marketingCloudServer = "w88.espn.com";
+s_omni.marketingCloudServerSecure = "sw88.espn.com";
+
+window.visitor = new Visitor("EE0201AC512D2BE80A490D4C@AdobeOrg");
+window.visitor.trackingServer = s_omni.trackingServer;
+window.visitor.trackingServerSecure = s_omni.trackingServerSecure;
+s_omni.visitor = Visitor.getInstance("EE0201AC512D2BE80A490D4C@AdobeOrg");
+
+loadPlugins(s_omni);
+
+/*
  Start ActivityMap Module
 
  The following module enables ActivityMap tracking in Adobe Analytics. ActivityMap
@@ -8,7 +37,6 @@
  Additional documentation on how to configure ActivityMap is available at:
  https://marketing.adobe.com/resources/help/en_US/analytics/activitymap/getting-started-admins.html
 */
-/*
 function AppMeasurement_Module_ActivityMap(f){function g(a,d){var b,c,n;if(a&&d&&(b=e.c[d]||(e.c[d]=d.split(","))))for(n=0;n<b.length&&(c=b[n++]);)if(-1<a.indexOf(c))return null;p=1;return a}function q(a,d,b,c,e){var g,h;if(a.dataset&&(h=a.dataset[d]))g=h;else if(a.getAttribute)if(h=a.getAttribute("data-"+b))g=h;else if(h=a.getAttribute(b))g=h;if(!g&&f.useForcedLinkTracking&&e&&(g="",d=a.onclick?""+a.onclick:"")){b=d.indexOf(c);var l,k;if(0<=b){for(b+=10;b<d.length&&0<="= \t\r\n".indexOf(d.charAt(b));)b++;
 if(b<d.length){h=b;for(l=k=0;h<d.length&&(";"!=d.charAt(h)||l);)l?d.charAt(h)!=l||k?k="\\"==d.charAt(h)?!k:0:l=0:(l=d.charAt(h),'"'!=l&&"'"!=l&&(l=0)),h++;if(d=d.substring(b,h))a.e=new Function("s","var e;try{s.w."+c+"="+d+"}catch(e){}"),a.e(f)}}}return g||e&&f.w[c]}function r(a,d,b){var c;return(c=e[d](a,b))&&(p?(p=0,c):g(k(c),e[d+"Exclusions"]))}function s(a,d,b){var c;if(a&&!(1===(c=a.nodeType)&&(c=a.nodeName)&&(c=c.toUpperCase())&&t[c])&&(1===a.nodeType&&(c=a.nodeValue)&&(d[d.length]=c),b.a||
 b.t||b.s||!a.getAttribute||((c=a.getAttribute("alt"))?b.a=c:(c=a.getAttribute("title"))?b.t=c:"IMG"==(""+a.nodeName).toUpperCase()&&(c=a.getAttribute("src")||a.src)&&(b.s=c)),(c=a.childNodes)&&c.length))for(a=0;a<c.length;a++)s(c[a],d,b)}function k(a){if(null==a||void 0==a)return a;try{return a.replace(RegExp("^[\\s\\n\\f\\r\\t\t-\r \u00a0\u1680\u180e\u2000-\u200a\u2028\u2029\u205f\u3000\ufeff]+","mg"),"").replace(RegExp("[\\s\\n\\f\\r\\t\t-\r \u00a0\u1680\u180e\u2000-\u200a\u2028\u2029\u205f\u3000\ufeff]+$",
@@ -16,7 +44,6 @@ b.t||b.s||!a.getAttribute||((c=a.getAttribute("alt"))?b.a=c:(c=a.getAttribute("t
 255),c["a.activitymap.link"]=128<d.length?d.substring(0,128):d,c["a.activitymap.region"]=127<b.length?b.substring(0,127):b,c["a.activitymap.pageIDType"]=f.pageName?1:0)};e.link=function(a,d){var b;if(d)b=g(k(d),e.linkExclusions);else if((b=a)&&!(b=q(a,"sObjectId","s-object-id","s_objectID",1))){var c,f;(f=g(k(a.innerText||a.textContent),e.linkExclusions))||(s(a,c=[],b={a:void 0,t:void 0,s:void 0}),(f=g(k(c.join(""))))||(f=g(k(b.a?b.a:b.t?b.t:b.s?b.s:void 0)))||!(c=(c=a.tagName)&&c.toUpperCase?c.toUpperCase():
 "")||("INPUT"==c||"SUBMIT"==c&&a.value?f=g(k(a.value)):"IMAGE"==c&&a.src&&(f=g(k(a.src)))));b=f}return b};e.region=function(a){for(var d,b=e.regionIDAttribute||"id";a&&(a=a.parentNode);){if(d=q(a,b,b,b))return d;if("BODY"==a.nodeName)return"BODY"}}}
 /* End ActivityMap Module */
-*/
 /*
  ============== DO NOT ALTER ANYTHING BELOW THIS LINE ! ===============
 

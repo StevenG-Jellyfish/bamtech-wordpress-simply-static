@@ -2290,7 +2290,8 @@ section.terms-conditions {
   display: flex; }
   @media (max-width: 640px) {
     .link-container {
-      width: 100%; } }
+      width: 100%;
+      display: block; } }
 
 .espn-lang {
   min-width: 160px;
