@@ -3775,10 +3775,13 @@ Stub Name:  global_header.scss
 .site-header.center {
   text-align: center; }
   .site-header.center .site-branding {
-    text-align: center; }
+    text-align: center;
+    margin: 0 auto; }
     .site-header.center .site-branding img {
       margin: 28px auto;
       width: 104px; }
+    .site-header.center .site-branding a {
+      margin: 0 auto; }
     @media (max-width: 580px) {
       .site-header.center .site-branding {
         display: flex;
