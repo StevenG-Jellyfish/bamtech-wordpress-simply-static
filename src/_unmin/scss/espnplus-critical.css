@@ -3716,6 +3716,10 @@ body {
   .main-navigation .espn-cta-container .btn.btn-primary {
     font-size: .8rem; } }
 
+@media (max-width: 380px) {
+  .main-navigation .espn-cta-container .btn.btn-primary {
+    font-size: .7rem; } }
+
 @media (max-width: 320px) {
   .main-navigation .espn-cta-container .btn.btn-primary {
     font-size: .6rem; } }
@@ -4011,7 +4015,8 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
         font-family: PlayoffProCond-Medium, arial;
         font-size: 1.500rem;
         font-weight: 700;
-        line-height: 1.750rem; } }
+        line-height: 1.750rem;
+        padding: 0 2rem 0 2rem; } }
     .jumbotron p.below-cta {
       font-family: PlayoffProCond-Medium, arial;
       font-size: 1.250rem; }

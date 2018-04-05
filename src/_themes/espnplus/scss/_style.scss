@@ -87,6 +87,11 @@ body {
     font-size: .8rem;
     }
 }
+@media(max-width: 380px) {
+    .main-navigation .espn-cta-container .btn.btn-primary {
+    font-size: .7rem;
+    }
+}
 @media(max-width: 320px) {
     .main-navigation .espn-cta-container .btn.btn-primary {
     font-size: .6rem;
