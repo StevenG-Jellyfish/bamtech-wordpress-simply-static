@@ -39,6 +39,9 @@ section.section {
 
       p {
         text-align: left;
+        @media (max-width: 767px) { 
+          text-align: center;
+        }
       }
 
       .featurette-heading {

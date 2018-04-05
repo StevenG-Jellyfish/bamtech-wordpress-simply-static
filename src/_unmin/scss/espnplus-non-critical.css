@@ -2204,7 +2204,8 @@ section.devices-bar {
       font-weight: 700;
       letter-spacing: 0.010rem;
       line-height: 2.750rem;
-      text-align: center; }
+      text-align: center;
+      padding: 0 2rem 0 2rem; }
     section.devices-bar .container .device-small-text {
       font-family: PlayoffProCond-Medium, arial;
       font-size: 1.1rem; }
@@ -2223,10 +2224,10 @@ section.devices-bar {
       margin: 0 auto; }
       section.devices-bar .container .devices-container .device {
         align-items: center;
-        margin-bottom: 2.25rem;
-        margin-top: 2.25rem;
-        padding-left: 1rem;
-        padding-right: 1rem;
+        margin-bottom: 2rem;
+        margin-top: 2rem;
+        padding-left: .5rem;
+        padding-right: .5rem;
         text-align: center; }
         section.devices-bar .container .devices-container .device .device-img {
           margin: 0 auto;
