@@ -99,6 +99,9 @@ body.error404.custom-background  {
     margin:0 auto;
 }
 .error404 .page-content .main-404-img {
-    max-width:716px;
+    max-width:840px;
     width:100%;
+   @media (max-width: 480px) { 
+        max-width:420px;
+    }
 }

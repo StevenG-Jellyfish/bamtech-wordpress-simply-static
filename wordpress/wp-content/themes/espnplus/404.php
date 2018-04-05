@@ -24,7 +24,10 @@ get_header();
 						<div class="">The page you are looking for can't be found. Please <a href="<?php echo get_site_url(); ?>">click here</a> to return to the homepage.</div>
 					</div>
 					<div class="error404-divider"><div class="divider"></div></div>
-					<img class="main-404-img" src="<?php bloginfo('template_url'); ?>/imgs/404-img.png" alt="404">
+					<picture>
+						<source media="(max-width: 480px)" srcset="<?php bloginfo('template_url'); ?>/imgs/hero-1280-generic.png">
+						<img class="main-404-img" src="<?php bloginfo('template_url'); ?>/imgs/hero-1280-generic-2x.png" alt="404">
+					</picture>
 				</div><!-- .page-content -->
 			</section><!-- .error-404 -->
 
