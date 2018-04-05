@@ -3712,6 +3712,14 @@ body {
       .espn-cta-container .btn.btn-primary {
         font-size: .9rem; } }
 
+@media (max-width: 420px) {
+  .main-navigation .espn-cta-container .btn.btn-primary {
+    font-size: .8rem; } }
+
+@media (max-width: 320px) {
+  .main-navigation .espn-cta-container .btn.btn-primary {
+    font-size: .6rem; } }
+
 @media (max-width: 767px) {
   .espn-cta-container {
     margin: 1.5rem auto .750rem auto; } }
@@ -3809,7 +3817,8 @@ Stub Name:  global_header.scss
   justify-content: flex-end; }
   .menu .menu-item {
     height: 48px;
-    font-family: PlayoffProCond-MediumItalic, arial; }
+    font-family: PlayoffProCond-MediumItalic, arial;
+    font-size: 1.0rem; }
   .menu .menu-item a:link,
   .menu .menu-item a:visited {
     margin-top: 10px;

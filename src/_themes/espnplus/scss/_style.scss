@@ -77,13 +77,27 @@ body {
         @media(max-width: 628px) {
             font-size: .9rem;
         }
+        // @media(max-width: 400px) {
+        //     font-size: .72rem;
+        // }
     } //.btn-primary 
 } // .espn-cta-container
+@media(max-width: 420px) {
+    .main-navigation .espn-cta-container .btn.btn-primary {
+    font-size: .8rem;
+    }
+}
+@media(max-width: 320px) {
+    .main-navigation .espn-cta-container .btn.btn-primary {
+    font-size: .6rem;
+    }
+}
 @media (max-width: 767px) {
     .espn-cta-container {
         margin: 1.5rem auto .750rem auto;
     } // .espn-cta-container
 } // max-width: 767px
+
 
 //
 .btn {
