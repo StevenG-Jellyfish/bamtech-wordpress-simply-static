@@ -4062,6 +4062,9 @@ section.section {
       text-align: left; }
       section.section .row.flexbox .copy-container p {
         text-align: left; }
+        @media (max-width: 767px) {
+          section.section .row.flexbox .copy-container p {
+            text-align: center; } }
       section.section .row.flexbox .copy-container .featurette-heading {
         font-family: PlayoffProCond-Medium, arial;
         font-size: 2.000rem;
