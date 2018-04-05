@@ -4291,3 +4291,35 @@ section.section {
   width: auto;
   z-index: 100000;
   /* Above WP toolbar. */ }
+
+body.error404.custom-background {
+  background-color: #fff;
+  background: #fff; }
+
+.error-404 {
+  margin-top: 2rem;
+  display: inline-block; }
+
+.error404 .page-title {
+  visibility: hidden; }
+
+.error404 .page-content .error-msg {
+  margin: 1.2rem 0 1.2rem 0;
+  font-family: PlayoffProCond-Medium, arial; }
+  .error404 .page-content .error-msg a:link, .error404 .page-content .error-msg a:active, .error404 .page-content .error-msg a:visited, .error404 .page-content .error-msg a:hover {
+    color: black;
+    text-decoration: underline;
+    font-weight: 900; }
+
+.error404-divider {
+  height: 6px;
+  display: block;
+  line-height: 0;
+  margin-bottom: 1rem; }
+
+.error404-divider .divider {
+  display: inline-block;
+  width: 60px;
+  height: 4px;
+  background: #f9b300;
+  margin: 0 auto; }
