@@ -16,7 +16,7 @@
 
     // ADD tracking code to variable content
     $temporal = get_field('spotlight_belowcta_text', $component,false);
-    $tracking_added = str_replace('">', '" onClick="var s=s_gi(\'wdgespncomdev\');s.linkTrackVars=\'\';s.tl(this,\'o\',\'Body - Terms & Conditions\')">', $temporal);
+    $tracking_added = str_replace('">', '" id="spotlight_terms">', $temporal);
 ?>
 
    
@@ -39,7 +39,7 @@
             <div class="espn-cta-container">
                 <div class="parallelogram">
                     
-                    <a href="<?php echo $link['url'];?>" class="btn btn-primary espn-cta" onClick="var s=s_gi('wdgespncomdev');s.linkTrackVars='';s.tl(this,'o','Body - CTA Free Trial')"><?php the_field('spotlight_cta_text', $component,false);?></a>
+                    <a id="spotlight_cta" href="<?php echo $link['url'];?>" class="btn btn-primary espn-cta" ><?php the_field('spotlight_cta_text', $component,false);?></a>
                     
                 </div>
             </div>

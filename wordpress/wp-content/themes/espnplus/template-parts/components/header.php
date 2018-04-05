@@ -70,12 +70,12 @@ if ($component !== false) {
                                 <li class="menu-item">
                                     <div class="espn-cta-container">
                                         <div class="parallelogram">
-                                            <a href="<?php echo $header_cta_link;?>" class="btn btn-primary" onClick="var s=s_gi('wdgespncomdev');s.linkTrackVars='';s.tl(this,'o','Header - CTA Free Trial')"><?php echo $header_cta_text;?></a>
+                                            <a id="header_cta" href="<?php echo $header_cta_link;?>" class="btn btn-primary" ><?php echo $header_cta_text;?></a>
                                         </div>
                                     </div>
                                 </li>
                                 <li class="menu-item login-link">
-                                    <a href="<?php echo $header_login_url;?>" onClick="var s=s_gi('wdgespncomdev');s.linkTrackVars='';s.tl(this,'o','Header - Login')"><?php echo $header_login_text;?></a>
+                                    <a id="header_login" href="<?php echo $header_login_url;?>" ><?php echo $header_login_text;?></a>
                                 </li>
                             </ul>
                         </div> 
