@@ -2219,7 +2219,6 @@ section.devices-bar {
       flex-wrap: wrap;
       flex-direction: row;
       justify-content: space-around;
-      max-width: 880px;
       margin: 0 auto; }
       section.devices-bar .container .devices-container .device {
         align-items: center;
@@ -2299,11 +2298,13 @@ section.terms-conditions {
       display: block; } }
 
 .espn-lang {
+  display: flex;
   min-width: 160px;
   width: 30%; }
   @media (max-width: 640px) {
     .espn-lang {
-      width: 100%; } }
+      width: 100%;
+      display: block; } }
   .espn-lang .logo-langselect {
     width: 140px;
     margin: 0 auto;
