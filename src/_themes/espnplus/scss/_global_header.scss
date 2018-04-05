@@ -68,10 +68,14 @@ Stub Name:  global_header.scss
     text-align: center;
     .site-branding {
         text-align: center;
+        margin:0 auto;
         img {
             margin:28px auto;
             width: 104px;
           //  margin-top: 28px;
+        }
+        a {
+            margin:0 auto;
         }
         @media (max-width: 580px) {
             display:flex;

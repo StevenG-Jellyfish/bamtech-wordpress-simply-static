@@ -8,6 +8,17 @@
  */
 get_header();
 ?>
+    <header id="masthead" class="">
+        <div class="headerbox">
+                <div class="site-header center">
+                    <div class="site-branding">
+					<?php the_custom_logo() ?>
+                        <!-- <img src="the_custom_logo()" alt="ESPN+"> -->
+                    </div> 
+                </div>
+                <!-- </div> -->
+        </div>
+    </header>
 	<div id="page" class="content-area 404-page site">
 		<main id="main" class="site-main">
 
