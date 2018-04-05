@@ -9,10 +9,12 @@
     }
 }
 .espn-lang {
+    display:flex;
     min-width:160px;
    width:30%;
     @media (max-width: 640px) {
         width:100%;
+        display:block;
     }
     .logo-langselect {
         width:140px;
