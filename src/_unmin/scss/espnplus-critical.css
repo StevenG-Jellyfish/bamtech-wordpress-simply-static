@@ -4305,7 +4305,8 @@ body.error404.custom-background {
 
 .error404 .page-content .error-msg {
   margin: 1.2rem 0 1.2rem 0;
-  font-family: PlayoffProCond-Medium, arial; }
+  font-family: PlayoffProCond-Medium, arial;
+  padding: 0 1rem 0 1rem; }
   .error404 .page-content .error-msg a:link, .error404 .page-content .error-msg a:active, .error404 .page-content .error-msg a:visited, .error404 .page-content .error-msg a:hover {
     color: black;
     text-decoration: underline;
@@ -4323,3 +4324,7 @@ body.error404.custom-background {
   height: 4px;
   background: #f9b300;
   margin: 0 auto; }
+
+.error404 .page-content .main-404-img {
+  max-width: 716px;
+  width: 100%; }
