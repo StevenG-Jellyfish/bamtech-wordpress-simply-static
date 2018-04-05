@@ -18,6 +18,78 @@
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
+	if (window.jQuery) {  
+		$(function() {
+			$("#header_cta").on('click',function(e){
+				
+				e.preventDefault();
+				var target = $(this).attr('href');
+				try {
+
+					var s=s_gi('wdgespncomdev');
+					s.linkTrackVars='';
+					s.tl(this,'o','Header - CTA Free Trial');
+				
+				}catch(err){}
+
+				window.location.href = target;
+
+
+			})
+
+			$("#header_login").on('click',function(e){
+
+				e.preventDefault();
+				var target = $(this).attr('href');
+
+				try {
+
+					var s=s_gi('wdgespncomdev');
+					s.linkTrackVars='';
+					s.tl(this,'o','Header - Login');
+				
+				}catch(err){}
+
+				window.location.href = target;
+			})
+
+			$("#spotlight_cta").on('click',function(e){
+
+				e.preventDefault();
+				var target = $(this).attr('href');
+
+				try {
+
+					var s=s_gi('wdgespncomdev');
+					s.linkTrackVars='';
+					s.tl(this,'o','Body - CTA Free Trial');
+				
+				}catch(err){}
+
+				window.location.href = target;
+			})
+
+			$("#spotlight_terms").on('click',function(e){
+
+				e.preventDefault();
+				var target = $(this).attr('href');
+
+				try {
+
+					var s=s_gi('wdgespncomdev');
+					s.linkTrackVars='';
+					s.tl(this,'o','Body - Terms & Conditions');
+				
+				}catch(err){}
+
+				window.location.href = target;
+			})
+
+		});
+	}
+	
+</script>
+<script>
     !function(e){"use strict";
     var n=function(n,t,o){function i(e){return f.body?e():void setTimeout(function(){i(e)})}var d,r,a,l,f=e.document,s=f.createElement("link"),u=o||"all";
     return t?d=t:(r=(f.body||f.getElementsByTagName("head")[0]).childNodes,d=r[r.length-1]),a=f.styleSheets,s.rel="stylesheet",s.href=n,s.media="only x",i(function(){d.parentNode.insertBefore(s,t?d:d.nextSibling)}),l=function(e){for(var n=s.href,t=a.length;t--;)if(a[t].href===n)return e();

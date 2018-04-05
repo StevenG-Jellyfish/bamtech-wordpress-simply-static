@@ -41,9 +41,7 @@
 	<!-- End Google Tag Manager -->
 
     <!-- Adobe Tracking -->
-    <script language="JavaScript" type="text/javascript" src="<?php echo get_home_url(); ?>/wp-content/adobetracking/VisitorAPI.js"></script>
-    <script language="JavaScript" type="text/javascript" src="<?php echo get_home_url(); ?>/wp-content/adobetracking/omniturePlugins.js"></script>
-    <script language="JavaScript" type="text/javascript" src="<?php echo get_home_url(); ?>/wp-content/adobetracking/AppMeasurement.js"></script>
+    <script language="JavaScript" type="text/javascript" src="<?php echo get_home_url(); ?>/wp-content/adobetracking/adobetrackingcodes.js"></script>
    
 
     <!-- End Adobe Tracking -->
@@ -100,7 +98,14 @@
         s_omni.contextData["league"] = "no league";
         s_omni.contextData["edition"] = "en-us";
 
-        var s_code=s_omni.t();if(s_code)document.write(s_code);//-->
+        var s_code=s_omni.t();if(s_code)document.write(s_code);
+
+
+        
+
+        //-->
+
+
  
     </script>
 
