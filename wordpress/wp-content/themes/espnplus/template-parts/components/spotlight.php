@@ -14,7 +14,7 @@
  
  if ($component !== false) {
 
-    // ADD tracking code to variable content
+    // ADD tracking code to variable content with a single a href tag
     $temporal = get_field('spotlight_belowcta_text', $component,false);
     $tracking_added = str_replace('">', '" id="spotlight_terms">', $temporal);
 ?>
