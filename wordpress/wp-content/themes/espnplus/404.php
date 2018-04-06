@@ -22,11 +22,11 @@ get_header();
 		<main id="main" class="site-main">
 
 			<section class="error-404 not-found">
-				<header class="page-header">
+				<div class="page-header">
 					<h1 class="page-title">
 						<?php esc_html_e( 'Oops! That page can&rsquo;t be found. 404', 'espnplus' ); ?>
 					</h1>
-				</header>
+</div>
 
 				<div class="page-content">
 					<img src="<?php bloginfo('template_url'); ?>/imgs/404.png" alt="404">
