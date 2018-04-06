@@ -15,6 +15,7 @@ if (empty($page_id)) {
 *  Assign repeater field to $component variable
 */ 
 $component = get_field('component_device', $page_id);
+$device_header = get_field('component_device_header', $page_id);
 
 /* 
 *  Verify if repeater value is empty
@@ -43,19 +44,21 @@ if ($component !== false) {
     <section class="devices-bar">
         <div class="container">
             <h3 class="devices-header">
-                 <?php echo  __( 'Available on All Your Favorite Supported Devices', 'espnplus' ); ?>
+                 <?php echo  $device_header; ?>
             </h3>
             <div class="devices-container">  
 
             <?php foreach($section_ids as $section_id) {?>
                 
                 <div class="device">
-                
-                    <?php $image = get_field('device_image', $section_id);?>
-                    <img class="device-image" src="<?echo $image['sizes']['medium'];?>" alt="<?php echo the_field('device_text', $section_id,false);?>">
-                    <p class="device-copy"><?php echo the_field('device_text', $section_id,false);?></p>
-                    
-                </div>
+                    <div class="device-img">
+                        <?php $image = get_field('device_image', $section_id);?>
+                        <img class="device-image" src="<?echo $image['sizes']['medium'];?>" alt="<?php echo the_field('device_text', $section_id,false);?>">
+                    </div>
+                    <div class="device-copy">
+                        <?php echo the_field('device_text', $section_id,false);?>
+                    </div>
+                 </div>
 
             <?php } ?>
 

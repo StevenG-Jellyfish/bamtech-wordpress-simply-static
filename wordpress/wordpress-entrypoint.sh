@@ -109,23 +109,18 @@ EOPHP
     alias wp='wp --allow-root'
     " > ~/.bashrc
 
+: <<'COMMENT'
     PLUGINS=(
         all-meta-stats-yoast-seo-addon
-        better-amp
-        busted
         contact-form-7
         duplicate-post
-        glue-for-yoast-seo-amp
         google-analytics-for-wordpress
         imsanity
         meta-box-yoast-seo
         responsify-wp
         w3-total-cache
         wordpress-seo
-        wp-statistics
-        wp-smushit
-        velvet-blues-update-urls
-        
+        wp-statistics        
     )
 
     # Loop the the plugins
@@ -137,7 +132,7 @@ EOPHP
             echo "[ WARNING ] Could not install $PLUGIN" && true
 
     done
-
+COMMENT
     #wp core update --allow-root
     #wp core update-db --allow-root
     #wp plugin update --all --allow-root

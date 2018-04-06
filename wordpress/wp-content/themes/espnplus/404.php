@@ -6,55 +6,43 @@
  *
  * @package espnplus
  */
-
 get_header();
 ?>
-
-	<div id="primary" class="content-area">
+    <header id="masthead" class="">
+        <div class="headerbox">
+                <div class="site-header center">
+                    <div class="site-branding">
+					<?php the_custom_logo() ?> 
+                    </div> 
+                </div>
+               
+        </div>
+    </header>
+	<div id="page" class="content-area 404-page site">
 		<main id="main" class="site-main">
 
 			<section class="error-404 not-found">
 				<header class="page-header">
-					<h1 class="page-title"><?php esc_html_e( 'Oops! That page can&rsquo;t be found.', 'espnplus' ); ?></h1>
-				</header><!-- .page-header -->
+					<h1 class="page-title">
+						<?php esc_html_e( 'Oops! That page can&rsquo;t be found. 404', 'espnplus' ); ?>
+					</h1>
+				</header>
 
 				<div class="page-content">
-					<p><?php esc_html_e( 'It looks like nothing was found at this location. Maybe try one of the links below or a search?', 'espnplus' ); ?></p>
+					<img src="<?php bloginfo('template_url'); ?>/imgs/404.png" alt="404">
+					<div class="error-msg">
+						<div class="">The page you are looking for can't be found. Please <a href="<?php echo get_site_url(); ?>">click here</a> to return to the homepage.</div>
+					</div>
+					<div class="error404-divider"><div class="divider"></div></div>
+					<picture>
+						<source media="(max-width: 480px)" srcset="<?php bloginfo('template_url'); ?>/imgs/hero-1280-generic.png">
+						<img class="main-404-img" src="<?php bloginfo('template_url'); ?>/imgs/hero-1280-generic-2x.png" alt="404">
+					</picture>
+				</div>
+			</section>
 
-					<?php
-					get_search_form();
-
-					the_widget( 'WP_Widget_Recent_Posts' );
-					?>
-
-					<div class="widget widget_categories">
-						<h2 class="widget-title"><?php esc_html_e( 'Most Used Categories', 'espnplus' ); ?></h2>
-						<ul>
-							<?php
-							wp_list_categories( array(
-								'orderby'    => 'count',
-								'order'      => 'DESC',
-								'show_count' => 1,
-								'title_li'   => '',
-								'number'     => 10,
-							) );
-							?>
-						</ul>
-					</div><!-- .widget -->
-
-					<?php
-					/* translators: %1$s: smiley */
-					$espnplus_archive_content = '<p>' . sprintf( esc_html__( 'Try looking in the monthly archives. %1$s', 'espnplus' ), convert_smilies( ':)' ) ) . '</p>';
-					the_widget( 'WP_Widget_Archives', 'dropdown=1', "after_title=</h2>$espnplus_archive_content" );
-
-					the_widget( 'WP_Widget_Tag_Cloud' );
-					?>
-
-				</div><!-- .page-content -->
-			</section><!-- .error-404 -->
-
-		</main><!-- #main -->
-	</div><!-- #primary -->
+		</main>
+	</div>
 
 <?php
 get_footer();

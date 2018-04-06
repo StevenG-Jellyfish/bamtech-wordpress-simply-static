@@ -15,8 +15,8 @@ if(get_field('component_text_and_media')){
 get_header();
 get_template_part('template-parts/components/header');
 get_template_part('template-parts/components/spotlight');
-get_template_part('template-parts/components/section');
 get_template_part('template-parts/components/device');
+get_template_part('template-parts/components/section');
 get_template_part('template-parts/components/toc');
 get_template_part('template-parts/components/footer-links');
 get_template_part('template-parts/components/league-accordion');

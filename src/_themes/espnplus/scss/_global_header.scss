@@ -8,8 +8,8 @@ Stub Name:  global_header.scss
     z-index: 16777270;
     display: inline-block;
     text-align: center;
-
 }
+
 #masthead-stick {
     width: 100%;
     z-index: 16777271;
@@ -25,7 +25,8 @@ Stub Name:  global_header.scss
     display: inline-block;
     // outline: 1px solid #ccc;
     // float: left;
-    flex: 1 100%;
+    // flex: 1 100%;
+    width:106px;
     @media (max-width: 580px) {
         display:none;
         flex:none;
@@ -39,51 +40,71 @@ Stub Name:  global_header.scss
     width: 100%;
     max-width: 1280px;
     height: 77px;
+    text-align:center;
 }
 
 .site-header {
-    // border: 1px solid #ccc;
     height: 77px;
     text-align: left;
-    // background: white;
-    //justify-content: flex-start | flex-end;
     display: -webkit-box;
     display: -moz-box;
     display: -ms-flexbox;
     display: -webkit-flex;
     display: flex;
     justify-content: space-between;
+    width:90%;
+    margin:0 auto;
 
-    // @media (max-width: 640px) {
-    //     justify-content: center;
-    // }
-    // a img {
-    //     max-height: 20px;
-    //     width: 104px;
-    //     margin-top: 28px;
-    //     margin-left: 75px;
-    // }
-    img {
+    .site-branding img {
         max-height: 20px;
         width: 104px;
         margin-top: 28px;
-        margin-left: 75px;
+       // margin-left: 60px;
+       margin-left:0;
+    }
+}
+.site-header.center {
+   // height: 77px;
+    text-align: center;
+    .site-branding {
+        text-align: center;
+        margin:0 auto;
+        img {
+            margin:28px auto;
+            width: 104px;
+          //  margin-top: 28px;
+        }
+        a {
+            margin:0 auto;
+        }
+        @media (max-width: 580px) {
+            display:flex;
+            flex: 1 100%;
+        }
     }
 }
 
 .main-navigation {
     display: inline-block;
     height: 77px;
-    flex: 1 100%;
-    ul {
+    margin-top:16px;
+    height:58px;
+   // flex: 1 100%;
+  // width:80%;
+    ul.menu {
         padding:0px;
+        margin:0;
+    }
+    @media (max-width: 580px) {
+        width:100%;
     }
 }
 .menu {
     margin-top: 14px;
     list-style: none;
     margin-bottom: 0;
-    margin-right: 55px;
+   // margin-right: 60px;
+    margin-right:0;
     display: flex;
     flex-direction: row;
     // border:1px solid #ccc;
@@ -91,6 +112,7 @@ Stub Name:  global_header.scss
     .menu-item {
         height: 48px;
         font-family: PlayoffProCond-MediumItalic, arial;
+        font-size:1.0rem;
         // border:1px solid #ccc;
     }
     .menu-item a:link,
@@ -101,19 +123,26 @@ Stub Name:  global_header.scss
     }
     .menu-item a:active,
     .menu-item a:hover, {
-        color: white;
+       // color: white;
         text-decoration: underline;
     }
     .menu-item:nth-child(2) {
-        width:42px;
-        margin-left:38px;
+        // width:42px;
+        margin-left:24px;
+        margin-right:0;
+        @media (max-width: 580px) {
+          //  margin-right:24px;
+            margin-left:0;
+        }
     }
     @media (max-width: 580px) {
         flex-direction: row-reverse;
         margin-right: 20px;
         margin-left: 20px;
+        justify-content: space-between;
         .menu-item {
-            flex:1 100%;
+            align-self: stretch;
+           // flex:1 100%;
             margin:0;
         }
         .menu-item:nth-child(2) {
@@ -122,7 +151,7 @@ Stub Name:  global_header.scss
     }
 
     @media (max-width: 480px) {
-        flex-direction: row-reverse;
+       // flex-direction: row-reverse;
         margin-right: 10px;
         margin-left: 10px;
     }

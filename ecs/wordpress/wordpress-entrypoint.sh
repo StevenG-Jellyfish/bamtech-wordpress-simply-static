@@ -118,6 +118,10 @@ EOPHP
     alias wp='wp --allow-root'
     " > ~/.bashrc
 
+
+
+# Disable this code temperarily
+: <<'COMMENT'
     PLUGINS=(
         all-meta-stats-yoast-seo-addon
         better-amp
@@ -146,23 +150,31 @@ EOPHP
             echo "[ WARNING ] Could not install $PLUGIN" && true
 
     done
+COMMENT
+
+
 
     #wp core update --allow-root
     #wp core update-db --allow-root
     #wp plugin update --all --allow-root
     #wp --info --allow-root
+
+    # Insert JSON master.php
+    echo "find and replace memcache variables master.php.."
+    sed -i 's/'"$OLDMEM"'/'"$MEM"'/' /var/www/html/wp-content/w3tc-config/master.php &&  chmod 444 /var/www/html/wp-content/w3tc-config/master.php 
+    sed -i 's;"pgcache.enabled": false,;"pgcache.enabled": true,;g' /var/www/html/wp-content/w3tc-config/master.php
+    sed -i 's;"minify.enabled": false,;"minify.enabled": true,;g' /var/www/html/wp-content/w3tc-config/master.php
+    sed -i 's;"pgcache.engine": "file_generic",;"pgcache.engine": "memcached",;g' /var/www/html/wp-content/w3tc-config/master.php
+    sed -i 's;"minify.engine": "file";"minify.engine": "memcached";g' /var/www/html/wp-content/w3tc-config/master.php
+
+    # && chattr +i /var/www/html/wp-content/w3tc-config/master.php
+    wp plugin activate --allow-root sitepress-multilingual-cms
+    
+    # Symlinking directories
+    rm -rf /var/www/html/wp-content/uploads
+    ln -s /media/uploads /var/www/html/wp-content/
     wp core version --extra --allow-root
 
 fi
-
-
-wp plugin activate --allow-root sitepress-multilingual-cms
-rm -rf /var/www/html/wp-content/uploads
-ln -s /media/uploads /var/www/html/wp-content/
-
-# Insert JSON master.php
-echo "find and replace memcache variables master.php.."
-sed -i 's/'"$OLDMEM"'/'"$MEM"'/' /var/www/html/wp-content/w3tc-config/master.php &&  chmod 444 /var/www/html/wp-content/w3tc-config/master.php
-
 
 exec "$@"
