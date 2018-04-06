@@ -32,13 +32,13 @@
     ga('require', 'GTM-PLN6GMP');
     </script>
 
-	<!-- Google Tag Manager -->
-	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-	})(window,document,'script','dataLayer','GTM-M97M4JF');</script>
-	<!-- End Google Tag Manager -->
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-M97M4JF');</script>
+    <!-- End Google Tag Manager -->
 
     <!-- Adobe Tracking -->
     <script language="JavaScript" type="text/javascript" src="<?php echo get_home_url(); ?>/wp-content/adobetracking/adobetrackingcodes.js"></script>
@@ -59,47 +59,7 @@
 </head>
 <body <?php body_class(); ?>>
 
-     <script language="JavaScript" type="text/javascript"><!--
-   
-        /* You may give each page an identifying name, server, and channel on
-        the next lines. */
-        s_omni.pageName="espnplus:marketing:paywall";
-        s_omni.server="";
-        s_omni.channel="";
-        s_omni.pageType="";
-        s_omni.prop1="";
-        s_omni.prop2="";
-        s_omni.prop3="";
-        s_omni.prop4="";
-        s_omni.prop5="";
-        /* Conversion Variables */
-        s_omni.campaign="";
-        s_omni.state="";
-        s_omni.zip="";
-        s_omni.events="";
-        s_omni.products="";
-        s_omni.purchaseID="";
-        s_omni.eVar1="";
-        s_omni.eVar2="";
-        s_omni.eVar3="";
-        s_omni.eVar4="";
-        s_omni.eVar5="";
-        /* Context Variables */
-        s_omni.contextData["section"] = "espnplus";
-        s_omni.contextData["contenttype"] = "paywall";
-        s_omni.contextData["externalmkt"] = s_omni.Util.getQueryParam("ex_cid"); 
-        s_omni.contextData["paywallshown"] = "yes";
-        s_omni.contextData["site"] = "espnplus";
-        s_omni.contextData["registrationtype"] = "unknown";
-        s_omni.contextData["lang"] = "en_us";
-        s_omni.contextData["visitortype"] = s_omni.getNewRepeat(30, "s_getNewRepeat");
-        s_omni.contextData["sport"] = "no sport";
-        s_omni.contextData["league"] = "no league";
-        s_omni.contextData["edition"] = "en-us";
-
-        var s_code=s_omni.t();if(s_code)document.write(s_code);//-->
-
-    </script>
+     <script language="JavaScript" type="text/javascript" src="<?php echo get_home_url(); ?>/wp-content/adobetracking/top-body.js"></script>
 
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M97M4JF"

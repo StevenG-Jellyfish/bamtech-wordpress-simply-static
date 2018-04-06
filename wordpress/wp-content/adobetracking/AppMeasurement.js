@@ -2,7 +2,8 @@
  Configuration
 */
 var s_omni = new AppMeasurement();
-s_omni.account="wdgespncomdev";
+s_account="wdgespncomdev";
+s_omni.account=s_account;
 
 s_omni.trackDownloadLinks = true;
 s_omni.trackExternalLinks = true;
