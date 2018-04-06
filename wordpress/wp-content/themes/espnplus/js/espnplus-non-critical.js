@@ -1,8 +1,9 @@
-// analytics events
+/* analytics events */
     window.jQuery && $(function() {
         /* Clicks on header CTA */
         $("#header_cta").on("click", function(t) {
             t.preventDefault();
+            
             try {
                 var r = s_gi(s_account);
                 r.linkTrackVars = "products,contextData.edition,contextData.site,contextData.linkid,contextData.purchasemethod,contextData.buylocation";
@@ -17,8 +18,9 @@
                 r.tl(this, "o", "buy:espn+monthly:7ft")
             } catch (t) {}
             var e = $(this).attr("href");
-            window.location.href = e
-        }),
+            
+            window.location.href = e;
+        });
         /* Clicks on spotlight CTA */
         $("#spotlight_cta").on("click", function(t) {
             t.preventDefault();
@@ -36,7 +38,7 @@
                 r.tl(this, "o", "buy:espn+monthly:7ft")
             } catch (t) {}
             var e = $(this).attr("href");
-            window.location.href = e
+            window.location.href = e;
         })
     });
 
