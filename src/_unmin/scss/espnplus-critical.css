@@ -3944,6 +3944,16 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
         max-width: 1280px;
         height: auto;
         object-fit: cover; }
+    .jumbotron .jubmotron-background .video-img {
+      display: inline-block;
+      width: 100%;
+      max-width: 1280px;
+      height: auto;
+      object-fit: cover; }
+      .jumbotron .jubmotron-background .video-img img {
+        width: 100%;
+        height: auto;
+        object-fit: cover; }
     @media (max-width: 767px) and (orientation: portrait) {
       .jumbotron .jubmotron-background #embed-responsive-16by9 {
         display: none; }
@@ -4286,16 +4296,16 @@ section.section {
   margin: -1px;
   overflow: hidden;
   padding: 0;
-  position: absolute !important;
+  position: absolute;
   width: 1px;
-  word-wrap: normal !important;
+  word-wrap: normal;
   /* Many screen reader and browser combinations announce broken words as they would appear visually. */ }
 
 .screen-reader-text:focus {
   background-color: #f1f1f1;
   border-radius: 3px;
   box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
-  clip: auto !important;
+  clip: auto;
   clip-path: none;
   color: #21759b;
   display: block;
