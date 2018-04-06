@@ -18,86 +18,15 @@
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
-	if (window.jQuery) {  
-		$(function() {
-			$("#header_cta").on('click',function(e){
-				
-				e.preventDefault();
-				var target = $(this).attr('href');
-				try {
+window.jQuery&&$(function(){$("#header_cta").on("click",function(t){t.preventDefault();try{var r=s_gi("wdgespncomdev");r.linkTrackVars="",r.tl(this,"o","Header - CTA Free Trial")}catch(t){}var e=$(this).attr("href");window.location.href=e}),$("#header_login").on("click",function(t){t.preventDefault();try{var r=s_gi("wdgespncomdev");r.linkTrackVars="",r.tl(this,"o","Header - Login")}catch(t){}var e=$(this).attr("href");window.location.href=e}),$("#spotlight_cta").on("click",function(t){t.preventDefault();try{var r=s_gi("wdgespncomdev");r.linkTrackVars="",r.tl(this,"o","Body - CTA Free Trial")}catch(t){}var e=$(this).attr("href");window.location.href=e}),$("#spotlight_terms").on("click",function(t){t.preventDefault();try{var r=s_gi("wdgespncomdev");r.linkTrackVars="",r.tl(this,"o","Body - Terms & Conditions")}catch(t){}var e=$(this).attr("href");window.location.href=e})});
 
-					var s=s_gi('wdgespncomdev');
-					s.linkTrackVars='';
-					s.tl(this,'o','Header - CTA Free Trial');
-				
-				}catch(err){}
-
-				window.location.href = target;
-
-
-			})
-
-			$("#header_login").on('click',function(e){
-
-				e.preventDefault();
-				var target = $(this).attr('href');
-
-				try {
-
-					var s=s_gi('wdgespncomdev');
-					s.linkTrackVars='';
-					s.tl(this,'o','Header - Login');
-				
-				}catch(err){}
-
-				window.location.href = target;
-			})
-
-			$("#spotlight_cta").on('click',function(e){
-
-				e.preventDefault();
-				var target = $(this).attr('href');
-
-				try {
-
-					var s=s_gi('wdgespncomdev');
-					s.linkTrackVars='';
-					s.tl(this,'o','Body - CTA Free Trial');
-				
-				}catch(err){}
-
-				window.location.href = target;
-			})
-
-			$("#spotlight_terms").on('click',function(e){
-
-				e.preventDefault();
-				var target = $(this).attr('href');
-
-				try {
-
-					var s=s_gi('wdgespncomdev');
-					s.linkTrackVars='';
-					s.tl(this,'o','Body - Terms & Conditions');
-				
-				}catch(err){}
-
-				window.location.href = target;
-			})
-
-		});
-	}
-	
-</script>
-<script>
     !function(e){"use strict";
     var n=function(n,t,o){function i(e){return f.body?e():void setTimeout(function(){i(e)})}var d,r,a,l,f=e.document,s=f.createElement("link"),u=o||"all";
     return t?d=t:(r=(f.body||f.getElementsByTagName("head")[0]).childNodes,d=r[r.length-1]),a=f.styleSheets,s.rel="stylesheet",s.href=n,s.media="only x",i(function(){d.parentNode.insertBefore(s,t?d:d.nextSibling)}),l=function(e){for(var n=s.href,t=a.length;t--;)if(a[t].href===n)return e();
     setTimeout(function(){l(e)})},s.addEventListener&&s.addEventListener("load",function(){this.media=u}),s.onloadcssdefined=l,l(function(){s.media!==u&&(s.media=u)}),s};
     "undefined"!=typeof exports?exports.loadCSS=n:e.loadCSS=n}("undefined"!=typeof global?global:this)
-</script>
-<script>
-loadCSS('<?php echo get_stylesheet_directory_uri().'/css/espnplus-non-critical.min.css'; ?>'); // load non-critical with javascript
+
+	loadCSS('<?php echo get_stylesheet_directory_uri().'/css/espnplus-non-critical.min.css'; ?>'); // load non-critical with javascript
 </script>
 <noscript>
 <link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri().'/css/espnplus-non-critical.min.css'; ?>">

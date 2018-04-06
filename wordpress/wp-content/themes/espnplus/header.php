@@ -42,9 +42,8 @@
 
     <!-- Adobe Tracking -->
     <script language="JavaScript" type="text/javascript" src="<?php echo get_home_url(); ?>/wp-content/adobetracking/adobetrackingcodes.js"></script>
-   
-
     <!-- End Adobe Tracking -->
+    
     <meta charset="<?php bloginfo( 'charset' ); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="profile" href="http://gmpg.org/xfn/11">
@@ -98,15 +97,8 @@
         s_omni.contextData["league"] = "no league";
         s_omni.contextData["edition"] = "en-us";
 
-        var s_code=s_omni.t();if(s_code)document.write(s_code);
+        var s_code=s_omni.t();if(s_code)document.write(s_code);//-->
 
-
-        
-
-        //-->
-
-
- 
     </script>
 
 <!-- Google Tag Manager (noscript) -->

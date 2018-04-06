@@ -68,10 +68,14 @@ Stub Name:  global_header.scss
     text-align: center;
     .site-branding {
         text-align: center;
+        margin:0 auto;
         img {
             margin:28px auto;
             width: 104px;
           //  margin-top: 28px;
+        }
+        a {
+            margin:0 auto;
         }
         @media (max-width: 580px) {
             display:flex;
@@ -108,6 +112,7 @@ Stub Name:  global_header.scss
     .menu-item {
         height: 48px;
         font-family: PlayoffProCond-MediumItalic, arial;
+        font-size:1.0rem;
         // border:1px solid #ccc;
     }
     .menu-item a:link,

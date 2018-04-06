@@ -3712,6 +3712,18 @@ body {
       .espn-cta-container .btn.btn-primary {
         font-size: .9rem; } }
 
+@media (max-width: 420px) {
+  .main-navigation .espn-cta-container .btn.btn-primary {
+    font-size: .8rem; } }
+
+@media (max-width: 380px) {
+  .main-navigation .espn-cta-container .btn.btn-primary {
+    font-size: .7rem; } }
+
+@media (max-width: 320px) {
+  .main-navigation .espn-cta-container .btn.btn-primary {
+    font-size: .6rem; } }
+
 @media (max-width: 767px) {
   .espn-cta-container {
     margin: 1.5rem auto .750rem auto; } }
@@ -3775,10 +3787,13 @@ Stub Name:  global_header.scss
 .site-header.center {
   text-align: center; }
   .site-header.center .site-branding {
-    text-align: center; }
+    text-align: center;
+    margin: 0 auto; }
     .site-header.center .site-branding img {
       margin: 28px auto;
       width: 104px; }
+    .site-header.center .site-branding a {
+      margin: 0 auto; }
     @media (max-width: 580px) {
       .site-header.center .site-branding {
         display: flex;
@@ -3806,7 +3821,8 @@ Stub Name:  global_header.scss
   justify-content: flex-end; }
   .menu .menu-item {
     height: 48px;
-    font-family: PlayoffProCond-MediumItalic, arial; }
+    font-family: PlayoffProCond-MediumItalic, arial;
+    font-size: 1.0rem; }
   .menu .menu-item a:link,
   .menu .menu-item a:visited {
     margin-top: 10px;
@@ -3999,7 +4015,8 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
         font-family: PlayoffProCond-Medium, arial;
         font-size: 1.500rem;
         font-weight: 700;
-        line-height: 1.750rem; } }
+        line-height: 1.750rem;
+        padding: 0 2rem 0 2rem; } }
     .jumbotron p.below-cta {
       font-family: PlayoffProCond-Medium, arial;
       font-size: 1.250rem; }
@@ -4050,6 +4067,9 @@ section.section {
       text-align: left; }
       section.section .row.flexbox .copy-container p {
         text-align: left; }
+        @media (max-width: 767px) {
+          section.section .row.flexbox .copy-container p {
+            text-align: center; } }
       section.section .row.flexbox .copy-container .featurette-heading {
         font-family: PlayoffProCond-Medium, arial;
         font-size: 2.000rem;

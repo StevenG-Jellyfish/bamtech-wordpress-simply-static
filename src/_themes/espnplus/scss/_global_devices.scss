@@ -32,6 +32,7 @@ section.devices-bar {
             letter-spacing: 0.010rem;
             line-height: 2.750rem;
             text-align: center;
+            padding:0 2rem 0 2rem;
             
         } // .devices-header
         .device-small-text {
@@ -55,19 +56,19 @@ section.devices-bar {
             flex-direction: row;
             // justify-content: center;
             justify-content: space-around;
-            // margin-top: 2.125rem;
-            max-width:1000px;
+            //margin-top: 2.125rem;
+             max-width:1000px;
             margin:0 auto;
 
             .device {
                 align-items:center;
                // display: inline-block;
-                margin-bottom:2.25rem;
-                margin-top:2.25rem;
+                margin-bottom: 2rem;
+                margin-top: 2rem;
                 // margin-right:1em;
                 // margin-left:1em;
-                padding-left:1rem;
-                padding-right:1rem;
+                padding-left:.5rem;
+                padding-right:.5rem;
                 text-align: center;
                // max-width:150px;
                 // border:1px solid #ccc;
