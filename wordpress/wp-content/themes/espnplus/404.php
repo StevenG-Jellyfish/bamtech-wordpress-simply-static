@@ -24,11 +24,11 @@ get_header();
 
 		<section class="error-404 not-found">
 			
-			<header class="page-header">
+			<div class="page-header">
 				<h1 class="page-title">
 					<?php esc_html_e( 'Oops! That page can&rsquo;t be found. 404', 'espnplus' ); ?>
 				</h1>
-			</header>
+			</div>
 
 			<div class="page-content">
 
