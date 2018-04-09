@@ -1,4 +1,3 @@
-<script language="JavaScript" type="text/javascript"><!--
 /* Configuration Variables */
 s_omni.pageName="espnplus:marketing:paywall";
 s_omni.server=window.location.hostname;
@@ -21,4 +20,4 @@ s_omni.contextData["edition"] = "en-us";
 s_omni.contextData["paywallvisitcount"] = s_omni.getVisitNum();
 s_omni.contextData["lastvisit"] = s_omni.getDaysSinceLastVisit();
 
-var s_code=s_omni.t();if(s_code)document.write(s_code)//--></script>
+var s_code=s_omni.t();if(s_code)document.write(s_code);
