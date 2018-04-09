@@ -2374,7 +2374,7 @@ section.terms-conditions {
   font-weight: 100;
   -webkit-text-stroke: 1px #000; }
 
-.wpml-ls-legacy-dropdown-click a:hover:after, .wpml-ls-legacy-dropdown-click a.wpml-ls-item-toggle:focus:after, .wpml-ls-current-language a.wpml-ls-item-toggle:hover > a:after {
+.wpml-ls-legacy-dropdown-click a:hover:after, .wpml-ls-legacy-dropdown-click a:focus:after, .wpml-ls-current-language a.wpml-ls-item-toggle:hover > a:after {
   -webkit-text-stroke: 1px #eee; }
 
 .wpml-ls-legacy-dropdown-click a:hover, .wpml-ls-legacy-dropdown-click a:focus, .wpml-ls-legacy-dropdown-click .wpml-ls-current-language:hover > a {
