@@ -26,10 +26,10 @@
 		return t?d=t:(r=(f.body||f.getElementsByTagName("head")[0]).childNodes,d=r[r.length-1]),a=f.styleSheets,s.rel="stylesheet",s.href=n,s.media="only x",i(function(){d.parentNode.insertBefore(s,t?d:d.nextSibling)}),l=function(e){for(var n=s.href,t=a.length;t--;)if(a[t].href===n)return e();
 		setTimeout(function(){l(e)})},s.addEventListener&&s.addEventListener("load",function(){this.media=u}),s.onloadcssdefined=l,l(function(){s.media!==u&&(s.media=u)}),s};
 		"undefined"!=typeof exports?exports.loadCSS=n:e.loadCSS=n}("undefined"!=typeof global?global:this);
-		loadCSS('/wp-content/themes/espnplus/css/espnplus-non-critical.min.css'); 
+		loadCSS('<?php echo get_stylesheet_directory_uri().'/css/espnplus-non-critical.min.css'; ?>'); 
 	</script>
 
-	<script async src="/wp-content/themes/espnplus/js/espnplus-non-critical.js"></script>
+	<script async src="<?php echo get_home_url(); ?>/wp-content/themes/espnplus/js/espnplus-non-critical.js"></script>
 		
 	<noscript>
 		<link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri().'/css/espnplus-non-critical.min.css'; ?>">
