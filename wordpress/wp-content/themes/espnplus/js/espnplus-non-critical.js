@@ -1,3 +1,6 @@
+/*find current language*/
+var language = (LangCode=='es')? "es":"en-us";
+
  /* Configuration Variables */
 s_omni.pageName="espnplus:marketing:paywall";
 s_omni.server=window.location.hostname;
@@ -16,7 +19,7 @@ s_omni.contextData["lang"] = "en_us";
 s_omni.contextData["visitortype"] = s_omni.getNewRepeat(30, "s_getNewRepeat");
 s_omni.contextData["sport"] = "no sport";
 s_omni.contextData["league"] = "no league";
-s_omni.contextData["edition"] = "en-us";
+s_omni.contextData["edition"] = language;
 s_omni.contextData["paywallvisitcount"] = s_omni.getVisitNum();
 s_omni.contextData["lastvisit"] = s_omni.getDaysSinceLastVisit();
 
@@ -26,20 +29,22 @@ var s_code=s_omni.t();if(s_code)document.write(s_code);
         /* Clicks on header CTA */
         $("#header_cta").on("click", function(t) {
             t.preventDefault();
-            var catDays = ctaDays($(this).html());
+            var language = (LangCode=='es')? "es":"en-us";
+            var catDays = ctaDays($(this).html(),language);
+            
            
             try {
                 var r = s_gi(s_account);
                 r.linkTrackVars = "products,contextData.edition,contextData.site,contextData.linkid,contextData.purchasemethod,contextData.buylocation";
                 r.linkTrackEvents = "";
-                r.contextData["edition"] = "en-us";
+                r.contextData["edition"] = language;
                 r.contextData["site"] = "espnplus";
                 r.contextData["linkid"] = "buy:espn+monthly:"+catDays+"ft";
                 r.contextData["purchasemethod"] = "bamtech";
                 r.contextData["buylocation"] = "espn+:paywall:buy";
                 r.products="D2C;8400199910209919951899000";
 
-                r.tl(this, "o", "buy:espn+monthly:"+catDays+"ft")
+                r.tl(this, "o", "buy:espn+monthly:"+catDays+"ft");
             } catch (t) {}
             var e = $(this).attr("href");
             
@@ -48,29 +53,43 @@ var s_code=s_omni.t();if(s_code)document.write(s_code);
         /* Clicks on spotlight CTA */
         $("#spotlight_cta").on("click", function(t) {
             t.preventDefault();
-            var catDays = ctaDays($(this).html());
+            var language = (LangCode=='es')? "es":"en-us";
+            var catDays = ctaDays($(this).html(),language);
+            
 
             try {
                 var r = s_gi(s_account);
                 r.linkTrackVars = "products,contextData.edition,contextData.site,contextData.linkid,contextData.purchasemethod,contextData.buylocation";
                 r.linkTrackEvents = "";
-                r.contextData["edition"] = "en-us";
+                r.contextData["edition"] = language;
                 r.contextData["site"] = "espnplus";
                 r.contextData["linkid"] = "buy:espn+monthly:"+catDays+"ft";
                 r.contextData["purchasemethod"] = "bamtech";
                 r.contextData["buylocation"] = "espn+:paywall:buy";
                 r.products="D2C;8400199910209919951899000";
 
-                r.tl(this, "o", "buy:espn+monthly:"+catDays+"ft")
+                r.tl(this, "o", "buy:espn+monthly:"+catDays+"ft");
             } catch (t) {}
             var e = $(this).attr("href");
             window.location.href = e;
         })
 
-        function ctaDays(str){
-            var s1 = str.split("-");
-            var result = s1[0].split(" ");
-            return result[result.length-1];
+        function ctaDays(str,l){
+            switch(l){
+                case "es": 
+                    var s1 = str.split(" de ");
+                    var result = s1[1].split(" ");
+                    return result[0];
+                    break;
+
+                default:
+                    var s1 = str.split("-");
+                    var result = s1[0].split(" ");
+                    return result[result.length-1];
+                    break;
+            }
+            
+            
         }
 });
 
