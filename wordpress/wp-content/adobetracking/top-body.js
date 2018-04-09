@@ -3,7 +3,6 @@ s_omni.pageName="espnplus:marketing:paywall";
 s_omni.server=window.location.hostname;
 
 /* Conversion Variables */
-//s_omni.events="prodView";
 s_omni.products="D2C;8400199910209919951899000";
 
 /* Context Variables */
@@ -19,7 +18,6 @@ s_omni.contextData["sport"] = "no sport";
 s_omni.contextData["league"] = "no league";
 s_omni.contextData["edition"] = "en-us";
 s_omni.contextData["paywallvisitcount"] = s_omni.getVisitNum();
+s_omni.contextData["lastvisit"] = s_omni.getDaysSinceLastVisit();
 
-var s_code=s_omni.t();
-if(s_code)document.write(s_code);
- 
+var s_code=s_omni.t();if(s_code)document.write(s_code);
