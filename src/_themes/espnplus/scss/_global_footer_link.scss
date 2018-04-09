@@ -11,7 +11,7 @@
 .espn-lang {
     display:flex;
     min-width:160px;
-   width:30%;
+    width:30%;
     @media (max-width: 640px) {
         width:100%;
         display:block;
@@ -36,8 +36,6 @@
         }
     }  
 } 
-
-
     // new lang select click
     .wpml-ls-legacy-dropdown-click {
         width:140px;
@@ -64,38 +62,31 @@
         width:100%;
         border:1px solid $espn-fotter-txt-grey;
         background-color:black;
-       // padding:4px 10px;
-        padding-top:10px;
+        padding-top:11px;
         padding-left:12px;
         line-height:1;
         font-size:0.6875rem;
         font-weight:normal;
     }
     .wpml-ls-legacy-dropdown-click a span {
-        vertical-align:middle;
+       // vertical-align:middle;
+    }
+    .wpml-ls-bracket {
+        //
     }
     .wpml-ls-legacy-dropdown-click a.wpml-ls-item-toggle {
         position:relative;
-       // padding-right:calc(10px + .7em + .7em);
     }
     .rtl .wpml-ls-legacy-dropdown-click a.wpml-ls-item-toggle {
         padding-right:10px;
         padding-top:8px;
         padding-left:12px;
-       // padding-left:calc(10px + .7em + .7em);
     }
     .wpml-ls-legacy-dropdown-click a.wpml-ls-item-toggle:after {
-       // content:'';
-       // vertical-align:middle;
         vertical-align:top;
-        display:inline-block;
-     //   border:.35em solid transparent;
-      //  border-top:.5em solid;
         position:absolute;
         right:10px;
         top:4px;
-       // top:calc(50% - .175em);
-        //
         font-family: "FontAwesome" ;
         content:"\f107"; 
         font-size: 1.75rem;
@@ -116,15 +107,12 @@
         top:100%;
         right:0;
         left:0;
-       // border-top:1px solid #cdcdcd;
         padding:0;
         margin:0;
         list-style-type:none;
         z-index:101;
     }
-    .wpml-ls-legacy-dropdown-click .wpml-ls-sub-menu a{
-      //  border-width:0 1px 1px 1px;
-    }
+
     .wpml-ls-legacy-dropdown-click .wpml-ls-flag{
         display:inline;
         vertical-align:middle;
@@ -172,14 +160,15 @@
         font-size:0.6875rem;
     }
     .wpml-ls-legacy-dropdown a span {
-        vertical-align:middle
-    }.wpml-ls-legacy-dropdown a.wpml-ls-item-toggle {
+       //  vertical-align:middle
+    }
+    .wpml-ls-legacy-dropdown a.wpml-ls-item-toggle {
         position:relative;
-        padding-right:calc(10px + .7em + .7em);
+       // padding-right:calc(10px + .7em + .7em);
     }
     .rtl .wpml-ls-legacy-dropdown a.wpml-ls-item-toggle {
         padding-right:10px;
-        padding-left:calc(10px + .7em + .7em);
+       // padding-left:calc(10px + .7em + .7em);
     }
     .wpml-ls-legacy-dropdown a.wpml-ls-item-toggle:after {
         font-family: "FontAwesome" ;
