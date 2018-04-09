@@ -38,7 +38,7 @@
 	<!-- End Google Tag Manager -->
 
     <!-- Adobe Tracking -->
-    <script language="JavaScript" type="text/javascript" src="<?php echo get_home_url(); ?>/wp-content/adobetracking/adobetrackingcodes.js"></script>
+    <script language="JavaScript" type="text/javascript" src="<?php echo get_site_url(null , '/wp-content'); ?>/adobetracking/adobetrackingcodes.js"></script>
     <!-- End Adobe Tracking -->
     
     <meta charset="<?php bloginfo( 'charset' ); ?>">
@@ -50,7 +50,7 @@
     </style>
       <noscript><link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri().'/style.css'; ?>"></noscript>
     <?php wp_head(); ?>
-    
+
 </head>
 
 <body <?php body_class(); ?>>
