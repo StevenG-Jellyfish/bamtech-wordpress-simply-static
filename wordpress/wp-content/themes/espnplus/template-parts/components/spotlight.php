@@ -18,29 +18,20 @@
     $temporal = get_field('spotlight_belowcta_text', $component,false);
     $tracking_added = str_replace('">', '" id="spotlight_terms">', $temporal);
 ?>
-
-   
     <section class="jumbotron text-center">
         <div class="container">
-            
             <!-- <a class="jumbotron-login" href="https://secure.web.plus.espn.com">Log In</a> -->
-
             <h1 class="jumbotron-heading"><?php the_field('spotlight_overlogo_text', $component);?></h1>
-            
             <div class="jumbotron-logo">
     			<?php $image = get_field('spotlight_logo_image', $component);?>
                 <img src="<?php echo $image['sizes']['medium'];?>" alt="ESPN+"> 
             </div>
-           
             <p class="lead"><?php the_field('spotlight_main_text', $component, false);?></p>
-            
             <?php if (!empty(get_field('spotlight_cta_link', $component))){?>
             <?php $link=get_field('spotlight_cta_link', $component);?>
             <div class="espn-cta-container">
-                <div class="parallelogram">
-                    
+                <div class="parallelogram">  
                     <a id="spotlight_cta" href="<?php echo $link['url'];?>" class="btn btn-primary espn-cta" ><?php the_field('spotlight_cta_text', $component,false);?></a>
-                    
                 </div>
             </div>
             <?php }?>
@@ -69,14 +60,11 @@
             </div>
 
             <div id="embed-responsive-4by3" class="">
-                <video id="background-movie"  class="embed-responsive-item" preload="preload" autoplay="autoplay" loop="loop" muted>
-                    
-                    <source src="<?php echo $small_video['url'];?>" 
-                        type="video/mp4" media="screen and (max-width:767px)"> 
+                <div id="background-movie"  class="video-img embed-responsive-item">
 
                     <img src="<?php echo $video_image['sizes']['medium'];?>" title="Your browser does not support the &lt;video&gt; tag" alt="ESPN+">
                     
-                </video>
+            </div>
             </div>
         </div>
 
