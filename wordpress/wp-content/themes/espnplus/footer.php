@@ -29,7 +29,7 @@
 		loadCSS('<?php echo get_stylesheet_directory_uri().'/css/espnplus-non-critical.min.css'; ?>'); 
 	</script>
 
-	<script async src="<?php echo get_home_url(); ?>/wp-content/themes/espnplus/js/espnplus-non-critical.js"></script>
+	<script async src="<?php echo get_stylesheet_directory_uri(); ?>/js/espnplus-non-critical.js"></script>
 		
 	<noscript>
 		<link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri().'/css/espnplus-non-critical.min.css'; ?>">
