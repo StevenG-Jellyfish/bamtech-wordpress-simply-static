@@ -2226,8 +2226,8 @@ section.devices-bar {
         align-items: center;
         margin-bottom: 2rem;
         margin-top: 2rem;
-        padding-left: .5rem;
-        padding-right: .5rem;
+        padding-left: .9rem;
+        padding-right: .9rem;
         text-align: center; }
         section.devices-bar .container .devices-container .device .device-img {
           margin: 0 auto;
@@ -2323,8 +2323,91 @@ section.terms-conditions {
         height: 38px;
         margin-bottom: 30px; }
 
-.wpml-ls-legacy-dropdown {
-  width: 140px; }
+.wpml-ls-legacy-dropdown-click {
+  width: 140px;
+  max-width: 100%;
+  height: 36px; }
+
+.wpml-ls-legacy-dropdown-click > ul {
+  position: relative;
+  padding: 0;
+  margin: 0;
+  list-style-type: none; }
+
+.wpml-ls-legacy-dropdown-click .wpml-ls-item {
+  padding: 0;
+  margin: 0;
+  list-style-type: none; }
+
+.wpml-ls-legacy-dropdown-click a {
+  display: block;
+  text-decoration: none;
+  color: #787878;
+  border-radius: 36px;
+  height: 36px;
+  width: 100%;
+  border: 1px solid #787878;
+  background-color: black;
+  padding-top: 10px;
+  padding-left: 12px;
+  line-height: 1;
+  font-size: 0.6875rem;
+  font-weight: normal; }
+
+.wpml-ls-legacy-dropdown-click a span {
+  vertical-align: middle; }
+
+.wpml-ls-legacy-dropdown-click a.wpml-ls-item-toggle {
+  position: relative; }
+
+.rtl .wpml-ls-legacy-dropdown-click a.wpml-ls-item-toggle {
+  padding-right: 10px;
+  padding-top: 8px;
+  padding-left: 12px; }
+
+.wpml-ls-legacy-dropdown-click a.wpml-ls-item-toggle:after {
+  vertical-align: top;
+  display: inline-block;
+  position: absolute;
+  right: 10px;
+  top: 4px;
+  font-family: "FontAwesome";
+  content: "\f107";
+  font-size: 1.75rem;
+  color: #787878;
+  font-weight: 100;
+  -webkit-text-stroke: 1px #000; }
+
+.wpml-ls-legacy-dropdown-click a:hover:after, .wpml-ls-legacy-dropdown-click a.wpml-ls-item-toggle:focus:after, .wpml-ls-current-language a.wpml-ls-item-toggle:hover > a:after {
+  -webkit-text-stroke: 1px #eee; }
+
+.wpml-ls-legacy-dropdown-click a:hover, .wpml-ls-legacy-dropdown-click a:focus, .wpml-ls-legacy-dropdown-click .wpml-ls-current-language:hover > a {
+  color: #000;
+  background: #eee; }
+
+.wpml-ls-legacy-dropdown-click .wpml-ls-sub-menu {
+  visibility: hidden;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  left: 0;
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  z-index: 101; }
+
+.wpml-ls-legacy-dropdown-click .wpml-ls-flag {
+  display: inline;
+  vertical-align: middle;
+  width: 18px;
+  height: 12px; }
+
+.wpml-ls-legacy-dropdown-click .wpml-ls-flag + span {
+  margin-left: .4em; }
+
+.rtl .wpml-ls-legacy-dropdown-click .wpml-ls-flag + span {
+  margin-left: 0;
+  margin-right: .4em; }
 
 .wpml-ls-legacy-dropdown > ul {
   position: relative;
@@ -2430,6 +2513,7 @@ section.terms-conditions {
     .espn-links {
       display: inline-block;
       position: relative;
+      margin-top: 40px;
       width: 100%; } }
   .espn-links .link {
     display: inline-block;
