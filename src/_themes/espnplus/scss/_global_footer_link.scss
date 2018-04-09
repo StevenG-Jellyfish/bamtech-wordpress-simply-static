@@ -94,10 +94,10 @@
         font-weight:100;
         -webkit-text-stroke: 1px #000;
     }
-    .wpml-ls-legacy-dropdown-click a:hover:after,.wpml-ls-legacy-dropdown-click a:focus:after,.wpml-ls-current-language a.wpml-ls-item-toggle:hover>a:after{
+    .wpml-ls-legacy-dropdown-click li a:hover:after,.wpml-ls-legacy-dropdown-click li a:focus:after,.wpml-ls-legacy-dropdown-click .wpml-ls-current-language li a:focus:after,.wpml-ls-current-language a.wpml-ls-item-toggle li:hover>a:after{
         -webkit-text-stroke: 1px #eee;
     }
-    .wpml-ls-legacy-dropdown-click a:hover,.wpml-ls-legacy-dropdown-click a:focus,.wpml-ls-legacy-dropdown-click .wpml-ls-current-language:hover>a {
+    .wpml-ls-legacy-dropdown-click li a:hover,.wpml-ls-legacy-dropdown-click .wpml-ls-current-language li:hover>a {
         color:#000;
         background:#eee;
     }
