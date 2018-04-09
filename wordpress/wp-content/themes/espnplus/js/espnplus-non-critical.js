@@ -1,3 +1,6 @@
+/*find current language*/
+var language = (window.location.pathname.includes("/es/"))? "es":"en-us"
+
  /* Configuration Variables */
 s_omni.pageName="espnplus:marketing:paywall";
 s_omni.server=window.location.hostname;
@@ -16,7 +19,7 @@ s_omni.contextData["lang"] = "en_us";
 s_omni.contextData["visitortype"] = s_omni.getNewRepeat(30, "s_getNewRepeat");
 s_omni.contextData["sport"] = "no sport";
 s_omni.contextData["league"] = "no league";
-s_omni.contextData["edition"] = "en-us";
+s_omni.contextData["edition"] = language;
 s_omni.contextData["paywallvisitcount"] = s_omni.getVisitNum();
 s_omni.contextData["lastvisit"] = s_omni.getDaysSinceLastVisit();
 
