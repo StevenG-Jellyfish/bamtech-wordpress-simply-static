@@ -14,23 +14,20 @@
 <html <?php language_attributes(); ?>>
 <head>
 
-    <!-- Page hiding snippet (recommended)  -->
     <style>.async-hide { opacity: 0 !important} </style>
+    
+    <!-- Google Analytics tracking code-->
     <script>(function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;h.start=1*new Date;
     h.end=i=function(){s.className=s.className.replace(RegExp(' ?'+y),'')};
     (a[n]=a[n]||[]).hide=h;setTimeout(function(){i();h.end=null},c);h.timeout=c;
     })(window,document.documentElement,'async-hide','dataLayer',4000,
-    {'GTM-PLN6GMP':true});</script>
-
-    <!-- Modified Analytics tracking code with Optimize plugin -->
-    <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    {'GTM-PLN6GMP':true});(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
     })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
     ga('create', 'UA-115899350-1', 'auto');
-    ga('require', 'GTM-PLN6GMP');
-    </script>
+    ga('require', 'GTM-PLN6GMP');</script>
+    <!-- End Google Analytics tracking code-->
 
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -47,22 +44,18 @@
     <meta charset="<?php bloginfo( 'charset' ); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="profile" href="http://gmpg.org/xfn/11">
-    <style>
-    <?php
-        include('css/espnplus-critical.min.css');
-    ?>
-    </style>
-      <noscript>
-          <link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri().'/style.css'; ?>">
-      </noscript>
+    
+    <style><?php include('css/espnplus-critical.min.css');?></style>
+    <noscript><link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri().'/style.css'; ?>"></noscript>
+
     <?php wp_head(); ?>
+
 </head>
+
 <body <?php body_class(); ?>>
 
-     <script language="JavaScript" type="text/javascript" src="<?php echo get_home_url(); ?>/wp-content/adobetracking/top-body.js"></script>
-
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M97M4JF"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M97M4JF"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
 
