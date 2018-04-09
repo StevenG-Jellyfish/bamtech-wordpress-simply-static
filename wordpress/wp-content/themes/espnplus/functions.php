@@ -6,7 +6,10 @@
  *
  * @package espnplus
  */
-
+/** WPML remove Language switch css */
+define('ICL_DONT_LOAD_NAVIGATION_CSS', true);
+define('ICL_DONT_LOAD_LANGUAGE_SELECTOR_CSS', true);
+//
 if ( ! function_exists( 'espnplus_setup' ) ) :
 	/**
 	 * Sets up theme defaults and registers support for various WordPress features.
