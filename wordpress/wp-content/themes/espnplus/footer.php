@@ -27,9 +27,14 @@
 		setTimeout(function(){l(e)})},s.addEventListener&&s.addEventListener("load",function(){this.media=u}),s.onloadcssdefined=l,l(function(){s.media!==u&&(s.media=u)}),s};
 		"undefined"!=typeof exports?exports.loadCSS=n:e.loadCSS=n}("undefined"!=typeof global?global:this);
 		loadCSS('<?php echo get_stylesheet_directory_uri().'/css/espnplus-non-critical.min.css'; ?>');
-		var LangCode = '<?php echo apply_filters( 'wpml_current_language', NULL );  ?>'; console.log(LangCode);
 	</script>
 
+    <script>
+    	var LangCode = '<?php echo apply_filters( 'wpml_current_language', NULL );  ?>';
+		<?php $context_vars = explode('-',$wp_query->post->post_title); ?>
+		var ALeague = '<?php echo array_key_exists(1,$context_vars)? strtolower(trim($context_vars[0])) : 'no league';?>';
+		var ASport = '<?php echo array_key_exists(1,$context_vars)? strtolower(trim($context_vars[1])) : 'no sport';?>';
+    </script>
 	<script async src="<?php echo get_stylesheet_directory_uri(); ?>/js/espnplus-non-critical.js"></script>
 		
 	<noscript>
