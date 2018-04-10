@@ -2346,13 +2346,20 @@ section.terms-conditions {
   border-radius: 36px;
   height: 36px;
   width: 100%;
-  border: 1px solid #787878;
-  background-color: black;
+  background-color: #191919;
   padding-top: 11px;
   padding-left: 12px;
   line-height: 1;
   font-size: 0.6875rem;
   font-weight: normal; }
+
+.wpml-ls-current-language.open a {
+  border-radius: 18px 18px 0px 0px;
+  border-bottom: 0; }
+
+.wpml-ls-current-language.open .wpml-ls-slot-lang-select a {
+  border-radius: 0px 0px 18px 18px;
+  border-top: 0; }
 
 .wpml-ls-legacy-dropdown-click a.wpml-ls-item-toggle {
   position: relative; }
@@ -2372,14 +2379,16 @@ section.terms-conditions {
   font-size: 1.75rem;
   color: #787878;
   font-weight: 100;
-  -webkit-text-stroke: 1px #000; }
+  -webkit-text-stroke: 1px #191919; }
 
-.wpml-ls-legacy-dropdown-click li a:hover:after, .wpml-ls-legacy-dropdown-click li a:focus:after, .wpml-ls-legacy-dropdown-click .wpml-ls-current-language li a:focus:after, .wpml-ls-current-language a.wpml-ls-item-toggle li:hover > a:after {
+.wpml-ls-legacy-dropdown-click li a:hover:after, .wpml-ls-current-language a.wpml-ls-item-toggle li:hover > a:after {
   -webkit-text-stroke: 1px #eee; }
 
 .wpml-ls-legacy-dropdown-click li a:hover, .wpml-ls-legacy-dropdown-click .wpml-ls-current-language li:hover > a {
   color: #000;
   background: #eee; }
+  .wpml-ls-legacy-dropdown-click li a:hover :after, .wpml-ls-legacy-dropdown-click .wpml-ls-current-language li:hover > a :after {
+    -webkit-text-stroke: 1px #eee; }
 
 .wpml-ls-legacy-dropdown-click .wpml-ls-sub-menu {
   visibility: hidden;
@@ -2504,7 +2513,7 @@ section.terms-conditions {
     .espn-links {
       display: inline-block;
       position: relative;
-      margin-top: 40px;
+      margin-top: 48px;
       width: 100%; } }
   .espn-links .link {
     display: inline-block;
