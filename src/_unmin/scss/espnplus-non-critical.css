@@ -2346,16 +2346,20 @@ section.terms-conditions {
   border-radius: 36px;
   height: 36px;
   width: 100%;
-  border: 1px solid #787878;
-  background-color: black;
-  padding-top: 10px;
+  background-color: #191919;
+  padding-top: 11px;
   padding-left: 12px;
   line-height: 1;
   font-size: 0.6875rem;
   font-weight: normal; }
 
-.wpml-ls-legacy-dropdown-click a span {
-  vertical-align: middle; }
+.wpml-ls-current-language.open a {
+  border-radius: 18px 18px 0px 0px;
+  border-bottom: 0; }
+
+.wpml-ls-current-language.open .wpml-ls-slot-lang-select a {
+  border-radius: 0px 0px 18px 18px;
+  border-top: 0; }
 
 .wpml-ls-legacy-dropdown-click a.wpml-ls-item-toggle {
   position: relative; }
@@ -2367,7 +2371,6 @@ section.terms-conditions {
 
 .wpml-ls-legacy-dropdown-click a.wpml-ls-item-toggle:after {
   vertical-align: top;
-  display: inline-block;
   position: absolute;
   right: 10px;
   top: 4px;
@@ -2376,14 +2379,16 @@ section.terms-conditions {
   font-size: 1.75rem;
   color: #787878;
   font-weight: 100;
-  -webkit-text-stroke: 1px #000; }
+  -webkit-text-stroke: 1px #191919; }
 
-.wpml-ls-legacy-dropdown-click a:hover:after, .wpml-ls-legacy-dropdown-click a.wpml-ls-item-toggle:focus:after, .wpml-ls-current-language a.wpml-ls-item-toggle:hover > a:after {
+.wpml-ls-legacy-dropdown-click li a:hover:after, .wpml-ls-current-language a.wpml-ls-item-toggle li:hover > a:after {
   -webkit-text-stroke: 1px #eee; }
 
-.wpml-ls-legacy-dropdown-click a:hover, .wpml-ls-legacy-dropdown-click a:focus, .wpml-ls-legacy-dropdown-click .wpml-ls-current-language:hover > a {
+.wpml-ls-legacy-dropdown-click li a:hover, .wpml-ls-legacy-dropdown-click .wpml-ls-current-language li:hover > a {
   color: #000;
   background: #eee; }
+  .wpml-ls-legacy-dropdown-click li a:hover :after, .wpml-ls-legacy-dropdown-click .wpml-ls-current-language li:hover > a :after {
+    -webkit-text-stroke: 1px #eee; }
 
 .wpml-ls-legacy-dropdown-click .wpml-ls-sub-menu {
   visibility: hidden;
@@ -2438,16 +2443,11 @@ section.terms-conditions {
   font-family: arial;
   font-size: 0.6875rem; }
 
-.wpml-ls-legacy-dropdown a span {
-  vertical-align: middle; }
-
 .wpml-ls-legacy-dropdown a.wpml-ls-item-toggle {
-  position: relative;
-  padding-right: calc(10px + .7em + .7em); }
+  position: relative; }
 
 .rtl .wpml-ls-legacy-dropdown a.wpml-ls-item-toggle {
-  padding-right: 10px;
-  padding-left: calc(10px + .7em + .7em); }
+  padding-right: 10px; }
 
 .wpml-ls-legacy-dropdown a.wpml-ls-item-toggle:after {
   font-family: "FontAwesome";
@@ -2513,7 +2513,7 @@ section.terms-conditions {
     .espn-links {
       display: inline-block;
       position: relative;
-      margin-top: 40px;
+      margin-top: 48px;
       width: 100%; } }
   .espn-links .link {
     display: inline-block;

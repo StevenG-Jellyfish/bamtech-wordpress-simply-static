@@ -143,7 +143,10 @@ function loadPlugins(s) {
  Configuration
 */
 var s_omni = new AppMeasurement();
-s_account="wdgespncomdev";
+
+//check for live or UAT environment
+s_account = window.location.hostname.includes("watch.espnplus.com")? 'wdgespcom,wdgespge': 'wdgespncomdev';
+
 s_omni.account=s_account;
 
 s_omni.trackDownloadLinks = true;
