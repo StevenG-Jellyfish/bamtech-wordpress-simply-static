@@ -1,5 +1,5 @@
 function appendQueryString($) {
-  $('#spotlight_cta, #header_cta').each(function() {
+  $('#spotlight_cta, #header_cta, a.wpml-ls-link').each(function() {
     trgtURL = $(this).attr('href');
 
     var currQueryString = "";
