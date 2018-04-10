@@ -44,6 +44,9 @@ $(document).ready(function() {
             });
         }
     });
+        // var langsector = $('#lang_sel_click');
+        // console.log("lang selector = ");
+         //
 });
 
 // ------------ Header nav ------------ //
