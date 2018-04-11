@@ -162,8 +162,10 @@ COMMENT
     # Insert JSON master.php
     echo "find and replace memcache variables master.php.."
     sed -i 's/'"$OLDMEM"'/'"$MEM"'/' /var/www/html/wp-content/w3tc-config/master.php &&  chmod 444 /var/www/html/wp-content/w3tc-config/master.php 
-    sed -i '' 's;"pgcache.enabled": "0",;"pgcache.enabled": "1",;g' /var/www/html/wp-content/w3tc-config/master.php
-    sed -i '' 's;"minify.enabled": "0",;"minify.enabled": "1",;g' /var/www/html/wp-content/w3tc-config/master.php
+    sed -i 's;"pgcache.enabled": false,;"pgcache.enabled": true,;g' /var/www/html/wp-content/w3tc-config/master.php
+    sed -i 's;"minify.enabled": false,;"minify.enabled": true,;g' /var/www/html/wp-content/w3tc-config/master.php
+    sed -i 's;"pgcache.engine": "file_generic",;"pgcache.engine": "memcached",;g' /var/www/html/wp-content/w3tc-config/master.php
+    sed -i 's;"minify.engine": "file";"minify.engine": "memcached";g' /var/www/html/wp-content/w3tc-config/master.php
 
     # && chattr +i /var/www/html/wp-content/w3tc-config/master.php
     wp plugin activate --allow-root sitepress-multilingual-cms
