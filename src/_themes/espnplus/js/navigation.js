@@ -46,7 +46,7 @@ $(document).ready(function() {
     });
         // var langsector = $('#lang_sel_click');
         // console.log("lang selector = ");
-         //
+        //
 });
 
 // ------------ Header nav ------------ //
@@ -59,16 +59,15 @@ var WPMLLanguageSwitcherDropdownClick = (function() {
     var wrapperSelector = '.js-wpml-ls-legacy-dropdown-click';
     var submenuSelector = '.js-wpml-ls-sub-menu';
     var isOpen = false;
-
     var toggle = function(event) {
         var subMenu = this.querySelectorAll(submenuSelector)[0];
 
         if(subMenu.style.visibility === 'visible'){
             subMenu.style.visibility = 'hidden';
-            $("#lang_sel_click .wpml-ls-item-legacy-dropdown-click").removeClass("open");
+            $(".wpml-ls-legacy-dropdown-click .wpml-ls-item-legacy-dropdown-click").removeClass("open");
             document.removeEventListener('click', close);
         }else{
-            $("#lang_sel_click .wpml-ls-item-legacy-dropdown-click").addClass("open");
+            $(".wpml-ls-legacy-dropdown-click .wpml-ls-item-legacy-dropdown-click").addClass("open");
             subMenu.style.visibility = 'visible';
             document.addEventListener('click', close);
             isOpen = true;
@@ -84,7 +83,7 @@ var WPMLLanguageSwitcherDropdownClick = (function() {
 
             for(var i=0;i<switchers.length;i++){
                 var altLangs = switchers[i].querySelectorAll(submenuSelector)[0];
-                $("#lang_sel_click .wpml-ls-item-legacy-dropdown-click").removeClass("open");
+                $(".wpml-ls-legacy-dropdown-click .wpml-ls-item-legacy-dropdown-click").removeClass("open");
                 altLangs.style.visibility = 'hidden';
             }
         }
