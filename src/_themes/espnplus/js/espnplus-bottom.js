@@ -1,6 +1,5 @@
 jQuery(function($) {
     //console.log('espnplus bottom.js loaded');
-   $('.collapse').collapse(); 
    
    /*find current language*/
     var ALanguage = (LangCode=='es')? "es":"en-us";
