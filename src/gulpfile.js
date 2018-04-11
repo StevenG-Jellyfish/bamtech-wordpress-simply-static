@@ -176,6 +176,7 @@ gulp.task('bottom-javascript', () => {
     return gulp.src([
             //paths.src.vendor.unveil,
             //paths.src.vendor.pholder,
+            paths.src.vendor.skiplink,
             paths.src.vendor.navigation,
             paths.src.vendor.popper,
             paths.src.vendor.bstrap,
@@ -184,7 +185,6 @@ gulp.task('bottom-javascript', () => {
            // paths.src.vendor.button,
            // paths.src.vendor.dropdown,
             paths.src.vendor.collapse,
-            paths.src.vendor.skiplink,
             paths.src.bottom_scripts
         ])
         // .pipe(debug({title: '[1] Files in Stream:'}))
