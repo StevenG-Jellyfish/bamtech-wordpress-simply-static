@@ -184,7 +184,7 @@ gulp.task('bottom-javascript', () => {
            // paths.src.vendor.button,
            // paths.src.vendor.dropdown,
             paths.src.vendor.collapse,
-            //paths.src.vendor.skiplink,
+            paths.src.vendor.skiplink,
             paths.src.bottom_scripts
         ])
         // .pipe(debug({title: '[1] Files in Stream:'}))
