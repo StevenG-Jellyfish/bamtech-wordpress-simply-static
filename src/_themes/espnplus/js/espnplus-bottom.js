@@ -9,7 +9,7 @@ jQuery(function($) {
     s_omni.pageName="espnplus:marketing:paywall";
     s_omni.server=window.location.hostname;
 
-    /* Conversion Variables */
+    /* Conversion Variables  */
     s_omni.products="D2C;8400199910209919951899000";
 
     /* Context Variables */
@@ -30,7 +30,6 @@ jQuery(function($) {
 
     var s_code=s_omni.t();if(s_code)document.write(s_code);
 
-    //window.jQuery && $(function() {
     /* Clicks on header CTA */
     $("#header_cta").on("click", function(t) {
         
@@ -104,7 +103,7 @@ jQuery(function($) {
         if (!results[2]) return '';
         return decodeURIComponent(results[2].replace(/\+/g, " "));
     }
-//    }); // docready()
+
 
 
 }); //jquery()
