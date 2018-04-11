@@ -1,6 +1,6 @@
 jQuery(function($) {
     //console.log('espnplus bottom.js loaded');
-
+   
    /*find current language*/
     var ALanguage = (LangCode=='es')? "es":"en-us";
     var Ex_cid = s_omni.Util.getQueryParam("ex_cid");
