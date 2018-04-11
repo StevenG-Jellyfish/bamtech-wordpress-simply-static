@@ -1,4 +1,4 @@
-jjQuery(function($) {
+jQuery(function($) {
     //console.log('espnplus bottom.js loaded');
 
    /*find current language*/
