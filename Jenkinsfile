@@ -99,15 +99,14 @@ pipeline {
                       slackSend channel: '#deploy',
                           color: 'good',
                           message: "Image's ${WORDPRESS}, ${NGINX} and ${VARNISH} SUCCESSFULLY built, Please visit > (<${env.RUN_DISPLAY_URL}|Open>) for details"
-                      
+                  }
+
                   always {
-                      script {
-                          sh "pwd" 
-                        }        
-                    }        
+                          sh "echo ${workspace}"
+                          sh "rm -rf *"
+                        }               
                 }
-            }
-        } 
+        }
         stage('DeployUat') {
             // Deploy stage agent selector
             agent {
@@ -156,7 +155,11 @@ pipeline {
                
                       input message: "Image's ${WORDPRESS}, ${NGINX} and ${VARNISH} have been released to ${UAT}, please test and confirm..."
                   }
-               }
+                  always {
+                          sh "echo ${workspace}"
+                          sh "rm -rf *"
+                        }
+                  }
             }
             stage('DeployProd') {
             // Deploy stage agent selector
@@ -205,7 +208,12 @@ pipeline {
              
                      input message: "Image's ${WORDPRESS}, ${NGINX} and ${VARNISH} have been released to ${PROD}, please test and confirm..."
                     }
+                    
+                  always {
+                        sh "echo ${workspace}"
+                        sh "rm -rf *"
+                   }          
                }
-          }
-     }     
+          }    
+     }       
 }
