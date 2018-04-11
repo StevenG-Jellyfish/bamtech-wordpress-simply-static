@@ -131,7 +131,7 @@ function espnplus_widgets_init() {
 add_action( 'widgets_init', 'espnplus_widgets_init' );
 /* --- */
 //Making jQuery to load from Google Library
-function replace_jquery() {
+/*function replace_jquery() {
 	if (!is_admin()) {
  		// comment out the next two lines to load the local copy of jQuery
  		wp_deregister_script('jquery');
@@ -140,6 +140,9 @@ function replace_jquery() {
  	}
 }
 add_action('init', 'replace_jquery');
+
+//added to footer.php
+*/
 /* ------------------- */
 /**
  * 
