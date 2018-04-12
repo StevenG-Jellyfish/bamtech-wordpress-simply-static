@@ -2236,7 +2236,6 @@ section.devices-bar {
           height: 3.5rem;
           width: auto; }
           section.devices-bar .container .devices-container .device .device-img img {
-            display: inline-block;
             width: auto;
             height: 100%; }
         section.devices-bar .container .devices-container .device .device-copy {
