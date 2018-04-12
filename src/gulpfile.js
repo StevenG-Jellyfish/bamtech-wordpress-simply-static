@@ -155,6 +155,17 @@ gulp.task('top-javascript', () => {
            //  paths.src.vendor.jquery,
             // paths.src.vendor.navigation,
             // paths.src.vendor.bstrap,
+            // paths.src.vendor.unveil,
+            // paths.src.vendor.pholder,
+            paths.src.vendor.skiplink,
+            paths.src.vendor.navigation,
+            paths.src.vendor.popper,
+            paths.src.vendor.bstrap,
+           // paths.src.vendor.bstrapindex,
+            paths.src.vendor.utils,
+           // paths.src.vendor.button,
+           // paths.src.vendor.dropdown,
+            paths.src.vendor.collapse,
             paths.src.top_scripts
         ])
         // .pipe(debug({title: '[1] Files in Stream:'}))
@@ -174,6 +185,7 @@ gulp.task('top-javascript', () => {
 //gulp.task('bottom-javascript', gulp.series('js_lint', () => {
 gulp.task('bottom-javascript', () => {
     return gulp.src([
+<<<<<<< HEAD
             //paths.src.vendor.unveil,
             //paths.src.vendor.pholder,
             paths.src.vendor.skiplink,
@@ -185,6 +197,8 @@ gulp.task('bottom-javascript', () => {
            // paths.src.vendor.button,
            // paths.src.vendor.dropdown,
             paths.src.vendor.collapse,
+=======
+>>>>>>> a54c4f858b82546f07dc3fa7d24da108efc38006
             paths.src.bottom_scripts
         ])
         // .pipe(debug({title: '[1] Files in Stream:'}))
