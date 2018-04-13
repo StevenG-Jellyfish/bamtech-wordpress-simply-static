@@ -146,8 +146,9 @@ add_action( 'widgets_init', 'espnplus_widgets_init' );
 }
 add_action('init', 'replace_jquery');
 
-//added to footer.php
+//added to header.php
 */
+
 /* ------------------- */
 /**
  * 
