@@ -16,8 +16,7 @@
 
     <style>.async-hide { opacity: 0 !important} </style>
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-   
+	<script async src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>   
     
     <meta charset="<?php bloginfo( 'charset' ); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -57,10 +56,6 @@
 	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 	})(window,document,'script','dataLayer','GTM-M97M4JF');</script>
 	<!-- End Google Tag Manager -->
-
-    <!-- Adobe Tracking -->
-    <script async language="JavaScript" type="text/javascript" src="<?php echo get_site_url(null , '/wp-content'); ?>/adobetracking/adobetrackingcodes.js"></script>
-    <!-- End Adobe Tracking -->
 
     <?php wp_head(); ?>
 

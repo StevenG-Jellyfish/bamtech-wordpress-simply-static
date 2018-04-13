@@ -25,6 +25,10 @@
 		<link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri().'/css/espnplus-non-critical.min.css'; ?>">
 	</noscript>
 
+    <!-- Adobe Tracking -->
+    <script language="JavaScript" type="text/javascript" src="<?php echo get_site_url(null , '/wp-content'); ?>/adobetracking/adobetrackingcodes.js"></script>
+    <!-- End Adobe Tracking -->
+
     <script>
     	var LangCode = '<?php echo apply_filters( 'wpml_current_language', NULL );  ?>';
 		<?php $context_vars = explode('-',$wp_query->post->post_title); ?>
