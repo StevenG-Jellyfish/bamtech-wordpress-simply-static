@@ -35,7 +35,7 @@ pipeline {
             agent { 
                 node {
                     label 'container_builder'
-                    customWorkspace '/var/jenkins_home/shared/docker_ctb'
+                    customWorkspace '/var/jenkins_home/shared/docker_ctb/${REPO}'
                 }
             }
 
@@ -112,7 +112,7 @@ pipeline {
             agent {
                 node {
                     label 'ecs_deployer'
-                    customWorkspace '/var/jenkins_home/shared/ecs_deployer'
+                    customWorkspace '/var/jenkins_home/shared/ecs_deployer/${REPO}'
                 }
             }
              
@@ -166,7 +166,7 @@ pipeline {
             agent {
                 node {
                     label 'ecs_deployer'
-                    customWorkspace '/var/jenkins_home/shared/ecs_deployer'
+                    customWorkspace '/var/jenkins_home/shared/ecs_deployer/${REPO}'
                 }
             }
              
