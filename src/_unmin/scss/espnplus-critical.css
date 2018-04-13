@@ -3912,6 +3912,11 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
       } // .jumbotron
     } // min-width: 767px
     */ }
+  .jumbotron .container-fluid.jubmotron-background {
+    height: 100%;
+    overflow: visible; }
+  .jumbotron .jumbotron .jubmotron-background .video-img {
+    background-size: cover !important; }
   .jumbotron .jubmotron-background {
     position: absolute;
     display: block;
@@ -3919,19 +3924,25 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
     top: 0px;
     left: 0px;
     width: 100%;
+    height: 100%;
     max-width: 1280px;
     height: auto;
     margin: 0 0 0 0;
     padding: 0 0 0 0;
     z-index: 1; }
     .jumbotron .jubmotron-background #embed-responsive-16by9 {
-      display: block; }
+      display: block;
+      height: 100%;
+      width: 100%; }
     .jumbotron .jubmotron-background #embed-responsive-4by3 {
-      display: none; }
+      display: none;
+      height: 100%;
+      width: 100%; }
     .jumbotron .jubmotron-background video {
       display: inline-block;
       width: 100%;
       max-width: 1280px;
+      min-width: 570px;
       height: auto;
       object-fit: cover; }
       .jumbotron .jubmotron-background video source {
@@ -3945,27 +3956,32 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
         height: auto;
         object-fit: cover; }
     .jumbotron .jubmotron-background #background-img {
+      display: inline-block;
       width: 100%;
-      height: auto; }
-      .jumbotron .jubmotron-background #background-img img {
-        width: 100%;
-        object-fit: cover; }
+      height: 100%;
+      object-fit: cover;
+      background-size: cover;
+      -ms-background-size: cover;
+      -o-background-size: cover;
+      -moz-background-size: cover;
+      -webkit-background-size: cover; }
     .jumbotron .jubmotron-background .video-img {
       display: inline-block;
       width: 100%;
       max-width: 1280px;
       height: auto;
-      object-fit: cover; }
-      .jumbotron .jubmotron-background .video-img img {
-        width: 100%;
-        height: auto;
-        object-fit: cover; }
-    @media (max-width: 767px) and (orientation: portrait) {
+      object-fit: cover;
+      background-size: cover;
+      -ms-background-size: cover;
+      -o-background-size: cover;
+      -moz-background-size: cover;
+      -webkit-background-size: cover; }
+    @media (max-width: 767px) {
       .jumbotron .jubmotron-background #embed-responsive-16by9 {
-        display: none; }
+        display: block; }
       .jumbotron .jubmotron-background #embed-responsive-4by3 {
-        display: block; } }
-    @media (max-width: 667px) and (orientation: landscape) {
+        display: none; } }
+    @media (max-width: 480px) {
       .jumbotron .jubmotron-background #embed-responsive-16by9 {
         display: none; }
       .jumbotron .jubmotron-background #embed-responsive-4by3 {
@@ -3975,7 +3991,7 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
     width: 100%;
     max-width: 1280px;
     margin: 0 0 0 0;
-    padding: 58px 5%;
+    padding: 40px 5%;
     text-align: center;
     z-index: 2; }
   @media (max-width: 767px) {
