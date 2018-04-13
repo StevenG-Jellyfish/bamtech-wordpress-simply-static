@@ -3944,6 +3944,12 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
         max-width: 1280px;
         height: auto;
         object-fit: cover; }
+    .jumbotron .jubmotron-background #background-img {
+      width: 100%;
+      height: auto; }
+      .jumbotron .jubmotron-background #background-img img {
+        width: 100%;
+        object-fit: cover; }
     .jumbotron .jubmotron-background .video-img {
       display: inline-block;
       width: 100%;

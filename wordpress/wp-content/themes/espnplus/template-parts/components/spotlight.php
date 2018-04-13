@@ -5,9 +5,9 @@
  * @package Bamtech ESPN+
  */
 /* Device detect */
-function isMobile() {
-    return preg_match("/(android|webos|avantgo|iphone|ipod|blackberry|iemobile|bolt|boost|cricket|docomo|fone|hiptop|mini|opera mini|kitkat|mobi|palm|phone|pie|up\.browser|up\.link|webos|wos)/i", $_SERVER["HTTP_USER_AGENT"]);
-}
+// function isMobile() {
+//     return preg_match("/(android|webos|avantgo|iphone|ipod|blackberry|iemobile|bolt|boost|cricket|docomo|fone|hiptop|mini|opera mini|kitkat|mobi|palm|phone|pie|up\.browser|up\.link|webos|wos)/i", $_SERVER["HTTP_USER_AGENT"]);
+// }
 /* -------- */
 // function isMobile(){
 //     if(defined(isMobile)) { return isMobile;
@@ -21,6 +21,34 @@ function isMobile() {
 //     )
 //     ));
 // }
+require get_template_directory() . '/Mobile_Detect.php';
+//
+// function isMobile(){
+//     if(isset($_SERVER['HTTP_USER_AGENT']) and !empty($_SERVER['HTTP_USER_AGENT'])){
+//        $user_ag = $_SERVER['HTTP_USER_AGENT'];
+//        if(preg_match('/(Mobile|Android|GoBrowser|[0-9]x[0-9]*|uZardWeb\/|Mini|Doris\/|Skyfire\/|iPhone|Fennec\/|Maemo|Iris\/|CLDC\-|Mobi\/)/uis',$user_ag)){
+//           return true;
+//        }else if (strstr($_SERVER['HTTP_USER_AGENT'],'iPad')) {
+//           return false;
+//        };
+//     }else{
+//        return false;    
+//     };
+// };
+function isMobile(){
+    $detect = new Mobile_Detect;
+    // Find c,m, or t (Computer, Mobile, or Tablet)
+    if ($detect->isMobile() && !$detect->isTablet()) {
+        $device = 'm';
+    } elseif ( $detect->isTablet()) {
+        $device = 't'; 
+    } else {
+        $device = 'c';
+    }
+    return $device;
+}
+
+// echo isMobile();
 
 /* ------- */
  $page_id = get_query_var('page_override_id');
@@ -70,12 +98,15 @@ function isMobile() {
             <div id="embed-responsive-16by9" class="">
                 <?php
                 // Use the function
-                 if(isMobile()){
+                // if(isMobile()){
+                $isMobile = isMobile();
+                if($isMobile == "m"){
+                // if ($device = "m"){
                     // Do something for only mobile users
                     ?>
-                    <video id="background-img"  class="embed-responsive-item" preload="preload" autoplay="autoplay" loop="loop" muted>
+                    <div id="background-img"  class="embed-responsive-item">
                         <img src="<?php echo $video_image['sizes']['large'];?>" title="Your browser does not support the &lt;video&gt; tag" alt="ESPN+">
-                    </video>
+                 </div>
                     <?php
                 }
                 else {
