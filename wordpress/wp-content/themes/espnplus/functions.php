@@ -148,10 +148,6 @@ add_action('init', 'replace_jquery');
 
 //added to header.php
 */
-/* adding the preferred way: https://wpengine.com/support/including-a-different-jquery-version-in-wordpress/ */
-wp_register_script( 'jquery3.3.1', 'https://code.jquery.com/jquery-3.3.1.min.js' );
-wp_add_inline_script( 'jquery3.3.1', 'var jQuery3_3_1 = $.noConflict(true);' );
-wp_enqueue_script( 'plugin-javascript', plugins_url( 'js.js', __FILE__ ), array( 'jquery3.3.1' ) );
 
 /* ------------------- */
 /**
