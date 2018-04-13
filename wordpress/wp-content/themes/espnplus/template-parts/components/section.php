@@ -64,7 +64,7 @@ if ($component !== false) {
                             <source media="(min-width: 768px)" srcset="<?echo $image['sizes']['bamtech-medium-width'];?>">
                             <source media="(min-width: 420px)" srcset="<?echo $image['sizes']['bamtech-small-width'];?>">
                             <source media="(min-width: 0px)" srcset="<?echo $image['sizes']['bamtech-small-width'];?>">
-                            <img class="featurette-image img-fluid mx-auto" src="../_images/theme/ep_valueProp_Logos_multi.png" alt="ESPN+">
+                            <img class="featurette-image img-fluid mx-auto" src="<?echo $image['sizes']['bamtech-large-width'];?>" alt="ESPN+">
                         </picture>
                        
                     </div>
