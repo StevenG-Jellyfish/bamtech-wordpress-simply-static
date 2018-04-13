@@ -57,10 +57,6 @@
 	})(window,document,'script','dataLayer','GTM-M97M4JF');</script>
 	<!-- End Google Tag Manager -->
 
-    <!-- Adobe Tracking -->
-    <script async language="JavaScript" type="text/javascript" src="<?php echo get_site_url(null , '/wp-content'); ?>/adobetracking/adobetrackingcodes.js"></script>
-    <!-- End Adobe Tracking -->
-
     <?php wp_head(); ?>
 
 </head>
