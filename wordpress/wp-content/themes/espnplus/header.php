@@ -32,9 +32,9 @@
 		setTimeout(function(){l(e)})},s.addEventListener&&s.addEventListener("load",function(){this.media=u}),s.onloadcssdefined=l,l(function(){s.media!==u&&(s.media=u)}),s};
 		"undefined"!=typeof exports?exports.loadCSS=n:e.loadCSS=n}("undefined"!=typeof global?global:this);
   		
-    	loadCSS('/wp-content/themes/espnplus/style.css');
+    	loadCSS('/wp-content/themes/espnplus/style.css?ver=<?php echo VERSION ?>' );
   	</script>
-    <noscript><link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri().'/style.css'; ?>"></noscript>
+    <noscript><link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri().'/style.css?ver='.VERSION; ?>"></noscript>
 
     <!-- Google Analytics tracking code with Optimize plugin -->
     <script>(function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;h.start=1*new Date;
