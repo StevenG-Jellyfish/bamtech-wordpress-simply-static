@@ -11,7 +11,7 @@
 /*
 * Jellyfish custom version number for cache busting
 */
-define( 'VERSION', '1' ); // increment to bust cache
+define( 'VERSION', '1' ); // increment to bust cache on css and js.
 
 /** WPML remove Language switch css */
 define('ICL_DONT_LOAD_NAVIGATION_CSS', true);
@@ -162,7 +162,6 @@ add_action('init', 'replace_jquery');
  * Enqueue scripts and styles.
  */
 function espnplus_register_scripts() {
-	echo 'VER:: '.VERSION;
 	wp_register_style( 'espnplus-style', get_stylesheet_uri(), array(), VERSION, false );
 
 	// Register scripts
