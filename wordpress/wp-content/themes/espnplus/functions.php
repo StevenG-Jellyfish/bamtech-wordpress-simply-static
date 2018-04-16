@@ -6,6 +6,13 @@
  *
  * @package espnplus
  */
+
+
+/*
+* Jellyfish custom version number for cache busting
+*/
+define( 'VERSION', '1' ); // increment to bust cache on css and js.
+
 /** WPML remove Language switch css */
 define('ICL_DONT_LOAD_NAVIGATION_CSS', true);
 define('ICL_DONT_LOAD_LANGUAGE_SELECTOR_CSS', true);
@@ -154,11 +161,25 @@ add_action('init', 'replace_jquery');
  * 
  * Enqueue scripts and styles.
  */
+function espnplus_register_scripts() {
+	wp_register_style( 'espnplus-style', get_stylesheet_uri(), array(), VERSION, false );
+
+	// Register scripts
+	//wp_register_script('jquery_3.1.1', 'http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js', array(), false, '3.1.1');		
+	wp_register_script( 'espnplus-top', get_template_directory_uri() . '/js/espnplus-top.min.js', array(), VERSION, false );
+	wp_register_script( 'espnplus-bottom', get_template_directory_uri() . '/js/espnplus-bottom.min.js', array(), VERSION, true );
+}
+add_action('init', 'espnplus_register_scripts');
+
 function espnplus_scripts() {
-	// wp_enqueue_script('jquery', 'http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js', array(),'20151215', false);
-	wp_enqueue_style( 'espnplus-style', get_stylesheet_uri(),array(),'20151215', false );
-	wp_enqueue_script( 'espnplus-top', get_template_directory_uri() . '/js/espnplus-top.min.js', array(), '20151215', false );
-	wp_enqueue_script( 'espnplus-bottom', get_template_directory_uri() . '/js/espnplus-bottom.min.js', array(), '20151215', true );
+	// styles
+	wp_enqueue_style( 'espnplus-style');
+	
+	// enqueue scripts
+	// wp_enqueue_script('jquery_3.1.1');
+	wp_enqueue_script('espnplus-top');
+	wp_enqueue_script('espnplus-bottom');
+
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
