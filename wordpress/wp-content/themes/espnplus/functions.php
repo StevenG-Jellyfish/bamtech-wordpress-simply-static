@@ -143,7 +143,7 @@ function espnplus_widgets_init() {
 add_action( 'widgets_init', 'espnplus_widgets_init' );
 /* --- */
 //Making jQuery to load from Google Library
-/*function replace_jquery() {
+function replace_jquery() {
 	if (!is_admin()) {
  		// comment out the next two lines to load the local copy of jQuery
  		wp_deregister_script('jquery');
@@ -151,10 +151,10 @@ add_action( 'widgets_init', 'espnplus_widgets_init' );
  		wp_enqueue_script('jquery');
  	}
 }
-add_action('init', 'replace_jquery');
+add_action('wp_enqueue_scripts', 'replace_jquery');
 
 //added to header.php
-*/
+
 
 /* ------------------- */
 /**
@@ -165,7 +165,6 @@ function espnplus_register_scripts() {
 	wp_register_style( 'espnplus-style', get_stylesheet_uri(), array(), VERSION, false );
 
 	// Register scripts
-	//wp_register_script('jquery_3.1.1', 'http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js', array(), false, '3.1.1');		
 	wp_register_script( 'espnplus-top', get_template_directory_uri() . '/js/espnplus-top.min.js', array(), VERSION, false );
 	wp_register_script( 'espnplus-bottom', get_template_directory_uri() . '/js/espnplus-bottom.min.js', array(), VERSION, true );
 }
@@ -176,7 +175,6 @@ function espnplus_scripts() {
 	wp_enqueue_style( 'espnplus-style');
 	
 	// enqueue scripts
-	// wp_enqueue_script('jquery_3.1.1');
 	wp_enqueue_script('espnplus-top');
 	wp_enqueue_script('espnplus-bottom');
 
