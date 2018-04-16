@@ -15,8 +15,6 @@
 <head>
 
     <style>.async-hide { opacity: 0 !important} </style>
-
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>   
     
     <meta charset="<?php bloginfo( 'charset' ); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -32,9 +30,9 @@
 		setTimeout(function(){l(e)})},s.addEventListener&&s.addEventListener("load",function(){this.media=u}),s.onloadcssdefined=l,l(function(){s.media!==u&&(s.media=u)}),s};
 		"undefined"!=typeof exports?exports.loadCSS=n:e.loadCSS=n}("undefined"!=typeof global?global:this);
   		
-    	loadCSS('/wp-content/themes/espnplus/style.css');
+    	loadCSS('/wp-content/themes/espnplus/style.css?ver=<?php echo VERSION ?>' );
   	</script>
-    <noscript><link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri().'/style.css'; ?>"></noscript>
+    <noscript><link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri().'/style.css?ver='.VERSION; ?>"></noscript>
 
     <!-- Google Analytics tracking code with Optimize plugin -->
     <script>(function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;h.start=1*new Date;
