@@ -152,10 +152,6 @@ function replace_jquery() {
  	}
 }
 add_action('wp_enqueue_scripts', 'replace_jquery');
-
-//added to header.php
-
-
 /* ------------------- */
 /**
  * 
@@ -247,6 +243,3 @@ function wpshout_custom_sizes( $sizes ) {
 add_filter( 'auto_update_plugin', '__return_false' );
 add_filter( 'auto_update_theme', '__return_false' );
 /* -------- */
-
-
-
