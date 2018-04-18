@@ -81,7 +81,10 @@ section.league-toc {
                         margin: 0;
                         padding: 0;
                         background-color: $espn-accordion-bg-grey;
-
+                        :focus {
+                            outline:none;
+                            border:none;
+                        }
                         a {
                             margin: 0;
                             padding: 0;
@@ -152,7 +155,7 @@ section.league-toc {
                     .card {
                         float: right;
                     }
-                    // float:right;
+                    // float:right;accordion
                    // align-self:flex-end;
                 }
 

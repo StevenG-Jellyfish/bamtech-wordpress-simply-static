@@ -2630,6 +2630,9 @@ section.league-toc {
             margin: 0;
             padding: 0;
             background-color: #191919; }
+            section.league-toc .container .accordion-container .accordion .card .card-header :focus {
+              outline: none;
+              border: none; }
             section.league-toc .container .accordion-container .accordion .card .card-header a {
               margin: 0;
               padding: 0;
