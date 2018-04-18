@@ -205,8 +205,7 @@ pipeline {
                      slackSend channel: '#deploy',
                          color: 'good',
                          message: "All images deployed successfully to to production, Please access > (<${env.RUN_DISPLAY_URL}|Open>) and accept or decline build to continue.."
-             
-                     input message: "Image's ${WORDPRESS}, ${NGINX} and ${VARNISH} have been released to ${PROD}, please test and confirm..."
+
                     }
                     
                   always {
