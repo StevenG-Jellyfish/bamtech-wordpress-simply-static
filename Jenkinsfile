@@ -93,6 +93,7 @@ pipeline {
                         // 1. jelly.json - authenticate with AWS
                         // 2. env.run - renamed to auth.sh - pulls the deploy key
                         // 3. env.tagger - environment script onto the container that does the image tagging
+                        echo "[DESC] Copying environment keys"
                         sh "sudo cp ${env.key} jelly.json;sudo cp ${env.run} auth.sh;sudo cp ${env.tagger} tagger.sh"
                         
                         // Setting permissions on the above scripts
