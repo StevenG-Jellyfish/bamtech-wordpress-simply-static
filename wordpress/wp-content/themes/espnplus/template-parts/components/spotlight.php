@@ -40,7 +40,7 @@ function isMobile(){
     <section class="jumbotron text-center">
         <div class="container">
             <!-- <a class="jumbotron-login" href="https://secure.web.plus.espn.com">Log In</a> -->
-            <h1 class="jumbotron-heading"><?php the_field('spotlight_overlogo_text', $component);?></h1>
+            <h1 class="jumbotron-heading"><?php the_field('spotlight_overlogo_text', $component, false);?></h1>
             <div class="jumbotron-logo">
     			<?php $image = get_field('spotlight_logo_image', $component);?>
                 <img src="<?php echo $image['sizes']['medium'];?>" alt="ESPN+"> 
@@ -85,7 +85,7 @@ function isMobile(){
                     // Do something for only desktop users
                     ?>
                     <div id="embed-responsive-16by9" class="">
-                        <video id="background-movie"  class="embed-responsive-item" preload="preload" autoplay="autoplay" loop="loop" muted>
+                        <video id="background-movie"  class="embed-responsive-item" autoplay="autoplay" loop="loop" muted>
                             <source src="<?php echo $video['url'];?>" type="video/mp4">
                             <img src="<?php echo $video_image['sizes']['large'];?>" title="Your browser does not support the &lt;video&gt; tag" alt="ESPN+">
                         </video>

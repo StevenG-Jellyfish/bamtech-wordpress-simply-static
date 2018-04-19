@@ -3657,7 +3657,7 @@ body {
   margin: 0 0 0 0;
   padding: 0 0 0 0;
   background-color: black;
-  font-weight: 16px;
+  font-size: 16px;
   line-height: 1.500rem; }
 
 .espn-cta-container {
@@ -3731,10 +3731,6 @@ body {
 .btn {
   transition: none; }
 
-/*!
-Theme Name: espnplus
-Stub Name:  global_header.scss 
-*/
 #masthead {
   width: 100%;
   z-index: 16777270;
@@ -3884,11 +3880,6 @@ Stub Name:  global_header.scss
   text-decoration: none;
   color: white; }
 
-/*!
-Theme Name          :   espnplus
-Stub Name           :   component_spotlight.scss 
-Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.html
-*/
 :root {
   --jumbotron-padding-y: 3rem; }
 
@@ -4064,11 +4055,6 @@ Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/hero.htm
         font-size: 0.750rem;
         line-height: 1.125rem; } }
 
-/*!
-Theme Name          :   espnplus
-Stub Name           :   component_section.scss 
-Component Souce     :   http://jf-style-guide.sgel6.dev.jellyfish.local/feature.html
-*/
 section.section {
   max-width: 1280px;
   margin: 0 auto;
