@@ -14,15 +14,19 @@ RUN echo 'http://alpine.gliderlabs.com/alpine/edge/main' > /etc/apk/repositories
 
 ENV PHPREDIS_VERSION 3.0.0
 
+RUN mkdir /home/wordpress/
+
 RUN mkdir -p /usr/src/php/ext/redis \
     && curl -L https://github.com/phpredis/phpredis/archive/$PHPREDIS_VERSION.tar.gz | tar xvz -C /usr/src/php/ext/redis --strip 1 \
     && echo 'redis' >> /usr/src/php-available-exts \
     && docker-php-ext-install redis
 
+
 COPY wordpress-entrypoint.sh /usr/local/bin/wordpress-entrypoint.sh
 COPY wordpress-php.ini /usr/local/etc/php/conf.d/wordpress-php.ini
 COPY .htaccess /var/www/html/.htaccess
 COPY wp-content /var/www/html/wp-content
+COPY wp-content/uploads /home/wordpress/uploads/
 COPY wordpress-cron /etc/crontabs/wordpress
 
 RUN chmod 600 /etc/crontabs/wordpress \

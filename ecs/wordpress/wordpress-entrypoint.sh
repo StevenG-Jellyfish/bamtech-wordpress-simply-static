@@ -164,8 +164,12 @@ COMMENT
     sed -i 's/'"$OLDMEM"'/'"$MEM"'/' /var/www/html/wp-content/w3tc-config/master.php &&  chmod 444 /var/www/html/wp-content/w3tc-config/master.php 
     sed -i 's;"pgcache.enabled": false,;"pgcache.enabled": true,;g' /var/www/html/wp-content/w3tc-config/master.php
     sed -i 's;"minify.enabled": false,;"minify.enabled": true,;g' /var/www/html/wp-content/w3tc-config/master.php
+    sed -i '317s;"";"espnplus-top.min.js", "espnplus-bottom.min.js";g' /var/www/html/wp-content/w3tc-config/master.php
+    sed -i '320s;"";"espnplus-critical.min.css", "espnplus-non-critical.min.css";g'  /var/www/html/wp-content/w3tc-config/master.php
     sed -i 's;"pgcache.engine": "file_generic",;"pgcache.engine": "memcached",;g' /var/www/html/wp-content/w3tc-config/master.php
     sed -i 's;"minify.engine": "file";"minify.engine": "memcached";g' /var/www/html/wp-content/w3tc-config/master.php
+
+
 
     # && chattr +i /var/www/html/wp-content/w3tc-config/master.php
     wp plugin activate --allow-root sitepress-multilingual-cms
