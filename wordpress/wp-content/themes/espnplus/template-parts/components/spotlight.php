@@ -20,8 +20,6 @@ function isMobile(){
     return $device;
 }
 
-// echo isMobile();
-
 /* ------- */
  $page_id = get_query_var('page_override_id');
 
