@@ -19,7 +19,6 @@ function isMobile(){
     }
     return $device;
 }
-
 /* ------- */
  $page_id = get_query_var('page_override_id');
 
@@ -51,12 +50,11 @@ function isMobile(){
                     <a id="spotlight_cta" href="<?php echo $link['url'];?>" class="btn btn-primary espn-cta" ><?php the_field('spotlight_cta_text', $component,false);?></a>
                 </div>
             </div>
-            <?php }?>
-
+            <?php 
+        }
+        ?>
             <p class="below-cta"><?php echo $tracking_added;?></p>
-    	
         </div>
-    	
         <?php 
             $video = get_field('spotlight_background-video', $component);
             $small_video = get_field('spotlight_background_small_video', $component);
@@ -95,9 +93,7 @@ function isMobile(){
                     <?php
                 }
                 ?>
-            
         </div>
-
     </section>
    
 <?php

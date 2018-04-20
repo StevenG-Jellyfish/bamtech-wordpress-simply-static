@@ -41,7 +41,7 @@ $acc_count=0;
 function card($acc_count, $section_id) {        
     $text = get_field('league_accordion_text', $section_id, false);  
     $body = get_field('league_accordion_body', $section_id);
-    $output = <<< EndHTML
+    $output = <<<EndHTML
           
             <div class="card">
         
