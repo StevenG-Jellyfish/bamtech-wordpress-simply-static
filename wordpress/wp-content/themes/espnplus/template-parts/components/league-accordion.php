@@ -22,14 +22,12 @@ $component = get_field('component_league_accordion', $page_id);
 */ 
 
 if ($component !== false) {
-    
-    //print_r($component);
+
     $section_ids = array();
     
     foreach($component as $value){
         $section_ids[] = $value['component_league_accordion_item'];
     }
-    //print_r($section_ids);
 
 
 /* 
