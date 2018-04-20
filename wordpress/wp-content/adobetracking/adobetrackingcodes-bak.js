@@ -145,8 +145,7 @@ function loadPlugins(s) {
 var s_omni = new AppMeasurement();
 
 //check for live or UAT environment
-//s_account = window.location.hostname.includes("watch.espnplus.com")? 'wdgespcom,wdgespge': 'wdgespncomdev';
-s_account = (window.location.hostname.search(/watch\.espnplus\.com/i) >= 0) ? 'wdgespcom,wdgespge': 'wdgespncomdev';
+s_account = window.location.hostname.includes("watch.espnplus.com")? 'wdgespcom,wdgespge': 'wdgespncomdev';
 
 s_omni.account=s_account;
 
