@@ -97,7 +97,7 @@ function isMobile(){
                     <?php
                 }
                 ?>
-            </div>
+            
         </div>
 
     </section>
