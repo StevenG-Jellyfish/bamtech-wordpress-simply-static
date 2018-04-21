@@ -19,9 +19,6 @@ function isMobile(){
     }
     return $device;
 }
-
-// echo isMobile();
-
 /* ------- */
  $page_id = get_query_var('page_override_id');
 
@@ -40,7 +37,7 @@ function isMobile(){
     <section class="jumbotron text-center">
         <div class="container">
             <!-- <a class="jumbotron-login" href="https://secure.web.plus.espn.com">Log In</a> -->
-            <h1 class="jumbotron-heading"><?php the_field('spotlight_overlogo_text', $component);?></h1>
+            <h1 class="jumbotron-heading"><?php the_field('spotlight_overlogo_text', $component, false);?></h1>
             <div class="jumbotron-logo">
     			<?php $image = get_field('spotlight_logo_image', $component);?>
                 <img src="<?php echo $image['sizes']['medium'];?>" alt="ESPN+"> 
@@ -53,12 +50,11 @@ function isMobile(){
                     <a id="spotlight_cta" href="<?php echo $link['url'];?>" class="btn btn-primary espn-cta" ><?php the_field('spotlight_cta_text', $component,false);?></a>
                 </div>
             </div>
-            <?php }?>
-
+            <?php 
+        }
+        ?>
             <p class="below-cta"><?php echo $tracking_added;?></p>
-    	
         </div>
-    	
         <?php 
             $video = get_field('spotlight_background-video', $component);
             $small_video = get_field('spotlight_background_small_video', $component);
@@ -85,7 +81,7 @@ function isMobile(){
                     // Do something for only desktop users
                     ?>
                     <div id="embed-responsive-16by9" class="">
-                        <video id="background-movie"  class="embed-responsive-item" preload="preload" autoplay="autoplay" loop="loop" muted>
+                        <video id="background-movie"  class="embed-responsive-item" autoplay="autoplay" loop="loop" muted>
                             <source src="<?php echo $video['url'];?>" type="video/mp4">
                             <img src="<?php echo $video_image['sizes']['large'];?>" title="Your browser does not support the &lt;video&gt; tag" alt="ESPN+">
                         </video>
@@ -97,9 +93,7 @@ function isMobile(){
                     <?php
                 }
                 ?>
-            </div>
         </div>
-
     </section>
    
 <?php
