@@ -22,14 +22,12 @@ $component = get_field('component_league_accordion', $page_id);
 */ 
 
 if ($component !== false) {
-    
-    //print_r($component);
+
     $section_ids = array();
     
     foreach($component as $value){
         $section_ids[] = $value['component_league_accordion_item'];
     }
-    //print_r($section_ids);
 
 
 /* 
@@ -41,9 +39,9 @@ $pos_class = array('One','Two','Three','Four','Five','Six','Seven','Eight');
 $acc_count=0;
 
 function card($acc_count, $section_id) {        
-    $text = get_field('league_accordion_text', $section_id);  
+    $text = get_field('league_accordion_text', $section_id, false);  
     $body = get_field('league_accordion_body', $section_id);
-    $output = <<< EndHTML
+    $output = <<<EndHTML
           
             <div class="card">
         
@@ -51,7 +49,7 @@ function card($acc_count, $section_id) {
                 <div class="card-header" role="tab" id="heading$acc_count">
                     <a data-toggle="collapse" data-parent="#league-toc-accordion" href="#collapse$acc_count" aria-expanded="false" aria-controls="collapse$acc_count">
                         <h5 class="mb-0">
-                            $text <i class="fa fa-chevron-down"></i></i>
+                            $text <i class="fa fa-chevron-down"></i>
                         </h5>
                     </a>
                 </div>

@@ -2176,10 +2176,6 @@
   overflow: visible;
   clip: auto; }
 
-/*!
-Theme Name: espnplus
-Stub Name:  global_devices.scss 
-*/
 section.devices-bar {
   display: block;
   width: 100%;
@@ -2255,10 +2251,6 @@ section.devices-bar {
             font-size: .500rem;
             line-height: .750rem; }
 
-/*!
-Theme Name: espnplus
-Stub Name:  global_toc.scss 
-*/
 section.terms-conditions {
   width: 100%;
   max-width: 100%;
@@ -2565,10 +2557,6 @@ section.terms-conditions {
       .footer-links .link-container {
         display: block; } }
 
-/*!
-Theme Name: espnplus
-Stub Name:  global_league_accordion.scss 
-*/
 section.league-toc {
   position: relative;
   display: block;
