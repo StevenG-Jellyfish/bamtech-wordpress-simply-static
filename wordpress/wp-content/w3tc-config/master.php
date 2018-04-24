@@ -1,4 +1,4 @@
-<?php exit; ?>{
+<?php $a=false;if($a){ ?>{
     "version": "0.9.6",
     "cluster.messagebus.debug": false,
     "cluster.messagebus.enabled": false,
@@ -686,3 +686,4 @@
     "plugin.license_key": "",
     "plugin.type": ""
 }
+<?php }?>
