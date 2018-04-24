@@ -25,17 +25,17 @@ jQuery(function($) {
     s_omni.contextData["league"] = ALeague;
     s_omni.contextData["edition"] = ALanguage;
     s_omni.contextData["paywallvisitcount"] = s_omni.getVisitNum();
-    s_omni.contextData["lastvisit"] = s_omni.getDaysSinceLastVisit("s_last");
+    s_omni.contextData["lastvisit"] = s_omni.getDaysSinceLastVisit();
     s_omni.contextData["navmethod"] = "external marketing";
 
     var s_code=s_omni.t();if(s_code)document.write(s_code);
 
-    /* Clicks on header CTA */
-    $("#header_cta").on("click", function(t) {
-        
+     /* Clicks on header CTA */
+     $("#header_cta").on("click", function(t) {
+            
         t.preventDefault();
         var catDays = ctaDays($(this).html(),ALanguage);
-            
+         
         try {
             var r = s_gi(s_account);
             r.linkTrackVars = "products,contextData.edition,contextData.site,contextData.linkid,contextData.purchasemethod,contextData.buylocation";
