@@ -1,4 +1,4 @@
- /*find current language*/
+/*find current language*/
 var ALanguage = (LangCode=='es')? "es":"en-us";
 var Ex_cid = s_omni.Util.getQueryParam("ex_cid");
 
@@ -25,18 +25,46 @@ s_omni.contextData["paywallvisitcount"] = s_omni.getVisitNum();
 s_omni.contextData["lastvisit"] = s_omni.getDaysSinceLastVisit("s_last");
 s_omni.contextData["navmethod"] = "external marketing";
 
-var s_code=s_omni.t();if(s_code)document.write(s_code);
+s_omni.contextData["unid"] = s_omni.Util.cookieRead("UNID");
+s_omni.contextData["swid"] = s_omni.Util.cookieRead("SWID");
+
+if(!s_omni.contextData["swid"] && s_omni.contextData["unid"]){
+  s_omni.contextData["swid"] = s_omni.contextData["unid"];
+}
+
+function write_s_code(){
+  var s_code=s_omni.t();
+  if(s_code){ 
+    document.write(s_code);
+  }
+}
+
+/* Get UNID Value */
+if(!s_omni.contextData["unid"] && (typeof unid != "undefined") && unid){
+  unid.getData(function(data){
+    s_omni.contextData["unid"] = data.unid;
+
+    if(!s_omni.contextData["swid"] && s_omni.contextData["unid"]){
+      s_omni.contextData["swid"] = s_omni.contextData["unid"];
+    }
+
+    write_s_code();
+  })
+} 
+else{
+  write_s_code();
+}
 
 window.jQuery && $(function() {
         /* Clicks on header CTA */
         $("#header_cta").on("click", function(t) {
-       
+            
             t.preventDefault();
             var catDays = ctaDays($(this).html(),ALanguage);
              
             try {
                 var r = s_gi(s_account);
-                r.linkTrackVars = "products,contextData.edition,contextData.site,contextData.linkid,contextData.purchasemethod,contextData.buylocation";
+                r.linkTrackVars = "products,contextData.edition,contextData.site,contextData.linkid,contextData.purchasemethod,contextData.buylocation,contextData.unid,contextData.swid";
                 r.linkTrackEvents = "";
                 r.contextData["edition"] = ALanguage;
                 r.contextData["site"] = "espnplus";
@@ -59,7 +87,7 @@ window.jQuery && $(function() {
 
             try {
                 var r = s_gi(s_account);
-                r.linkTrackVars = "products,contextData.edition,contextData.site,contextData.linkid,contextData.purchasemethod,contextData.buylocation";
+                r.linkTrackVars = "products,contextData.edition,contextData.site,contextData.linkid,contextData.purchasemethod,contextData.buylocation,contextData.unid,contextData.swid";
                 r.linkTrackEvents = "";
                 r.contextData["edition"] = ALanguage;
                 r.contextData["site"] = "espnplus";
@@ -92,5 +120,13 @@ window.jQuery && $(function() {
             
         }
 
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
 });
-
