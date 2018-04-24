@@ -7189,30 +7189,16 @@ Visitor.getInstance=function(q,v){var y,a=window.s_c_il,m;0>q.indexOf("@")&&(q+=
          * Plugin: getNewRepeat 1.2 - Returns whether user is new or repeat
          */
         s.getNewRepeat = (Function("return (function(d,cn) { var s=this,e=new Date(),cval,sval,ct=e.getTime();d=d?d:30;cn=cn?cn:'s_nr';e.setTime(ct+d*24*60*60*1000);cval=s.c_r(cn);if(cval.length==0){s.c_w(cn,ct+'-New',e);return'New';}sval=s.split(cval,'-');if(ct-sval[0]<30*60*1000&&sval[1]=='New'){s.c_w(cn,ct+'-New',e);return'New';}else{s.c_w(cn,ct+'-Repeat',e);return'Repeat';}; });"))();
-
-                /*                                                                                                                             
-                 * Plugin: getVisitNum - version 3.0
-                 */
-                s.getVisitNum = (Function("return (function(tp,c,c2,"
-                +"var s=this,e=new Date,cval,cvisit,ct=e.getTime(),d;if(!tp){tp='m';}"
-                +"if(tp=='m'||tp=='w'||tp=='d'){eo=s.endof(tp),y=eo.getTime();e.setTi"
-                +"me(y);}else {d=tp*86400000;e.setTime(ct+d);}if(!c){c='s_vnum';}if(!"
-                +"c2){c2='s_invisit';}cval=s.c_r(c);if(cval){var i=cval.indexOf('&vn="
-                +"'),str=cval.substring(i+4,cval.length),k;}cvisit=s.c_r(c2);if(cvisi"
-                +"t){if(str){e.setTime(ct+1800000);s.c_w(c2,'true',e);return str;}els"
-                +"e {return 'unknown visit number';}}else {if(str){str++;k=cval.substri"
-                +"ng(0,i);e.setTime(k);s.c_w(c,k+'&vn='+str,e);e.setTime(ct+1800000);"
-                +"s.c_w(c2,'true',e);return str;}else {s.c_w(c,e.getTime()+'&vn=1',e)"
-                +";e.setTime(ct+1800000);s.c_w(c2,'true',e);return 1;}}"))();
+      
+        /*                                                                                                                             
+        * Plugin: getVisitNum - version 3.0
+        */
+        s.getVisitNum = (Function("return (function(tp,c,c2){var s=this,e=new Date,cval,cvisit,ct=e.getTime(),d;if(!tp){tp='m';}if(tp=='m'||tp=='w'||tp=='d'){eo=s.endof(tp),y=eo.getTime();e.setTime(y);}else {d=tp*86400000;e.setTime(ct+d);}if(!c){c='s_vnum';}if(!c2){c2='s_invisit';}cval=s.c_r(c);if(cval){var i=cval.indexOf('&vn='),str=cval.substring(i+4,cval.length),k;}cvisit=s.c_r(c2);if(cvisit){if(str){e.setTime(ct+1800000);s.c_w(c2,'true',e);return str;}else {return 'unknown visit number';}}else {if(str){str++;k=cval.substring(0,i);e.setTime(k);s.c_w(c,k+'&vn='+str,e);e.setTime(ct+1800000);s.c_w(c2,'true',e);return str;}else {s.c_w(c,e.getTime()+'&vn=1',e);e.setTime(ct+1800000);s.c_w(c2,'true',e);return 1;}}})"))();
+        
+        s.dimo = (Function("return (function(m,y){var d=new Date(y,m+1,0);return d.getDate();})"))();
+        
+        s.endof = (Function("return (function(x){var s=this;var t=new Date;t.setHours(0);t.setMinutes(0);t.setSeconds(0);if(x=='m'){d=s.dimo(t.getMonth(),t.getFullYear())-t.getDate()+1;}else if(x=='w'){d=7-t.getDay();}else {d=1;}t.setDate(t.getDate()+d);return t;})"))();
                 
-                s.dimo = (Function("return (function(m,y,"
-                +"var d=new Date(y,m+1,0);return d.getDate();"))();
-                
-                s.endof = (Function("return (function(x,"
-                +"var s=this;var t=new Date;t.setHours(0);t.setMinutes(0);t.setSeconds(0);if(x=="
-                +"'m'){d=s.dimo(t.getMonth(),t.getFullYear())-t.getDate()+1;}else if("
-                +"x=='w'){d=7-t.getDay();}else {d=1;}t.setDate(t.getDate()+d);return "
-                +"t;"))();
                 
         // Load Media Module
         //s = _loadMediaModule(s);
