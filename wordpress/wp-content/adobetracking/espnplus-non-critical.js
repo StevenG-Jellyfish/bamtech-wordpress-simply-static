@@ -22,7 +22,7 @@ s_omni.contextData["sport"] = ASport;
 s_omni.contextData["league"] = ALeague;
 s_omni.contextData["edition"] = ALanguage;
 s_omni.contextData["paywallvisitcount"] = s_omni.getVisitNum();
-s_omni.contextData["lastvisit"] = s_omni.getDaysSinceLastVisit();
+s_omni.contextData["lastvisit"] = s_omni.getDaysSinceLastVisit("s_last");
 s_omni.contextData["navmethod"] = "external marketing";
 
 var s_code=s_omni.t();if(s_code)document.write(s_code);
