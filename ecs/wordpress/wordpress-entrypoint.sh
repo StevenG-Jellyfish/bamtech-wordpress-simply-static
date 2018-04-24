@@ -161,17 +161,20 @@ COMMENT
 
     # Insert JSON master.php
     echo "find and replace memcache variables master.php.."
-    sed -i 's/'"$OLDMEM"'/'"$MEM"'/' /var/www/html/wp-content/w3tc-config/master.php &&  chmod 444 /var/www/html/wp-content/w3tc-config/master.php 
+    sed -i 's/'"$OLDMEM"'/'"$MEM"'/' /var/www/html/wp-content/w3tc-config/master.php 
     sed -i 's;"pgcache.enabled": false,;"pgcache.enabled": true,;g' /var/www/html/wp-content/w3tc-config/master.php
     sed -i 's;"minify.enabled": false,;"minify.enabled": true,;g' /var/www/html/wp-content/w3tc-config/master.php
 
+<<<<<<< HEAD
     sed -i '312s/\[[^][]*\]/\["wp-content/themes/espnplus/js/espnplus-top.min.js", "wp-content/adobetracking/adobetrackingcodes.js", "wp-content/themes/espnplus/js/espnplus-bottom.min.js"],/g' /var/www/html/wp-content/w3tc-config/master.php
     sed -i '313s/\[[^][]*\]/\["espnplus-critical.min.css", "espnplus-non-critical.min.css", "style.css"],/g' /var/www/html/wp-content/w3tc-config/master.php
 
+=======
+>>>>>>> 05190f98448988d1182c15b6331bb787619c5701
     sed -i 's;"pgcache.engine": "file_generic",;"pgcache.engine": "memcached",;g' /var/www/html/wp-content/w3tc-config/master.php
     sed -i 's;"minify.engine": "file";"minify.engine": "memcached";g' /var/www/html/wp-content/w3tc-config/master.php
-
-
+    sed -i '312s/\[[^][]*\]/\["espnplus-top.min.js", "adobetrackingcodes.js", "espnplus-bottom.min.js"]/g' /var/www/html/wp-content/w3tc-config/master.php
+    sed -i '313s/\[[^][]*\]/\["espnplus-critical.min.css", "espnplus-non-critical.min.css", "style.css"]/g' /var/www/html/wp-content/w3tc-config/master.php &&  chmod 444 /var/www/html/wp-content/w3tc-config/master.php 
 
     # && chattr +i /var/www/html/wp-content/w3tc-config/master.php
     wp plugin activate --allow-root sitepress-multilingual-cms
