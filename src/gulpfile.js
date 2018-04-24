@@ -89,6 +89,12 @@ var paths = {
             // easing: '_vendor/js/jquery.easing.js',
             skiplink: '_vendor/js/skip-link-focus-fix.js'
             // unveil: '_vendor/js/jquery_unveil/jquery.unveil.js' //https://luis-almeida.github.io/unveil/
+        },
+        adobe: {
+            visitor:        '../wordpress/wp-content/adobetracking/VisitorAPI.js',
+            uuid:           '../wordpress/wp-content/adobetracking/uuid.js',
+            omniture:       '../wordpress/wp-content/adobetracking/omniturePlugins.js',
+            appmeasurement: '../wordpress/wp-content/adobetracking/AppMeasurement.js'
         }
     },
     watch: {
@@ -96,7 +102,8 @@ var paths = {
         scripts: '_themes/**/js/*.js',
         images: '_images/*.{png,gif,jpg}',
         svgs: '_svgs/*.svg',
-        svgpng: '_svgs/_fallback/*.png'
+        svgpng: '_svgs/_fallback/*.png',
+        adobetracking: '../wordpress/wp-contnent/*.js'
     }
 };
 
@@ -166,6 +173,10 @@ gulp.task('top-javascript', () => {
            // paths.src.vendor.button,
            // paths.src.vendor.dropdown,
             paths.src.vendor.collapse,
+            paths.src.adobe.visitor,
+            paths.src.adobe.omniture,
+            paths.src.adobe.appmeasurement,
+            paths.src.adobe.uuid,
             paths.src.top_scripts
         ])
         // .pipe(debug({title: '[1] Files in Stream:'}))
