@@ -2547,6 +2547,7 @@ section.terms-conditions {
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5rem;
+  margin-top: 8px;
   margin-bottom: 30px; }
   .footer-links .link-container {
     width: 100%;
@@ -2575,7 +2576,7 @@ section.league-toc {
     padding: 0 0 0 0;
     border-top: 1px solid #636363; }
     section.league-toc .container .copyright {
-      margin: 3.375rem 0 1.5rem 0;
+      margin: 50px 0 18px 0;
       text-align: left;
       color: #636363; }
     @media (max-width: 767px) {
