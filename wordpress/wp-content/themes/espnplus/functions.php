@@ -180,6 +180,15 @@ function espnplus_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'espnplus_scripts' );
 
+/* Asyc wp_enqueue_script
+*/
+function add_async_attribute($tag, $handle) {
+    if ( 'espnplus-bottom' !== $handle )
+        return $tag;
+    return str_replace( ' src', ' async="async" src', $tag );
+}
+add_filter('script_loader_tag', 'add_async_attribute', 10, 2);
+
 /**
  * Implement the Custom Header feature.
  */
