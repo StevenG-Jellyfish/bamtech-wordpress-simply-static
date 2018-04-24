@@ -7223,7 +7223,7 @@ Visitor.getInstance=function(q,v){var y,a=window.s_c_il,m;0>q.indexOf("@")&&(q+=
  Configuration
 */
 var s_omni = new AppMeasurement();
-s_account="wdgespncomdev";
+s_account = (window.location.hostname.search(/watch\.espnplus\.com/i) >= 0) ? 'wdgespcom,wdgespge': 'wdgespncomdev';
 s_omni.account=s_account;
 
 s_omni.trackDownloadLinks = true;
