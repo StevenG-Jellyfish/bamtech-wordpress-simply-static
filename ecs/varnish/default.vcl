@@ -138,8 +138,8 @@ sub vcl_backend_response {
          # Marker for vcl_deliver to reset Age: /
         set beresp.http.magicmarker = "1";
 
-        set beresp.ttl = 10m;
-        set beresp.grace = 10m;
+        set beresp.ttl = 600s;
+        set beresp.grace = 600s;
 
         return (deliver);
 
@@ -152,10 +152,10 @@ sub vcl_backend_response {
     unset beresp.http.set-cookie;
 
     # A TTL of 1h
-    set beresp.ttl = 3600s;
+    set beresp.ttl = 900s;
 
     # Define the default grace period to serve cached content
-    set beresp.grace = 3600s;
+    set beresp.grace = 900s;
 
     return (deliver);
 }

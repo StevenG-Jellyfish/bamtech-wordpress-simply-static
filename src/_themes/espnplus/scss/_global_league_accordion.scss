@@ -1,9 +1,3 @@
-/*!
-Theme Name: espnplus
-Stub Name:  global_league_accordion.scss 
-*/
-
-
 section.league-toc {
     position: relative;
     display: block;
@@ -24,7 +18,8 @@ section.league-toc {
         border-top: 1px solid $espn-accordion-txt-grey;
 
         .copyright {
-            margin: 3.375rem 0 1.5rem 0;
+            //margin: 3.375rem 0 1.5rem 0;
+            margin: 50px 0 18px 0;
             text-align: left;
             color: $espn-accordion-txt-grey;
 
@@ -81,7 +76,10 @@ section.league-toc {
                         margin: 0;
                         padding: 0;
                         background-color: $espn-accordion-bg-grey;
-
+                        :focus {
+                            outline:none;
+                            border:none;
+                        }
                         a {
                             margin: 0;
                             padding: 0;
@@ -152,7 +150,7 @@ section.league-toc {
                     .card {
                         float: right;
                     }
-                    // float:right;
+                    // float:right;accordion
                    // align-self:flex-end;
                 }
 

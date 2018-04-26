@@ -3,9 +3,6 @@ set -euo pipefail
 
 
 
-#curl -o /usr/local/bin/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
-#chmod +x /usr/local/bin/wp
-
 if [[ "$1" == apache2* ]] || [ "$1" == php-fpm ]; then
     if ! [ -e index.php -a -e wp-includes/version.php ]; then
         echo >&2 "WordPress not found in $PWD - copying now..."
@@ -16,7 +13,9 @@ if [[ "$1" == apache2* ]] || [ "$1" == php-fpm ]; then
         tar cf - --one-file-system -C /usr/src/wordpress . | tar xf -
         echo >&2 "Complete! WordPress has been successfully copied to $PWD"
     fi
-
+ 
+    
+ 
     cd /var/www/html
     chown -R www-data /var/www/html
 

@@ -2176,10 +2176,6 @@
   overflow: visible;
   clip: auto; }
 
-/*!
-Theme Name: espnplus
-Stub Name:  global_devices.scss 
-*/
 section.devices-bar {
   display: block;
   width: 100%;
@@ -2220,7 +2216,7 @@ section.devices-bar {
       flex-wrap: wrap;
       flex-direction: row;
       justify-content: space-around;
-      max-width: 1000px;
+      max-width: 1200px;
       margin: 0 auto; }
       section.devices-bar .container .devices-container .device {
         align-items: center;
@@ -2233,14 +2229,11 @@ section.devices-bar {
           margin: 0 auto;
           display: block;
           padding-bottom: .75rem;
-          max-width: 160px;
           height: 3.5rem;
           width: auto; }
           section.devices-bar .container .devices-container .device .device-img img {
-            display: inline-block;
             width: auto;
-            height: 100%;
-            max-width: 160px; }
+            height: 100%; }
         section.devices-bar .container .devices-container .device .device-copy {
           clear: both;
           display: block;
@@ -2258,10 +2251,6 @@ section.devices-bar {
             font-size: .500rem;
             line-height: .750rem; }
 
-/*!
-Theme Name: espnplus
-Stub Name:  global_toc.scss 
-*/
 section.terms-conditions {
   width: 100%;
   max-width: 100%;
@@ -2558,6 +2547,7 @@ section.terms-conditions {
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5rem;
+  margin-top: 8px;
   margin-bottom: 30px; }
   .footer-links .link-container {
     width: 100%;
@@ -2568,10 +2558,6 @@ section.terms-conditions {
       .footer-links .link-container {
         display: block; } }
 
-/*!
-Theme Name: espnplus
-Stub Name:  global_league_accordion.scss 
-*/
 section.league-toc {
   position: relative;
   display: block;
@@ -2590,7 +2576,7 @@ section.league-toc {
     padding: 0 0 0 0;
     border-top: 1px solid #636363; }
     section.league-toc .container .copyright {
-      margin: 3.375rem 0 1.5rem 0;
+      margin: 50px 0 18px 0;
       text-align: left;
       color: #636363; }
     @media (max-width: 767px) {
@@ -2633,6 +2619,9 @@ section.league-toc {
             margin: 0;
             padding: 0;
             background-color: #191919; }
+            section.league-toc .container .accordion-container .accordion .card .card-header :focus {
+              outline: none;
+              border: none; }
             section.league-toc .container .accordion-container .accordion .card .card-header a {
               margin: 0;
               padding: 0;

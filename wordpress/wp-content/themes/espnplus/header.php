@@ -15,8 +15,26 @@
 <head>
 
     <style>.async-hide { opacity: 0 !important} </style>
+    
+    <meta charset="<?php bloginfo( 'charset' ); ?>">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="profile" href="https://gmpg.org/xfn/11">
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <style>
+        <?php include('css/espnplus-critical.min.css');?>
+    </style>
+    <script>
+		!function(e){"use strict";
+		var n=function(n,t,o){function i(e){return f.body?e():void setTimeout(function(){i(e)})}var d,r,a,l,f=e.document,s=f.createElement("link"),u=o||"all";
+		return t?d=t:(r=(f.body||f.getElementsByTagName("head")[0]).childNodes,d=r[r.length-1]),a=f.styleSheets,s.rel="stylesheet",s.href=n,s.media="only x",i(function(){d.parentNode.insertBefore(s,t?d:d.nextSibling)}),l=function(e){for(var n=s.href,t=a.length;t--;)if(a[t].href===n)return e();
+		setTimeout(function(){l(e)})},s.addEventListener&&s.addEventListener("load",function(){this.media=u}),s.onloadcssdefined=l,l(function(){s.media!==u&&(s.media=u)}),s};
+		"undefined"!=typeof exports?exports.loadCSS=n:e.loadCSS=n}("undefined"!=typeof global?global:this);
+  		
+  	</script>
+    <noscript>
+        <link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri().'/style.css?ver='.VERSION; ?>">
+    </noscript>
+
     <!-- Google Analytics tracking code with Optimize plugin -->
     <script>(function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;h.start=1*new Date;
     h.end=i=function(){s.className=s.className.replace(RegExp(' ?'+y),'')};
@@ -39,17 +57,9 @@
 	<!-- End Google Tag Manager -->
 
     <!-- Adobe Tracking -->
-    <script language="JavaScript" type="text/javascript" src="<?php echo get_site_url(null , '/wp-content'); ?>/adobetracking/adobetrackingcodes.js"></script>
+    <!--<script async language="JavaScript" type="text/javascript" src="<?php echo get_site_url(null , '/wp-content'); ?>/adobetracking/adobetrackingcodes.js"></script>-->
     <!-- End Adobe Tracking -->
-    
-    <meta charset="<?php bloginfo( 'charset' ); ?>">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="profile" href="http://gmpg.org/xfn/11">
 
-    <style>
-        <?php include('css/espnplus-critical.min.css');?>
-    </style>
-      <noscript><link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri().'/style.css'; ?>"></noscript>
     <?php wp_head(); ?>
 
 </head>

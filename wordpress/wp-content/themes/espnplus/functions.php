@@ -6,10 +6,21 @@
  *
  * @package espnplus
  */
+
+
+/*
+* Jellyfish custom version number for cache busting
+*/
+define( 'VERSION', '2.1' ); // increment to bust cache on css and js.
+
 /** WPML remove Language switch css */
 define('ICL_DONT_LOAD_NAVIGATION_CSS', true);
 define('ICL_DONT_LOAD_LANGUAGE_SELECTOR_CSS', true);
 define('ICL_DONT_LOAD_LANGUAGES_JS', true);
+//
+// REMOVE EMOJI ICONS
+remove_action('wp_head', 'print_emoji_detection_script', 7);
+remove_action('wp_print_styles', 'print_emoji_styles');
 //
 if ( ! function_exists( 'espnplus_setup' ) ) :
 	/**
@@ -132,33 +143,51 @@ function espnplus_widgets_init() {
 add_action( 'widgets_init', 'espnplus_widgets_init' );
 /* --- */
 //Making jQuery to load from Google Library
-/*function replace_jquery() {
+function replace_jquery() {
 	if (!is_admin()) {
  		// comment out the next two lines to load the local copy of jQuery
  		wp_deregister_script('jquery');
- 		wp_register_script('jquery', 'http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js', false, '3.1.1');
+ 		wp_register_script('jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js', false, '3.1.1');
  		wp_enqueue_script('jquery');
  	}
 }
-add_action('init', 'replace_jquery');
-
-//added to footer.php
-*/
+add_action('wp_enqueue_scripts', 'replace_jquery');
 /* ------------------- */
 /**
  * 
  * Enqueue scripts and styles.
  */
+function espnplus_register_scripts() {
+	wp_register_style( 'espnplus-style', get_stylesheet_uri(), array(), VERSION, false );
+
+	// Register scripts
+	wp_register_script( 'espnplus-top', get_template_directory_uri() . '/js/espnplus-top.min.js', array(), VERSION, false );
+	wp_register_script( 'espnplus-bottom', get_template_directory_uri() . '/js/espnplus-bottom.min.js', array(), VERSION, true );
+}
+add_action('init', 'espnplus_register_scripts');
+
 function espnplus_scripts() {
-	// wp_enqueue_script('jquery', 'http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js', array(),'20151215', false);
-	wp_enqueue_style( 'espnplus-style', get_stylesheet_uri(),array(),'20151215', false );
-	wp_enqueue_script( 'espnplus-top', get_template_directory_uri() . '/js/espnplus-top.min.js', array(), '20151215', false );
-	wp_enqueue_script( 'espnplus-bottom', get_template_directory_uri() . '/js/espnplus-bottom.min.js', array(), '20151215', true );
+	// styles
+	wp_enqueue_style( 'espnplus-style');
+	
+	// enqueue scripts
+	wp_enqueue_script('espnplus-top');
+	wp_enqueue_script('espnplus-bottom');
+
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
 }
 add_action( 'wp_enqueue_scripts', 'espnplus_scripts' );
+
+/* Asyc wp_enqueue_script
+*/
+function add_async_attribute($tag, $handle) {
+    if ( 'espnplus-bottom' !== $handle )
+        return $tag;
+    return str_replace( ' src', ' async="async" src', $tag );
+}
+add_filter('script_loader_tag', 'add_async_attribute', 10, 2);
 
 /**
  * Implement the Custom Header feature.
@@ -223,6 +252,3 @@ function wpshout_custom_sizes( $sizes ) {
 add_filter( 'auto_update_plugin', '__return_false' );
 add_filter( 'auto_update_theme', '__return_false' );
 /* -------- */
-
-
-
