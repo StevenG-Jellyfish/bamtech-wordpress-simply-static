@@ -11,7 +11,7 @@
 /*
 * Jellyfish custom version number for cache busting
 */
-define( 'VERSION', '2.1' ); // increment to bust cache on css and js.
+define( 'VERSION', '2.2' ); // increment to bust cache on css and js.
 
 /** WPML remove Language switch css */
 define('ICL_DONT_LOAD_NAVIGATION_CSS', true);
