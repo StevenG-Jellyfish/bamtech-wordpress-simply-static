@@ -728,7 +728,7 @@ a.marketingCloudOrgID=q;a.cookieName="AMCV_"+q;a.sessionCookieName="AMCVS_"+q;a.
 r.aa);!a.idSyncDisableSyncs&&z.bb(N,G)&&(a.j(s,-1),a.e(K,G));a.getMarketingCloudVisitorID();a.getAudienceManagerLocationHint();a.getAudienceManagerBlob();a.Va(a.serverState)}else a.ba();if(!a.idSyncDisableSyncs){z.cb();x.M(window,"load",function(){l.Y=j;o.X=o.o();o.zb();var a=z;a.Da()&&a.O()});try{a.na.U(function(a){z.U(a.data)},z.Q)}catch(O){}}}
 Visitor.getInstance=function(q,v){var y,a=window.s_c_il,m;0>q.indexOf("@")&&(q+="@AdobeOrg");if(a)for(m=0;m<a.length;m++)if((y=a[m])&&"Visitor"==y._c&&y.marketingCloudOrgID==q)return y;return new Visitor(q,v)};(function(){function q(){v.Y=y}var v=window.Visitor,y=v.Oa,a=v.Ma;y||(y=!0);a||(a=!1);window.addEventListener?window.addEventListener("load",q):window.attachEvent&&window.attachEvent("onload",q);v.eb=(new Date).getTime()})();
 
-var visitor = Visitor.getInstance("EE0201AC512D2BE80A490D4C@AdobeOrg", { trackingServer: "w88.espn.com", trackingServerSecure: "sw88.espn.com", marketingCloudServer: "w88.espn.com", marketingCloudServerSecure: "sw88.espn.com" });
+//var visitor = Visitor.getInstance("EE0201AC512D2BE80A490D4C@AdobeOrg", { trackingServer: "w88.espn.com", trackingServerSecure: "sw88.espn.com", marketingCloudServer: "w88.espn.com", marketingCloudServerSecure: "sw88.espn.com" });
     function loadPlugins(s) {
         /************************* PLUGINS FUNCTIONS ************************/
         /*
@@ -814,10 +814,10 @@ s_omni.trackingServerSecure = "sw88.espn.com";
 s_omni.marketingCloudServer = "w88.espn.com";
 s_omni.marketingCloudServerSecure = "sw88.espn.com";
 
-window.visitor = new Visitor("EE0201AC512D2BE80A490D4C@AdobeOrg");
-window.visitor.trackingServer = s_omni.trackingServer;
-window.visitor.trackingServerSecure = s_omni.trackingServerSecure;
-s_omni.visitor = Visitor.getInstance("EE0201AC512D2BE80A490D4C@AdobeOrg");
+//window.visitor = new Visitor("EE0201AC512D2BE80A490D4C@AdobeOrg");
+//window.visitor.trackingServer = s_omni.trackingServer;
+//window.visitor.trackingServerSecure = s_omni.trackingServerSecure;
+//s_omni.visitor = Visitor.getInstance("EE0201AC512D2BE80A490D4C@AdobeOrg");
 
 loadPlugins(s_omni);
 
