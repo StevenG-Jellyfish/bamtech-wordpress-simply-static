@@ -68,7 +68,7 @@ function isMobile(){
                 if($isMobile == "m"){
                     ?>
                     <div id="embed-responsive-16by9" class="">
-                        <div id="background-img"  class="embed-responsive-item" style="background-image: url(<?php echo $video_image_wide['sizes']['large'];?>)">
+                        <div id="background-img"  class="embed-responsive-item" style="background-image: url(<?php echo $video_image_wide['sizes']['medium'];?>)">
                         </div>
                     </div>
                     <div id="embed-responsive-4by3" class="">
