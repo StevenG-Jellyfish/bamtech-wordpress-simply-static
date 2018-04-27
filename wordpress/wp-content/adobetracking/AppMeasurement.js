@@ -21,10 +21,10 @@ s_omni.trackingServerSecure = "sw88.espn.com";
 s_omni.marketingCloudServer = "w88.espn.com";
 s_omni.marketingCloudServerSecure = "sw88.espn.com";
 
-window.visitor = new Visitor("EE0201AC512D2BE80A490D4C@AdobeOrg");
-window.visitor.trackingServer = s_omni.trackingServer;
-window.visitor.trackingServerSecure = s_omni.trackingServerSecure;
-s_omni.visitor = Visitor.getInstance("EE0201AC512D2BE80A490D4C@AdobeOrg");
+//window.visitor = new Visitor("EE0201AC512D2BE80A490D4C@AdobeOrg");
+//window.visitor.trackingServer = s_omni.trackingServer;
+//window.visitor.trackingServerSecure = s_omni.trackingServerSecure;
+//s_omni.visitor = Visitor.getInstance("EE0201AC512D2BE80A490D4C@AdobeOrg");
 
 loadPlugins(s_omni);
 
