@@ -83,7 +83,7 @@ function isMobile(){
                     <div id="embed-responsive-16by9" class="">
                         <video id="background-movie"  class="embed-responsive-item" autoplay="autoplay" loop="loop" muted>
                             <source src="<?php echo $video['url'];?>" type="video/mp4">
-                            <img src="<?php echo $video_image['sizes']['medium'];?>" title="Your browser does not support the &lt;video&gt; tag" alt="ESPN+">
+                            
                         </video>
                     </div>
                     <div id="embed-responsive-4by3" class="">
