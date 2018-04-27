@@ -552,6 +552,9 @@ body {
   text-decoration: none;
   color: white; }
 
+.d-none {
+  display: none !important; }
+
 :root {
   --jumbotron-padding-y: 3rem; }
 
