@@ -166,8 +166,8 @@ COMMENT
     sed -i 's;"minify.enabled": false,;"minify.enabled": true,;g' /var/www/html/wp-content/w3tc-config/master.php
 
 
-    sed -i '312s/\[[^][]*\]/\["wp-content/themes/espnplus/js/espnplus-top.min.js", "wp-content/adobetracking/adobetrackingcodes.js", "wp-content/themes/espnplus/js/espnplus-bottom.min.js"],/g' /var/www/html/wp-content/w3tc-config/master.php
-    sed -i '313s/\[[^][]*\]/\["espnplus-critical.min.css", "espnplus-non-critical.min.css", "style.css"],/g' /var/www/html/wp-content/w3tc-config/master.php
+    #sed -i '312s/\[[^][]*\]/\["wp-content/themes/espnplus/js/espnplus-top.min.js", "wp-content/adobetracking/adobetrackingcodes.js", "wp-content/themes/espnplus/js/espnplus-bottom.min.js"],/g' /var/www/html/wp-content/w3tc-config/master.php
+    #sed -i '313s/\[[^][]*\]/\["espnplus-critical.min.css", "espnplus-non-critical.min.css", "style.css"],/g' /var/www/html/wp-content/w3tc-config/master.php
     
     sed -i 's;"pgcache.engine": "file_generic",;"pgcache.engine": "memcached",;g' /var/www/html/wp-content/w3tc-config/master.php
     sed -i 's;"minify.engine": "file";"minify.engine": "memcached";g' /var/www/html/wp-content/w3tc-config/master.php
