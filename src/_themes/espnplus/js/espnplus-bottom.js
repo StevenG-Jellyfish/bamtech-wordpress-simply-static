@@ -1,3 +1,19 @@
+$('img.lazy').Lazy({
+    // your configuration goes here
+    bind: "event",
+    delay: 2000,
+    scrollDirection: 'vertical',
+    visibleOnly: true,
+
+// show_while_loading: true, //best for progressive JPEG
+    afterLoad: function(element) {
+        // console.log('ok');
+    },
+    onError: function(element) {
+        console.log('error loading ' + element.data('src'));
+    }
+    });
+    //
 /*find current language*/
 var ALanguage = (LangCode=='es')? "es":"en-us";
 var Ex_cid = s_omni.Util.getQueryParam("ex_cid");
@@ -29,6 +45,7 @@ var s_code=s_omni.t();if(s_code)document.write(s_code);
 
 jQuery(function($) {
     //console.log('espnplus bottom.js loaded');    
+
      /* Clicks on header CTA */
      $("#header_cta").on("click", function(t) {
             

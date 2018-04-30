@@ -19,21 +19,7 @@
 	</div>
 
 	<script>
-           $('img.lazy').Lazy({
-			// your configuration goes here
-			bind: "event",
-            delay: 2000,
-			scrollDirection: 'vertical',
-			visibleOnly: true,
 
-   // show_while_loading: true, //best for progressive JPEG
-			afterLoad: function(element) {
-				// console.log('ok');
-			},
-			onError: function(element) {
-				console.log('error loading ' + element.data('src'));
-			}
-			});
 			//
 		loadCSS('<?php echo get_stylesheet_directory_uri().'/css/espnplus-non-critical.min.css?ver='.VERSION; ?>');
 	</script>	
