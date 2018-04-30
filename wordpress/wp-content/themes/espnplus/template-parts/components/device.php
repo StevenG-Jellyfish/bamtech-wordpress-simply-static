@@ -51,7 +51,7 @@ if ($component !== false) {
             <?php foreach($section_ids as $section_id) {?>
                 
                 <div class="device">
-                    <div class="device-img">
+                    <div class="device-img lazy">
                         <?php $image = get_field('device_image', $section_id);?>
                         <img class="device-image" src="<?echo $image['sizes']['medium'];?>" alt="<?php echo the_field('device_text', $section_id,false);?>">
                     </div>

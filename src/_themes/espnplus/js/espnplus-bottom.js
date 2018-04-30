@@ -29,7 +29,6 @@ var s_code=s_omni.t();if(s_code)document.write(s_code);
 
 jQuery(function($) {
     //console.log('espnplus bottom.js loaded');    
-
      /* Clicks on header CTA */
      $("#header_cta").on("click", function(t) {
             
