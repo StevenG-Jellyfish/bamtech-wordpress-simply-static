@@ -20,7 +20,9 @@ function appendQueryString($) {
 
 jQuery(function($) {
   //console.log('espnplus-top.js loaded:: 2');
-
   // execute the following functions when the DOM returns the 'DOMContentLoaded' status (render tree built)
   appendQueryString($);
 });
+//
+
+       

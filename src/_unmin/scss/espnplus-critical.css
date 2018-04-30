@@ -746,6 +746,81 @@ body {
         font-size: 0.750rem;
         line-height: 1.125rem; } }
 
+section.devices-bar {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 2.125rem 0 0 0;
+  background-color: #F9B300; }
+  section.devices-bar .container {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0; }
+    section.devices-bar .container .devices-header {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: PlayoffProCond-Medium, arial;
+      font-size: 2.000rem;
+      font-weight: 700;
+      letter-spacing: 0.010rem;
+      line-height: 2.750rem;
+      text-align: center;
+      padding: 0 2rem 0 2rem; }
+    section.devices-bar .container .device-small-text {
+      font-family: PlayoffProCond-Medium, arial;
+      font-size: 1.1rem; }
+    @media (max-width: 767px) {
+      section.devices-bar .container .devices-header {
+        font-size: 1.250rem;
+        line-height: 1.375rem; }
+      section.devices-bar .container .device-small-text {
+        font-size: .8rem; } }
+    section.devices-bar .container .devices-container {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
+      justify-content: space-around;
+      max-width: 1200px;
+      margin: 0 auto; }
+      section.devices-bar .container .devices-container .device {
+        align-items: center;
+        margin-bottom: 2rem;
+        margin-top: 2rem;
+        padding-left: .9rem;
+        padding-right: .9rem;
+        text-align: center; }
+        section.devices-bar .container .devices-container .device .device-img {
+          margin: 0 auto;
+          display: block;
+          padding-bottom: .75rem;
+          height: 3.5rem;
+          width: auto; }
+          section.devices-bar .container .devices-container .device .device-img img {
+            width: auto;
+            height: 100%; }
+        section.devices-bar .container .devices-container .device .device-copy {
+          clear: both;
+          display: block;
+          margin: 0 auto;
+          padding-top: .5rem;
+          border-top: 2px solid black;
+          font-weight: 700;
+          color: black;
+          width: auto;
+          font-weight: normal; }
+          section.devices-bar .container .devices-container .device .device-copy span {
+            display: block;
+            margin: 0;
+            padding: 0;
+            font-size: .500rem;
+            line-height: .750rem; }
+
 section.section {
   max-width: 1280px;
   margin: 0 auto;

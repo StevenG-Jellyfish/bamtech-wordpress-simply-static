@@ -232,17 +232,21 @@ add_action('admin_menu', 'my_custom_menu_page');
 * custom image sizes
 **/
 // Add other useful image sizes for use through Add Media modal
-add_image_size( 'bamtech-small-width', 420 );
-add_image_size( 'bamtech-medium-width', 768);
-add_image_size( 'bamtech-large-width', 990 );
+add_image_size( 'bamtech-xsmall-width', 20 );
+add_image_size( 'bamtech-small-width', 150 );
+add_image_size( 'bamtech-medium-width', 512);
+add_image_size( 'bamtech-large-width', 690 );
+add_image_size( 'bamtech-xlarge-width', 900 );
 
 // Register the three useful image sizes for use in Add Media modal
 add_filter( 'image_size_names_choose', 'wpshout_custom_sizes' );
 function wpshout_custom_sizes( $sizes ) {
     return array_merge( $sizes, array(
+		'bamtech-xsmall-width' => __( 'Bamtech XSmall Width' ),
         'bamtech-small-width' => __( 'Bamtech Small Width' ),
         'bamtech-medium-width' => __( 'Bamtech Medium Width' ),
-        'bamtech-large-width' => __( 'Bamtech Large Width' ),
+		'bamtech-large-width' => __( 'Bamtech Large Width' ),
+		'bamtech-xlarge-width' => __( 'Bamtech XLarge Width' ),
     ) );
 }
 
