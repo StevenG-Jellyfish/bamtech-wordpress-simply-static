@@ -203,3 +203,12 @@ section.league-toc {
     } // .container
 
 } // section.league-toc
+.fa-chevron-down {
+    display:inline-block;
+    float:right;
+    background:url("../imgs/chevron-down.svg") no-repeat 50% 50%;
+     width:16px;
+     height:16px;
+     margin-top:12px;
+     background-size: cover;
+}

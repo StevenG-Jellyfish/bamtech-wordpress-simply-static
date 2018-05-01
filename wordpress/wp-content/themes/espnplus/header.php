@@ -14,8 +14,6 @@
 <html <?php language_attributes(); ?>>
 <head>
 
-    <style>.async-hide { opacity: 0 !important} </style>
-    
     <meta charset="<?php bloginfo( 'charset' ); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="profile" href="https://gmpg.org/xfn/11">
@@ -34,7 +32,6 @@
     <noscript>
         <link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri().'/style.css?ver='.VERSION; ?>">
     </noscript>
-
     <!-- Google Analytics tracking code with Optimize plugin -->
     <script>(function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;h.start=1*new Date;
     h.end=i=function(){s.className=s.className.replace(RegExp(' ?'+y),'')};

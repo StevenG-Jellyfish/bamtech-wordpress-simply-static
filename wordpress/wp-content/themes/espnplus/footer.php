@@ -19,7 +19,9 @@
 	</div>
 
 	<script>
-		loadCSS('<?php echo get_stylesheet_directory_uri().'/css/'.VERSION.'espnplus-non-critical.min.css?ver='.VERSION; ?>');
+
+			//
+		loadCSS('<?php echo get_stylesheet_directory_uri().'/css/espnplus-non-critical.min.css?ver='.VERSION; ?>');
 	</script>	
 	<noscript>
 		<link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri().'/css/'.VERSION.'espnplus-non-critical.min.css?ver='.VERSION; ?>">
