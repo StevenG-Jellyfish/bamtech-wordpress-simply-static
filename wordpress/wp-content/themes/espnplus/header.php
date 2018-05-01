@@ -21,7 +21,7 @@
     <link rel="profile" href="https://gmpg.org/xfn/11">
 
     <style>
-        <?php include('css/espnplus-critical.min.css');?>
+        <?php include('css/'.VERSION.'espnplus-critical.min.css');?>
     </style>
     <script>
 		!function(e){"use strict";

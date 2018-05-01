@@ -11,7 +11,8 @@
 /*
 * Jellyfish custom version number for cache busting
 */
-define( 'VERSION', '2.3' ); // increment to bust cache on css and js.
+define( 'VERSION', '20180501001' ); // increment to bust cache on css and js.
+// needs to match version in gulp file.
 
 /** WPML remove Language switch css */
 define('ICL_DONT_LOAD_NAVIGATION_CSS', true);
@@ -161,8 +162,8 @@ function espnplus_register_scripts() {
 	wp_register_style( 'espnplus-style', get_stylesheet_uri(), array(), VERSION, false );
 
 	// Register scripts
-	wp_register_script( 'espnplus-top', get_template_directory_uri() . '/js/espnplus-top.min.js', array(), VERSION, false );
-	wp_register_script( 'espnplus-bottom', get_template_directory_uri() . '/js/espnplus-bottom.min.js', array(), VERSION, true );
+	wp_register_script( 'espnplus-top', get_template_directory_uri() . '/js/'.VERSION.'espnplus-top.min.js', array(), VERSION, false );
+	wp_register_script( 'espnplus-bottom', get_template_directory_uri() . '/js/'.VERSION.'espnplus-bottom.min.js', array(), VERSION, true );
 }
 add_action('init', 'espnplus_register_scripts');
 
