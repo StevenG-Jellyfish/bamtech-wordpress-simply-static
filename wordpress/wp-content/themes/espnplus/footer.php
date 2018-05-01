@@ -24,7 +24,7 @@
 		loadCSS('<?php echo get_stylesheet_directory_uri().'/css/espnplus-non-critical.min.css?ver='.VERSION; ?>');
 	</script>	
 	<noscript>
-		<link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri().'/css/espnplus-non-critical.min.css?ver='.VERSION; ?>">
+		<link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri().'/css/'.VERSION.'espnplus-non-critical.min.css?ver='.VERSION; ?>">
 	</noscript>
 	<script src="//cdn.unid.go.com/js/unid.min.js" data-client="ESPN-ONESITE.WEB-PROD"></script>
     <script>
