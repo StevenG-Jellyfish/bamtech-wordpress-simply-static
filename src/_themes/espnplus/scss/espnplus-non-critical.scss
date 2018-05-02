@@ -1,4 +1,4 @@
-@import "font-awesome";
+/* @import "font-awesome"; */
 // bootstrap overrides
 $yellow: #F9B300 !default;
 $primary: $yellow !default;
@@ -9,10 +9,6 @@ $espn-toc-txt-grey: #c5c9d1;
 $espn-accordion-bg-grey: #191919;
 $espn-accordion-txt-grey: #636363;
 
-@import "global_devices";
-
 @import "global_toc";
-
 @import "global_footer_link";
-
 @import "global_league_accordion";

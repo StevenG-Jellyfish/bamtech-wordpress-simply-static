@@ -43,7 +43,7 @@ if ($component !== false) {
     ?>
        
         <section class="section <?echo $odd_even; if ($section_id === reset($section_ids)) {echo " first-section";}if ($section_id === end($section_ids))
-        {echo " last-section";}?>">
+        {echo " last-section";}?> style="background-color: #f9b300;" ">
             <div class="container">
                 <div class="row flexbox">
                     
@@ -55,17 +55,10 @@ if ($component !== false) {
 
                     </div>
 
-                    <div class="col-md-6 media-container">    
-                       
-                        <picture> 
-                            <?php $image = get_field('section_image', $section_id); ?>
+                    <div class="col-md-6 media-container"> 
+                    <?php $image = get_field('section_image', $section_id); ?>
 
-                            <source media="(min-width: 990px)" srcset="<?echo $image['sizes']['bamtech-large-width'];?>">
-                            <source media="(min-width: 768px)" srcset="<?echo $image['sizes']['bamtech-medium-width'];?>">
-                            <source media="(min-width: 420px)" srcset="<?echo $image['sizes']['bamtech-small-width'];?>">
-                            <source media="(min-width: 0px)" srcset="<?echo $image['sizes']['bamtech-small-width'];?>">
-                            <img class="featurette-image img-fluid mx-auto" src="<?echo $image['sizes']['bamtech-large-width'];?>" alt="ESPN+">
-                        </picture>
+                            <img class="featurette-image img-fluid mx-auto lazy" src="<?echo $image['sizes']['bamtech-xsmall-width'];?>" sizes="(min-width: 568px) 512px, (min-width: 767px) 690px, (min-width: 1280px) 512px," data-srcset="<?echo $image['sizes']['bamtech-medium-width'];?> 512w,<?echo $image['sizes']['bamtech-large-width'];?> 690w" data-retina="<?echo $image['sizes']['bamtech-large-width'];?>" alt="ESPN+" />
                        
                     </div>
 

@@ -39,6 +39,10 @@ var config = {
 // https://tinypng.com/ --> 500 images uploads per month
 // not sure who's api that is but it was poached from silverscript
 
+
+const jsVersion = 20180501001; // increment to bust cache on css and js.
+// needs to match version in functions.php file.
+
 // define shorthand path variable references
 var paths = {
     dist: {
@@ -75,7 +79,7 @@ var paths = {
             // jquery: '_vendor/js/jquery.min.js',
             navigation: '_themes/espnplus/js/navigation.js',
             // jquery: './node_modules/jquery/dist/jquery.js',
-            popper: '_vendor/js/popper.js',
+           // popper: '_vendor/js/popper.js',
             // bstrap: '_vendor/js/bootstrap.js',
             bstrap: './node_modules/bootstrap/dist/js/bootstrap.js',
             // pholder: '_vendor/js/jquery.placeholder.js',
@@ -87,6 +91,9 @@ var paths = {
             collapse: './node_modules/bootstrap/js/dist/collapse.js',
             // validate: '_vendor/js/jquery.validate.js',
             // easing: '_vendor/js/jquery.easing.js',
+            lazy: '_vendor/js/jquery.lazy.js',
+            lazyplugin: '_vendor/js/jquery.lazy.plugins.js',
+            // lazy: '_vendor/js/lazysizes.js',
             skiplink: '_vendor/js/skip-link-focus-fix.js'
             // unveil: '_vendor/js/jquery_unveil/jquery.unveil.js' //https://luis-almeida.github.io/unveil/
         },
@@ -163,11 +170,13 @@ gulp.task('top-javascript', () => {
             // paths.src.vendor.navigation,
             // paths.src.vendor.bstrap,
             // paths.src.vendor.unveil,
+             paths.src.vendor.lazy,
+             paths.src.vendor.lazyplugin,
             // paths.src.vendor.pholder,
             paths.src.vendor.skiplink,
             paths.src.vendor.navigation,
-            paths.src.vendor.popper,
-            paths.src.vendor.bstrap,
+           // paths.src.vendor.popper,
+           // paths.src.vendor.bstrap,
            // paths.src.vendor.bstrapindex,
             paths.src.vendor.utils,
            // paths.src.vendor.button,
@@ -181,13 +190,13 @@ gulp.task('top-javascript', () => {
         ])
         // .pipe(debug({title: '[1] Files in Stream:'}))
         .pipe(isDev(sourcemaps.init()))
-        .pipe(concat('espnplus-top.js'))
+        .pipe(concat(jsVersion+'espnplus-top.js'))
         .pipe(gulp.dest(paths.src.unmin.scripts))
         .pipe(cached('top-javascript'))
         .pipe(uglify())
         .pipe(remember('top-javascript'))
         // .pipe(debug({title: '[2] Files in Stream:'}))
-        .pipe(concat('espnplus-top.min.js'))
+        .pipe(concat(jsVersion+'espnplus-top.min.js'))
         .pipe(config.production ? util.noop() : (sourcemaps.write('.')))
         // .pipe(debug({title: '[3] Files in Stream:'}))
         .pipe(gulp.dest(paths.dist.scripts))
@@ -211,13 +220,13 @@ gulp.task('bottom-javascript', () => {
         ])
         // .pipe(debug({title: '[1] Files in Stream:'}))
         .pipe(isDev(sourcemaps.init()))
-        .pipe(concat('espnplus-bottom.js'))
+        .pipe(concat(jsVersion+'espnplus-bottom.js'))
         .pipe(gulp.dest(paths.src.unmin.scripts))
         .pipe(cached('bottom-javascript'))
         .pipe(uglify())
         .pipe(remember('bottom-avascript'))
         // .pipe(debug({title: '[2] Files in Stream:'}))
-        .pipe(concat('espnplus-bottom.min.js'))
+        .pipe(concat(jsVersion+'espnplus-bottom.min.js'))
         .pipe(config.production ? util.noop() : (sourcemaps.write('.')))
         // .pipe(debug({title: '[3] Files in Stream:'}))
         .pipe(gulp.dest(paths.dist.scripts))
@@ -237,11 +246,11 @@ gulp.task('critical-scss', () => {
         .pipe(isDev(sourcemaps.init()))
         // .pipe(debug({title: '[1] Files in Stream:'}))
         .pipe(sass().on('error', sass.logError))
-        .pipe(concat('espnplus-critical.css'))
+        .pipe(concat(jsVersion+'espnplus-critical.css'))
         .pipe(gulp.dest(paths.src.unmin.styles))
         .pipe(cssmin(sassOptions))
         // .pipe(debug({title: '[2] Files in Stream:'}))
-        .pipe(concat('espnplus-critical.min.css'))
+        .pipe(concat(jsVersion+'espnplus-critical.min.css'))
         .pipe(config.production ? util.noop() : (sourcemaps.write('.')))
         // .pipe(debug({title: '[3] Files in Stream:'}))
         .pipe(gulp.dest(paths.dist.styles));
@@ -252,11 +261,11 @@ gulp.task('non-critical-scss', () => {
         .pipe(isDev(sourcemaps.init()))
         // .pipe(debug({title: '[1] Files in Stream:'}))
         .pipe(sass().on('error', sass.logError))
-        .pipe(concat('espnplus-non-critical.css'))
+        .pipe(concat(jsVersion+'espnplus-non-critical.css'))
         .pipe(gulp.dest(paths.src.unmin.styles))
         .pipe(cssmin(sassOptions))
         // .pipe(debug({title: '[2] Files in Stream:'}))
-        .pipe(concat('espnplus-non-critical.min.css'))
+        .pipe(concat(jsVersion+'espnplus-non-critical.min.css'))
         .pipe(config.production ? util.noop() : (sourcemaps.write('.')))
         // .pipe(debug({title: '[3] Files in Stream:'}))
         .pipe(gulp.dest(paths.dist.styles))

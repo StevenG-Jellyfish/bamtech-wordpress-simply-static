@@ -7,8 +7,6 @@
     display: block;
     width: 100%;
     max-width: 1280px;
-    //padding-top: var(--jumbotron-padding-y);
-    //padding-bottom: var(--jumbotron-padding-y);
     padding: 0 0 0 0;
     margin: 0 auto;
     background-color: black;
@@ -17,12 +15,6 @@
     -moz-border-radius:0;
     -webkit-border-radius:0;
   /*
-    @media (min-width: 767px) {
-      .jumbotron {
-        padding-top: calc(var(--jumbotron-padding-y) * 2);
-        padding-bottom: calc(var(--jumbotron-padding-y) * 2);
-      } // .jumbotron
-    } // min-width: 767px
     */
     .container-fluid.jubmotron-background {
         height:100%;
@@ -126,21 +118,6 @@
                 display: none;
             }
         } // max-width: 767px
-        // @media (orientation: portrait) {
-        //     #embed-responsive-16by9 {
-        //         display: none;
-        //     }
-        //     #embed-responsive-4by3 {
-        //         display: block;
-        //     }
-        // } // max-width: 767px
-        // @media (max-width: 767px) and (orientation: portrait) {
-        //     #embed-responsive-16by9 {
-        //         display: none;
-        //     }
-        //     #embed-responsive-4by3 {
-        //         display: block;
-        //     }
         // } // max-width: 767px
         @media (max-width: 480px) {
             #embed-responsive-16by9 {
@@ -150,15 +127,6 @@
                 display: block;
             }
         } // max-width: 667px
-        // @media (max-width: 667px) and (orientation: landscape) {
-        //     #embed-responsive-16by9 {
-        //         display: none;
-        //     }
-        //     #embed-responsive-4by3 {
-        //         display: block;
-        //     }
-        // } // max-width: 667px
-
     } // .jubmotron-background
 
     .container {
@@ -229,14 +197,6 @@
            // font-family: PlayoffProCond-Medium, arial;           
            // font-size: 1.125rem;
         }
-        // @media (max-width: 767px) {
-        //     .btn.btn-primary {
-        //         font-family: PlayoffProCond-Medium, arial;
-        //         font-size: 1.125rem;
-        //         // font-weight: 700;
-        //         // line-height: 2.750rem;
-        //     } // .btn
-        // } // max-width: 767px
     } // .espn-cta-container
 
     p {

@@ -68,7 +68,7 @@ function isMobile(){
                 if($isMobile == "m"){
                     ?>
                     <div id="embed-responsive-16by9" class="">
-                        <div id="background-img"  class="embed-responsive-item" style="background-image: url(<?php echo $video_image_wide['sizes']['large'];?>)">
+                        <div id="background-img"  class="embed-responsive-item" style="background-image: url(<?php echo $video_image_wide['sizes']['medium'];?>)">
                         </div>
                     </div>
                     <div id="embed-responsive-4by3" class="">
@@ -80,11 +80,10 @@ function isMobile(){
                 else {
                     // Do something for only desktop users
                     ?>
-                    <div id="embed-responsive-16by9" class="">
-                        <video id="background-movie"  class="embed-responsive-item" autoplay="autoplay" loop="loop" muted>
-                            <source src="<?php echo $video['url'];?>" type="video/mp4">
-                            <img src="<?php echo $video_image['sizes']['large'];?>" title="Your browser does not support the &lt;video&gt; tag" alt="ESPN+">
-                        </video>
+                    <div id="embed-responsive-16by9" class="" style="background-image: url(<?php echo $video_image_wide['sizes']['medium'];?>);background-repeat: no-repeat; background-size:cover">
+                    <video id="background-movie lazy" poster="<?php echo $video_image['sizes']['small'];?>"  class="embed-responsive-item" autoplay="autoplay" loop="loop" muted>
+                                <source src="<?php echo $video['url'];?>" type="video/mp4">
+                            </video>
                     </div>
                     <div id="embed-responsive-4by3" class="">
                         <div id="background-img"  class="video-img embed-responsive-item" style="background-image: url(<?php echo $video_image['sizes']['medium'];?>)">
