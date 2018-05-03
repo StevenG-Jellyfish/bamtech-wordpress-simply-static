@@ -144,19 +144,20 @@ gulp.task('js_lint', () => {
         .pipe(jshint.reporter('jshint-stylish', { beep: true }))
 });
 
-/* force del of older files
-gulp.task('clean-js', function(cb) {
-  del([
-      '../Front-End/js/*.js',
-      '../Front-End/js/*.map'
-  ], { force: true }, cb)
+// force del of older files
+gulp.task('clean-js', function() {
+  return del([
+      paths.dist.scripts+'/*espnplus*.js*',
+      paths.src.unmin.scripts+'/*espnplus*.js*'
+    ], 
+    {force: true});
+    done();
 });
-*/
 
 // javascript series
 gulp.task('javascript', (done) => {
     gulp.parallel(
-        //'clean-js',
+        'clean-js',
         'top-javascript',
         'bottom-javascript'
     );
@@ -166,21 +167,21 @@ gulp.task('javascript', (done) => {
 //gulp.task('top-javascript', gulp.series('js_lint', () => {
 gulp.task('top-javascript', () => {
     return gulp.src([
-           //  paths.src.vendor.jquery,
+            // paths.src.vendor.jquery,
             // paths.src.vendor.navigation,
             // paths.src.vendor.bstrap,
             // paths.src.vendor.unveil,
-             paths.src.vendor.lazy,
-             paths.src.vendor.lazyplugin,
+            paths.src.vendor.lazy,
+            paths.src.vendor.lazyplugin,
             // paths.src.vendor.pholder,
             paths.src.vendor.skiplink,
             paths.src.vendor.navigation,
-           // paths.src.vendor.popper,
-           // paths.src.vendor.bstrap,
-           // paths.src.vendor.bstrapindex,
+            // paths.src.vendor.popper,
+            // paths.src.vendor.bstrap,
+            // paths.src.vendor.bstrapindex,
             paths.src.vendor.utils,
-           // paths.src.vendor.button,
-           // paths.src.vendor.dropdown,
+            // paths.src.vendor.button,
+            // paths.src.vendor.dropdown,
             paths.src.vendor.collapse,
             paths.src.adobe.visitor,
             paths.src.adobe.omniture,
@@ -209,13 +210,13 @@ gulp.task('bottom-javascript', () => {
             //paths.src.vendor.pholder,
             //paths.src.vendor.skiplink,
             //paths.src.vendor.navigation,
-           // paths.src.vendor.popper,
-           // paths.src.vendor.bstrap,
-           // paths.src.vendor.bstrapindex,
-           // paths.src.vendor.utils,
-           // paths.src.vendor.button,
-           // paths.src.vendor.dropdown,
-           // paths.src.vendor.collapse,
+            // paths.src.vendor.popper,
+            // paths.src.vendor.bstrap,
+            // paths.src.vendor.bstrapindex,
+            // paths.src.vendor.utils,
+            // paths.src.vendor.button,
+            // paths.src.vendor.dropdown,
+            // paths.src.vendor.collapse,
             paths.src.bottom_scripts
         ])
         // .pipe(debug({title: '[1] Files in Stream:'}))
@@ -232,9 +233,20 @@ gulp.task('bottom-javascript', () => {
         .pipe(gulp.dest(paths.dist.scripts))
 });
 
+
+// force del of older files
+gulp.task('clean-scss', function() {
+    return del([
+        paths.src.unmin.styles+'/*espnplus*.css*',
+        paths.dist.styles+'/*espnplus*.css*'
+      ], 
+      {force: true});
+      done();
+  });
 // scss series
 gulp.task('scss', (done) => {
     gulp.parallel(
+        'clean-scss',
         'critical-scss',
         'non-critical-scss'
     );
