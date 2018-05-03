@@ -40,7 +40,7 @@ var config = {
 // not sure who's api that is but it was poached from silverscript
 
 
-const jsVersion = 20180501001; // increment to bust cache on css and js.
+const jsVersion = 20180501002; // increment to bust cache on css and js.
 // needs to match version in functions.php file.
 
 // define shorthand path variable references
