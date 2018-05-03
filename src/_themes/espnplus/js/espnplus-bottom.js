@@ -1,19 +1,4 @@
-$('img.lazy').Lazy({
-    // your configuration goes here
-    bind: "event",
-    delay: 2000,
-    scrollDirection: 'vertical',
-    visibleOnly: true,
 
-// show_while_loading: true, //best for progressive JPEG
-    afterLoad: function(element) {
-        // console.log('ok');
-    },
-    onError: function(element) {
-        console.log('error loading ' + element.data('src'));
-    }
-    });
-    //
 /*find current language*/
 var ALanguage = (LangCode=='es')? "es":"en-us";
 var Ex_cid = s_omni.Util.getQueryParam("ex_cid");
@@ -119,5 +104,20 @@ jQuery(function($) {
         if (!results[2]) return '';
         return decodeURIComponent(results[2].replace(/\+/g, " "));
     }
+    $('img.lazy').Lazy({
+        // your configuration goes here
+        bind: "event",
+        delay: 2000,
+        scrollDirection: 'vertical',
+        visibleOnly: true,
+    
+    // show_while_loading: true, //best for progressive JPEG
+        afterLoad: function(element) {
+            // console.log('ok');
+        },
+        onError: function(element) {
+            console.log('error loading ' + element.data('src'));
+        }
+    });
 
 }); //jquery()
