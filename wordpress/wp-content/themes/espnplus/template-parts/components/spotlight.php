@@ -67,11 +67,12 @@ function isMobile(){
                 $isMobile = isMobile();
                 if($isMobile == "m"){
                     ?>
-                    <div id="embed-responsive-16by9" class="">
-                        <div id="background-img"  class="embed-responsive-item" style="background-image: url(<?php echo $video_image_wide['sizes']['medium'];?>)">
+                    <div id="embed-responsive-16by9-img">
+                        <div id="background-img" class="embed-responsive-item" autoplay="autoplay" loop="loop" muted>
+                                <img src="<?php echo $video_image_wide['sizes']['large'];?>">
                         </div>
                     </div>
-                    <div id="embed-responsive-4by3" class="">
+                    <div id="embed-responsive-4by3-img">
                         <div id="background-img"  class="video-img embed-responsive-item" style="background-image: url(<?php echo $video_image['sizes']['medium'];?>)">
                         </div>
                     </div>
@@ -80,12 +81,12 @@ function isMobile(){
                 else {
                     // Do something for only desktop users
                     ?>
-                    <div id="embed-responsive-16by9" class="" style="background-image: url(<?php echo $video_image_wide['sizes']['medium'];?>);background-repeat: no-repeat; background-size:cover">
-                    <video id="background-movie lazy" poster="<?php echo $video_image['sizes']['small'];?>"  class="embed-responsive-item" autoplay="autoplay" loop="loop" muted>
-                                <source src="<?php echo $video['url'];?>" type="video/mp4">
-                            </video>
+                    <div id="embed-responsive-16by9-video" style="background-image: url(<?php echo $video_image_wide['sizes']['medium'];?>);background-repeat: no-repeat; background-size:cover">
+                        <video id="background-movie" poster="<?php echo $video_image['sizes']['small'];?>"  class="embed-responsive-item" autoplay="autoplay" loop="loop" muted>
+                            <source src="<?php echo $video['url'];?>" type="video/mp4">
+                        </video>
                     </div>
-                    <div id="embed-responsive-4by3" class="">
+                    <div id="embed-responsive-4by3-img">
                         <div id="background-img"  class="video-img embed-responsive-item" style="background-image: url(<?php echo $video_image['sizes']['medium'];?>)">
                         </div>
                     </div>
