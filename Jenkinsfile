@@ -41,7 +41,7 @@ pipeline {
         PROD = "prod"
         
         //
-        TIMEOUT = "1600"
+        TIMEOUT = "1900"
         
         // Images that do not usually get built..
         NGINX = "nginx"
