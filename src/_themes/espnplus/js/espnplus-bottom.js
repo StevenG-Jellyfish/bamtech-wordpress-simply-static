@@ -105,23 +105,5 @@ jQuery(function($) {
         return decodeURIComponent(results[2].replace(/\+/g, " "));
     }
 
-    $(function() {
-
-        console.log('ok Lazy');
-        $('img.lazy').Lazy({
-            // your configuration goes here
-            bind: "event",
-            delay: 2000,
-            scrollDirection: 'vertical',
-            visibleOnly: true,
-        
-        // show_while_loading: true, //best for progressive JPEG
-            afterLoad: function(element) {
-                // console.log('ok');
-            },
-            onError: function(element) {
-                console.log('error loading ' + element.data('src'));
-            }
-        });
-    });
+    
 }); //jquery()

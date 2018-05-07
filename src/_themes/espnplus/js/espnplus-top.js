@@ -23,6 +23,26 @@ jQuery(function($) {
   // execute the following functions when the DOM returns the 'DOMContentLoaded' status (render tree built)
   appendQueryString($);
 
+  $(function() {
+
+    console.log('ok Lazy');
+    $('img.lazy').Lazy({
+        // your configuration goes here
+        bind: "event",
+        delay: 2000,
+        scrollDirection: 'vertical',
+        visibleOnly: true,
+    
+    // show_while_loading: true, //best for progressive JPEG
+        afterLoad: function(element) {
+            // console.log('ok');
+        },
+        onError: function(element) {
+            console.log('error loading ' + element.data('src'));
+        }
+    });
+  });
+  
   document.addEventListener('contextmenu', function(e){
     e.preventDefault();
   }, false);
