@@ -104,7 +104,10 @@ jQuery(function($) {
         if (!results[2]) return '';
         return decodeURIComponent(results[2].replace(/\+/g, " "));
     }
+
     $(function() {
+
+        console.log('ok Lazy');
         $('img.lazy').Lazy({
             // your configuration goes here
             bind: "event",
