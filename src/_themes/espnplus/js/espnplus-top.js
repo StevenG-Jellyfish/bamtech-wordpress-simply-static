@@ -25,7 +25,7 @@ jQuery(function($) {
 
   $(function() {
 
-    console.log('ok Lazy');
+    //console.log('ok Lazy');
     $('img.lazy').Lazy({
         // your configuration goes here
         bind: "event",
@@ -42,7 +42,7 @@ jQuery(function($) {
         }
     });
   });
-  
+
   document.addEventListener('contextmenu', function(e){
     e.preventDefault();
   }, false);
