@@ -7,7 +7,7 @@
     // display:inline;
     //  width: 100%;
     //  height:auto;
-     max-width: 1280px;
+    max-width: 1280px;
     padding: 0 0 0 0;
     margin: 0 auto;
     background-color: black;
@@ -36,7 +36,9 @@
         #embed-responsive-16by9-img,#embed-responsive-16by9-video {
             display: block;
             height: 100%;
+            max-height: 720px;
             width: 100%;
+            line-height: 0;
         }
         #embed-responsive-4by3-img {
            display: block;
