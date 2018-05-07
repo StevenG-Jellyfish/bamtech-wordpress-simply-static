@@ -50,6 +50,9 @@
             width: 100%;
             max-width: 1280px;
         }
+        ::-webkit-media-controls {
+            display: none !important;
+        }
         img {
             width: 100%;
             max-width: 1280px;
