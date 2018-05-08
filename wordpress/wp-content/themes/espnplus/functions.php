@@ -11,7 +11,7 @@
 /*
 * Jellyfish custom version number for cache busting
 */
-define( 'VERSION', '20180508003' ); // increment to bust cache on css and js.
+define( 'VERSION', '20180508004' ); // increment to bust cache on css and js.
 // needs to match version in gulp file.
 
 /** WPML remove Language switch css */
