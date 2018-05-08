@@ -145,7 +145,7 @@ gulp.task('js_lint', () => {
 });
 
 // force del of older files
-gulp.task('clean-js', function() {
+gulp.task('clean-js', () => {
   return del([
       paths.dist.scripts+'/*espnplus*.js*',
       paths.src.unmin.scripts+'/*espnplus*.js*'
@@ -235,7 +235,7 @@ gulp.task('bottom-javascript', () => {
 
 
 // force del of older files
-gulp.task('clean-scss', function() {
+gulp.task('clean-scss', () => {
     return del([
         paths.src.unmin.styles+'/*espnplus*.css*',
         paths.dist.styles+'/*espnplus*.css*'
@@ -353,20 +353,19 @@ gulp.task('ampinfo', function() {
 
 // inform gulp to run through a series of watchers for its default task
 gulp.task('default', gulp.series(
-    gulp.parallel('clean-scss', 'critical-scss', 'non-critical-scss', 'clean-js', 'top-javascript', 'bottom-javascript'),
-    (done) => {
-        //gulp.parallel('scss', 'javascript'), (done) => {
-        gulp.watch(paths.watch.styles, gulp.parallel('clean-scss')),
-        gulp.watch(paths.watch.styles, gulp.parallel('critical-scss')),
-            gulp.watch(paths.watch.styles, gulp.parallel('non-critical-scss')),
+    //gulp.parallel('clean-scss', 'critical-scss', 'non-critical-scss', 'clean-js', 'top-javascript', 'bottom-javascript'),
+    //(done) => {
+        gulp.parallel('scss', 'javascript'), (done) => {
+            //gulp.watch(paths.watch.styles, gulp.parallel('critical-scss')),
+            //gulp.watch(paths.watch.styles, gulp.parallel('non-critical-scss')),
             // gulp.watch(paths.watch.images, gulp.parallel('images')),
             // gulp.watch(paths.watch.svgs, gulp.parallel('svgs')),
             // gulp.watch(paths.watch.svgpng, gulp.parallel('svgpng')),
             //gulp.watch(paths.watch.scripts,         gulp.parallel('js_lint', 'top-javascript')),
             //gulp.watch(paths.watch.scripts,         gulp.parallel('js_lint', 'bottom-javascript')), 
-            gulp.watch(paths.watch.scripts, gulp.parallel('clean-js')),
-            gulp.watch(paths.watch.scripts, gulp.parallel('top-javascript')),
-            gulp.watch(paths.watch.scripts, gulp.parallel('bottom-javascript')),
-            //gulp.watch(paths.watch.scripts,         gulp.parallel('javascript')),
+            //gulp.watch(paths.watch.scripts, gulp.parallel('top-javascript')),
+            //gulp.watch(paths.watch.scripts, gulp.parallel('bottom-javascript')),
+            gulp.watch(paths.watch.scripts,         gulp.parallel('javascript')),
+            gulp.watch(paths.watch.styles,         gulp.parallel('scss')),
             done();
     }));
