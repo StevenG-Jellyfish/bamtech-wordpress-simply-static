@@ -68,6 +68,7 @@ if ($component !== false) {
                                 <source media="(min-width: 0px)" srcset="<?echo $image['sizes']['bamtech-small-width'];?>">
                                 <img class="featurette-image img-fluid mx-auto" src="<?echo $image['sizes']['bamtech-xlarge-width'];?>" alt="ESPN+">     
                             </picture>                  
+                            <?echo $image['sizes']['bamtech-xlarge-width'];?>
                     </div>
 
                 </div>
