@@ -40,7 +40,7 @@ var config = {
 // not sure who's api that is but it was poached from silverscript
 
 
-const jsVersion = 20180508003; // increment to bust cache on css and js.
+const jsVersion = 20180508004; // increment to bust cache on css and js.
 // needs to match version in functions.php file.
 
 // define shorthand path variable references
@@ -353,16 +353,18 @@ gulp.task('ampinfo', function() {
 
 // inform gulp to run through a series of watchers for its default task
 gulp.task('default', gulp.series(
-    gulp.parallel('critical-scss', 'non-critical-scss', 'top-javascript', 'bottom-javascript'),
+    gulp.parallel('clean-scss', 'critical-scss', 'non-critical-scss', 'clean-js', 'top-javascript', 'bottom-javascript'),
     (done) => {
         //gulp.parallel('scss', 'javascript'), (done) => {
+        gulp.watch(paths.watch.styles, gulp.parallel('clean-scss')),
         gulp.watch(paths.watch.styles, gulp.parallel('critical-scss')),
             gulp.watch(paths.watch.styles, gulp.parallel('non-critical-scss')),
             // gulp.watch(paths.watch.images, gulp.parallel('images')),
             // gulp.watch(paths.watch.svgs, gulp.parallel('svgs')),
             // gulp.watch(paths.watch.svgpng, gulp.parallel('svgpng')),
             //gulp.watch(paths.watch.scripts,         gulp.parallel('js_lint', 'top-javascript')),
-            //gulp.watch(paths.watch.scripts,         gulp.parallel('js_lint', 'bottom-javascript')),
+            //gulp.watch(paths.watch.scripts,         gulp.parallel('js_lint', 'bottom-javascript')), 
+            gulp.watch(paths.watch.scripts, gulp.parallel('clean-js')),
             gulp.watch(paths.watch.scripts, gulp.parallel('top-javascript')),
             gulp.watch(paths.watch.scripts, gulp.parallel('bottom-javascript')),
             //gulp.watch(paths.watch.scripts,         gulp.parallel('javascript')),
