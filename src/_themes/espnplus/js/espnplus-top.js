@@ -23,6 +23,7 @@ jQuery(function($) {
   // execute the following functions when the DOM returns the 'DOMContentLoaded' status (render tree built)
   appendQueryString($);
 
+/* temp turn off lazy loading
   $(function() {
 
     //console.log('ok Lazy');
@@ -42,7 +43,7 @@ jQuery(function($) {
         }
     });
   });
-
+*/
   document.addEventListener('contextmenu', function(e){
     e.preventDefault();
   }, false);
