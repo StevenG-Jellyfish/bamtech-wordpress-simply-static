@@ -170,6 +170,14 @@
         padding: 0 0 0 0;
         color: white;
 
+        .bamt-cent {
+            position: relative;
+            display: inline-block;
+            font-size: 75%;
+            top: -8px;
+            left: 2px;
+        }
+
         &.lead {
             font-family: PlayoffProCond-Medium, arial;
             font-size: 2.500rem;
@@ -203,6 +211,10 @@
                 font-family: PlayoffProCond-Medium, arial;
                 text-decoration: underline;
                 color: white;
+            }
+
+            .bamt-cent {
+                top: -4px;
             }
         }
         @media (max-width: 767px) {
