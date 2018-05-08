@@ -42,7 +42,6 @@ $(document).ready(function() {
             header.slideUp(400, function() {
                 header.removeClass("sticky");
             });
-            $('.jumbotron .container').attr('visibility','visible');
         }
     });
         // var langsector = $('#lang_sel_click');
