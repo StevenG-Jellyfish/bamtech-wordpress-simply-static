@@ -43,6 +43,7 @@ $(document).ready(function() {
                 header.removeClass("sticky");
             });
         }
+        $('.jumbotron .container').attr('visibility','visible');
     });
         // var langsector = $('#lang_sel_click');
         // console.log("lang selector = ");
