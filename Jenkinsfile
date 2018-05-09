@@ -291,7 +291,7 @@ pipeline {
                 success {
                     slackSend channel: '#deploy',
                         color: 'good',
-                        message: "All images deployed successfully to to production, Please access > (<${env.RUN_DISPLAY_URL}|Open>) and accept or decline build to continue.."
+                        message: "All images deployed successfully to production >  https://watch.espnplus.com, Great sucess!"
                 }
 
                 always {
