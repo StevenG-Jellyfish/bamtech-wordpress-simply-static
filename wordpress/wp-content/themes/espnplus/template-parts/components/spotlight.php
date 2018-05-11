@@ -45,10 +45,12 @@ function isMobile(){
             <p class="lead"><?php the_field('spotlight_main_text', $component, false);?></p>
             <?php if (!empty(get_field('spotlight_cta_link', $component))){?>
             <?php $link=get_field('spotlight_cta_link', $component);?>
+            <div class="espn-cta-container-outside">
             <div class="espn-cta-container">
                 <div class="parallelogram">  
                     <a id="spotlight_cta" href="<?php echo $link['url'];?>" class="btn btn-primary espn-cta" ><?php the_field('spotlight_cta_text', $component,false);?></a>
                 </div>
+            </div>
             </div>
             <?php 
         }
@@ -63,6 +65,7 @@ function isMobile(){
         ?>
         
         <div class="container-fluid jubmotron-background">
+            <div class="background-overlay"></div>
                 <?php
                 $isMobile = isMobile();
                 if($isMobile == "m"){
