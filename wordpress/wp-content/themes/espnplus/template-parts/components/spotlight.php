@@ -36,6 +36,7 @@ function isMobile(){
 ?>
     <section class="jumbotron text-center">
         <div class="container">
+            <div class="spotlight-txt-box">
             <!-- <a class="jumbotron-login" href="https://secure.web.plus.espn.com">Log In</a> -->
             <h1 class="jumbotron-heading"><?php the_field('spotlight_overlogo_text', $component, false);?></h1>
             <div class="jumbotron-logo">
@@ -56,6 +57,7 @@ function isMobile(){
         }
         ?>
             <p class="below-cta"><?php echo $tracking_added;?></p>
+    </div>
         </div>
         <?php 
             $video = get_field('spotlight_background-video', $component);
