@@ -87,7 +87,7 @@ function isMobile(){
                     // Do something for only desktop users
                     ?>
                     <div id="embed-responsive-16by9-video" style="background-image: url(<?php echo $video_image_wide['sizes']['medium'];?>);background-repeat: no-repeat; background-size:cover">
-                        <video id="background-movie" poster="<?php echo $video_image['sizes']['small'];?>"  class="embed-responsive-item" autoplay="autoplay" loop="loop" muted>
+                        <video id="background-movie" class="embed-responsive-item" autoplay="autoplay" loop="loop" muted>
                             <source src="<?php echo $video['url'];?>" type="video/mp4">
                         </video>
                     </div>
