@@ -1,4 +1,4 @@
-FROM nginx:1.7
+FROM gcr.io/jellyfish-development-167809/nginx:0.0.0.2
 
 COPY conf/default.conf /etc/nginx/conf.d/default.conf
 

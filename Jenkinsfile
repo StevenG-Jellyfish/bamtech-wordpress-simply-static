@@ -41,7 +41,7 @@ pipeline {
         PROD = "prod"
         
         //
-        TIMEOUT = "1200"
+        TIMEOUT = "1900"
         
         // Images that do not usually get built..
         NGINX = "nginx"
@@ -131,7 +131,7 @@ pipeline {
                                     sh "gcloud docker -- push ${GCR}${REPO}-ecs-$IMAGE; cd ../"
                                     
                                     // Tag the pushed images
-                                    sh "./tagger.sh ${GCR} ${REPO} $IMAGE $TAG"
+                                    // sh "./tagger.sh ${GCR} ${REPO} $IMAGE $TAG"
                                     
                                     // Clean up images
                                     sh "docker images -q |xargs docker rmi -f"
@@ -151,20 +151,20 @@ pipeline {
                         // Build Wordpress
                         sh "cd ${REPO}; docker build -f DockerfileWP . -t ${GCR}${REPO}-ecs-${WORDPRESS}:$TAG" 
                         sh "gcloud docker -- push ${GCR}${REPO}-ecs-${WORDPRESS}; cd ../"
-                        sh "./tagger.sh ${GCR} ${REPO} ${WORDPRESS} $TAG"
+                        // sh "./tagger.sh ${GCR} ${REPO} ${WORDPRESS} $TAG"
                         sh "docker images -q |xargs docker rmi -f"
                         
                         // Images that do not usually get built..
                         // Build Nginx
                         sh "cd ${REPO}; docker build -f DockerfileNGX . -t ${GCR}${REPO}-ecs-${NGINX}:$TAG"
                         sh "gcloud docker -- push ${GCR}${REPO}-ecs-${NGINX}; cd ../"
-                        sh "./tagger.sh ${GCR} ${REPO} ${NGINX} $TAG"
+                        // sh "./tagger.sh ${GCR} ${REPO} ${NGINX} $TAG"
                         sh "docker images -q |xargs docker rmi -f"
                         
                         // Build Varnish
                         sh "cd ${REPO}; docker build -f DockerfileVSH . -t ${GCR}${REPO}-ecs-${VARNISH}:$TAG"
                         sh "gcloud docker -- push ${GCR}${REPO}-ecs-${VARNISH}; cd ../"
-                        sh "./tagger.sh ${GCR} ${REPO} ${VARNISH} $TAG"
+                        // sh "./tagger.sh ${GCR} ${REPO} ${VARNISH} $TAG"
                         sh "docker images -q |xargs docker rmi -f"
                         
                         // Tidy up
@@ -219,7 +219,8 @@ pipeline {
                         // Export keys and start deployment
                         sh "sudo cp ${env.DEPLOYER} ecs.sh; sudo chmod +x ecs.sh; sudo chown jenkins: ecs.sh"
                         sh "echo 'export AWS_SECRET_ACCESS_KEY=${env.BAM_SECRET}\nexport AWS_ACCESS_KEY_ID=${env.BAM_ACCESS}\nexport AWS_DEFAULT_REGION=${REGION}\nexport AWS_DEFAULT_OUTPUT=json' >> aws.env"
-                        sh ". ./aws.env ; ecs deploy ${UATCLUSTER} ${UAT}-${WORDPRESS} --image ${WORDPRESS} ${GCR}${REPO}-ecs-${WORDPRESS}:latest --timeout ${TIMEOUT}"
+                        sh ". ./aws.env ; ecs deploy ${UATCLUSTER} ${UAT}-${WORDPRESS} --timeout 1200 --image ${WORDPRESS} ${GCR}${REPO}-ecs-${WORDPRESS}:${TAG}"
+                        sh ". ./aws.env ; ecs deploy ${UATCLUSTER} ${UAT}-${WORDPRESS} --timeout 1200 --image ${NGINX} ${GCR}${REPO}-ecs-${NGINX}:${TAG}"
 
                         // Clean up
                         sh "sudo rm -rf *"
@@ -272,7 +273,7 @@ pipeline {
                     // Export keys and start deployment
                     sh "sudo cp ${env.DEPLOYER} ecs.sh; sudo chmod +x ecs.sh; sudo chown jenkins: ecs.sh"
                     sh "echo 'export AWS_SECRET_ACCESS_KEY=${env.BAM_SECRET}\nexport AWS_ACCESS_KEY_ID=${env.BAM_ACCESS}\nexport AWS_DEFAULT_REGION=${REGION}\nexport AWS_DEFAULT_OUTPUT=json' >> aws.env"
-                    sh ". ./aws.env ; ecs deploy ${PRODCLUSTER} ${PROD}-${WORDPRESS} --image ${WORDPRESS} ${GCR}${REPO}-ecs-${WORDPRESS}:latest --timeout ${TIMEOUT}"
+                    sh ". ./aws.env ; ecs deploy ${PRODCLUSTER} ${PROD}-${WORDPRESS} --timeout 1200 --image ${WORDPRESS} ${GCR}${REPO}-ecs-${WORDPRESS}:${TAG}"
                     
                     // Clean up
                     sh "sudo rm -rf *"
@@ -290,7 +291,7 @@ pipeline {
                 success {
                     slackSend channel: '#deploy',
                         color: 'good',
-                        message: "All images deployed successfully to to production, Please access > (<${env.RUN_DISPLAY_URL}|Open>) and accept or decline build to continue.."
+                        message: "All images deployed successfully to production >  https://watch.espnplus.com, Great sucess!"
                 }
 
                 always {
