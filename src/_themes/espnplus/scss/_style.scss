@@ -97,12 +97,14 @@ body {
     font-size: .6rem;
     }
 }
-@media (max-width: 767px) {
-    .espn-cta-container {
-        margin: 1.5rem auto .750rem auto;
-    } // .espn-cta-container
-} // max-width: 767px
-
+// @media (max-width: 767px) {
+//     .espn-cta-container {
+//         margin: 1.5rem auto .750rem auto;
+//     } // .espn-cta-container 
+// } // max-width: 767px
+.espn-cta-container {
+    margin: 1.5rem auto .750rem auto;
+} // .espn-cta-container 
 
 //
 .btn {
