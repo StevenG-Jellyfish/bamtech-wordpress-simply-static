@@ -144,15 +144,6 @@ gulp.task('js_lint', () => {
         .pipe(jshint.reporter('jshint-stylish', { beep: true }))
 });
 
-// force del of older files
-gulp.task('clean-js', function() {
-  return del([
-      paths.dist.scripts+'/*espnplus*.js*',
-      paths.src.unmin.scripts+'/*espnplus*.js*'
-    ], 
-    {force: true});
-    done();
-});
 
 // javascript series
 gulp.task('javascript', (done) => {
@@ -163,6 +154,17 @@ gulp.task('javascript', (done) => {
     );
     done();
 });
+
+// force del of older files
+gulp.task('clean-js', (done) => {
+    del([
+       paths.dist.scripts+'/*espnplus*.js*',
+       paths.src.unmin.scripts+'/*espnplus*.js*'
+     ], 
+     {force: true});
+     done();
+ });
+ 
 // javascript pipeline - top
 //gulp.task('top-javascript', gulp.series('js_lint', () => {
 gulp.task('top-javascript', () => {
@@ -233,16 +235,6 @@ gulp.task('bottom-javascript', () => {
         .pipe(gulp.dest(paths.dist.scripts))
 });
 
-
-// force del of older files
-gulp.task('clean-scss', function() {
-    return del([
-        paths.src.unmin.styles+'/*espnplus*.css*',
-        paths.dist.styles+'/*espnplus*.css*'
-      ], 
-      {force: true});
-      done();
-  });
 // scss series
 gulp.task('scss', (done) => {
     gulp.parallel(
@@ -251,6 +243,15 @@ gulp.task('scss', (done) => {
         'non-critical-scss'
     );
     done();
+});
+// force del of older files
+gulp.task('clean-scss', (done) => {
+    del([
+        paths.src.unmin.styles+'/*espnplus*.css*',
+        paths.dist.styles+'/*espnplus*.css*'
+      ], 
+      {force: true});
+      done();
 });
 // sass/css pipeline - critical
 gulp.task('critical-scss', () => {
@@ -356,7 +357,6 @@ gulp.task('default', gulp.series(
     gulp.parallel('clean-scss', 'critical-scss', 'non-critical-scss', 'clean-js', 'top-javascript', 'bottom-javascript'),
     (done) => {
         //gulp.parallel('scss', 'javascript'), (done) => {
-        gulp.watch(paths.watch.styles, gulp.parallel('clean-scss')),
         gulp.watch(paths.watch.styles, gulp.parallel('critical-scss')),
             gulp.watch(paths.watch.styles, gulp.parallel('non-critical-scss')),
             // gulp.watch(paths.watch.images, gulp.parallel('images')),
@@ -364,7 +364,6 @@ gulp.task('default', gulp.series(
             // gulp.watch(paths.watch.svgpng, gulp.parallel('svgpng')),
             //gulp.watch(paths.watch.scripts,         gulp.parallel('js_lint', 'top-javascript')),
             //gulp.watch(paths.watch.scripts,         gulp.parallel('js_lint', 'bottom-javascript')), 
-            gulp.watch(paths.watch.scripts, gulp.parallel('clean-js')),
             gulp.watch(paths.watch.scripts, gulp.parallel('top-javascript')),
             gulp.watch(paths.watch.scripts, gulp.parallel('bottom-javascript')),
             //gulp.watch(paths.watch.scripts,         gulp.parallel('javascript')),

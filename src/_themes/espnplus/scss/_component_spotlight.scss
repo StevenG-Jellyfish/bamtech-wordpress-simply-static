@@ -18,6 +18,14 @@
     @media (max-width: 548px) {
         padding:20% 0;
         }
+    .background-overlay {
+        position:absolute;
+         background:#eee;
+         width:100%;
+         height:100%;
+          background:radial-gradient(#000, transparent);
+          opacity:0.5;
+     }
     .jubmotron-background {
         position: relative;
         background-color: black;
@@ -39,7 +47,11 @@
             max-height: 720px;
             width: 100%;
             line-height: 0;
+            z-index:1;
+           // opacity:0.6;
+            
         }
+
         #embed-responsive-4by3-img {
            display: block;
            height: 100%;
@@ -90,30 +102,69 @@
     } // .jubmotron-background
 
     .container {
-       // position: relative;
+       // display: table;
        position: absolute;
         width: 100%;
-       // height:100%;
         max-width: 1280px;
         margin: 0 0 0 0;
-      //  padding: 40px 5%;
+        top:0;
+        bottom:0;
+        left:0;
+        right:0;
+        vertical-align:middle;
         text-align: center;
-        z-index: 2;
-        top:10%;
+        z-index: 999;
+        padding: 10% 0;
+        .spotlight-txt-box {
+            position:relative;
+           // border:1px solid #ccc;
+            text-align: center;
+            margin: auto;
+        }
+        // top:20%;
+        .jumbotron-heading, .lead, .below-cta {
+            text-shadow: 0 0 12px #000;
+        }
+        .jumbotron-logo img {
+            -webkit-filter: drop-shadow(0 0 12px #000);
+            filter: drop-shadow(0 0 12px #000);
+        }
+        .espn-cta-container-outside {
+            // box-shadow: 0 0 12px #000;
+            // background:radial-gradient(#000, transparent);
+            background:rgba(0,0,0,0.2); 
+            box-shadow: 0 0 8px 6px rgba(0,0,0,0.2);
+            display:inline-block;
+            margin: 12px auto;
+            height: 48px;
+            // padding:10px 10px;
+            padding:0;
+            position:relative;
+            // height:48px;
+            // border:10px solid #000;
+            //  padding:10px;
+        }
     }
+
+
+
     @media (max-width: 548px) {
         .container {
             position: relative;
+           // top:20%;
+            left:auto;
+            -webkit-transform: none; 
+            -ms-transform:none;
+        transform: none; 
         }
     }
 
     @media (max-width: 767px) {
         .container {
-            top:1%;
             width: 100%;
             max-width: 767px;
             margin: 0;
-            padding: .5rem 0;
+            padding: 2% 0;
         } // .container
     } // max-width: 767px
 
@@ -160,9 +211,9 @@
     } // max-width: 767px
 
     .espn-cta-container {
-        margin-top: 1.875rem;
+       // margin-top: 1.875rem;
         font-family: PlayoffProCond-Medium, arial;
-
+        height:48px;
     } // .espn-cta-container
 
     p {
@@ -209,7 +260,7 @@
             a:active,
             a:hover {
                 font-family: PlayoffProCond-Medium, arial;
-                text-decoration: underline;
+                text-decoration: none;
                 color: white;
             }
 
