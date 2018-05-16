@@ -305,16 +305,17 @@
                 top: -4px;
             }
         }
-        @media (max-width: 768px) {
-            &.below-cta {
-                font-size: 0.750rem;
-                line-height: 1.125rem;
-            } // &.below-cta
-        } // max-width: 767px
+        // @media (max-width: 768px) {
+        //     &.below-cta {
+        //         font-size: 0.750rem;
+        //         line-height: 1.125rem;
+        //     } // &.below-cta
+        // } // max-width: 767px
     } // p
     .below-cta {
         font-family: PlayoffProCond-Medium, arial;
         font-size: 1.250rem;
+        line-height: 1.125rem;
         a:link,
         a:visited,
         a:active,
@@ -322,5 +323,8 @@
             font-family: PlayoffProCond-Medium, arial;
             text-decoration: underline;
             color: #fff;
+        }
+        @media (max-width: 768px) {
+            font-size: 0.750rem;
         }
 } // .jumbotron
