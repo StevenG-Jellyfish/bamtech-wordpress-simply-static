@@ -16,7 +16,7 @@
     -moz-border-radius:0;
     -webkit-border-radius:0;
     @media (max-width: 548px) {
-        padding:24% 0 8% 0;
+        padding:24% 0 10% 0;
         }
     .background-overlay {
         position:absolute;
@@ -193,6 +193,12 @@
         }
 
     } //.jumbotron-heading
+    @media (max-width: 1024px) {
+        .jumbotron-heading {
+            font-size: 1.400rem;
+           // letter-spacing: -0.013rem;
+        } // .jumbotron-heading
+    } // max-width: 767px
     @media (max-width: 769px) {
         .jumbotron-heading {
             font-size: 1.250rem;
@@ -204,15 +210,23 @@
         margin-bottom: 1.5rem;
 
         img {
-            width: 392px;
-            height: 76px;
-        }
-        @media (max-width: 769px) {
-            img {
-                width: 214px;
+            // width: 392px;
+             height: 77px;
+           @media (max-width: 1024px) {
+               // width: 340px;
+                height: 68px;
+           }
+           @media (max-width: 769px) {
+               // width: 214px;
                 height: 44px;
-            } // img
-        } // max-width: 767px
+            } 
+        }
+        // @media (max-width: 769px) {
+        //     img {
+        //         width: 214px;
+        //         height: 44px;
+        //     } // img
+        // } // max-width: 767px
 
     } // .jumbotron-logo
     @media (max-width: 769px) {
