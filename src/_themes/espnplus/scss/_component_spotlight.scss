@@ -82,7 +82,7 @@
             -webkit-background-size: cover;
 
         }
-        @media (max-width: 769px) {
+        @media (max-width: 768px) {
             #embed-responsive-16by9-img,#embed-responsive-16by9-video {
                 display: block;
             }
@@ -126,6 +126,11 @@
            // border:1px solid #ccc;
             text-align: center;
             margin: auto;
+            @media (max-width: 1024px) { //564
+                h1 {
+                    margin-bottom: .2rem;
+                }
+            } 
         }
         // top:20%;
         .jumbotron-heading, .lead, .below-cta {
@@ -138,7 +143,7 @@
         .espn-cta-container-outside {
             // box-shadow: 0 0 12px #000;
             // background:radial-gradient(#000, transparent);
-            margin: 1.2rem auto .750rem auto;
+            margin: 1.1rem auto .750rem auto;
             height:48px;
             background:rgba(0,0,0,0.2); 
             box-shadow: 0 0 8px 6px rgba(0,0,0,0.2);
@@ -165,17 +170,22 @@
         }
     }
 
-    @media (max-width: 769px) {
+    @media (max-width: 768px) {
         .container {
             width: 100%;
-            max-width: 769px;
+            max-width: 768px;
             margin: 0;
-            padding: 0 0 6% 0;
+            padding: 0 0 8% 0;
         } // .container
     } // max-width: 767px
+    @media (max-width: 720px){
+        .container {
+        padding: 0 0 4% 0;
+        }
+    }
     @media (max-width: 580px) {
         .container {
-            padding: 0 0 3% 0;
+            padding: none;
         } // .container
     } // max-width: 767px
 
@@ -199,7 +209,7 @@
            // letter-spacing: -0.013rem;
         } // .jumbotron-heading
     } // max-width: 767px
-    @media (max-width: 769px) {
+    @media (max-width: 768px) {
         .jumbotron-heading {
             font-size: 1.250rem;
             letter-spacing: -0.013rem;
@@ -208,7 +218,9 @@
 
     .jumbotron-logo {
         margin-bottom: 1.5rem;
-
+        @media (max-width: 768px) {
+            margin-bottom: 1.1rem;
+        }
         img {
             // width: 392px;
              height: 77px;
@@ -216,7 +228,7 @@
                // width: 340px;
                 height: 68px;
            }
-           @media (max-width: 769px) {
+           @media (max-width: 768px) {
                // width: 214px;
                 height: 44px;
             } 
@@ -229,7 +241,7 @@
         // } // max-width: 767px
 
     } // .jumbotron-logo
-    @media (max-width: 769px) {
+    @media (max-width: 768px) {
         .jumbotron-logo {
             margin-bottom: 1.5rem;
         } // .jumbotron-logo
@@ -292,7 +304,7 @@
                 top: -4px;
             }
         }
-        @media (max-width: 769px) {
+        @media (max-width: 768px) {
             &.below-cta {
                 font-size: 0.750rem;
                 line-height: 1.125rem;
