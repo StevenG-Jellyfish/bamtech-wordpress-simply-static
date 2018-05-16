@@ -18,9 +18,6 @@
     @media (max-width: 548px) {
         padding:20% 0;
         }
-    .espn-cta-container {
-        margin: 1.5rem auto .750rem auto;
-    } // .espn-cta-container 
     .background-overlay {
         position:absolute;
          background:#000;
@@ -138,6 +135,8 @@
         .espn-cta-container-outside {
             // box-shadow: 0 0 12px #000;
             // background:radial-gradient(#000, transparent);
+            margin: 1.5rem auto .750rem auto;
+            height:48px;
             background:rgba(0,0,0,0.2); 
             box-shadow: 0 0 8px 6px rgba(0,0,0,0.2);
             display:inline-block;
@@ -199,7 +198,7 @@
     } // max-width: 767px
 
     .jumbotron-logo {
-        margin-bottom: 3rem;
+        margin-bottom: 2rem;
 
         img {
             width: 392px;
