@@ -82,7 +82,7 @@
             -webkit-background-size: cover;
 
         }
-        @media (max-width: 767px) {
+        @media (max-width: 769px) {
             #embed-responsive-16by9-img,#embed-responsive-16by9-video {
                 display: block;
             }
@@ -162,10 +162,10 @@
         }
     }
 
-    @media (max-width: 767px) {
+    @media (max-width: 769px) {
         .container {
             width: 100%;
-            max-width: 767px;
+            max-width: 769px;
             margin: 0;
             padding: 0 0 6% 0;
         } // .container
@@ -190,7 +190,7 @@
         }
 
     } //.jumbotron-heading
-    @media (max-width: 767px) {
+    @media (max-width: 769px) {
         .jumbotron-heading {
             font-size: 1.250rem;
             letter-spacing: -0.013rem;
@@ -204,7 +204,7 @@
             width: 392px;
             height: 76px;
         }
-        @media (max-width: 767px) {
+        @media (max-width: 769px) {
             img {
                 width: 214px;
                 height: 44px;
@@ -212,7 +212,7 @@
         } // max-width: 767px
 
     } // .jumbotron-logo
-    @media (max-width: 767px) {
+    @media (max-width: 769px) {
         .jumbotron-logo {
             margin-bottom: 1.5rem;
         } // .jumbotron-logo
@@ -222,6 +222,12 @@
        // margin-top: 1.875rem;
         font-family: PlayoffProCond-Medium, arial;
         height:48px;
+        a:link,
+        a:visited,
+        a:active,
+        a:hover {
+            text-decoration: none;
+        }
     } // .espn-cta-container
 
     p {
@@ -259,28 +265,27 @@
             } // &.lead
         } // max-width: 767px
 
-        &.below-cta {
-            font-family: PlayoffProCond-Medium, arial;
-            font-size: 1.250rem;
-
-            a:link,
-            a:visited,
-            a:active,
-            a:hover {
-                font-family: PlayoffProCond-Medium, arial;
-                text-decoration: none;
-                color: white;
-            }
 
             .bamt-cent {
                 top: -4px;
             }
         }
-        @media (max-width: 767px) {
+        @media (max-width: 769px) {
             &.below-cta {
                 font-size: 0.750rem;
                 line-height: 1.125rem;
             } // &.below-cta
         } // max-width: 767px
     } // p
+    .below-cta {
+        font-family: PlayoffProCond-Medium, arial;
+        font-size: 1.250rem;
+        a:link,
+        a:visited,
+        a:active,
+        a:hover {
+            font-family: PlayoffProCond-Medium, arial;
+            text-decoration: underline;
+            color: #fff;
+        }
 } // .jumbotron
