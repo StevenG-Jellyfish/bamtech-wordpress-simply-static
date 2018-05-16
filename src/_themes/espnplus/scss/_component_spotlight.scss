@@ -115,6 +115,9 @@
         text-align: center;
         z-index: 999;
         padding: 0 0 12% 0;
+        @media (max-width: 1024px) { //564
+            padding: 0 0 10% 0;
+        } // &.lead 
         @media (max-width: 960px){
             padding: 0 0 8% 0;
         }
@@ -250,6 +253,11 @@
             line-height: 3.000rem;
             padding:0px 10px 0px 10px;
         } //.lead
+        @media (max-width: 1024px) { //564
+            &.lead  {
+                font-size: 2.000rem;
+            } // &.lead 
+        }
         @media screen and (min-width: 825px) and (max-width: 960px) { //564
             &.lead  {
                 font-size: 2.000rem;
