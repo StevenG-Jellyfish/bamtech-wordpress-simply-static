@@ -16,7 +16,7 @@
     -moz-border-radius:0;
     -webkit-border-radius:0;
     @media (max-width: 548px) {
-        padding:24% 0 10% 0;
+        padding:26% 0 10% 0;
         }
     .background-overlay {
         position:absolute;
@@ -159,17 +159,6 @@
         }
     }
 
-    @media (max-width: 548px) {
-        .container {
-            position: relative;
-           // top:20%;
-            left:auto;
-            -webkit-transform: none; 
-            -ms-transform:none;
-        transform: none; 
-        }
-    }
-
     @media (max-width: 768px) {
         .container {
             width: 100%;
@@ -189,6 +178,16 @@
         } // .container
     } // max-width: 767px
 
+    @media (max-width: 548px) {
+        .container {
+            position: relative;
+           // top:20%;
+            left:auto;
+            -webkit-transform: none; 
+            -ms-transform:none;
+        transform: none; 
+        }
+    }
     .jumbotron-heading {
         font-family: PlayoffProCond-Medium, arial;
         font-size: 1.875rem;
