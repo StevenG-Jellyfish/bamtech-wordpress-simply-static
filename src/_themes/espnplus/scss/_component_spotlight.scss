@@ -231,7 +231,7 @@
         padding: 0 0 0 0;
         color: white;
 
-        .bamt-cent {
+        .lead .bamt-cent {
             position: relative;
             display: inline-block;
             font-size: 75%;
@@ -266,7 +266,7 @@
                 padding:0 2rem 0 2rem;
             } // &.lead
         } // max-width: 767px
-            .bamt-cent {
+            .below-cta .bamt-cent {
                 top: -4px;
             }
         }
