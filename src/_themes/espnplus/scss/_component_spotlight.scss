@@ -225,19 +225,24 @@
             text-decoration: none;
         }
     } // .espn-cta-container
+    .lead .bamt-cent {
+        position: relative;
+        display: inline-block;
+        font-size: 75%;
+        top: -8px;
+    }
+    .below-cta .bamt-cent {
+        position: relative;
+        display: inline-block;
+        font-size: 75%;
+        top: -4px;
+       // left: 2px;
+    }
 
     p {
         margin: 0 0 0 0;
         padding: 0 0 0 0;
         color: white;
-
-        .bamt-cent {
-            position: relative;
-            display: inline-block;
-            font-size: 75%;
-            top: -8px;
-            left: 2px;
-        }
 
         &.lead {
             font-family: PlayoffProCond-Medium, arial;
@@ -266,9 +271,6 @@
                 padding:0 2rem 0 2rem;
             } // &.lead
         } // max-width: 767px
-            .bamt-cent {
-                top: -4px;
-            }
         }
     } // p
     .below-cta {
