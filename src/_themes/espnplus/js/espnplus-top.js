@@ -55,9 +55,8 @@ function lazyLoad(){
 
   for(var i=0; i<lazy.length; i++) {
       if(isInViewport(lazy[i])){
-         lazy[i].src =
-          lazy[i].getAttribute('data-src');
-          console.log("ok view: " + i)
+         lazy[i].src = lazy[i].getAttribute('data-src');
+       //   console.log("ok view: " + i)
       }
   }
 }
