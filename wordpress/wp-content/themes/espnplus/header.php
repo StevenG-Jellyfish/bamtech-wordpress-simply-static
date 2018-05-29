@@ -21,6 +21,13 @@
     <style>
         <?php include('css/'.VERSION.'espnplus-critical.min.css');?>
     </style>
+    <noscript>
+        <style>
+            .media-container img.lazy {
+                display:none;
+            }
+        </style>
+    </noscript>
     <script>
 		!function(e){"use strict";
 		var n=function(n,t,o){function i(e){return f.body?e():void setTimeout(function(){i(e)})}var d,r,a,l,f=e.document,s=f.createElement("link"),u=o||"all";

@@ -57,17 +57,19 @@ if ($component !== false) {
 
                     <div class="col-md-6 media-container"> 
                     <?php $image = get_field('section_image', $section_id); ?>
-
-                            <!--<img class="featurette-image img-fluid mx-auto lazy" src="<?echo $image['sizes']['bamtech-xsmall-width'];?>" sizes="(min-width: 568px) 512px, (min-width: 767px) 690px, (min-width: 1280px) 900px," data-srcset="<?echo $image['sizes']['bamtech-medium-width'];?> 512w,<?echo $image['sizes']['bamtech-large-width'];?> 690w" data-retina="<?echo $image['sizes']['bamtech-large-width'];?>" alt="ESPN+" />
-                            -->
-                            <picture>
-                                <source media="(min-width: 1280px)" srcset="<?echo $image['sizes']['bamtech-xlarge-width'];?>">
-                                <source media="(min-width: 990px)" srcset="<?echo $image['sizes']['bamtech-large-width'];?>">
-                                <source media="(min-width: 768px)" srcset="<?echo $image['sizes']['bamtech-medium-width'];?>">
-                                <source media="(min-width: 420px)" srcset="<?echo $image['sizes']['bamtech-small-width'];?>">
-                                <source media="(min-width: 0px)" srcset="<?echo $image['sizes']['bamtech-small-width'];?>">
-                                <img class="featurette-image img-fluid mx-auto" src="<?echo $image['sizes']['bamtech-xlarge-width'];?>" alt="ESPN+">     
-                            </picture>                  
+                        <img 
+                            class="featurette-image img-fluid mx-auto lazy"
+                            src="<?echo $image['sizes']['bamtech-xsmall-width'];?>"
+                            data-src="<?echo $image['sizes']['bamtech-large-width'];?>" 
+                            alt="cool"
+                        />
+                    <noscript>
+                        <img 
+                            class="featurette-image img-fluid mx-auto nolazy"
+                            src="<?echo $image['sizes']['bamtech-large-width'];?>"
+                            alt="cool"
+                        />
+                    </noscript>
                     </div>
 
                 </div>
