@@ -55,35 +55,14 @@ function lazyLoad(){
 
   for(var i=0; i<lazy.length; i++) {
       if(isInViewport(lazy[i])){
-         lazy[i].src =
-          lazy[i].getAttribute('data-src');
-          console.log("ok view: " + i)
+         lazy[i].src = lazy[i].getAttribute('data-src');
+       //   console.log("ok view: " + i)
       }
   }
 }
 
 registerListener('scroll', lazyLoad);
-/* temp turn off lazy loading
-  $(function() {
 
-    //console.log('ok Lazy');
-    $('img.lazy').Lazy({
-        // your configuration goes here
-        bind: "event",
-        delay: 2000,
-        scrollDirection: 'vertical',
-        visibleOnly: true,
-    
-    // show_while_loading: true, //best for progressive JPEG
-        afterLoad: function(element) {
-            // console.log('ok');
-        },
-        onError: function(element) {
-            console.log('error loading ' + element.data('src'));
-        }
-    });
-  });
-*/
   document.addEventListener('contextmenu', function(e){
     e.preventDefault();
   }, false);
