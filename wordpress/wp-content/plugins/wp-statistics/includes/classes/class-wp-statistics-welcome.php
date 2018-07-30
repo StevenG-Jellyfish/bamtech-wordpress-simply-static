@@ -39,7 +39,7 @@ class WP_Statistics_Welcome {
 			'wp-statistics-admin-js',
 			WP_Statistics::$reg['plugin-url'] . 'assets/js/admin.js',
 			array( 'jquery' ),
-			'1.0'
+            WP_Statistics::$reg['version']
 		);
 
 		include( WP_Statistics::$reg['plugin-dir'] . "includes/templates/welcomes/last-version.php" );
@@ -52,7 +52,7 @@ class WP_Statistics_Welcome {
 	public static function do_welcome( $upgrader_object, $options ) {
 		$current_plugin_path_name = 'wp-statistics/wp-statistics.php';
 
-		if ( $options['action'] == 'update' && $options['type'] == 'plugin' ) {
+		if ( $options['action'] == 'update' and $options['type'] == 'plugin' and isset($options['plugins']) ) {
 			foreach ( $options['plugins'] as $each_plugin ) {
 				if ( $each_plugin == $current_plugin_path_name ) {
 					global $WP_Statistics;

@@ -170,6 +170,8 @@ foreach ( $excluded_reasons as $reason ) {
 ?>
 <div class="wrap">
     <h2><?php _e( 'Exclusions Statistics', 'wp-statistics' ); ?></h2>
+    <?php do_action( 'wp_statistics_after_title' ); ?>
+
 	<?php wp_statistics_date_range_selector( WP_Statistics::$page['exclusions'], $daysToDisplay ); ?>
     <div class="postbox-container" id="last-log">
         <div class="metabox-holder">
@@ -262,13 +264,13 @@ foreach ( $excluded_reasons as $reason ) {
                             </tr>
 
                             <tr>
-                                <th><?php _e( 'Chart Total', 'wp-statistics' ); ?>:</th>
+                                <th><?php _e( 'Chart Total:', 'wp-statistics' ); ?></th>
                                 <th class="th-center"><span><?php echo number_format_i18n( $excluded_total ); ?></span>
                                 </th>
                             </tr>
 
                             <tr>
-                                <th><?php _e( 'All Time Total', 'wp-statistics' ); ?>:</th>
+                                <th><?php _e( 'All Time Total:', 'wp-statistics' ); ?></th>
                                 <th class="th-center">
                                     <span><?php echo number_format_i18n( $excuded_all_time ); ?></span>
                                 </th>
