@@ -13,7 +13,7 @@
 			addEventListener( 'load', module.load );
 
 			// Add new cloned fields.
-			$( document ).on( 'clone', ':input[class|="rwmb"]', module.addNewField );
+			$( document ).on( 'clone', 'input[class*="rwmb"], textarea[class*="rwmb"], select[class*="rwmb"], button[class*="rwmb"]', module.addNewField );
 		},
 
 		// Load plugin and add hooks.
@@ -45,8 +45,11 @@
 		listenToField: function( fieldId ) {
 			if ( isEditor( fieldId ) ) {
 				tinymce.get( fieldId ).on( 'keyup', module.update );
-			} else {
-				document.getElementById( fieldId ).addEventListener( 'keyup', module.update );
+				return;
+			}
+			var field = document.getElementById( fieldId );
+			if ( field ) {
+				field.addEventListener( 'keyup', module.update );
 			}
 		},
 
@@ -62,7 +65,7 @@
 		 * Add new cloned field to the list and listen to its change.
 		 */
 		addNewField: function() {
-			if ( - 1 === $.inArray( this.id, fields ) ) {
+			if ( -1 === fields.indexOf( this.id ) ) {
 				fields.push( this.id );
 				module.listenToField( this.id );
 			}
@@ -74,9 +77,10 @@
 	 */
 	function getClonedFields() {
 		fields.map( function ( fieldId ) {
-			$( '[id^=' + fieldId + '_]' ).each( function () {
-				if ( - 1 === $.inArray( this.id, fields ) ) {
-					fields.push( this.id );
+			var elements = document.querySelectorAll( '[id^=' + fieldId + '_]' );
+			Array.prototype.forEach.call( elements, function( element ) {
+				if ( -1 === fields.indexOf( element.id ) ) {
+					fields.push( element.id );
 				}
 			} );
 		} );
@@ -90,8 +94,12 @@
 	 * @returns string
 	 */
 	function getFieldContent( fieldId ) {
-		var content = isEditor( fieldId ) ? tinymce.get( fieldId ).getContent() : document.getElementById( fieldId ).value;
-		return content ? content : '';
+		var field = document.getElementById( fieldId );
+		if ( field ) {
+			var content = isEditor( fieldId ) ? tinymce.get( fieldId ).getContent() : field.value;
+			return content ? content : '';
+		}
+		return '';
 	}
 
 	/**

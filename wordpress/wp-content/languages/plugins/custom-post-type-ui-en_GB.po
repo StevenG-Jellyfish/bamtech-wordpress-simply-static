@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Custom Post Type UI - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2017-02-02 07:57:58+0000\n"
+"PO-Revision-Date: 2018-04-19 07:18:06+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -11,23 +11,31 @@ msgstr ""
 "Language: en_GB\n"
 "Project-Id-Version: Plugins - Custom Post Type UI - Stable (latest release)\n"
 
-#: inc/tools.php:751
+#: inc/support.php:64
+msgid "View our Layouts page"
+msgstr "View our Layouts page"
+
+#: inc/support.php:60
+msgid "Please note that %s this plugin will not handle display %s of registered post types or taxonomies in your current theme. It simply registers them for you. To display your data, check out %s. %s to see some examples that are available with Custom Post Type UI Extended. If all else fails, visit us on the %s"
+msgstr "Please note that %s this plugin will not handle display %s of registered post types or taxonomies in your current theme. It simply registers them for you. To display your data, check out %s. %s to see some examples that are available with Custom Post Type UI Extended. If all else fails, visit us on the %s"
+
+#: inc/tools.php:768
 msgid "All of the selectable code snippets below are useful if you wish to migrate away from CPTUI and retain your existing registered post types or taxonomies."
 msgstr "All of the selectable code snippets below are useful if you wish to migrate away from CPTUI and retain your existing registered post types or taxonomies."
 
-#: inc/utility.php:594
+#: inc/utility.php:597
 msgid "Invalid data provided"
 msgstr "Invalid data provided"
 
-#: inc/utility.php:583
+#: inc/utility.php:586
 msgid "Successfully imported data."
 msgstr "Successfully imported data."
 
-#: inc/support.php:155
+#: inc/support.php:156
 msgid "CPTUI tries to make smart choices for our users, and forcing underscores is one of them. Please see the tutorial at the following URL for how to get dashes in your permalink urls while continuing to use underscores for the actual slug."
 msgstr "CPTUI tries to make smart choices for our users, and forcing underscores is one of them. Please see the tutorial at the following URL for how to get dashes in your permalink urls while continuing to use underscores for the actual slug."
 
-#: inc/support.php:153
+#: inc/support.php:154
 msgid "Why can I not use dashes in post type or taxonomy slugs?"
 msgstr "Why can I not use dashes in post type or taxonomy slugs?"
 
@@ -95,11 +103,11 @@ msgstr "Tools"
 msgid "Custom Post Type UI Tools"
 msgstr "Custom Post Type UI Tools"
 
-#: inc/utility.php:483
+#: inc/utility.php:486
 msgid "Object"
 msgstr "Object"
 
-#: inc/utility.php:314
+#: inc/utility.php:317
 msgid "Remove these ads?"
 msgstr "Remove these ads?"
 
@@ -287,79 +295,79 @@ msgstr "More from %s"
 msgid "Thank you for choosing Custom Post Type UI! We hope that your experience with our plugin makes creating post types and taxonomies and organizing your content quick and easy."
 msgstr "Thank you for choosing Custom Post Type UI! We hope that your experience with our plugin makes creating post types and taxonomies and organising your content quick and easy."
 
-#: inc/about.php:171 inc/utility.php:348
+#: inc/about.php:171 inc/utility.php:351
 msgid "Subscribe"
 msgstr "Subscribe"
 
-#: inc/about.php:161 inc/utility.php:338
+#: inc/about.php:161 inc/utility.php:341
 msgid "Email Address"
 msgstr "Email Address"
 
-#: inc/utility.php:336
+#: inc/utility.php:339
 msgid "Get email updates from pluginize.com about Custom Post Type UI"
 msgstr "Get email updates from pluginize.com about Custom Post Type UI"
 
-#: inc/support.php:182
+#: inc/support.php:183
 msgid "We encourage checking out %s for easily displaying post type content wherever you can utilize a shortcode. If you prefer to handle on your own, you will need to utilize the %s class to handle display in custom locations. If you have set the post type to have archives, the archive url should be something like \"http://www.mysite.com/post-type-slug\""
 msgstr "We encourage checking out %s for easily displaying post type content wherever you can utilise a shortcode. If you prefer to handle on your own, you will need to utilise the %s class to handle display in custom locations. If you have set the post type to have archives, the archive url should be something like \"http://www.mysite.com/post-type-slug\""
 
-#: inc/support.php:112
+#: inc/support.php:113
 msgid "No it does not. The Shortcode builder is not multisite dependent and will work with either setup."
 msgstr "No, it does not. The Shortcode builder is not multisite dependent and will work with either setup."
 
-#: inc/support.php:111
+#: inc/support.php:112
 msgid "Does Custom Post Type UI Extended require multisite?"
 msgstr "Does Custom Post Type UI Extended require multisite?"
 
-#: inc/support.php:107
+#: inc/support.php:108
 msgid "Yes you will. The Custom Post Type UI Extended is not a replacement of the free version with added extra features. It acts based on the data made available through Custom Post Type UI"
 msgstr "Yes, you will. Custom Post Type UI Extended is not a replacement of the free version with added extra features. It acts based on the data made available through the Custom Post Type UI"
 
-#: inc/support.php:106
+#: inc/support.php:107
 msgid "Do I still need Custom Post Type UI if I purchase and install Custom Post Type UI Extended?"
 msgstr "Do I still need Custom Post Type UI if I purchase and install Custom Post Type UI Extended?"
 
-#: inc/support.php:102
+#: inc/support.php:103
 msgid "No, there is no data being sent out from your site with these. The only way anything is tracked is via UTM parameters for WebDevStudios's analytics so we can get an idea of where traffic is coming from. Those are only tracked if you actually click on an ad spot."
 msgstr "No, there is no data being sent out from your site with these. The only way anything is tracked is via UTM parameters for WebDevStudios's analytics so we can get an idea of where traffic is coming from. Those are only tracked if you actually click on an ad spot."
 
-#: inc/support.php:101
+#: inc/support.php:102
 msgid "Are these ad spots tracking my personal information in any way?"
 msgstr "Are these ad spots tracking my personal information in any way?"
 
-#: inc/support.php:92
+#: inc/support.php:93
 msgid "You can have them automatically removed from display via a purchased copy of %s."
 msgstr "You can have them automatically removed from display via a purchased copy of %s."
 
-#: inc/support.php:88
+#: inc/support.php:89
 msgid "How can I remove the ads that suddenly started showing up?"
 msgstr "How can I remove the ads that suddenly started showing up?"
 
-#: inc/support.php:84
+#: inc/support.php:85
 msgid "No. These spots are intended for and will only be used for other available WebDevStudios products and services."
 msgstr "No. These spots are intended for and will only be used for other available WebDevStudios products and services."
 
-#: inc/support.php:83
+#: inc/support.php:84
 msgid "Will these ad spots ever show third-party data?"
 msgstr "Will these ad spots ever show third-party data?"
 
-#: inc/support.php:79
+#: inc/support.php:80
 msgid "Pluginize offers both free and paid WordPress plugins."
 msgstr "Pluginize offers both free and paid WordPress plugins."
 
-#: inc/support.php:78
+#: inc/support.php:79
 msgid "What does Pluginize offer?"
 msgstr "What does Pluginize offer?"
 
-#: inc/support.php:74
+#: inc/support.php:75
 msgid "Pluginize is a marketplace of plugins by WebDevStudios."
 msgstr "Pluginize is a marketplace of plugins by WebDevStudios."
 
-#: inc/support.php:73
+#: inc/support.php:74
 msgid "What is Pluginize?"
 msgstr "What is Pluginize?"
 
-#: inc/support.php:70
+#: inc/support.php:71
 msgid "Pluginize"
 msgstr "Pluginize"
 
@@ -367,15 +375,11 @@ msgstr "Pluginize"
 msgid "CPTUI Extended"
 msgstr "CPTUI Extended"
 
-#: inc/support.php:60
-msgid "Please note that %s this plugin will not handle display %s of registered post types or taxonomies in your current theme. It simply registers them for you. To display your data, check out %s. If all else fails, visit us on the %s"
-msgstr "Please note that %s this plugin will not handle display %s of registered post types or taxonomies in your current theme. It simply registers them for you. To display your data, check out %s. If all else fails, visit us on the %s"
-
-#: inc/utility.php:109
+#: inc/utility.php:112
 msgid "Support forums"
 msgstr "Support forums"
 
-#: inc/utility.php:32
+#: inc/utility.php:35
 msgid "About"
 msgstr "About"
 
@@ -459,7 +463,7 @@ msgstr "The taxonomy name/slug. Used for various queries for taxonomy content."
 msgid "View Taxonomies"
 msgstr "View Taxonomies"
 
-#: inc/utility.php:635
+#: inc/utility.php:639
 msgid "Please choose a different post type name. %s matches an existing page slug, which can cause conflicts."
 msgstr "Please choose a different post type name. %s matches an existing page slug, which can cause conflicts."
 
@@ -659,27 +663,27 @@ msgstr "Are you sure you want to delete this? Deleting will NOT remove created c
 msgid "(default: taxonomy slug). Query var needs to be true to use."
 msgstr "(default: taxonomy slug). Query var needs to be true to use."
 
-#: inc/support.php:148
+#: inc/support.php:149
 msgid "Please see the solution from the following forum support thread."
 msgstr "Please see the solution from the following forum support thread."
 
-#: inc/support.php:146
+#: inc/support.php:147
 msgid "Is there any way to get CPTUI-registered post types working with Visual Composer Media Grid?"
 msgstr "Is there any way to get CPTUI-registered post types working with Visual Composer Media Grid?"
 
-#: inc/support.php:141
+#: inc/support.php:142
 msgid "We recommend using VelocityPage."
 msgstr "We recommend using VelocityPage."
 
-#: inc/support.php:140
+#: inc/support.php:141
 msgid "Do you have any recommendations for an alternative to Visual Composer?"
 msgstr "Do you have any recommendations for an alternative to Visual Composer?"
 
-#: inc/support.php:122
+#: inc/support.php:123
 msgid "Visit the Import/Export page and copy the export code into the import side on the left. Replace the space with an underscore and then click \"Import\". You should be able to delete the individual post types afterwards."
 msgstr "Visit the Import/Export page and copy the export code into the import side on the left. Replace the space with an underscore and then click \"Import\". You should be able to delete the individual post types afterwards."
 
-#: inc/support.php:121
+#: inc/support.php:122
 msgid "I have post types with spaces in their slug and can not successfully delete them. How can I fix that?"
 msgstr "I have post types with spaces in their slug and can not successfully delete them. How can I fix that?"
 
@@ -743,23 +747,23 @@ msgstr "Archives file name examples."
 msgid "Template Hierarchy"
 msgstr "Template Hierarchy"
 
-#: inc/tools.php:815
+#: inc/tools.php:832
 msgid "Send debug info"
 msgstr "Send debug info"
 
-#: inc/tools.php:806
+#: inc/tools.php:823
 msgid "Please provide an email address to send debug information to: "
 msgstr "Please provide an email address to send debug information to: "
 
-#: inc/tools.php:779
+#: inc/tools.php:796
 msgid "%s Taxonomy"
 msgstr "%s Taxonomy"
 
-#: inc/tools.php:762
+#: inc/tools.php:779
 msgid "%s Post Type"
 msgstr "%s Post Type"
 
-#: inc/tools.php:652
+#: inc/tools.php:669
 msgid "This will not export the associated posts or taxonomy terms, just the settings."
 msgstr "This will not export the associated posts or taxonomy terms, just the settings."
 
@@ -795,7 +799,7 @@ msgstr "Admin panel for creating custom post types and custom taxonomies in Word
 msgid "https://github.com/WebDevStudios/custom-post-type-ui/"
 msgstr "https://github.com/WebDevStudios/custom-post-type-ui/"
 
-#: inc/utility.php:621
+#: inc/utility.php:625
 msgid "Please choose a different taxonomy name. %s is already registered."
 msgstr "Please choose a different taxonomy name. %s is already registered."
 
@@ -970,103 +974,103 @@ msgstr "(e.g. Actors)"
 msgid "Taxonomy Slug"
 msgstr "Taxonomy Slug"
 
-#: inc/support.php:245
+#: inc/support.php:246
 msgid "Change text inside the post/page editor title field. Should be able to adapt as necessary."
 msgstr "Change text inside the post/page editor title field. Should be able to adapt as necessary."
 
-#: inc/support.php:244
+#: inc/support.php:245
 msgid "How do I filter the \"enter title here\" text in the post editor screen?"
 msgstr "How do I filter the \"enter title here\" text in the post editor screen?"
 
-#: inc/support.php:240
+#: inc/support.php:241
 msgid "%s has compiled a nice list of functions used by our plugin. Note not all will be useful as they are attached to hooks."
 msgstr "%s has compiled a nice list of functions used by our plugin. Note not all will be useful as they are attached to hooks."
 
-#: inc/support.php:239
+#: inc/support.php:240
 msgid "Is there any function reference list?"
 msgstr "Is there any function reference list?"
 
-#: inc/support.php:230
+#: inc/support.php:231
 msgid "%s has an excellent %spost%s introducing users to the %sPosts 2 Posts%s plugin that should be a good start."
 msgstr "%s has an excellent %spost%s introducing users to the %sPosts 2 Posts%s plugin that should be a good start."
 
-#: inc/support.php:226
+#: inc/support.php:227
 msgid "Post relationships?"
 msgstr "Post relationships?"
 
-#: inc/support.php:220
+#: inc/support.php:221
 msgid "Check out the %s function for documentation and usage examples."
 msgstr "Check out the %s function for documentation and usage examples."
 
-#: inc/support.php:216
+#: inc/support.php:217
 msgid "How do I add a newly registered taxonomy to a post type that already exists?"
 msgstr "How do I add a newly registered taxonomy to a post type that already exists?"
 
-#: inc/support.php:210
+#: inc/support.php:211
 msgid "We recommend checking out %s, the latest iteration of \"Custom Metaboxes and Fields for WordPress\". Both are maintained by WebDevStudios."
 msgstr "We recommend checking out %s, the latest iteration of \"Custom Metaboxes and Fields for WordPress\". Both are maintained by WebDevStudios."
 
-#: inc/support.php:206
+#: inc/support.php:207
 msgid "How do I add custom metaboxes to my post type?"
 msgstr "How do I add custom metaboxes to my post type?"
 
-#: inc/support.php:203
+#: inc/support.php:204
 msgid "Advanced"
 msgstr "Advanced"
 
-#: inc/support.php:196
+#: inc/support.php:197
 msgid "You will need to add your newly created post type to the types that the category and tag archives query for. You can see a tutorial on how to do that at %s"
 msgstr "You will need to add your newly created post type to the types that the category and tag archives query for. You can see a tutorial on how to do that at %s"
 
-#: inc/support.php:192
+#: inc/support.php:193
 msgid "I have added categories and tags to my custom post type, but they do not appear in the archives."
 msgstr "I have added categories and tags to my custom post type, but they do not appear in the archives."
 
-#: inc/support.php:178
+#: inc/support.php:179
 msgid "How do I display my custom post type on my site?"
 msgstr "How do I display my custom post type on my site?"
 
-#: inc/support.php:171
+#: inc/support.php:172
 msgid "Please visit the %sTemplate Hierarchy%s page on the WordPress codex for details about available templates."
 msgstr "Please visit the %sTemplate Hierarchy%s page on the WordPress codex for details about available templates."
 
-#: inc/support.php:167
+#: inc/support.php:168
 msgid "What template files should I edit to alter my post type display?"
 msgstr "What template files should I edit to alter my post type display?"
 
-#: inc/support.php:164
+#: inc/support.php:165
 msgid "Front-end Display"
 msgstr "Front-end Display"
 
-#: inc/support.php:137
+#: inc/support.php:138
 msgid "Make sure your theme has post \"post-thumbnails\" theme support enabled."
 msgstr "Make sure your theme has post \"post-thumbnails\" theme support enabled."
 
-#: inc/support.php:136
+#: inc/support.php:137
 msgid "I have added post thumbnail and/or post format support to my post type, but those do not appear when adding a post type post."
 msgstr "I have added post thumbnail and/or post format support to my post type, but those do not appear when adding a post type post."
 
-#: inc/support.php:133
+#: inc/support.php:134
 msgid "Renaming the slug for a post type or taxonomy creates a new entry in our saved option which gets registered as its own post type or taxonomy. Since the settings will be mirrored from the previous slug, you will just need to delete the previous version's entry."
 msgstr "Renaming the slug for a post type or taxonomy creates a new entry in our saved option which gets registered as its own post type or taxonomy. Since the settings will be mirrored from the previous slug, you will just need to delete the previous version's entry."
 
-#: inc/support.php:132
+#: inc/support.php:133
 msgid "I changed my custom post type or taxonomy slug and now I have duplicates shown. How do I remove the duplicate?"
 msgstr "I changed my custom post type or taxonomy slug and now I have duplicates shown. How do I remove the duplicate?"
 
-#: inc/support.php:127
+#: inc/support.php:128
 msgid "You can either change the custom post type name back to the original name or try the Post Type Switcher plugin"
 msgstr "You can either change the custom post type name back to the original name or try the Post Type Switcher plugin"
 
-#: inc/support.php:126
+#: inc/support.php:127
 msgid "I changed my custom post type name and now I can not get to my posts. How do I get them back?"
 msgstr "I changed my custom post type name and now I can not get to my posts. How do I get them back?"
 
-#: inc/support.php:118
+#: inc/support.php:119
 msgid "General"
 msgstr "General"
 
-#: inc/support.php:64
+#: inc/support.php:65
 msgid "Support Forums"
 msgstr "Support Forums"
 
@@ -1074,11 +1078,11 @@ msgstr "Support Forums"
 msgid "Custom Post Type UI Support"
 msgstr "Custom Post Type UI Support"
 
-#: inc/utility.php:607
+#: inc/utility.php:611
 msgid "Please choose a different post type name. %s is already registered."
 msgstr "Please choose a different post type name. %s is already registered."
 
-#: inc/utility.php:649
+#: inc/utility.php:653
 msgid "Please do not use quotes in post type/taxonomy names or rewrite slugs"
 msgstr "Please do not use quotes in post type/taxonomy names or rewrite slugs"
 
@@ -1436,7 +1440,7 @@ msgstr "Post Type"
 msgid "Post Types and Taxonomies registered by Custom Post Type UI."
 msgstr "Post Types and Taxonomies registered by Custom Post Type UI."
 
-#: inc/tools.php:327
+#: inc/tools.php:330
 msgid "No post types to display at this time"
 msgstr "No post types to display at this time"
 
@@ -1444,87 +1448,87 @@ msgstr "No post types to display at this time"
 msgid "No taxonomies to display at this time"
 msgstr "No taxonomies to display at this time"
 
-#: inc/tools.php:768
+#: inc/tools.php:785
 msgid "All CPT UI Taxonomies"
 msgstr "All CPT UI Taxonomies"
 
-#: inc/tools.php:754 inc/tools.php:763 inc/tools.php:771 inc/tools.php:780
+#: inc/tools.php:771 inc/tools.php:780 inc/tools.php:788 inc/tools.php:797
 msgid "Copy/paste the code below into your functions.php file."
 msgstr "Copy/paste the code below into your functions.php file."
 
-#: inc/tools.php:749
+#: inc/tools.php:766
 msgid "All CPT UI Post Types"
 msgstr "All CPT UI Post Types"
 
-#: inc/tools.php:747
+#: inc/tools.php:764
 msgid "Get Post Type and Taxonomy Code"
 msgstr "Get Post Type and Taxonomy Code"
 
-#: inc/tools.php:729
+#: inc/tools.php:746
 msgid "Use the content above to import current taxonomies into a different WordPress site. You can also use this to simply back up your taxonomy settings."
 msgstr "Use the content above to import current taxonomies into a different WordPress site. You can also use this to simply back up your taxonomy settings."
 
-#: inc/tools.php:723
+#: inc/tools.php:740
 msgid "No taxonomies registered yet."
 msgstr "No taxonomies registered yet."
 
-#: inc/tools.php:717
+#: inc/tools.php:734
 msgid "Export Taxonomies"
 msgstr "Export Taxonomies"
 
-#: inc/tools.php:708
+#: inc/tools.php:725
 msgid "To import taxonomies from a different WordPress site, paste the exported content from that site and click the \"Import\" button."
 msgstr "To import taxonomies from a different WordPress site, paste the exported content from that site and click the \"Import\" button."
 
-#: inc/tools.php:698
+#: inc/tools.php:715
 msgid "Import Taxonomies"
 msgstr "Import Taxonomies"
 
-#: inc/tools.php:691
+#: inc/tools.php:708
 msgid "Use the content above to import current post types into a different WordPress site. You can also use this to simply back up your post type settings."
 msgstr "Use the content above to import current post types into a different WordPress site. You can also use this to simply back up your post type settings."
 
-#: inc/tools.php:688 inc/tools.php:726
+#: inc/tools.php:705 inc/tools.php:743
 msgid "To copy the system info, click below then press Ctrl + C (PC) or Cmd + C (Mac)."
 msgstr "To copy the system info, click below then press Ctrl + C (PC) or Cmd + C (Mac)."
 
-#: inc/tools.php:685
+#: inc/tools.php:702
 msgid "No post types registered yet."
 msgstr "No post types registered yet."
 
-#: inc/tools.php:679
+#: inc/tools.php:696
 msgid "Export Post Types"
 msgstr "Export Post Types"
 
-#: inc/tools.php:674 inc/tools.php:712
+#: inc/tools.php:691 inc/tools.php:729
 msgid "Import"
 msgstr "Import"
 
-#: inc/tools.php:670
+#: inc/tools.php:687
 msgid "To import post types from a different WordPress site, paste the exported content from that site and click the \"Import\" button."
 msgstr "To import post types from a different WordPress site, paste the exported content from that site and click the \"Import\" button."
 
-#: inc/tools.php:666 inc/tools.php:704
+#: inc/tools.php:683 inc/tools.php:721
 msgid "Importing will overwrite previous registered settings."
 msgstr "Importing will overwrite previous registered settings."
 
-#: inc/tools.php:666 inc/tools.php:704
+#: inc/tools.php:683 inc/tools.php:721
 msgid "Note:"
 msgstr "Note:"
 
-#: inc/tools.php:663 inc/tools.php:701
+#: inc/tools.php:680 inc/tools.php:718
 msgid "Paste content here."
 msgstr "Paste content here."
 
-#: inc/tools.php:660
+#: inc/tools.php:677
 msgid "Import Post Types"
 msgstr "Import Post Types"
 
-#: inc/tools.php:651
+#: inc/tools.php:668
 msgid "NOTE"
 msgstr "NOTE"
 
-#: inc/tools.php:645
+#: inc/tools.php:662
 msgid "If you are wanting to migrate registered post types or taxonomies from this site to another, that will also use Custom Post Type UI, use the import and export functionality. If you are moving away from Custom Post Type UI, use the information in the \"Get Code\" tab."
 msgstr "If you are wanting to migrate registered post types or taxonomies from this site to another, that will also use Custom Post Type UI, use the import and export functionality. If you are moving away from Custom Post Type UI, use the information in the \"Get Code\" tab."
 
@@ -1601,31 +1605,31 @@ msgstr "%s has failed to be imported"
 msgid "%s has been successfully imported"
 msgstr "%s has been successfully imported"
 
-#: custom-post-type-ui.php:746 inc/utility.php:569
+#: custom-post-type-ui.php:746 inc/utility.php:572
 msgid "%s has failed to be deleted"
 msgstr "%s has failed to be deleted"
 
-#: custom-post-type-ui.php:744 inc/utility.php:554
+#: custom-post-type-ui.php:744 inc/utility.php:557
 msgid "%s has been successfully deleted"
 msgstr "%s has been successfully deleted"
 
-#: custom-post-type-ui.php:740 inc/utility.php:539
+#: custom-post-type-ui.php:740 inc/utility.php:542
 msgid "%s has failed to be updated"
 msgstr "%s has failed to be updated"
 
-#: custom-post-type-ui.php:738 inc/utility.php:524
+#: custom-post-type-ui.php:738 inc/utility.php:527
 msgid "%s has been successfully updated"
 msgstr "%s has been successfully updated"
 
-#: custom-post-type-ui.php:734 inc/utility.php:509
+#: custom-post-type-ui.php:734 inc/utility.php:512
 msgid "%s has failed to be added"
 msgstr "%s has failed to be added"
 
-#: custom-post-type-ui.php:732 inc/utility.php:494
+#: custom-post-type-ui.php:732 inc/utility.php:497
 msgid "%s has been successfully added"
 msgstr "%s has been successfully added"
 
-#: inc/utility.php:33
+#: inc/utility.php:36
 msgid "Help"
 msgstr "Help"
 
@@ -1662,18 +1666,18 @@ msgstr "Edit Post Types"
 msgid "Add New Post Type"
 msgstr "Add New Post Type"
 
-#: inc/utility.php:111
+#: inc/utility.php:114
 msgid "Follow on Twitter:"
 msgstr "Follow on Twitter:"
 
-#: inc/utility.php:102
+#: inc/utility.php:105
 msgid "%s version %s by %s"
 msgstr "%s version %s by %s"
 
-#. #-#-#-#-#  custom-post-type-ui-code.pot (Custom Post Type UI 1.5.5) 
+#. #-#-#-#-#  custom-post-type-ui-code.pot (Custom Post Type UI 1.5.8) 
 #. #-#-#-#-#
 #. Plugin Name of the plugin/theme
-#: inc/about.php:34 inc/utility.php:103
+#: inc/about.php:34 inc/utility.php:106
 msgid "Custom Post Type UI"
 msgstr "Custom Post Type UI"
 

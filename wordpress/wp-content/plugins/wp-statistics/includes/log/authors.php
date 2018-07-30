@@ -3,8 +3,11 @@
         postboxes.add_postbox_toggles(pagenow);
     });
 </script>
+
 <div class="wrap">
     <h2><?php _e( 'Author Statistics', 'wp-statistics' ); ?></h2>
+    <?php do_action( 'wp_statistics_after_title' ); ?>
+
 	<?php
 	$daysToDisplay = 20;
 	if ( array_key_exists( 'hitdays', $_GET ) ) {
@@ -190,19 +193,19 @@
                             </tr>
 
                             <tr>
-                                <th><?php _e( 'Number of posts by author', 'wp-statistics' ); ?>:</th>
+                                <th><?php _e( 'Number of posts by author:', 'wp-statistics' ); ?></th>
                                 <th class="th-center"><span><?php echo number_format_i18n( count( $posts ) ); ?></span>
                                 </th>
                             </tr>
 
                             <tr>
-                                <th><?php _e( 'Chart Visits Total', 'wp-statistics' ); ?>:</th>
+                                <th><?php _e( 'Chart Visits Total:', 'wp-statistics' ); ?></th>
                                 <th class="th-center"><span><?php echo number_format_i18n( $visit_total ); ?></span>
                                 </th>
                             </tr>
 
                             <tr>
-                                <th><?php _e( 'All Time Visits Total', 'wp-statistics' ); ?>:</th>
+                                <th><?php _e( 'All Time Visits Total:', 'wp-statistics' ); ?></th>
                                 <th class="th-center"><span><?php
 
 										$stat = 0;

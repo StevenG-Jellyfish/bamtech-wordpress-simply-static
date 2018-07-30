@@ -33,18 +33,11 @@ if ( $wps_nonce_valid ) {
 		'wps_menu_bar',
 		'wps_coefficient',
 		'wps_chart_totals',
-		'wps_store_ua',
 		'wps_hide_notices',
-		'wps_hash_ips',
 		'wps_all_online',
 		'wps_strip_uri_parameters',
 		'wps_addsearchwords',
 	);
-
-	// If the IP hash's are enabled, disable storing the complete user agent.
-	if ( array_key_exists( 'wps_hash_ips', $_POST ) ) {
-		$_POST['wps_store_ua'] = '';
-	}
 
 	// We need to check the permalink format for the strip_uri_parameters option, if the permalink is the default or contains uri parameters, we can't strip them.
 	if ( $disable_strip_uri_parameters ) {
@@ -71,34 +64,12 @@ if ( $wps_nonce_valid ) {
     <table class="form-table">
         <tbody>
         <tr valign="top">
-            <th scope="row" colspan="2"><h3><?php _e( 'IP Addresses', 'wp-statistics' ); ?></h3></th>
-        </tr>
-
-        <tr valign="top">
-            <th scope="row">
-                <label for="useronline"><?php _e( 'Hash IP Addresses', 'wp-statistics' ); ?>:</label>
-            </th>
-
-            <td>
-                <input id="hash_ips" type="checkbox" value="1"
-                       name="wps_hash_ips" <?php echo $WP_Statistics->get_option( 'hash_ips' ) == true
-					? "checked='checked'" : ''; ?>>
-                <label for="hash_ips"><?php _e( 'Enable', 'wp-statistics' ); ?></label>
-
-                <p class="description"><?php _e(
-						'This feature will not store IP addresses in the database but instead used a unique hash.  The "Store entire user agent string" setting will be disabled if this is selected.  You will not be able to recover the IP addresses in the future to recover location information if this is enabled.',
-						'wp-statistics'
-					); ?></p>
-            </td>
-        </tr>
-
-        <tr valign="top">
             <th scope="row" colspan="2"><h3><?php _e( 'Online Users', 'wp-statistics' ); ?></h3></th>
         </tr>
 
         <tr valign="top">
             <th scope="row">
-                <label for="useronline"><?php _e( 'Online User', 'wp-statistics' ); ?>:</label>
+                <label for="useronline"><?php _e( 'Online User:', 'wp-statistics' ); ?></label>
             </th>
 
             <td>
@@ -113,7 +84,7 @@ if ( $wps_nonce_valid ) {
 
         <tr valign="top">
             <th scope="row">
-                <label for="check_online"><?php _e( 'Check for online users every', 'wp-statistics' ); ?>:</label>
+                <label for="check_online"><?php _e( 'Check for online users every:', 'wp-statistics' ); ?></label>
             </th>
 
             <td>
@@ -129,7 +100,7 @@ if ( $wps_nonce_valid ) {
 
         <tr valign="top">
             <th scope="row">
-                <label for="useronline"><?php _e( 'Record all user', 'wp-statistics' ); ?>:</label>
+                <label for="allonline"><?php _e( 'Record all user:', 'wp-statistics' ); ?></label>
             </th>
 
             <td>
@@ -139,7 +110,7 @@ if ( $wps_nonce_valid ) {
                 <label for="allonline"><?php _e( 'Enable', 'wp-statistics' ); ?></label>
 
                 <p class="description"><?php _e(
-						'Ignores the exclusion settings and records all users that are online (including self referrals and robots).  Should only be used for troubleshooting.',
+						'Ignores the exclusion settings and records all users that are online (including self referrals and robots). Should only be used for troubleshooting.',
 						'wp-statistics'
 					); ?></p>
             </td>
@@ -151,7 +122,7 @@ if ( $wps_nonce_valid ) {
 
         <tr valign="top">
             <th scope="row">
-                <label for="visits"><?php _e( 'Visits', 'wp-statistics' ); ?>:</label>
+                <label for="visits"><?php _e( 'Visits:', 'wp-statistics' ); ?></label>
             </th>
 
             <td>
@@ -170,7 +141,7 @@ if ( $wps_nonce_valid ) {
 
         <tr valign="top">
             <th scope="row">
-                <label for="visitors"><?php _e( 'Visitors', 'wp-statistics' ); ?>:</label>
+                <label for="visitors"><?php _e( 'Visitors:', 'wp-statistics' ); ?></label>
             </th>
 
             <td>
@@ -185,22 +156,7 @@ if ( $wps_nonce_valid ) {
 
         <tr valign="top">
             <th scope="row">
-                <label for="visitors"><?php _e( 'Store entire user agent string', 'wp-statistics' ); ?>:</label>
-            </th>
-
-            <td>
-                <input id="store_ua" type="checkbox" value="1"
-                       name="wps_store_ua" <?php echo $WP_Statistics->get_option( 'store_ua' ) == true
-					? "checked='checked'" : ''; ?>>
-                <label for="store_ua"><?php _e( 'Enable', 'wp-statistics' ); ?></label>
-
-                <p class="description"><?php _e( 'Only enabled for debugging', 'wp-statistics' ); ?></p>
-            </td>
-        </tr>
-
-        <tr valign="top">
-            <th scope="row">
-                <label for="coefficient"><?php _e( 'Coefficient per visitor', 'wp-statistics' ); ?>:</label>
+                <label for="coefficient"><?php _e( 'Coefficient per visitor:', 'wp-statistics' ); ?></label>
             </th>
 
             <td>
@@ -220,7 +176,7 @@ if ( $wps_nonce_valid ) {
 
         <tr valign="top">
             <th scope="row">
-                <label for="pages"><?php _e( 'Pages', 'wp-statistics' ); ?>:</label>
+                <label for="pages"><?php _e( 'Pages:', 'wp-statistics' ); ?></label>
             </th>
 
             <td>
@@ -235,7 +191,7 @@ if ( $wps_nonce_valid ) {
 
         <tr valign="top">
             <th scope="row">
-                <label for="all_pages"><?php _e( 'Track all pages', 'wp-statistics' ); ?>:</label>
+                <label for="all_pages"><?php _e( 'Track all pages:', 'wp-statistics' ); ?></label>
             </th>
 
             <td>
@@ -253,8 +209,7 @@ if ( $wps_nonce_valid ) {
 			?>
             <tr valign="top">
                 <th scope="row">
-                    <label for="strip_uri_parameters"><?php _e( 'Strip parameters from URI', 'wp-statistics' ); ?>
-                        :</label>
+                    <label for="strip_uri_parameters"><?php _e( 'Strip parameters from URI:', 'wp-statistics' ); ?></label>
                 </th>
 
                 <td>
@@ -275,8 +230,7 @@ if ( $wps_nonce_valid ) {
 		?>
         <tr valign="top">
             <th scope="row">
-                <label for="disable_column"><?php _e( 'Disable hits column in post/pages list', 'wp-statistics' ); ?>
-                    :</label>
+                <label for="disable_column"><?php _e( 'Disable hits column in post/pages list:', 'wp-statistics' ); ?></label>
             </th>
 
             <td>
@@ -291,7 +245,7 @@ if ( $wps_nonce_valid ) {
 
         <tr valign="top">
             <th scope="row">
-                <label for="show_hits"><?php _e( 'Show hits in posts/pages in the site', 'wp-statistics' ); ?>:</label>
+                <label for="show_hits"><?php _e( 'Show hits in posts/pages in the site:', 'wp-statistics' ); ?></label>
             </th>
 
             <td>
@@ -311,7 +265,7 @@ if ( $wps_nonce_valid ) {
 		} ?>
         <tr valign="top"<?php echo $hidden; ?> id='wps_show_hits_option'>
             <td scope="row" style="vertical-align: top;">
-                <label for="display_hits_position"><?php _e( 'Display position', 'wp-statistics' ); ?>:</label>
+                <label for="display_hits_position"><?php _e( 'Display position:', 'wp-statistics' ); ?></label>
             </td>
 
             <td>
@@ -344,7 +298,7 @@ if ( $wps_nonce_valid ) {
 
         <tr valign="top">
             <th scope="row">
-                <label for="menu-bar"><?php _e( 'Show stats in menu bar', 'wp-statistics' ); ?>:</label>
+                <label for="menu-bar"><?php _e( 'Show stats in menu bar:', 'wp-statistics' ); ?></label>
             </th>
 
             <td>
@@ -365,15 +319,14 @@ if ( $wps_nonce_valid ) {
 
         <tr valign="top">
             <th scope="row">
-                <label for="hide_notices"><?php _e( 'Hide admin notices about non active features', 'wp-statistics' ); ?>
-                    :</label>
+                <label for="hide_notices"><?php _e( 'Hide admin notices about non active features:', 'wp-statistics' ); ?></label>
             </th>
 
             <td>
                 <input id="hide_notices" type="checkbox" value="1"
                        name="wps_hide_notices" <?php echo $WP_Statistics->get_option( 'hide_notices' ) == true
 					? "checked='checked'" : ''; ?>>
-                <label for="store_ua"><?php _e( 'Enable', 'wp-statistics' ); ?></label>
+                <label for="hide_notices"><?php _e( 'Enable', 'wp-statistics' ); ?></label>
 
                 <p class="description"><?php _e(
 						'By default WP Statistics displays an alert if any of the core features are disabled on every admin page, this option will disable these notices.',
@@ -388,8 +341,7 @@ if ( $wps_nonce_valid ) {
 
         <tr valign="top">
             <th scope="row">
-                <label for="hide_notices"><?php _e( 'Add page title to empty search words', 'wp-statistics' ); ?>
-                    :</label>
+                <label for="addsearchwords"><?php _e( 'Add page title to empty search words:', 'wp-statistics' ); ?></label>
             </th>
 
             <td>
@@ -448,7 +400,7 @@ if ( $wps_nonce_valid ) {
 
         <tr valign="top">
             <th scope="row">
-                <label for="chart-totals"><?php _e( 'Include totals', 'wp-statistics' ); ?>:</label>
+                <label for="chart-totals"><?php _e( 'Include totals:', 'wp-statistics' ); ?></label>
             </th>
 
             <td>
