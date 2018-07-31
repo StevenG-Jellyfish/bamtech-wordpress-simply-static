@@ -13,10 +13,8 @@ var WPMLLanguageSwitcherDropdownClick = (function() {
 
         if(subMenu.style.visibility === 'visible'){
             subMenu.style.visibility = 'hidden';
-           // $("#lang_sel_click .wpml-ls-item-legacy-dropdown-click").removeClass("open");
             document.removeEventListener('click', close);
         }else{
-           // $("#lang_sel_click .wpml-ls-item-legacy-dropdown-click").addClass("open");
             subMenu.style.visibility = 'visible';
             document.addEventListener('click', close);
             isOpen = true;
@@ -32,7 +30,6 @@ var WPMLLanguageSwitcherDropdownClick = (function() {
 
             for(var i=0;i<switchers.length;i++){
                 var altLangs = switchers[i].querySelectorAll(submenuSelector)[0];
-             //   $("#lang_sel_click .wpml-ls-item-legacy-dropdown-click").removeClass("open");
                 altLangs.style.visibility = 'hidden';
             }
         }

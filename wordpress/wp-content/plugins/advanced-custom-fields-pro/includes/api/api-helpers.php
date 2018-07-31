@@ -39,6 +39,37 @@ function acf_is_empty( $value ) {
 	
 }
 
+/**
+*  acf_idify
+*
+*  Returns an id friendly string
+*
+*  @date	24/12/17
+*  @since	5.6.5
+*
+*  @param	type $var Description. Default.
+*  @return	type Description.
+*/
+
+function acf_idify( $str = '' ) {
+	return str_replace(array('][', '[', ']'), array('-', '-', ''), strtolower($str));
+}
+
+/**
+*  acf_slugify
+*
+*  Returns a slug friendly string
+*
+*  @date	24/12/17
+*  @since	5.6.5
+*
+*  @param	type $var Description. Default.
+*  @return	type Description.
+*/
+
+function acf_slugify( $str = '' ) {
+	return str_replace('_', '-', strtolower($str));
+}
 
 /**
 *  acf_has_setting
@@ -1823,8 +1854,8 @@ function acf_get_grouped_posts( $args ) {
 	
 	
 	// attachment doesn't work if it is the only item in an array
-	if( $is_single_post_type) {
-		$args['post_type'] = current($post_types);
+	if( $is_single_post_type ) {
+		$args['post_type'] = reset($post_types);
 	}
 	
 	
@@ -3160,6 +3191,9 @@ function acf_get_post_id_info( $post_id = 0 ) {
 	//acf_set_cache($cache_key, $info);
 	
 	
+	// filter
+	$info = apply_filters("acf/get_post_id_info", $info, $post_id);
+	
 	// return
 	return $info;
 	
@@ -3386,8 +3420,7 @@ function acf_upload_file( $uploaded_file ) {
 	$object = array(
 		'post_title' => $filename,
 		'post_mime_type' => $type,
-		'guid' => $url,
-		'context' => 'acf-upload'
+		'guid' => $url
 	);
 
 	// Save the data
@@ -3466,20 +3499,25 @@ function acf_update_nested_array( &$array, $ancestors, $value ) {
 function acf_is_screen( $id = '' ) {
 	
 	// bail early if not defined
-	if( !function_exists('get_current_screen') ) return false;
-	
+	if( !function_exists('get_current_screen') ) {
+		return false;
+	}
 	
 	// vars
 	$current_screen = get_current_screen();
 	
+	// no screen
+	if( !$current_screen ) {
+		return false;
 	
-	// bail early if no screen
-	if( !$current_screen ) return false;
+	// array
+	} elseif( is_array($id) ) {
+		return in_array($current_screen->id, $id);
 	
-	
-	// return
-	return ($id === $current_screen->id);
-	
+	// string
+	} else {
+		return ($id === $current_screen->id);
+	}
 }
 
 
@@ -3530,98 +3568,116 @@ function acf_maybe_get_GET( $key = '', $default = null ) {
 *  @return	(array)
 */
 
-function acf_get_attachment( $post ) {
+function acf_get_attachment( $attachment ) {
 	
-	// post
-	$post = get_post($post);
+	// get post
+	if( !$attachment = get_post($attachment) ) {
+		return false;
+	}
 	
-    
-	// bail early if no post
-	if( !$post ) return false;
-	
+	// validate post_type
+	if( $attachment->post_type !== 'attachment' ) {
+		return false;
+	}
 	
 	// vars
-	$thumb_id = 0;
-	$id = $post->ID;
-	$a = array(
-		'ID'			=> $id,
-		'id'			=> $id,
-		'title'       	=> $post->post_title,
-		'filename'    	=> wp_basename( $post->guid ),
-		'url'			=> wp_get_attachment_url( $id ),
-		'alt'			=> get_post_meta($id, '_wp_attachment_image_alt', true),
-		'author'		=> $post->post_author,
-		'description'	=> $post->post_content,
-		'caption'		=> $post->post_excerpt,
-		'name'			=> $post->post_name,
-		'date'			=> $post->post_date_gmt,
-		'modified'		=> $post->post_modified_gmt,
-		'mime_type'		=> $post->post_mime_type,
-		'type'			=> acf_maybe_get( explode('/', $post->post_mime_type), 0, '' ),
-		'icon'			=> wp_mime_type_icon( $id )
+	$sizes_id = 0;
+	$meta = wp_get_attachment_metadata( $attachment->ID );
+	$attached_file = get_attached_file( $attachment->ID );
+	$attachment_url = wp_get_attachment_url( $attachment->ID );
+	
+	// get mime types
+	if( strpos( $attachment->post_mime_type, '/' ) !== false ) {
+		list( $type, $subtype ) = explode( '/', $attachment->post_mime_type );
+	} else {
+		list( $type, $subtype ) = array( $attachment->post_mime_type, '' );
+	}
+	
+	// vars
+	$response = array(
+		'ID'			=> $attachment->ID,
+		'id'			=> $attachment->ID,
+		'title'       	=> $attachment->post_title,
+		'filename'		=> wp_basename( $attached_file ),
+		'filesize'		=> 0,
+		'url'			=> $attachment_url,
+		'link'			=> get_attachment_link( $attachment->ID ),
+		'alt'			=> get_post_meta( $attachment->ID, '_wp_attachment_image_alt', true ),
+		'author'		=> $attachment->post_author,
+		'description'	=> $attachment->post_content,
+		'caption'		=> $attachment->post_excerpt,
+		'name'			=> $attachment->post_name,
+        'status'		=> $attachment->post_status,
+        'uploaded_to'	=> $attachment->post_parent,
+        'date'			=> $attachment->post_date_gmt,
+		'modified'		=> $attachment->post_modified_gmt,
+		'menu_order'	=> $attachment->menu_order,
+		'mime_type'		=> $attachment->post_mime_type,
+        'type'			=> $type,
+        'subtype'		=> $subtype,
+        'icon'			=> wp_mime_type_icon( $attachment->ID )
 	);
 	
+	// filesize
+	if( isset($meta['filesize']) ) {
+		$response['filesize'] = $meta['filesize'];
+	} elseif( file_exists($attached_file) ) {
+		$response['filesize'] = filesize( $attached_file );
+	}
 	
-	// video may use featured image
-	if( $a['type'] === 'image' ) {
+	// image
+	if( $type === 'image' ) {
 		
-		$thumb_id = $id;
-		$src = wp_get_attachment_image_src( $id, 'full' );
+		$sizes_id = $attachment->ID;
+		$src = wp_get_attachment_image_src( $attachment->ID, 'full' );
 		
-		$a['url'] = $src[0];
-		$a['width'] = $src[1];
-		$a['height'] = $src[2];
+		$response['url'] = $src[0];
+		$response['width'] = $src[1];
+		$response['height'] = $src[2];
+	
+	// video
+	} elseif( $type === 'video' ) {
 		
+		// dimentions
+		$response['width'] = acf_maybe_get($meta, 'width', 0);
+		$response['height'] = acf_maybe_get($meta, 'height', 0);
 		
-	} elseif( $a['type'] === 'audio' || $a['type'] === 'video' ) {
-		
-		// video dimentions
-		if( $a['type'] == 'video' ) {
-			
-			$meta = wp_get_attachment_metadata( $id );
-			$a['width'] = acf_maybe_get($meta, 'width', 0);
-			$a['height'] = acf_maybe_get($meta, 'height', 0);
-		
+		// featured image
+		if( $featured_id = get_post_thumbnail_id($attachment->ID) ) {
+			$sizes_id = $featured_id;
 		}
 		
+	// audio
+	} elseif( $type === 'audio' ) {
 		
-		// feature image
-		if( $featured_id = get_post_thumbnail_id($id) ) {
-		
-			$thumb_id = $featured_id;
-			
-		}
-						
+		// featured image
+		if( $featured_id = get_post_thumbnail_id($attachment->ID) ) {
+			$sizes_id = $featured_id;
+		}				
 	}
 	
 	
 	// sizes
-	if( $thumb_id ) {
+	if( $sizes_id ) {
 		
-		// find all image sizes
-		if( $sizes = get_intermediate_image_sizes() ) {
-			
-			$a['sizes'] = array();
-			
-			foreach( $sizes as $size ) {
-				
-				// url
-				$src = wp_get_attachment_image_src( $thumb_id, $size );
-				
-				// add src
-				$a['sizes'][ $size ] = $src[0];
-				$a['sizes'][ $size . '-width' ] = $src[1];
-				$a['sizes'][ $size . '-height' ] = $src[2];
-				
-			}
-			
+		// vars
+		$sizes = get_intermediate_image_sizes();
+		$data = array();
+		
+		// loop
+		foreach( $sizes as $size ) {
+			$src = wp_get_attachment_image_src( $sizes_id, $size );
+			$data[ $size ] = $src[0];
+			$data[ $size . '-width' ] = $src[1];
+			$data[ $size . '-height' ] = $src[2];
 		}
 		
+		// append
+		$response['sizes'] = $data;
 	}
 	
-	
 	// return
-	return $a;
+	return $response;
 	
 }
 
@@ -5098,22 +5154,6 @@ function acf_remove_array_key_prefix( $array, $prefix ) {
 	return $array2;
 	
 }
-
-
-	
-
-add_filter("acf/settings/slug", '_acf_settings_slug');
-
-function _acf_settings_slug( $v ) {
-	
-	$basename = acf_get_setting('basename');
-    $slug = explode('/', $basename);
-    $slug = current($slug);
-	
-	return $slug;
-}
-
-
 
 
 /*
