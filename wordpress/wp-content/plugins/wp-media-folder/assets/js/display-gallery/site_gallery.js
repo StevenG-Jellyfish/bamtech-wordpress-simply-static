@@ -20,8 +20,11 @@
         } else if (gutterWidth > 30 || gutterWidth < 0) {
             gutterWidth = 5;
         }
-        
-        if(parseInt(columns) < 2) columns = 2;
+
+        if (parseInt(columns) < 2 || containerWidth <= 450) {
+            columns = 2;
+        }
+
         gutterWidth = parseInt(gutterWidth);
 
         var allGutters = gutterWidth * (columns - 1);
@@ -112,7 +115,7 @@
                             type: 'iframe',
                             mainClass: 'mfp-fade',
                             removalDelay: 160,
-                            preloader: false,
+                            preloader: true,
                             fixedContentPos: false
                         });
 
@@ -150,7 +153,7 @@
                                 arrowMarkup: '<button title="%title%" type="button" class="zmdi zmdi-chevron-%dir%"></button>' // markup of an arrow button
                             },
                             type: 'image',
-                            showCloseBtn: false,
+                            showCloseBtn: true,
                             image: {
                                 titleSrc: 'title'
                             },

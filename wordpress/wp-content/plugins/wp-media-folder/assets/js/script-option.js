@@ -1,22 +1,227 @@
 var selected_folder = null, curFolders = [], wpmf_list_import = '', current_page_watermark = 1;
+var wpmfWatermarkExcludeTreeModule;
 (function ($) {
-    /**
-     * Import nextgen gallery
-     * @param doit true or false
-     * @param button
-     */
-    var importWpmfgallery = function(doit,button){
-        jQuery(button).closest("p").find(".spinner").show().css({"visibility":"visible"});
-        jQuery.post(ajaxurl, {action: "import_gallery" , doit :doit}, function(response) {
-            if(response === "error time"){
-                jQuery("#wmpfImportgallery").click();
-            }else{
-                jQuery(button).closest("div#wpmf_error").hide();
-                if(doit===true){
-                    jQuery("#wpmf_error").after("<div class='updated'> <p><strong>NextGEN galleries successfully imported in WP Media Folder</strong></p></div>");
+    wpmfWatermarkExcludeTreeModule = {
+        categories: [], // categories
+        folders_states: [], // Contains open or closed status of folders
+
+        /**
+         * Retrieve the Jquery tree view element
+         * of the current frame
+         * @return jQuery
+         */
+        getTreeElement: function () {
+            return $('.watermark_exclude_folders').find('.wpmf-folder-tree');
+        },
+
+        /**
+         * Initialize module related things
+         */
+        initModule: function () {
+            // Import categories from wpmf main module
+            wpmfWatermarkExcludeTreeModule.importCategories();
+
+            // Add the tree view to the main content
+            $('<div class="wpmf-folder-tree"></div>').appendTo($('.watermark_exclude_folders'));
+
+            // Render the tree view
+            wpmfWatermarkExcludeTreeModule.loadTreeView();
+
+            $.ajax({
+                type: "POST",
+                url: ajaxurl,
+                data: {
+                    action: 'wpmf',
+                    task: 'get_exclude_folders',
+                    wpmf_nonce: wpmf.vars.wpmf_nonce
+                },
+                success: function (res) {
+                    $.each(res.folders, function (i, v) {
+                        $('.wpmf_watermark_exclude_folders[value="' + v + '"]').prop('checked', true);
+                    });
                 }
+            });
+        },
+
+        /**
+         * Import categories from wpmf main module
+         */
+        importCategories: function () {
+            var folders_ordered = [];
+
+            // Add each category
+            $(wpmf.vars.wpmf_categories_order).each(function () {
+                folders_ordered.push(wpmf.vars.wpmf_categories[this]);
+            });
+
+            // Reorder array based on children
+            var folders_ordered_deep = [];
+            var processed_ids = [];
+            var loadChildren = function (id) {
+                if (processed_ids.indexOf(id) < 0) {
+                    processed_ids.push(id);
+                    for (var ij = 0; ij < folders_ordered.length; ij++) {
+                        if (folders_ordered[ij].parent_id === id) {
+                            folders_ordered_deep.push(folders_ordered[ij]);
+                            loadChildren(folders_ordered[ij].id);
+                        }
+                    }
+                }
+            };
+            loadChildren(parseInt(wpmf.vars.term_root_id));
+
+            // Finally save it to the global var
+            wpmfWatermarkExcludeTreeModule.categories = folders_ordered_deep;
+
+        },
+
+        /**
+         * Render tree view inside content
+         */
+        loadTreeView: function () {
+            wpmfWatermarkExcludeTreeModule.getTreeElement().html(wpmfWatermarkExcludeTreeModule.getRendering());
+        },
+
+        /**
+         * Get the html resulting tree view
+         * @return {string}
+         */
+        getRendering: function () {
+            var ij = 0;
+            var content = ''; // Final tree view content
+            /**
+             * Recursively print list of folders
+             * @return {boolean}
+             */
+            var generateList = function generateList() {
+                content += '<ul>';
+                while (ij < wpmfWatermarkExcludeTreeModule.categories.length) {
+                    var className = 'closed';
+                    // Open li tag
+                    content += '<li class="' + className + '" data-id="' + wpmfWatermarkExcludeTreeModule.categories[ij].id + '" >';
+
+                    // get color folder
+                    var bgcolor = '';
+                    if (typeof wpmf.vars.colors !== 'undefined' && typeof wpmf.vars.colors[wpmfWatermarkExcludeTreeModule.categories[ij].id] !== 'undefined' && wpmfFoldersModule.folder_design === 'material_design') {
+                        bgcolor = 'color: ' + wpmf.vars.colors[wpmfWatermarkExcludeTreeModule.categories[ij].id];
+                    } else {
+                        bgcolor = 'color: #8f8f8f';
+                    }
+
+                    var text_label = '';
+                    if (wpmfWatermarkExcludeTreeModule.categories[ij + 1] && wpmfWatermarkExcludeTreeModule.categories[ij + 1].depth > wpmfWatermarkExcludeTreeModule.categories[ij].depth) { // The next element is a sub folder
+                        content += '<a onclick="wpmfWatermarkExcludeTreeModule.toggle(' + wpmfWatermarkExcludeTreeModule.categories[ij].id + ')"><i class="material-icons wpmf-arrow">keyboard_arrow_down</i></a>';
+                    } else {
+                        // Add folder icon
+                        content += '<i class="material-icons wpmf-arrow" style="opacity: 0">keyboard_arrow_down</i></a>';
+                    }
+                    content += '<div class="pure-checkbox">';
+                    if (wpmfWatermarkExcludeTreeModule.categories[ij].id === 0) {
+                        text_label = wpmf.l18n.media_folder;
+                    } else {
+                        text_label = wpmfWatermarkExcludeTreeModule.categories[ij].label;
+                    }
+
+                    content += '<input type="hidden" name="wpmf_watermark_exclude_folders[' + wpmfWatermarkExcludeTreeModule.categories[ij].id + ']" value="0">';
+                    if (wpmfWatermarkExcludeTreeModule.categories[ij].id === 0) {
+                        content += '<input id="wpmf_watermark_exclude_folders_0" class="wpmf_watermark_exclude_folders" type="checkbox" name="wpmf_watermark_exclude_folders[0]" value="root">';
+                    } else {
+                        content += '<input id="wpmf_watermark_exclude_folders_' + wpmfWatermarkExcludeTreeModule.categories[ij].id + '" class="wpmf_watermark_exclude_folders" type="checkbox" name="wpmf_watermark_exclude_folders[' + wpmfWatermarkExcludeTreeModule.categories[ij].id + ']" value="' + wpmfWatermarkExcludeTreeModule.categories[ij].id + '">';
+                    }
+
+                    content += '<label for="wpmf_watermark_exclude_folders_' + wpmfWatermarkExcludeTreeModule.categories[ij].id + '" onclick="wpmfWatermarkExcludeTreeModule.changeFolder(' + wpmfWatermarkExcludeTreeModule.categories[ij].id + ')">';
+                    content += '<i class="material-icons" style="' + bgcolor + '">folder</i>';
+                    content += text_label;
+                    content += '</label>';
+                    content += '</div>';
+                    // This is the end of the array
+                    if (wpmfWatermarkExcludeTreeModule.categories[ij + 1] === undefined) {
+                        // var's close all opened tags
+                        for (var ik = wpmfWatermarkExcludeTreeModule.categories[ij].depth; ik >= 0; ik--) {
+                            content += '</li>';
+                            content += '</ul>';
+                        }
+
+                        // We are at the end don't continue to process array
+                        return false;
+                    }
+
+
+                    if (wpmfWatermarkExcludeTreeModule.categories[ij + 1].depth > wpmfWatermarkExcludeTreeModule.categories[ij].depth) { // The next element is a sub folder
+                        // Recursively list it
+                        ij++;
+                        if (generateList() === false) {
+                            // We have reached the end, var's recursively end
+                            return false;
+                        }
+                    } else if (wpmfWatermarkExcludeTreeModule.categories[ij + 1].depth < wpmfWatermarkExcludeTreeModule.categories[ij].depth) { // The next element don't have the same parent
+                        // var's close opened tags
+                        for (var ik1 = wpmfWatermarkExcludeTreeModule.categories[ij].depth; ik1 > wpmfWatermarkExcludeTreeModule.categories[ij + 1].depth; ik1--) {
+                            content += '</li>';
+                            content += '</ul>';
+                        }
+
+                        // We're not at the end of the array var's continue processing it
+                        return true;
+                    }
+
+                    // Close the current element
+                    content += '</li>';
+                    ij++;
+                }
+            };
+
+            // Start generation
+            generateList();
+            return content;
+        },
+
+        /**
+         * Change the selected folder in tree view
+         * @param folder_id
+         */
+        changeFolder: function (folder_id) {
+            // Remove previous selection
+            wpmfWatermarkExcludeTreeModule.getTreeElement().find('li').removeClass('selected');
+
+            // Select the folder
+            wpmfWatermarkExcludeTreeModule.getTreeElement().find('li[data-id="' + folder_id + '"]').addClass('selected').// Open parent folders
+            parents('.wpmf-folder-tree li.closed').removeClass('closed');
+        },
+
+        /**
+         * Toggle the open / closed state of a folder
+         * @param folder_id
+         */
+        toggle: function (folder_id) {
+            // Check is folder has closed class
+            if (wpmfWatermarkExcludeTreeModule.getTreeElement().find('li[data-id="' + folder_id + '"]').hasClass('closed')) {
+                // Open the folder
+                wpmfWatermarkExcludeTreeModule.openFolder(folder_id);
+            } else {
+                // Close the folder
+                wpmfWatermarkExcludeTreeModule.closeFolder(folder_id);
+                // close all sub folder
+                $('li[data-id="' + folder_id + '"]').find('li').addClass('closed');
             }
-        });
+        },
+
+
+        /**
+         * Open a folder to show children
+         */
+        openFolder: function (folder_id) {
+            wpmfWatermarkExcludeTreeModule.getTreeElement().find('li[data-id="' + folder_id + '"]').removeClass('closed');
+            wpmfWatermarkExcludeTreeModule.folders_states[folder_id] = 'open';
+        },
+
+        /**
+         * Close a folder and hide children
+         */
+        closeFolder: function (folder_id) {
+            wpmfWatermarkExcludeTreeModule.getTreeElement().find('li[data-id="' + folder_id + '"]').addClass('closed');
+            wpmfWatermarkExcludeTreeModule.folders_states[folder_id] = 'close';
+        }
     };
 
     /**
@@ -31,7 +236,8 @@ var selected_folder = null, curFolders = [], wpmf_list_import = '', current_page
             url: ajaxurl,
             data: {
                 action: "import_categories",
-                doit: doit
+                doit: doit,
+                wpmf_nonce: wpmf.vars.wpmf_nonce
             },
             success: function () {
                 jQuery(button).closest('div').find('.spinner').hide();
@@ -45,7 +251,7 @@ var selected_folder = null, curFolders = [], wpmf_list_import = '', current_page
      */
     var bindSelect = function () {
         /* show tooltip when hover label, button */
-        jQuery('.wpmf_row_full label ,.content-box #wmpfImpoBtn').qtip({
+        jQuery('.wpmf_row_full label ,.content-box #wmpfImpoBtn, .wpmfqtip').qtip({
             content: {
                 attr: 'data-alt'
             },
@@ -64,7 +270,6 @@ var selected_folder = null, curFolders = [], wpmf_list_import = '', current_page
                 fixed: true,
                 delay: 10
             }
-
         });
 
         /**
@@ -84,7 +289,8 @@ var selected_folder = null, curFolders = [], wpmf_list_import = '', current_page
                 dataType: 'json',
                 data: {
                     action: "wpmf_remove_syncmedia",
-                    key: list.toString()
+                    key: list.toString(),
+                    wpmf_nonce: wpmf.vars.wpmf_nonce
                 },
                 success: function (response) {
                     if (response !== false) {
@@ -120,7 +326,8 @@ var selected_folder = null, curFolders = [], wpmf_list_import = '', current_page
                 data: {
                     action: "wpmf_add_syncmedia",
                     folder_ftp: folder_ftp,
-                    folder_category: folder_category
+                    folder_category: folder_category,
+                    wpmf_nonce: wpmf.vars.wpmf_nonce
                 },
                 success: function (response) {
                     var tr = '<tr data-id="' + response.folder_category + '">';
@@ -164,7 +371,8 @@ var selected_folder = null, curFolders = [], wpmf_list_import = '', current_page
                 url: ajaxurl,
                 data: {
                     action: "wpmf_import_folder",
-                    wpmf_list_import: wpmf_list_import
+                    wpmf_list_import: wpmf_list_import,
+                    wpmf_nonce: wpmf.vars.wpmf_nonce
                 },
                 success: function (res) {
                     var w = $('.process_import_ftp').data('w');
@@ -173,16 +381,14 @@ var selected_folder = null, curFolders = [], wpmf_list_import = '', current_page
                             var new_w = parseFloat(w) + parseFloat(res.percent);
                             if (new_w > 100)
                                 new_w = 100;
-                            $('.process_import_ftp').data('w', new_w);
-                            $('.process_import_ftp').css('width', new_w + '%');
+                            $('.process_import_ftp').data('w', new_w).css('width', new_w + '%');
                         }
                         $this.click();
                     } else {
                         $this.parent('.btnoption').find('.spinner').hide();
                         $this.parent('.btnoption').find('.info_import').fadeIn(500).fadeOut(3000);
                         $('.process_import_ftp_full').show();
-                        $('.process_import_ftp').data('w', 0);
-                        $('.process_import_ftp').css('width', '100%');
+                        $('.process_import_ftp').data('w', 0).css('width', '100%');
 
                         setTimeout(function () {
                             $('.process_import_ftp_full').hide();
@@ -211,7 +417,8 @@ var selected_folder = null, curFolders = [], wpmf_list_import = '', current_page
                         action: "wpmf_add_weight",
                         min_weight: $('.wpmf_min_weight').val(),
                         max_weight: $('.wpmf_max_weight').val(),
-                        unit: $('.wpmfunit').val()
+                        unit: $('.wpmfunit').val(),
+                        wpmf_nonce: wpmf.vars.wpmf_nonce
                     },
                     success: function (res) {
                         if (res !== false) {
@@ -247,7 +454,8 @@ var selected_folder = null, curFolders = [], wpmf_list_import = '', current_page
                     data: {
                         action: "wpmf_add_dimension",
                         width_dimension: $('.wpmf_width_dimension').val(),
-                        height_dimension: $('.wpmf_height_dimension').val()
+                        height_dimension: $('.wpmf_height_dimension').val(),
+                        wpmf_nonce: wpmf.vars.wpmf_nonce
                     },
                     success: function (res) {
                         if (res !== false) {
@@ -287,7 +495,8 @@ var selected_folder = null, curFolders = [], wpmf_list_import = '', current_page
                 data: {
                     action: action,
                     value: value,
-                    unit: unit
+                    unit: unit,
+                    wpmf_nonce: wpmf.vars.wpmf_nonce
                 },
                 success: function (res) {
                     if (res === true) {
@@ -305,8 +514,9 @@ var selected_folder = null, curFolders = [], wpmf_list_import = '', current_page
             var label = $this.data('label');
             var current_value = $('#edit_' + label + '').data('value');
             var unit = $('.wpmfunit').val();
+            var new_value = '';
             if (label === 'dimension') {
-                var new_value = $('.wpmf_width_dimension').val() + 'x' + $('.wpmf_height_dimension').val();
+                new_value = $('.wpmf_width_dimension').val() + 'x' + $('.wpmf_height_dimension').val();
             } else {
                 if (unit === 'kB') {
                     new_value = ($('.wpmf_min_weight').val() * 1024) + '-' + ($('.wpmf_max_weight').val() * 1024) + ',' + unit;
@@ -323,7 +533,8 @@ var selected_folder = null, curFolders = [], wpmf_list_import = '', current_page
                     label: label,
                     old_value: $this.data('value'),
                     new_value: new_value,
-                    unit: unit
+                    unit: unit,
+                    wpmf_nonce: wpmf.vars.wpmf_nonce
                 },
                 success: function (res) {
                     if (res !== false) {
@@ -424,7 +635,8 @@ var selected_folder = null, curFolders = [], wpmf_list_import = '', current_page
                 url: ajaxurl,
                 data: {
                     action: "import_gallery",
-                    doit: true
+                    doit: true,
+                    wpmf_nonce: wpmf.vars.wpmf_nonce
                 },
                 success: function (res) {
                     if (res === 'error time') {
@@ -438,6 +650,8 @@ var selected_folder = null, curFolders = [], wpmf_list_import = '', current_page
     };
 
     $(document).ready(function () {
+        // load exclude tree folders
+        wpmfWatermarkExcludeTreeModule.initModule();
         var sdir = '/';
         /**
          * options
@@ -446,7 +660,8 @@ var selected_folder = null, curFolders = [], wpmf_list_import = '', current_page
         var options = {
             'root': '/',
             'showroot': '/',
-            'onclick': function (elem, type, file) {},
+            'onclick': function (elem, type, file) {
+            },
             'oncheck': function (elem, checked, type, file) {
                 if (file.substring(file.length - 1) === sdir) {
                     file = file.substring(0, file.length - 1);
@@ -573,7 +788,7 @@ var selected_folder = null, curFolders = [], wpmf_list_import = '', current_page
          * @param dir dir name
          * @param callback
          */
-        var openfolderftp = function (dir , callback) {
+        var openfolderftp = function (dir, callback) {
             if ($thisftp.find('a[data-file="' + dir + '"]').parent().hasClass('expanded')) {
                 return;
             }
@@ -587,8 +802,13 @@ var selected_folder = null, curFolders = [], wpmf_list_import = '', current_page
             var ret;
             ret = $.ajax({
                 url: ajaxurl,
-                method:'POST',
-                data: {dir: dir, action: 'wpmf_get_folder'},
+                method: 'POST',
+                data: {
+                    dir: dir,
+                    action: 'wpmf_get_folder',
+                    wpmf_list_import: wpmf_list_import,
+                    wpmf_nonce: wpmf.vars.wpmf_nonce
+                },
                 context: $thisftp,
                 dataType: 'json',
                 beforeSend: function () {
@@ -608,22 +828,28 @@ var selected_folder = null, curFolders = [], wpmf_list_import = '', current_page
                     }
                     ret += '<li class="' + classe + '">';
                     if (options.usecheckboxes === true || (options.usecheckboxes === 'dirs' && datas[ij].type === 'dir') || (options.usecheckboxes === 'files' && datas[ij].type === 'file')) {
-                        ret += '<input type="checkbox" data-file="' + dir + datas[ij].file + isdir + '" data-type="' + datas[ij].type + '" />';
+                        if (!datas[ij].disable) {
+                            ret += '<input type="checkbox" data-file="' + dir + datas[ij].file + isdir + '" data-type="' + datas[ij].type + '" />';
+                        }
+
                         var testFolder = dir + datas[ij].file;
                         if (testFolder.substring(0, 1) === '/') {
                             testFolder = testFolder.substring(1, testFolder.length);
                         }
 
-                        if (curFolders.indexOf(testFolder) > -1) {
-                            ret += '<span class="check checked" data-file="' + dir + datas[ij].file + isdir + '" data-type="' + datas[ij].type + '"></span>';
-                        } else if (datas[ij].pchecked === true) {
-                            ret += '<span class="check pchecked" data-file="' + dir + datas[ij].file + isdir + '" data-type="' + datas[ij].type + '" ></span>';
+                        if (datas[ij].disable) {
+                            ret += '<span class="dashicons dashicons-upload notvisible"></span>';
                         } else {
-                            ret += '<span class="check" data-file="' + dir + datas[ij].file + isdir + '" data-type="' + datas[ij].type + '" ></span>';
+                            if (curFolders.indexOf(testFolder) > -1) {
+                                ret += '<span class="check checked" data-file="' + dir + datas[ij].file + isdir + '" data-type="' + datas[ij].type + '"></span>';
+                            } else if (datas[ij].pchecked === true) {
+                                ret += '<span class="check pchecked" data-file="' + dir + datas[ij].file + isdir + '" data-type="' + datas[ij].type + '" ></span>';
+                            } else {
+                                ret += '<span class="check" data-file="' + dir + datas[ij].file + isdir + '" data-type="' + datas[ij].type + '" ></span>';
+                            }
                         }
-
                     } else {
-                        
+
                     }
                     ret += '<a href="#" data-file="' + dir + datas[ij].file + isdir + '" data-type="' + datas[ij].type + '">' + datas[ij].file + '</a>';
                     ret += '</li>';
@@ -641,7 +867,7 @@ var selected_folder = null, curFolders = [], wpmf_list_import = '', current_page
                     });
 
                 seteventsftp();
-
+                wpmf_bindeventcheckbox($thisftp);
                 if (options.usecheckboxes) {
                     this.find('a[data-file="' + dir + '"]').parent().find('li input[type="checkbox"]').attr('checked', null);
                     for (ij = 0; ij < datas.length; ij++) {
@@ -704,14 +930,6 @@ var selected_folder = null, curFolders = [], wpmf_list_import = '', current_page
                 }
 
                 wpmf_list_import = fchecked.toString();
-                $.ajax({
-                    type: "POST",
-                    url: ajaxurl,
-                    data: {
-                        action: "wpmfjao_checked",
-                        dir_checked: wpmf_list_import
-                    }
-                });
             });
         };
 
@@ -851,7 +1069,8 @@ var selected_folder = null, curFolders = [], wpmf_list_import = '', current_page
                 dataType: 'json',
                 data: {
                     action: 'wpmf_watermark_regeneration',
-                    paged: paged
+                    paged: paged,
+                    wpmf_nonce: wpmf.vars.wpmf_nonce
                 },
                 success: function (res) {
                     var w = $('.process_watermark_thumb').data('w');
@@ -860,7 +1079,7 @@ var selected_folder = null, curFolders = [], wpmf_list_import = '', current_page
                         $('.process_watermark_thumb').data('w', 0).css('width', '100%');
                     }
 
-                    if (res.status === 'limit') {
+                    if (res.status === 'limit' || typeof res === "undefined") {
                         current_page_watermark = parseInt(paged) + 1;
                         if (typeof res.percent !== "undefined") {
                             var new_w = parseFloat(w) + parseFloat(res.percent);
@@ -870,7 +1089,7 @@ var selected_folder = null, curFolders = [], wpmf_list_import = '', current_page
                             $('.process_watermark_thumb').data('w', new_w).css('width', new_w + '%');
                         }
                         watermarkRegeneration(current_page_watermark);
-                    }else{
+                    } else {
                         $('.process_watermark_thumb_full').hide();
                     }
                 }
@@ -880,7 +1099,7 @@ var selected_folder = null, curFolders = [], wpmf_list_import = '', current_page
         /**
          * run watermark image
          */
-        $('.wpmf_watermark_regeneration').on('click',function(){
+        $('.wpmf_watermark_regeneration').on('click', function () {
             $('.process_watermark_thumb_full').show();
             watermarkRegeneration(current_page_watermark);
         });
@@ -888,8 +1107,8 @@ var selected_folder = null, curFolders = [], wpmf_list_import = '', current_page
         /**
          * Open select logo watermark
          */
-        $('.wpmf_watermark_select_image').on('click',function(){
-            if ( typeof frame !== "undefined" ) {
+        $('.wpmf_watermark_select_image').on('click', function () {
+            if (typeof frame !== "undefined") {
                 frame.open();
                 return;
             }
@@ -903,7 +1122,7 @@ var selected_folder = null, curFolders = [], wpmf_list_import = '', current_page
             });
 
             // When an image is selected, run a callback.
-            frame.on( 'select', function() {
+            frame.on('select', function () {
                 // Grab the selected attachment.
                 var attachment = frame.state().get('selection').first().toJSON();
                 $('#wpmf_watermark_image').val(attachment.url);
@@ -916,25 +1135,9 @@ var selected_folder = null, curFolders = [], wpmf_list_import = '', current_page
         /**
          * clear logo watermark
          */
-        $('.wpmf_watermark_clear_image').on('click',function(){
+        $('.wpmf_watermark_clear_image').on('click', function () {
             $('#wpmf_watermark_image').val('');
             $('#wpmf_watermark_image_id').val(0);
-        });
-
-        /**
-         * import nextgen gallery
-         */
-        $('#wmpfImportgallery').on('click',function(){
-            var $this = $(this);
-            importWpmfgallery(true,$this);
-        });
-
-        /**
-         * cancel import gallery button
-         */
-        $('.wmpfNoImportgallery').on('click',function(){
-            var $this = $(this);
-            importWpmfgallery(false,$this);
         });
     });
 })(jQuery);

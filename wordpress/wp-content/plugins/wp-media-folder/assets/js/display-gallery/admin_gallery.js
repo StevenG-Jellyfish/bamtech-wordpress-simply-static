@@ -6,50 +6,56 @@
 
     var media = wp.media;
     var setTime;
-    media.view.Settings.Gallery = media.view.Settings.Gallery.extend({
-        render: function () {
-            var $el = this.$el;
-            var id_folder = wpmfFoldersModule.last_selected_folder;
-            media.view.Settings.prototype.render.apply(this, arguments);
-            $el.find('[data-setting="size"]').parent('label').remove();
-            $el.find('[data-setting="link"]').parent('label').remove();
-            $el.find('[data-setting="columns"]').parent('label').remove();
-            $el.find('[data-setting="_orderbyRandom"]').parent('label').remove();
-            $el.append(media.template('wpmf-gallery-settings'));
-
-            media.gallery.defaults.display = 'default';
-            media.gallery.defaults.targetsize = 'large';
-            media.gallery.defaults.wpmf_folder_id = '';
-            media.gallery.defaults.wpmf_autoinsert = '0';
-            media.gallery.defaults.wpmf_orderby = 'post__in';
-            media.gallery.defaults.wpmf_order = 'ASC';
-
-            this.update.apply(this, ['link']);
-            this.update.apply(this, ['columns']);
-            this.update.apply(this, ['size']);
-            this.update.apply(this, ['display']);
-            this.update.apply(this, ['targetsize']);
-            this.update.apply(this, ['wpmf_folder_id']);
-            this.update.apply(this, ['wpmf_orderby']);
-            this.update.apply(this, ['wpmf_order']);
-
-            if (typeof id_folder !== "undefined") {
-                var oldfIds = $el.find('.wpmf_folder_id').val();
-                var oldfIds_array = oldfIds.split(",").map(Number);
-
-                if (oldfIds !== '') {
-                    if (oldfIds_array.indexOf(id_folder) < 0) {
-                        $el.find('.wpmf_folder_id').val(oldfIds + ',' + id_folder).change();
-                    }
-                } else {
-                    $el.find('.wpmf_folder_id').val(id_folder).change();
+    if (typeof media.view.Settings !== "undefined") {
+        media.view.Settings.Gallery = media.view.Settings.Gallery.extend({
+            render: function () {
+                var $el = this.$el;
+                if (typeof wpmfFoldersModule === "undefined") {
+                    return this;
                 }
-            }
 
-            this.update.apply(this, ['wpmf_autoinsert']);
-            return this;
-        }
-    });
+                var id_folder = wpmfFoldersModule.last_selected_folder;
+                media.view.Settings.prototype.render.apply(this, arguments);
+                $el.find('[data-setting="size"]').parent('label').remove();
+                $el.find('[data-setting="link"]').parent('label').remove();
+                $el.find('[data-setting="columns"]').parent('label').remove();
+                $el.find('[data-setting="_orderbyRandom"]').parent('label').remove();
+                $el.append(media.template('wpmf-gallery-settings'));
+
+                media.gallery.defaults.display = 'default';
+                media.gallery.defaults.targetsize = 'large';
+                media.gallery.defaults.wpmf_folder_id = '';
+                media.gallery.defaults.wpmf_autoinsert = '0';
+                media.gallery.defaults.wpmf_orderby = 'post__in';
+                media.gallery.defaults.wpmf_order = 'ASC';
+
+                this.update.apply(this, ['link']);
+                this.update.apply(this, ['columns']);
+                this.update.apply(this, ['size']);
+                this.update.apply(this, ['display']);
+                this.update.apply(this, ['targetsize']);
+                this.update.apply(this, ['wpmf_folder_id']);
+                this.update.apply(this, ['wpmf_orderby']);
+                this.update.apply(this, ['wpmf_order']);
+
+                if (typeof id_folder !== "undefined") {
+                    var oldfIds = $el.find('.wpmf_folder_id').val();
+                    var oldfIds_array = oldfIds.split(",").map(Number);
+
+                    if (oldfIds !== '') {
+                        if (oldfIds_array.indexOf(id_folder) < 0) {
+                            $el.find('.wpmf_folder_id').val(oldfIds + ',' + id_folder).change();
+                        }
+                    } else {
+                        $el.find('.wpmf_folder_id').val(id_folder).change();
+                    }
+                }
+
+                this.update.apply(this, ['wpmf_autoinsert']);
+                return this;
+            }
+        });
+    }
 
     /* when click Create a gallery from folder button */
     var selectallGallery = function () {
@@ -67,8 +73,19 @@
         }
     };
 
+    /* change gallery theme */
+    $(document).on('change', '.wpmf_display', function () {
+        var theme = $(this).val();
+        $('.wpmf_columns').val(wpmf.vars.gallery_configs.theme[theme + '_theme'].columns);
+        $('.wpmf_size').val(wpmf.vars.gallery_configs.theme[theme + '_theme'].size);
+        $('.wpmf_targetsize').val(wpmf.vars.gallery_configs.theme[theme + '_theme'].targetsize);
+        $('.wpmf_link-to').val(wpmf.vars.gallery_configs.theme[theme + '_theme'].link);
+        $('.wpmf_orderby').val(wpmf.vars.gallery_configs.theme[theme + '_theme'].orderby);
+        $('.wpmf_order').val(wpmf.vars.gallery_configs.theme[theme + '_theme'].order);
+    });
+
     /* sort image gallery */
-    $(document).on('change', '.wpmf_orderby', function (event) {
+    $(document).on('change', '.wpmf_orderby', function () {
         $('.media-button-wpmf_reverse_gallery').click();
         if ($(this).val() === 'title' || $(this).val() === 'date') {
             $(this).closest('.attachments-browser').find('.media-button-reverse').hide();

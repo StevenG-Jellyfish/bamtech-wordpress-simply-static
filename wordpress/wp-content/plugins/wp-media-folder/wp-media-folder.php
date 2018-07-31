@@ -4,7 +4,7 @@
   Plugin URI: http://www.joomunited.com
   Description: WP media Folder is a WordPress plugin that enhance the WordPress media manager by adding a folder manager inside.
   Author: Joomunited
-  Version: 4.5.0
+  Version: 4.6.0
   Author URI: http://www.joomunited.com
   Text Domain: wpmf
   Domain Path: /languages
@@ -16,8 +16,13 @@ defined('ABSPATH') || die('No direct script access allowed!');
 
 //Check plugin requirements
 if (version_compare(PHP_VERSION, '5.3', '<')) {
-    if (!function_exists('wpmf_disable_plugin')) {
-        function wpmf_disable_plugin()
+    if (!function_exists('wpmfDisablePlugin')) {
+        /**
+         * Deactivate plugin
+         *
+         * @return void
+         */
+        function wpmfDisablePlugin()
         {
             if (current_user_can('activate_plugins') && is_plugin_active(plugin_basename(__FILE__))) {
                 deactivate_plugins(__FILE__);
@@ -26,8 +31,13 @@ if (version_compare(PHP_VERSION, '5.3', '<')) {
         }
     }
 
-    if (!function_exists('wpmf_show_error')) {
-        function wpmf_show_error()
+    if (!function_exists('wpmfShowError')) {
+        /**
+         * Show notice
+         *
+         * @return void
+         */
+        function wpmfShowError()
         {
             echo '<div class="error"><p>';
             echo '<strong>WP Media Folder</strong>';
@@ -36,8 +46,8 @@ if (version_compare(PHP_VERSION, '5.3', '<')) {
     }
 
     //Add actions
-    add_action('admin_init', 'wpmf_disable_plugin');
-    add_action('admin_notices', 'wpmf_show_error');
+    add_action('admin_init', 'wpmfDisablePlugin');
+    add_action('admin_notices', 'wpmfShowError');
 
     //Do not load anything more
     return;
@@ -75,30 +85,34 @@ define('_WPMF_GALLERY_PREFIX', '_wpmf_gallery_');
 define('WPMF_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('WPMF_DOMAIN', 'wpmf');
 define('WPMF_URL', plugin_dir_url(__FILE__));
-define('WPMF_VERSION', '4.5.0');
+define('WPMF_VERSION', '4.6.0');
 
 include_once(ABSPATH . 'wp-admin/includes/plugin.php');
 register_activation_hook(__FILE__, 'wpmfInstall');
-
+/**
+ * Install plugin
+ *
+ * @return void
+ */
 function wpmfInstall()
 {
     global $wpdb;
-    $limit = 100;
-    $values = array();
+    $limit         = 100;
+    $values        = array();
     $place_holders = array();
-    $total = $wpdb->get_var("SELECT COUNT(posts.ID) as total FROM " . $wpdb->prefix . "posts as posts
-               WHERE   posts.post_type = 'attachment'");
+    $total         = $wpdb->get_var($wpdb->prepare('SELECT COUNT(posts.ID) as total FROM ' . $wpdb->prefix . 'posts as posts
+               WHERE   posts.post_type = %s', array('attachment')));
 
     if ($total <= 10000) {
-        $j = ceil((int)$total / $limit);
-        for ($i = 1; $i <= $j; $i++) {
-            $offset = ($i - 1) * $limit;
-            $attachments = $wpdb->get_results("SELECT ID FROM " . $wpdb->prefix . "posts as posts
-               WHERE   posts.post_type     = 'attachment' LIMIT $limit OFFSET $offset");
+        $j = ceil((int) $total / $limit);
+        for ($i = 1; $i <= $j; $i ++) {
+            $offset      = ($i - 1) * $limit;
+            $attachments = $wpdb->get_results($wpdb->prepare('SELECT ID FROM ' . $wpdb->prefix . 'posts as posts
+               WHERE   posts.post_type     = %s LIMIT %d OFFSET %d', array('attachment', $limit, $offset)));
             foreach ($attachments as $attachment) {
                 $wpmf_size_filetype = wpmfGetSizeFiletype($attachment->ID);
-                $size = $wpmf_size_filetype['size'];
-                $ext = $wpmf_size_filetype['ext'];
+                $size               = $wpmf_size_filetype['size'];
+                $ext                = $wpmf_size_filetype['ext'];
                 if (!get_post_meta($attachment->ID, 'wpmf_size')) {
                     array_push($values, $attachment->ID, 'wpmf_size', $size);
                     $place_holders[] = "('%d', '%s', '%s')";
@@ -111,11 +125,11 @@ function wpmfInstall()
             }
 
             if (count($place_holders) > 0) {
-                $query = "INSERT INTO " . $wpdb->prefix . "postmeta (post_id, meta_key, meta_value) VALUES ";
+                $query = 'INSERT INTO ' . $wpdb->prefix . 'postmeta (post_id, meta_key, meta_value) VALUES ';
                 $query .= implode(', ', $place_holders);
-                $wpdb->query($wpdb->prepare("$query ", $values));
+                $wpdb->query($wpdb->prepare($query, $values)); // phpcs:ignore WordPress.WP.PreparedSQL.NotPrepared -- Insert multiple row, can't write sql in prepare
                 $place_holders = array();
-                $values = array();
+                $values        = array();
             }
         }
     }
@@ -123,39 +137,44 @@ function wpmfInstall()
 
 /**
  * Get size and file type for attachment
- * @param $pid
+ *
+ * @param integer $pid ID of attachment
+ *
  * @return array
  */
 function wpmfGetSizeFiletype($pid)
 {
     $wpmf_size_filetype = array();
-    $meta = get_post_meta($pid, '_wp_attached_file');
-    $upload_dir = wp_upload_dir();
-    $url_attachment = $upload_dir['basedir'] . '/' . $meta[0];
+    $meta               = get_post_meta($pid, '_wp_attached_file');
+    $upload_dir         = wp_upload_dir();
+    $url_attachment     = $upload_dir['basedir'] . '/' . $meta[0];
     if (file_exists($url_attachment)) {
-        $size = filesize($url_attachment);
+        $size     = filesize($url_attachment);
         $filetype = wp_check_filetype($url_attachment);
-        $ext = $filetype['ext'];
+        $ext      = $filetype['ext'];
     } else {
         $size = 0;
-        $ext = '';
+        $ext  = '';
     }
     $wpmf_size_filetype['size'] = $size;
-    $wpmf_size_filetype['ext'] = $ext;
+    $wpmf_size_filetype['ext']  = $ext;
 
     return $wpmf_size_filetype;
 }
 
 /**
  * Set a option
- * @param string $option_name option name
- * @param $value
+ *
+ * @param string $option_name Option name
+ * @param void   $value       Value of option
+ *
+ * @return void
  */
 function wpmfSetOption($option_name, $value)
 {
     $settings = get_option('wpmf_settings');
     if (empty($settings)) {
-        $settings = array();
+        $settings               = array();
         $settings[$option_name] = $value;
     } else {
         $settings[$option_name] = $value;
@@ -166,24 +185,115 @@ function wpmfSetOption($option_name, $value)
 
 /**
  * Get a option
- * @param string $option_name option name
- * @return bool
+ *
+ * @param string $option_name Option name
+ *
+ * @return mixed
  */
 function wpmfGetOption($option_name)
 {
-    $default_settings = array(
-        'folder_design' => 'material_design',
-        'load_gif' => 1,
-        'folder_color' => array(),
-        'watermark_image_scaling' => 100,
-        'watermark_margin' => array(
-            'top' => 0,
-            'right' => 0,
-            'bottom' => 0,
-            'left' => 0
-        )
+    $params_theme     = array(
+        'default_theme'     => array(
+            'columns'    => 3,
+            'size'       => 'medium',
+            'targetsize' => 'large',
+            'link'       => 'file',
+            'orderby'    => 'post__in',
+            'order'      => 'ASC'
+        ),
+        'portfolio_theme'   => array(
+            'columns'    => 3,
+            'size'       => 'medium',
+            'targetsize' => 'large',
+            'link'       => 'file',
+            'orderby'    => 'post__in',
+            'order'      => 'ASC'
+        ),
+        'masonry_theme'     => array(
+            'columns'    => 3,
+            'size'       => 'medium',
+            'targetsize' => 'large',
+            'link'       => 'file',
+            'orderby'    => 'post__in',
+            'order'      => 'ASC'
+        ),
+        'slider_theme'      => array(
+            'columns'        => 3,
+            'size'           => 'medium',
+            'targetsize'     => 'large',
+            'link'           => 'file',
+            'orderby'        => 'post__in',
+            'order'          => 'ASC',
+            'animation'      => 'slide',
+            'duration'       => 4000,
+            'auto_animation' => 1
+        ),
+        'flowslide_theme'   => array(
+            'columns'      => 3,
+            'size'         => 'medium',
+            'targetsize'   => 'large',
+            'link'         => 'file',
+            'orderby'      => 'post__in',
+            'order'        => 'ASC',
+            'show_buttons' => 1
+        ),
+        'square_grid_theme' => array(
+            'columns'    => 3,
+            'size'       => 'medium',
+            'targetsize' => 'large',
+            'link'       => 'file',
+            'orderby'    => 'post__in',
+            'order'      => 'ASC'
+        ),
+        'material_theme'    => array(
+            'columns'    => 3,
+            'size'       => 'medium',
+            'targetsize' => 'large',
+            'link'       => 'file',
+            'orderby'    => 'post__in',
+            'order'      => 'ASC'
+        ),
     );
-    $settings = get_option('wpmf_settings');
+    $gallery_settings = array(
+        'theme' => $params_theme
+    );
+
+    $gallery_shortcode_settings = array(
+        'choose_gallery_id'       => 0,
+        'choose_gallery_theme'    => 'default',
+        'display_tree'            => 0,
+        'display_tag'             => 0,
+        'theme'                   => $params_theme,
+        'gallery_shortcode_input' => ''
+    );
+
+    $default_settings = array(
+        'folder_design'           => 'material_design',
+        'load_gif'                => 1,
+        'hide_tree'               => 1,
+        'hide_remote_video'       => 1,
+        'folder_color'            => array(),
+        'watermark_image_scaling' => 100,
+        'social_sharing'          => 0,
+        'social_sharing_link'     => array(
+            'facebook'  => '',
+            'twitter'   => '',
+            'google'    => '',
+            'instagram' => '',
+            'pinterest' => ''
+        ),
+        'watermark_margin'        => array(
+            'top'    => 0,
+            'right'  => 0,
+            'bottom' => 0,
+            'left'   => 0
+        ),
+        'format_mediatitle'       => 1,
+        'gallery_settings'        => $gallery_settings,
+        'gallery_shortcode'       => $gallery_shortcode_settings,
+        'watermark_exclude_folders' => array()
+    );
+    $settings         = get_option('wpmf_settings');
     if (isset($settings) && isset($settings[$option_name])) {
         return $settings[$option_name];
     }
@@ -196,10 +306,10 @@ if (!empty($frontend) || is_admin()) {
     require_once(WP_MEDIA_FOLDER_PLUGIN_DIR . '/class/class-helper.php');
     require_once(WP_MEDIA_FOLDER_PLUGIN_DIR . '/class/class-media-folder.php');
     $GLOBALS['wp_media_folder'] = new WpMediaFolder;
-    $useorder = get_option('wpmf_useorder');
+    $useorder                   = get_option('wpmf_useorder');
     // todo : should this really be always loaded on each wp request?
     // todo : should we not loaded
-    if (isset($useorder) && $useorder == 1) {
+    if (isset($useorder) && (int) $useorder === 1) {
         require_once(WP_MEDIA_FOLDER_PLUGIN_DIR . 'class/class-orderby-media.php');
         new WpmfOrderbyMedia;
         require_once(WP_MEDIA_FOLDER_PLUGIN_DIR . 'class/class-filter-size.php');
@@ -207,13 +317,13 @@ if (!empty($frontend) || is_admin()) {
     }
 
     $option_duplicate = get_option('wpmf_option_duplicate');
-    if (isset($option_duplicate) && $option_duplicate == 1) {
+    if (isset($option_duplicate) && (int) $option_duplicate === 1) {
         require_once(WP_MEDIA_FOLDER_PLUGIN_DIR . 'class/class-duplicate-file.php');
         new WpmfDuplicateFile;
     }
 
     $wpmf_media_rename = get_option('wpmf_media_rename');
-    if (isset($wpmf_media_rename) && $wpmf_media_rename == 1) {
+    if (isset($wpmf_media_rename) && (int) $wpmf_media_rename === 1) {
         require_once(WP_MEDIA_FOLDER_PLUGIN_DIR . 'class/class-media-rename.php');
         new WpmfMediaRename;
     }
@@ -222,7 +332,7 @@ if (!empty($frontend) || is_admin()) {
     new WpmfBackgroundFolder;
 
     $option_override = get_option('wpmf_option_override');
-    if (isset($option_override) && $option_override == 1) {
+    if (isset($option_override) && (int) $option_override === 1) {
         require_once(WP_MEDIA_FOLDER_PLUGIN_DIR . 'class/class-replace-file.php');
         new WpmfReplaceFile;
     }
@@ -232,7 +342,7 @@ if (!empty($frontend) || is_admin()) {
 }
 
 $usegellery = get_option('wpmf_usegellery');
-if (isset($usegellery) && $usegellery == 1) {
+if (isset($usegellery) && (int) $usegellery === 1) {
     require_once(WP_MEDIA_FOLDER_PLUGIN_DIR . '/class/class-display-gallery.php');
     new WpmfDisplayGallery;
 }
@@ -240,13 +350,13 @@ if (isset($usegellery) && $usegellery == 1) {
 require_once(WP_MEDIA_FOLDER_PLUGIN_DIR . 'class/class-wp-folder-option.php');
 new WpmfMediaFolderOption;
 $wpmf_option_singlefile = get_option('wpmf_option_singlefile');
-if (isset($wpmf_option_singlefile) && $wpmf_option_singlefile == 1) {
+if (isset($wpmf_option_singlefile) && (int) $wpmf_option_singlefile === 1) {
     require_once(WP_MEDIA_FOLDER_PLUGIN_DIR . '/class/class-single-file.php');
     new WpmfSingleFile();
 }
 
 $wpmf_option_lightboximage = get_option('wpmf_option_lightboximage');
-if (isset($wpmf_option_lightboximage) && $wpmf_option_lightboximage == 1) {
+if (isset($wpmf_option_lightboximage) && (int) $wpmf_option_lightboximage === 1) {
     require_once(WP_MEDIA_FOLDER_PLUGIN_DIR . 'class/class-single-lightbox.php');
     new WpmfSingleLightbox;
 }
@@ -256,14 +366,19 @@ new WpmfPdfEmbed();
 
 //  load gif file on page load or not
 $load_gif = wpmfGetOption('load_gif');
-if (isset($load_gif) && $load_gif == 0) {
+if (isset($load_gif) && (int) $load_gif === 0) {
     require_once(WP_MEDIA_FOLDER_PLUGIN_DIR . '/class/class-load-gif.php');
     new WpmfLoadGif();
 }
 
-add_action('wp_enqueue_media', 'wpmf_add_style');
-add_action('admin_enqueue_scripts', 'wpmf_add_style');
-function wpmf_add_style()
+add_action('wp_enqueue_media', 'wpmfAddStyle');
+add_action('admin_enqueue_scripts', 'wpmfAddStyle');
+/**
+ * Add style and script
+ *
+ * @return void
+ */
+function wpmfAddStyle()
 {
     wp_enqueue_style(
         'wpmf-material-design-iconic-font.min',
@@ -287,31 +402,35 @@ function wpmf_add_style()
     );
 }
 
-/* Register WPMF_TAXO taxonomy */
 add_action('init', 'wpmfRegisterTaxonomyForImages', 0);
+/**
+ * Register 'wpmf-category' taxonomy
+ *
+ * @return void
+ */
 function wpmfRegisterTaxonomyForImages()
 {
     register_taxonomy(
         WPMF_TAXO,
         'attachment',
         array(
-            'hierarchical' => true,
+            'hierarchical'      => true,
             'show_in_nav_menus' => false,
-            'show_ui' => false,
-            'public' => false,
-            'labels' => array(
-                'name' => __('WPMF Categories', 'wpmf'),
-                'singular_name' => __('WPMF Category', 'wpmf'),
-                'menu_name' => __('WPMF Categories', 'wpmf'),
-                'all_items' => __('All WPMF Categories', 'wpmf'),
-                'edit_item' => __('Edit WPMF Category', 'wpmf'),
-                'view_item' => __('View WPMF Category', 'wpmf'),
-                'update_item' => __('Update WPMF Category', 'wpmf'),
-                'add_new_item' => __('Add New WPMF Category', 'wpmf'),
-                'new_item_name' => __('New WPMF Category Name', 'wpmf'),
-                'parent_item' => __('Parent WPMF Category', 'wpmf'),
+            'show_ui'           => false,
+            'public'            => false,
+            'labels'            => array(
+                'name'              => __('WPMF Categories', 'wpmf'),
+                'singular_name'     => __('WPMF Category', 'wpmf'),
+                'menu_name'         => __('WPMF Categories', 'wpmf'),
+                'all_items'         => __('All WPMF Categories', 'wpmf'),
+                'edit_item'         => __('Edit WPMF Category', 'wpmf'),
+                'view_item'         => __('View WPMF Category', 'wpmf'),
+                'update_item'       => __('Update WPMF Category', 'wpmf'),
+                'add_new_item'      => __('Add New WPMF Category', 'wpmf'),
+                'new_item_name'     => __('New WPMF Category Name', 'wpmf'),
+                'parent_item'       => __('Parent WPMF Category', 'wpmf'),
                 'parent_item_colon' => __('Parent WPMF Category:', 'wpmf'),
-                'search_items' => __('Search WPMF Categories', 'wpmf'),
+                'search_items'      => __('Search WPMF Categories', 'wpmf'),
             )
         )
     );

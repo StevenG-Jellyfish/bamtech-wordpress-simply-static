@@ -42,6 +42,7 @@ let wpmfReplaceModule;
             var form_replace = '<div class="replace_wrap">';
             form_replace += '<img class="wpmf_img_replace" src="">';
             form_replace += '<form id="wpmf_form_upload" method="post" action="' + wpmf.vars.ajaxurl + '" enctype="multipart/form-data">';
+            form_replace += '<input type="hidden" name="wpmf_nonce" value="' + wpmf.vars.wpmf_nonce + '">';
             form_replace += '<input class="hide" type="file" name="wpmf_replace_file" id="wpmf_upload_input_version"><input type="button" value="' + wpmf.l18n.replace + '" class="button-primary wpmf_submit_upload" id="submit-upload"/>';
             form_replace += '<input type="hidden" name="action" value="wpmf_replace_file">';
             form_replace += '<input type="hidden" name="post_selected" value="' + id + '">';
@@ -280,22 +281,24 @@ let wpmfReplaceModule;
         }
         if (wpmfFoldersModule.page_type !== 'upload-list') {
             var myreplaceForm = wp.media.view.AttachmentsBrowser;
-            wp.media.view.AttachmentsBrowser = wp.media.view.AttachmentsBrowser.extend({
-                createSingle: function () {
-                    myreplaceForm.prototype.createSingle.apply(this, arguments);
-                    var sidebar = this.sidebar;
-                    var single = this.options.selection.single();
-                    var form_replace = wpmfReplaceModule.genFormReplace(single.id);
-                    if (wpmf.vars.wpmf_pagenow !== 'upload.php') {
-                        if (typeof wpmf.vars.override !== 'undefined' && parseInt(wpmf.vars.override) === 1) {
-                            $('.replace_wrap').remove();
-                            $(sidebar.$el).find('.attachment-info').append(form_replace);
+            if (typeof myreplaceForm !== "undefined") {
+                wp.media.view.AttachmentsBrowser = wp.media.view.AttachmentsBrowser.extend({
+                    createSingle: function () {
+                        myreplaceForm.prototype.createSingle.apply(this, arguments);
+                        var sidebar = this.sidebar;
+                        var single = this.options.selection.single();
+                        var form_replace = wpmfReplaceModule.genFormReplace(single.id);
+                        if (wpmf.vars.wpmf_pagenow !== 'upload.php') {
+                            if (typeof wpmf.vars.override !== 'undefined' && parseInt(wpmf.vars.override) === 1) {
+                                $('.replace_wrap').remove();
+                                $(sidebar.$el).find('.attachment-info').append(form_replace);
+                            }
                         }
+                        wpmfReplaceModule.doEvent();
+                        wpmfReplaceModule.replace_attachment(single.id);
                     }
-                    wpmfReplaceModule.doEvent();
-                    wpmfReplaceModule.replace_attachment(single.id);
-                }
-            });
+                });
+            }
 
             /* Create replace button when wp smush plugin active */
             if (wpmf.vars.get_plugin_active.indexOf('wp-smush.php') !== -1) {
@@ -307,75 +310,82 @@ let wpmfReplaceModule;
                     /**
                      * Add Smush details to attachment.
                      */
-                    wp.media.view.Attachment.Details.TwoColumn = wp.media.view.Attachment.Details.TwoColumn.extend({
-                        render: function () {
-                            // Get Smush status for the image
-                            wpmfAssignMediaTwoColumn.prototype.render.apply(this);
-                            $( document ).ajaxComplete(function( event, xhr, settings ) {
-                                var data = settings.data;
-                                if ( data.indexOf('smush_get_attachment_details') !== -1 ) {
-                                    var attachmentID = $('.attachment-details').data('id');
-                                    var form_replace = wpmfReplaceModule.genFormReplace(attachmentID);
-                                    $('.replace_wrap').remove();
-                                    $('.details').append(form_replace);
-                                    wpmfReplaceModule.doEvent();
-                                    wpmfReplaceModule.replace_attachment(attachmentID);
-                                }
-                            });
-                        }
-                    });
+                    if (typeof wpmfAssignMediaTwoColumn !== "undefined") {
+                        wp.media.view.Attachment.Details.TwoColumn = wp.media.view.Attachment.Details.TwoColumn.extend({
+                            render: function () {
+                                // Get Smush status for the image
+                                wpmfAssignMediaTwoColumn.prototype.render.apply(this);
+                                $( document ).ajaxComplete(function( event, xhr, settings ) {
+                                    var data = settings.data;
+                                    if ( data.indexOf('smush_get_attachment_details') !== -1 ) {
+                                        var attachmentID = $('.attachment-details').data('id');
+                                        var form_replace = wpmfReplaceModule.genFormReplace(attachmentID);
+                                        $('.replace_wrap').remove();
+                                        $('.details').append(form_replace);
+                                        wpmfReplaceModule.doEvent();
+                                        wpmfReplaceModule.replace_attachment(attachmentID);
+                                    }
+                                });
+                            }
+                        });
+                    }
                 }
             }
 
             var myReplace = wp.media.view.Modal;
-            wp.media.view.Modal = wp.media.view.Modal.extend({
-                open: function () {
-                    myReplace.prototype.open.apply(this, arguments);
-                    if (wpmf.vars.wpmf_pagenow === 'upload.php') {
-                        if (typeof wpmf.vars.override !== 'undefined' && parseInt(wpmf.vars.override) === 1) {
-                            setTimeout(function () {
+            if (typeof myReplace !== "undefined") {
+                wp.media.view.Modal = wp.media.view.Modal.extend({
+                    open: function () {
+                        myReplace.prototype.open.apply(this, arguments);
+                        if (wpmf.vars.wpmf_pagenow === 'upload.php') {
+                            if (typeof wpmf.vars.override !== 'undefined' && parseInt(wpmf.vars.override) === 1) {
+                                setTimeout(function () {
+                                    var attachmentID = $('.attachment-details').data('id');
+                                    var form_replace = wpmfReplaceModule.genFormReplace(attachmentID);
+                                    $('.replace_wrap').remove();
+                                    $('.attachment-details .details').append(form_replace);
+                                    wpmfReplaceModule.doEvent();
+                                    wpmfReplaceModule.replace_attachment(attachmentID);
+                                }, 150);
+                            }
+                        }
+                    }
+                });
+            }
+
+
+            if (wpmf.vars.wpmf_pagenow === 'upload.php') {
+                // create replace button when next and prev media items
+                var myReplaceEditAttachments = wp.media.view.MediaFrame.EditAttachments;
+                if (typeof myReplaceEditAttachments !== "undefined") {
+                    wp.media.view.MediaFrame.EditAttachments = wp.media.view.MediaFrame.EditAttachments.extend({
+                        previousMediaItem: function () {
+                            /* Create duplicate button setting */
+                            myReplaceEditAttachments.prototype.previousMediaItem.apply(this, arguments);
+                            if (typeof wpmf.vars.override !== 'undefined' && parseInt(wpmf.vars.override) === 1) {
                                 var attachmentID = $('.attachment-details').data('id');
                                 var form_replace = wpmfReplaceModule.genFormReplace(attachmentID);
                                 $('.replace_wrap').remove();
                                 $('.attachment-details .details').append(form_replace);
                                 wpmfReplaceModule.doEvent();
                                 wpmfReplaceModule.replace_attachment(attachmentID);
-                            }, 150);
+                            }
+                        },
+
+                        nextMediaItem: function () {
+                            /* Create duplicate button setting */
+                            myReplaceEditAttachments.prototype.nextMediaItem.apply(this, arguments);
+                            if (typeof wpmf.vars.override !== 'undefined' && parseInt(wpmf.vars.override) === 1) {
+                                var attachmentID = $('.attachment-details').data('id');
+                                var form_replace = wpmfReplaceModule.genFormReplace(attachmentID);
+                                $('.replace_wrap').remove();
+                                $('.attachment-details .details').append(form_replace);
+                                wpmfReplaceModule.doEvent();
+                                wpmfReplaceModule.replace_attachment(attachmentID);
+                            }
                         }
-                    }
+                    });
                 }
-            });
-
-            if (wpmf.vars.wpmf_pagenow === 'upload.php') {
-                // create replace button when next and prev media items
-                var myReplaceEditAttachments = wp.media.view.MediaFrame.EditAttachments;
-                wp.media.view.MediaFrame.EditAttachments = wp.media.view.MediaFrame.EditAttachments.extend({
-                    previousMediaItem: function () {
-                        /* Create duplicate button setting */
-                        myReplaceEditAttachments.prototype.previousMediaItem.apply(this, arguments);
-                        if (typeof wpmf.vars.override !== 'undefined' && parseInt(wpmf.vars.override) === 1) {
-                            var attachmentID = $('.attachment-details').data('id');
-                            var form_replace = wpmfReplaceModule.genFormReplace(attachmentID);
-                            $('.replace_wrap').remove();
-                            $('.attachment-details .details').append(form_replace);
-                            wpmfReplaceModule.doEvent();
-                            wpmfReplaceModule.replace_attachment(attachmentID);
-                        }
-                    },
-
-                    nextMediaItem: function () {
-                        /* Create duplicate button setting */
-                        myReplaceEditAttachments.prototype.nextMediaItem.apply(this, arguments);
-                        if (typeof wpmf.vars.override !== 'undefined' && parseInt(wpmf.vars.override) === 1) {
-                            var attachmentID = $('.attachment-details').data('id');
-                            var form_replace = wpmfReplaceModule.genFormReplace(attachmentID);
-                            $('.replace_wrap').remove();
-                            $('.attachment-details .details').append(form_replace);
-                            wpmfReplaceModule.doEvent();
-                            wpmfReplaceModule.replace_attachment(attachmentID);
-                        }
-                    }
-                });
             }
         }
     });

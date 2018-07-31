@@ -78,7 +78,12 @@ let wpmfFoldersModule;
                 // Select the first item of folder filter
                 if (wpmfFoldersModule.page_type !== 'upload-list') {
                     if (typeof lastAccessFolder === "undefined" || (typeof lastAccessFolder !== "undefined" && lastAccessFolder === '') || (typeof lastAccessFolder !== "undefined" && parseInt(lastAccessFolder) === 0) || typeof wpmfFoldersModule.categories[lastAccessFolder] === "undefined") {
-                        $current_frame.find('#wpmf-media-category').val(wpmfFoldersModule.relation_category_filter[wpmfFoldersModule.last_selected_folder]).trigger('change');
+                        if (typeof wpmfFoldersModule.relation_category_filter[wpmfFoldersModule.last_selected_folder] === "undefined") {
+                            wpmfFoldersModule.changeFolder(wpmfFoldersModule.getCurrentFolderId());
+                        } else {
+                            $current_frame.find('#wpmf-media-category').val(wpmfFoldersModule.relation_category_filter[wpmfFoldersModule.last_selected_folder]).trigger('change');
+                        }
+
                     } else {
                         $current_frame.find('#wpmf-media-category').val(wpmfFoldersModule.relation_category_filter[lastAccessFolder]).trigger('change');
                     }
@@ -111,6 +116,15 @@ let wpmfFoldersModule;
 
                     // Change the upload href link to add current folder as parameter
                     $('.page-title-action').attr('href', $('.page-title-action').attr('href') + '?wpmf-folder=' + wpmfFoldersModule.last_selected_folder);
+                }
+
+                if (typeof wpmf.vars.hide_tree === "undefined" || parseInt(wpmf.vars.hide_tree) === 0) {
+                    // Remove the loader on list page
+                    if (wpmfFoldersModule.page_type === 'upload-list' && !$('.upload-php #posts-filter').hasClass('wpmf-not-loading')) {
+                        setTimeout(function () {
+                            $('.upload-php #posts-filter').addClass('wpmf-not-loading');
+                        }, 200);
+                    }
                 }
 
                 // Change the upload href link to add current folder as parameter
@@ -191,7 +205,7 @@ let wpmfFoldersModule;
                 init();
             } else {
                 // Initialize folders rendering when the attachment browser is ready
-                if (typeof wp.media !== "undefined" && typeof wp.media.view !== "undefined") {
+                if (typeof wp.media !== "undefined" && typeof wp.media.view !== "undefined" && typeof wp.media.view.AttachmentsBrowser !== "undefined") {
                     wp.media.view.AttachmentsBrowser.prototype.on('ready', function () {
                         init();
                     });
@@ -215,7 +229,19 @@ let wpmfFoldersModule;
                         this.uploader.bind('UploadComplete', function () {
                             wpmfFoldersModule.reloadAttachments();
                             wpmfFoldersModule.renderFolders();
+                            // Hovering image intialization
+                            wpmfFoldersModule.initHoverImage();
+                            wpmfFoldersModule.updateCountFiles(wpmfFoldersModule.last_selected_folder);
                         });
+
+                        jQuery(document).ajaxComplete(function (e, xhs, req) {
+                            try {
+                                if (req.data.indexOf("action=delete-post") > -1) {
+                                    wpmfFoldersModule.updateCountFiles(wpmfFoldersModule.last_selected_folder);
+                                }
+                            } catch (e) {
+                            }
+                        }.bind(this));
                     }
                 });
 
@@ -272,92 +298,119 @@ let wpmfFoldersModule;
 
                 // Initialize folders rendering on media modal events
                 let myMediaViewModal = wp.media.view.Modal;
-                wp.media.view.Modal = wp.media.view.Modal.extend({
-                    open: function () {
-                        myMediaViewModal.prototype.open.apply(this, arguments);
-                        if (typeof wp.media.frame !== "undefined") {
-                            wp.media.frame.on('router:render:browse', function () {
-                                init();
-                            });
-                            wp.media.frame.on('content:activate:browse', function () {
-                                init();
-                            });
-                        } else {
-                            wpmfFoldersModule.renderFolders();
-                        }
-                    }
-                });
-
-                // Hide create gallery button if attachments are selected
-                if (typeof wpmf.vars.usegellery !== "undefined" && parseInt(wpmf.vars.usegellery) === 1) {
-                    let myMediaViewToolbar = wp.media.view.Toolbar;
-                    wp.media.view.Toolbar = wp.media.view.Toolbar.extend({
-                        refresh: function () {
-                            myMediaViewToolbar.prototype.refresh.apply(this, arguments);
-                            let state = this.controller.state(),
-                                selection = state.get('selection');
-                            if (typeof state !== "undefined" && typeof selection !== "undefined") {
-                                if (selection.length === 0) {
-                                    $('.btn-selectall,.btn-selectall-gallery').show();
-                                    $('.media-button-gallery').hide();
-                                } else {
-                                    $('.btn-selectall,.btn-selectall-gallery').hide();
-                                    $('.media-button-gallery').show();
-                                }
+                if (typeof myMediaViewModal !== "undefined") {
+                    wp.media.view.Modal = wp.media.view.Modal.extend({
+                        open: function () {
+                            myMediaViewModal.prototype.open.apply(this, arguments);
+                            if (typeof wp.media.frame !== "undefined") {
+                                wp.media.frame.on('router:render:browse', function () {
+                                    init();
+                                });
+                                wp.media.frame.on('content:activate:browse', function () {
+                                    init();
+                                });
+                            } else {
+                                wpmfFoldersModule.renderFolders();
                             }
                         }
                     });
                 }
 
-                let myMediaControllerCollectionEdit = wp.media.controller.CollectionEdit;
-                wp.media.controller.CollectionEdit = wp.media.controller.CollectionEdit.extend({
-                    activate: function () {
-                        myMediaControllerCollectionEdit.prototype.activate.apply(this, arguments);
-                    },
-                    deactivate: function () {
-                        myMediaControllerCollectionEdit.prototype.deactivate.apply(this, arguments);
+                // Hide create gallery button if attachments are selected
+                if (typeof wpmf.vars.usegellery !== "undefined" && parseInt(wpmf.vars.usegellery) === 1) {
+                    let myMediaViewToolbar = wp.media.view.Toolbar;
+                    if (typeof myMediaViewToolbar !== "undefined") {
+                        wp.media.view.Toolbar = wp.media.view.Toolbar.extend({
+                            refresh: function () {
+                                myMediaViewToolbar.prototype.refresh.apply(this, arguments);
+                                let state = this.controller.state(),
+                                    selection = state.get('selection');
+                                if (typeof state !== "undefined" && typeof selection !== "undefined") {
+                                    if (selection.length === 0) {
+                                        $('.btn-selectall,.btn-selectall-gallery').show();
+                                        $('.media-button-gallery').hide();
+                                    } else {
+                                        $('.btn-selectall,.btn-selectall-gallery').hide();
+                                        $('.media-button-gallery').show();
+                                    }
+                                }
+                            }
+                        });
                     }
-                });
+                }
+
+                let myMediaControllerCollectionEdit = wp.media.controller.CollectionEdit;
+                if (typeof myMediaControllerCollectionEdit !== "undefined") {
+                    wp.media.controller.CollectionEdit = wp.media.controller.CollectionEdit.extend({
+                        activate: function () {
+                            myMediaControllerCollectionEdit.prototype.activate.apply(this, arguments);
+                        },
+                        deactivate: function () {
+                            myMediaControllerCollectionEdit.prototype.deactivate.apply(this, arguments);
+                        }
+                    });
+                }
 
                 // display folder on feature image
                 let myMediaControllerFeaturedImage = wp.media.controller.FeaturedImage;
-                wp.media.controller.FeaturedImage = wp.media.controller.FeaturedImage.extend({
-                    updateSelection: function () {
-                        myMediaControllerFeaturedImage.prototype.updateSelection.apply(this, arguments);
-                        wpmfFoldersModule.renderFolders();
-                    }
-                });
+                if (typeof myMediaControllerFeaturedImage !== "undefined") {
+                    wp.media.controller.FeaturedImage = wp.media.controller.FeaturedImage.extend({
+                        updateSelection: function () {
+                            myMediaControllerFeaturedImage.prototype.updateSelection.apply(this, arguments);
+                            wpmfFoldersModule.renderFolders();
+                        }
+                    });
+                }
 
                 // Create and initialize select filter used to filter by folder
                 wpmfFoldersModule.initFolderFilter();
 
                 // Add button to the uploader content page
                 let myMediaViewToolbar = wp.media.view.UploaderInline;
-                wp.media.view.UploaderInline = wp.media.view.UploaderInline.extend({
-                    ready: function () {
-                        myMediaViewToolbar.prototype.ready.apply(this, arguments);
-                        // Add remote video button
-                        if (!this.$el.find('.wpmf_btn_remote_video').length) {
-                            this.$el.find('.upload-ui button').after('<button href="#" class="wpmf_btn_remote_video button button-hero">' + wpmf.l18n.remote_video + '</button>');
-                            wpmfFoldersModule.initRemoteVideo();
-                        }
-
-                        // render folder tree in left menu
-                        wpmfFoldersTreeModule.initModule(wpmfFoldersModule.getFrame());
-                        if (wpmf.vars.wpmf_pagenow !== 'upload.php') {
-                            if (!this.$el.find('.wpmf_msg_upload_folder').length) {
-                                let bread = '';
-                                let lastAccessFolder = wpmfFoldersModule.getCookie('lastAccessFolder_' + wpmf.vars.site_url);
-                                if (typeof lastAccessFolder === "undefined" || (typeof lastAccessFolder !== "undefined" && lastAccessFolder === '') || (typeof lastAccessFolder !== "undefined" && parseInt(lastAccessFolder) === 0) || typeof wpmfFoldersModule.categories[lastAccessFolder] === "undefined") {
-                                    bread = wpmfFoldersModule.getBreadcrumb(0);
-                                } else {
-                                    bread = wpmfFoldersModule.getBreadcrumb(lastAccessFolder);
+                if (typeof myMediaViewToolbar !== "undefined") {
+                    wp.media.view.UploaderInline = wp.media.view.UploaderInline.extend({
+                        ready: function () {
+                            myMediaViewToolbar.prototype.ready.apply(this, arguments);
+                            // Add remote video button
+                            if (typeof wpmf.vars.hide_remote_video !== "undefined" && parseInt(wpmf.vars.hide_remote_video) === 1) {
+                                if (!this.$el.find('.wpmf_btn_remote_video').length) {
+                                    this.$el.find('.upload-ui button').after('<button href="#" class="wpmf_btn_remote_video button button-hero">' + wpmf.l18n.remote_video + '</button>');
+                                    wpmfFoldersModule.initRemoteVideo();
                                 }
-                                this.$el.find('.post-upload-ui').after('<p class="wpmf_msg_upload_folder">' + wpmf.l18n.msg_upload_folder + '<span>' + bread + '</span></p>');
+                            }
+
+                            // Add reload button
+                            let $current_frame = wpmfFoldersModule.getFrame();
+                            if (!$current_frame.find('.media-frame-content .media-toolbar-secondary .wpmf_btn_reload').length) {
+                                $current_frame.find('.media-frame-content .media-toolbar-secondary').append('<i class="material-icons wpmf_btn_reload" data-for="' + wpmf.l18n.reload_media + '">refresh</i>');
+                                wpmfFoldersModule.showTooltip();
+                            }
+
+                            $('.wpmf_btn_reload').unbind('click').click(function () {
+                                wpmfFoldersModule.reloadAttachments();
+                                wpmfFoldersModule.renderFolders();
+                            });
+
+                            // render folder tree in left menu
+                            if (typeof wpmf.vars.hide_tree !== "undefined" && parseInt(wpmf.vars.hide_tree) === 1) {
+                                wpmfFoldersTreeModule.initModule(wpmfFoldersModule.getFrame());
+                            }
+
+                            if (wpmf.vars.wpmf_pagenow !== 'upload.php') {
+                                if (!this.$el.find('.wpmf_msg_upload_folder').length) {
+                                    let bread = '';
+                                    let lastAccessFolder = wpmfFoldersModule.getCookie('lastAccessFolder_' + wpmf.vars.site_url);
+                                    if (typeof lastAccessFolder === "undefined" || (typeof lastAccessFolder !== "undefined" && lastAccessFolder === '') || (typeof lastAccessFolder !== "undefined" && parseInt(lastAccessFolder) === 0) || typeof wpmfFoldersModule.categories[lastAccessFolder] === "undefined") {
+                                        bread = wpmfFoldersModule.getBreadcrumb();
+                                    } else {
+                                        bread = wpmfFoldersModule.getBreadcrumb(lastAccessFolder);
+                                    }
+                                    this.$el.find('.post-upload-ui').after('<p class="wpmf_msg_upload_folder">' + wpmf.l18n.msg_upload_folder + '<span>' + bread + '</span></p>');
+                                }
                             }
                         }
-                    }
-                });
+                    });
+                }
 
                 // Manage reset iframe
                 wp.Uploader.queue.on('reset', function () {
@@ -383,40 +436,42 @@ let wpmfFoldersModule;
 
                 // Get upload progress infos
                 let myMediaUploaderStatus = wp.media.view.UploaderStatus;
-                wp.media.view.UploaderStatus = wp.media.view.UploaderStatus.extend({
-                    progress: function (file_info) {
-                        // Call parent function
-                        myMediaUploaderStatus.prototype.progress.apply(this, arguments);
+                if (typeof myMediaUploaderStatus !== "undefined") {
+                    wp.media.view.UploaderStatus = wp.media.view.UploaderStatus.extend({
+                        progress: function (file_info) {
+                            // Call parent function
+                            myMediaUploaderStatus.prototype.progress.apply(this, arguments);
 
-                        // This is not a uploading update
-                        if (file_info === undefined || file_info.changed === undefined || file_info.changed.percent === undefined) {
-                            return;
+                            // This is not a uploading update
+                            if (file_info === undefined || file_info.changed === undefined || file_info.changed.percent === undefined) {
+                                return;
+                            }
+
+                            // Retrieve snackbar from its id
+                            let $snack = wpmfSnackbarModule.getFromId(file_info.attributes.file.id);
+
+                            // Is the upload finished
+                            if (file_info.changed.percent === 100) {
+                                wpmfSnackbarModule.close($snack);
+                                wpmfSnackbarModule.show({
+                                    content: wpmf.l18n.wpmf_media_uploaded
+                                });
+                            } else {
+                                wpmfSnackbarModule.setProgress($snack, file_info.changed.percent);
+                            }
+
+                            // Update the uploaded percentage for this file
+                            $('li.attachment[data-cid=' + file_info.attributes.file.id + '] .media-progress-bar > div').css({'width': file_info.changed.percent + '%'});
+                        },
+                        error: function (error) {
+                            if (error.get('message') === wpmf.l18n.error_replace) {
+                                $('.upload-errors').addClass('wpmferror_replace');
+                                wp.Uploader.queue.reset();
+                            }
+                            myMediaUploaderStatus.prototype.error.apply(this, arguments);
                         }
-
-                        // Retrieve snackbar from its id
-                        let $snack = wpmfSnackbarModule.getFromId(file_info.attributes.file.id);
-
-                        // Is the upload finished
-                        if (file_info.changed.percent === 100) {
-                            wpmfSnackbarModule.close($snack);
-                            wpmfSnackbarModule.show({
-                                content: wpmf.l18n.wpmf_media_uploaded
-                            });
-                        } else {
-                            wpmfSnackbarModule.setProgress($snack, file_info.changed.percent);
-                        }
-
-                        // Update the uploaded percentage for this file
-                        $('li.attachment[data-cid=' + file_info.attributes.file.id + '] .media-progress-bar > div').css({'width': file_info.changed.percent + '%'});
-                    },
-                    error: function (error) {
-                        if (error.get('message') === wpmf.l18n.error_replace) {
-                            $('.upload-errors').addClass('wpmferror_replace');
-                            wp.Uploader.queue.reset();
-                        }
-                        myMediaUploaderStatus.prototype.error.apply(this, arguments);
-                    }
-                });
+                    });
+                }
             }
 
             wpmfFoldersModule.trigger('afterFiltersInitialization');
@@ -429,75 +484,80 @@ let wpmfFoldersModule;
             /**
              * We extend the AttachmentFilters view to add our own filtering
              */
-            wp.media.view.AttachmentFilters['wpmf_categories'] = wp.media.view.AttachmentFilters.extend({
-                className: 'wpmf-media-categories attachment-filters',
-                id: 'wpmf-media-category',
-                createFilters: function () {
-                    let filters = {};
-                    let ij = 0;
-                    let space = '&nbsp;&nbsp;';
-                    _.each(wpmfFoldersModule.categories_order || [], function (key) {
-                        let term = wpmfFoldersModule.categories[key];
-                        if (typeof term !== "undefined") {
-                            if (wpmfFoldersModule.media_root !== term.id) {
-                                let query = {
-                                    taxonomy: wpmfFoldersModule.taxonomy,
-                                    term_id: parseInt(term.id, 10),
-                                    term_slug: term.slug,
-                                    wpmf_taxonomy: 'true'
-                                };
+            if (typeof wp.media.view.AttachmentFilters !== "undefined") {
+                wp.media.view.AttachmentFilters['wpmf_categories'] = wp.media.view.AttachmentFilters.extend({
+                    className: 'wpmf-media-categories attachment-filters',
+                    id: 'wpmf-media-category',
+                    createFilters: function () {
+                        let filters = {};
+                        let ij = 0;
+                        let space = '&nbsp;&nbsp;';
+                        _.each(wpmfFoldersModule.categories_order || [], function (key) {
+                            let term = wpmfFoldersModule.categories[key];
+                            if (typeof term !== "undefined") {
+                                if (parseInt(wpmfFoldersModule.media_root) !== parseInt(term.id)) {
+                                    let query = {
+                                        taxonomy: wpmfFoldersModule.taxonomy,
+                                        term_id: parseInt(term.id, 10),
+                                        term_slug: term.slug,
+                                        wpmf_taxonomy: 'true',
+                                        wpmf_nonce: wpmf.vars.wpmf_nonce
+                                    };
 
-                                if (typeof term.depth === 'undefined') {
-                                    term.depth = 0;
+                                    if (typeof term.depth === 'undefined') {
+                                        term.depth = 0;
+                                    }
+
+                                    filters[ij] = {
+                                        text: space.repeat(term.depth) + term.label,
+                                        props: query
+                                    };
+
+                                    wpmfFoldersModule.relation_category_filter[term.id] = ij;
+                                    wpmfFoldersModule.relation_filter_category[ij] = term.id;
+                                    ij++;
                                 }
-
-                                filters[ij] = {
-                                    text: space.repeat(term.depth) + term.label,
-                                    props: query
-                                };
-
-                                wpmfFoldersModule.relation_category_filter[term.id] = ij;
-                                wpmfFoldersModule.relation_filter_category[ij] = term.id;
-                                ij++;
                             }
-                        }
-                    });
+                        });
 
-                    this.filters = filters;
-                }
-            });
+                        this.filters = filters;
+                    }
+                });
+            }
 
             // render filter
             let myAttachmentsBrowser = wp.media.view.AttachmentsBrowser;
-            wp.media.view.AttachmentsBrowser = wp.media.view.AttachmentsBrowser.extend({
+            if (typeof myAttachmentsBrowser !== "undefined") {
+                wp.media.view.AttachmentsBrowser = wp.media.view.AttachmentsBrowser.extend({
 
-                createToolbar: function () {
-                    wp.media.model.Query.defaultArgs.filterSource = 'filter-attachment-category';
-                    myAttachmentsBrowser.prototype.createToolbar.apply(this, arguments);
-                    //Save the attachments because we'll need it to change the category filter
-                    wpmfFoldersModule.attachments_browser = this;
+                    createToolbar: function () {
+                        wp.media.model.Query.defaultArgs.filterSource = 'filter-attachment-category';
+                        myAttachmentsBrowser.prototype.createToolbar.apply(this, arguments);
+                        //Save the attachments because we'll need it to change the category filter
+                        wpmfFoldersModule.attachments_browser = this;
 
-                    this.toolbar.set(wpmfFoldersModule.taxonomy, new wp.media.view.AttachmentFilters['wpmf_categories']({
-                            controller: this.controller,
-                            model: this.collection.props,
-                            priority: -75
-                        }).render()
-                    );
-                },
+                        this.toolbar.set(wpmfFoldersModule.taxonomy, new wp.media.view.AttachmentFilters['wpmf_categories']({
+                                controller: this.controller,
+                                model: this.collection.props,
+                                priority: -75
+                            }).render()
+                        );
+                    },
 
-                // Add video icon for each remote video attachment
-                updateContent: function () {
-                    myAttachmentsBrowser.prototype.updateContent.apply(this, arguments);
-                    wpmfFoldersModule.getFrame().find('.attachments-browser .attachment').each(function (i, v) {
-                        const id_img = $(v).data('id');
-                        if (wp.media.attachment(id_img).get('description') === 'wpmf_remote_video') {
-                            if ($('li.attachment[data-id="' + id_img + '"] .attachment-preview .wpmf_remote_video').length === 0) {
-                                $('li.attachment[data-id="' + id_img + '"] .attachment-preview').append('<i class="material-icons wpmf_remote_video">play_circle_filled</i>');
+                    // Add video icon for each remote video attachment
+                    updateContent: function () {
+                        myAttachmentsBrowser.prototype.updateContent.apply(this, arguments);
+                        wpmfFoldersModule.getFrame().find('.attachments-browser .attachment').each(function (i, v) {
+                            const id_img = $(v).data('id');
+                            if (wp.media.attachment(id_img).get('description') === 'wpmf_remote_video') {
+                                if ($('li.attachment[data-id="' + id_img + '"] .attachment-preview .wpmf_remote_video').length === 0) {
+                                    $('li.attachment[data-id="' + id_img + '"] .attachment-preview').append('<i class="material-icons wpmf_remote_video">play_circle_filled</i>');
+                                }
                             }
-                        }
-                    });
-                }
-            });
+                        });
+                    }
+                });
+            }
 
             // If the filter has already been rendered, force it to be reloaded
             if (wpmfFoldersModule.attachments_browser !== null) {
@@ -516,76 +576,81 @@ let wpmfFoldersModule;
 
             // order image gallery
             let myMediaControllerGalleryEdit = wp.media.controller.GalleryEdit;
-            wp.media.controller.GalleryEdit = wp.media.controller.GalleryEdit.extend({
-                gallerySettings: function (browser) {
-                    // Apply original method
-                    myMediaControllerGalleryEdit.prototype.gallerySettings.apply(this, arguments);
-                    var library = this.get('library');
-                    browser.toolbar.set('wpmf_reverse_gallery', {
-                        text: 'Order by',
-                        priority: 70,
-                        click: function () {
-                            /* Sort images gallery by setting */
-                            var lists_i = library.toArray();
-                            var listsId = [];
-                            var wpmf_orderby = $('.wpmf_orderby').val();
-                            var wpmf_order = $('.wpmf_order').val();
-                            $.each(lists_i, function (i, v) {
-                                listsId.push(v.id);
-                            });
+            if (typeof myMediaControllerGalleryEdit !== "undefined") {
+                wp.media.controller.GalleryEdit = wp.media.controller.GalleryEdit.extend({
+                    gallerySettings: function (browser) {
+                        // Apply original method
+                        myMediaControllerGalleryEdit.prototype.gallerySettings.apply(this, arguments);
+                        var library = this.get('library');
+                        browser.toolbar.set('wpmf_reverse_gallery', {
+                            text: 'Order by',
+                            priority: 70,
+                            click: function () {
+                                /* Sort images gallery by setting */
+                                var lists_i = library.toArray();
+                                var listsId = [];
+                                var wpmf_orderby = $('.wpmf_orderby').val();
+                                var wpmf_order = $('.wpmf_order').val();
+                                $.each(lists_i, function (i, v) {
+                                    listsId.push(v.id);
+                                });
 
-                            var wpmf_img_order = [];
-                            $.ajax({
-                                method: "POST",
-                                dataType: 'json',
-                                url: ajaxurl,
-                                data: {
-                                    action: "wpmf",
-                                    ids: listsId,
-                                    wpmf_orderby: wpmf_orderby,
-                                    wpmf_order: wpmf_order,
-                                    task: "gallery_get_image"
-                                },
-                                success: function (res) {
-                                    if (res !== false) {
-                                        $.each(res, function (i, v) {
-                                            $.each(lists_i, function (k, h) {
-                                                if (h.id === v.ID)
-                                                    wpmf_img_order.push(h);
+                                var wpmf_img_order = [];
+                                $.ajax({
+                                    method: "POST",
+                                    dataType: 'json',
+                                    url: ajaxurl,
+                                    data: {
+                                        action: "wpmf",
+                                        ids: listsId,
+                                        wpmf_orderby: wpmf_orderby,
+                                        wpmf_order: wpmf_order,
+                                        task: "gallery_get_image",
+                                        wpmf_nonce: wpmf.vars.wpmf_nonce
+                                    },
+                                    success: function (res) {
+                                        if (res !== false) {
+                                            $.each(res, function (i, v) {
+                                                $.each(lists_i, function (k, h) {
+                                                    if (h.id === v.ID)
+                                                        wpmf_img_order.push(h);
+                                                });
                                             });
-                                        });
 
-                                        library.reset(wpmf_img_order);
+                                            library.reset(wpmf_img_order);
+                                        }
                                     }
-                                }
-                            });
-                        }
-                    });
-                }
-            });
+                                });
+                            }
+                        });
+                    }
+                });
+            }
 
             // Reload folders after searching
             let mySearch = wp.media.view.Search;
             let search_initialized = false;
-            wp.media.view.Search = wp.media.view.Search.extend({
-                search: function () {
-                    // Apply original method
-                    mySearch.prototype.search.apply(this, arguments);
+            if (typeof mySearch !== "undefined") {
+                wp.media.view.Search = wp.media.view.Search.extend({
+                    search: function (event) {
+                        // Apply original method
+                        mySearch.prototype.search.apply(this, arguments);
 
-                    // Save as a global variable is we're currently doing a global search or not
-                    wpmfFoldersModule.doing_global_search = !!(event.target.value && wpmfFoldersModule.global_search);
+                        // Save as a global variable is we're currently doing a global search or not
+                        wpmfFoldersModule.doing_global_search = !!(event.target.value && wpmfFoldersModule.global_search);
 
-                    // Register on change event if not already done
-                    if (!search_initialized) {
-                        this.model.on('change', function () {
-                            wpmfFoldersModule.renderFolders();
-                        });
+                        // Register on change event if not already done
+                        if (!search_initialized) {
+                            this.model.on('change', function () {
+                                wpmfFoldersModule.renderFolders();
+                            });
 
-                        // Prevent to register the function on the event each time search is called
-                        search_initialized = true;
+                            // Prevent to register the function on the event each time search is called
+                            search_initialized = true;
+                        }
                     }
-                }
-            });
+                });
+            }
         },
 
         setFolderOrdering: function (ordering) {
@@ -630,6 +695,13 @@ let wpmfFoldersModule;
                 } else {
                     wpmfFoldersModule.renderFolders(wpmfFoldersModule.relation_filter_category[$(this).val()]);
                     wpmfFoldersModule.updateBreadcrumb(wpmfFoldersModule.relation_filter_category[$(this).val()]);
+
+                    // set cookie last access folder
+                    if (typeof wpmfFoldersModule.relation_filter_category[$(this).val()] === "undefined") {
+                        wpmfFoldersModule.setCookie('lastAccessFolder_' + wpmf.vars.site_url, 0, 365);
+                    } else {
+                        wpmfFoldersModule.setCookie('lastAccessFolder_' + wpmf.vars.site_url, wpmfFoldersModule.relation_filter_category[$(this).val()], 365);
+                    }
 
                     // Trigger change changeFolder event for other modules
                     wpmfFoldersModule.trigger('changeFolder', wpmfFoldersModule.relation_filter_category[$(this).val()]);
@@ -785,7 +857,35 @@ let wpmfFoldersModule;
             </span>
             </li>`
             }
+        },
 
+        /**
+         * Update count files in folder
+         * @param term_id
+         */
+        updateCountFiles: function (term_id) {
+            $.ajax({
+                type: "POST",
+                url: ajaxurl,
+                data: {
+                    action: "wpmf",
+                    task: "getcountfiles",
+                    term_id: term_id,
+                    wpmf_nonce: wpmf.vars.wpmf_nonce
+                },
+                success: function (response) {
+                    if (response.status) {
+                        if (term_id !== 0) {
+                            wpmfFoldersModule.categories[term_id].files_count = parseInt(response.count);
+                        }
+
+                        // Import categories with updated count
+                        wpmfFoldersTreeModule.importCategories();
+                        // Reload tree view
+                        wpmfFoldersTreeModule.loadTreeView();
+                    }
+                }
+            });
         },
 
         /**
@@ -799,14 +899,18 @@ let wpmfFoldersModule;
                 return;
             }
 
-            if (term_id === undefined) {
+            if (typeof term_id === "undefined") {
                 // check if enable display own media
                 if (parseInt(wpmf.vars.wpmf_active_media) === 1 && wpmf.vars.wpmf_role !== 'administrator' && wpmfFoldersModule.page_type !== 'upload-list' && wpmf.vars.term_root_id) {
                     // If not term id is set we use the latest used
                     term_id = wpmf.vars.term_root_id;
                 } else {
                     // If not term id is set we use the latest used
-                    term_id = wpmfFoldersModule.last_selected_folder;
+                    if (parseInt(wpmf.vars.wpmf_active_media) === 1 && wpmf.vars.wpmf_role !== 'administrator') {
+                        term_id = wpmf.vars.term_root_id;
+                    } else {
+                        term_id = wpmfFoldersModule.last_selected_folder;
+                    }
                 }
             } else {
                 // Let's save this term as the last used one
@@ -893,7 +997,6 @@ let wpmfFoldersModule;
             $(folders_ordered).each(function () {
                 // Get the formatted folder for the attachment listing
                 let folder = wpmfFoldersModule.getFolderRendering('folder', this.label, this.id, this.parent_id, this.cover_image);
-
                 // Add the folder to the attachment listing
                 $attachments_container.append(folder);
             });
@@ -905,7 +1008,7 @@ let wpmfFoldersModule;
             $attachments_container.prepend(folder);
 
             // Check if we're not on the top folder
-            if (wpmfFoldersModule.categories[term_id].id !== 0) {
+            if (parseInt(wpmfFoldersModule.categories[term_id].id) !== parseInt(wpmf.vars.term_root_id)) {
                 // Get the formatted back button
                 let folder = wpmfFoldersModule.getFolderRendering('back', wpmf.l18n['back'], wpmfFoldersModule.categories[term_id].parent_id, wpmfFoldersModule.categories[term_id].parent_id, wpmfFoldersModule.categories[term_id].cover_image);
 
@@ -1052,7 +1155,8 @@ let wpmfFoldersModule;
                         action: "wpmf",
                         task: "set_folder_color",
                         color: color,
-                        folder_id: wpmfFoldersModule.editFolderId
+                        folder_id: wpmfFoldersModule.editFolderId,
+                        wpmf_nonce: wpmf.vars.wpmf_nonce
                     },
                     success: function (response) {
                         if (!response.status) {
@@ -1188,7 +1292,7 @@ let wpmfFoldersModule;
             // get URL attachment
             $('.material_geturlfile').unbind('click').bind('click', function (e) {
                 let url = wp.media.attachment(wpmfFoldersModule.editFileId).get('url');
-                wpmfFoldersModule.setClipboardText(url);
+                wpmfFoldersModule.setClipboardText(url, wpmf.l18n.copy_url);
                 wpmfFoldersModule.houtside();
             });
 
@@ -1220,7 +1324,7 @@ let wpmfFoldersModule;
          * set clipboard text
          * @param text
          */
-        setClipboardText: function (text) {
+        setClipboardText: function (text, msg_success) {
             let id = "mycustom-clipboard-textarea-hidden-id";
             let existsTextarea = document.getElementById(id);
 
@@ -1264,7 +1368,7 @@ let wpmfFoldersModule;
                     });
                 } else {
                     wpmfSnackbarModule.show({
-                        content: wpmf.l18n.copy_url,
+                        content: msg_success,
                         auto_close_delay: 1000
                     });
                 }
@@ -1324,16 +1428,20 @@ let wpmfFoldersModule;
             if (typeof wpmf.vars.override !== 'undefined' && parseInt(wpmf.vars.override) === 1) {
                 override = `<li><div class="material_overridefile items_menu">${wpmf.l18n.replace}<i class="material-icons">cached</i></div></li>`
             }
-            let context_file = `
-            <ul class="wpmf-contextmenu wpmf-contextmenu-file contextmenu z-depth-1 grey-text text-darken-2">
-                <li><div class="material_editfile items_menu">${wpmf.l18n.edit_file}<i class="material-icons">border_color</i></div></li>
-                <li><div class="material_deletefile items_menu">${wpmf.l18n.remove}<i class="material-icons">delete</i></div></li>
+
+            let context_file = '<ul class="wpmf-contextmenu wpmf-contextmenu-file contextmenu z-depth-1 grey-text text-darken-2">';
+            if (wpmf.vars.wpmf_pagenow === 'upload.php') {
+                context_file += `<li><div class="material_editfile items_menu">${wpmf.l18n.edit_file}<i class="material-icons">border_color</i></div></li>`;
+            }
+
+            context_file += `
+            <li><div class="material_deletefile items_menu">${wpmf.l18n.remove}<i class="material-icons">delete</i></div></li>
                 <li><div class="material_geturlfile items_menu">${wpmf.l18n.get_url_file}<i class="material-icons">link</i></div></li>
                 ${duplicate}
                 ${override}
                 <li><div class="material_changefolder open-popup-tree items_menu">${wpmf.l18n.change_folder}<i class="material-icons">keyboard_tab</i></div></li>
             </ul>
-            `
+            `;
 
             // Add the context menu box for folder to body
             if (!$('.wpmf-contextmenu.wpmf-contextmenu-folder').length) {
@@ -1390,7 +1498,8 @@ let wpmfFoldersModule;
                     action: "wpmf",
                     task: "save_folder_cover",
                     folder_id: wpmfFoldersModule.last_selected_folder,
-                    post_id: wpmfFoldersModule.editFileId
+                    post_id: wpmfFoldersModule.editFileId,
+                    wpmf_nonce: wpmf.vars.wpmf_nonce
                 },
                 success: function (response) {
                     if (response.status === true) {
@@ -1415,7 +1524,8 @@ let wpmfFoldersModule;
                     action: "wpmf",
                     task: "add_folder",
                     name: name,
-                    parent: parent_id
+                    parent: parent_id,
+                    wpmf_nonce: wpmf.vars.wpmf_nonce
                 },
                 success: function (response) {
                     if (response.status === true) {
@@ -1508,7 +1618,8 @@ let wpmfFoldersModule;
                     action: "wpmf",
                     task: "edit_folder",
                     name: name,
-                    id: id
+                    id: id,
+                    wpmf_nonce: wpmf.vars.wpmf_nonce
                 },
                 success: function (response) {
                     if (response === false) {
@@ -1518,10 +1629,6 @@ let wpmfFoldersModule;
                                 text: wpmf.l18n.alert_add,
                                 closeicon: true
                             });
-
-                            if ($(wpmfFoldersTreeModule.editable).length) {
-                                $(wpmfFoldersTreeModule.editable).text(wpmfFoldersModule.categories[id].label);
-                            }
                         }
                     } else {
                         // Store variables in case of undo
@@ -1603,13 +1710,14 @@ let wpmfFoldersModule;
             const old_folder_name = wpmfFoldersModule.categories[id].label,
                 old_parent = wpmfFoldersModule.categories[id].parent_id;
 
-            return $.ajax({
+            $.ajax({
                 type: "POST",
                 url: ajaxurl,
                 data: {
                     action: "wpmf",
                     task: "delete_folder",
-                    id: id
+                    id: id,
+                    wpmf_nonce: wpmf.vars.wpmf_nonce
                 },
                 success: function (response) {
                     if (response.status === true) {
@@ -1641,11 +1749,15 @@ let wpmfFoldersModule;
 
                         wpmfFoldersModule.trigger('deleteFolder', id);
                     } else {
-                        // todo : show error message from json response
-                        showDialog({
-                            title: wpmf.l18n.information,
-                            text: wpmf.l18n.alert_delete1
-                        });
+                        if (typeof response.msg !== "undefined" && response.msg === 'limit') {
+                            wpmfFoldersModule.deleteFolder(id);
+                        } else {
+                            // todo : show error message from json response
+                            showDialog({
+                                title: wpmf.l18n.information,
+                                text: wpmf.l18n.alert_delete1
+                            });
+                        }
                     }
                 }
             });
@@ -1683,7 +1795,8 @@ let wpmfFoldersModule;
                 data: {
                     action: "wpmf",
                     task: "delete_file",
-                    id: id
+                    id: id,
+                    wpmf_nonce: wpmf.vars.wpmf_nonce
                 },
                 success: function (response) {
                     if (response.status) {
@@ -1700,13 +1813,9 @@ let wpmfFoldersModule;
          * @param term_id
          */
         updateBreadcrumb: function (term_id) {
-            if (term_id === undefined) {
-                // If not term id is set we use the latest used
-                if (parseInt(wpmf.vars.wpmf_active_media) === 1 && wpmf.vars.wpmf_role !== 'administrator' && wpmfFoldersModule.page_type !== 'upload-list' && wpmf.vars.term_root_id) {
-                    term_id = wpmf.vars.term_root_id;
-                } else {
-                    term_id = wpmfFoldersModule.last_selected_folder;
-                }
+
+            if (typeof term_id === "undefined") {
+                term_id = wpmfFoldersModule.getCurrentFolderId();
             } else {
                 // Let's save this term as the last used one
                 wpmfFoldersModule.last_selected_folder = term_id
@@ -1717,9 +1826,7 @@ let wpmfFoldersModule;
 
             // Remove breadcrumb content
             $wpmf_breadcrumb.html(null);
-
             let category = wpmfFoldersModule.categories[term_id];
-
             let breadcrumb_content = '';
 
             // Ascend until there is no more parent
@@ -1747,19 +1854,30 @@ let wpmfFoldersModule;
         },
 
         /**
+         * Get current folder id
+         */
+        getCurrentFolderId: function () {
+            // If not term id is set we use the latest used
+            if (parseInt(wpmf.vars.wpmf_active_media) === 1 && wpmf.vars.wpmf_role !== 'administrator' && wpmfFoldersModule.page_type !== 'upload-list' && wpmf.vars.term_root_id) {
+                return wpmf.vars.term_root_id;
+            } else {
+                if (parseInt(wpmf.vars.wpmf_active_media) === 1 && wpmf.vars.wpmf_role !== 'administrator') {
+                    return wpmf.vars.term_root_id;
+                } else {
+                    return wpmfFoldersModule.last_selected_folder;
+                }
+            }
+        },
+
+        /**
          * get breadcrumb content
          * depending on the selected folder
          *
          * @param term_id
          */
         getBreadcrumb: function (term_id) {
-            if (term_id === undefined) {
-                // If not term id is set we use the latest used
-                if (parseInt(wpmf.vars.wpmf_active_media) === 1 && wpmf.vars.wpmf_role !== 'administrator' && wpmfFoldersModule.page_type !== 'upload-list' && wpmf.vars.term_root_id) {
-                    term_id = wpmf.vars.term_root_id;
-                } else {
-                    term_id = wpmfFoldersModule.last_selected_folder;
-                }
+            if (typeof term_id === 'undefined') {
+                term_id = wpmfFoldersModule.getCurrentFolderId();
             } else {
                 // Let's save this term as the last used one
                 wpmfFoldersModule.last_selected_folder = term_id
@@ -1793,7 +1911,7 @@ let wpmfFoldersModule;
         initializeDragAndDropAttachments: function () {
             // Initialize draggable
             const $frame = wpmfFoldersModule.getFrame();
-            let draggable_attachments = 'ul.attachments .attachment:not(.attachment.uploading):not(.wpmf-new):not(.wpmf-back):not(.ui-droppable):not(.ui-state-disabled)';
+            let draggable_attachments = 'ul.attachments .attachment:not(.attachment.loading):not(.wpmf-new):not(.wpmf-back):not(.ui-droppable):not(.ui-state-disabled)';
             let append_element;
 
             if (wpmfFoldersModule.page_type === 'upload-list') {
@@ -2025,7 +2143,8 @@ let wpmfFoldersModule;
                             data: {
                                 action: "wpmf",
                                 task: "reorderfolder",
-                                order: order
+                                order: order,
+                                wpmf_nonce: wpmf.vars.wpmf_nonce
                             },
                             success: function (response) {
 
@@ -2126,7 +2245,8 @@ let wpmfFoldersModule;
                             data: {
                                 action: "wpmf",
                                 task: "reorderfile",
-                                order: order
+                                order: order,
+                                wpmf_nonce: wpmf.vars.wpmf_nonce
                             },
                             success: function (response) {
                                 if (wpmfFoldersModule.page_type !== 'upload-list') {
@@ -2217,7 +2337,8 @@ let wpmfFoldersModule;
                                 data: {
                                     action: "wpmf",
                                     task: "reorderfolder",
-                                    order: order
+                                    order: order,
+                                    wpmf_nonce: wpmf.vars.wpmf_nonce
                                 }
                             });
                         } else {
@@ -2248,7 +2369,8 @@ let wpmfFoldersModule;
                                 data: {
                                     action: "wpmf",
                                     task: "reorderfile",
-                                    order: order
+                                    order: order,
+                                    wpmf_nonce: wpmf.vars.wpmf_nonce
                                 },
                                 success: function (response) {
                                     if (wpmfFoldersModule.page_type !== 'upload-list') {
@@ -2320,7 +2442,8 @@ let wpmfFoldersModule;
                         data: {
                             action: "wpmf",
                             task: "reorderfolder",
-                            order: order
+                            order: order,
+                            wpmf_nonce: wpmf.vars.wpmf_nonce
                         }
                     });
                 }
@@ -2455,7 +2578,8 @@ let wpmfFoldersModule;
                         data: {
                             action: "wpmf",
                             task: "reorderfile",
-                            order: order
+                            order: order,
+                            wpmf_nonce: wpmf.vars.wpmf_nonce
                         },
                         success: function (response) {
                             if (wpmfFoldersModule.page_type !== 'upload-list') {
@@ -2515,7 +2639,8 @@ let wpmfFoldersModule;
                     task: "move_folder",
                     id: folder_id,
                     id_category: folder_to_id,
-                    type: 'move' // todo: handle the undo feature
+                    type: 'move', // todo: handle the undo feature
+                    wpmf_nonce: wpmf.vars.wpmf_nonce
                 },
                 success: function (response) {
                     if (response.status === true) {
@@ -2568,7 +2693,8 @@ let wpmfFoldersModule;
                     ids: files_ids,
                     id_category: folder_to_id,
                     current_category: folder_from_id,
-                    type: 'move' // todo: handle the undo feature
+                    type: 'move', // todo: handle the undo feature
+                    wpmf_nonce: wpmf.vars.wpmf_nonce
                 },
                 success: function (response) {
                     if (response.status === true) {
@@ -2606,6 +2732,13 @@ let wpmfFoldersModule;
                             }
                         });
 
+                        if ($('.mode-select .select-mode-toggle-button').length) {
+                            $('.mode-select .select-mode-toggle-button').click();
+                        }
+
+                        if ($('.selection-info .clear-selection').length) {
+                            $('.selection-info .clear-selection').click();
+                        }
                         wpmfFoldersModule.trigger('moveFile', files_ids, folder_to_id, folder_from_id);
                     }
                 }
@@ -2628,7 +2761,7 @@ let wpmfFoldersModule;
             /* END CONFIG */
             wpmfFoldersModule.getFrame().find('.attachments-browser ul.attachments .attachment .thumbnail').unbind('hover').hover(function (e) {
                     var $this = $(this);
-                    if ($this.closest('.attachment-preview').hasClass('type-image') && !$this.closest('.attachment').hasClass('uploading')) {
+                    if ($this.closest('.attachment-preview').hasClass('type-image') && !$this.closest('.attachment.loading').length) {
                         var id_img = $(this).closest('.attachment').data('id');
                         var ext = '!svg';
                         if (typeof wpmfFoldersModule.hover_images[id_img] === "undefined") {
@@ -2696,7 +2829,7 @@ let wpmfFoldersModule;
                         html += "<br>";
                         html += "<span class='bottomlegend_filetitle'>";
                         if (wpmfFoldersModule.hover_images[id_img].description === 'wpmf_remote_video') {
-                            if(wpmfFoldersModule.hover_images[id_img].caption !== '') {
+                            if (wpmfFoldersModule.hover_images[id_img].caption !== '') {
                                 html += wpmfFoldersModule.hover_images[id_img].caption;
                             }
                         } else {
@@ -2711,12 +2844,12 @@ let wpmfFoldersModule;
                             $("#wpmf_preview_image").fadeIn("fast");
                             if ((e.pageX + wpmfFoldersModule.hover_images[id_img].width) > $('body').width()) {
                                 $("#wpmf_preview_image")
-                                    .css("top", (e.pageY - 100 - $("#wpmf_preview_image").height()) + "px")
-                                    .css("left", (e.pageX - wpmfFoldersModule.hover_images[id_img].width) - 50 + "px")
+                                    .css("top", (e.pageY - 30 - $("#wpmf_preview_image").height()) + "px")
+                                    .css("left", (e.pageX - wpmfFoldersModule.hover_images[id_img].width) - 30 + "px")
                                     .fadeIn("fast");
                             } else {
                                 $("#wpmf_preview_image")
-                                    .css("top", (e.pageY - 100 - $("#wpmf_preview_image").height()) + "px")
+                                    .css("top", (e.pageY - 30 - $("#wpmf_preview_image").height()) + "px")
                                     .css("left", (e.pageX + yOffset) + "px")
                                     .fadeIn("fast");
                             }
@@ -2756,11 +2889,16 @@ let wpmfFoldersModule;
                         action: "wpmf",
                         task: "create_remote_video",
                         wpmf_remote_link: remote_link,
-                        folder_id: wpmfFoldersModule.last_selected_folder
+                        folder_id: wpmfFoldersModule.last_selected_folder,
+                        wpmf_nonce: wpmf.vars.wpmf_nonce
                     },
                     success: function (response) {
                         if (response.status) {
+                            wpmfSnackbarModule.show({
+                                content: wpmf.l18n.video_uploaded
+                            });
                             wpmfFoldersModule.reloadAttachments();
+                            wpmfFoldersModule.renderFolders();
                         } else {
                             showDialog({
                                 title: wpmf.l18n.information,
@@ -2773,46 +2911,38 @@ let wpmfFoldersModule;
             };
 
             // Add remote button
-            if (!$current_frame.find('.media-frame-content .media-toolbar-secondary .wpmf_btn_remote_video').length) {
-                $current_frame.find('.media-frame-content .media-toolbar-secondary').append('<i class="material-icons wpmf_icon_remote_video" data-for="' + wpmf.l18n.remote_video_tooltip + '">play_circle_outline</i>');
-                wpmfFoldersModule.showTooltip();
-            }
-
-            // Add reload button
-            if (!$current_frame.find('.media-frame-content .media-toolbar-secondary .wpmf_btn_reload').length) {
-                $current_frame.find('.media-frame-content .media-toolbar-secondary').append('<i class="material-icons wpmf_btn_reload" data-for="' + wpmf.l18n.reload_media + '">refresh</i>');
-                wpmfFoldersModule.showTooltip();
+            if (typeof wpmf.vars.hide_remote_video !== "undefined" && parseInt(wpmf.vars.hide_remote_video) === 1) {
+                if (!$current_frame.find('.media-frame-content .media-toolbar-secondary .wpmf_btn_remote_video').length) {
+                    $current_frame.find('.media-frame-content .media-toolbar-secondary').append('<i class="material-icons wpmf_icon_remote_video" data-for="' + wpmf.l18n.remote_video_tooltip + '">play_circle_outline</i>');
+                    wpmfFoldersModule.showTooltip();
+                }
             }
 
             // Initialize main functionality
-            $('.wpmf_btn_remote_video,.wpmf_icon_remote_video').unbind('click').click(function () {
-                showDialog({
-                    title: wpmf.l18n.remote_video_lb_box,
-                    text: '<input type="text" name="wpmf_remote_video_input" class="wpmf_remote_video_input">',
-                    negative: {
-                        title: wpmf.l18n.cancel
-                    },
-                    positive: {
-                        title: wpmf.l18n.upload,
-                        onClick: function () {
-                            create_remote_video();
+            if (typeof wpmf.vars.hide_remote_video !== "undefined" && parseInt(wpmf.vars.hide_remote_video) === 1) {
+                $('.wpmf_btn_remote_video,.wpmf_icon_remote_video').unbind('click').click(function () {
+                    showDialog({
+                        title: wpmf.l18n.remote_video_lb_box,
+                        text: '<input type="text" name="wpmf_remote_video_input" class="wpmf_remote_video_input">',
+                        negative: {
+                            title: wpmf.l18n.cancel
+                        },
+                        positive: {
+                            title: wpmf.l18n.upload,
+                            onClick: function () {
+                                create_remote_video();
+                            }
                         }
-                    }
+                    });
+
+                    $('.wpmf_newfolder_input').focus().keypress(function (e) {
+                        if (e.which === 13) {
+                            create_remote_video();
+                            hideDialog(jQuery('#orrsDiag'));
+                        }
+                    });
                 });
-
-                $('.wpmf_newfolder_input').focus().keypress(function (e) {
-                    if (e.which === 13) {
-                        create_remote_video();
-                        hideDialog(jQuery('#orrsDiag'));
-                    }
-                });
-            });
-
-            $('.wpmf_btn_reload').unbind('click').click(function () {
-                wpmfFoldersModule.reloadAttachments();
-            });
-
-
+            }
         },
 
         /**

@@ -45,13 +45,16 @@
             }
 
             $.ajax({
-                type: "POST",
                 url: ajaxurl,
+                method: "POST",
+                dataType: 'json',
                 data: {
-                    action: "update_link",
+                    action: 'wpmf',
+                    task: "update_link",
                     id: attachment_id,
                     link: link,
-                    link_target: link_target
+                    link_target: link_target,
+                    wpmf_nonce: wpmf.vars.wpmf_nonce
                 },
                 success: function (response) {
                     $('.compat-field-wpmf_gallery_custom_image_link input.text').val(response.link);

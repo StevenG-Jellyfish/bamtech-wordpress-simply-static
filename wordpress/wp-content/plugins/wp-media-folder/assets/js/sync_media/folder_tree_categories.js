@@ -1,193 +1,250 @@
+/**
+ * Folder tree for WP Media Folder
+ */
+var wpmfFoldersTreeCategoriesModule;
 (function ($) {
-    $(document).ready(function () {
-        /**
-         * options
-         * @type {{root: string, showroot: string, onclick: onclick, oncheck: oncheck, usecheckboxes: boolean, expandSpeed: number, collapseSpeed: number, expandEasing: null, collapseEasing: null, canselect: boolean}}
-         */
-        var options_categories = {
-            'root': '/',
-            'showroot': wpmfoption.l18n.media_library,
-            'onclick': function (elem, type, file) {
-            },
-            'oncheck': function (elem, checked, type, file) {
-            },
-            'usecheckboxes': false, //can be true files dirs or false
-            'expandSpeed': 500,
-            'collapseSpeed': 500,
-            'expandEasing': null,
-            'collapseEasing': null,
-            'canselect': true
-        };
+    wpmfFoldersTreeCategoriesModule = {
+        categories: [], // categories
+        folders_states: [], // Contains open or closed status of folders
 
         /**
-         * Main folder tree of WPMF category function for sync feature
-         * @type {{init: init, open_categories: open_categories, close_categories: close_categories}}
+         * Retrieve the Jquery tree view element
+         * of the current frame
+         * @return jQuery
          */
-        var methods_categories = {
-            /**
-             * Folder tree init
-             */
-            init: function () {
-                $thiscategories = $('#wpmf_foldertree_categories');
-                if ($thiscategories.length === 0) {
-                    return;
-                }
-                if (options_categories.showroot !== '') {
-                    $thiscategories.html('<ul class="jaofiletree"><li class="drive directory_library collapsed_library selected"><a href="#" data-file="' + options_categories.root + '" data-type="dir">' + options_categories.showroot + '</a></li></ul>');
-                }
-                openfolder_categories(options_categories.root);
-            },
-            /**
-             * open folder tree by dir name
-             * @param dir
-             */
-            open_categories: function (dir) {
-                openfolder_categories(dir);
-            },
-            /**
-             * close folder tree by dir name
-             * @param dir
-             */
-            close_categories: function (dir) {
-                closedir_categories(dir);
-            }
-        };
+        getTreeElement: function () {
+            return $('#wpmf_foldertree_categories').find('.wpmf-folder-tree');
+        },
 
         /**
-         * open folder tree by dir name
-         * @param dir dir name
-         * @param callback
+         * Initialize module related things
          */
-        var openfolder_categories = function (dir , callback) {
-            if (typeof $thiscategories === "undefined")
-                return;
+        initModule: function () {
+            // Import categories from wpmf main module
+            wpmfFoldersTreeCategoriesModule.importCategories();
 
-            var id = $thiscategories.find('a[data-file="' + dir + '"]').data('id');
-            if ($thiscategories.find('a[data-file="' + dir + '"]').parent().hasClass('expanded_library') || $thiscategories.find('a[data-file="' + dir + '"]').parent().hasClass('wait')) {
-                if (typeof callback === 'function')
-                    callback();
-                return;
-            }
+            // Add the tree view to the main content
+            $('<div class="wpmf-folder-tree"></div>').appendTo($('#wpmf_foldertree_categories'));
 
-            if(typeof id === 'undefined') id = 0;
-            var ret;
-            ret = $.ajax({
-                url: ajaxurl,
-                method: 'POST',
-                data: {
-                    action: 'wpmf',
-                    task: 'get_terms',
-                    dir: dir,
-                    id: id,
-                    wpmf_display_media: 'all'
-                },
-                context: $thiscategories,
-                dataType: 'json',
-                beforeSend: function () {
-                    $('#wpmf_foldertree_categories').find('a[data-file="' + dir + '"]').parent().addClass('wait');
-                }
-            }).done(function (datas) {
-                var selectedId = $('#wpmf_foldertree_categories').find('.directory_library.selected').data('id');
-                ret = '<ul class="jaofiletree" style="display: none">';
-                for (var ij = 0; ij < datas.length; ij++) {
-                    if(parseInt(wpmfoption.vars.root_media_root) !== parseInt(datas[ij].id)) {
-                        var classe = '';
-                        if (datas[ij].type === 'dir') {
-                            classe = 'directory_library collapsed_library';
-                        } else {
-                            classe = 'file ext_' + datas[ij].ext;
+            // Render the tree view
+            wpmfFoldersTreeCategoriesModule.loadTreeView();
+        },
+
+        /**
+         * Import categories from wpmf main module
+         */
+        importCategories: function () {
+            var folders_ordered = [];
+
+            // Add each category
+            $(wpmf.vars.wpmf_categories_order).each(function () {
+                folders_ordered.push(wpmf.vars.wpmf_categories[this]);
+            });
+
+            // Reorder array based on children
+            var folders_ordered_deep = [];
+            var processed_ids = [];
+            var loadChildren = function (id) {
+                if (processed_ids.indexOf(id) < 0) {
+                    processed_ids.push(id);
+                    for (var ij = 0; ij < folders_ordered.length; ij++) {
+                        if (folders_ordered[ij].parent_id === id) {
+                            folders_ordered_deep.push(folders_ordered[ij]);
+                            loadChildren(folders_ordered[ij].id);
                         }
-
-                        if (datas[ij].id === id.toString()) {
-                            classe += ' selected';
-                        }
-
-                        ret += '<li class="' + classe + '" data-id="' + datas[ij].id + '" data-parent_id="' + datas[ij].parent_id + '" data-group="' + datas[ij].term_group + '">';
-                        if (datas[ij].count_child > 0) {
-                            ret += '<div class="icon-open-close" data-id="' + datas[ij].id + '" data-parent_id="' + datas[ij].parent_id + '" data-file="' + dir + datas[ij].file + '/" data-type="' + datas[ij].type + '"></div>';
-                        } else {
-                            ret += '<div class="icon-open-close" data-id="' + datas[ij].id + '" data-parent_id="' + datas[ij].parent_id + '" data-file="' + dir + datas[ij].file + '/" data-type="' + datas[ij].type + '" style="opacity:0"></div>';
-                        }
-
-                        ret += '<i class="zmdi zmdi-folder"></i>';
-                        ret += '<a href="#" class="title-folder" data-id="' + datas[ij].id + '" data-parent_id="' + datas[ij].parent_id + '" data-file="' + dir + datas[ij].file + '/" data-type="' + datas[ij].type + '">' + datas[ij].file + '</a>';
-                        ret += '</li>';
                     }
                 }
-                ret += '</ul>';
-                $('#wpmf_foldertree_categories').find('a[data-file="' + dir + '"]').parent().removeClass('wait').removeClass('collapsed_library').addClass('expanded_library');
-                $('#wpmf_foldertree_categories').find('a[data-file="' + dir + '"]').after(ret);
-                $('#wpmf_foldertree_categories').find('a[data-file="' + dir + '"]').next().slideDown(options_categories.expandSpeed, options_categories.expandEasing,
-                    function () {
-                        $thiscategories.trigger('afteropen');
-                        $thiscategories.trigger('afterupdate');
-                        if (typeof callback === 'function')
-                            callback();
-                    });
+            };
+            loadChildren(parseInt(wpmf.vars.term_root_id));
 
-                $('.dir_name_categories').val(dir.replace("\\", "/")).data('id_category' , id);
-                setevents_categories();
+            // Finally save it to the global var
+            wpmfFoldersTreeCategoriesModule.categories = folders_ordered_deep;
 
-            }).done(function () {
-                $thiscategories.trigger('afteropen');
-                $thiscategories.trigger('afterupdate');
-            });
-
-        };
+        },
 
         /**
-         * close folder tree by dir name
-         * @param dir
+         * Render tree view inside content
          */
-        var closedir_categories = function (dir) {
-            $thiscategories.find('a[data-file="' + dir + '"]').next().slideUp(options_categories.collapseSpeed, options_categories.collapseEasing, function () {
-                $(this).remove();
-            });
-            $thiscategories.find('a[data-file="' + dir + '"]').parent().removeClass('expanded_library').addClass('collapsed_library');
-            $('.dir_name_categories').val('').data('id_category' , 0);
-            setevents_categories();
-
-            //Trigger custom event
-            $thiscategories.trigger('afterclose');
-            $thiscategories.trigger('afterupdate');
-
-        };
+        loadTreeView: function () {
+            wpmfFoldersTreeCategoriesModule.getTreeElement().html(wpmfFoldersTreeCategoriesModule.getRendering());
+        },
 
         /**
-         * init event click to open/close folder tree
+         * Get the html resulting tree view
+         * @return {string}
          */
-        var setevents_categories = function () {
-            $thiscategories = $('#wpmf_foldertree_categories');
-            $thiscategories.find('li a, li .icon-open-close').unbind('click');
-            //Bind userdefined function on click an element
-            $thiscategories.find('li a').bind('click', function (e) {
-                e.preventDefault();
-                if (!$(this).hasClass('wpmfaddFolder')) {
-                    var id = $(this).data('id');
-                    $thiscategories.find('li').removeClass('selected');
-                    $thiscategories.find('i.zmdi').removeClass('wpmf-zmdi-folder-open').addClass("zmdi-folder");
-                    $(this).closest('li').addClass("selected");
-                    $(this).closest('li').find('> i.zmdi').removeClass("zmdi-folder").addClass("wpmf-zmdi-folder-open");
-                    methods_categories.open_categories($(this).attr('data-file'));
+        getRendering: function () {
+            var ij = 0;
+            var content = ''; // Final tree view content
+            /**
+             * Recursively print list of folders
+             * @return {boolean}
+             */
+            var generateList = function generateList() {
+                content += '<ul>';
+    
+                while (ij < wpmfFoldersTreeCategoriesModule.categories.length) {
+                    var className = 'closed';
+                    // Open li tag
+                    content += '<li class="' + className + '" data-id="' + wpmfFoldersTreeCategoriesModule.categories[ij].id + '" >';
+
+                    var a_tag = '<a data-id="' + wpmfFoldersTreeCategoriesModule.categories[ij].id + '">';
+
+                    // get color folder
+                    var bgcolor = '';
+                    if (typeof wpmf.vars.colors !== 'undefined' && typeof wpmf.vars.colors[wpmfFoldersTreeCategoriesModule.categories[ij].id] !== 'undefined' && wpmfFoldersModule.folder_design === 'material_design') {
+                        bgcolor = 'color: ' + wpmf.vars.colors[wpmfFoldersTreeCategoriesModule.categories[ij].id];
+                    } else {
+                        bgcolor = 'color: #8f8f8f';
+                    }
+
+                    if (wpmfFoldersTreeCategoriesModule.categories[ij + 1] && wpmfFoldersTreeCategoriesModule.categories[ij + 1].depth > wpmfFoldersTreeCategoriesModule.categories[ij].depth) { // The next element is a sub folder
+                        content += '<a onclick="wpmfFoldersTreeCategoriesModule.toggle(' + wpmfFoldersTreeCategoriesModule.categories[ij].id + ')"><i class="material-icons wpmf-arrow">keyboard_arrow_down</i></a>';
+
+                        content += a_tag;
+
+                        // Add folder icon
+                        content += '<i class="material-icons" style="' + bgcolor + '">folder</i>';
+                    } else {
+                        content += a_tag;
+
+                        // Add folder icon
+                        content += '<i class="material-icons wpmf-no-arrow" style="' + bgcolor + '">folder</i>';
+                    }
+
+                    // Add current category name
+                    if (wpmfFoldersTreeCategoriesModule.categories[ij].id === 0) {
+                        // If this is the root folder then rename it
+                        content += '<span onclick="wpmfFoldersTreeCategoriesModule.changeFolder(0)">' + wpmf.l18n.media_folder + '</span>';
+                    } else {
+                        content += '<span onclick="wpmfFoldersTreeCategoriesModule.changeFolder(' + wpmfFoldersTreeCategoriesModule.categories[ij].id + ')">' + wpmfFoldersTreeCategoriesModule.categories[ij].label + '</span>';
+                    }
+
+                    content += '</a>';
+                    // This is the end of the array
+                    if (wpmfFoldersTreeCategoriesModule.categories[ij + 1] === undefined) {
+                        // var's close all opened tags
+                        for (var ik = wpmfFoldersTreeCategoriesModule.categories[ij].depth; ik >= 0; ik--) {
+                            content += '</li>';
+                            content += '</ul>';
+                        }
+
+                        // We are at the end don't continue to process array
+                        return false;
+                    }
+
+
+                    if (wpmfFoldersTreeCategoriesModule.categories[ij + 1].depth > wpmfFoldersTreeCategoriesModule.categories[ij].depth) { // The next element is a sub folder
+                        // Recursively list it
+                        ij++;
+                        if (generateList() === false) {
+                            // We have reached the end, var's recursively end
+                            return false;
+                        }
+                    } else if (wpmfFoldersTreeCategoriesModule.categories[ij + 1].depth < wpmfFoldersTreeCategoriesModule.categories[ij].depth) { // The next element don't have the same parent
+                        // var's close opened tags
+                        for (var ik1 = wpmfFoldersTreeCategoriesModule.categories[ij].depth; ik1 > wpmfFoldersTreeCategoriesModule.categories[ij + 1].depth; ik1--) {
+                            content += '</li>';
+                            content += '</ul>';
+                        }
+
+                        // We're not at the end of the array var's continue processing it
+                        return true;
+                    }
+
+                    // Close the current element
+                    content += '</li>';
+                    ij++;
+                }
+            };
+
+            // Start generation
+            generateList();
+            return content;
+        },
+
+        /**
+         * Change the selected folder in tree view
+         * @param folder_id
+         */
+        changeFolder: function (folder_id) {
+            // Remove previous selection
+            wpmfFoldersTreeCategoriesModule.getTreeElement().find('li').removeClass('selected');
+
+            // Select the folder
+            wpmfFoldersTreeCategoriesModule.getTreeElement().find('li[data-id="' + folder_id + '"]').addClass('selected').// Open parent folders
+            parents('.wpmf-folder-tree li.closed').removeClass('closed');
+            wpmfFoldersTreeCategoriesModule.renderBreadCrumb(folder_id);
+
+        },
+
+        /**
+         * Change the selected folder in tree view
+         * @param folder_id
+         */
+        renderBreadCrumb: function (folder_id) {
+            if (parseInt(folder_id) === 0) {
+                $('.dir_name_categories').val('/').data('id_category' , 0);
+            } else {
+                var category = wpmf.vars.wpmf_categories[folder_id];
+                var breadcrumb_content = '';
+
+                // Ascend until there is no more parent
+                while (parseInt(category.parent_id) !== parseInt(wpmf.vars.parent)) {
+                    // Generate breadcrumb element
+                    breadcrumb_content = '/' + wpmf.vars.wpmf_categories[category.id].label + breadcrumb_content;
+
+                    // Get the parent
+                    category = wpmf.vars.wpmf_categories[wpmf.vars.wpmf_categories[category.id].parent_id];
                 }
 
-                return false;
-            });
+                if (parseInt(category.id) !== 0) {
+                    breadcrumb_content = wpmf.vars.wpmf_categories[category.id].label + breadcrumb_content;
+                }
 
-            //Bind for collapse or expand elements
-            $thiscategories.find('li.directory_library.collapsed_library .icon-open-close').bind('click', function () {
-                methods_categories.open_categories($(this).attr('data-file'));
-                return false;
-            });
-            $thiscategories.find('li.directory_library.expanded_library .icon-open-close').bind('click', function () {
-                methods_categories.close_categories($(this).attr('data-file'));
-                return false;
-            });
-        };
+                breadcrumb_content = '/' + breadcrumb_content + '/';
+                $('.dir_name_categories').val(breadcrumb_content).data('id_category' , folder_id);
+            }
+
+        },
 
         /**
-         * Folder tree function
+         * Toggle the open / closed state of a folder
+         * @param folder_id
          */
-        methods_categories.init();
+        toggle: function (folder_id) {
+            // Check is folder has closed class
+            if (wpmfFoldersTreeCategoriesModule.getTreeElement().find('li[data-id="' + folder_id + '"]').hasClass('closed')) {
+                // Open the folder
+                wpmfFoldersTreeCategoriesModule.openFolder(folder_id);
+            } else {
+                // Close the folder
+                wpmfFoldersTreeCategoriesModule.closeFolder(folder_id);
+                // close all sub folder
+                $('li[data-id="' + folder_id + '"]').find('li').addClass('closed');
+            }
+        },
+
+
+        /**
+         * Open a folder to show children
+         */
+        openFolder: function (folder_id) {
+            wpmfFoldersTreeCategoriesModule.getTreeElement().find('li[data-id="' + folder_id + '"]').removeClass('closed');
+            wpmfFoldersTreeCategoriesModule.folders_states[folder_id] = 'open';
+        },
+
+        /**
+         * Close a folder and hide children
+         */
+        closeFolder: function (folder_id) {
+            wpmfFoldersTreeCategoriesModule.getTreeElement().find('li[data-id="' + folder_id + '"]').addClass('closed');
+            wpmfFoldersTreeCategoriesModule.folders_states[folder_id] = 'close';
+        }
+    };
+
+    // var's initialize WPMF folder tree features
+    $(document).ready(function () {
+        wpmfFoldersTreeCategoriesModule.initModule();
     });
 })(jQuery);

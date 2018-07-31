@@ -10,10 +10,13 @@ class WpmfHelper
 {
     /**
      * Create thumbnail after replace
-     * @param $filepath string physical path of file
-     * @param $extimage string extension of file
-     * @param $metadata array meta data of file
-     * @param $post_id int ID of file
+     *
+     * @param string  $filepath Physical path of file
+     * @param string  $extimage Extension of file
+     * @param array   $metadata Meta data of file
+     * @param integer $post_id  ID of file
+     *
+     * @return void
      */
     public function createThumbs($filepath, $extimage, $metadata, $post_id)
     {
@@ -46,24 +49,22 @@ class WpmfHelper
                 }
 
                 // load image and get image size
-                $width = imagesx($img);
-                $height = imagesy($img);
-                $new_width = $sizeinfo['width'];
+                $width      = imagesx($img);
+                $height     = imagesy($img);
+                $new_width  = $sizeinfo['width'];
                 $new_height = floor($height * ($sizeinfo['width'] / $width));
-                $tmp_img = imagecreatetruecolor($new_width, $new_height);
+                $tmp_img    = imagecreatetruecolor($new_width, $new_height);
                 imagecopyresized($tmp_img, $img, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
                 switch ($extimage) {
                     case 'jpeg':
                     case 'jpg':
                         imagejpeg($tmp_img, path_join($uploadpath['basedir'], $intermediate_file));
                         break;
-                        break;
 
                     case 'png':
                         $background = imagecolorallocate($tmp_img, 0, 0, 0);
                         imagecolortransparent($tmp_img, $background);
                         imagepng($tmp_img, path_join($uploadpath['basedir'], $intermediate_file));
-                        break;
                         break;
 
                     case 'gif':
@@ -72,7 +73,6 @@ class WpmfHelper
 
                     case 'bmp':
                         imagewbmp($tmp_img, path_join($uploadpath['basedir'], $intermediate_file));
-                        break;
                         break;
                 }
 

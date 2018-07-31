@@ -448,6 +448,10 @@ ul.attachments .attachment {
     left: 0;
 }
 
+#wpmf_preview_image img {
+    max-height: 250px;
+}
+
 #wpmf_preview_image .bottomlegend_filename {
     font-weight: bold;
     overflow: hidden;
@@ -1352,6 +1356,14 @@ body:not(.rtl) .wpmf-folder-tree li span[data-files-count]:after {
     cursor: pointer;
 }
 
+.rtl .wpmf-expandable-search .material-icons {
+    position: relative;
+    right: -30px;
+    margin-left: -18px;
+    margin-right: 0;
+    cursor: pointer;
+}
+
 .wpmf-expandable-search, .wpmf-expandable-search form {
     display: -webkit-inline-box;
     display: -webkit-inline-flex;
@@ -1450,6 +1462,30 @@ body:not(.rtl) .wpmf-folder-tree li span[data-files-count]:after {
     font-size: 22px;
 }
 
+/** fix conflict with ClientSide plugin */
+.clientside-theme.upload-php .attachments-browser .wpmf-folder-tree {
+   position: relative !important;
+}
+
+.clientside-theme .attachments {
+    margin-left: 0 !important;
+}
+
+.clientside-theme #wpmf-breadcrumb {
+    width: 100%;
+}
+
+.clientside-theme .wpmf-filters-dropdown {
+    font-size: 15px;
+    vertical-align: middle;
+}
+
+.clientside-theme .wpmf-filters-dropdown > a.wpmf-filters-dropdown-button {
+    height: 41px;
+    line-height: 41px;
+    box-shadow: none;
+}
+
 /** hide uploader */
 .media-modal .attachments-browser .uploader-inline {
     display: none;
@@ -1459,6 +1495,34 @@ body:not(.rtl) .wpmf-folder-tree li span[data-files-count]:after {
 .acf-media-modal .wpmf-folder-tree,
 .acf-media-modal .wpmf-folder-tree-resize {
     display: none;
+}
+
+@media screen and (max-width: 375px) {
+    .wpmf-folder-tree {
+        display: none !important;
+    }
+
+    .attachments-browser .attachments {
+        margin-left: 0 !important;
+    }
+
+    #wpmf-wrapper {
+        margin-left: 0 !important;
+    }
+
+    .wpmf-attachment.mdc-list-item {
+        width: 150px !important;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .media-modal ul.attachments {
+        top: 100px;
+    }
+}
+
+.media-frame-content[data-columns="2"] .wpmf-attachment {
+    width: 40% !important;
 }
 
 /** right to left style */

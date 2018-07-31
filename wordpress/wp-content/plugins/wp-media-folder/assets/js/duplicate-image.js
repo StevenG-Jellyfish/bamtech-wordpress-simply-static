@@ -30,7 +30,8 @@ let wpmfDuplicateModule;
                     dataType: 'json',
                     data: {
                         action: 'wpmf_duplicate_file',
-                        id: id
+                        id: id,
+                        wpmf_nonce: wpmf.vars.wpmf_nonce
                     },
                     success: function (res) {
                         $('.wpmf_spinner_duplicate').hide();
@@ -62,20 +63,22 @@ let wpmfDuplicateModule;
             /* base on /wp-includes/js/media-views.js */
             var myduplicateForm = wp.media.view.AttachmentsBrowser;
             var form_uplicate = '<a class="wpmf_btn_duplicate">' + wpmf.l18n.duplicate_text + '</a><span class="spinner wpmf_spinner_duplicate"></span><p class="wpmf_message_duplicate"></p>';
-            wp.media.view.AttachmentsBrowser = wp.media.view.AttachmentsBrowser.extend({
-                createSingle: function () {
-                    /* Create duplicate button setting */
-                    myduplicateForm.prototype.createSingle.apply(this, arguments);
-                    var sidebar = this.sidebar;
-                    if (wpmf.vars.wpmf_pagenow !== 'upload.php') {
-                        if (typeof wpmf.vars.duplicate !== 'undefined' && parseInt(wpmf.vars.duplicate) === 1) {
-                            $('.wpmf_btn_duplicate, .wpmf_spinner_duplicate, .wpmf_message_duplicate').remove();
-                            $(sidebar.$el).find('.attachment-info .details').append(form_uplicate);
-                            wpmfDuplicateModule.doEvent();
+            if (typeof myduplicateForm !== "undefined") {
+                wp.media.view.AttachmentsBrowser = wp.media.view.AttachmentsBrowser.extend({
+                    createSingle: function () {
+                        /* Create duplicate button setting */
+                        myduplicateForm.prototype.createSingle.apply(this, arguments);
+                        var sidebar = this.sidebar;
+                        if (wpmf.vars.wpmf_pagenow !== 'upload.php') {
+                            if (typeof wpmf.vars.duplicate !== 'undefined' && parseInt(wpmf.vars.duplicate) === 1) {
+                                $('.wpmf_btn_duplicate, .wpmf_spinner_duplicate, .wpmf_message_duplicate').remove();
+                                $(sidebar.$el).find('.attachment-info .details').append(form_uplicate);
+                                wpmfDuplicateModule.doEvent();
+                            }
                         }
                     }
-                }
-            });
+                });
+            }
 
             /* Create duplicate button when wp smush plugin active*/
             if (wpmf.vars.get_plugin_active.indexOf('wp-smush.php') !== -1) {
@@ -87,67 +90,74 @@ let wpmfDuplicateModule;
                     /**
                      * Add Smush details to attachment.
                      */
-                    wp.media.view.Attachment.Details.TwoColumn = wp.media.view.Attachment.Details.TwoColumn.extend({
-                        render: function () {
-                            // Get Smush status for the image
-                            wpmfAssignMediaTwoColumn.prototype.render.apply(this);
-                            $( document ).ajaxComplete(function( event, xhr, settings ) {
-                                var data = settings.data;
-                                if ( data.indexOf('smush_get_attachment_details') !== -1 ) {
-                                    $('.wpmf_btn_duplicate, .wpmf_spinner_duplicate, .wpmf_message_duplicate').remove();
-                                    $('.details').append(form_uplicate);
-                                    wpmfDuplicateModule.doEvent();
-                                }
-                            });
-                        }
-                    });
+                    if (typeof wpmfAssignMediaTwoColumn !== "undefined") {
+                        wp.media.view.Attachment.Details.TwoColumn = wp.media.view.Attachment.Details.TwoColumn.extend({
+                            render: function () {
+                                // Get Smush status for the image
+                                wpmfAssignMediaTwoColumn.prototype.render.apply(this);
+                                $( document ).ajaxComplete(function( event, xhr, settings ) {
+                                    var data = settings.data;
+                                    if ( data.indexOf('smush_get_attachment_details') !== -1 ) {
+                                        $('.wpmf_btn_duplicate, .wpmf_spinner_duplicate, .wpmf_message_duplicate').remove();
+                                        $('.details').append(form_uplicate);
+                                        wpmfDuplicateModule.doEvent();
+                                    }
+                                });
+                            }
+                        });
+                    }
                 }
             }
 
             /* base on /wp-includes/js/media-views.js */
             var myDuplicate = wp.media.view.Modal;
-            wp.media.view.Modal = wp.media.view.Modal.extend({
-                open: function () {
-                    /* Create duplicate button setting */
-                    myDuplicate.prototype.open.apply(this, arguments);
-                    if (wpmf.vars.wpmf_pagenow === 'upload.php') {
-                        if (typeof wpmf.vars.duplicate !== 'undefined' && parseInt(wpmf.vars.duplicate) === 1) {
-                            setTimeout(function(){
-                                $('.wpmf_btn_duplicate, .wpmf_spinner_duplicate, .wpmf_message_duplicate').remove();
-                                $('.attachment-details .details').append(form_uplicate);
-                                wpmfDuplicateModule.doEvent();
-                            },150);
+            if (typeof myDuplicate !== "undefined") {
+                wp.media.view.Modal = wp.media.view.Modal.extend({
+                    open: function () {
+                        /* Create duplicate button setting */
+                        myDuplicate.prototype.open.apply(this, arguments);
+                        if (wpmf.vars.wpmf_pagenow === 'upload.php') {
+                            if (typeof wpmf.vars.duplicate !== 'undefined' && parseInt(wpmf.vars.duplicate) === 1) {
+                                setTimeout(function(){
+                                    $('.wpmf_btn_duplicate, .wpmf_spinner_duplicate, .wpmf_message_duplicate').remove();
+                                    $('.attachment-details .details').append(form_uplicate);
+                                    wpmfDuplicateModule.doEvent();
+                                },150);
 
+                            }
                         }
                     }
-                }
-            });
+                });
+            }
+
 
             if (wpmf.vars.wpmf_pagenow === 'upload.php') {
                 // create duplicate button when next and prev media items
                 var myEditAttachments = wp.media.view.MediaFrame.EditAttachments;
-                wp.media.view.MediaFrame.EditAttachments = wp.media.view.MediaFrame.EditAttachments.extend({
-                    previousMediaItem: function () {
-                        /* Create duplicate button setting */
-                        myEditAttachments.prototype.previousMediaItem.apply(this, arguments);
-                        if (typeof wpmf.vars.duplicate !== 'undefined' && parseInt(wpmf.vars.duplicate) === 1) {
-                            $('.wpmf_btn_duplicate, .wpmf_spinner_duplicate, .wpmf_message_duplicate').remove();
-                            $('.attachment-details .details').append(form_uplicate);
-                            wpmfDuplicateModule.doEvent();
+                if (typeof myEditAttachments !== "undefined") {
+                    wp.media.view.MediaFrame.EditAttachments = wp.media.view.MediaFrame.EditAttachments.extend({
+                        previousMediaItem: function () {
+                            /* Create duplicate button setting */
+                            myEditAttachments.prototype.previousMediaItem.apply(this, arguments);
+                            if (typeof wpmf.vars.duplicate !== 'undefined' && parseInt(wpmf.vars.duplicate) === 1) {
+                                $('.wpmf_btn_duplicate, .wpmf_spinner_duplicate, .wpmf_message_duplicate').remove();
+                                $('.attachment-details .details').append(form_uplicate);
+                                wpmfDuplicateModule.doEvent();
 
-                        }
-                    },
+                            }
+                        },
 
-                    nextMediaItem: function () {
-                        /* Create duplicate button setting */
-                        myEditAttachments.prototype.nextMediaItem.apply(this, arguments);
-                        if (typeof wpmf.vars.duplicate !== 'undefined' && parseInt(wpmf.vars.duplicate) === 1) {
-                            $('.wpmf_btn_duplicate, .wpmf_spinner_duplicate, .wpmf_message_duplicate').remove();
-                            $('.attachment-details .details').append(form_uplicate);
-                            wpmfDuplicateModule.doEvent();
+                        nextMediaItem: function () {
+                            /* Create duplicate button setting */
+                            myEditAttachments.prototype.nextMediaItem.apply(this, arguments);
+                            if (typeof wpmf.vars.duplicate !== 'undefined' && parseInt(wpmf.vars.duplicate) === 1) {
+                                $('.wpmf_btn_duplicate, .wpmf_spinner_duplicate, .wpmf_message_duplicate').remove();
+                                $('.attachment-details .details').append(form_uplicate);
+                                wpmfDuplicateModule.doEvent();
+                            }
                         }
-                    }
-                });
+                    });
+                }
             }
         }
     });
