@@ -1,4 +1,4 @@
-FROM wordpress:4.8-php7.1-fpm-alpine
+FROM gcr.io/jellyfish-development-167809/wordpress-wordpress:0.0.0.17
 
 RUN echo 'http://alpine.gliderlabs.com/alpine/edge/main' > /etc/apk/repositories \
     && echo 'http://alpine.gliderlabs.com/alpine/edge/community' >> /etc/apk/repositories \
