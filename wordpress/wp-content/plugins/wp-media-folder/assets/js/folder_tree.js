@@ -171,7 +171,7 @@ var wpmfFoldersTreeModule = void 0;
                     }
                 }
             };
-            loadChildren(0);
+            loadChildren(parseInt(wpmf.vars.term_root_id));
 
             // Finally save it to the global var
             wpmfFoldersTreeModule.categories = folders_ordered_deep;
@@ -299,7 +299,7 @@ var wpmfFoldersTreeModule = void 0;
             var ij = 0;
             var content = ''; // Final tree view content
             // render search folder box
-            var search_folder = '\n            <div class="wpmf-expandable-search mdl-cell--hide-phone">\n                <form action="#">\n                  <input type="search" class="wpmf_search_folder" placeholder="' + wpmf.l18n.search_folder + '" size="1">\n                </form>\n                <i class="material-icons searchfolder">search</i>\n            </div>\n            ';
+            var search_folder = '\n            <div class="wpmf-expandable-search mdl-cell--hide-phone">\n                <form action="#">\n                  <input type="text" class="wpmf_search_folder" placeholder="' + wpmf.l18n.search_folder + '" size="1">\n                </form>\n                <i class="material-icons searchfolder">search</i>\n            </div>\n            ';
 
             // get last status folder tree
             var lastStatusTree = wpmfFoldersModule.getCookie('lastStatusTree_' + wpmf.vars.site_url);
@@ -514,7 +514,7 @@ var wpmfFoldersTreeModule = void 0;
                 // Check on window scroll event
                 $(window).on('scroll', function (e) {
                     // Check if the window has been scrolled more than the top position of the folder tree
-                    if (original_top_position < this.scrollY + 40 && window.outerHeight - window.innerHeight < 100) {
+                    if (original_top_position < this.scrollY + 40) {
                         // Check if folder tree was already in normal position
                         if (wpmfFoldersTreeModule.last_scrolling_state !== 'fixed') {
                             if (wpmfFoldersModule.page_type === 'upload-grid') {
@@ -523,7 +523,9 @@ var wpmfFoldersTreeModule = void 0;
                             }
 
                             // Set the folder tree in the fixed position
-                            wpmfFoldersTreeModule.getTreeElement().css('position', 'fixed').css('top', '40px');
+                            if (!$('body').hasClass('rtl')) {
+                                wpmfFoldersTreeModule.getTreeElement().css('position', 'fixed').css('top', '40px');
+                            }
 
                             // Save the state
                             wpmfFoldersTreeModule.last_scrolling_state = 'fixed';

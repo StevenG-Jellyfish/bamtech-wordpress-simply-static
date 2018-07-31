@@ -175,9 +175,7 @@ button::-moz-focus-inner {
 
 .wpmf_mfp-image-holder .wpmf_mfp-close, .wpmf_mfp-iframe-holder .wpmf_mfp-close {
     color: white;
-    right: -6px;
     text-align: right;
-    padding-right: 6px;
     width: 100%;
 }
 

@@ -19,24 +19,25 @@ class WpmfDisplayGallery
         add_shortcode('wpmf_gallery', array($this, 'galleryShortcode'));
         add_filter('post_gallery', array($this, 'galleryDefaultShortcode'), 11, 3);
         add_action('print_media_templates', array($this, 'galleryPrintMediaTemplates'));
-        add_filter("attachment_fields_to_edit", array($this, "galleryAttachmentFieldsToEdit"), 10, 2);
-        add_filter("attachment_fields_to_save", array($this, "galleryAttachmentFieldsToSave"), 10, 2);
-        add_action('wp_ajax_update_link', array($this, 'updateLink'));
+        add_filter('attachment_fields_to_edit', array($this, 'galleryAttachmentFieldsToEdit'), 10, 2);
+        add_filter('attachment_fields_to_save', array($this, 'galleryAttachmentFieldsToSave'), 10, 2);
         add_filter('wp_generate_attachment_metadata', array($this, 'uploadAfter'), 10, 2);
         add_action('delete_post', array($this, 'deleteAttachment'));
         add_filter('widget_media_gallery_instance_schema', array($this, 'mediaGalleryInstanceSchema'), 10, 2);
     }
 
     /**
-     * compatible with elementor plugin
-     * @param $schema
+     * Compatible with elementor plugin
+     *
+     * @param array $schema Params of gallery
+     *
      * @return mixed
      */
     public function mediaGalleryInstanceSchema($schema)
     {
         $schema['display'] = array(
-            'type' => 'string',
-            'enum' => array(
+            'type'    => 'string',
+            'enum'    => array(
                 'default',
                 'masonry',
                 'portfolio',
@@ -46,14 +47,14 @@ class WpmfDisplayGallery
         );
 
         $schema['wpmf_autoinsert'] = array(
-            'type' => 'string',
-            'enum' => array(0,1),
+            'type'    => 'string',
+            'enum'    => array(0, 1),
             'default' => 0
         );
 
         $schema['wpmf_orderby'] = array(
-            'type' => 'string',
-            'enum' => array(
+            'type'    => 'string',
+            'enum'    => array(
                 'post__in',
                 'rand',
                 'title',
@@ -63,8 +64,8 @@ class WpmfDisplayGallery
         );
 
         $schema['wpmf_order'] = array(
-            'type' => 'string',
-            'enum' => array(
+            'type'    => 'string',
+            'enum'    => array(
                 'ASC',
                 'DESC'
             ),
@@ -75,7 +76,9 @@ class WpmfDisplayGallery
     }
 
     /**
-     * includes styles and some scripts
+     * Includes styles and some scripts
+     *
+     * @return void
      */
     public function galleryScripts()
     {
@@ -123,27 +126,30 @@ class WpmfDisplayGallery
     /**
      * Localize a script.
      * Works only if the script has already been added.
+     *
      * @return array
      */
     public function localizeScript()
     {
         $option_usegellery_lightbox = get_option('wpmf_usegellery_lightbox');
-        $option_current_theme = get_option('current_theme');
-        $slider_animation = get_option('wpmf_slider_animation');
+        $option_current_theme       = get_option('current_theme');
+        $slider_animation           = get_option('wpmf_slider_animation');
         return array(
             'wpmf_lightbox_gallery' => (int) $option_usegellery_lightbox,
-            'wpmf_current_theme' => $option_current_theme,
-            'slider_animation' => $slider_animation
+            'wpmf_current_theme'    => $option_current_theme,
+            'slider_animation'      => $slider_animation
         );
     }
 
     /**
-     * includes some scripts
+     * Includes some scripts
+     *
+     * @return void
      */
     public function galleryEnqueueAdminScripts()
     {
         global $pagenow;
-        if ($pagenow != 'upload.php') {
+        if ($pagenow !== 'upload.php') {
             wp_enqueue_script(
                 'wpmf-gallery-admin-js',
                 plugins_url('assets/js/display-gallery/admin_gallery.js', dirname(__FILE__)),
@@ -154,11 +160,18 @@ class WpmfDisplayGallery
         }
     }
 
+    /**
+     * Render gallery by shortcode
+     *
+     * @param array $attr All attribute in shortcode
+     *
+     * @return string
+     */
     public function gallery($attr)
     {
         $post = get_post();
         static $instance = 0;
-        $instance++;
+        $instance ++;
         if (isset($attr['orderby'])) {
             $attr['orderby'] = sanitize_sql_orderby($attr['orderby']);
             if (!$attr['orderby']) {
@@ -166,31 +179,47 @@ class WpmfDisplayGallery
             }
         }
 
-        extract(shortcode_atts(array(
-            'order' => 'ASC', 'orderby' => 'menu_order ID', 'id' => $post ? $post->ID : 0,
-            'columns' => 3, 'gutterwidth' => '5', 'link' => 'post',
-            'size' => 'thumbnail', 'targetsize' => 'large',
-            'display' => 'default', 'wpmf_orderby' => 'post__in', 'wpmf_order' => 'ASC',
-            'customlink' => 0, 'bottomspace' => 'default', 'hidecontrols' => 'false',
-            'class' => '', 'include' => '', 'exclude' => '', 'wpmf_folder_id' => 0,
-            'wpmf_autoinsert' => 0), $attr, 'gallery'));
+        $attrs = shortcode_atts(array(
+            'order'           => 'ASC',
+            'orderby'         => 'menu_order ID',
+            'id'              => $post ? $post->ID : 0,
+            'columns'         => 3,
+            'gutterwidth'     => '5',
+            'link'            => 'post',
+            'size'            => 'thumbnail',
+            'targetsize'      => 'large',
+            'display'         => 'default',
+            'wpmf_orderby'    => 'post__in',
+            'wpmf_order'      => 'ASC',
+            'customlink'      => 0,
+            'bottomspace'     => 'default',
+            'hidecontrols'    => 'false',
+            'class'           => '',
+            'include'         => '',
+            'exclude'         => '',
+            'wpmf_folder_id'  => 0,
+            'wpmf_autoinsert' => 0
+        ), $attr, 'gallery');
 
+        foreach ($attrs as $attr_key => $attr_value) {
+            ${$attr_key} = $attr_value;
+        }
 
         $custom_class = trim($class);
-        $id = intval($id);
-        $orderby = $wpmf_orderby;
-        $order = $wpmf_order;
-        if ('RAND' == $order) {
+        $id           = intval($id);
+        $orderby      = $wpmf_orderby;
+        $order        = $wpmf_order;
+        if ('RAND' === $order) {
             $orderby = 'none';
         }
 
-        if (isset($wpmf_autoinsert) && $wpmf_autoinsert == 1 && isset($wpmf_folder_id)) {
+        if (isset($wpmf_autoinsert) && (int) $wpmf_autoinsert === 1 && isset($wpmf_folder_id)) {
             $root_id = (int) get_option('wpmf_folder_root_id');
-            if ($wpmf_folder_id == 0) {
-                $terms = get_categories(
+            if ((int) $wpmf_folder_id === 0) {
+                $terms     = get_categories(
                     array(
-                        'taxonomy' => WPMF_TAXO,
-                        'hide_empty' => false,
+                        'taxonomy'     => WPMF_TAXO,
+                        'hide_empty'   => false,
                         'hierarchical' => false
                     )
                 );
@@ -204,49 +233,49 @@ class WpmfDisplayGallery
                     unset($unsetTags[$key]);
                 }
 
-                $args = array(
-                    'posts_per_page' => -1,
-                    'post_status' => 'any',
-                    'post_type' => 'attachment',
-                    'order' => $order,
-                    'orderby' => $orderby,
-                    'tax_query' => array(
+                $args         = array(
+                    'posts_per_page' => - 1,
+                    'post_status'    => 'any',
+                    'post_type'      => 'attachment',
+                    'order'          => $order,
+                    'orderby'        => $orderby,
+                    'tax_query'      => array(
                         'relation' => 'OR',
                         array(
-                            'taxonomy' => WPMF_TAXO,
-                            'field' => 'term_id',
-                            'terms' => $unsetTags,
-                            'operator' => 'NOT IN',
+                            'taxonomy'         => WPMF_TAXO,
+                            'field'            => 'term_id',
+                            'terms'            => $unsetTags,
+                            'operator'         => 'NOT IN',
                             'include_children' => false
                         ),
                         array(
-                            'taxonomy' => WPMF_TAXO,
-                            'field' => 'term_id',
-                            'terms' => (int) $root_id,
+                            'taxonomy'         => WPMF_TAXO,
+                            'field'            => 'term_id',
+                            'terms'            => (int) $root_id,
                             'include_children' => false
                         )
                     )
                 );
-                $query = new WP_Query($args);
+                $query        = new WP_Query($args);
                 $_attachments = $query->get_posts();
             } else {
-                $args = array(
-                    'posts_per_page' => -1,
-                    'post_status' => 'any',
-                    'post_type' => 'attachment',
-                    'order' => $order,
-                    'orderby' => $orderby,
-                    'tax_query' => array(
+                $args         = array(
+                    'posts_per_page' => - 1,
+                    'post_status'    => 'any',
+                    'post_type'      => 'attachment',
+                    'order'          => $order,
+                    'orderby'        => $orderby,
+                    'tax_query'      => array(
                         array(
-                            'taxonomy' => WPMF_TAXO,
-                            'field' => 'term_id',
-                            'terms' => (int)$wpmf_folder_id,
-                            'operator' => 'IN',
+                            'taxonomy'         => WPMF_TAXO,
+                            'field'            => 'term_id',
+                            'terms'            => (int) $wpmf_folder_id,
+                            'operator'         => 'IN',
                             'include_children' => false
                         )
                     )
                 );
-                $query = new WP_Query($args);
+                $query        = new WP_Query($args);
                 $_attachments = $query->get_posts();
             }
 
@@ -258,39 +287,39 @@ class WpmfDisplayGallery
             if (!empty($include)) {
                 $_attachments = get_posts(
                     array(
-                        'include' => $include,
-                        'post_status' => 'inherit',
-                        'post_type' => 'attachment',
+                        'include'        => $include,
+                        'post_status'    => 'inherit',
+                        'post_type'      => 'attachment',
                         'post_mime_type' => 'image',
-                        'order' => $order,
-                        'orderby' => $orderby
+                        'order'          => $order,
+                        'orderby'        => $orderby
                     )
                 );
-                $attachments = array();
+                $attachments  = array();
                 foreach ($_attachments as $key => $val) {
                     $attachments[$val->ID] = $_attachments[$key];
                 }
             } elseif (!empty($exclude)) {
                 $attachments = get_children(
                     array(
-                        'post_parent' => $id,
-                        'exclude' => $exclude,
-                        'post_status' => 'inherit',
-                        'post_type' => 'attachment',
+                        'post_parent'    => $id,
+                        'exclude'        => $exclude,
+                        'post_status'    => 'inherit',
+                        'post_type'      => 'attachment',
                         'post_mime_type' => 'image',
-                        'order' => $order,
-                        'orderby' => $orderby
+                        'order'          => $order,
+                        'orderby'        => $orderby
                     )
                 );
             } else {
                 $attachments = get_children(
                     array(
-                        'post_parent' => $id,
-                        'post_status' => 'inherit',
-                        'post_type' => 'attachment',
+                        'post_parent'    => $id,
+                        'post_status'    => 'inherit',
+                        'post_type'      => 'attachment',
                         'post_mime_type' => 'image',
-                        'order' => $order,
-                        'orderby' => $orderby
+                        'order'          => $order,
+                        'orderby'        => $orderby
                     )
                 );
             }
@@ -311,13 +340,13 @@ class WpmfDisplayGallery
 
         $columns = intval($columns);
 
-        $selector = "gallery-{$instance}";
+        $selector   = 'gallery-' . $instance;
         $size_class = sanitize_html_class($size);
-        $customlink = 1 == $customlink ? true : false;
-        $class = array();
-        $class[] = 'gallery';
+        $customlink = 1 === $customlink ? true : false;
+        $class      = array();
+        $class[]    = 'gallery';
 
-        if ($link == 'file' || $link == 'none') {
+        if ($link === 'file' || $link === 'none') {
             $customlink = false;
         } else {
             $customlink = true;
@@ -327,11 +356,11 @@ class WpmfDisplayGallery
         }
 
         if (!$customlink) {
-            $class[] = "gallery-link-{$link}";
+            $class[] = 'gallery-link-' . $link;
         }
 
 
-        if ($link == 'file') {
+        if ($link === 'file') {
             wp_enqueue_script('wpmf-gallery-popup');
         }
 
@@ -354,15 +383,15 @@ class WpmfDisplayGallery
         );
 
         switch ($display) {
-            case "slider":
+            case 'slider':
                 require(WP_MEDIA_FOLDER_PLUGIN_DIR . 'themes-gallery/gallery-slider.php');
                 break;
 
-            case "masonry":
+            case 'masonry':
                 require(WP_MEDIA_FOLDER_PLUGIN_DIR . 'themes-gallery/gallery-mansory.php');
                 break;
 
-            case "portfolio":
+            case 'portfolio':
                 require(WP_MEDIA_FOLDER_PLUGIN_DIR . 'themes-gallery/gallery-portfolio.php');
                 break;
 
@@ -376,9 +405,11 @@ class WpmfDisplayGallery
 
     /**
      * Display gallery on frontend
-     * @param $blank
-     * @param array $attr Attributes of the gallery shortcode.
-     * @return string $output   The gallery output. Default empty.
+     *
+     * @param string $blank The current output
+     * @param array  $attr  Attributes of the gallery shortcode.
+     *
+     * @return string $output The gallery output. Default empty.
      */
     public function galleryDefaultShortcode($blank, $attr)
     {
@@ -388,7 +419,9 @@ class WpmfDisplayGallery
 
     /**
      * Display gallery from folder on frontend
+     *
      * @param array $attr Attributes of the gallery shortcode.
+     *
      * @return string $output   The gallery output. Default empty.
      */
     public function galleryShortcode($attr)
@@ -399,12 +432,14 @@ class WpmfDisplayGallery
 
     /**
      * Generate html attachment link
-     * @param int $id id of image
-     * @param string $size size of image
-     * @param bool $permalink
-     * @param string $targetsize Optional. Image size. Accepts any valid image size, or an array of width
-     * @param bool $customlink
-     * @param string $target target of link
+     *
+     * @param integer $id         Id of image
+     * @param string  $size       Size of image
+     * @param boolean $permalink  Permalink of current image
+     * @param string  $targetsize Optional. Image size. Accepts any valid image size, or an array of width
+     * @param boolean $customlink Custom link URL
+     * @param string  $target     Target of link
+     *
      * @return mixed|string
      */
     public function getAttachmentLink(
@@ -415,27 +450,28 @@ class WpmfDisplayGallery
         $customlink = false,
         $target = '_self'
     ) {
-        $id = intval($id);
+        $id    = intval($id);
         $_post = get_post($id);
 
-        if (empty($_post) || ('attachment' != $_post->post_type) || !$url = wp_get_attachment_url($_post->ID)) {
+        $url = wp_get_attachment_url($_post->ID);
+        if (empty($_post) || ('attachment' !== $_post->post_type) || !$url) {
             return __('Missing Attachment', 'wpmf');
         }
 
         $lb = 0;
         if ($customlink) {
             $url = get_post_meta($_post->ID, _WPMF_GALLERY_PREFIX . 'custom_image_link', true);
-            if ($url == '') {
+            if ($url === '') {
                 $url = get_attachment_link($_post->ID);
             }
         } elseif ($permalink) {
             $url = get_attachment_link($_post->ID);
         } elseif ($targetsize) {
-            if (get_post_meta($id, _WPMF_GALLERY_PREFIX . 'custom_image_link', true) != '') {
-                $lb = 0;
+            if (get_post_meta($id, _WPMF_GALLERY_PREFIX . 'custom_image_link', true) !== '') {
+                $lb  = 0;
                 $url = get_post_meta($_post->ID, _WPMF_GALLERY_PREFIX . 'custom_image_link', true);
             } else {
-                $lb = 1;
+                $lb  = 1;
                 $img = wp_get_attachment_image_src($_post->ID, $targetsize);
                 $url = $img[0];
             }
@@ -443,18 +479,18 @@ class WpmfDisplayGallery
 
         $title = esc_attr($_post->post_title);
 
-        if ($size && 'none' != $size) {
+        if ($size && 'none' !== $size) {
             $text = wp_get_attachment_image($id, $size, false, array('data-type' => 'wpmfgalleryimg'));
         } else {
             $text = '';
         }
 
-        if (trim($text) == '') {
+        if (trim($text) === '') {
             $text = $_post->post_title;
         }
 
         $current_theme = get_option('current_theme');
-        if (isset($current_theme) && $current_theme == 'Gleam') {
+        if (isset($current_theme) && $current_theme === 'Gleam') {
             $tclass = 'fancybox';
         } else {
             $tclass = '';
@@ -465,12 +501,12 @@ class WpmfDisplayGallery
             $class = $tclass . ' not_video';
         } else {
             $class = $tclass . ' isvideo';
-            $url = $remote_video;
+            $url   = $remote_video;
         }
 
         return apply_filters(
             'wp_get_attachment_link',
-            "<a class='$class' data-lightbox='$lb' href='$url' title='$title' target='$target'>$text</a>",
+            '<a class="' . $class . '" data-lightbox="' . $lb . '" href="' . $url . '" title="' . $title . '" target="' . $target . '">' . $text . '</a>',
             $id,
             $size,
             $permalink,
@@ -481,24 +517,31 @@ class WpmfDisplayGallery
 
     /**
      * Display settings gallery when custom gallery in back-end
+     *
+     * @return void
      */
     public function galleryPrintMediaTemplates()
     {
+        if (isset($_GET['action']) && $_GET['action'] === 'elementor') { // phpcs:ignore WordPress.CSRF.NonceVerification.NoNonceVerification -- No action, nonce is not required
+            return;
+        }
+
+        $cf            = wpmfGetOption('gallery_settings');
         $display_types = array(
-            'default' => __('Default', 'wpmf'),
-            'masonry' => __('Masonry', 'wpmf'),
+            'default'   => __('Default', 'wpmf'),
+            'masonry'   => __('Masonry', 'wpmf'),
             'portfolio' => __('Portfolio', 'wpmf'),
-            'slider' => __('Slider', 'wpmf'),
+            'slider'    => __('Slider', 'wpmf'),
         );
         ?>
 
         <script type="text/html" id="tmpl-wpmf-gallery-settings">
             <label class="setting">
-                <span><?php _e('Gallery themes', 'wpmf'); ?></span>
+                <span><?php esc_html_e('Gallery themes', 'wpmf'); ?></span>
             </label>
 
             <label class="setting">
-                <select class="display" name="display" data-setting="display">
+                <select class="display wpmf_display" name="display" data-setting="display">
                     <?php foreach ($display_types as $key => $value) : ?>
                         <option
                                 value="<?php echo esc_attr($key); ?>" <?php selected($key, 'default'); ?>>
@@ -508,42 +551,42 @@ class WpmfDisplayGallery
             </label>
 
             <label class="setting">
-                <span><?php _e('Columns', 'wpmf'); ?></span>
+                <span><?php esc_html_e('Columns', 'wpmf'); ?></span>
             </label>
 
             <label class="setting">
-                <select class="columns" name="columns" data-setting="columns">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3" selected>3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
+                <select class="columns wpmf_columns" name="columns" data-setting="columns">
+                    <option value="1" <?php selected($cf['theme']['default_theme']['columns'], 1) ?>>1</option>
+                    <option value="2" <?php selected($cf['theme']['default_theme']['columns'], 2) ?>>2</option>
+                    <option value="3" <?php selected($cf['theme']['default_theme']['columns'], 3) ?>>3</option>
+                    <option value="4" <?php selected($cf['theme']['default_theme']['columns'], 4) ?>>4</option>
+                    <option value="5" <?php selected($cf['theme']['default_theme']['columns'], 5) ?>>5</option>
+                    <option value="6" <?php selected($cf['theme']['default_theme']['columns'], 6) ?>>6</option>
+                    <option value="7" <?php selected($cf['theme']['default_theme']['columns'], 7) ?>>7</option>
+                    <option value="8" <?php selected($cf['theme']['default_theme']['columns'], 8) ?>>8</option>
+                    <option value="9" <?php selected($cf['theme']['default_theme']['columns'], 9) ?>>9</option>
                 </select>
             </label>
 
             <label class="setting size">
-                <span><?php _e('Gallery image size', 'wpmf'); ?></span>
+                <span><?php esc_html_e('Gallery image size', 'wpmf'); ?></span>
             </label>
 
             <label class="setting size">
-                <select class="size" name="size" data-setting="size">
+                <select class="size wpmf_size" name="size" data-setting="size">
                     <?php
                     $sizes_value = json_decode(get_option('wpmf_gallery_image_size_value'));
-                    $sizes = apply_filters('image_size_names_choose', array(
+                    $sizes       = apply_filters('image_size_names_choose', array(
                         'thumbnail' => __('Thumbnail', 'wpmf'),
-                        'medium' => __('Medium', 'wpmf'),
-                        'large' => __('Large', 'wpmf'),
-                        'full' => __('Full Size', 'wpmf'),
+                        'medium'    => __('Medium', 'wpmf'),
+                        'large'     => __('Large', 'wpmf'),
+                        'full'      => __('Full Size', 'wpmf'),
                     ));
                     ?>
 
                     <?php foreach ($sizes_value as $key) : ?>
-                        <option
-                                value="<?php echo esc_attr($key); ?>" <?php selected($key, 'thumbnail'); ?>>
+                        <option value="<?php echo esc_attr($key); ?>"
+                            <?php selected($cf['theme']['default_theme']['size'], esc_attr($key)); ?>>
                             <?php echo esc_html($sizes[$key]); ?></option>
                     <?php endforeach; ?>
 
@@ -551,72 +594,99 @@ class WpmfDisplayGallery
             </label>
 
             <label class="setting">
-                <span><?php _e('Lightbox size', 'wpmf'); ?></span>
+                <span><?php esc_html_e('Lightbox size', 'wpmf'); ?></span>
             </label>
 
             <label class="setting">
-                <select class="targetsize" name="targetsize" data-setting="targetsize">
+                <select class="targetsize wpmf_targetsize" name="targetsize" data-setting="targetsize">
                     <?php
                     $sizes = array(
                         'thumbnail' => __('Thumbnail', 'wpmf'),
-                        'medium' => __('Medium', 'wpmf'),
-                        'large' => __('Large', 'wpmf'),
-                        'full' => __('Full Size', 'wpmf'),
+                        'medium'    => __('Medium', 'wpmf'),
+                        'large'     => __('Large', 'wpmf'),
+                        'full'      => __('Full Size', 'wpmf'),
                     );
                     ?>
 
                     <?php foreach ($sizes as $key => $name) : ?>
-                        <option
-                                value="<?php echo esc_attr($key); ?>" <?php selected($key, 'large'); ?>>
+                        <option value="<?php echo esc_attr($key); ?>"
+                            <?php selected($cf['theme']['default_theme']['targetsize'], esc_attr($key)); ?>>
                             <?php echo esc_html($name); ?></option>
                     <?php endforeach; ?>
                 </select>
             </label>
 
             <label class="setting">
-                <span><?php _e('Action on click', 'wpmf'); ?></span>
+                <span><?php esc_html_e('Action on click', 'wpmf'); ?></span>
             </label>
 
             <label class="setting">
-                <select class="link-to" name="link" data-setting="link">
-                    <option value="file" selected><?php _e('Lightbox', 'wpmf'); ?></option>
-                    <option value="post"><?php _e('Attachment Page', 'wpmf'); ?></option>
-                    <option value="none"><?php _e('None', 'wpmf'); ?></option>
+                <select class="link-to wpmf_link-to" name="link" data-setting="link">
+                    <option value="file"
+                        <?php selected($cf['theme']['default_theme']['link'], 'file'); ?>>
+                        <?php esc_html_e('Lightbox', 'wpmf'); ?>
+                    </option>
+                    <option value="post"
+                        <?php selected($cf['theme']['default_theme']['link'], 'post'); ?>>
+                        <?php esc_html_e('Attachment Page', 'wpmf'); ?>
+                    </option>
+                    <option value="none"
+                        <?php selected($cf['theme']['default_theme']['link'], 'none'); ?>>
+                        <?php esc_html_e('None', 'wpmf'); ?>
+                    </option>
                 </select>
             </label>
 
             <label class="setting">
-                <span><?php _e('Auto insert image in folder', 'wpmf'); ?></span>
+                <span><?php esc_html_e('Auto insert image in folder', 'wpmf'); ?></span>
             </label>
 
             <label class="setting">
                 <select class="wpmf_autoinsert" name="wpmf_autoinsert" data-setting="wpmf_autoinsert">
-                    <option value="0" selected><?php _e('No', 'wpmf'); ?></option>
-                    <option value="1"><?php _e('Yes', 'wpmf'); ?></option>
+                    <option value="0" selected><?php esc_html_e('No', 'wpmf'); ?></option>
+                    <option value="1"><?php esc_html_e('Yes', 'wpmf'); ?></option>
                 </select>
             </label>
 
             <label class="setting">
-                <span><?php _e('Order by', 'wpmf'); ?></span>
+                <span><?php esc_html_e('Order by', 'wpmf'); ?></span>
             </label>
 
             <label class="setting">
                 <select class="wpmf_orderby" name="wpmf_orderby" data-setting="wpmf_orderby">
-                    <option value="post__in" selected><?php _e('Custom', 'wpmf'); ?></option>
-                    <option value="rand"><?php _e('Random', 'wpmf'); ?></option>
-                    <option value="title"><?php _e('Title', 'wpmf'); ?></option>
-                    <option value="date"><?php _e('Date', 'wpmf'); ?></option>
+                    <option value="post__in"
+                        <?php selected($cf['theme']['default_theme']['orderby'], 'post__in'); ?>>
+                        <?php esc_html_e('Custom', 'wpmf'); ?>
+                    </option>
+                    <option value="rand"
+                        <?php selected($cf['theme']['default_theme']['orderby'], 'rand'); ?>>
+                        <?php esc_html_e('Random', 'wpmf'); ?>
+                    </option>
+                    <option value="title"
+                        <?php selected($cf['theme']['default_theme']['orderby'], 'title'); ?>>
+                        <?php esc_html_e('Title', 'wpmf'); ?>
+                    </option>
+                    <option value="date"
+                        <?php selected($cf['theme']['default_theme']['orderby'], 'date'); ?>>
+                        <?php esc_html_e('Date', 'wpmf'); ?>
+                    </option>
                 </select>
             </label>
 
             <label class="setting">
-                <span><?php _e('Order', 'wpmf'); ?></span>
+                <span><?php esc_html_e('Order', 'wpmf'); ?></span>
             </label>
 
             <label class="setting">
                 <select class="wpmf_order" name="wpmf_order" data-setting="wpmf_order">
-                    <option value="ASC" selected><?php _e('Ascending', 'wpmf'); ?></option>
-                    <option value="DESC"><?php _e('Descending', 'wpmf'); ?></option>
+                    <option value="ASC"
+                        <?php selected($cf['theme']['default_theme']['order'], 'ASC'); ?>>
+                        <?php esc_html_e('Ascending', 'wpmf'); ?>
+                    </option>
+                    <option value="DESC"
+                        <?php selected($cf['theme']['default_theme']['order'], 'DESC'); ?>>
+                        <?php esc_html_e('Descending', 'wpmf'); ?>
+                    </option>
                 </select>
             </label>
 
@@ -630,21 +700,34 @@ class WpmfDisplayGallery
     /**
      * Add custom field for attachment
      * Based on /wp-admin/includes/media.php
-     * @param array $form_fields An array of attachment form fields.
-     * @param WP_Post $post The WP_Post attachment object.
+     *
+     * @param array   $form_fields An array of attachment form fields.
+     * @param WP_Post $post        The WP_Post attachment object.
+     *
      * @return mixed $form_fields
      */
     public function galleryAttachmentFieldsToEdit($form_fields, $post)
     {
-        $target_value = get_post_meta($post->ID, '_gallery_link_target', true);
+        $form_fields['wpmf_gallery_custom_image_link'] = array(
+            'label' => __('Image gallery link to', 'wpmf'),
+            'input' => 'html',
+            'html'  => '<input type="text" class="text"
+             id="attachments-' . $post->ID . '-wpmf_gallery_custom_image_link"
+              name="attachments[' . $post->ID . '][wpmf_gallery_custom_image_link]"
+               value="' . get_post_meta($post->ID, _WPMF_GALLERY_PREFIX . 'custom_image_link', true) . '">
+                <button type="button" id="link-btn"
+                 class="link-btn"><i class="zmdi zmdi-link wpmf-zmdi-link"></i></button>'
+        );
+
+        $target_value                       = get_post_meta($post->ID, '_gallery_link_target', true);
         $form_fields['gallery_link_target'] = array(
             'label' => __('Link target', 'wpmf'),
             'input' => 'html',
-            'html' => '
+            'html'  => '
                         <select name="attachments[' . $post->ID . '][gallery_link_target]"
                          id="attachments[' . $post->ID . '][gallery_link_target]">
                                 <option value="">' . __('Same Window', 'wpmf') . '</option>
-                                <option value="_blank"' . ($target_value == '_blank' ? ' selected="selected"' : '') . '>
+                                <option value="_blank"' . ($target_value === '_blank' ? ' selected="selected"' : '') . '>
                                 ' . __('New Window', 'wpmf') . '</option>
                         </select>'
         );
@@ -655,8 +738,10 @@ class WpmfDisplayGallery
     /**
      * Save custom field for attachment
      * Based on /wp-admin/includes/media.php
-     * @param array $post An array of post data.
+     *
+     * @param array $post       An array of post data.
      * @param array $attachment An array of attachment metadata.
+     *
      * @return mixed $post
      */
     public function galleryAttachmentFieldsToSave($post, $attachment)
@@ -677,28 +762,15 @@ class WpmfDisplayGallery
     }
 
     /**
-     * Ajax update link for attachment
-     */
-    public function updateLink()
-    {
-        if (!current_user_can('upload_files')) {
-            wp_send_json(false);
-        }
-        $attachment_id = $_POST['id'];
-        update_post_meta($attachment_id, '_wpmf_gallery_custom_image_link', esc_url_raw($_POST['link']));
-        update_post_meta($attachment_id, '_gallery_link_target', $_POST['link_target']);
-        $link = get_post_meta($attachment_id, '_wpmf_gallery_custom_image_link');
-        $target = get_post_meta($attachment_id, '_gallery_link_target');
-        wp_send_json(array('link' => $link, 'target' => $target));
-    }
-
-    /**
      * When use 'auto insert image from folder' feature , do Ajax update gallery when delete attachment
-     * @param $pid : id of post
+     *
+     * @param integer $pid Id of post
+     *
+     * @return void
      */
     public function deleteAttachment($pid)
     {
-        $post_type = get_post_type($pid);
+        $post_type  = get_post_type($pid);
         $post_types = get_post_types(array('public' => true, 'exclude_from_search' => false));
         if (in_array($post_type, $post_types)) {
             $this->updateGallery();
@@ -708,8 +780,10 @@ class WpmfDisplayGallery
     /**
      * When use 'auto insert image from folder' feature , do Ajax update gallery after upload
      * Base on /wp-admin/includes/image.php
-     * @param array $metadata An array of attachment meta data.
-     * @param int $attachment_id Current attachment ID.
+     *
+     * @param array   $metadata      An array of attachment meta data.
+     * @param integer $attachment_id Current attachment ID.
+     *
      * @return mixed $metadata
      */
     public function uploadAfter($metadata, $attachment_id)
@@ -719,15 +793,17 @@ class WpmfDisplayGallery
     }
 
     /**
-     * get all images id in root folder
-     * @param $gallery
+     * Get all images id in root folder
+     *
+     * @param array $gallery Gallery params
+     *
      * @return array
      */
     public function autoInsertGalleryFolder($gallery)
     {
-        $root_id = (int)get_option('wpmf_folder_root_id');
-        $terms = get_categories(array('hide_empty' => false, 'taxonomy' => WPMF_TAXO));
-        $cats = array();
+        $root_id = (int) get_option('wpmf_folder_root_id');
+        $terms   = get_categories(array('hide_empty' => false, 'taxonomy' => WPMF_TAXO));
+        $cats    = array();
         foreach ($terms as $term) {
             if (!empty($term->term_id)) {
                 $cats[] = $term->term_id;
@@ -739,67 +815,69 @@ class WpmfDisplayGallery
             unset($cats[$key]);
         }
 
-        $args = array(
-            'posts_per_page' => -1,
-            'post_type' => 'attachment',
-            'fields' => 'ids',
-            'post_status' => 'any',
-            'orderby' => isset($gallery['wpmf_orderby'])?$gallery['wpmf_orderby']:'post__in',
-            'order' => isset($gallery['wpmf_order'])?$gallery['wpmf_order']:'ASC',
-            'tax_query' => array(
+        $args   = array(
+            'posts_per_page' => - 1,
+            'post_type'      => 'attachment',
+            'fields'         => 'ids',
+            'post_status'    => 'any',
+            'orderby'        => isset($gallery['wpmf_orderby']) ? $gallery['wpmf_orderby'] : 'post__in',
+            'order'          => isset($gallery['wpmf_order']) ? $gallery['wpmf_order'] : 'ASC',
+            'tax_query'      => array(
                 'relation' => 'OR',
                 array(
                     'taxonomy' => WPMF_TAXO,
-                    'field' => 'term_id',
-                    'terms' => $cats,
+                    'field'    => 'term_id',
+                    'terms'    => $cats,
                     'operator' => 'NOT IN'
                 ),
                 array(
                     'taxonomy' => WPMF_TAXO,
-                    'field' => 'term_id',
-                    'terms' => $root_id,
+                    'field'    => 'term_id',
+                    'terms'    => $root_id,
                     'operator' => 'IN'
                 )
             ),
         );
-        $query = new WP_Query($args);
+        $query  = new WP_Query($args);
         $allimg = $query->get_posts();
         return $allimg;
     }
 
     /**
      * Get all images id in current folder
-     * @param array $gallery current gallery
+     *
+     * @param array $gallery Current gallery params
+     *
      * @return array $allimg array new list image gallery
      */
     public function uploadUpdatePost($gallery)
     {
-        $folder_ids = explode(',', $gallery['wpmf_folder_id']);
-        $imgs_root = array();
+        $folder_ids  = explode(',', $gallery['wpmf_folder_id']);
+        $imgs_root   = array();
         $img_subroot = array();
         foreach ($folder_ids as $folder_id) {
-            if (isset($folder_id) && $folder_id != '') {
-                if ($folder_id != 0) {
-                    $args = array(
-                        'posts_per_page' => -1,
-                        'post_type' => 'attachment',
-                        'fields' => 'ids',
-                        'post_status' => 'any',
-                        'orderby' => isset($gallery['wpmf_orderby'])?$gallery['wpmf_orderby']:'post__in',
-                        'order' => isset($gallery['wpmf_order'])?$gallery['wpmf_order']:'ASC',
-                        'tax_query' => array(
+            if (isset($folder_id) && $folder_id !== '') {
+                if ($folder_id !== 0) {
+                    $args  = array(
+                        'posts_per_page' => - 1,
+                        'post_type'      => 'attachment',
+                        'fields'         => 'ids',
+                        'post_status'    => 'any',
+                        'orderby'        => isset($gallery['wpmf_orderby']) ? $gallery['wpmf_orderby'] : 'post__in',
+                        'order'          => isset($gallery['wpmf_order']) ? $gallery['wpmf_order'] : 'ASC',
+                        'tax_query'      => array(
                             array(
-                                'taxonomy' => WPMF_TAXO,
-                                'field'    => 'term_id',
-                                'terms'    => (int) $folder_id,
+                                'taxonomy'         => WPMF_TAXO,
+                                'field'            => 'term_id',
+                                'terms'            => (int) $folder_id,
                                 'include_children' => false
                             )
                         ),
                     );
                     $query = new WP_Query($args);
-                    $imgs = $query->get_posts();
+                    $imgs  = $query->get_posts();
                     foreach ($imgs as $img) {
-                        if (in_array($img, $img_subroot) == false) {
+                        if (!in_array($img, $img_subroot)) {
                             array_push($img_subroot, $img);
                         }
                     }
@@ -814,7 +892,9 @@ class WpmfDisplayGallery
     }
 
     /**
-     * auto update gallery
+     * Auto update gallery
+     *
+     * @return void
      */
     public function updateGallery()
     {
@@ -829,24 +909,23 @@ class WpmfDisplayGallery
             }
         }
         $post_types = get_post_types(array('public' => true, 'exclude_from_search' => false));
-        $sql = $wpdb->prepare(
-            "SELECT ID,post_content,post_type FROM " . $wpdb->prefix . "posts WHERE post_content LIKE %s ",
-            array('%wpmf_autoinsert="1"%')
-        );
 
-        $posts = $wpdb->get_results($sql);
+        $posts = $wpdb->get_results($wpdb->prepare(
+            'SELECT ID,post_content,post_type FROM ' . $wpdb->prefix . 'posts WHERE post_content LIKE %s ',
+            array('%wpmf_autoinsert="1"%')
+        ));
 
         foreach ($posts as $post) {
             if (!empty($post_types) && !empty($post->post_type) && in_array($post->post_type, $post_types)) {
                 $galleries = get_post_galleries($post->ID, false);
                 foreach ($galleries as $gallery) {
-                    $ids_old = 'ids="' . $gallery['ids'] . '"';
+                    $ids_old       = 'ids="' . $gallery['ids'] . '"';
                     $ids_old_array = explode(',', $gallery['ids']);
                     if (isset($gallery['wpmf_folder_id']) && isset($gallery['wpmf_autoinsert'])
-                        && $gallery['wpmf_autoinsert'] == 1) {
+                        && (int) $gallery['wpmf_autoinsert'] === 1) {
                         $allimages = $this->uploadUpdatePost($gallery);
-                        $ids_new = 'ids="' . trim(implode(',', $allimages), ',') . '"';
-                        if ($allimages != $ids_old_array) {
+                        $ids_new   = 'ids="' . trim(implode(',', $allimages), ',') . '"';
+                        if ($allimages !== $ids_old_array) {
                             $post_content = str_replace($ids_old, $ids_new, $post->post_content);
                             wp_update_post(array('ID' => $post->ID, 'post_content' => $post_content));
                         }

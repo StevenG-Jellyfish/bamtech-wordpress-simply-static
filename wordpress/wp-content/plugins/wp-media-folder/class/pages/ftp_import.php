@@ -9,13 +9,13 @@ defined('ABSPATH') || die('No direct script access allowed!');
             <div class="process_import_ftp" data-w="0"></div>
         </div>
         <input type="button" id="import_button"
-               name="import_folder" value="<?php _e('Import Folder', 'wpmf'); ?>"
+               name="import_folder" value="<?php esc_html_e('Import Folder', 'wpmf'); ?>"
                class="button" style="margin: 10px 0 10px 10px;">
         <span class="spinner" style="float: left;margin: 15px 10px 15px 6px;"></span>
-        <span class="info_import"><?php _e('Imported !', 'wpmf'); ?></span>
+        <span class="info_import"><?php esc_html_e('Imported !', 'wpmf'); ?></span>
     </div>
     <p style="margin-left:10px;" class="description">
-        <?php _e('Import folder structure and media from your
+        <?php esc_html_e('Import folder structure and media from your
          server in the standard WordPress media manager', 'wpmf'); ?>
         <br>7z,bz2,gz,rar,tgz,zip,csv,doc,docx,ods,odt,pdf,
         pps,ppt,pptx,rtf,txt,xls,xlsx,bmp,psd,tif,tiff,mid,

@@ -170,7 +170,7 @@ let wpmfFoldersTreeModule;
                     }
                 }
             };
-            loadChildren(0);
+            loadChildren(parseInt(wpmf.vars.term_root_id));
 
             // Finally save it to the global var
             wpmfFoldersTreeModule.categories = folders_ordered_deep;
@@ -304,7 +304,7 @@ let wpmfFoldersTreeModule;
             let search_folder = `
             <div class="wpmf-expandable-search mdl-cell--hide-phone">
                 <form action="#">
-                  <input type="search" class="wpmf_search_folder" placeholder="${wpmf.l18n.search_folder}" size="1">
+                  <input type="text" class="wpmf_search_folder" placeholder="${wpmf.l18n.search_folder}" size="1">
                 </form>
                 <i class="material-icons searchfolder">search</i>
             </div>
@@ -522,7 +522,7 @@ let wpmfFoldersTreeModule;
                 // Check on window scroll event
                 $(window).on('scroll', function (e) {
                     // Check if the window has been scrolled more than the top position of the folder tree
-                    if (original_top_position < this.scrollY + 40 && (window.outerHeight - window.innerHeight) < 100) {
+                    if (original_top_position < this.scrollY + 40) {
                         // Check if folder tree was already in normal position
                         if (wpmfFoldersTreeModule.last_scrolling_state !== 'fixed') {
                             if (wpmfFoldersModule.page_type === 'upload-grid') {
@@ -531,7 +531,9 @@ let wpmfFoldersTreeModule;
                             }
 
                             // Set the folder tree in the fixed position
-                            wpmfFoldersTreeModule.getTreeElement().css('position', 'fixed').css('top', '40px');
+                            if (!$('body').hasClass('rtl')) {
+                                wpmfFoldersTreeModule.getTreeElement().css('position', 'fixed').css('top', '40px');
+                            }
 
                             // Save the state
                             wpmfFoldersTreeModule.last_scrolling_state = 'fixed';

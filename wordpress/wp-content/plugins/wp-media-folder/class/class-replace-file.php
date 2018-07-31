@@ -18,73 +18,92 @@ class WpmfReplaceFile extends WpmfHelper
         add_action('wp_ajax_wpmf_replace_file', array($this, 'replaceFile'));
     }
 
-    /* Ajax replace attachment */
+    /**
+     * Ajax replace attachment
+     *
+     * @return void
+     */
     public function replaceFile()
     {
+        if (empty($_POST['wpmf_nonce'])
+            || !wp_verify_nonce($_POST['wpmf_nonce'], 'wpmf_nonce')) {
+            die();
+        }
+
         if (!current_user_can('upload_files')) {
             wp_send_json(false);
         }
-        if (!empty($_FILES["wpmf_replace_file"])) {
+        if (!empty($_FILES['wpmf_replace_file'])) {
             if (empty($_POST['post_selected'])) {
-                _e('Post empty', 'wpmf');
+                esc_html_e('Post empty', 'wpmf');
                 die();
             }
 
-            $id = $_POST['post_selected'];
+            $id       = $_POST['post_selected'];
             $metadata = wp_get_attachment_metadata($id);
 
-            $filepath = get_attached_file($id);
-            $infopath = pathinfo($filepath);
+            $filepath          = get_attached_file($id);
+            $infopath          = pathinfo($filepath);
             $allowedImageTypes = array('gif', 'jpg', 'png', 'bmp');
-            $new_filetype = wp_check_filetype($_FILES["wpmf_replace_file"]["name"]);
-            if ($new_filetype['ext'] == 'jpeg') {
+            $new_filetype      = wp_check_filetype($_FILES['wpmf_replace_file']['name']);
+            if ($new_filetype['ext'] === 'jpeg') {
                 $new_filetype['ext'] = 'jpg';
             }
 
-            if ($infopath["extension"] == 'jpeg') {
-                $infopath["extension"] = 'jpg';
+            if ($infopath['extension'] === 'jpeg') {
+                $infopath['extension'] = 'jpg';
             }
-            if ($new_filetype['ext'] != $infopath["extension"]) {
+            if ($new_filetype['ext'] !== $infopath['extension']) {
                 wp_send_json(
                     array(
                         'status' => false,
-                        'msg' => __('To replace a media and keep the link to this media working,
+                        'msg'    => __('To replace a media and keep the link to this media working,
 it must be in the same format, ie. jpg > jpg… Thanks!', 'wpmf')
                     )
                 );
             }
 
-            if ($_FILES["wpmf_replace_file"]["error"] > 0) {
-                echo "Error: " . $_FILES["wpmf_replace_file"]["error"] . "<br>";
+            if ($_FILES['wpmf_replace_file']['error'] > 0) {
+                wp_send_json(
+                    array(
+                        'status' => false,
+                        'msg'    => $_FILES['wpmf_replace_file']['error']
+                    )
+                );
             } else {
                 $uploadpath = wp_upload_dir();
-                @unlink($filepath);
+                unlink($filepath);
                 if (in_array($infopath['extension'], $allowedImageTypes)) {
                     if (isset($metadata['sizes']) && is_array($metadata['sizes'])) {
                         foreach ($metadata['sizes'] as $size => $sizeinfo) {
                             $intermediate_file = str_replace(basename($filepath), $sizeinfo['file'], $filepath);
-                            /** This filter is documented in wp-includes/functions.php */
+                            // This filter is documented in wp-includes/functions.php
                             $intermediate_file = apply_filters('wp_delete_file', $intermediate_file);
-                            @unlink(path_join($uploadpath['basedir'], $intermediate_file));
+                            unlink(
+                                path_join(
+                                    $uploadpath['basedir'],
+                                    $intermediate_file
+                                )
+                            );
                         }
                     }
                 }
 
-                @move_uploaded_file(
-                    $_FILES["wpmf_replace_file"]["tmp_name"],
-                    $infopath['dirname'] . "/" . $infopath['basename']
+                move_uploaded_file(
+                    $_FILES['wpmf_replace_file']['tmp_name'],
+                    $infopath['dirname'] . '/' . $infopath['basename']
                 );
-                update_post_meta($id, 'wpmf_size', filesize($infopath['dirname'] . "/" . $infopath['basename']));
+                update_post_meta($id, 'wpmf_size', filesize($infopath['dirname'] . '/' . $infopath['basename']));
 
                 //_wp_attachment_metadata
                 if (in_array($infopath['extension'], $allowedImageTypes)) {
                     $actual_sizes_array = getimagesize($filepath);
-                    $metadata['width'] = $actual_sizes_array[0];
+                    $metadata['width']  = $actual_sizes_array[0];
                     $metadata['height'] = $actual_sizes_array[1];
                     $this->createThumbs($filepath, $infopath['extension'], $metadata, $id);
                 }
-                if (isset($_FILES["wpmf_replace_file"]['size'])) {
-                    $size = $_FILES["wpmf_replace_file"]['size'];
+                if (isset($_FILES['wpmf_replace_file']['size'])) {
+                    $size = $_FILES['wpmf_replace_file']['size'];
                     update_post_meta($id, 'wpmf_size', $size);
                     if ($size >= 1024 && $size < 1024 * 1024) {
                         $size = ceil($size / 1024) . ' KB';
@@ -98,7 +117,7 @@ it must be in the same format, ie. jpg > jpg… Thanks!', 'wpmf')
                 }
 
                 if (in_array($infopath['extension'], $allowedImageTypes)) {
-                    $metadata = wp_get_attachment_metadata($id);
+                    $metadata   = wp_get_attachment_metadata($id);
                     $dimensions = $metadata['width'] . ' x ' . $metadata['height'];
                     wp_send_json(array('status' => true, 'size' => $size, 'dimensions' => $dimensions));
                 } else {
@@ -110,7 +129,11 @@ it must be in the same format, ie. jpg > jpg… Thanks!', 'wpmf')
         }
     }
 
-    /* includes styles and some scripts */
+    /**
+     * Includes styles and some scripts
+     *
+     * @return void
+     */
     public function enqueueAdminScripts()
     {
         if (current_user_can('upload_files')) {

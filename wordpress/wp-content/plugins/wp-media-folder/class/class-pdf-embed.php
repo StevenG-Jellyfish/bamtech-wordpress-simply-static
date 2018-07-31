@@ -17,19 +17,21 @@ class WpmfPdfEmbed
         add_action('wp_enqueue_media', array($this, 'loadScript'));
         add_filter('media_send_to_editor', array($this, 'addImageFiles'), 10, 3);
         add_action('wp_enqueue_scripts', array($this, 'loadStyleScript'));
-        add_filter("attachment_fields_to_edit", array($this, "attachmentFieldsToEdit"), 10, 2);
-        add_filter("attachment_fields_to_save", array($this, "attachmentFieldsToSave"), 10, 2);
+        add_filter('attachment_fields_to_edit', array($this, 'attachmentFieldsToEdit'), 10, 2);
+        add_filter('attachment_fields_to_save', array($this, 'attachmentFieldsToSave'), 10, 2);
     }
 
     /**
      * Load styles and scripts
+     *
+     * @return void
      */
     public function loadStyleScript()
     {
         global $post;
         if (!empty($post)) {
-            if (strpos($post->post_content, 'wpmf-pdfemb-viewer') !== false
-                && strpos($post->post_content, 'data-wpmf_pdf_embed="embed"') !== false
+            if (strpos($post->post_content, 'wpmf-pdfemb-viewer')
+                && strpos($post->post_content, 'data-wpmf_pdf_embed="embed"')
             ) {
                 wp_enqueue_script(
                     'wpmf_embed_pdf_js',
@@ -62,52 +64,58 @@ class WpmfPdfEmbed
     /**
      * Localize a script.
      * Works only if the script has already been added.
+     *
      * @return array
      */
     public function getTranslation()
     {
         $array = array(
             'worker_src' => plugins_url('assets/js/pdf-embed/pdf.worker.min.js', dirname(__FILE__)),
-            'cmap_url' => plugins_url('assets/js/pdf-embed/cmaps/', dirname(__FILE__)),
+            'cmap_url'   => plugins_url('assets/js/pdf-embed/cmaps/', dirname(__FILE__)),
             'objectL10n' =>
                 array(
-                    'loading' => __('Loading...', 'wpmf'),
-                    'page' => __('Page', 'wpmf'),
-                    'zoom' => __('Zoom', 'wpmf'),
-                    'prev' => __('Previous page', 'wpmf'),
-                    'next' => __('Next page', 'wpmf'),
-                    'zoomin' => __('Zoom In', 'wpmf'),
-                    'zoomout' => __('Zoom Out', 'wpmf'),
-                    'secure' => __('Secure', 'wpmf'),
-                    'download' => __('Download PDF', 'wpmf'),
-                    'fullscreen' => __('Full Screen', 'wpmf'),
-                    'domainerror' => __('Error: URL to the PDF file must be on exactly
+                    'loading'            => __('Loading...', 'wpmf'),
+                    'page'               => __('Page', 'wpmf'),
+                    'zoom'               => __('Zoom', 'wpmf'),
+                    'prev'               => __('Previous page', 'wpmf'),
+                    'next'               => __('Next page', 'wpmf'),
+                    'zoomin'             => __('Zoom In', 'wpmf'),
+                    'zoomout'            => __('Zoom Out', 'wpmf'),
+                    'secure'             => __('Secure', 'wpmf'),
+                    'download'           => __('Download PDF', 'wpmf'),
+                    'fullscreen'         => __('Full Screen', 'wpmf'),
+                    'domainerror'        => __('Error: URL to the PDF file must be on exactly
                  the same domain as the current web page.', 'wpmf'),
-                    'clickhereinfo' => __('Click here for more info', 'wpmf'),
+                    'clickhereinfo'      => __('Click here for more info', 'wpmf'),
                     'widthheightinvalid' => __('PDF page width or height are invalid', 'wpmf'),
-                    'viewinfullscreen' => __('View in Full Screen', 'wpmf'),
-                    'poweredby' => 1));
+                    'viewinfullscreen'   => __('View in Full Screen', 'wpmf'),
+                    'poweredby'          => 1
+                )
+        );
         return $array;
     }
 
     /**
      * Add pdf embed html to editor
-     * @param string $html HTML markup for a media item sent to the editor.
-     * @param int $id The first key from the $_POST['send'] data.
-     * @param array $attachment Array of attachment metadata.
+     *
+     * @param string  $html       HTML markup for a media item sent to the editor.
+     * @param integer $id         The first key from the $_POST['send'] data.
+     * @param array   $attachment Array of attachment metadata.
+     *
      * @return string $html
      */
     public function addImageFiles($html, $id, $attachment)
     {
-        $post = get_post($id);
-        $mimetype = explode("/", $post->post_mime_type);
+        $post      = get_post($id);
+        $mimetype  = explode('/', $post->post_mime_type);
         $pdf_embed = get_post_meta($id, 'wpmf_pdf_embed', true);
-        $target = get_post_meta($id, '_gallery_link_target', true);
-        if ($mimetype[1] == 'pdf') {
-            if (isset($pdf_embed) && $pdf_embed == 'embed') {
+        $target    = get_post_meta($id, '_gallery_link_target', true);
+        if ($mimetype[1] === 'pdf') {
+            if (isset($pdf_embed) && $pdf_embed === 'embed') {
                 $doc = new DOMDocument();
                 libxml_use_internal_errors(true);
-                @$doc->loadHTML(mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8'));
+                $sousce = mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8');
+                $doc->loadHTML($sousce);
                 $tags = $doc->getElementsByTagName('a');
                 if ($tags->length > 0) {
                     if (!empty($tags)) {
@@ -125,9 +133,9 @@ class WpmfPdfEmbed
                 }
             } else {
                 $singlefile = get_option('wpmf_option_singlefile');
-                if (isset($singlefile) && $singlefile == 1) {
-                    $meta = get_post_meta($id, '_wp_attached_file');
-                    $upload_dir = wp_upload_dir();
+                if (isset($singlefile) && (int) $singlefile === 1) {
+                    $meta           = get_post_meta($id, '_wp_attached_file');
+                    $upload_dir     = wp_upload_dir();
                     $url_attachment = $upload_dir['basedir'] . '/' . $meta[0];
                     if (file_exists($url_attachment)) {
                         $size = filesize($url_attachment);
@@ -141,7 +149,7 @@ class WpmfPdfEmbed
                     }
 
                     $type = wp_check_filetype($post->guid);
-                    $ext = $type['ext'];
+                    $ext  = $type['ext'];
                     $html = '<span class="wpmf_mce-wrap" data-file="' . $id . '" style="overflow: hidden;">';
                     $html .= '<a class="wpmf-defile wpmf_mce-single-child"
                      href="' . $post->guid . '" data-id="' . $id . '" target="' . $target . '">';
@@ -149,12 +157,12 @@ class WpmfPdfEmbed
                     $html .= $post->post_title;
                     $html .= '</span><br>';
                     $html .= '<span class="wpmf_mce-single-child" style="font-weight: normal;font-size: 0.8em;">';
-                    $html .= '<b class="wpmf_mce-single-child">Size : </b>' . $size;
-                    $html .= '<b class="wpmf_mce-single-child"> Format : </b>' . strtoupper($ext) . '</span>';
+                    $html .= '<b class="wpmf_mce-single-child">' . esc_html__('Size', 'wpmf') . ' : </b>' . $size;
+                    $html .= '<b class="wpmf_mce-single-child"> ' . esc_html__('Format', 'wpmf') . ' : </b>' . strtoupper($ext) . '</span>';
                     $html .= '</a>';
                     $html .= '</span>';
                 } else {
-                    $html = preg_replace('/(<a\b[^><]*)>/i', '$1 target="'.$target.'">', $html);
+                    $html = preg_replace('/(<a\b[^><]*)>/i', '$1 target="' . $target . '">', $html);
                 }
             }
         }
@@ -162,7 +170,9 @@ class WpmfPdfEmbed
     }
 
     /**
-     * add footer
+     * Add footer
+     *
+     * @return void
      */
     public function adminFooterPdfEmbed()
     {
@@ -180,7 +190,9 @@ class WpmfPdfEmbed
     }
 
     /**
-     * add footer script
+     * Add footer script
+     *
+     * @return void
      */
     public function loadScript()
     {
@@ -191,25 +203,27 @@ class WpmfPdfEmbed
     /**
      * Create enable PDF embed field
      * Based on /wp-admin/includes/media.php
-     * @param array $form_fields An array of attachment form fields.
-     * @param WP_Post $post The WP_Post attachment object.
+     *
+     * @param array   $form_fields An array of attachment form fields.
+     * @param WP_Post $post        The WP_Post attachment object.
+     *
      * @return mixed
      */
     public function attachmentFieldsToEdit($form_fields, $post)
     {
         $infosfile = wp_check_filetype($post->guid);
-        if (!empty($infosfile['ext']) && $infosfile['ext'] == 'pdf') {
+        if (!empty($infosfile['ext']) && $infosfile['ext'] === 'pdf') {
             $value = get_post_meta($post->ID, 'wpmf_pdf_embed', true);
             if (empty($value)) {
                 $value = 'large';
             }
-            $embed = array(
-                'link' => __('Off', 'wpmf'),
+            $embed  = array(
+                'link'  => __('Off', 'wpmf'),
                 'embed' => __('On', 'wpmf'),
             );
             $option = '';
             foreach ($embed as $k => $v) {
-                if ($value == $k) {
+                if ($value === $k) {
                     $option .= '<option selected value="' . $k . '">' . $v . '</option>';
                 } else {
                     $option .= '<option value="' . $k . '">' . $v . '</option>';
@@ -218,7 +232,7 @@ class WpmfPdfEmbed
             $form_fields['wpmf_pdf_embed'] = array(
                 'label' => __('PDF Embed', 'wpmf'),
                 'input' => 'html',
-                'html' => '
+                'html'  => '
                             <select name="attachments[' . $post->ID . '][wpmf_pdf_embed]"
                              id="attachments[' . $post->ID . '][wpmf_pdf_embed]">
                                     ' . $option . '
@@ -232,8 +246,10 @@ class WpmfPdfEmbed
     /**
      * Save enable PDF embed option
      * Based on /wp-admin/includes/media.php
-     * @param array $post An array of post data.
+     *
+     * @param array $post       An array of post data.
      * @param array $attachment An array of attachment metadata.
+     *
      * @return mixed $post
      */
     public function attachmentFieldsToSave($post, $attachment)

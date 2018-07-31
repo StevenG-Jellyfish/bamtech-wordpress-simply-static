@@ -132,7 +132,8 @@
                     id: id,
                     attachment_id: attachment_id,
                     action: 'wpmf',
-                    task: 'get_user_media_tree'
+                    task: 'get_user_media_tree',
+                    wpmf_nonce: wpmf.vars.wpmf_nonce
                 },
                 context: $userimagetree,
                 dataType: 'json',
@@ -167,10 +168,15 @@
 
                             ret += '<div class="pure-checkbox">';
 
-                            if (res.user_media_folder_root === datas[ij].id) {
-                                ret += '<input type="checkbox" checked id="' + dir + datas[ij].file + '/" name="wpmf_checkbox_tree" class="wpmf_checkbox_tree" value="' + datas[ij].id + '" data-id="' + datas[ij].id + '" data-file="' + dir + datas[ij].file + '" data-type="' + datas[ij].type + '">';
-                            } else {
+                            if (parseInt(res.user_media_folder_root) === 0) {
+                                $('.wpmf_checkbox_tree[value="0"]').prop('checked', true);
                                 ret += '<input type="checkbox" id="' + dir + datas[ij].file + '/" name="wpmf_checkbox_tree" class="wpmf_checkbox_tree" value="' + datas[ij].id + '" data-id="' + datas[ij].id + '" data-file="' + dir + datas[ij].file + '" data-type="' + datas[ij].type + '">';
+                            } else {
+                                if (parseInt(res.user_media_folder_root) === parseInt(datas[ij].id)) {
+                                    ret += '<input type="checkbox" checked id="' + dir + datas[ij].file + '/" name="wpmf_checkbox_tree" class="wpmf_checkbox_tree" value="' + datas[ij].id + '" data-id="' + datas[ij].id + '" data-file="' + dir + datas[ij].file + '" data-type="' + datas[ij].type + '">';
+                                } else {
+                                    ret += '<input type="checkbox" id="' + dir + datas[ij].file + '/" name="wpmf_checkbox_tree" class="wpmf_checkbox_tree" value="' + datas[ij].id + '" data-id="' + datas[ij].id + '" data-file="' + dir + datas[ij].file + '" data-type="' + datas[ij].type + '">';
+                                }
                             }
 
                             if (datas[ij].checked) {

@@ -15,28 +15,29 @@ class WpmfSingleFile
     public function __construct()
     {
         add_action('admin_enqueue_scripts', array($this, 'singleFileStyleAdmin'));
-        $singlefile = get_option('wpmf_option_singlefile');
-        if (isset($singlefile) && $singlefile == 1) {
-            add_filter('media_send_to_editor', array($this, 'addImageFiles'), 10, 3);
-        }
+        add_filter('media_send_to_editor', array($this, 'addImageFiles'), 10, 3);
         add_action('wp_enqueue_scripts', array($this, 'loadCustomWpAdminScript'));
         add_filter('mce_external_plugins', array($this, 'register'));
     }
 
     /**
      * Includes script to editor
-     * @param $plugin_array
+     *
+     * @param array $plugin_array List editor plugin
+     *
      * @return mixed
      */
     public function register($plugin_array)
     {
-        $url = WPMF_PLUGIN_URL . '/assets/js/single-file.js';
-        $plugin_array["wpmf_mce"] = $url;
+        $url                      = WPMF_PLUGIN_URL . '/assets/js/single-file.js';
+        $plugin_array['wpmf_mce'] = $url;
         return $plugin_array;
     }
 
     /**
      * Includes styles to editor
+     *
+     * @return void
      */
     public function singleFileStyleAdmin()
     {
@@ -44,7 +45,9 @@ class WpmfSingleFile
     }
 
     /**
-     * includes styles
+     * Includes styles
+     *
+     * @return void
      */
     public function loadCustomWpAdminScript()
     {
@@ -58,18 +61,20 @@ class WpmfSingleFile
 
     /**
      * Add single file to editor
-     * @param string $html HTML markup for a media item sent to the editor.
-     * @param int $id The first key from the $_POST['send'] data.
-     * @param array $attachment Array of attachment metadata.
+     *
+     * @param string  $html       HTML markup for a media item sent to the editor.
+     * @param integer $id         The first key from the $_POST['send'] data.
+     * @param array   $attachment Array of attachment metadata.
+     *
      * @return string $html
      */
     public function addImageFiles($html, $id, $attachment)
     {
-        $post = get_post($id);
-        $mimetype = explode("/", $post->post_mime_type);
-        $target = get_post_meta($id, '_gallery_link_target', true);
-        $meta = get_post_meta($id, '_wp_attached_file');
-        $upload_dir = wp_upload_dir();
+        $post           = get_post($id);
+        $mimetype       = explode('/', $post->post_mime_type);
+        $target         = get_post_meta($id, '_gallery_link_target', true);
+        $meta           = get_post_meta($id, '_wp_attached_file');
+        $upload_dir     = wp_upload_dir();
         $url_attachment = $upload_dir['basedir'] . '/' . $meta[0];
         if (file_exists($url_attachment)) {
             $size = filesize($url_attachment);
@@ -82,9 +87,9 @@ class WpmfSingleFile
             $size = 0;
         }
 
-        if ($mimetype[0] == 'application' && $mimetype[1] != 'pdf') {
+        if ($mimetype[0] === 'application' && $mimetype[1] !== 'pdf') {
             $type = wp_check_filetype($post->guid);
-            $ext = $type['ext'];
+            $ext  = $type['ext'];
             $html = '<span class="wpmf_mce-wrap" data-file="' . $id . '" style="overflow: hidden;">';
             $html .= '<a class="wpmf-defile wpmf_mce-single-child"
              href="' . $post->guid . '" data-id="' . $id . '" target="' . $target . '">';

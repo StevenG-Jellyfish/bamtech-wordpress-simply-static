@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - W3 Total Cache - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-05-01 07:27:37+0000\n"
+"PO-Revision-Date: 2018-07-30 16:29:51+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -153,7 +153,7 @@ msgstr "Desactivar soporte de juego de caracteres UTF-8"
 
 #: lib/W3/UI/Settings/PageCache.php:45
 msgid "Enable compatibility mode"
-msgstr "Habilitar modo de compatiblidad"
+msgstr "Activar el modo de compatibilidad"
 
 #: lib/W3/UI/Settings/PageCache.php:43
 msgid "Purge sitemaps:"
@@ -317,7 +317,7 @@ msgstr "Método de cacheado de objetos:"
 
 #: lib/W3/UI/Settings/Monitoring.php:20
 msgid "Enable XMIT"
-msgstr "Habilitar XMIT"
+msgstr "Activar XMIT"
 
 #: lib/W3/UI/Settings/Monitoring.php:19
 msgid "Use PHP function to set application name:"
@@ -337,7 +337,7 @@ msgstr "Incluir <acronym title=\"Real User Monitoring\">RUM</acronym> en página
 
 #: lib/W3/UI/Settings/Monitoring.php:15
 msgid "Select user roles that <acronym title=\"Real User Monitoring\">RUM</acronym> should be enabled for:"
-msgstr "Selecciona roles de usuarios que deberían tener habilitado <acronym title=\"Real User Monitoring\">RUM</acronym>:"
+msgstr "Selecciona perfiles de usuarios que deberían tener activo <acronym title=\"Real User Monitoring\">RUM</acronym>:"
 
 #: lib/W3/UI/Settings/Monitoring.php:14
 msgid "Use <acronym title=\"Real User Monitoring\">RUM</acronym> only for following user roles"
@@ -497,7 +497,7 @@ msgstr "Longitud del nombre de archivo:"
 
 #: lib/W3/UI/Settings/Minify.php:35
 msgid "Disable minify automatic file name length test"
-msgstr "Deshabilitar el test automático de longitud de nombre de archivo al minimizar"
+msgstr "Desactivar la prueba automática de longitud de nombre de archivo al minimizar"
 
 #: lib/W3/UI/Settings/Minify.php:34
 msgid "@import handling:"
@@ -554,15 +554,15 @@ msgstr "Método de minimización:"
 
 #: lib/W3/UI/Settings/Minify.php:13
 msgid "<acronym title=\"Cascading Style Sheets\">CSS</acronym> minifier:"
-msgstr "<acronym title=\"Cascading Style Sheets\">CSS</acronym> minifier:"
+msgstr "Minimizado de <acronym title=\"Cascading Style Sheets\">CSS</acronym>:"
 
 #: lib/W3/UI/Settings/Minify.php:12
 msgid "<acronym title=\"JavaScript\">JS</acronym> minifier:"
-msgstr "Minificador <acronym title=\"JavaScript\">JS</acronym>:"
+msgstr "Minimizado de <acronym title=\"JavaScript\">JS</acronym>:"
 
 #: lib/W3/UI/Settings/Minify.php:11
 msgid "<acronym title=\"Hypertext Markup Language\">HTML</acronym> minifier:"
-msgstr "Minificador <acronym title=\"Hypertext Markup Language\">HTML</acronym>:"
+msgstr "Minimizado de <acronym title=\"Hypertext Markup Language\">HTML</acronym>:"
 
 #: lib/W3/UI/Settings/Minify.php:9
 msgid "Minify:"
@@ -731,7 +731,7 @@ msgstr "Archivos personalizados del sitio"
 
 #: lib/W3/UI/Settings/CDN.php:16
 msgid "Host minified <acronym title=\"Cascading Style Sheet\">CSS</acronym> and <acronym title=\"JavaScript\">JS</acronym> files"
-msgstr "Archivos <acronym title=\"Cascading Style Sheet\">CSS</acronym> y <acronym title=\"JavaScript\">JS</acronym> minificados por el servidor"
+msgstr "Archivos <acronym title=\"Cascading Style Sheet\">CSS</acronym> y <acronym title=\"JavaScript\">JS</acronym> minimizados por el servidor"
 
 #: lib/W3/UI/Settings/CDN.php:15
 msgid "Host theme files"
@@ -760,7 +760,7 @@ msgstr "Activa <acronym title=\"Hypertext Transfer Protocol\">HTTP</acronym> com
 #: lib/W3/UI/Settings/BrowserCache.php:23
 #: lib/W3/UI/Settings/BrowserCache.php:41
 msgid "Disable cookies for static files"
-msgstr "Deshabilitar la cookies para los archivos estáticos"
+msgstr "Desactivar la cookies para los archivos estáticos"
 
 #: lib/W3/UI/Settings/BrowserCache.php:19
 #: lib/W3/UI/Settings/BrowserCache.php:29
@@ -798,7 +798,7 @@ msgstr "Caché del navegador:"
 
 #: lib/W3/UI/PluginView.php:465
 msgid "Please enter FTP details <a href=\"#ftp_upload_form\">below</a> to remove the disabled modules. "
-msgstr "Introduce las credeciales FTP  <a href=\"#ftp_upload_form\">below</a> para quitar los módulos deshabilitados"
+msgstr "Introduce las credenciales FTP  <a href=\"#ftp_upload_form\">below</a> para quitar los módulos desactivados."
 
 #: lib/W3/UI/PluginView.php:454
 msgid "View technical information"
@@ -868,7 +868,7 @@ msgstr ""
 
 #: lib/W3/UI/PluginView.php:379
 msgid "disable"
-msgstr "deshabilitar"
+msgstr "desactivar"
 
 #: lib/W3/UI/PluginView.php:379
 msgid "deploy"
@@ -1088,11 +1088,11 @@ msgstr "El directorio w3tc puede ser  borrado,%s: %s.Sin embargo, <em>no borre e
 
 #: lib/W3/Plugin/TotalCacheAdmin.php:707
 msgid "Empty the minify cache"
-msgstr "Vaciar la caché de minificación"
+msgstr "Vaciar la caché de minimizado"
 
 #: lib/W3/Plugin/TotalCacheAdmin.php:700
 msgid "Recently an error occurred while creating the CSS / JS minify cache: %s. %s"
-msgstr "Ha ocurrido un error al crear la cache de minificación CSS / JS: %s. %s"
+msgstr "Ha ocurrido un error al crear la cache de minimizado CSS / JS: %s. %s"
 
 #: lib/W3/Plugin/TotalCacheAdmin.php:689
 msgid "Empty the object cache"
@@ -1113,7 +1113,7 @@ msgstr "Uno o más plugins han sido activados o desactivados, por favor %s. %s"
 
 #: lib/W3/Plugin/TotalCacheAdmin.php:670
 msgid "minify settings"
-msgstr "ajustes de minificación"
+msgstr "ajustes de minimizado"
 
 #: lib/W3/Plugin/TotalCacheAdmin.php:670
 msgid "check the %s to maintain the desired user experience"
@@ -1205,7 +1205,7 @@ msgstr "La cadena de búsqueda multimedia ha sido actualizada con éxito."
 
 #: lib/W3/Plugin/TotalCacheAdmin.php:518
 msgid "Minify cache successfully emptied."
-msgstr "La caché minificada se vació con éxito."
+msgstr "La caché minimizada se vació con éxito."
 
 #: lib/W3/Plugin/TotalCacheAdmin.php:517
 msgid "Fragment cache successfully emptied."
@@ -1393,7 +1393,7 @@ msgstr "Almacenamiento en caché de página utilizando %s%s"
 
 #: lib/W3/Plugin/TotalCache.php:536
 msgid "Minified using %s%s"
-msgstr "Minificado usando %s%s"
+msgstr "Minimizado usando %s%s"
 
 #: lib/W3/Plugin/TotalCache.php:395
 msgid "<span style=\"color: red; background: none;\">Support</span>"
@@ -1429,7 +1429,7 @@ msgstr "Vaciar caché de base de datos"
 
 #: lib/W3/Plugin/TotalCache.php:312
 msgid "Empty Minify Cache"
-msgstr "Vaciar caché de minificación"
+msgstr "Vaciar caché de minimizado"
 
 #: lib/W3/Plugin/TotalCache.php:303
 msgid "Empty Page Cache"
@@ -1473,7 +1473,7 @@ msgid ""
 "        <p>Also, you can now try out our new features as soon as they're ready. %s to enable \"edge mode\" and unlock pre-release features. %s</p>"
 msgstr ""
 "<p>Ahora puedes mantener W3 Total Cache actualizado sin tener que preocuparte porque las nuevas características rompan tu sitio web. Habrá más versiones con correcciones de errores, correcciones de seguridad y actualizaciones de ajustes. </p>\n"
-"         <p>También puedes probar nuestras nuevas funciones tan pronto como estén listas. %s para habilitar el \"modo edge\" y desbloquear las funciones de pre-lanzamiento. %s </p>"
+"         <p>También puedes probar nuestras nuevas funciones tan pronto como estén listas. %s para activar el \"modo edge\" y desbloquear las funciones de pre-lanzamiento. %s </p>"
 
 #: lib/W3/Plugin/NewRelicAdmin.php:63
 msgid "Please review the <a href=\"%s\">settings</a>."
@@ -1571,8 +1571,8 @@ msgid ""
 "The Object Cache add-in file object-cache.php is not a W3 Total Cache drop-in.\n"
 "                    Remove it or disable Object Caching. %s"
 msgstr ""
-"El objeto de caché de objetos add-in archivo-cache.php no es un Drop-in de caché total de W3.\n"
-"                     Quítelo o deshabilite la caché de objetos. %s"
+"El objeto de caché de objetos añadido archivo-cache.php no es un dependiente de caché total de W3.\n"
+"                     Quítalo o desactiva la caché de objetos. %s"
 
 #: lib/W3/ObjectCache.php:685
 msgid "DONOTCACHEOBJECT constant is defined"
@@ -1608,11 +1608,11 @@ msgstr "No está configurada la API KEY."
 
 #: lib/W3/NewRelicService.php:154
 msgid "PHP agent is not enabled."
-msgstr "El agente PHP no está habilitado"
+msgstr "El agente PHP no está activo."
 
 #: lib/W3/NewRelicService.php:152
 msgid "PHP module is not enabled."
-msgstr "El módulo PHP no está habilitado."
+msgstr "El módulo PHP no está activo."
 
 #: lib/W3/NewRelicService.php:135
 msgid "Web Server"
@@ -1894,11 +1894,11 @@ msgstr "Ha fallado el vaciado de la caché de objetos."
 
 #: lib/W3/Cli.php:45
 msgid "The minify cache is flushed successfully."
-msgstr "El vaciado de la caché de minificación se ha realizado correctamente."
+msgstr "El vaciado de la caché de minimizado se ha realizado correctamente."
 
 #: lib/W3/Cli.php:43
 msgid "Flushing the minify cache failed."
-msgstr "El vaciado de la caché de minificación ha fallado."
+msgstr "El vaciado de la caché de minimizado ha fallado."
 
 #: lib/W3/Cli.php:34
 msgid "The DB cache is flushed successfully."
@@ -2161,7 +2161,7 @@ msgstr "Exportar archivos Personalizados"
 
 #: lib/W3/AdminActions/CdnActionsAdmin.php:239
 msgid "Minify files export"
-msgstr "Exportar archivos Minificados"
+msgstr "Exportar archivos minimizados"
 
 #: lib/W3/AdminActions/CdnActionsAdmin.php:234
 msgid "Theme files export"
@@ -2648,7 +2648,7 @@ msgstr "Por favor, añade el dominio w3-edge.com a tu <a href=\"http://en.wikipe
 
 #: inc/options/support/form.php:12
 msgid "Instead of providing your primary administrative or <acronym title=\"Secure Shell\">SSH</acronym> / <acronym title=\"File Transfer Protocol\">FTP</acronym> accounts, create a new administrator account that can be disabled when the support case is closed."
-msgstr "En lugar de proporcionar sus cuentas principales administrativas o <acronym title=\"Shell seguro\">SSH</acronym> / <acronym title=\"Protocolo de transferencia de archivos\">FTP</acronym>, crea una nueva cuenta de administrador que se puede deshabilitar cuando soporte se resuelva."
+msgstr "En lugar de proporcionar tus cuentas principales administrativas o <acronym title=\"Shell seguro\">SSH</acronym> / <acronym title=\"Protocolo de transferencia de archivos\">FTP</acronym>, crea una nueva cuenta de administrador que puedes desactivar cuando soporte se resuelva."
 
 #: inc/options/support/form.php:11
 msgid "All submitted data will not be saved and is used solely for the purposes your support request. You will not be added to a mailing list, solicited without your permission, nor will your site be administered after this support case is closed."
@@ -2844,7 +2844,7 @@ msgstr "Información necesaria"
 
 #: inc/options/referrer.php:79
 msgid "No groups added. All referrers recieve the same page and minify cache results."
-msgstr "No se han añadido grupos. Todas las referencias reciben la misma página y minifican los resultados de la caché."
+msgstr "No se han añadido grupos. Todas las referencias reciben la misma página y minimizan los resultados de la caché."
 
 #: inc/options/referrer.php:72
 msgid "Specify the referrers for this group. Remember to escape special characters like spaces, dots or dashes with a backslash. Regular expressions are also supported."
@@ -2876,7 +2876,7 @@ msgstr "de los referentes especificando nombres en el campo referentes. Asigna q
 
 #: inc/options/referrer.php:12
 msgid "Referrer group support is always <span class=\"w3tc-enabled\">enabled"
-msgstr "Soporte de grupo de referente está siempre <span class=\"w3tc-enabled\">habilitado"
+msgstr "Soporte de grupo de referente está siempre <span class=\"w3tc-enabled\">activo"
 
 #: inc/options/pro/fragmentcache.php:94
 msgid "Specify fragment groups that should be managed by W3 Total Cache. Enter one action per line comma delimited, e.g. (group, action1, action2). Include the prefix used for a transient by a theme or plugin."
@@ -2984,7 +2984,7 @@ msgstr "Conjunto de caracteres:"
 
 #: inc/options/pgcache.php:263
 msgid "Decreases performance by ~20% at scale in exchange for increasing interoperability with more hosting environments and WordPress idiosyncrasies. This option should be enabled for most sites"
-msgstr "Disminuye el rendimiento en ~ 20% en escala a cambio de incrementar la interoperabilidad con más entornos de alojamiento y idiosincrasias de WordPress. Esta opción debe estar habilitada para la mayoría de los sitios"
+msgstr "Disminuye el rendimiento en ~ 20% en escala a cambio de incrementar la interoperabilidad con más entornos de alojamiento y idiosincrasias de WordPress. Esta opción debe estar activa para la mayoría de los sitios"
 
 #: inc/options/pgcache.php:260
 msgid "Compatibility mode"
@@ -2992,7 +2992,7 @@ msgstr "Modo de compatibilidad"
 
 #: inc/options/pgcache.php:239
 msgid "Enables support for WordPress functionality in fragment caching for the page caching engine. Use of this feature may increase response times."
-msgstr "Habilita el soporte para la funcionalidad de WordPress de caché de fragmentos para el motor de caché de páginas. El uso de esta función puede aumentar los tiempos de respuesta."
+msgstr "Activa el soporte para la funcionalidad de WordPress de caché de fragmentos para el motor de caché de páginas. El uso de esta función puede aumentar los tiempos de respuesta."
 
 #: inc/options/pgcache.php:235
 msgid "Late initialization:"
@@ -3079,7 +3079,7 @@ msgid ""
 "Enabling this option will increase load on server on certain actions but will guarantee that\n"
 "                    the Object Cache is always clean and contains latest changes. <em>Enable if you are experiencing issues\n"
 "                     with options displaying wrong value/state (checkboxes etc).</em>"
-msgstr "Habilitar esta opción aumentará la carga del servidor con algunas acciones pero garantiza que la Caché de Objetos está siempre limpia y contiene los últimos cambios. <em>Actívala si estás teniendo el problema de que las opciones muestren el valor/estado incorrecto (casillas de verificación etc).</em>"
+msgstr "Activar esta opción aumentará la carga del servidor con algunas acciones pero garantiza que la Caché de Objetos está siempre limpia y contiene los últimos cambios. <em>Actívala si estás teniendo el problema de que las opciones muestren el valor/estado incorrecto (casillas de verificación etc).</em>"
 
 #: inc/options/objectcache.php:66
 msgid "Groups that should not be cached."
@@ -3147,7 +3147,7 @@ msgstr "Aunque sólo actives un único grupo de agentes usuarios se escribirá u
 
 #: inc/options/mobile.php:79
 msgid "No groups added. All user agents recieve the same page and minify cache results."
-msgstr "Ningún grupo añadido. Todos los user-agents recibirán la misma página y minificado resultante de la caché."
+msgstr "Ningún grupo añadido. Todos los user-agents recibirán la misma página y minimizado resultante de la caché."
 
 #: inc/options/mobile.php:72
 msgid "Specify the user agents for this group. Remember to escape special characters like spaces, dots or dashes with a backslash. Regular expressions are also supported."
@@ -3171,7 +3171,7 @@ msgstr "Asigna este grupo de agente usuarios a un tema específico. Seleccionar 
 
 #: inc/options/mobile.php:36 inc/options/referrer.php:36
 msgid "Enabled:"
-msgstr "Habilitado:"
+msgstr "Activo:"
 
 #: inc/options/mobile.php:28 inc/options/referrer.php:28
 msgid "Group name:"
@@ -3227,7 +3227,7 @@ msgid ""
 "                The more <acronym title=\"Cascading Style Sheet\">CSS</acronym> / <acronym title=\"JavaScript\">JS</acronym> files you have the more files will be generated because their file names are combined in\n"
 "                the final <acronym title=\"Uniform Resource Locator\">URL</acronym> of the minified file name. File name length is only applicable when minify is in auto mode and file name length testing is enabled. The maximum file name length value is 246."
 msgstr ""
-"Cambia este valor para reducir o determinar el número de ficheros minificados que son generados.\n"
+"Cambia este valor para reducir o determinar el número de ficheros minimizados que se generan.\n"
 "                Cuantos más ficheros <acronym title=\"Cascading Style Sheet\">CSS</acronym> / <acronym title=\"JavaScript\">JS</acronym> tengas, más ficheros serán generados, porque sus nombres se combinan en la \n"
 "                <acronym title=\"Uniform Resource Locator\">URL</acronym> del fichero minificado. La longitud del nombre de archivo sólo se aplica cuando la minificación está en modo automático y el testeo de de la longitud de nombre de fichero está activada. La longitud máxima del nombre de archivo es 246."
 
@@ -3245,7 +3245,7 @@ msgstr "No se han agregado archivos <acronym title=\"Cascading Style Sheet\">CSS
 
 #: inc/options/minify.php:369
 msgid "Files are minified by template. First select the theme to manage, then add style sheets used in all templates to the \"All Templates\" group. Use the menu above to manage style sheets unique to a specific template. If necessary drag &amp; drop to resolve dependency issues (due to incorrect order)."
-msgstr "Los ficheros son minificados por plantilla. Elige primero qué tema gestionar y después añade las hojas de estilo usadas en todas las plantillas al grupo \"Todas las plantillas\". Usa el menú superior para gestionar las hojas de estilo que sólo están en una plantilla específica. Si es necesario, arrástralas y suéltalas para resolver los problemas de dependencias (debidos a un orden incorrecto)."
+msgstr "Los ficheros son minimizados por plantilla. Elige primero qué tema gestionar y después añade las hojas de estilo usadas en todas las plantillas al grupo \"Todas las plantillas\". Usa el menú superior para gestionar las hojas de estilo que sólo están en una plantilla específica. Si es necesario, arrástralas y suéltalas para resolver los problemas de dependencias (debidos a un orden incorrecto)."
 
 #: inc/options/minify.php:357
 msgid "<acronym title=\"Cascading Style Sheet\">CSS</acronym> file management:"
@@ -3253,7 +3253,7 @@ msgstr "Gestión de archivos <acronym title=\"Cascading Style Sheet\">CSS</acron
 
 #: inc/options/minify.php:308
 msgid "<acronym title=\"Cascading Style Sheet\">CSS</acronym> minify settings:"
-msgstr "Ajustes de minificación <acronym title=\"Cascading Style Sheet\">CSS</acronym>:"
+msgstr "Ajustes de minimizado <acronym title=\"Cascading Style Sheet\">CSS</acronym>:"
 
 #: inc/options/minify.php:293
 msgid "Add a script"
@@ -3265,7 +3265,7 @@ msgstr "No se han añadido archivos <acronym title=\"JavaScript\">JS</acronym>"
 
 #: inc/options/minify.php:244
 msgid "Files are minified by template. First select the theme to manage, then add scripts used in all templates to the \"All Templates\" group. Use the menu above to manage scripts unique to a specific template. If necessary drag &amp; drop to resolve dependency issues (due to incorrect order)."
-msgstr "Los archivos se minifican por plantilla. En primer lugar, seleccione el tema que desee administrar y, a continuación, agregue los scripts utilizados en todas las plantillas para el grupo \"Todas las plantillas\". Utilice el menú de arriba para administrar scripts únicos para una plantilla específica. Si es necesario arrastrar y soltar para resolver problemas de dependencia (debido a una orden incorrecta)."
+msgstr "Los archivos se minimizan por plantilla. En primer lugar, seleccione el tema que desee administrar y, a continuación, agregue los scripts utilizados en todas las plantillas para el grupo \"Todas las plantillas\". Utilice el menú de arriba para administrar scripts únicos para una plantilla específica. Si es necesario arrastrar y soltar para resolver problemas de dependencia (debido a una orden incorrecta)."
 
 #: inc/options/minify.php:236 inc/options/minify.php:361
 #: inc/options/mobile.php:45 inc/options/referrer.php:45
@@ -3316,7 +3316,7 @@ msgstr "Operaciones en las áreas:"
 
 #: inc/options/minify.php:133
 msgid "<acronym title=\"JavaScript\">JS</acronym> minify settings:"
-msgstr "Ajustes de minificación <acronym title=\"JavaScript\">JS</acronym>:"
+msgstr "Ajustes de minimizado de <acronym title=\"JavaScript\">JS</acronym>:"
 
 #: inc/options/minify.php:105
 msgid "Do not remove comments that contain these terms."
@@ -3324,11 +3324,11 @@ msgstr "No eliminar comentarios que contengan estos términos."
 
 #: inc/options/minify.php:77
 msgid "<acronym title=\"Hypertext Markup Language\">HTML</acronym> minify settings:"
-msgstr "Ajustes de minificación <acronym title=\"Hypertext Markup Language\">HTML</acronym>:"
+msgstr "Ajustes de minimizado de <acronym title=\"Hypertext Markup Language\">HTML</acronym>:"
 
 #: inc/options/minify.php:63
 msgid "Notify when minify cache creation errors occur."
-msgstr "Notificar errores al crear caché minificada."
+msgstr "Notificar errores al crear caché minimizada."
 
 #: inc/options/minify.php:61
 msgid "Both Admin &amp; Email Notification"
@@ -3344,7 +3344,7 @@ msgstr "Notificación de administrador"
 
 #: inc/options/minify.php:47
 msgid "Authenticated users will not receive minified pages if this option is enabled."
-msgstr "Los usuarios identificados no recibirán páginas minificadas si se activa esta opción."
+msgstr "Los usuarios identificados no recibirán páginas minimizadas si se activa esta opción."
 
 #: inc/options/minify.php:41
 msgid "If disabled, <acronym title=\"Cascading Style Sheet\">CSS</acronym> and <acronym title=\"JavaScript\">JS</acronym> embeddings will use GET variables instead of \"fancy\" links."
@@ -3376,7 +3376,7 @@ msgstr "Minimizar a través de %s es actualmente %s."
 
 #: inc/options/minify/yuijs2.php:28
 msgid "symbols (set to 0 to disable)"
-msgstr "Símbolos (establecidos en 0 para deshabilitar)"
+msgstr "símbolos (establecidos en 0 para desactivarlos)"
 
 #: inc/options/minify/yuijs2.php:10 lib/W3/UI/Settings/Minify.php:49
 #: lib/W3/UI/Settings/Minify.php:82
@@ -3703,7 +3703,7 @@ msgstr "<em>Recomendado:</em> En la pestaña \"<a href=\"admin.php?page=w3tc_bro
 
 #: inc/options/install.php:12
 msgid "<em>Recommended:</em> On the \"<a href=\"admin.php?page=w3tc_minify\">Minify</a>\" tab all of the recommended settings are preset. Use the help button to simplify discovery of your <acronym title=\"Cascading Style Sheet\">CSS</acronym> and <acronym title=\"JavaScript\">JS</acronym> files and groups. Pay close attention to the method and location of your <acronym title=\"JavaScript\">JS</acronym> group embeddings. See the plugin's <a href=\"admin.php?page=w3tc_faq\">FAQ</a> for more information on usage."
-msgstr "<em>Recomendado:</em> en la pestaña \"<a href=\"admin.php?page=w3tc_minify\">Minificar</a>\" está preestablecidos los valores recomendados. Usa el botón de ayuda para simplificar el descubrimiento de tus ficheros y grupos <acronym title=\"Cascading Style Sheet\">CSS</acronym> y <acronym title=\"JavaScript\">JS</acronym>. Presta mucha atención al método y la ubicación de tus grupos de incrustado de <acronym title=\"JavaScript\">JS</acronym>. Mira las  <a href=\"admin.php?page=w3tc_faq\">FAQ</a> del plugin para más información sobre el uso."
+msgstr "<em>Recomendado:</em> en la pestaña \"<a href=\"admin.php?page=w3tc_minify\">Minimizar</a>\" está preestablecidos los valores recomendados. Usa el botón de ayuda para simplificar el descubrimiento de tus ficheros y grupos <acronym title=\"Cascading Style Sheet\">CSS</acronym> y <acronym title=\"JavaScript\">JS</acronym>. Presta mucha atención al método y la ubicación de tus grupos de incrustado de <acronym title=\"JavaScript\">JS</acronym>. Mira las  <a href=\"admin.php?page=w3tc_faq\">FAQ</a> del plugin para más información sobre el uso."
 
 #: inc/options/install.php:11
 msgid "1. The \"Compatibility Mode\" option found in the advanced section of the \"<a href=\"admin.php?page=w3tc_pgcache\">Page Cache Settings</a>\" tab will enable functionality that optimizes the interoperablity of caching with WordPress, is disabled by default, but highly recommended. Years of testing in hundreds of thousands of installations have helped us learn how to make caching behave well with WordPress. The tradeoff is that disk enhanced page cache performance under load tests will be decreased by ~20% at scale."
@@ -3711,7 +3711,7 @@ msgstr "1. El \"Modo de compatibilidad\" de la sección avanzada de la pestaña 
 
 #: inc/options/install.php:10
 msgid "On the \"<a href=\"admin.php?page=w3tc_general\">General</a>\" tab and select your caching methods for page, database and minify. In most cases, \"disk enhanced\" mode for page cache, \"disk\" mode for minify and \"disk\" mode for database caching are \"good\" settings."
-msgstr "En la pestaña \"<a href=\"admin.php?page=w3tc_general\">General</a>\" y selecciona tus métodos de cacheo para página, base de datos y minificación. En casi todos los casos, el modo \"disco mejorado\" para la caché de páginas, el modo \"disco\" para la minificación y el modo \"disco\" para la caché de base de datos son \"buenos\" ajustes. "
+msgstr "En la pestaña \"<a href=\"admin.php?page=w3tc_general\">General</a>\" y selecciona tus métodos de cacheo para página, base de datos y minimización. En casi todos los casos, el modo \"disco mejorado\" para la caché de páginas, el modo \"disco\" para la minimización y el modo \"disco\" para la caché de base de datos son \"buenos\" ajustes. "
 
 #: inc/options/install.php:7
 msgid "Set the permissions of wp-content/ back to 755, e.g.:"
@@ -3783,7 +3783,7 @@ msgstr "Prueba esta opción para una posible mejora de rendimiento si tu entorno
 
 #: inc/options/general.php:639
 msgid "Optimize disk enhanced page and minify disk caching for <acronym title=\"Network File System\">NFS</acronym>"
-msgstr "Optimiza la caché de página mejorada y la minificación a disco para <acronym title=\"Network File System\">NFS</acronym>"
+msgstr "Optimiza la caché de página mejorada y la minimización a disco para <acronym title=\"Network File System\">NFS</acronym>"
 
 #: inc/options/general.php:633
 msgid "Not recommended for <acronym title=\"Network File System\">NFS</acronym> systems."
@@ -3791,7 +3791,7 @@ msgstr "No recomendado para sistemas <acronym title=\"Network File System\">NFS<
 
 #: inc/options/general.php:632
 msgid "Enable file locking"
-msgstr "Habilitar bloqueo de archivos"
+msgstr "Activar el bloqueo de archivos"
 
 #: inc/options/general.php:626
 msgid "Notify of server configuration errors, if this option is disabled, the server configuration for active settings can be found on the <a href=\"admin.php?page=w3tc_install\">install</a> tab."
@@ -3996,7 +3996,7 @@ msgstr "La caché de objetos aumenta mucho el rendimiento de los sitios muy din�
 
 #: inc/options/general.php:237
 msgid "Enable object caching to further reduce execution time for common operations."
-msgstr "Habilitar cacheado de objetos para reducir aún más el tiempo de ejecución de operaciones comunes."
+msgstr "Activa el cacheado de objetos para reducir aún más el tiempo de ejecución de operaciones comunes."
 
 #: inc/options/general.php:193
 msgid "Caching database objects decreases the response time of your site. Best used if object caching is not possible."
@@ -4004,7 +4004,7 @@ msgstr "Cachear objetos de la basa de datos disminuye el tiempo de respuesta de 
 
 #: inc/options/general.php:186
 msgid "Enable database caching to reduce post, page and feed creation time."
-msgstr "Habilitar la caché de base de datos para reducir el tiempo de creación de post, páginas y feed."
+msgstr "Activa la caché de base de datos para reducir el tiempo de creación de entradas, páginas y feed."
 
 #: inc/options/general.php:164
 msgid "CSS Tidy"
@@ -4041,7 +4041,7 @@ msgstr "Servidor compartido (el disco es el mejor):"
 
 #: inc/options/general.php:117
 msgid "Select manual mode to use fields on the minify settings tab to specify files to be minified, otherwise files will be minified automatically."
-msgstr "Selecciona el modo manual para usar los campos de la pestaña de ajustes de minificación para especificar qué ficheros deben minificarse. Si no, los ficheros se minificarán automáticamente."
+msgstr "Selecciona el modo manual para usar los campos de la pestaña de ajustes de minimizado para especificar qué ficheros deben minimizarse. Si no, los ficheros se minimizarán automáticamente."
 
 #: inc/options/general.php:116
 msgid "Manual"
@@ -4053,11 +4053,11 @@ msgstr "Automático"
 
 #: inc/options/general.php:109
 msgid "Minification can decrease file size of <acronym title=\"Hypertext Markup Language\">HTML</acronym>, <acronym title=\"Cascading Style Sheet\">CSS</acronym>, <acronym title=\"JavaScript\">JS</acronym> and feeds respectively by ~10% on average."
-msgstr "La minificación puede disminuir el tamaño de los archivos <acronym title=\"Hypertext Markup Language\">HTML</acronym>, <acronym title=\"Cascading Style Sheet\">CSS</acronym>, <acronym title=\"JavaScript\">JS</acronym> y feeds respectivamente en ~10% de media. "
+msgstr "El minimizado puede disminuir el tamaño de los archivos <acronym title=\"Hypertext Markup Language\">HTML</acronym>, <acronym title=\"Cascading Style Sheet\">CSS</acronym>, <acronym title=\"JavaScript\">JS</acronym> y feeds respectivamente en ~10% de media. "
 
 #: inc/options/general.php:107
 msgid "Minify is disabled because CloudFlare minification is enabled."
-msgstr "La minificación está desactivada porque está activada la minificación de CloudFlare."
+msgstr "El minimizado está desactivado porque está activado el minimizado de CloudFlare."
 
 #: inc/options/general.php:99
 msgid "Reduce load time by decreasing the size and number of <acronym title=\"Cascading Style Sheet\">CSS</acronym> and <acronym title=\"JavaScript\">JS</acronym> files. Automatically remove unncessary data from <acronym title=\"Cascading Style Sheet\">CSS</acronym>, <acronym title=\"JavaScript\">JS</acronym>, feed, page and post <acronym title=\"Hypertext Markup Language\">HTML</acronym>."
@@ -4068,7 +4068,7 @@ msgstr "Reduce el tiempo de carga reduciendo el tamaño y el número de los fich
 #: lib/W3/Menus.php:54 lib/W3/UI/NewRelicNotes.php:30
 #: lib/W3/UI/Settings/Minify.php:10
 msgid "Minify"
-msgstr "Minificar"
+msgstr "Minimizar"
 
 #: inc/options/general.php:94 inc/options/general.php:181
 #: inc/options/general.php:232 inc/options/general.php:279
@@ -4128,11 +4128,11 @@ msgstr "Cachear páginas reduce el tiempo de respuesta de tu sitio y aumenta la 
 
 #: inc/options/general.php:51
 msgid "Enable page caching to decrease the response time of the site."
-msgstr "Habilitar el almacenamiento en caché de páginas para disminuir el tiempo de respuesta del sitio."
+msgstr "Activa el almacenamiento en caché de páginas para disminuir el tiempo de respuesta del sitio."
 
 #: inc/options/general.php:39
 msgid "Use preview mode to test configuration scenarios prior to releasing them (deploy) on the actual site. Preview mode remains active even after deploying settings until the feature is disabled."
-msgstr "Usa el modo de vista previa para probar los escenarios de configuración antes de liberarlos (desplegarlos) en el sitio real. El modo de vista previa se mantiene activo incluso después de desplegar los ajustes hasta que se deshabilita la función."
+msgstr "Usa el modo de vista previa para probar los escenarios de configuración antes de liberarlos (desplegarlos) en el sitio real. El modo de vista previa se mantiene activo incluso después de desplegar los ajustes hasta que se desactiva la función."
 
 #: inc/options/general.php:35 lib/W3/UI/PluginView.php:380
 msgid "To preview any changed settings (without deploying): %s"
@@ -4156,7 +4156,7 @@ msgstr "Tabla de contenidos"
 
 #: inc/options/extensions.php:11
 msgid "Extension support is always %s"
-msgstr "La extensión soportada siempre es %s"
+msgstr "La extensión compatible siempre está %s"
 
 #: inc/options/extensions/settings.php:18
 msgid "Save settings"
@@ -4192,7 +4192,7 @@ msgstr "Requisitos: %s"
 
 #: inc/options/extensions/list.php:83
 msgid "Disabled: Unsupported"
-msgstr "Desactivado: No soportado"
+msgstr "Desactivado: No compatible"
 
 #: inc/options/extensions/list.php:79
 msgid "Activate this extension"
@@ -4231,12 +4231,12 @@ msgstr "Aplicar"
 #: inc/options/extensions/list.php:25 inc/options/extensions/list.php:73
 #: inc/options/extensions/list.php:124 lib/W3/AdminCompatibility.php:98
 msgid "Deactivate"
-msgstr "Desactivado"
+msgstr "Desactivar"
 
 #: inc/options/extensions/list.php:24 inc/options/extensions/list.php:80
 #: inc/options/extensions/list.php:123
 msgid "Activate"
-msgstr "Activado"
+msgstr "Activar"
 
 #: inc/options/extensions/list.php:23 inc/options/extensions/list.php:122
 msgid "Bulk Actions"
@@ -4579,7 +4579,7 @@ msgstr "Intenta automáticamente buscar y subir los archivos modificados."
 
 #: inc/options/cdn.php:195
 msgid "If <acronym title=\"Content Delivery Network\">CDN</acronym> is enabled (and not using the origin pull method), your minified files will be automatically uploaded."
-msgstr "Si la <acronym title=\"Content Delivery Network\">CDN</acronym> está activada (y no está usando el método pull), tus ficheros minificados serán subidos automáticamente."
+msgstr "Si la <acronym title=\"Content Delivery Network\">CDN</acronym> está activada (y no está usando el método pull), tus ficheros minimizados serán subidos automáticamente."
 
 #: inc/options/cdn.php:194
 msgid "Automatically upload minify files"
@@ -4636,7 +4636,7 @@ msgstr "Subir archivos minify"
 
 #: inc/options/cdn.php:80
 msgid "If checked, minified <acronym>CSS</acronym> and <acronym>JS</acronym> files will be hosted with the <acronym title=\"Content Delivery Network\">CDN</acronym>."
-msgstr "Si se marca, los ficheros <acronym>CSS</acronym> y <acronym>JS</acronym> minificados serán hospedados en la <acronym title=\"Content Delivery Network\">CDN</acronym>."
+msgstr "Si se marca, los ficheros <acronym>CSS</acronym> y <acronym>JS</acronym> minimizados se alojarán en la <acronym title=\"Content Delivery Network\">CDN</acronym>."
 
 #: inc/options/cdn.php:73
 msgid "Upload theme files"
@@ -4873,7 +4873,7 @@ msgstr "<acronym title=\"File Transfer Protocol\">FTP</acronym> hostname:"
 
 #: inc/options/cdn/ftp.php:5
 msgid "Enable this option only if there are connectivity issues, otherwise it's not recommended."
-msgstr "Habilitar esta opción solo si existen problemas de conectividad, de lo contrario, no es recomendable."
+msgstr "Activa esta opción solo si existen problemas de conectividad, de lo contrario, no es recomendable."
 
 #: inc/options/cdn/ftp.php:4
 msgid "Use passive <acronym title=\"File Transfer Protocol\">FTP</acronym> mode"
@@ -5039,7 +5039,7 @@ msgstr "Algunos proveedores de <acronym>CDN</acronym> pueden o no dar soporte a 
 #: inc/options/cdn/netdna.php:73 inc/options/cdn/rscf.php:41
 #: inc/options/cdn/s3.php:35
 msgid "Disabled (always use HTTP)"
-msgstr "Deshabilitado (siempre utilice HTTP)"
+msgstr "Desactivado (siempre utilice HTTP)"
 
 #: inc/options/cdn/akamai.php:48 inc/options/cdn/att.php:21
 #: inc/options/cdn/azure.php:30 inc/options/cdn/cf.php:35
@@ -5049,7 +5049,7 @@ msgstr "Deshabilitado (siempre utilice HTTP)"
 #: inc/options/cdn/netdna.php:72 inc/options/cdn/rscf.php:40
 #: inc/options/cdn/s3.php:34
 msgid "Enabled (always use SSL)"
-msgstr "Habilitado (siempre use SSL)"
+msgstr "Activado (siempre usa SSL)"
 
 #: inc/options/cdn/akamai.php:47 inc/options/cdn/att.php:20
 #: inc/options/cdn/azure.php:29 inc/options/cdn/cf.php:34
@@ -5306,11 +5306,11 @@ msgstr "Gestión completa de cabeceras, incluidas <a href=\"http://en.wikipedia.
 
 #: inc/options/about.php:22
 msgid "Minification (concatenation and white space removal) of inline, external or 3rd party JavaScript / <acronym title=\"Cascading Style Sheet\">CSS</acronym> with automated updates"
-msgstr "Minificación (concatenación reducción de espacios en blanco) del JavaScript / <acronym title=\"Cascading Style Sheet\">CSS</acronym> en línea, externo o de terceras partes con actualizaciones automáticas."
+msgstr "Minimizado (concatenación reducción de espacios en blanco) del JavaScript / <acronym title=\"Cascading Style Sheet\">CSS</acronym> en línea, externo o de terceras partes con actualizaciones automáticas."
 
 #: inc/options/about.php:21
 msgid "Minification of posts / pages and feeds"
-msgstr "Minificación de los feeds de entradas / páginas"
+msgstr "Minimizado de los feeds de entradas / páginas"
 
 #: inc/options/about.php:20
 msgid "Caching of search results pages (i.e. <acronym title=\"Uniform Resource Identifier\">URI</acronym>s with query string variables) in memory or on disk"
@@ -5330,7 +5330,7 @@ msgstr "Cachear los objetos de la base de datos en memoria o en disco"
 
 #: inc/options/about.php:16
 msgid "Caching of (minified) <acronym title=\"Cascading Style Sheet\">CSS</acronym> and JavaScript in memory, on disk or on <acronym title=\"Content Delivery Network\">CDN</acronym>"
-msgstr "Cacheo de los <acronym title=\"Cascading Style Sheet\">CSS</acronym> y JavaScript (minificados), en disco o en <acronym title=\"Content Delivery Network\">CDN</acronym>"
+msgstr "Cacheo de los <acronym title=\"Cascading Style Sheet\">CSS</acronym> y JavaScript (minimizados), en disco o en <acronym title=\"Content Delivery Network\">CDN</acronym>"
 
 #: inc/options/about.php:15
 msgid "Caching of pages / posts in memory or on disk or on CDN (mirror only)"
@@ -5346,7 +5346,7 @@ msgstr "Mejora de la concurrencia y el escalado del servidor (aguantar con facil
 
 #: inc/options/about.php:12
 msgid "Bandwidth savings via Minify and <acronym title=\"Hypertext Transfer Protocol\">HTTP</acronym> compression of <acronym title=\"Hypertext Markup Language\">HTML</acronym>, <acronym title=\"Cascading Style Sheet\">CSS</acronym>, JavaScript and feeds"
-msgstr "Ahorro de ancho de banda por la minificación y la compresión <acronym title=\"Hypertext Transfer Protocol\">HTTP</acronym> del <acronym title=\"Hypertext Markup Language\">HTML</acronym>, <acronym title=\"Cascading Style Sheet\">CSS</acronym>, JavaScript y los feeds"
+msgstr "Ahorro de ancho de banda por la minimización y la compresión <acronym title=\"Hypertext Transfer Protocol\">HTTP</acronym> del <acronym title=\"Hypertext Markup Language\">HTML</acronym>, <acronym title=\"Cascading Style Sheet\">CSS</acronym>, JavaScript y los feeds"
 
 #: inc/options/about.php:11
 msgid "Reduced <acronym title=\"Hypertext Transfer Protocol\">HTTP</acronym> Transactions, <acronym title=\"Domain Name System\">DNS</acronym> lookups and reduced document load time"
@@ -5410,7 +5410,7 @@ msgstr "Modo de red:"
 
 #: inc/lightbox/self_test.php:302
 msgid "Enabled"
-msgstr "Habilitado"
+msgstr "Activo"
 
 #: inc/lightbox/self_test.php:300
 msgid "URL rewrite:"
@@ -5431,7 +5431,7 @@ msgstr "Definir WP_CACHE:"
 #: inc/lightbox/self_test.php:286 inc/lightbox/self_test.php:304
 #: inc/options/minify.php:58
 msgid "Disabled"
-msgstr "Deshabilitado"
+msgstr "Desactivado"
 
 #: inc/lightbox/self_test.php:282
 msgid "Fancy permalinks:"
@@ -5544,7 +5544,7 @@ msgstr "Detección de tipo Mime:"
 
 #: inc/lightbox/self_test.php:124
 msgid "(required for HTML Tidy minifier suppport)"
-msgstr "(necesario para la compatibilidad con el minificador HTML Tidy)"
+msgstr "(necesario para la compatibilidad con el minimizado de HTML Tidy)"
 
 #: inc/lightbox/self_test.php:118
 msgid "HTML Tidy extension:"
@@ -5650,7 +5650,7 @@ msgstr "Puede ser necesaria <a href=\"admin.php?page=w3tc_support&amp;request_ty
 
 #: inc/lightbox/minify_recommendations.php:123
 msgid "Typically minification of advertiser code, analytics/statistics or any other types of tracking code is not recommended."
-msgstr "Normalmente no es aconsejable minificar el código de los anuncios, annalítica/estadística y cualquier otro tipo de código de seguimiento."
+msgstr "Normalmente no es aconsejable minimizar el código de los anuncios, analítica/estadística y cualquier otro tipo de código de seguimiento."
 
 #: inc/lightbox/minify_recommendations.php:120
 msgid "Notes"
@@ -5714,15 +5714,15 @@ msgstr "Agregar:"
 
 #: inc/lightbox/minify_recommendations.php:11
 msgid "theme. Select \"add\" the files you wish to minify, then click \"apply &amp; close\" to save the settings."
-msgstr "tema. Elige \"añadir\" los ficheros que quieres minificar, después haz clic en \"aplicar y cerrar\" para guardar los ajustes."
+msgstr "tema. Elige \"añadir\" los ficheros que quieres minimizar, después haz clic en \"aplicar y cerrar\" para guardar los ajustes."
 
 #: inc/lightbox/minify_recommendations.php:5
 msgid "To get started with minify, we've identified the following external CSS and JS objects in the"
-msgstr "Hemos identificado los siguientes CSS y JS externos para ayudarte a empezar con el minificador."
+msgstr "Hemos identificado los siguientes CSS y JS externos para ayudarte a empezar con el minimizado."
 
 #: inc/lightbox/edge.php:13
 msgid "Enable Edge Mode"
-msgstr "Habilitar modo Edge"
+msgstr "Activar el modo Edge"
 
 #: inc/lightbox/edge.php:8
 msgid "Enable \"edge mode\" to opt-in to pre-release features or simply close this window to opt-in to bug fixes, security fixes and settings updates only."
@@ -6012,7 +6012,7 @@ msgstr "Seleccionar ganchos:"
 
 #: extensions/GenesisAdmin.php:296
 msgid "Disable fragment cache:"
-msgstr "Deshabilitar caché de fragmentos:"
+msgstr "Desactivar caché de fragmentos:"
 
 #: extensions/GenesisAdmin.php:291
 msgid "Caches wp_footer loop."
@@ -6141,7 +6141,7 @@ msgstr "y cacheo via <strong>%s</strong>"
 #: inc/options/pgcache.php:9 inc/options/pro/fragmentcache.php:6
 #: inc/widget/new_relic.php:89
 msgid "disabled"
-msgstr "deshabilitado"
+msgstr "desactivado"
 
 #: extensions/GenesisAdmin.php:31
 msgid "The Genesis Framework extension is currently %s "
@@ -6171,7 +6171,7 @@ msgstr "Ping automático (purgar) los feeds de FeedBurner cuando se modifican la
 #: inc/options/objectcache.php:9 inc/options/pgcache.php:9
 #: inc/options/pro/fragmentcache.php:6 inc/widget/new_relic.php:89
 msgid "enabled"
-msgstr "habilitado"
+msgstr "activo"
 
 #: extensions/FeedBurnerAdmin.php:52
 msgid "The FeedBurner extension is currently %s "
@@ -6282,7 +6282,7 @@ msgstr "Modo desarrollador:"
 
 #: extensions/CloudFlare/general-settings-box.php:71
 msgid "Minification:"
-msgstr "Minificación:"
+msgstr "Minimizado:"
 
 #: extensions/CloudFlare/general-settings-box.php:58
 msgid "Rocket Loader:"
@@ -6303,7 +6303,7 @@ msgstr "encuéntralo aquí"
 #: inc/options/pgcache.php:238 lib/W3/UI/Settings/Minify.php:20
 #: lib/W3/UI/Settings/Minify.php:25 lib/W3/UI/Settings/Minify.php:32
 msgid "Enable"
-msgstr "Habilitar"
+msgstr "Activar"
 
 #: extensions/CloudFlare/general-settings-box.php:3
 msgid "CloudFlare protects and accelerates websites."

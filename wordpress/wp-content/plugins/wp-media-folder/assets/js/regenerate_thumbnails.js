@@ -33,7 +33,8 @@
                 url: ajaxurl,
                 data: {
                     action: "wpmf_regeneratethumbnail",
-                    paged: paged
+                    paged: paged,
+                    wpmf_nonce: wpmf.vars.wpmf_nonce
                 },
                 success: function (res) {
                     var w = $('.process_gennerate_thumb').data('w');

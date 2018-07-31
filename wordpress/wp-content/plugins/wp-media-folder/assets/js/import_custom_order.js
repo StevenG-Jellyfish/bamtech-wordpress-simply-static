@@ -17,7 +17,8 @@
                 data: {
                     action: "wpmf",
                     task: 'import_order',
-                    current_import_page: current_import_page
+                    current_import_page: current_import_page,
+                    wpmf_nonce: wpmf.vars.wpmf_nonce
                 },
                 success: function (res) {
                     if (!res.status) {
