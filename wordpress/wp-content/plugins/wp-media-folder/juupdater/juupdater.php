@@ -10,30 +10,108 @@ if (!class_exists('JuUpdater', false)) :
     class JuUpdater
     {
 
-        public $metadataUrl = ''; //The URL of the plugin's metadata file.
-        public $pluginAbsolutePath = ''; //Full path of the main plugin file.
-        /* Plugin filename relative to the plugins directory. Many WP APIs use this to identify plugins. */
+        /**
+         * The URL of the plugin's metadata file.
+         *
+         * @var string
+         */
+        public $metadataUrl = '';
+
+        /**
+         * Full path of the main plugin file.
+         *
+         * @var string
+         */
+        public $pluginAbsolutePath = '';
+
+        /**
+         * Plugin filename relative to the plugins directory. Many WP APIs use this to identify plugins.
+         *
+         * @var string
+         */
         public $pluginFile = '';
-        public $slug = '';        //Plugin slug.
-        public $checkPeriod = 12; //How often to check for updates (in hours).
-        public $optionName = '';  //Where to store the update info.
-        public $muPluginFile = ''; //For MU plugins, the plugin filename relative to the mu-plugins directory.
-        public $debugMode = false; //Set to TRUE to enable error reporting. Errors are raised using trigger_error()
-        //and should be logged to the standard PHP error log.
-        public $throttleRedundantChecks = false; //Check less often if we already know that an update is available.
+
+        /**
+         * Plugin slug.
+         *
+         * @var string
+         */
+        public $slug = '';
+
+        /**
+         * How often to check for updates (in hours).
+         *
+         * @var string
+         */
+        public $checkPeriod = 12;
+
+        /**
+         * Where to store the update info.
+         *
+         * @var string
+         */
+        public $optionName = '';
+
+        /**
+         * For MU plugins, the plugin filename relative to the mu-plugins directory.
+         *
+         * @var string
+         */
+        public $muPluginFile = '';
+
+        /**
+         * Set to TRUE to enable error reporting. Errors are raised using trigger_error()
+         *
+         * @var string
+         */
+        public $debugMode = false;
+
+        /**
+         * Check less often if we already know that an update is available.
+         *
+         * @var string
+         */
+        public $throttleRedundantChecks = false;
+
+        /**
+         * Full path of the main plugin file.
+         *
+         * @var string
+         */
         public $throttledCheckPeriod = 72;
+
+        /**
+         * Cron hook
+         *
+         * @var string
+         */
         private $cronHook = null;
+
+        /**
+         * Cache installed version
+         *
+         * @var string
+         */
         private $cachedInstalledVersion = null;
+
+        /**
+         * Juupdater version
+         *
+         * @var string
+         */
         public $juversion = '1.0.0';
 
         /**
          * JuUpdater constructor.
-         * @param $metadataUrl
-         * @param $pluginFile
-         * @param string $slug
-         * @param int $checkPeriod
-         * @param string $optionName
-         * @param string $muPluginFile
+         *
+         * @param string  $metadataUrl  Meta data URL
+         * @param string  $pluginFile   Plugin file
+         * @param string  $slug         Plugin slug
+         * @param integer $checkPeriod  Check Period
+         * @param string  $optionName   Option Name
+         * @param string  $muPluginFile MuPlugin file
+         *
+         * @return void
          */
         public function __construct(
             $metadataUrl,
@@ -43,14 +121,14 @@ if (!class_exists('JuUpdater', false)) :
             $optionName = '',
             $muPluginFile = ''
         ) {
-            $this->metadataUrl = $metadataUrl;
+            $this->metadataUrl        = $metadataUrl;
             $this->pluginAbsolutePath = $pluginFile;
-            $this->pluginFile = plugin_basename($this->pluginAbsolutePath);
-            $this->muPluginFile = $muPluginFile;
-            $this->checkPeriod = $checkPeriod;
-            $this->slug = $slug;
-            $this->optionName = $optionName;
-            $this->debugMode = defined('WP_DEBUG') && WP_DEBUG;
+            $this->pluginFile         = plugin_basename($this->pluginAbsolutePath);
+            $this->muPluginFile       = $muPluginFile;
+            $this->checkPeriod        = $checkPeriod;
+            $this->slug               = $slug;
+            $this->optionName         = $optionName;
+            $this->debugMode          = defined('WP_DEBUG') && WP_DEBUG;
 
             //If no slug is specified, use the name of the main plugin file as the slug.
             //For example, 'my-cool-plugin/cool-plugin.php' becomes 'cool-plugin'.
@@ -102,7 +180,7 @@ if (!class_exists('JuUpdater', false)) :
                 //Try to use one of the default schedules if possible as it's less likely to conflict
                 //with other plugins and their custom schedules.
                 $defaultSchedules = array(
-                    1 => 'hourly',
+                    1  => 'hourly',
                     12 => 'twicedaily',
                     24 => 'daily',
                 );
@@ -123,9 +201,6 @@ if (!class_exists('JuUpdater', false)) :
                 // In case Cron is disabled or unreliable, we also manually trigger
                 // the periodic checks while the user is browsing the Dashboard.
                 add_action('admin_init', array($this, 'maybeCheckForUpdates'));
-
-                //Like WordPress itself, we check more often on certain pages.
-                /** @see wp_update_plugins */
                 add_action('load-update-core.php', array($this, 'maybeCheckForUpdates'));
                 add_action('load-plugins.php', array($this, 'maybeCheckForUpdates'));
                 add_action('load-update.php', array($this, 'maybeCheckForUpdates'));
@@ -146,10 +221,15 @@ if (!class_exists('JuUpdater', false)) :
             add_action('admin_init', array($this, 'juAddButton'));
         }
 
+        /**
+         * Add a connect button in settings page
+         *
+         * @return void
+         */
         public function juAddButton()
         {
             global $pagenow;
-            if ($pagenow == 'options-general.php') {
+            if ($pagenow === 'options-general.php') {
                 register_setting('JoomUnited live updates', '_ju_settings');
                 add_settings_section('juupdater-connect', '', array($this, 'showSettings'), 'general');
                 add_settings_field(
@@ -163,43 +243,72 @@ if (!class_exists('JuUpdater', false)) :
             }
         }
 
+        /**
+         * Show setting title
+         *
+         * @return void
+         */
         public function showSettings()
         {
             echo '<h3>Joomunited live updates</h3>';
         }
 
+        /**
+         * Show connect or disconnect button
+         *
+         * @return void
+         */
         public function joomConnect()
         {
             $token = get_option('ju_user_token');
             if (empty($token)) {
                 echo '<p>To enable live update please link your joomunited account</p>';
-                $link = JU_BASE . "index.php?option=com_juupdater&view=login
-                &tmpl=component&site=" . admin_url() . "&TB_iframe=true&width=600&height=550";
-                $button = '<a href="' . $link . '" class="thickbox button">Link my Joomunited account</a>';
+                $link = JU_BASE . 'index.php?option=com_juupdater&view=login
+                &tmpl=component&site=' . admin_url() . '&TB_iframe=true&width=600&height=550';
+                echo '<a href="' . esc_html($link) . '" class="thickbox button">Link my Joomunited account</a>';
             } else {
                 echo '<p>Live update are enabled click here if you want to disable it</p>';
-                $button = '<span class="button button-primary ju-btn-disconnect">
+                echo '<span class="button button-primary ju-btn-disconnect">
 Disconnect my Joomunited account</span>';
             }
-            echo $button;
         }
 
+        /**
+         * Update token
+         *
+         * @return void
+         */
         public function juAddToken()
         {
+            if (empty($_POST['wpmf_nonce'])
+                || !wp_verify_nonce($_POST['wpmf_nonce'], 'wpmf_nonce')) {
+                die();
+            }
+
             if (isset($_POST['token'])) {
                 update_option('ju_user_token', $_POST['token']);
             }
         }
 
+        /**
+         * Remove token
+         *
+         * @return void
+         */
         public function juLogout()
         {
             update_option('ju_user_token', '');
         }
 
+        /**
+         * Add script file
+         *
+         * @return void
+         */
         public function juLoadCustomWpAdminScript()
         {
             global $pagenow;
-            if ($pagenow == 'plugins.php' || $pagenow == 'options-general.php') {
+            if ($pagenow === 'plugins.php' || $pagenow === 'options-general.php') {
                 wp_register_script(
                     'check_token',
                     plugins_url('/juupdater/js/check_token.js', dirname(__FILE__)),
@@ -209,7 +318,7 @@ Disconnect my Joomunited account</span>';
                 wp_enqueue_script('check_token');
             }
 
-            if ($pagenow == 'update-core.php') {
+            if ($pagenow === 'update-core.php') {
                 wp_register_script(
                     'ju_update_core',
                     plugins_url('/juupdater/js/ju_update_core.js', dirname(__FILE__)),
@@ -225,6 +334,8 @@ Disconnect my Joomunited account</span>';
         }
 
         /**
+         * Localize a script.
+         *
          * @return array
          */
         public function localizeScript()
@@ -239,27 +350,29 @@ Disconnect my Joomunited account</span>';
             }
             $token = get_option('ju_user_token');
             return array(
-                'ajaxurl' => admin_url('admin-ajax.php'),
-                'token' => @$token,
-                'ju_base' => JU_BASE,
+                'ajaxurl'        => admin_url('admin-ajax.php'),
+                'token'          => $token,
+                'ju_base'        => JU_BASE,
                 'ju_content_url' => admin_url(),
-                'version' => $version
+                'version'        => $version,
+                'wpmf_nonce'            => wp_create_nonce('wpmf_nonce')
             );
         }
 
         /**
          * Add our custom schedule to the array of Cron schedules used by WP.
          *
-         * @param array $schedules
+         * @param array $schedules Schedule
+         *
          * @return array
          */
         public function addCustomSchedule($schedules)
         {
             if ($this->checkPeriod && ($this->checkPeriod > 0)) {
-                $scheduleName = 'every' . $this->checkPeriod . 'hours';
+                $scheduleName             = 'every' . $this->checkPeriod . 'hours';
                 $schedules[$scheduleName] = array(
                     'interval' => $this->checkPeriod * 3600,
-                    'display' => sprintf('Every %d hours', $this->checkPeriod),
+                    'display'  => sprintf('Every %d hours', $this->checkPeriod),
                 );
             }
             return $schedules;
@@ -288,9 +401,8 @@ Disconnect my Joomunited account</span>';
         /**
          * Retrieve plugin info from the configured API endpoint.
          *
-         * @uses wp_remote_get()
+         * @param array $queryArgs Additional query arguments to append to the request.
          *
-         * @param array $queryArgs Additional query arguments to append to the request. Optional.
          * @return PluginInfo
          */
         public function requestInfo($queryArgs = array())
@@ -299,9 +411,9 @@ Disconnect my Joomunited account</span>';
              * Query args to append to the URL.
              * Plugins can add their own by using a filter callback (see addQueryArgFilter()).
              */
-            $installedVersion = $this->getInstalledVersion();
+            $installedVersion               = $this->getInstalledVersion();
             $queryArgs['installed_version'] = ($installedVersion !== null) ? $installedVersion : '';
-            $queryArgs = apply_filters('puc_request_info_query_args-' . $this->slug, $queryArgs);
+            $queryArgs                      = apply_filters('puc_request_info_query_args-' . $this->slug, $queryArgs);
 
             //Various options for the wp_remote_get() call. Plugins can filter these, too.
             $options = array(
@@ -325,20 +437,10 @@ Disconnect my Joomunited account</span>';
             //Try to parse the response
             $pluginInfo = null;
             if (!is_wp_error($result) && isset($result['response']['code'])
-                && ($result['response']['code'] == 200) && !empty($result['body'])) {
-                $pluginInfo = JuPluginInfo::fromJson($result['body'], $this->debugMode);
+                && ($result['response']['code'] === 200) && !empty($result['body'])) {
+                $pluginInfo           = JuPluginInfo::fromJson($result['body'], $this->debugMode);
                 $pluginInfo->filename = $this->pluginFile;
-                $pluginInfo->slug = $this->slug;
-            } elseif ($this->debugMode) {
-                $message = sprintf("The URL %s does not point to a valid plugin metadata file. ", $url);
-                if (is_wp_error($result)) {
-                    $message .= "WP HTTP error: " . $result->get_error_message();
-                } elseif (isset($result['response']['code'])) {
-                    $message .= "HTTP response code is " . $result['response']['code'] . " (expected: 200)";
-                } else {
-                    $message .= "wp_remote_get() returned an unexpected result.";
-                }
-                trigger_error($message, E_USER_WARNING);
+                $pluginInfo->slug     = $this->slug;
             }
 
             $pluginInfo = apply_filters('puc_request_info_result-' . $this->slug, $pluginInfo, $result);
@@ -357,7 +459,7 @@ Disconnect my Joomunited account</span>';
             // For the sake of simplicity, this function just calls requestInfo()
             // and transforms the result accordingly.
             $pluginInfo = $this->requestInfo(array('checking_for_updates' => '1'));
-            if ($pluginInfo == null) {
+            if ($pluginInfo === null) {
                 return null;
             }
             return JuPluginUpdate::fromPluginInfo($pluginInfo);
@@ -379,16 +481,6 @@ Disconnect my Joomunited account</span>';
                 $this->cachedInstalledVersion = $pluginHeader['Version'];
                 return $pluginHeader['Version'];
             } else {
-                //This can happen if the filename points to something that is not a plugin.
-                if ($this->debugMode) {
-                    trigger_error(
-                        sprintf(
-                            "Can't to read the Version header for '%s'. The filename is incorrect or is not a plugin.",
-                            $this->pluginFile
-                        ),
-                        E_USER_WARNING
-                    );
-                }
                 return null;
             }
         }
@@ -402,15 +494,6 @@ Disconnect my Joomunited account</span>';
         {
             if (!is_file($this->pluginAbsolutePath)) {
                 //This can happen if the plugin filename is wrong.
-                if ($this->debugMode) {
-                    trigger_error(
-                        sprintf(
-                            "Can't to read the plugin header for '%s'. The file does not exist.",
-                            $this->pluginFile
-                        ),
-                        E_USER_WARNING
-                    );
-                }
                 return array();
             }
 
@@ -431,27 +514,18 @@ Disconnect my Joomunited account</span>';
             $installedVersion = $this->getInstalledVersion();
             //Fail silently if we can't find the plugin or read its header.
             if ($installedVersion === null) {
-                if ($this->debugMode) {
-                    trigger_error(
-                        sprintf(
-                            'Skipping update check for %s - installed version unknown.',
-                            $this->pluginFile
-                        ),
-                        E_USER_WARNING
-                    );
-                }
                 return null;
             }
 
             $state = $this->getUpdateState();
             if (empty($state)) {
-                $state = new stdClass;
-                $state->lastCheck = 0;
+                $state                 = new stdClass;
+                $state->lastCheck      = 0;
                 $state->checkedVersion = '';
-                $state->update = null;
+                $state->update         = null;
             }
 
-            $state->lastCheck = time();
+            $state->lastCheck      = time();
             $state->checkedVersion = $installedVersion;
             //Save before checking in case something goes wrong
             $this->setUpdateState($state);
@@ -474,6 +548,8 @@ Disconnect my Joomunited account</span>';
          * Return TRUE to check for updates immediately, or FALSE to cancel.
          *
          * This method is declared public because it's a hook callback. Calling it directly is not recommended.
+         *
+         * @return void
          */
         public function maybeCheckForUpdates()
         {
@@ -495,15 +571,15 @@ Disconnect my Joomunited account</span>';
                 //WordPress cron schedules are not exact, so lets do an update check even
                 //if slightly less than $checkPeriod hours have elapsed since the last check.
                 $cronFuzziness = 20 * 60;
-                $timeout = $this->checkPeriod * 3600 - $cronFuzziness;
+                $timeout       = $this->checkPeriod * 3600 - $cronFuzziness;
             } else {
                 $timeout = $this->checkPeriod * 3600;
             }
 
-            $state = $this->getUpdateState();
+            $state       = $this->getUpdateState();
             $shouldCheck = empty($state) ||
-                !isset($state->lastCheck) ||
-                ((time() - $state->lastCheck) >= $timeout);
+                           !isset($state->lastCheck) ||
+                           ((time() - $state->lastCheck) >= $timeout);
 
             //Let plugin authors substitute their own algorithm.
             if ((!empty($state) && isset($state->lastCheck))) {
@@ -544,14 +620,14 @@ Disconnect my Joomunited account</span>';
         /**
          * Persist the update checker state to the DB.
          *
-         * @param StdClass $state
+         * @param StdClass $state State
+         *
          * @return void
          */
         private function setUpdateState($state)
         {
             if (isset($state->update) && is_object($state->update) && method_exists($state->update, 'toStdClass')) {
-                $update = $state->update;
-                /** @var PluginUpdate $update */
+                $update        = $state->update;
                 $state->update = $update->toStdClass();
             }
             update_site_option($this->optionName, $state);
@@ -562,6 +638,8 @@ Disconnect my Joomunited account</span>';
          *
          * Call this when your plugin is being uninstalled, or if you want to
          * clear the update cache.
+         *
+         * @return void
          */
         public function resetUpdateState()
         {
@@ -572,17 +650,16 @@ Disconnect my Joomunited account</span>';
          * Intercept plugins_api() calls that request information about our plugin and
          * use the configured API endpoint to satisfy them.
          *
-         * @see plugins_api()
+         * @param mixed        $result Result
+         * @param string       $action Action
+         * @param array|object $args   Params
          *
-         * @param mixed $result
-         * @param string $action
-         * @param array|object $args
          * @return mixed
          */
         public function injectInfo($result, $action = null, $args = null)
         {
-            $relevant = ($action == 'plugin_information') && isset($args->slug) && (
-                    ($args->slug == $this->slug) || ($args->slug == dirname($this->pluginFile))
+            $relevant = ($action === 'plugin_information') && isset($args->slug) && (
+                    ($args->slug === $this->slug) || ($args->slug === dirname($this->pluginFile))
                 );
             if (!$relevant) {
                 return $result;
@@ -601,6 +678,7 @@ Disconnect my Joomunited account</span>';
          * Insert the latest update (if any) into the update list maintained by WP.
          *
          * @param StdClass $updates Update list.
+         *
          * @return StdClass Modified update list.
          */
         public function injectUpdate($updates)
@@ -617,11 +695,11 @@ Disconnect my Joomunited account</span>';
                 //Let plugins filter the update info before it's passed on to WordPress.
                 $update = apply_filters('puc_pre_inject_update-' . $this->slug, $update);
                 if (!is_object($updates)) {
-                    $updates = new stdClass();
+                    $updates           = new stdClass();
                     $updates->response = array();
                 }
 
-                $wpUpdate = $update->toWpFormat();
+                $wpUpdate   = $update->toWpFormat();
                 $pluginFile = $this->pluginFile;
 
                 if ($this->isMuPlugin()) {
@@ -630,9 +708,9 @@ Disconnect my Joomunited account</span>';
                      * but we can still display a notice.
                      */
                     $wpUpdate->package = null;
-                    $pluginFile = $this->muPluginFile;
+                    $pluginFile        = $this->muPluginFile;
                 }
-                add_action("after_plugin_row_{$pluginFile}", array($this, 'juPluginUpdateRow'), 10, 2);
+                add_action('after_plugin_row_' . $pluginFile, array($this, 'juPluginUpdateRow'), 10, 2);
                 $updates->response[$pluginFile] = $wpUpdate;
             } elseif (isset($updates, $updates->response)) {
                 unset($updates->response[$this->pluginFile]);
@@ -645,9 +723,12 @@ Disconnect my Joomunited account</span>';
         }
 
         /**
-         * @param $file
-         * @param $plugin_data
-         * @return bool
+         * Plugin update row
+         *
+         * @param string $file        Plugin file
+         * @param array  $plugin_data Plugin data
+         *
+         * @return boolean
          */
         public function juPluginUpdateRow($file, $plugin_data)
         {
@@ -657,7 +738,7 @@ Disconnect my Joomunited account</span>';
                     $plugin_data['slug'] = sanitize_title($plugin_data['Name']);
                 }
 
-                if ($plugin_data['slug'] == 'wp-frontpage-news-pro-addon') {
+                if ($plugin_data['slug'] === 'wp-frontpage-news-pro-addon') {
                     $response = wp_remote_get(
                         JU_BASE . 'index.php?option=com_juupdater&task=
                         download.checktoken&extension=wp-latest-posts-addon.zip&token=' . $token
@@ -676,7 +757,7 @@ Disconnect my Joomunited account</span>';
                     return false;
                 }
 
-                $r = $current->response[$file];
+                $r             = $current->response[$file];
                 $wp_list_table = _get_list_table('WP_Plugins_List_Table');
                 if (is_network_admin() || !is_multisite()) {
                     if (is_network_admin()) {
@@ -685,17 +766,18 @@ Disconnect my Joomunited account</span>';
                         $active_class = is_plugin_active($file) ? ' active' : '';
                     }
                     if (!empty($a_body)) {
-                        if ($a_body->status == false && $a_body->linkdownload != '') {
-                            echo '<tr class="plugin-update-tr' . $active_class . '"
+                        if (!$a_body->status && $a_body->linkdownload !== '') {
+                            echo '<tr class="plugin-update-tr' . esc_html($active_class) . '"
                              id="ju-' . esc_attr($r->slug . '-update') . '"
                               data-slug="' . esc_attr($r->slug) . '"
                                data-plugin="' . esc_attr($file) . '">
                                <td colspan="' . esc_attr($wp_list_table->get_column_count()) . '"
                                 class="plugin-update colspanchange"><div class="update-message">';
+                            // phpcs:ignore WordPress.XSS.EscapeOutput -- Content already escaped in the method
                             printf($a_body->linkdownload);
                         }
                     }
-                    do_action("in_plugin_update_message-{$file}", $plugin_data, $r);
+                    do_action('in_plugin_update_message-' . $file, $plugin_data, $r);
                     echo '</div></td></tr>';
                 }
             }
@@ -712,15 +794,15 @@ Disconnect my Joomunited account</span>';
          * GitHub and other repositories provide ZIP downloads, but they often use directory names like
          * "project-branch" or "project-tag-hash". We need to change the name to the actual plugin folder.
          *
-         * @param string $source The directory to copy to /wp-content/plugins. Usually a subdirectory of $remoteSource.
-         * @param string $remoteSource WordPress has extracted the update to this directory.
-         * @param WP_Upgrader $upgrader
+         * @param string      $source       The directory to copy to /wp-content/plugins. Usually a subdirectory of $remoteSource.
+         * @param string      $remoteSource WordPress has extracted the update to this directory.
+         * @param WP_Upgrader $upgrader     Upgrader
+         *
          * @return string|WP_Error
          */
         public function fixDirectoryName($source, $remoteSource, $upgrader)
         {
             global $wp_filesystem;
-            /** @var WP_Filesystem_Base $wp_filesystem */
             //Basic sanity checks.
             if (!isset($source, $remoteSource, $upgrader, $upgrader->skin, $wp_filesystem)) {
                 return $source;
@@ -728,7 +810,7 @@ Disconnect my Joomunited account</span>';
 
             //Figure out which plugin is being upgraded.
             $pluginFile = null;
-            $skin = $upgrader->skin;
+            $skin       = $upgrader->skin;
             if ($skin instanceof Plugin_Upgrader_Skin) {
                 if (isset($skin->plugin) && is_string($skin->plugin) && ($skin->plugin !== '')) {
                     $pluginFile = $skin->plugin;
@@ -741,7 +823,7 @@ Disconnect my Joomunited account</span>';
                     require_once(ABSPATH . '/wp-admin/includes/plugin.php');
                 }
                 $installedPlugins = get_plugins();
-                $matches = array();
+                $matches          = array();
                 foreach ($installedPlugins as $pluginBasename => $headers) {
                     $diff1 = array_diff_assoc($headers, $skin->plugin_info);
                     $diff2 = array_diff_assoc($skin->plugin_info, $headers);
@@ -778,7 +860,7 @@ Disconnect my Joomunited account</span>';
 
                 $sourceFiles = $wp_filesystem->dirlist($remoteSource);
                 if (is_array($sourceFiles)) {
-                    $sourceFiles = array_keys($sourceFiles);
+                    $sourceFiles   = array_keys($sourceFiles);
                     $firstFilePath = trailingslashit($remoteSource) . $sourceFiles[0];
 
                     if ((count($sourceFiles) > 1) || (!$wp_filesystem->is_dir($firstFilePath))) {
@@ -829,7 +911,6 @@ Disconnect my Joomunited account</span>';
         public function getUpdate()
         {
             $state = $this->getUpdateState();
-            /** @var StdClass $state */
             //Is there an update available insert?
             if (!empty($state) && isset($state->update) && !empty($state->update)) {
                 $update = $state->update;
@@ -850,21 +931,22 @@ Disconnect my Joomunited account</span>';
          * You can change the link text by using the "puc_manual_check_link-$slug" filter.
          * Returning an empty string from the filter will disable the link.
          *
-         * @param array $pluginMeta Array of meta links.
-         * @param string $pluginFile
+         * @param array  $pluginMeta Array of meta links.
+         * @param string $pluginFile Plugin file
+         *
          * @return array
          */
         public function addCheckForUpdatesLink($pluginMeta, $pluginFile)
         {
-            $isRelevant = ($pluginFile == $this->pluginFile) || (!empty($this->muPluginFile)
-                    && $pluginFile == $this->muPluginFile);
+            $isRelevant = ($pluginFile === $this->pluginFile) || (!empty($this->muPluginFile)
+                                                                  && $pluginFile === $this->muPluginFile);
 
             if ($isRelevant && current_user_can('update_plugins')) {
                 $linkUrl = wp_nonce_url(
                     add_query_arg(
                         array(
                             'puc_check_for_updates' => 1,
-                            'puc_slug' => $this->slug,
+                            'puc_slug'              => $this->slug,
                         ),
                         is_network_admin() ? network_admin_url('plugins.php') : admin_url('plugins.php')
                     ),
@@ -877,8 +959,8 @@ Disconnect my Joomunited account</span>';
                 }
 
                 $ju_token = get_option('ju_user_token');
-                $link = JU_BASE . "index.php?option=com_juupdater&view=login&tmpl=component&site=" . admin_url() . "
-                &TB_iframe=true&width=300&height=305";
+                $link     = JU_BASE . 'index.php?option=com_juupdater&view=login&tmpl=component&site=' . admin_url() . '
+                &TB_iframe=true&width=300&height=305';
 
                 if (empty($ju_token)) {
                     $pluginMeta[] = sprintf('<a class="thickbox ju_update"
@@ -890,15 +972,15 @@ Disconnect my Joomunited account</span>';
 
         /**
          * Check for updates when the user clicks the "Check for updates" link.
+         *
          * @see self::addCheckForUpdatesLink()
          *
          * @return void
          */
         public function handleManualCheck()
         {
-            $shouldCheck = isset($_GET['puc_check_for_updates'], $_GET['puc_slug'])
-                && $_GET['puc_slug'] == $this->slug && current_user_can('update_plugins')
-                && check_admin_referer('puc_check_for_updates');
+            // phpcs:ignore WordPress.CSRF.NonceVerification.NoNonceVerification -- No action, nonce is not required
+            $shouldCheck = isset($_GET['puc_check_for_updates'], $_GET['puc_slug']) && $_GET['puc_slug'] === $this->slug && current_user_can('update_plugins') && check_admin_referer('puc_check_for_updates');
 
             if ($shouldCheck) {
                 $update = $this->checkForUpdates();
@@ -906,7 +988,7 @@ Disconnect my Joomunited account</span>';
                 wp_redirect(add_query_arg(
                     array(
                         'puc_update_check_result' => $status,
-                        'puc_slug' => $this->slug,
+                        'puc_slug'                => $this->slug,
                     ),
                     is_network_admin() ? network_admin_url('plugins.php') : admin_url('plugins.php')
                 ));
@@ -915,24 +997,29 @@ Disconnect my Joomunited account</span>';
 
         /**
          * Display the results of a manual update check.
+         *
          * @see self::handleManualCheck()
          *
          * You can change the result message by using the "puc_manual_check_message-$slug" filter.
+         *
+         * @return void
          */
         public function displayManualCheckResult()
         {
-            if (isset($_GET['puc_update_check_result'], $_GET['puc_slug']) && ($_GET['puc_slug'] == $this->slug)) {
+            // phpcs:ignore WordPress.CSRF.NonceVerification.NoNonceVerification -- No action, nonce is not required
+            if (isset($_GET['puc_update_check_result'], $_GET['puc_slug']) && ($_GET['puc_slug'] === $this->slug)) {
+                // phpcs:ignore WordPress.CSRF.NonceVerification.NoNonceVerification -- No action, nonce is not required
                 $status = strval($_GET['puc_update_check_result']);
-                if ($status == 'no_update') {
+                if ($status === 'no_update') {
                     $message = 'This plugin is up to date.';
-                } elseif ($status == 'update_available') {
+                } elseif ($status === 'update_available') {
                     $message = 'A new version of this plugin is available.';
                 } else {
                     $message = sprintf('Unknown update checker status "%s"', htmlentities($status));
                 }
                 printf(
                     '<div class="updated"><p>%s</p></div>',
-                    apply_filters('puc_manual_check_message-' . $this->slug, $message, $status)
+                    esc_html(apply_filters('puc_manual_check_message-' . $this->slug, $message, $status))
                 );
             }
         }
@@ -940,7 +1027,7 @@ Disconnect my Joomunited account</span>';
         /**
          * Check if the plugin file is inside the mu-plugins directory.
          *
-         * @return bool
+         * @return boolean
          */
         protected function isMuPlugin()
         {
@@ -949,7 +1036,7 @@ Disconnect my Joomunited account</span>';
             if ($cachedResult === null) {
                 //Convert both paths to the canonical form before comparison.
                 $muPluginDir = realpath(WPMU_PLUGIN_DIR);
-                $pluginPath = realpath($this->pluginAbsolutePath);
+                $pluginPath  = realpath($this->pluginAbsolutePath);
 
                 $cachedResult = (strpos($pluginPath, $muPluginDir) === 0);
             }
@@ -961,7 +1048,8 @@ Disconnect my Joomunited account</span>';
          * Clear the cached plugin version. This method can be set up as a filter (hook) and will
          * return the filter argument unmodified.
          *
-         * @param mixed $filterArgument
+         * @param mixed $filterArgument Filter argument
+         *
          * @return mixed
          */
         public function clearCachedVersion($filterArgument = null)
@@ -976,9 +1064,8 @@ Disconnect my Joomunited account</span>';
          * The callback function should take one argument - an associative array of query arguments.
          * It should return a modified array of query arguments.
          *
-         * @uses add_filter() This method is a convenience wrapper for add_filter().
+         * @param callable $callback Callback
          *
-         * @param callable $callback
          * @return void
          */
         public function addQueryArgFilter($callback)
@@ -993,9 +1080,8 @@ Disconnect my Joomunited account</span>';
          * and return a modified array or arguments. See the WP documentation on wp_remote_get()
          * for details on what arguments are available and how they work.
          *
-         * @uses add_filter() This method is a convenience wrapper for add_filter().
+         * @param callable $callback Callback
          *
-         * @param callable $callback
          * @return void
          */
         public function addHttpRequestArgFilter($callback)
@@ -1013,9 +1099,8 @@ Disconnect my Joomunited account</span>';
          *
          * The callback function should return a new or modified instance of PluginInfo or NULL.
          *
-         * @uses add_filter() This method is a convenience wrapper for add_filter().
+         * @param callable $callback Callback
          *
-         * @param callable $callback
          * @return void
          */
         public function addResultFilter($callback)
@@ -1030,10 +1115,12 @@ Disconnect my Joomunited account</span>';
          * and the "-$plugin_slug" suffix to the filter name. For example, "request_info_result"
          * becomes "puc_request_info_result-your_plugin_slug".
          *
-         * @param string $tag
-         * @param callable $callback
-         * @param int $priority
-         * @param int $acceptedArgs
+         * @param string   $tag          Tag
+         * @param callable $callback     Callback
+         * @param integer  $priority     Priority
+         * @param integer  $acceptedArgs AcceptedArgs
+         *
+         * @return void
          */
         public function addFilter($tag, $callback, $priority = 10, $acceptedArgs = 1)
         {
@@ -1047,70 +1134,163 @@ if (!class_exists('JuPluginInfo', false)) :
 
     /**
      * A container class for holding and transforming various plugin metadata.
-     *
-     * @author Janis Elsts
-     * @copyright 2015
-     * @version 2.1
-     * @access public
      */
-    class JuPluginInfo
+    class JuPluginInfo // phpcs:ignore Generic.Files.OneClassPerFile.MultipleFound -- some classes have no function
     {
 
-        //Most fields map directly to the contents of the plugin's info.json file.
-        //See the relevant docs for a description of their meaning.
+        /**
+         * Plugin name
+         *
+         * @var string
+         */
         public $name;
+
+        /**
+         * Plugin slug
+         *
+         * @var string
+         */
         public $slug;
+
+        /**
+         * Plugin version
+         *
+         * @var string
+         */
         public $version;
+
+        /**
+         * Plugin homepage
+         *
+         * @var string
+         */
         public $homepage;
+
+        /**
+         * Plugin section
+         *
+         * @var string
+         */
         public $sections;
+
+        /**
+         * Plugin banners
+         *
+         * @var string
+         */
         public $banners;
+
+        /**
+         * Plugin download uRL
+         *
+         * @var string
+         */
         public $download_url;
+
+        /**
+         * Plugin author
+         *
+         * @var string
+         */
         public $author;
+
+        /**
+         * Plugin author homepage
+         *
+         * @var string
+         */
         public $author_homepage;
+
+        /**
+         * Plugin requires
+         *
+         * @var string
+         */
         public $requires;
+
+        /**
+         * Plugin testted
+         *
+         * @var string
+         */
         public $tested;
+
+        /**
+         * Plugin upgrade notice
+         *
+         * @var string
+         */
         public $upgrade_notice;
+
+        /**
+         * Plugin rating
+         *
+         * @var string
+         */
         public $rating;
+
+        /**
+         * Plugin num ratings
+         *
+         * @var string
+         */
         public $num_ratings;
+
+        /**
+         * Plugin downloaded
+         *
+         * @var string
+         */
         public $downloaded;
+
+        /**
+         * Plugin active installs
+         *
+         * @var string
+         */
         public $active_installs;
+
+        /**
+         * Plugin last updated
+         *
+         * @var string
+         */
         public $last_updated;
-        public $id = 0; //The native WP.org API returns numeric plugin IDs, but they're not used for anything.
-        public $filename; //Plugin filename relative to the plugins directory.
+
+        /**
+         * The native WP.org API returns numeric plugin IDs, but they're not used for anything.
+         *
+         * @var integer
+         */
+        public $id = 0;
+
+        /**
+         * Plugin filename relative to the plugins directory.
+         *
+         * @var string
+         */
+        public $filename;
 
         /**
          * Create a new instance of PluginInfo from JSON-encoded plugin info
          * returned by an external update API.
          *
-         * @param string $json Valid JSON string representing plugin info.
-         * @param bool $triggerErrors
+         * @param string  $json          Valid JSON string representing plugin info.
+         * @param boolean $triggerErrors Trigger rrrors
+         *
          * @return JuPluginInfo|null|PluginInfo
          */
-
         public static function fromJson($json, $triggerErrors = false)
         {
-            /** @var StdClass $apiResponse */
             $apiResponse = json_decode($json);
             if (empty($apiResponse) || !is_object($apiResponse)) {
-                if ($triggerErrors) {
-                    trigger_error(
-                        "Failed to parse plugin metadata. Try validating your .json file with http://jsonlint.com/",
-                        E_USER_NOTICE
-                    );
-                }
                 return null;
             }
 
             //Very, very basic validation.
             $valid = isset($apiResponse->name) && !empty($apiResponse->name)
-                && isset($apiResponse->version) && !empty($apiResponse->version);
+                     && isset($apiResponse->version) && !empty($apiResponse->version);
             if (!$valid) {
-                if ($triggerErrors) {
-                    trigger_error(
-                        "The plugin metadata file does not contain the required 'name' and/or 'version' keys.",
-                        E_USER_NOTICE
-                    );
-                }
                 return null;
             }
 
@@ -1134,8 +1314,18 @@ if (!class_exists('JuPluginInfo', false)) :
             //The custom update API is built so that many fields have the same name and format
             //as those returned by the native WordPress.org API. These can be assigned directly.
             $sameFormat = array(
-                'name', 'slug', 'version', 'requires', 'tested', 'rating', 'upgrade_notice',
-                'num_ratings', 'downloaded', 'active_installs', 'homepage', 'last_updated',
+                'name',
+                'slug',
+                'version',
+                'requires',
+                'tested',
+                'rating',
+                'upgrade_notice',
+                'num_ratings',
+                'downloaded',
+                'active_installs',
+                'homepage',
+                'last_updated',
             );
             foreach ($sameFormat as $field) {
                 if (isset($this->$field)) {
@@ -1179,22 +1369,64 @@ if (!class_exists('JuPluginUpdate', false)) :
 
     /**
      * A simple container class for holding information about an available update.
-     *
-     * @author Janis Elsts
-     * @copyright 2015
-     * @version 2.1
-     * @access public
      */
-    class JuPluginUpdate
+    class JuPluginUpdate // phpcs:ignore Generic.Files.OneClassPerFile.MultipleFound -- some classes have no function
     {
 
+        /**
+         * Plugin id
+         *
+         * @var integer
+         */
         public $id = 0;
+
+        /**
+         * Plugin slug
+         *
+         * @var string
+         */
         public $slug;
+
+        /**
+         * Plugin version
+         *
+         * @var string
+         */
         public $version;
+
+        /**
+         * Plugin homepage
+         *
+         * @var string
+         */
         public $homepage;
+
+        /**
+         * Plugin download url
+         *
+         * @var string
+         */
         public $download_url;
+
+        /**
+         * Plugin upgrade notice
+         *
+         * @var string
+         */
         public $upgrade_notice;
-        public $filename; //Plugin filename relative to the plugins directory.
+
+        /**
+         * Plugin filename relative to the plugins directory.
+         *
+         * @var string
+         */
+        public $filename;
+
+        /**
+         * Plugin default fields
+         *
+         * @var array
+         */
         private static $fields = array(
             'id',
             'slug',
@@ -1208,8 +1440,9 @@ if (!class_exists('JuPluginUpdate', false)) :
         /**
          * Create a new instance of PluginUpdate from its JSON-encoded representation.
          *
-         * @param string $json
-         * @param bool $triggerErrors
+         * @param string  $json          Json
+         * @param boolean $triggerErrors Trigger errors
+         *
          * @return PluginUpdate|null
          */
         public static function fromJson($json, $triggerErrors = false)
@@ -1218,7 +1451,7 @@ if (!class_exists('JuPluginUpdate', false)) :
             //we can parse the update JSON as if it was a plugin info string, then copy over
             //the parts that we care about.
             $pluginInfo = JuPluginInfo::fromJson($json, $triggerErrors);
-            if ($pluginInfo != null) {
+            if ($pluginInfo !== null) {
                 return self::fromPluginInfo($pluginInfo);
             } else {
                 return null;
@@ -1229,7 +1462,8 @@ if (!class_exists('JuPluginUpdate', false)) :
          * Create a new instance of PluginUpdate based on an instance of PluginInfo.
          * Basically, this just copies a subset of fields from one object to another.
          *
-         * @param PluginInfo $info
+         * @param PluginInfo $info Plugin infomations
+         *
          * @return PluginUpdate
          */
         public static function fromPluginInfo($info)
@@ -1242,6 +1476,7 @@ if (!class_exists('JuPluginUpdate', false)) :
          * another object.
          *
          * @param StdClass|PluginInfo|PluginUpdate $object The source object.
+         *
          * @return JuPluginUpdate|PluginUpdate
          */
         public static function fromObject($object)
@@ -1291,12 +1526,12 @@ if (!class_exists('JuPluginUpdate', false)) :
          */
         public function toWpFormat()
         {
-            $update = new stdClass;
-            $token = get_option('ju_user_token');
-            $update->id = $this->id;
-            $update->slug = $this->slug;
+            $update              = new stdClass;
+            $token               = get_option('ju_user_token');
+            $update->id          = $this->id;
+            $update->slug        = $this->slug;
             $update->new_version = $this->version;
-            $update->url = $this->homepage;
+            $update->url         = $this->homepage;
             if (!empty($token)) {
                 $update->package = $this->download_url . '&token=' . $token . '&siteurl=' . get_option('siteurl');
             } else {
@@ -1327,23 +1562,33 @@ if (!class_exists('Jufactory', false)) :
      * want to instantiate one of them anyway, you can use {@link Jufactory::getLatestClassVersion()}
      * to get the class name and then create it with <code>new $class(...)</code>.
      */
-    class Jufactory
+    class Jufactory // phpcs:ignore Generic.Files.OneClassPerFile.MultipleFound -- some classes have no function
     {
 
+        /**
+         * Class versions
+         *
+         * @var array
+         */
         protected static $classVersions = array();
+
+        /**
+         * Check sorted
+         *
+         * @var boolean
+         */
         protected static $sorted = false;
 
         /**
          * Create a new instance of PluginUpdateChecker.
          *
-         * @see PluginUpdateChecker::__construct()
+         * @param array   $metadataUrl  Meta data Url
+         * @param string  $pluginFile   Plugin file
+         * @param string  $slug         Slug of plugin
+         * @param integer $checkPeriod  Check Period
+         * @param string  $optionName   Option name
+         * @param string  $muPluginFile Mu plugin file
          *
-         * @param $metadataUrl
-         * @param $pluginFile
-         * @param string $slug
-         * @param int $checkPeriod
-         * @param string $optionName
-         * @param string $muPluginFile
          * @return PluginUpdateChecker
          */
         public static function buildUpdateChecker(
@@ -1361,7 +1606,8 @@ if (!class_exists('Jufactory', false)) :
         /**
          * Get the specific class name for the latest available version of a class.
          *
-         * @param string $class
+         * @param string $class Class
+         *
          * @return string|null
          */
         public static function getLatestClassVersion($class)
@@ -1379,6 +1625,8 @@ if (!class_exists('Jufactory', false)) :
 
         /**
          * Sort available class versions in descending order (i.e. newest first).
+         *
+         * @return void
          */
         protected static function sortVersions()
         {
@@ -1390,23 +1638,26 @@ if (!class_exists('Jufactory', false)) :
         }
 
         /**
-         * @param $a
-         * @param $b
+         * Compare versions
+         *
+         * @param string $a Version
+         * @param string $b Version
+         *
          * @return mixed
          */
         protected static function compareVersions($a, $b)
         {
-            return -version_compare($a, $b);
+            return - version_compare($a, $b);
         }
 
         /**
          * Register a version of a class.
          *
-         * @access private This method is only for internal use by the library.
-         *
-         * @param string $generalClass Class name without version numbers, e.g. 'PluginUpdateChecker'.
+         * @param string $generalClass   Class name without version numbers, e.g. 'PluginUpdateChecker'.
          * @param string $versionedClass Actual class name, e.g. 'PluginUpdateChecker_1_2'.
-         * @param string $version Version number, e.g. '1.2'.
+         * @param string $version        Version number, e.g. '1.2'.
+         *
+         * @return void
          */
         public static function addVersion($generalClass, $versionedClass, $version)
         {
@@ -1414,7 +1665,7 @@ if (!class_exists('Jufactory', false)) :
                 self::$classVersions[$generalClass] = array();
             }
             self::$classVersions[$generalClass][$version] = $versionedClass;
-            self::$sorted = false;
+            self::$sorted                                 = false;
         }
     }
 
@@ -1434,7 +1685,7 @@ if (!class_exists('PluginUpdateChecker', false)) {
     /**
      * Class PluginUpdateChecker
      */
-    class PluginUpdateChecker extends JuUpdater
+    class PluginUpdateChecker extends JuUpdater // phpcs:ignore Generic.Files.OneClassPerFile.MultipleFound -- some classes have no function
     {
 
     }
@@ -1446,7 +1697,7 @@ if (!class_exists('PluginUpdate', false)) {
     /**
      * Class PluginUpdate
      */
-    class PluginUpdate extends JuPluginUpdate
+    class PluginUpdate extends JuPluginUpdate // phpcs:ignore Generic.Files.OneClassPerFile.MultipleFound -- some classes have no function
     {
 
     }
@@ -1458,7 +1709,7 @@ if (!class_exists('PluginInfo', false)) {
     /**
      * Class PluginInfo
      */
-    class PluginInfo extends JuPluginInfo
+    class PluginInfo extends JuPluginInfo // phpcs:ignore Generic.Files.OneClassPerFile.MultipleFound -- some classes have no function
     {
 
     }

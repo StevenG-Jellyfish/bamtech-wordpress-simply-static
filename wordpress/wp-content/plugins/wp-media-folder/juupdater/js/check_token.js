@@ -102,13 +102,16 @@
         var listplugins = [
             "wp-media-folder",
             "wp-media-folder-addon",
+            "wp-media-folder-gallery-addon",
             "wp-file-download",
             "wp-file-download-addon",
             "wp-team-display",
-            "wp-latest-post",
             "wp-table-manager",
+            "wp-latest-post",
+            "wp-latest-posts-addon",
             "wp-frontpage-news-pro-addon",
-            "wp-meta-seo-addon"
+            "wp-meta-seo-addon",
+            "wp-speed-of-light-addon"
         ];
 
         if($.inArray(slug,listplugins) !== -1){
@@ -117,7 +120,7 @@
                 if (slug === 'wp-frontpage-news-pro-addon') {
                     var link = updaterparams.ju_base + 'index.php?option=com_juupdater&task=download.checktoken&extension=wp-latest-posts-addon.zip&token=' + updaterparams.token;
                 } else {
-                    var link = updaterparams.ju_base + 'index.php?option=com_juupdater&task=download.checktoken&extension=' + slug + '.zip&token=' + updaterparams.token;
+                    link = updaterparams.ju_base + 'index.php?option=com_juupdater&task=download.checktoken&extension=' + slug + '.zip&token=' + updaterparams.token;
                 }
                 $.ajax({
                     url: link,
@@ -176,7 +179,8 @@
                     type: 'POST',
                     data: {
                         'action': 'ju_add_token',
-                        'token': res.token
+                        'token': res.token,
+                        'wpmf_nonce': updaterparams.wpmf_nonce
                     },
                     success: function () {
                         window.location.assign(document.URL);

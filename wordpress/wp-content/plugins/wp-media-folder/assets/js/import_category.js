@@ -16,7 +16,8 @@
                 {
                     action: "wpmf",
                     task: "import",
-                    doit: doit
+                    doit: doit,
+                    wpmf_nonce: wpmf.vars.wpmf_nonce
                 },
                 function (response) {
                     jQuery(button).closest("div#wpmf_error").hide();

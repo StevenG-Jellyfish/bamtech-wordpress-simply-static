@@ -1,6 +1,6 @@
 <?php
 /**
- * @package WP Smush
+ * @package WP_Smush
  * @subpackage Admin
  * @version 2.3
  *
@@ -835,7 +835,7 @@ if ( ! class_exists( 'WpSmushDB' ) ) {
 		 *
 		 *
 		 */
-		function get_savings_for_attachments( $attachments = array() ) {
+		function get_stats_for_attachments( $attachments = array() ) {
 			//@todo: Add image_count, lossy count, count_smushed
 			$stats = array(
 				'size_before'        => 0,
@@ -845,7 +845,8 @@ if ( ! class_exists( 'WpSmushDB' ) ) {
 				'count_images'       => 0,
 				'count_supersmushed' => 0,
 				'count_smushed'      => 0,
-				'count_resize'       => 0
+				'count_resize'       => 0,
+				'count_remaining'    => 0
 			);
 
 			//If we don't have any attachments, return empty array
@@ -853,11 +854,11 @@ if ( ! class_exists( 'WpSmushDB' ) ) {
 				return $stats;
 			}
 
-			global $WpSmush, $wpsmush_helper;
+			global $wp_smush, $wpsmush_helper;
 
 			//Loop over all the attachments to get the cummulative savings
 			foreach ( $attachments as $attachment ) {
-				$smush_stats        = get_post_meta( $attachment, $WpSmush->smushed_meta_key, true );
+				$smush_stats        = get_post_meta( $attachment, $wp_smush->smushed_meta_key, true );
 				$resize_savings     = get_post_meta( $attachment, WP_SMUSH_PREFIX . 'resize_savings', true );
 				$conversion_savings = $wpsmush_helper->get_pngjpg_savings( $attachment );
 

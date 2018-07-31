@@ -16,15 +16,17 @@ class WpmfSingleLightbox
     {
         add_action('wp_enqueue_media', array($this, 'loadScript'));
         add_action('wp_enqueue_scripts', array($this, 'enqueueScript'));
-        add_filter("attachment_fields_to_edit", array($this, "attachmentFieldsToEdit"), 10, 2);
-        add_filter("attachment_fields_to_save", array($this, "attachmentFieldsToSave"), 10, 2);
+        add_filter('attachment_fields_to_edit', array($this, 'attachmentFieldsToEdit'), 10, 2);
+        add_filter('attachment_fields_to_save', array($this, 'attachmentFieldsToSave'), 10, 2);
         add_filter('image_send_to_editor', array($this, 'imageLightboxSendToEditor'), 10, 8);
         add_action('print_media_templates', array($this, 'printMediaTemplates'));
         add_action('wp_ajax_wpmf_get_thumb_image', array($this, 'getThumbImage'));
     }
 
     /**
-     * add script to footer
+     * Add script to footer
+     *
+     * @return void
      */
     public function adminFooterImagelightbox()
     {
@@ -74,7 +76,9 @@ class WpmfSingleLightbox
     }
 
     /**
-     * add script to footer
+     * Add script to footer
+     *
+     * @return void
      */
     public function loadScript()
     {
@@ -90,6 +94,8 @@ class WpmfSingleLightbox
 
     /**
      * Load styles and scripts
+     *
+     * @return void
      */
     public function enqueueScript()
     {
@@ -121,10 +127,17 @@ class WpmfSingleLightbox
     }
 
     /**
-     * ajax get thumbnail for image
+     * Ajax get thumbnail for image
+     *
+     * @return void
      */
     public function getThumbImage()
     {
+        if (empty($_POST['wpmf_nonce'])
+            || !wp_verify_nonce($_POST['wpmf_nonce'], 'wpmf_nonce')) {
+            die();
+        }
+
         if (isset($_POST['attachment_id']) && isset($_POST['size'])) {
             $image_src = wp_get_attachment_image_src($_POST['attachment_id'], $_POST['size']);
             $url_image = $image_src[0];
@@ -135,28 +148,34 @@ class WpmfSingleLightbox
 
     /**
      * Add media templates
+     *
+     * @return void
      */
     public function printMediaTemplates()
     {
+        // phpcs:ignore WordPress.CSRF.NonceVerification.NoNonceVerification -- No action, nonce is not required
+        if (isset($_GET['action']) && $_GET['action'] === 'elementor') {
+            return;
+        }
         ?>
 
         <script type="text/html" id="tmpl-image-wpmf">
             <label class="setting wpmf_size_lightbox">
-                <span><?php _e('Lightbox size', 'wpmf'); ?></span>
+                <span><?php esc_html_e('Lightbox size', 'wpmf'); ?></span>
                 <select class="wpmf_size_lightbox" name="wpmf_size_lightbox" data-setting="wpmf_size_lightbox">
-                    <option value="none"><?php _e('None', 'wpmf') ?></option>
+                    <option value="none"><?php esc_html_e('None', 'wpmf') ?></option>
                     <?php
                     $sizes = apply_filters('image_size_names_choose', array(
-                        'none' => __('None', 'wpmf'),
+                        'none'      => __('None', 'wpmf'),
                         'thumbnail' => __('Thumbnail', 'wpmf'),
-                        'medium' => __('Medium', 'wpmf'),
-                        'large' => __('Large', 'wpmf'),
-                        'full' => __('Full Size', 'wpmf'),
+                        'medium'    => __('Medium', 'wpmf'),
+                        'large'     => __('Large', 'wpmf'),
+                        'full'      => __('Full Size', 'wpmf'),
                     ));
                     ?>
 
                     <?php foreach ($sizes as $k => $v) : ?>
-                        <option value="<?php echo $k ?>"><?php echo $v ?></option>
+                        <option value="<?php echo esc_html($k) ?>"><?php echo esc_html($v) ?></option>
                     <?php endforeach; ?>
 
                 </select>
@@ -168,38 +187,36 @@ class WpmfSingleLightbox
     /**
      * Filters the image HTML markup to send to the editor when inserting an image.
      *
-     * @since 2.5.0
+     * @param string       $html    The image HTML markup to send.
+     * @param integer      $id      The attachment id.
+     * @param string       $caption The image caption.
+     * @param string       $title   The image title.
+     * @param string       $align   The image alignment.
+     * @param string       $url     The image source URL.
+     * @param string|array $size    Size of image. Image size or array of width and height values
+     * @param string       $alt     The image alternative, or alt, text.
      *
-     * @param string $html The image HTML markup to send.
-     * @param int $id The attachment id.
-     * @param string $caption The image caption.
-     * @param string $title The image title.
-     * @param string $align The image alignment.
-     * @param string $url The image source URL.
-     * @param string|array $size Size of image. Image size or array of width and height values
-     *                              (in that order). Default 'medium'.
-     * @param string $alt The image alternative, or alt, text.
      * @return string $html
      */
     public function imageLightboxSendToEditor($html, $id, $caption, $title, $align, $url, $size, $alt = '')
     {
         // check link to option, if value not empty do set attribute
-        if (isset($url) && $url != '') {
+        if (isset($url) && $url !== '') {
             $url_attachment = wp_get_attachment_url($id);
-            $size = get_post_meta($id, 'wpmf_image_lightbox', true);
+            $size           = get_post_meta($id, 'wpmf_image_lightbox', true);
             if (empty($size)) {
                 $size = 'large';
             }
             $image_src = wp_get_attachment_image_src($id, $size);
             $url_image = $image_src[0];
-            $dom = new DOMDocument();
+            $dom       = new DOMDocument();
             libxml_use_internal_errors(true);
-            @$dom->loadHTML($html);
+            $dom->loadHTML($html);
             $tags = $dom->getElementsByTagName('img');
             foreach ($tags as $tag) {
                 $tag->setAttribute('data-wpmf_image_lightbox', $url_image);
                 $tag->setAttribute('data-wpmf_size_lightbox', $size);
-                if ($url_attachment != $url || $size == 'none') {
+                if ($url_attachment !== $url || $size === 'none') {
                     $tag->setAttribute('data-wpmflightbox', 0);
                 } else {
                     $tag->setAttribute('data-wpmflightbox', 1);
@@ -214,8 +231,10 @@ class WpmfSingleLightbox
     /**
      * Create lightbox size field
      * Based on /wp-admin/includes/media.php
-     * @param array $form_fields An array of attachment form fields.
-     * @param WP_Post $post The WP_Post attachment object.
+     *
+     * @param array   $form_fields An array of attachment form fields.
+     * @param WP_Post $post        The WP_Post attachment object.
+     *
      * @return mixed
      */
     public function attachmentFieldsToEdit($form_fields, $post)
@@ -224,16 +243,16 @@ class WpmfSingleLightbox
         if (empty($value)) {
             $value = 'large';
         }
-        $sizes = apply_filters('image_size_names_choose', array(
+        $sizes  = apply_filters('image_size_names_choose', array(
             'thumbnail' => __('Thumbnail', 'wpmf'),
-            'medium' => __('Medium', 'wpmf'),
-            'large' => __('Large', 'wpmf'),
-            'full' => __('Full Size', 'wpmf'),
+            'medium'    => __('Medium', 'wpmf'),
+            'large'     => __('Large', 'wpmf'),
+            'full'      => __('Full Size', 'wpmf'),
         ));
         $option = '';
         $option .= '<option value="none">' . __('None', 'wpmf') . '</option>';
         foreach ($sizes as $k => $v) {
-            if ($value == $k) {
+            if ($value === $k) {
                 $option .= '<option selected value="' . $k . '">' . $v . '</option>';
             } else {
                 $option .= '<option value="' . $k . '">' . $v . '</option>';
@@ -242,7 +261,7 @@ class WpmfSingleLightbox
         $form_fields['wpmf_image_lightbox'] = array(
             'label' => __('Lightbox size', 'wpmf'),
             'input' => 'html',
-            'html' => '
+            'html'  => '
                         <select name="attachments[' . $post->ID . '][wpmf_image_lightbox]"
                          id="attachments[' . $post->ID . '][wpmf_image_lightbox]">
                                 ' . $option . '
@@ -255,8 +274,10 @@ class WpmfSingleLightbox
     /**
      * Save lightbox size field
      * Based on /wp-admin/includes/media.php
-     * @param array $post An array of post data.
+     *
+     * @param array $post       An array of post data.
      * @param array $attachment An array of attachment metadata.
+     *
      * @return mixed $post
      */
     public function attachmentFieldsToSave($post, $attachment)

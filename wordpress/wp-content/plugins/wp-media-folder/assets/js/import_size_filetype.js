@@ -18,7 +18,8 @@
                 url: ajaxurl,
                 data: {
                     action: "wpmf_import_size_filetype",
-                    wpmf_current_page: wpmf_current_page
+                    wpmf_current_page: wpmf_current_page,
+                    wpmf_nonce: wpmf.vars.wpmf_nonce
                 },
                 success: function (res) {
                     if (!res.status) {

@@ -5,6 +5,8 @@
 </script>
 <div class="wrap">
     <h2><?php _e( 'Hit Statistics', 'wp-statistics' ); ?></h2>
+    <?php do_action( 'wp_statistics_after_title' ); ?>
+
 	<?php
 	$daysToDisplay = 20;
 	if ( array_key_exists( 'hitdays', $_GET ) ) {
@@ -150,7 +152,7 @@
                             </tr>
 
                             <tr>
-                                <th><?php _e( 'Chart Total', 'wp-statistics' ); ?>:</th>
+                                <th><?php _e( 'Chart Total:', 'wp-statistics' ); ?></th>
                                 <th class="th-center"><span><?php echo number_format_i18n( $visit_total ); ?></span>
                                 </th>
                                 <th class="th-center"><span><?php echo number_format_i18n( $visitor_total ); ?></span>
@@ -158,7 +160,7 @@
                             </tr>
 
                             <tr>
-                                <th><?php _e( 'All Time Total', 'wp-statistics' ); ?>:</th>
+                                <th><?php _e( 'All Time Total:', 'wp-statistics' ); ?></th>
                                 <th class="th-center">
                                     <span><?php echo number_format_i18n( wp_statistics_visit( 'total' ) ); ?></span>
                                 </th>

@@ -27,7 +27,7 @@ $smushit_keys = array(
 	'png_to_jpg',
 	'resize-sizes',
 	'nextgen',
-	'keep_exif',
+	'strip_exif',
 	'resmush-list',
 	'resize_sizes',
 	'transparent_png',
@@ -47,7 +47,12 @@ $smushit_keys = array(
 	'networkwide',
 	'dir_path',
 	'scan',
-	'last_settings'
+	'last_settings',
+	's3',
+	'smush_option',
+	'smush-directory-path-hash-updated',
+	'smush_global_stats',
+	'skip-smush-setup'
 );
 
 //Cache Keys

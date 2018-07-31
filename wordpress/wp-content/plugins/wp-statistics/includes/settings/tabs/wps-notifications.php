@@ -28,6 +28,7 @@ if ( $wps_nonce_valid ) {
 		"wps_geoip_report",
 		"wps_prune_report",
 		"wps_upgrade_report",
+		"wps_admin_notices",
 	);
 
 	foreach ( $wps_option_list as $option ) {
@@ -60,7 +61,7 @@ if ( $wps_nonce_valid ) {
 
         <tr valign="top">
             <td scope="row" style="vertical-align: top;">
-                <label for="email-report"><?php _e( 'E-mail addresses', 'wp-statistics' ); ?>:</label>
+                <label for="email-report"><?php _e( 'E-mail addresses:', 'wp-statistics' ); ?></label>
             </td>
 
             <td>
@@ -83,7 +84,7 @@ if ( $wps_nonce_valid ) {
 
         <tr valign="top">
             <td scope="row">
-                <label for="browscap-report"><?php _e( 'Browscap', 'wp-statistics' ); ?>:</label>
+                <label for="browscap-report"><?php _e( 'Browscap:', 'wp-statistics' ); ?></label>
             </td>
 
             <td>
@@ -101,7 +102,7 @@ if ( $wps_nonce_valid ) {
 
         <tr valign="top">
             <td scope="row">
-                <label for="geoip-report"><?php _e( 'GeoIP', 'wp-statistics' ); ?>:</label>
+                <label for="geoip-report"><?php _e( 'GeoIP:', 'wp-statistics' ); ?></label>
             </td>
 
             <td>
@@ -119,7 +120,7 @@ if ( $wps_nonce_valid ) {
 
         <tr valign="top">
             <td scope="row">
-                <label for="prune-report"><?php _e( 'Pruning', 'wp-statistics' ); ?>:</label>
+                <label for="prune-report"><?php _e( 'Pruning:', 'wp-statistics' ); ?></label>
             </td>
 
             <td>
@@ -137,7 +138,7 @@ if ( $wps_nonce_valid ) {
 
         <tr valign="top">
             <td scope="row">
-                <label for="upgrade-report"><?php _e( 'Upgrade', 'wp-statistics' ); ?>:</label>
+                <label for="upgrade-report"><?php _e( 'Upgrade:', 'wp-statistics' ); ?></label>
             </td>
 
             <td>
@@ -159,7 +160,7 @@ if ( $wps_nonce_valid ) {
 
         <tr valign="top">
             <th scope="row">
-                <label for="stats-report"><?php _e( 'Statistical reporting', 'wp-statistics' ); ?>:</label>
+                <label for="stats-report"><?php _e( 'Statistical reporting:', 'wp-statistics' ); ?></label>
             </th>
 
             <td>
@@ -179,7 +180,7 @@ if ( $wps_nonce_valid ) {
 		} ?>
         <tr valign="top"<?php echo $hidden; ?> id='wps_stats_report_option'>
             <td scope="row" style="vertical-align: top;">
-                <label for="time-report"><?php _e( 'Schedule', 'wp-statistics' ); ?>:</label>
+                <label for="time-report"><?php _e( 'Schedule:', 'wp-statistics' ); ?></label>
             </td>
 
             <td>
@@ -222,7 +223,7 @@ if ( $wps_nonce_valid ) {
 
         <tr valign="top"<?php echo $hidden; ?> id='wps_stats_report_option'>
             <td scope="row" style="vertical-align: top;">
-                <label for="send-report"><?php _e( 'Send reports via', 'wp-statistics' ); ?>:</label>
+                <label for="send-report"><?php _e( 'Send reports via:', 'wp-statistics' ); ?></label>
             </td>
 
             <td>
@@ -261,7 +262,7 @@ if ( $wps_nonce_valid ) {
 
         <tr valign="top"<?php echo $hidden; ?> id='wps_stats_report_option'>
             <td scope="row" style="vertical-align: top;">
-                <label for="content-report"><?php _e( 'Report body', 'wp-statistics' ); ?>:</label>
+                <label for="content-report"><?php _e( 'Message body:', 'wp-statistics' ); ?></label>
             </td>
 
             <td>
@@ -278,7 +279,7 @@ if ( $wps_nonce_valid ) {
 
                 <p class="description data">
 					<?php _e(
-						'Any shortcode supported by your installation of WordPress, include all shortcodes for WP Statistics (see the documentation for a list of codes available) are supported in the body of the message.  Here are some examples:',
+						'Any shortcode supported by your installation of WordPress, include all shortcodes for WP Statistics (see the documentation for a list of codes available) are supported in the body of the message. Here are some examples:',
 						'wp-statistics'
 					); ?>
                     <br><br>
@@ -297,6 +298,23 @@ if ( $wps_nonce_valid ) {
                     &nbsp;&nbsp;&nbsp;&nbsp;<?php _e( 'Total Visits', 'wp-statistics' ); ?>: <code>[wpstatistics
                         stat=visits time=total]</code><br>
                 </p>
+            </td>
+        </tr>
+
+        <tr valign="top">
+            <th scope="row" colspan="2"><h3><?php _e( 'Admin Notices', 'wp-statistics' ); ?></h3></th>
+        </tr>
+
+        <tr valign="top">
+            <td scope="row">
+                <label for="admin-notices"><?php _e( 'All Notices:', 'wp-statistics' ); ?></label>
+            </td>
+
+            <td>
+                <input id="admin-notices" type="checkbox" value="1" name="wps_admin_notices" <?php echo $WP_Statistics->get_option( 'admin_notices' ) == true ? "checked='checked'" : ''; ?>>
+                <label for="admin-notices"><?php _e( 'Enable', 'wp-statistics' ); ?></label>
+
+                <p class="description"><?php _e('Show all notices and suggestion from WP-Statistics in the admin.', 'wp-statistics'); ?></p>
             </td>
         </tr>
         </tbody>

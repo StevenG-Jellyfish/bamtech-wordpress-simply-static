@@ -23,7 +23,9 @@ class WpmfOrderbyMedia
 
     /**
      * Add file type to Filetype filter
-     * @param $post_mime_types : list of post mime types.
+     *
+     * @param array $post_mime_types List of post mime types.
+     *
      * @return array $post_mime_types
      */
     public function modifyPostMimeTypes($post_mime_types)
@@ -42,12 +44,22 @@ class WpmfOrderbyMedia
     /**
      * Query attachment by file type
      * Base on /wp-includes/class-wp-query.php
-     * @param $query
+     *
+     * @param object $query Params use to query attachment
+     *
      * @return mixed $query
      */
     public function filter($query)
     {
-        if (!isset($query->query_vars['post_type']) || $query->query_vars['post_type'] != 'attachment') {
+        global $pagenow;
+        if ($pagenow !== 'upload.php') {
+            if (empty($_REQUEST['query']['wpmf_nonce'])
+                || !wp_verify_nonce($_REQUEST['query']['wpmf_nonce'], 'wpmf_nonce')) {
+                return $query;
+            }
+        }
+
+        if (!isset($query->query_vars['post_type']) || $query->query_vars['post_type'] !== 'attachment') {
             return $query;
         }
 
@@ -60,31 +72,37 @@ class WpmfOrderbyMedia
             $current_view = 'grid';
         }
 
-        if ($pagenow == 'upload.php') {
-            if ($current_view == 'list') {
-                if (isset($_GET["media-order-media"]) && empty($_GET['orderby']) && empty($_GET['order'])) {
-                    if ($_GET["media-order-media"] == 'custom') {
+        if ($pagenow === 'upload.php') {
+            if ($current_view === 'list') {
+                if (isset($_GET['media-order-media']) && empty($_GET['orderby']) && empty($_GET['order'])) {
+                    if ($_GET['media-order-media'] === 'custom') {
                         $query->set('meta_key', 'wpmf_order');
                         $query->set('orderby', 'meta_value_num');
                         $query->set('order', 'ASC');
                     } else {
-                        if ($_GET["media-order-media"] == 'all') {
+                        if ($_GET['media-order-media'] === 'all') {
                             $order_media = 'title|asc';
                         } else {
-                            $order_media = $_GET["media-order-media"];
+                            $order_media = $_GET['media-order-media'];
                         }
-                        $cook = explode('|', $order_media);
+                        $cook         = explode('|', $order_media);
                         $wpmf_allowed = array(
-                            'name', 'author', 'date',
-                            'title', 'modified', 'uploadedTo',
-                            'id', 'post__in', 'menuOrder'
+                            'name',
+                            'author',
+                            'date',
+                            'title',
+                            'modified',
+                            'uploadedTo',
+                            'id',
+                            'post__in',
+                            'menuOrder'
                         );
                         if ($cook) {
-                            if ($cook[0] == 'size') {
+                            if ($cook[0] === 'size') {
                                 $query->set('meta_key', 'wpmf_size');
                                 $query->set('orderby', 'meta_value_num');
                                 $query->set('order', $cook[1]);
-                            } elseif ($cook[0] == 'filetype') {
+                            } elseif ($cook[0] === 'filetype') {
                                 $query->set('meta_key', 'wpmf_filetype');
                                 $query->set('orderby', 'meta_value');
                                 $query->set('order', $cook[1]);
@@ -96,36 +114,36 @@ class WpmfOrderbyMedia
                     }
                 } elseif (isset($_GET['orderby'])) {
                     $orderby = $_GET['orderby'];
-                    if ('size' == $orderby) {
+                    if ('size' === $orderby) {
                         $query->set('meta_key', 'wpmf_size');
                         $query->set('orderby', 'meta_value_num');
                     }
 
-                    if ('filetype' == $orderby) {
+                    if ('filetype' === $orderby) {
                         $query->set('meta_key', 'wpmf_filetype');
                         $query->set('orderby', 'meta_value');
                     }
                 }
             }
         } else {
-            if (isset($_COOKIE["gridwpmf_media_order"]) && empty($_REQUEST['query']['meta_key'])) {
-                $g_cook = explode('|', $_COOKIE["gridwpmf_media_order"]);
-                if ($g_cook[0] == 'size') {
+            if (isset($_COOKIE['lastSortMedia_' . site_url()]) && empty($_REQUEST['query']['meta_key'])) {
+                $g_cook = explode('|', $_COOKIE['lastSortMedia_' . site_url()]);
+                if ($g_cook[0] === 'size') {
                     $query->query_vars['meta_key'] = 'wpmf_size';
-                    $query->query_vars['orderby'] = 'meta_value_num';
-                } elseif ($g_cook[0] == 'filetype') {
+                    $query->query_vars['orderby']  = 'meta_value_num';
+                } elseif ($g_cook[0] === 'filetype') {
                     $query->query_vars['meta_key'] = 'wpmf_filetype';
-                    $query->query_vars['orderby'] = 'meta_value';
+                    $query->query_vars['orderby']  = 'meta_value';
                 } else {
                     if (isset($_REQUEST['query']['wpmf_orderby']) && isset($_REQUEST['query']['order'])) {
                         $query->query_vars['orderby'] = $_REQUEST['query']['wpmf_orderby'];
-                        $query->query_vars['order'] = $_REQUEST['query']['order'];
+                        $query->query_vars['order']   = $_REQUEST['query']['order'];
                     }
                 }
             } else {
-                if (isset($_REQUEST['query']['meta_key']) && $_REQUEST['query']['wpmf_orderby']) {
+                if (isset($_REQUEST['query']['meta_key']) && isset($_REQUEST['query']['wpmf_orderby'])) {
                     $query->query_vars['meta_key'] = $_REQUEST['query']['meta_key'];
-                    $query->query_vars['orderby'] = $_REQUEST['query']['wpmf_orderby'];
+                    $query->query_vars['orderby']  = $_REQUEST['query']['wpmf_orderby'];
                 }
             }
         }
@@ -138,65 +156,182 @@ class WpmfOrderbyMedia
         }
 
         if (isset($filetype_wpmf)) {
-            if ($filetype_wpmf == 'wpmf-pdf' || $filetype_wpmf == 'wpmf-zip' || $filetype_wpmf == 'wpmf-other') {
+            if ($filetype_wpmf === 'wpmf-pdf' || $filetype_wpmf === 'wpmf-zip' || $filetype_wpmf === 'wpmf-other') {
                 $filetypes = explode('-', $filetype_wpmf);
-                $filetype = $filetypes[1];
-                if ($filetype == 'zip' || $filetype == 'pdf' || $filetype == 'other') {
+                $filetype  = $filetypes[1];
+                if ($filetype === 'zip' || $filetype === 'pdf' || $filetype === 'other') {
                     $query->query_vars['post_mime_type'] = '';
-                    $query->query_vars['meta_key'] = 'wpmf_filetype';
+                    $query->query_vars['meta_key']       = 'wpmf_filetype';
                     switch ($filetype) {
                         case 'pdf':
                             $query->query_vars['meta_value'] = 'pdf';
                             break;
                         case 'zip':
                             $query->query_vars['meta_value'] = array(
-                                'zip', 'rar', 'ace', 'arj',
-                                'bz2', 'cab', 'gzip', 'iso',
-                                'jar', 'lzh', 'tar', 'uue',
-                                'xz', 'z', '7-zip'
+                                'zip',
+                                'rar',
+                                'ace',
+                                'arj',
+                                'bz2',
+                                'cab',
+                                'gzip',
+                                'iso',
+                                'jar',
+                                'lzh',
+                                'tar',
+                                'uue',
+                                'xz',
+                                'z',
+                                '7-zip'
                             );
                             break;
                         case 'other':
-                            $exts = array(
-                                'jpg', 'jpeg', 'jpe', 'gif',
-                                'png', 'bmp', 'tiff', 'tif',
-                                'ico', 'asf', 'asx', 'wmv',
-                                'wmx', 'wm', 'avi', 'divx',
-                                'flv', 'mov', 'qt', 'mpeg',
-                                'mpg', 'mpe', 'mp4', 'm4v',
-                                'ogv', 'webm', 'mkv', '3gp',
-                                '3gpp', '3g2', '3gp2', 'txt',
-                                'asc', 'c', 'cc', 'h',
-                                'srt', 'csv', 'tsv', 'ics',
-                                'rtx', 'css', 'html', 'htm',
-                                'vtt', 'dfxp', 'mp3', 'm4a',
-                                'm4b', 'ra', 'ram', 'wav',
-                                'ogg', 'oga', 'mid', 'midi',
-                                'wma', 'wax', 'mka', 'rtf',
-                                'js', 'pdf', 'class', 'tar',
-                                'zip', 'gz', 'gzip', 'rar',
-                                '7z', 'psd', 'xcf', 'doc',
-                                'pot', 'pps', 'ppt', 'wri',
-                                'xla', 'xls', 'xlt', 'xlw',
-                                'mdp', 'mpp', 'docx', 'docm',
-                                'dotx', 'xlsx', 'xlsm', 'xlsb',
-                                'xltx', 'xltm', 'xlam', 'pptx',
-                                'pptm', 'ppsx', 'ppsm', 'potx',
-                                'potm', 'ppam', 'sldx', 'sldm',
-                                'onetoc', 'onetoc2', 'onetmp', 'onepkg',
-                                'oxps', 'xps', 'odt', 'odp',
-                                'ods', 'odg', 'odc', 'odb',
-                                'odf', 'wp', 'wpd', 'key', 'numbers', 'pages'
+                            $exts  = array(
+                                'jpg',
+                                'jpeg',
+                                'jpe',
+                                'gif',
+                                'png',
+                                'bmp',
+                                'tiff',
+                                'tif',
+                                'ico',
+                                'asf',
+                                'asx',
+                                'wmv',
+                                'wmx',
+                                'wm',
+                                'avi',
+                                'divx',
+                                'flv',
+                                'mov',
+                                'qt',
+                                'mpeg',
+                                'mpg',
+                                'mpe',
+                                'mp4',
+                                'm4v',
+                                'ogv',
+                                'webm',
+                                'mkv',
+                                '3gp',
+                                '3gpp',
+                                '3g2',
+                                '3gp2',
+                                'txt',
+                                'asc',
+                                'c',
+                                'cc',
+                                'h',
+                                'srt',
+                                'csv',
+                                'tsv',
+                                'ics',
+                                'rtx',
+                                'css',
+                                'html',
+                                'htm',
+                                'vtt',
+                                'dfxp',
+                                'mp3',
+                                'm4a',
+                                'm4b',
+                                'ra',
+                                'ram',
+                                'wav',
+                                'ogg',
+                                'oga',
+                                'mid',
+                                'midi',
+                                'wma',
+                                'wax',
+                                'mka',
+                                'rtf',
+                                'js',
+                                'pdf',
+                                'class',
+                                'tar',
+                                'zip',
+                                'gz',
+                                'gzip',
+                                'rar',
+                                '7z',
+                                'psd',
+                                'xcf',
+                                'doc',
+                                'pot',
+                                'pps',
+                                'ppt',
+                                'wri',
+                                'xla',
+                                'xls',
+                                'xlt',
+                                'xlw',
+                                'mdp',
+                                'mpp',
+                                'docx',
+                                'docm',
+                                'dotx',
+                                'xlsx',
+                                'xlsm',
+                                'xlsb',
+                                'xltx',
+                                'xltm',
+                                'xlam',
+                                'pptx',
+                                'pptm',
+                                'ppsx',
+                                'ppsm',
+                                'potx',
+                                'potm',
+                                'ppam',
+                                'sldx',
+                                'sldm',
+                                'onetoc',
+                                'onetoc2',
+                                'onetmp',
+                                'onepkg',
+                                'oxps',
+                                'xps',
+                                'odt',
+                                'odp',
+                                'ods',
+                                'odg',
+                                'odc',
+                                'odb',
+                                'odf',
+                                'wp',
+                                'wpd',
+                                'key',
+                                'numbers',
+                                'pages'
                             );
                             $other = array_diff(
                                 $exts,
                                 array(
-                                    "zip", "rar", "ace", "arj",
-                                    "bz2", "cab", "gzip", "iso",
-                                    "jar", "lzh", "tar", "uue",
-                                    "xz", "z", "7-zip", "pdf",
-                                    "mp3", "mp4", "jpg", "png",
-                                    "gif", "bmp", "svg"
+                                    'zip',
+                                    'rar',
+                                    'ace',
+                                    'arj',
+                                    'bz2',
+                                    'cab',
+                                    'gzip',
+                                    'iso',
+                                    'jar',
+                                    'lzh',
+                                    'tar',
+                                    'uue',
+                                    'xz',
+                                    'z',
+                                    '7-zip',
+                                    'pdf',
+                                    'mp3',
+                                    'mp4',
+                                    'jpg',
+                                    'png',
+                                    'gif',
+                                    'bmp',
+                                    'svg'
                                 )
                             );
                             if (empty($other)) {
@@ -214,38 +349,44 @@ class WpmfOrderbyMedia
 
     /**
      * Add size column and filetype column
-     * @param $columns : An array of columns displayed in the Media list table.
+     *
+     * @param array $columns An array of columns displayed in the Media list table.
+     *
      * @return array $columns
      */
     public static function manageMediaColumns($columns)
     {
-        $columns['wpmf_size'] = __('Size', 'wpmf');
+        $columns['wpmf_size']     = __('Size', 'wpmf');
         $columns['wpmf_filetype'] = __('File type', 'wpmf');
         return $columns;
     }
 
     /**
-     * register sortcolumn
-     * @param $columns : An array of sort columns.
+     * Register sortcolumn
+     *
+     * @param array $columns An array of sort columns.
+     *
      * @return array $columns
      */
     public function imwidthColumnRegisterSortable($columns)
     {
-        $columns['wpmf_size'] = 'size';
+        $columns['wpmf_size']     = 'size';
         $columns['wpmf_filetype'] = 'filetype';
         return $columns;
     }
 
     /**
-     * get size and filetype of attachment
-     * @param $pid : id of attachment
+     * Get size and filetype of attachment
+     *
+     * @param integer $pid Id of attachment
+     *
      * @return array $wpmf_size_filetype
      */
     public function getSizeFiletype($pid)
     {
         $wpmf_size_filetype = array();
-        $meta = get_post_meta($pid, '_wp_attached_file');
-        $upload_dir = wp_upload_dir();
+        $meta               = get_post_meta($pid, '_wp_attached_file');
+        $upload_dir         = wp_upload_dir();
         // get path file
         $path_attachment = $upload_dir['basedir'] . '/' . $meta[0];
         if (file_exists($path_attachment)) {
@@ -253,27 +394,30 @@ class WpmfOrderbyMedia
             $size = filesize($path_attachment);
             // get file type
             $filetype = wp_check_filetype($path_attachment);
-            $ext = $filetype['ext'];
+            $ext      = $filetype['ext'];
         } else {
             $size = 0;
-            $ext = '';
+            $ext  = '';
         }
         $wpmf_size_filetype['size'] = $size;
-        $wpmf_size_filetype['ext'] = $ext;
+        $wpmf_size_filetype['ext']  = $ext;
 
         return $wpmf_size_filetype;
     }
 
     /**
-     * get size and filetype of attachment
-     * @param $column_name : column name
-     * @param $id : id of attachment
+     * Get size and filetype of attachment
+     *
+     * @param string  $column_name Column name
+     * @param integer $id          Id of attachment
+     *
+     * @return void
      */
     public function manageMediaCustomColumn($column_name, $id)
     {
         $wpmf_size_filetype = $this->getSizeFiletype($id);
-        $size = $wpmf_size_filetype['size'];
-        $ext = $wpmf_size_filetype['ext'];
+        $size               = $wpmf_size_filetype['size'];
+        $ext                = $wpmf_size_filetype['ext'];
         if ($size < 1024 * 1024) {
             $size = round($size / 1024, 1) . ' kB';
         } elseif ($size > 1024 * 1024) {
@@ -282,11 +426,11 @@ class WpmfOrderbyMedia
 
         switch ($column_name) {
             case 'wpmf_size':
-                echo $size;
+                echo esc_html($size);
                 break;
 
             case 'wpmf_filetype':
-                echo $ext;
+                echo esc_html($ext);
                 break;
         }
     }

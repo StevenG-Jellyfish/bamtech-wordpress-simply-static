@@ -33,15 +33,17 @@ let wpmfFoldersFiltersModule;
                         $('#post-query-submit').click();
                     });
                 } else {
-                    wpmfFoldersFiltersModule.initSizeFilter();
+                    if (typeof wp.media.view.AttachmentsBrowser !== "undefined") {
+                        wpmfFoldersFiltersModule.initSizeFilter();
 
-                    wpmfFoldersFiltersModule.initWeightFilter();
+                        wpmfFoldersFiltersModule.initWeightFilter();
 
-                    wpmfFoldersFiltersModule.initMyMediasFilter();
+                        wpmfFoldersFiltersModule.initMyMediasFilter();
 
-                    wpmfFoldersFiltersModule.initFoldersOrderFilter();
+                        wpmfFoldersFiltersModule.initFoldersOrderFilter();
 
-                    wpmfFoldersFiltersModule.initFilesOrderFilter();
+                        wpmfFoldersFiltersModule.initFilesOrderFilter();
+                    }
                 }
 
                 const initDropdown = function($current_frame) {
@@ -71,45 +73,47 @@ let wpmfFoldersFiltersModule;
             let myMediaViewAttachmentsBrowser= wp.media.view.AttachmentsBrowser;
 
             // render filter to toolbar
-            wp.media.view.AttachmentsBrowser = wp.media.view.AttachmentsBrowser.extend({
-                createToolbar: function () {
-                    // call the original method
-                    myMediaViewAttachmentsBrowser.prototype.createToolbar.apply(this, arguments);
+            if (typeof myMediaViewAttachmentsBrowser !== "undefined") {
+                wp.media.view.AttachmentsBrowser = wp.media.view.AttachmentsBrowser.extend({
+                    createToolbar: function () {
+                        // call the original method
+                        myMediaViewAttachmentsBrowser.prototype.createToolbar.apply(this, arguments);
 
-                    // add our custom filter
-                    wpmfFoldersModule.attachments_browser.toolbar.set('sizetags', new wp.media.view.AttachmentFilters['wpmf_attachment_size']({
-                        controller: wpmfFoldersModule.attachments_browser.controller,
-                        model: wpmfFoldersModule.attachments_browser.collection.props,
-                        priority: -74
-                    }).render());
-                }
-            });
+                        // add our custom filter
+                        wpmfFoldersModule.attachments_browser.toolbar.set('sizetags', new wp.media.view.AttachmentFilters['wpmf_attachment_size']({
+                            controller: wpmfFoldersModule.attachments_browser.controller,
+                            model: wpmfFoldersModule.attachments_browser.collection.props,
+                            priority: -74
+                        }).render());
+                    }
+                });
 
-            wp.media.view.AttachmentFilters['wpmf_attachment_size'] = wp.media.view.AttachmentFilters.extend({
-                className: 'wpmf-attachment-size attachment-filters',
-                id: 'media-attachment-size-filters',
-                createFilters: function () {
-                    let filters = {};
-                    _.each(wpmf.vars.wpmf_size || [], function (text) {
-                        filters[text] = {
-                            text: text,
+                wp.media.view.AttachmentFilters['wpmf_attachment_size'] = wp.media.view.AttachmentFilters.extend({
+                    className: 'wpmf-attachment-size attachment-filters',
+                    id: 'media-attachment-size-filters',
+                    createFilters: function () {
+                        let filters = {};
+                        _.each(wpmf.vars.wpmf_size || [], function (text) {
+                            filters[text] = {
+                                text: text,
+                                props: {
+                                    wpmf_size: text
+                                }
+                            };
+                        });
+
+                        filters.all = {
+                            text: wpmf.l18n.all_size_label,
                             props: {
-                                wpmf_size: text
-                            }
+                                wpmf_size: 'all'
+                            },
+                            priority: 10
                         };
-                    });
 
-                    filters.all = {
-                        text: wpmf.l18n.all_size_label,
-                        props: {
-                            wpmf_size: 'all'
-                        },
-                        priority: 10
-                    };
-
-                    this.filters = filters;
-                }
-            });
+                        this.filters = filters;
+                    }
+                });
+            }
         },
 
         /**
@@ -241,11 +245,8 @@ let wpmfFoldersFiltersModule;
             let filter_order = '<select name="folder_order" id="media-order-folder" class="wpmf-order-folder wpmf-order">';
             filter_order += '<option value="name-asc" selected>' + wpmf.l18n.order_folder_label + '</option>';
             $.each(wpmf.l18n.order_folder, function (key, text) {
-                if (key === wpmf.vars.order_f) {
-                    filter_order += '<option value="' + key + '" selected>' + text + '</option>';
-                } else {
+
                     filter_order += '<option value="' + key + '">' + text + '</option>';
-                }
             });
             filter_order += '</select>';
             $('#wpmf-media-category').after(filter_order);
@@ -474,11 +475,20 @@ let wpmfFoldersFiltersModule;
          * Initialize own user media filtering for list view
          */
         initListMyMediasFilter : function() {
-            const selected = (wpmf.vars.wpmf_selected_dmedia==='yes')?'selected="selected"':'';
-            let filter_media = `<select id="wpmf-display-media-filters" name="wpmf-display-media-filters" class="wpmf-filter-display-media attachment-filters">
-                                        <option value="all">No</option>
-                                        <option ${selected} value="yes">Yes</option>
-                                </select>`;
+            let filter_media = '<select id="wpmf-display-media-filters" name="wpmf-display-media-filters" class="wpmf-filter-display-media attachment-filters">';
+            if (wpmf.vars.display_own_media === 'all') {
+                filter_media += '<option value="all" selected>No</option>';
+            } else {
+                filter_media += '<option value="all">No</option>';
+            }
+
+            if (wpmf.vars.display_own_media === 'yes') {
+                filter_media += '<option value="yes" selected>Yes</option>';
+            } else {
+                filter_media += '<option value="yes">Yes</option>';
+            }
+
+            filter_media += '</select>';
             $('#wpmf-media-category').after(filter_media);
         },
 
@@ -617,7 +627,7 @@ let wpmfFoldersFiltersModule;
             clear_filters = '<li onclick="wpmfFoldersFiltersModule.clearFilters();">'+wpmf.l18n.clear_filters+'<span class="sub"><i class="material-icons">delete_sweep</i></span></li>';
 
             // Own user media
-            my_medias =  `<li onclick="wpmfFoldersFiltersModule.toggleFilter('#wpmf-display-media-filters');">`;
+            my_medias =  `<li class="own-user-media" onclick="wpmfFoldersFiltersModule.toggleFilter('#wpmf-display-media-filters');">`;
             if($current_frame.find('#wpmf-display-media-filters').val() === 'yes') {
                 my_medias += '<span class="check"><i class="material-icons">check</i></span>';
             }
@@ -695,6 +705,11 @@ let wpmfFoldersFiltersModule;
             $(filter_elem).val(value).trigger('change');
             if ((filter_elem === '#media-order-media' || filter_elem === '#media-order-folder') && wpmfFoldersModule.page_type !== 'upload-list') {
                 wpmfFoldersModule.reloadAttachments();
+            }
+
+            if (filter_elem === '#media-order-media') {
+                // set last status folder tree
+                wpmfFoldersModule.setCookie("lastSortMedia_" + wpmf.vars.site_url, value, 365);
             }
 
             // Show snackbar

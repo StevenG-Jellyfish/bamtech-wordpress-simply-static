@@ -6,49 +6,49 @@ defined('ABSPATH') || die('No direct script access allowed!');
     <div class="btnoption">
         <div class="wpmf_row_full">
             <input type="hidden" name="wpmf_option_sync_media" value="0">
-            <label data-alt="<?php _e('Activate the sync from External folder to WordPress media library', 'wpmf') ?>"
-                   class="text"><?php _e('Activate the sync', 'wpmf') ?></label>
+            <label data-alt="<?php esc_html_e('Activate the sync from External folder to WordPress media library', 'wpmf') ?>"
+                   class="text"><?php esc_html_e('Activate the sync', 'wpmf') ?></label>
             <div class="switch-optimization">
                 <label class="switch switch-optimization">
                     <input type="checkbox" id="cb_option_sync_media"
                            name="wpmf_option_sync_media" value="1"
                         <?php
-                        if (isset($option_sync_media) && $option_sync_media == 1) {
+                        if (isset($option_sync_media) && (int) $option_sync_media === 1) {
                             echo 'checked';
                         }
                         ?>
                     >
-                    <div class="slider round"></div>
+                    <span class="slider round"></span>
                 </label>
             </div>
         </div>
 
         <div class="wpmf_row_full">
             <input type="hidden" name="wpmf_option_sync_media_external" value="0">
-            <label data-alt="<?php _e('Also activate the sync from
+            <label data-alt="<?php esc_html_e('Also activate the sync from
              WordPress media library to external folders', 'wpmf') ?>"
-                   class="text"><?php _e('Activate 2 ways sync', 'wpmf') ?></label>
+                   class="text"><?php esc_html_e('Activate 2 ways sync', 'wpmf') ?></label>
             <div class="switch-optimization">
                 <label class="switch switch-optimization">
                     <input type="checkbox" id="cb_option_sync_media_external"
                            name="wpmf_option_sync_media_external" value="1"
                         <?php
-                        if (isset($sync_media_ex) && $sync_media_ex == 1) {
+                        if (isset($sync_media_ex) && (int) $sync_media_ex === 1) {
                             echo 'checked';
                         }
                         ?>
                     >
-                    <div class="slider round"></div>
+                    <span class="slider round"></span>
                 </label>
             </div>
         </div>
 
         <div>
-            <lable><?php _e('Sync delay', 'wpmf') ?></lable>
+            <?php esc_html_e('Sync delay', 'wpmf') ?>
             <label>
-                <input name="input_time_sync" class="input_time_sync" value="<?php echo $time_sync ?>">
+                <input name="input_time_sync" class="input_time_sync" value="<?php echo esc_attr($time_sync) ?>">
             </label>
-            <lable><?php _e('minutes', 'wpmf') ?></lable>
+            <?php esc_html_e('minutes', 'wpmf') ?>
         </div>
         <hr>
         <div>
@@ -73,26 +73,27 @@ defined('ABSPATH') || die('No direct script access allowed!');
                 </label>
             </div>
 
-            <input type="button" class="button btn_addsync_media" value="<?php _e('Add', 'wpmf') ?>">
-            <input type="button" class="button btn_deletesync_media" value="<?php _e('Delete selected', 'wpmf') ?>">
+            <input type="button" class="button btn_addsync_media" value="<?php esc_html_e('Add', 'wpmf') ?>">
+            <input type="button" class="button btn_deletesync_media"
+                   value="<?php esc_html_e('Delete selected', 'wpmf') ?>">
         </div>
 
         <table class="wp-list-table widefat striped wp-list-table-sync">
             <tr>
                 <td style="width: 1%"><label for="cb-select-all"></label><input id="cb-select-all" type="checkbox"></td>
-                <td style="width: 40%"><?php _e('Directory FTP', 'wpmf') ?></td>
-                <td style="width: 40%"><?php _e('Folder category', 'wpmf') ?></td>
+                <td style="width: 40%"><?php esc_html_e('Directory FTP', 'wpmf') ?></td>
+                <td style="width: 40%"><?php esc_html_e('Folder category', 'wpmf') ?></td>
             </tr>
             <?php if (!empty($wpmf_list_sync_media)) : ?>
                 <?php foreach ($wpmf_list_sync_media as $k => $v) : ?>
-                    <tr data-id="<?php echo $k ?>">
+                    <tr data-id="<?php echo esc_html($k) ?>">
                         <td>
-                            <label for="cb-select-<?php echo $k ?>"></label>
-                            <input id="cb-select-<?php echo $k ?>"
-                                   type="checkbox" name="post[]" value="<?php echo $k ?>">
+                            <label for="cb-select-<?php echo esc_html($k) ?>"></label>
+                            <input id="cb-select-<?php echo esc_html($k) ?>"
+                                   type="checkbox" name="post[]" value="<?php echo esc_html($k) ?>">
                         </td>
-                        <td><?php echo $v['folder_ftp'] ?></td>
-                        <td><?php echo @$this->breadcrumb_category[$k] ?></td>
+                        <td><?php echo esc_html($v['folder_ftp']) ?></td>
+                        <td><?php echo esc_html($this->breadcrumb_category[$k]) ?></td>
                     </tr>
                 <?php endforeach; ?>
             <?php endif; ?>

@@ -10,16 +10,19 @@
                 var listplugins = [
                     "wp-media-folder",
                     "wp-media-folder-addon",
+                    "wp-media-folder-gallery-addon",
                     "wp-file-download",
                     "wp-file-download-addon",
                     "wp-team-display",
-                    "wp-latest-post",
                     "wp-table-manager",
+                    "wp-latest-post",
+                    "wp-latest-posts-addon",
                     "wp-frontpage-news-pro-addon",
-                    "wp-meta-seo-addon"
+                    "wp-meta-seo-addon",
+                    "wp-speed-of-light-addon"
                 ];
 
-                $('#update-plugins-table tr input[type="checkbox"][name="checked[]"]').each(function () {
+                $('#update-plugins-table').find('tr input[type="checkbox"][name="checked[]"]').each(function () {
                     var ju_plugin_file = $(this).val();
                     var slug = ju_plugin_file.substr(ju_plugin_file.indexOf('/') + 1, ju_plugin_file.indexOf('.') - ju_plugin_file.indexOf('/') - 1);
                     if($.inArray(slug,listplugins) !== -1){
@@ -44,7 +47,8 @@
                     type: 'POST',
                     data: {
                         'action': 'ju_add_token',
-                        'token': res.token
+                        'token': res.token,
+                        'wpmf_nonce': updaterparams.wpmf_nonce
                     },
                     success: function () {
                         window.location.assign(document.URL);

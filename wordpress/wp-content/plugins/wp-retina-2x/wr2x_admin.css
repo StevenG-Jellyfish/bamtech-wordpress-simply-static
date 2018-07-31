@@ -206,3 +206,21 @@
 	text-shadow: 0 -1px 0 rgba(0,0,0,0.1) !important;
 	cursor: default;
 }
+
+/**
+ * Retina Uploader.
+ * Some parts derived from `wp-admin/css/media.css`
+ *
+ * @update WP 4.9.7
+ * @since  WP 4.9.7
+ */
+#wr2x_retina-uploader {
+	margin-top: 20px;
+}
+.drag-drop #wr2x_drag-drop-area {
+	border: 4px dashed #b4b9be;
+	height: 200px;
+}
+input#wr2x_file-selector {
+	display: none;
+}

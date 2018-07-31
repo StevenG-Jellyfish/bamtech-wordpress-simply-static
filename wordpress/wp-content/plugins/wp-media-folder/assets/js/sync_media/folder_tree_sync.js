@@ -69,7 +69,11 @@
             ret = $.ajax({
                 url: ajaxurl,
                 method:'POST',
-                data: {dir: dir, action: 'wpmf_get_folder'},
+                data: {
+                    dir: dir,
+                    action: 'wpmf_get_folder',
+                    wpmf_nonce: wpmf.vars.wpmf_nonce
+                },
                 context: $thisftp,
                 dataType: 'json',
                 beforeSend: function () {
@@ -78,8 +82,13 @@
             }).done(function (datas) {
                 ret = '<ul class="jaofiletree" style="display: none">';
                 for (var ij = 0; ij < datas.length; ij++) {
-                    if (datas[ij].type == 'dir') {
+                    if (datas[ij].type === 'dir') {
                         var classe = 'directory collapsed';
+                        if (datas[ij].disable) {
+                            classe += ' folder_disabled';
+                        } else {
+                            classe += ' folder_enabled';
+                        }
                         var isdir = '/';
                     } else {
                         classe = 'file ext_' + datas[ij].ext;
@@ -145,11 +154,11 @@
             });
 
             //Bind for collapse or expand elements
-            $thisftp.find('li.directory.collapsed a').bind('click', function () {
+            $thisftp.find('li.directory.collapsed.folder_enabled a').bind('click', function () {
                 methods_sync.open_sync($(this).attr('data-file'));
                 return false;
             });
-            $thisftp.find('li.directory.expanded a').bind('click', function () {
+            $thisftp.find('li.directory.expanded.folder_enabled a').bind('click', function () {
                 methods_sync.close_sync($(this).attr('data-file'));
                 return false;
             });

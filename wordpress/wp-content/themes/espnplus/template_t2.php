@@ -20,6 +20,7 @@ get_template_part('template-parts/components/section');
 get_template_part('template-parts/components/toc');
 get_template_part('template-parts/components/footer-links');
 get_template_part('template-parts/components/league-accordion');
+// get_template_part('template-parts/components/featured-programming');
 get_footer();
 
 ?>

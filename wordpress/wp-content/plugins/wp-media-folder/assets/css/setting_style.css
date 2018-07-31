@@ -8,7 +8,7 @@
 }
 
 #wpmf_filter_dimension, #wpmf_filter_weights {
-    width: 280px;
+    width: 310px;
 }
 
 #gallery_image_padding, #wpmf_filter_weights {
@@ -294,6 +294,18 @@ ul.jaofiletree a:hover {
     height: 0.8rem;
     background-color: #FFF;
     border: 1px solid #999;
+    padding: 0;
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.jaofiletree li.directory span.notvisible {
+    width: 0.8rem;
+    height: 0.8rem;
+    font-size: 0.8rem;
+    background-color: transparent;
+    border: transparent 1px solid;
     padding: 0;
     position: relative;
     display: inline-block;
@@ -994,4 +1006,37 @@ input:checked + .slider:before {
     width: 65px;
     float: left;
     line-height: 28px;
+}
+
+.shortcode_theme_wrap {
+    display: none;
+}
+
+.shortcode_theme_wrap.show_params {
+    display: block;
+}
+
+.gallery_shortcode_input {
+    width: 60%;
+}
+
+.copy_shortcode_gallery {
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.wpmf-folder-tree li.selected > a {
+    color: #2196F3;
+}
+
+.watermark_exclude_folders .wpmf-arrow,
+.watermark_exclude_folders .wpmf-no-arrow {
+    float: left;
+}
+
+.watermark_exclude_folders .wpmf-folder-tree {
+    padding: 0;
+    width: 100%;
+    min-height: 50px;
+    background: #f5f5f5 !important;
 }

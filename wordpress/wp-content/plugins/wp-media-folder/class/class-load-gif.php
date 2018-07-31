@@ -20,8 +20,10 @@ class WpmfLoadGif
     }
 
     /**
-     * cancel gif file load on front end
-     * @param $content
+     * Cancel gif file load on front end
+     *
+     * @param string $content Current post content
+     *
      * @return mixed
      */
     public function gifReplace($content)
@@ -31,14 +33,16 @@ class WpmfLoadGif
                 foreach ($matches[0] as $img) {
                     $dom = new DOMDocument();
                     $dom->loadHTML($img);
-                    $src = $dom->getElementsByTagName('img')->item(0)->getAttribute('src');
+                    $src          = $dom->getElementsByTagName('img')->item(0)->getAttribute('src');
                     $still_attach = preg_replace('/\.gif$/', '_still_tmp.jpeg', $src);
-                    $alt = $dom->getElementsByTagName('img')->item(0)->getAttribute('alt');
-                    $width = $dom->getElementsByTagName('img')->item(0)->getAttribute('width');
-                    $class = $dom->getElementsByTagName('img')->item(0)->getAttribute('class');
-
+                    $alt          = $dom->getElementsByTagName('img')->item(0)->getAttribute('alt');
+                    $width        = $dom->getElementsByTagName('img')->item(0)->getAttribute('width');
+                    $class        = $dom->getElementsByTagName('img')->item(0)->getAttribute('class');
+                    if (empty($src)) {
+                        return $content;
+                    }
                     $infos = pathinfo($src);
-                    if ($infos['extension'] == 'gif') {
+                    if ($infos['extension'] === 'gif') {
                         $output = '<div class="gif_wrap ' . $width . '">
                         <a href="javascript:void(0);" class="gif_link_wrap ' . $width . '"
                          title="Click to play" rel="nofollow"></a>
@@ -58,7 +62,9 @@ class WpmfLoadGif
     }
 
     /**
-     * load script
+     * Load script
+     *
+     * @return void
      */
     public function enqueue()
     {

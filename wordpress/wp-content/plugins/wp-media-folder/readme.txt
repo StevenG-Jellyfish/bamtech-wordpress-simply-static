@@ -1,8 +1,8 @@
 === Media test ===
 Tags: media, folder
 Requires at least: 3.5.1
-Tested up to: 4.9.4
-Stable tag: 4.5.0
+Tested up to: 4.9.7
+Stable tag: 4.6.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -18,6 +18,56 @@ I can not tell more just watch our demo and please try it to make your own idea.
 Stop searching for an image through thousand of media, just navigate like you do on your desktop file manager.
 
 = Changelog = 
+
+= 4.6.0 =
+* Add : Exclude some folder from the Watermark process
+* Add : Compatibility with Gutenberg editor
+* Fix : Import FTP & sync media
+
+= 4.5.9 =
+* Fix : Delete folder
+* Fix : Import Nextgen gallery
+* Fix : Save theme and plugin file
+* Fix : Import category button
+
+= 4.5.8 =
+* Add : Add actions and filters for developers
+
+= 4.5.7 =
+* Fix : Deleting folder with its media
+* Fix : Duplicate attachment
+* Fix : Load google font on IE browser
+
+= 4.5.6 =
+* Fix : Move media with WPML plugin (compatibility)
+* Fix : Upload the files when enable media access by user
+* Fix : Login to JUupdater for plugin update
+
+= 4.5.5 =
+* Fix : Duplicate file when import and sync
+
+= 4.5.4 =
+* Fix : Enhance code readability and performance
+
+= 4.5.3 =
+* Add : Enable/disable remote video feature
+* Add : Option to enable/disable format media title
+* Add : Shortcode generator for Gallery Addon: Load images by gallery, tag and all options
+* Fix : Remove a folder with its media
+* Fix : Count files in folder tree
+
+= 4.5.2 =
+* Fix : Notification display success on video upload
+* Fix : Display .svg file in content
+* Fix : Conflict with elementor, clientside plugin
+* Fix : Preview image when uploading
+
+= 4.5.1 =
+* Fix : Sync from FTP to media library
+* Fix : Remove the right click edit button on the popup view
+* Fix : Compability with WPML plugin
+* Fix : Folder not displayed after reload attachment in modal view
+* Fix : Change lists plugin updater
 
 = 4.5.0 =
 * Add : Handle animated GIF in the media manager with option to load it in content

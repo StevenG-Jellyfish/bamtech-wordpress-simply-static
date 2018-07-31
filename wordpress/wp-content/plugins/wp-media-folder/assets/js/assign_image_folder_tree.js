@@ -82,7 +82,8 @@
                     id: id,
                     attachment_id: wpmfFoldersModule.editFileId,
                     action: 'wpmf',
-                    task: 'get_assign_tree'
+                    task: 'get_assign_tree',
+                    wpmf_nonce: wpmf.vars.wpmf_nonce
                 },
                 context: $assignimagetree,
                 dataType: 'json',
@@ -348,7 +349,8 @@
                     task: 'set_object_term',
                     wpmf_term_ids_check: wpmf_term_ids_check.join(),
                     wpmf_term_ids_notcheck: wpmf_term_ids_notcheck.join(),
-                    attachment_id: attachment_id
+                    attachment_id: attachment_id,
+                    wpmf_nonce: wpmf.vars.wpmf_nonce
                 },
                 success: function () {
                     // Show snackbar
@@ -386,20 +388,22 @@
 
             /* base on /wp-includes/js/media-views.js */
             var wpmfAssigntreeform = wp.media.view.AttachmentsBrowser;
-            wp.media.view.AttachmentsBrowser = wp.media.view.AttachmentsBrowser.extend({
-                createSingle: function () {
-                    /* Create media folder selection setting */
-                    wpmfAssigntreeform.prototype.createSingle.apply(this, arguments);
-                    var sidebar = this.sidebar;
-                    var wpmf_form_tree = wpmfAssignModule.genFormassigntree();
-                    if (wpmf.vars.wpmf_pagenow !== 'upload.php') {
-                        $('.wpmfjaoassign_row').remove();
-                        $(sidebar.$el).find('.attachment-details').append(wpmf_form_tree);
-                        wpmfAssignModule.treeshowdialog();
-                    }
+            if (typeof wpmfAssigntreeform !== "undefined") {
+                wp.media.view.AttachmentsBrowser = wp.media.view.AttachmentsBrowser.extend({
+                    createSingle: function () {
+                        /* Create media folder selection setting */
+                        wpmfAssigntreeform.prototype.createSingle.apply(this, arguments);
+                        var sidebar = this.sidebar;
+                        var wpmf_form_tree = wpmfAssignModule.genFormassigntree();
+                        if (wpmf.vars.wpmf_pagenow !== 'upload.php') {
+                            $('.wpmfjaoassign_row').remove();
+                            $(sidebar.$el).find('.attachment-details').append(wpmf_form_tree);
+                            wpmfAssignModule.treeshowdialog();
+                        }
 
-                }
-            });
+                    }
+                });
+            }
 
             /* Create media folder selection setting when wp smush plugin active*/
             if (wpmf.vars.get_plugin_active.indexOf('wp-smush.php') !== -1) {
@@ -411,64 +415,70 @@
                     /**
                      * Add Smush details to attachment.
                      */
-                    wp.media.view.Attachment.Details.TwoColumn = wp.media.view.Attachment.Details.TwoColumn.extend({
-                        render: function () {
-                            // Get Smush status for the image
-                            wpmfAssignMediaTwoColumn.prototype.render.apply(this);
-                            var $this = this;
-                            var wpmf_form_tree = wpmfAssignModule.genFormassigntree();
-                            $( document ).ajaxComplete(function( event, xhr, settings ) {
-                                var data = settings.data;
-                                if ( data.indexOf('smush_get_attachment_details') !== -1 ) {
-                                    $('.wpmfjaoassign_row').remove();
-                                    $this.$el.find('.attachment-info .settings').append(wpmf_form_tree);
-                                    wpmfAssignModule.treeshowdialog();
-                                }
-                            });
-                        }
-                    });
+                    if (typeof wpmfAssignMediaTwoColumn !== "undefined") {
+                        wp.media.view.Attachment.Details.TwoColumn = wp.media.view.Attachment.Details.TwoColumn.extend({
+                            render: function () {
+                                // Get Smush status for the image
+                                wpmfAssignMediaTwoColumn.prototype.render.apply(this);
+                                var $this = this;
+                                var wpmf_form_tree = wpmfAssignModule.genFormassigntree();
+                                $( document ).ajaxComplete(function( event, xhr, settings ) {
+                                    var data = settings.data;
+                                    if ( data.indexOf('smush_get_attachment_details') !== -1 ) {
+                                        $('.wpmfjaoassign_row').remove();
+                                        $this.$el.find('.attachment-info .settings').append(wpmf_form_tree);
+                                        wpmfAssignModule.treeshowdialog();
+                                    }
+                                });
+                            }
+                        });
+                    }
                 }
             }
 
             /* base on /wp-includes/js/media-views.js */
             var wpmfAssigntree = wp.media.view.Modal;
-            wp.media.view.Modal = wp.media.view.Modal.extend({
-                open: function () {
-                    /* Create media folder selection setting */
-                    wpmfAssigntree.prototype.open.apply(this, arguments);
-                    if (wpmf.vars.wpmf_pagenow === 'upload.php') {
-                        var wpmf_form_tree = wpmfAssignModule.genFormassigntree();
-                        setTimeout(function () {
-                            $('.wpmfjaoassign_row').remove();
-                            $('.attachment-info .settings').append(wpmf_form_tree);
-                            wpmfAssignModule.treeshowdialog();
-                        }, 150);
+            if (typeof wpmfAssigntree !== "undefined") {
+                wp.media.view.Modal = wp.media.view.Modal.extend({
+                    open: function () {
+                        /* Create media folder selection setting */
+                        wpmfAssigntree.prototype.open.apply(this, arguments);
+                        if (wpmf.vars.wpmf_pagenow === 'upload.php') {
+                            var wpmf_form_tree = wpmfAssignModule.genFormassigntree();
+                            setTimeout(function () {
+                                $('.wpmfjaoassign_row').remove();
+                                $('.attachment-info .settings').append(wpmf_form_tree);
+                                wpmfAssignModule.treeshowdialog();
+                            }, 150);
+                        }
                     }
-                }
-            });
+                });
+            }
 
             if (wpmf.vars.wpmf_pagenow === 'upload.php' && wpmfFoldersModule.page_type !== 'upload-list') {
                 // create media folder selection setting when next and prev media items
                 var myFolderEditAttachments = wp.media.view.MediaFrame.EditAttachments;
-                wp.media.view.MediaFrame.EditAttachments = wp.media.view.MediaFrame.EditAttachments.extend({
-                    previousMediaItem: function () {
-                        /* Create duplicate button setting */
-                        myFolderEditAttachments.prototype.previousMediaItem.apply(this, arguments);
-                        var wpmf_form_tree = wpmfAssignModule.genFormassigntree();
-                        $('.wpmfjaoassign_row').remove();
-                        $('.attachment-info .settings').append(wpmf_form_tree);
-                        wpmfAssignModule.treeshowdialog();
-                    },
+                if (typeof myFolderEditAttachments !== "undefined") {
+                    wp.media.view.MediaFrame.EditAttachments = wp.media.view.MediaFrame.EditAttachments.extend({
+                        previousMediaItem: function () {
+                            /* Create duplicate button setting */
+                            myFolderEditAttachments.prototype.previousMediaItem.apply(this, arguments);
+                            var wpmf_form_tree = wpmfAssignModule.genFormassigntree();
+                            $('.wpmfjaoassign_row').remove();
+                            $('.attachment-info .settings').append(wpmf_form_tree);
+                            wpmfAssignModule.treeshowdialog();
+                        },
 
-                    nextMediaItem: function () {
-                        /* Create duplicate button setting */
-                        myFolderEditAttachments.prototype.nextMediaItem.apply(this, arguments);
-                        var wpmf_form_tree = wpmfAssignModule.genFormassigntree();
-                        $('.wpmfjaoassign_row').remove();
-                        $('.attachment-info .settings').append(wpmf_form_tree);
-                        wpmfAssignModule.treeshowdialog();
-                    }
-                });
+                        nextMediaItem: function () {
+                            /* Create duplicate button setting */
+                            myFolderEditAttachments.prototype.nextMediaItem.apply(this, arguments);
+                            var wpmf_form_tree = wpmfAssignModule.genFormassigntree();
+                            $('.wpmfjaoassign_row').remove();
+                            $('.attachment-info .settings').append(wpmf_form_tree);
+                            wpmfAssignModule.treeshowdialog();
+                        }
+                    });
+                }
             }
         }
     });

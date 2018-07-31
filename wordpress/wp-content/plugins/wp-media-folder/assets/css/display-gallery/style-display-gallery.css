@@ -225,7 +225,8 @@ body .wpmf_mfp-arrow:active {
 }
 
 
-.gallery-masonry .gallery-icon:hover>.hover_img,.gallery-masonry .gallery-icon:hover>.portfolio_lightbox{
+.gallery-masonry .gallery-icon:hover > .hover_img,
+.gallery-masonry .gallery-icon:hover > .portfolio_lightbox{
     display: block !important;
 }
 
@@ -295,4 +296,8 @@ body .wpmf_mfp-arrow:active {
 
 .gallery_default figure {
     box-sizing: border-box;
+}
+
+.wpmf-control-nav {
+    margin: 0 !important;
 }
