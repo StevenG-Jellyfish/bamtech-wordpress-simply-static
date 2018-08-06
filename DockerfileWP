@@ -1,5 +1,4 @@
-#FROM wordpress:4.8-php7.1-fpm-alpine
-FROM gcr.io/jellyfish-development-167809/wordpress-wordpress:0.0.0.2
+FROM gcr.io/jellyfish-development-167809/wordpress-wordpress:0.0.0.17
 
 RUN mkdir /home/wordpress/
 RUN mkdir /media/cache && chmod 777 -R /media/cache
