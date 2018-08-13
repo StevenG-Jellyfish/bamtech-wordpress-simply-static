@@ -45,7 +45,7 @@ if ($component !== false) {
         <section class="section <?echo $odd_even; if ($section_id === reset($section_ids)) {echo " first-section";}if ($section_id === end($section_ids))
         {echo " last-section";}?> style="background-color: #f9b300;" ">
             <div class="container">
-                <div class="row flexbox">
+                <div class="row flexbox <?php the_field('section_image_position', $section_id, false); ?>">
                     
                     <div class="col-md-6 copy-container">
                         
