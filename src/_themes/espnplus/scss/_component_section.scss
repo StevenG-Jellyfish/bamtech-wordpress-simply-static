@@ -134,7 +134,8 @@ section.section {
 
   } // .row.flexbox
 
-  &.odd {
+  &.odd,
+  &.section-image-position-left {
     padding: 100px 0;
     background-color: white;
     color: black;
@@ -163,25 +164,31 @@ section.section {
   } // .odd
 
   @media (max-width: 767px) { // mobile
-    &.odd {
+    &.odd,
+    &.section-image-position-left {
       padding-top: 2rem;
       padding-bottom: 2rem;
     } // .odd {  
   } // max-width: 767px
 
-  &.odd:first-child {
+  &.odd:first-child,
+  &.section-image-position-left:first-child {
     padding-top: 2rem;
   } // &.odd:first-child
 
-  &.odd:last-child {
+  &.odd:last-child,
+  &.section-image-position-left:last-child {
     padding-top: 2rem;
     padding-bottom: 2rem;
   } // &.odd:last-child
 
-  &.even {
+  &.even,
+  &.section-image-position-right {
     padding: 0;
-    background-color: black;
-    color: white;
+    background-color: white;
+    color: black;
+    // background-color: black;
+    // color: white;
 
     .row.flexbox {
       flex-direction: row-reverse;
@@ -201,28 +208,34 @@ section.section {
     a:visited,
     a:active,
     a:hover {
-      color: white;
+      color: black;
       text-decoration: underline;
+      // color: white;
+      // text-decoration: underline;
     } // a
 
   } // .even
 
   @media (max-width: 767px) { // mobile
-    &.even {
+    &.even,
+    &.section-image-position-right {
       padding-top: 0;
       padding-bottom: 0;
     } // .even {  
   } // max-width: 767px
 
-  &.even:first-child {
+  &.even:first-child,
+  &.section-image-position-right:first-child {
     padding-top: 2rem;
   } // &.odd:first-child
 
-  &.even:last-child {
+  &.even:last-child,
+  &.section-image-position-right:last-child {
     padding-bottom: 2rem;
   } // &.odd:last-child
   
-  &.even:before {
+  &.even:before,
+  &.section-image-position-right:before {
     content: '';
     position: relative;
     display: block;
@@ -240,12 +253,14 @@ section.section {
   } // &.even:before >> top angled BG
 
   @media (max-width: 767px) { // mobile
-    &.even:before {
+    &.even:before,
+    &.section-image-position-right:before {
       height: 40px;
     } // &.even:beforex {  
   } // max-width: 767px
 
-  &.even:first-child:before {
+  &.even:first-child:before,
+  &.section-image-position-right:first-child:before {
     content: '';
     position: relative;
     display: none;
@@ -262,55 +277,59 @@ section.section {
     z-index: -1;
   } // &.even:before >> top angled BG
   
-  &.even:after {
-    content: '';
-    position: relative;
-    display: block;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    width: 100%;
-    height: 60px;
-    margin: 0;
-    padding: 0;
-    background: inherit;
-    transform: skewY(-2.5deg);
-    transform-origin: 100%;
-    z-index: 2;
-  } //&.even:after >> bottom angled BG
+  // &.even:after {
+  //   content: '';
+  //   position: relative;
+  //   display: block;
+  //   bottom: 0;
+  //   right: 0;
+  //   left: 0;
+  //   width: 100%;
+  //   height: 60px;
+  //   margin: 0;
+  //   padding: 0;
+  //   background: inherit;
+  //   transform: skewY(-2.5deg);
+  //   transform-origin: 100%;
+  //   z-index: 2;
+  // } //&.even:after >> bottom angled BG
 
-  @media (max-width: 767px) { // mobile
-    &.even:after {
-      height: 40px;
-    } // &.even:after {  
-  } // max-width: 767px
+  // @media (max-width: 767px) { // mobile
+  //   &.even:after {
+  //     height: 40px;
+  //   } // &.even:after {  
+  // } // max-width: 767px
   
-  &.even:last-child:after {
-    content: '';
-    position: relative;
-    display: none;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    width: 0;
-    height: 0;
-    margin: 0;
-    padding: 0;
-    background: inherit;
-    transform: skewY(0deg);
-    transform-origin: 100%;
-    z-index: -1;
-  } //&.even:after >> bottom angled BG
-  &.even.first-section {
+  // &.even:last-child:after {
+  //   content: '';
+  //   position: relative;
+  //   display: none;
+  //   bottom: 0;
+  //   right: 0;
+  //   left: 0;
+  //   width: 0;
+  //   height: 0;
+  //   margin: 0;
+  //   padding: 0;
+  //   background: inherit;
+  //   transform: skewY(0deg);
+  //   transform-origin: 100%;
+  //   z-index: -1;
+  // } //&.even:after >> bottom angled BG
+  &.even.first-section,
+  &.section-image-position-right.first-section {
     padding: 1.750rem 0 0 0;
   } // &.first-section
-  &.even.first-section:before {
+  &.even.first-section:before,
+  &.section-image-position-right.first-section:before {
     display: none;
   } // &.first-section
-  &.even.last-section {
+  &.even.last-section,
+  &.section-image-position-right.last-section {
     padding: 0 0 1.750rem 0;
   } // &.last-section 
-  &.even.last-section:after {
+  &.even.last-section:after,
+  &.section-image-position-right.last-section:after {
     display: none;
   } // &.last-section 
 
