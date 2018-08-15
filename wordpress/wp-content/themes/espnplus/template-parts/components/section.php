@@ -42,16 +42,18 @@ if ($component !== false) {
     $odd_even = ++$count % 2 ? "even" : "odd";
     ?>
        
-        <section class="section <?echo $odd_even; if ($section_id === reset($section_ids)) {echo " first-section";}if ($section_id === end($section_ids))
-        {echo " last-section";}?>">
+        <section class="section <?echo $odd_even." "; if ($section_id === reset($section_ids)) {echo "first-section ";}if ($section_id === end($section_ids))
+        {echo "last-section ";} the_field('section_image_position', $section_id, false);?>">
             <div class="container">
-                <div class="row flexbox <?php the_field('section_image_position', $section_id, false); ?>">
+                <div class="row flexbox">
                     
                     <div class="col-md-6 copy-container">
                         
                         <h2 class="featurette-heading"><?php the_field('section_header', $section_id,false);?></h2>
 
                         <p class="lead"><?php the_field('section_body', $section_id,false);?></p>
+
+                        <?php the_field('section_image_position', $section_id, false);?>
 
                     </div>
 
