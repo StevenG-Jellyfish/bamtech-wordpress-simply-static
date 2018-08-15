@@ -7,12 +7,15 @@ $espn-toc-bg-grey: #252525;
 $espn-toc-txt-grey: #c5c9d1;
 $espn-accordion-bg-grey: #191919;
 $espn-accordion-txt-grey: #636363;
+$espn-accordion-bg-blue: #013265;
+
 // global elements
 body {
     max-width: 100%;
     margin: 0 0 0 0;
     padding: 0 0 0 0;
-    background-color: black;
+    background-color: $espn-accordion-bg-blue;
+    //background-color: black;
     font-size: 16px;
     line-height: 1.500rem;
 }
