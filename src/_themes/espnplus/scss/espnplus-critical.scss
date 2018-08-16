@@ -1,4 +1,5 @@
 @import "bootstrap";
+@import "color_overrides";
 @import "style";
 @import "global_header";
 @import "component_spotlight";
@@ -15,7 +16,7 @@
 }
 
 .container-fluid {
-    max-width: 1280px;
+    max-width: 1920px;
     margin: 0 auto;
     padding: 0;
 }

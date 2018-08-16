@@ -42,7 +42,7 @@ if ($component !== false) {
     $odd_even = ++$count % 2 ? "even" : "odd";
     ?>
        
-        <section class="section <?echo $odd_even." "; if ($section_id === reset($section_ids)) {echo "first-section ";}if ($section_id === end($section_ids))
+        <section class="section <?php echo $odd_even." "; if ($section_id === reset($section_ids)) {echo "first-section ";}if ($section_id === end($section_ids))
         {echo "last-section ";} the_field('section_image_position', $section_id, false);?>">
             <div class="container">
                 <div class="row flexbox">
@@ -61,15 +61,15 @@ if ($component !== false) {
                     <?php $image = get_field('section_image', $section_id); ?>
                         <img 
                             class="featurette-image img-fluid mx-auto lazy"
-                            src="<?echo $image['sizes']['bamtech-xsmall-width'];?>"
-                            data-src="<?echo $image['sizes']['bamtech-large-width'];?>" 
-                            alt="cool"
+                            src="<?php echo $image['sizes']['bamtech-xsmall-width'];?>"
+                            data-src="<?php echo $image['sizes']['bamtech-large-width'];?>" 
+                            alt="<?php echo $image['alt']?>"
                         />
                     <noscript>
                         <img 
                             class="featurette-image img-fluid mx-auto nolazy"
-                            src="<?echo $image['sizes']['bamtech-large-width'];?>"
-                            alt="cool"
+                            src="<?php echo $image['sizes']['bamtech-large-width'];?>"
+                            alt="<?php echo ($image['alt'])?$image['alt']:'Wicked Cool' ?>"
                         />
                     </noscript>
                     </div>

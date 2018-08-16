@@ -1,5 +1,6 @@
 .link-container {
     display:flex;
+
     @media (max-width: 640px) {
         width:100%;
         display:block;
@@ -9,6 +10,7 @@
     display:flex;
     min-width:160px;
     width:30%;
+
     @media (max-width: 640px) {
         width:100%;
         display:block;
@@ -17,17 +19,19 @@
         width:140px;
         margin:0 auto;
         text-align:left;
+
         @media (max-width: 640px) {
             margin:0;
         }
         .logo {
             margin:0 auto;
+
             img {
-            margin-top:26px;
-            margin-left:0px;
-            width:74px;
-            height:38px;
-            margin-bottom:30px;
+                margin-top:26px;
+                margin-left:0px;
+                width:74px;
+                height:38px;
+                margin-bottom:30px;
             }
         }
     }  
@@ -111,10 +115,10 @@
     }
 
     .wpml-ls-legacy-dropdown-click .wpml-ls-flag{
-        display:inline;
-        vertical-align:middle;
-        width:18px;
-        height:12px;
+        display: inline;
+        vertical-align: middle;
+        width: 18px;
+        height: 12px;
     }
 
     .wpml-ls-legacy-dropdown-click .wpml-ls-flag+span {
@@ -130,6 +134,7 @@
     width:70%;
     display:flex;
     flex-wrap: wrap;
+
     @media (max-width: 640px) {
         display:inline-block;
         position:relative;
@@ -145,6 +150,7 @@
         color:$espn-fotter-txt-grey;
         text-align:left;
         padding:0.25rem;
+
         @media (max-width: 940px) {
             width: 48%;
         }
@@ -185,9 +191,10 @@
     line-height: 1.5rem;
     margin-top:8px;
     margin-bottom:30px;
+
     .link-container {
-         width: 100%;
-       margin:0;
+        width: 100%;
+        margin:0;
         padding: 0;
         display:flex;
         @media (max-width: 640px) {
