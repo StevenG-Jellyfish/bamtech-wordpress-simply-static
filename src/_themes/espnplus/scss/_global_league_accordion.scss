@@ -1,3 +1,6 @@
+
+$espn-footer-bg-blue: #013265;
+
 section.league-toc {
     position: relative;
     display: block;
@@ -8,7 +11,8 @@ section.league-toc {
     font-size: 1.000rem;
     font-weight: 400;
     line-height: 1.500rem;
-    background-color: black;
+    background-color: $espn-footer-bg-blue;
+    //background-color: black;
 
     .container {
         width: 100%;
