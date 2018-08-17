@@ -1,5 +1,5 @@
 section.section {
-  max-width: 1280px;
+  max-width: 1920px;
   margin: 0 auto;
   padding: 0;
   font-size: 1.000rem;
@@ -8,7 +8,7 @@ section.section {
 
   .container {
     width: 100%;
-    max-width: 1280px;
+    max-width: 1920px;
     margin: 0 0 0 0;
     padding: 0 0 0 0;
   }
@@ -19,7 +19,7 @@ section.section {
     justify-content: center;
     align-items: center;
     width: 100%;
-    max-width: 1280px;
+    max-width: 1920px;
     margin: 0;
     padding: 0;
 
@@ -152,6 +152,16 @@ section.section {
             text-align: center;
           }
         }
+
+
+        .in-page-cta {
+          a:link,
+          a:visited,
+          a:active,
+          a:hover {
+            color: $yellow;
+          }
+        }
   
         .featurette-heading {
           font-family: PlayoffProCond-Medium, arial;
@@ -236,6 +246,15 @@ section.section {
       text-decoration: underline;
     }
 
+    .in-page-cta {
+      a:link,
+      a:visited,
+      a:active,
+      a:hover {
+        color: $yellow;
+      }
+    }
+
   } // .odd .section-image-position-left
 
   @media (max-width: 767px) { // mobile
@@ -287,6 +306,15 @@ section.section {
       // color: white;
       // text-decoration: underline;
     } // a
+
+    .in-page-cta {
+      a:link,
+      a:visited,
+      a:active,
+      a:hover {
+        color: $yellow;
+      }
+    }
 
   } // .even .section-image-position-right
 
