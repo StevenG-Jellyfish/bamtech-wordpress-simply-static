@@ -1,5 +1,6 @@
 .link-container {
     display:flex;
+
     @media (max-width: 640px) {
         width:100%;
         display:block;
@@ -9,6 +10,7 @@
     display:flex;
     min-width:160px;
     width:30%;
+
     @media (max-width: 640px) {
         width:100%;
         display:block;
@@ -17,17 +19,19 @@
         width:140px;
         margin:0 auto;
         text-align:left;
+
         @media (max-width: 640px) {
             margin:0;
         }
         .logo {
             margin:0 auto;
+
             img {
-            margin-top:26px;
-            margin-left:0px;
-            width:74px;
-            height:38px;
-            margin-bottom:30px;
+                margin-top:26px;
+                margin-left:0px;
+                width:74px;
+                height:38px;
+                margin-bottom:30px;
             }
         }
     }  
@@ -52,11 +56,12 @@
     .wpml-ls-legacy-dropdown-click a {
         display:block;
         text-decoration:none;
-        color:$espn-fotter-txt-grey;
+        color:$espn-footer-txt-white;
         border-radius:36px;
         height:36px;
         width:100%;
-        background-color:#191919;
+        //background-color:#191919;
+        background-color: $espn-accordion-bg-blue;
         padding-top:11px;
         padding-left:12px;
         line-height:1;
@@ -111,10 +116,10 @@
     }
 
     .wpml-ls-legacy-dropdown-click .wpml-ls-flag{
-        display:inline;
-        vertical-align:middle;
-        width:18px;
-        height:12px;
+        display: inline;
+        vertical-align: middle;
+        width: 18px;
+        height: 12px;
     }
 
     .wpml-ls-legacy-dropdown-click .wpml-ls-flag+span {
@@ -130,6 +135,7 @@
     width:70%;
     display:flex;
     flex-wrap: wrap;
+
     @media (max-width: 640px) {
         display:inline-block;
         position:relative;
@@ -142,9 +148,10 @@
         font-family:arial;
         font-size:0.8125rem;
         line-height:2rem;
-        color:$espn-fotter-txt-grey;
+        color:$espn-footer-txt-white;
         text-align:left;
         padding:0.25rem;
+
         @media (max-width: 940px) {
             width: 48%;
         }
@@ -155,21 +162,21 @@
             font-family:arial;
             font-size:0.8125rem;
             line-height:0.8125rem;
-            color:$espn-fotter-txt-grey;
+            color:$espn-footer-txt-white;
             font-weight:normal;
         }
         a:visited {
             font-family:arial;
             font-size:0.8125rem;
             line-height:0.8125rem;
-            color:$espn-fotter-txt-grey;
+            color:$espn-footer-txt-white;
             font-weight:normal;
         }
         a:active {
             font-family:arial;
             font-size:0.8125rem;
             line-height:0.8125rem;
-            color:$espn-fotter-txt-grey;
+            color:$espn-footer-txt-white;
             font-weight:normal;
         }
     }
@@ -178,6 +185,9 @@
     position: relative;
     display: inline-block;
     width: 90%;
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
     text-align:left;
     height:auto;
     font-size: 1rem;
@@ -185,9 +195,10 @@
     line-height: 1.5rem;
     margin-top:8px;
     margin-bottom:30px;
+
     .link-container {
-         width: 100%;
-       margin:0;
+        width: 100%;
+        margin:0;
         padding: 0;
         display:flex;
         @media (max-width: 640px) {

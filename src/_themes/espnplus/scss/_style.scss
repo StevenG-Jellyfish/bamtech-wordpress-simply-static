@@ -1,18 +1,10 @@
-// bootstrap overrides
-$yellow: #F9B300 !default;
-$primary: $yellow !default;
-$espn-device-black: #010000;
-$espn-fotter-txt-grey: #787878;
-$espn-toc-bg-grey: #252525;
-$espn-toc-txt-grey: #c5c9d1;
-$espn-accordion-bg-grey: #191919;
-$espn-accordion-txt-grey: #636363;
 // global elements
 body {
     max-width: 100%;
     margin: 0 0 0 0;
     padding: 0 0 0 0;
-    background-color: black;
+    background-color: $espn-footer-bg-blue !important;
+    //background-color: $black;
     font-size: 16px;
     line-height: 1.500rem;
 }
@@ -41,7 +33,7 @@ body {
         &:hover,
         &:active {
             background-color: white;
-            color: black;
+            color: $black;
         } // active & hover
     } // .parallelogram
     .btn.btn-primary {
@@ -69,7 +61,7 @@ body {
         font-style: normal;
         text-transform: uppercase;
         line-height: 48px;
-        color: black;
+        color: $black;
         letter-spacing:normal;
         -webkit-transform: skew(45deg);
         -ms-transform: skew(45deg);

@@ -1,3 +1,6 @@
+
+$espn-footer-bg-blue: #013265;
+
 section.league-toc {
     position: relative;
     display: block;
@@ -8,20 +11,21 @@ section.league-toc {
     font-size: 1.000rem;
     font-weight: 400;
     line-height: 1.500rem;
-    background-color: black;
+    background-color: $espn-footer-bg-blue;
+    //background-color: black;
 
     .container {
         width: 100%;
         max-width: 100%;
         margin: 0 0 3.375rem 0;
         padding: 0 0 0 0;
-        border-top: 1px solid $espn-accordion-txt-grey;
+        border-top: 1px solid $espn-accordion-txt-white;
 
         .copyright {
             //margin: 3.375rem 0 1.5rem 0;
             margin: 50px 0 18px 0;
             text-align: left;
-            color: $espn-accordion-txt-grey;
+            color: $espn-accordion-txt-white;
 
         } // .copyright
 
@@ -75,7 +79,7 @@ section.league-toc {
                     .card-header {
                         margin: 0;
                         padding: 0;
-                        background-color: $espn-accordion-bg-grey;
+                        background-color: $espn-accordion-bg-blue;
                         :focus {
                             outline:none;
                             border:none;
@@ -92,7 +96,7 @@ section.league-toc {
                                 font-weight: 400;
                                 line-height: 2.563rem;
                                 text-align: left;
-                                color: $espn-accordion-txt-grey;
+                                color: $espn-accordion-txt-white;
 
                                 p {
                                     margin: 0;
@@ -109,7 +113,7 @@ section.league-toc {
                                     margin: 0;
                                     padding: 0;
                                     line-height: 2.563rem;
-                                    color: $espn-accordion-txt-grey;
+                                    color: $espn-accordion-txt-white;
                                 } // i.fa
 
                             } // h5
@@ -122,10 +126,10 @@ section.league-toc {
                         display: block;
                         margin: 0 0 1.282rem 0;
                         padding: 1.282rem;
-                        border-top: 1px solid $espn-accordion-txt-grey;
-                        background-color: $espn-accordion-bg-grey;
+                        border-top: 1px solid $espn-accordion-txt-white;
+                        background-color: $espn-accordion-bg-blue;
                         text-align: left;
-                        color: $espn-accordion-txt-grey;
+                        color: $espn-accordion-txt-white;
                                 
                         p {
                             margin: 0;
