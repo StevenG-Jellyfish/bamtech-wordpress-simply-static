@@ -53,7 +53,7 @@ if ($component !== false) {
 
                         <p class="lead"><?php the_field('section_body', $section_id,false);?></p>
 
-                        <?php the_field('section_image_position', $section_id, false);?>
+                        <!--<?php the_field('section_image_position', $section_id, false);?>-->
 
                     </div>
 
