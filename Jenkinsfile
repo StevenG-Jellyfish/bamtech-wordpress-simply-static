@@ -217,7 +217,7 @@ pipeline {
 // Jenkins slave containers
 agent {
    kubernetes {
-     label 'jenkins-slaves'
+     label 'jenkins-slaves-bamtech'
      defaultContainer 'jnlp'
 
      yaml """
