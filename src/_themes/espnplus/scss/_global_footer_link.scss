@@ -56,12 +56,12 @@
     .wpml-ls-legacy-dropdown-click a {
         display:block;
         text-decoration:none;
-        color:$espn-footer-txt-white;
+        color:$espn-footer-txt-grey;
         border-radius:36px;
         height:36px;
         width:100%;
         //background-color:#191919;
-        background-color: $espn-accordion-bg-blue;
+        background-color: $espn-accordion-bg-grey;
         padding-top:11px;
         padding-left:12px;
         line-height:1;
@@ -148,7 +148,7 @@
         font-family:arial;
         font-size:0.8125rem;
         line-height:2rem;
-        color:$espn-footer-txt-white;
+        color:$espn-footer-txt-grey;
         text-align:left;
         padding:0.25rem;
 
@@ -162,21 +162,21 @@
             font-family:arial;
             font-size:0.8125rem;
             line-height:0.8125rem;
-            color:$espn-footer-txt-white;
+            color:$espn-footer-txt-grey;
             font-weight:normal;
         }
         a:visited {
             font-family:arial;
             font-size:0.8125rem;
             line-height:0.8125rem;
-            color:$espn-footer-txt-white;
+            color:$espn-footer-txt-grey;
             font-weight:normal;
         }
         a:active {
             font-family:arial;
             font-size:0.8125rem;
             line-height:0.8125rem;
-            color:$espn-footer-txt-white;
+            color:$espn-footer-txt-grey;
             font-weight:normal;
         }
     }
