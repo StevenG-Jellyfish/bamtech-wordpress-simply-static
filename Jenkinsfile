@@ -97,10 +97,10 @@ def GhostInsTest () {
                 echo "Use image: - ${WORDPRESS} ${jfrog_URL}${REPO}-ecs-${WORDPRESS}:${TAG} for ${cluster_ENV} -  ${cluster}"
 
                 // Pull from GCR
-               // sh ". ./aws.env ; ecs deploy ${cluster} ${cluster_ENV}-${WORDPRESS} --timeout ${TIMEOUT} --image ${WORDPRESS} ${GCR}${REPO}-ecs-${WORDPRESS}:${TAG}"
+                sh ". ./aws.env ; ecs deploy ${cluster} ${cluster_ENV}-${WORDPRESS} --timeout ${TIMEOUT} --image ${WORDPRESS} ${GCR}${REPO}-ecs-${WORDPRESS}:${TAG}"
                
                // Pull from JFrog
-               sh ". ./aws.env ; ecs deploy ${cluster} ${cluster_ENV}-${WORDPRESS} --timeout ${TIMEOUT} --image ${WORDPRESS} ${jfrog_URL}${REPO}-ecs-${WORDPRESS}:${TAG}"
+               // sh ". ./aws.env ; ecs deploy ${cluster} ${cluster_ENV}-${WORDPRESS} --timeout ${TIMEOUT} --image ${WORDPRESS} ${jfrog_URL}${REPO}-ecs-${WORDPRESS}:${TAG}"
         
        }
 
