@@ -165,6 +165,7 @@ section.section {
           a:hover {
             color: $yellow;
             text-decoration: underline;
+            font-weight: 700;
           }
         }
   
@@ -256,6 +257,8 @@ section.section {
       a:active,
       a:hover {
         color: $yellow;
+        text-decoration: underline;
+        font-weight: 700;
       }
     }
 
@@ -314,6 +317,8 @@ section.section {
       a:active,
       a:hover {
         color: $yellow;
+        text-decoration: underline;
+        font-weight: 700;
       }
     }
 
