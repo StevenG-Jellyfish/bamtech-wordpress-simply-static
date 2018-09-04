@@ -45,7 +45,7 @@ steps:
        '-X',
        'POST',
        'https://us-central1-jellyfish-development-167809.cloudfunctions.net/CfToIAP']
-     waitFor: [''Push Docker bamtech-wordpress-child-ecs-wordpress Image to JFROG']
+     waitFor: ['Push Docker bamtech-wordpress-child-ecs-wordpress Image to JFROG']
      id: 'Trigger jenkinsfile via GOOGLE IAP based on jenkins JOB TOKEN (jenkins_job_token)'
 
 # Images for GCB to check for:
