@@ -3,8 +3,8 @@ section.terms-conditions {
     max-width: 100%;
     margin: 0;
     padding: 2.125rem 0;
-    background-color: white;
-    //background-color: $espn-toc-bg-grey;
+    //background-color: white;
+    background-color: $espn-toc-bg-grey;
 
     .container {
         display: block;   
@@ -21,12 +21,12 @@ section.terms-conditions {
             font-size: 0.938rem;
             line-height: 1.250rem; 
             text-align: center;
-            color: $black;
-            //color: $espn-toc-txt-grey;
+            //color: $black;
+            color: $espn-toc-txt-grey;
 
             a {
-                color: $black;
-                //color: $espn-toc-txt-grey;
+                //color: $black;
+                color: $espn-toc-txt-grey;
                 text-decoration: underline;
             }
         }
