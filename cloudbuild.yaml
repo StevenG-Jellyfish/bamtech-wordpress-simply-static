@@ -9,29 +9,6 @@ steps:
      secretEnv: [JFROG_PASSWORD]
      id: 'Login to JFROG'
 
-## DB
-   - name: 'gcr.io/cloud-builders/docker'
-     args: [
-       'build',
-       '-t', 'gcr.io/${PROJECT_ID}/bamtech-wordpress-child-ecs-db:${TAG_NAME}',
-       '.']
-     waitFor: ['Login to JFROG']
-     dir: 'db'
-     id: 'bamtech-wordpress-child-ecs-db'
-
-   - name: 'gcr.io/cloud-builders/docker'
-     args: [
-       'tag',
-       'gcr.io/${PROJECT_ID}/bamtech-wordpress-child-ecs-db:${TAG_NAME}',
-       'jellyfish-docker.jfrog.io/bamtech-wordpress-child-ecs-db:${TAG_NAME}']
-     id: 'Tag bamtech-wordpress-child-ecs-db image'
-
-   - name: 'gcr.io/cloud-builders/docker'
-     args: [
-       'push',
-       'jellyfish-docker.jfrog.io/bamtech-wordpress-child-ecs-db:${TAG_NAME}']
-     id: 'Push Docker bamtech-wordpress-child-ecs-db Image to JFROG'
-
 ## WP
    - name: 'gcr.io/cloud-builders/docker'
      args: [
@@ -57,55 +34,6 @@ steps:
       'jellyfish-docker.jfrog.io/bamtech-wordpress-child-ecs-wordpress:${TAG_NAME}']
      id: 'Push Docker bamtech-wordpress-child-ecs-wordpress Image to JFROG'
 
-## NGINX
-   - name: 'gcr.io/cloud-builders/docker'
-     args: [
-       'build',
-       '-t', 'gcr.io/${PROJECT_ID}/bamtech-wordpress-child-ecs-nginx:${TAG_NAME}',
-       '-f',
-       'DockerfileNGX',
-       '.']
-     waitFor: ['Login to JFROG']
-     dir: '.'
-     id: 'bamtech-wordpress-child-ecs-nginx'
-
-   - name: 'gcr.io/cloud-builders/docker'
-     args: [
-       'tag',
-       'gcr.io/${PROJECT_ID}/bamtech-wordpress-child-ecs-nginx:${TAG_NAME}',
-       'jellyfish-docker.jfrog.io/bamtech-wordpress-child-ecs-nginx:${TAG_NAME}']
-     id: 'Tag bamtech-wordpress-child-ecs-nginx image'
-
-   - name: 'gcr.io/cloud-builders/docker'
-     args: [
-       'push',
-       'jellyfish-docker.jfrog.io/bamtech-wordpress-child-ecs-nginx:${TAG_NAME}']
-     id: 'Push Docker bamtech-wordpress-child-ecs-nginx Image to JFROG'
-
-## VARNISH
-   - name: 'gcr.io/cloud-builders/docker'
-     args: [
-       'build',
-       '-t', 'gcr.io/${PROJECT_ID}/bamtech-wordpress-child-ecs-varnish:${TAG_NAME}',
-       '-f',
-       'DockerfileVSH',
-       '.']
-     waitFor: ['Login to JFROG']
-     dir: '.'
-     id: 'bamtech-wordpress-child-ecs-varnish'
-
-   - name: 'gcr.io/cloud-builders/docker'
-     args: [
-       'tag',
-       'gcr.io/${PROJECT_ID}/bamtech-wordpress-child-ecs-varnish:${TAG_NAME}',
-       'jellyfish-docker.jfrog.io/bamtech-wordpress-child-ecs-varnish:${TAG_NAME}']
-     id: 'Tag bamtech-wordpress-child-ecs-varnish image'
-
-   - name: 'gcr.io/cloud-builders/docker'
-     args: [
-       'push',
-       'jellyfish-docker.jfrog.io/bamtech-wordpress-child-ecs-varnish:${TAG_NAME}']
-     id: 'Push Docker bamtech-wordpress-child-ecs-varnish Image to JFROG'
 
 ## Trigger jenkins job when all pushes to JFrog complete
    - name: 'gcr.io/cloud-builders/curl'
@@ -117,18 +45,14 @@ steps:
        '-X',
        'POST',
        'https://us-central1-jellyfish-development-167809.cloudfunctions.net/CfToIAP']
-     waitFor: ['Push Docker bamtech-wordpress-child-ecs-db Image to JFROG', 'Push Docker bamtech-wordpress-child-ecs-wordpress Image to JFROG', 'Push Docker bamtech-wordpress-child-ecs-nginx Image to JFROG',
-                'Push Docker bamtech-wordpress-child-ecs-varnish Image to JFROG']
+     waitFor: [''Push Docker bamtech-wordpress-child-ecs-wordpress Image to JFROG']
      id: 'Trigger jenkinsfile via GOOGLE IAP based on jenkins JOB TOKEN (jenkins_job_token)'
 
 # Images for GCB to check for:
 images:
     # Tagged with ${TAG_NAME}
-    - 'gcr.io/${PROJECT_ID}/bamtech-wordpress-child-ecs-db:${TAG_NAME}'
     - 'gcr.io/${PROJECT_ID}/bamtech-wordpress-child-ecs-wordpress:${TAG_NAME}'
-    - 'gcr.io/${PROJECT_ID}/bamtech-wordpress-child-ecs-nginx:${TAG_NAME}'
-    - 'gcr.io/${PROJECT_ID}/bamtech-wordpress-child-ecs-varnish:${TAG_NAME}'
-
+   
 ## Google KMS KEY for JFROG_PASSWORD Login
 secrets:
    - kmsKeyName: projects/jellyfish-development-167809/locations/global/keyRings/JFROGKEYRING/cryptoKeys/JFROGCRYPTOKEY
