@@ -94,10 +94,14 @@ def GhostInsTest () {
              // Export keys and run against AWS ECS access
                 sh "echo 'export AWS_SECRET_ACCESS_KEY=${env.BAM_SECRET}\nexport AWS_ACCESS_KEY_ID=${env.BAM_ACCESS}\nexport AWS_DEFAULT_REGION=${REGION}\nexport AWS_DEFAULT_OUTPUT=json' >> aws.env"
 
-                echo "Use image: - ${WORDPRESS} ${GCR}${REPO}-ecs-${WORDPRESS}:${TAG} for ${cluster_ENV} -  ${cluster}"
+                echo "Use image: - ${WORDPRESS} ${jfrog_URL}${REPO}-ecs-${WORDPRESS}:${TAG} for ${cluster_ENV} -  ${cluster}"
 
-                // Note: Needs to pull from JFrog rather than GCR
-                sh ". ./aws.env ; ecs deploy ${cluster} ${cluster_ENV}-${WORDPRESS} --timeout ${TIMEOUT} --image ${WORDPRESS} ${GCR}${REPO}-ecs-${WORDPRESS}:${TAG}"
+                // Pull from GCR
+               // sh ". ./aws.env ; ecs deploy ${cluster} ${cluster_ENV}-${WORDPRESS} --timeout ${TIMEOUT} --image ${WORDPRESS} ${GCR}${REPO}-ecs-${WORDPRESS}:${TAG}"
+               
+               // Pull from JFrog
+               sh ". ./aws.env ; ecs deploy ${cluster} ${cluster_ENV}-${WORDPRESS} --timeout ${TIMEOUT} --image ${WORDPRESS} ${jfrog_URL}${REPO}-ecs-${WORDPRESS}:${TAG}"
+        
        }
 
  }
@@ -203,7 +207,7 @@ pipeline {
 
         // JFrog details
         SERVER_ID = "JF.jfrog01"
-        jfrog_URL = "jellyfish-docker.jfrog.io"
+        jfrog_URL = "jellyfish-docker.jfrog.io/"
 
         TAG = ""
 
