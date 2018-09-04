@@ -88,7 +88,7 @@ foreach($section_ids as $section_id) {
         <div class="container">
 
            
-            <div class="copyright">&copy;<script>var d = new Date(); document.write( d.getFullYear() ); </script> ESPN </div>
+            <div class="copyright">&copy;<?php echo date("Y"); ?> ESPN </div>
 
             <div class="accordion-container">
                 <div class="accordion" id="league-toc-accordion1" role="tablist" aria-multiselectable="true">
