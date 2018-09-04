@@ -3,11 +3,15 @@ body {
     max-width: 100%;
     margin: 0 0 0 0;
     padding: 0 0 0 0;
-    background-color: $espn-footer-bg-blue !important;
-    //background-color: $black;
+    background-color: $black;
     font-size: 16px;
     line-height: 1.500rem;
 }
+    
+body.error404.custom-background {
+    background-color: white;
+}
+
 
 //Wrapper for CTA with corner knockout 
 .espn-cta-container {

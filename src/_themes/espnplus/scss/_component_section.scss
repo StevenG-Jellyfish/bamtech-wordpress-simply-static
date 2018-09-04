@@ -135,6 +135,10 @@ section.section {
   } // .row.flexbox
 
   &.section-image-position-bottom {
+    padding: 0;
+    background-color: white;
+    color: black;
+
     .row.flexbox {
       display: block;
       flex-direction: none;
