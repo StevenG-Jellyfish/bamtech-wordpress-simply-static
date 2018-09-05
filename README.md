@@ -4,12 +4,11 @@
 
 # Steps to set Docker CE on your Mac: 
 
-Set the host.env file:
+Set the host.env file in the root directory:
 
-```bash
-cp host.env.default host.env
-```
-Modify the host.env to from project.local to localhost
+    WP_SITEURL=http://bamtech.local/
+    WP_HOME=http://bamtech.local/
+    WP_CONTENT_URL=http://bamtech.local/wp-content
 
 Start the containers:
 
