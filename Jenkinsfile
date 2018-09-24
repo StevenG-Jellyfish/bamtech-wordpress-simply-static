@@ -49,6 +49,42 @@ def webHookUrl(env_value) {
 
 }
 
+/*
+    Slack Channel - prod-deploy
+ */
+def slackChannelMessagePROD (color, message) {
+
+  // Update slack channel as required
+  def date = new Date()
+  slackSend (channel: '#prod-deploy', color: "${color}", message: "${message} - ${date}")
+}
+
+/*
+    Webhook Step - wait for POST curl to URL and then a PROMPT to confirm
+ */
+def webHookUrl(env_value) {
+
+   script {
+     def date = new Date()
+     hook = registerWebhook()
+
+     switch("${env_value}") {
+       case 'PROD':
+          slackChannelMessagePROD("#000000", "${env_value} - Click on this link (link will expire after 120 minutes from pipeline start) to continue to progress to: ${env_value} for ${env.JOB_NAME}, Build (${env.BUILD_NUMBER}) using TAG $git_tag_id for Image ${WORDPRESS} : ${hook.getURL()} > (<${env.RUN_DISPLAY_URL}|Open>)")
+          data = waitForWebhook hook
+          slackChannelMessagePROD("good", "Please access > (<${env.RUN_DISPLAY_URL}|Open>) and accept or decline build ${env_value} for ${env.JOB_NAME}, Build (${env.BUILD_NUMBER}) using TAG $git_tag_id for Image ${WORDPRESS} in PROD..")
+          input message: "Are you sure you want to progress the release to PROD - build ${env_value} for ${env.JOB_NAME}, Build (${env.BUILD_NUMBER}) using TAG $git_tag_id for Image ${WORDPRESS}?"
+       break
+       default:
+         slackChannelMessage("good", "${env_value} - Click on this link (link will expire after 120 minutes from pipeline start) to continue to progress to: ${env_value} for ${env.JOB_NAME}, Build (${env.BUILD_NUMBER}) using TAG $git_tag_id for Image ${WORDPRESS} : ${hook.getURL()} > (<${env.RUN_DISPLAY_URL}|Open>)")
+         data = waitForWebhook hook
+     }
+   }
+
+
+}
+
+
 
 /*
     Ghost Inspector Test
@@ -253,15 +289,6 @@ spec:
    env:
    - name: CONTAINER_ENV_VAR
      value: jenkins-chrome-slave
- - name: jenkins-qa-slave
-   image: jellyfish-docker.jfrog.io/jfh-development/docker_jenkins_slave-qa_service:latest
-   imagePullPolicy: Always
-   command:
-   - cat
-   tty: true
-   env:
-   - name: CONTAINER_ENV_VAR
-     value: jenkins-qa-slave
  imagePullSecrets:
  - name: docker-reg-secret
 
@@ -285,6 +312,7 @@ triggers {
   }
 
      options {
+        timeout(time: 120, unit: 'MINUTES')
         skipDefaultCheckout()
     }
 
