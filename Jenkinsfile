@@ -36,20 +36,6 @@ def slackChannelMessage (color, message) {
 
 
 /*
-    Webhook Step - wait for POST curl to URL
- */
-def webHookUrl(env_value) {
-
-   script {
-     def date = new Date()
-     hook = registerWebhook()
-     slackChannelMessage ("good", "${env_value} - Click on this link to continue to progress to: ${env_value} for ${env.JOB_NAME} Build (${env.BUILD_NUMBER}) using TAG ${git_tag_id} for Image ${WORDPRESS} : ${hook.getURL()} > (<${env.RUN_DISPLAY_URL}|Open>)")
-     data = waitForWebhook hook
-    }
-
-}
-
-/*
     Slack Channel - prod-deploy
  */
 def slackChannelMessagePROD (color, message) {
