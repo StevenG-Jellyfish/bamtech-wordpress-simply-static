@@ -9,7 +9,7 @@ spec:
    env:
    - name: CONTAINER_ENV_VAR
      value: jenkins-jnlp
- - name: jenkins-kube-slave
+ - name: jenkins-ecs-slave
    image: jellyfish-docker.jfrog.io/jfh-development/docker_jenkins_slave-kube_deploy:latest
    imagePullPolicy: Always
    command:
@@ -17,7 +17,7 @@ spec:
    tty: true
    env:
    - name: CONTAINER_ENV_VAR
-     value: jenkins-kube-slave
+     value: jenkins-ecs-slave
  - name: jenkins-chrome-slave
    image: jellyfish-docker.jfrog.io/jfh-development/docker_jenkins_slave-chrome_service:latest
    imagePullPolicy: Always
