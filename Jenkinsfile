@@ -56,13 +56,13 @@ def webHookUrl(env_value) {
 
      switch("${env_value}") {
        case 'PROD':
-          slackChannelMessagePROD("#000000", "${env_value} - Click on this link (link will expire after 120 minutes from pipeline start) to continue to progress to: ${env_value} for ${env.JOB_NAME}, Build (${env.BUILD_NUMBER}) using TAG $git_tag_id for Image ${WORDPRESS} : ${hook.getURL()} > (<${env.RUN_DISPLAY_URL}|Open>)")
+          slackChannelMessagePROD("#000000", "${env_value} - Click on this link to continue to progress to: ${env_value} for ${env.JOB_NAME}, Build (${env.BUILD_NUMBER}) using TAG $git_tag_id for Image ${WORDPRESS} : ${hook.getURL()} > (<${env.RUN_DISPLAY_URL}|Open>)")
           data = waitForWebhook hook
           slackChannelMessagePROD("good", "Please access > (<${env.RUN_DISPLAY_URL}|Open>) and accept or decline build ${env_value} for ${env.JOB_NAME}, Build (${env.BUILD_NUMBER}) using TAG $git_tag_id for Image ${WORDPRESS} in PROD..")
           input message: "Are you sure you want to progress the release to PROD - build ${env_value} for ${env.JOB_NAME}, Build (${env.BUILD_NUMBER}) using TAG $git_tag_id for Image ${WORDPRESS}?"
        break
        default:
-         slackChannelMessage("good", "${env_value} - Click on this link (link will expire after 120 minutes from pipeline start) to continue to progress to: ${env_value} for ${env.JOB_NAME}, Build (${env.BUILD_NUMBER}) using TAG $git_tag_id for Image ${WORDPRESS} : ${hook.getURL()} > (<${env.RUN_DISPLAY_URL}|Open>)")
+         slackChannelMessage("good", "${env_value} - Click on this link to continue to progress to: ${env_value} for ${env.JOB_NAME}, Build (${env.BUILD_NUMBER}) using TAG $git_tag_id for Image ${WORDPRESS} : ${hook.getURL()} > (<${env.RUN_DISPLAY_URL}|Open>)")
          data = waitForWebhook hook
      }
    }
@@ -185,6 +185,8 @@ def curlRun (url, out) {
 
 pipeline {
 
+    agent none
+    
     environment {
 
         GCR = "gcr.io/jellyfish-development-167809/"
@@ -236,51 +238,6 @@ pipeline {
 
     }
 
-// Jenkins slave containers
-agent {
-   kubernetes {
-     label 'jenkins-slaves-bamtech'
-     defaultContainer 'jnlp'
-
-     yaml """
-
-apiVersion: v1
-kind: Pod
-metadata:
- name: jenkins-slaves
- label: jenkins-slaves
-spec:
- securityContext:
-   runAsUser: 0
- containers:
- - name: jnlp
-   env:
-   - name: CONTAINER_ENV_VAR
-     value: jenkins-jnlp
- - name: jenkins-ecs-slave
-   image: jellyfish-docker.jfrog.io/jfh-development/docker_jenkins_slave-kube_deploy:latest
-   imagePullPolicy: Always
-   command:
-   - cat
-   tty: true
-   env:
-   - name: CONTAINER_ENV_VAR
-     value: jenkins-ecs-slave
- - name: jenkins-chrome-slave
-   image: jellyfish-docker.jfrog.io/jfh-development/docker_jenkins_slave-chrome_service:latest
-   imagePullPolicy: Always
-   command:
-   - cat
-   tty: true
-   env:
-   - name: CONTAINER_ENV_VAR
-     value: jenkins-chrome-slave
- imagePullSecrets:
- - name: docker-reg-secret
-
-"""
-   }
-}
 
 // jenkins job token - Also update in cloudbuild.yaml
 triggers {
@@ -298,7 +255,6 @@ triggers {
   }
 
      options {
-        timeout(time: 120, unit: 'MINUTES')
         skipDefaultCheckout()
     }
 
@@ -308,6 +264,13 @@ triggers {
          stage('Trigger received from Google WebHook') {
 
             steps {
+                
+                agent {
+                    kubernetes {
+                        label 'jenkins-slaves-bamtech-wordpress-child'
+                        yamlFile 'jenkins/KubernetesPod.yaml'
+                    }
+                }
 
                  slackChannelMessage ("good", " ** Start of Jenkins job ${env.JOB_NAME} Build (${env.BUILD_NUMBER}) using TAG $git_tag_id for Image ${WORDPRESS} > (<${env.RUN_DISPLAY_URL}|Open>) for details")
 
@@ -378,6 +341,12 @@ triggers {
             }
 
            // Deploy UAT agent selector - ECS
+           agent {
+                    kubernetes {
+                        label 'jenkins-slaves-bamtech-wordpress-child'
+                        yamlFile 'jenkins/KubernetesPod.yaml'
+                    }
+                }
 
             steps {
              container('jenkins-ecs-slave') {
@@ -430,6 +399,12 @@ triggers {
              }
 
            // Deploy PROD agent selector - ECS
+            agent {
+                    kubernetes {
+                        label 'jenkins-slaves-bamtech-wordpress-child'
+                        yamlFile 'jenkins/KubernetesPod.yaml'
+                    }
+            }
 
            steps {
              container('jenkins-ecs-slave') {
