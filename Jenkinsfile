@@ -56,8 +56,6 @@ def webHookUrl(env_value) {
 
      switch("${env_value}") {
        case 'PROD':
-          slackChannelMessagePROD("#000000", "${env_value} - Click on this link to continue to progress to: ${env_value} for ${env.JOB_NAME}, Build (${env.BUILD_NUMBER}) using TAG $git_tag_id for Image ${WORDPRESS} : ${hook.getURL()} > (<${env.RUN_DISPLAY_URL}|Open>)")
-          data = waitForWebhook hook
           slackChannelMessagePROD("good", "Please access > (<${env.RUN_DISPLAY_URL}|Open>) and accept or decline build ${env_value} for ${env.JOB_NAME}, Build (${env.BUILD_NUMBER}) using TAG $git_tag_id for Image ${WORDPRESS} in PROD..")
           input message: "Are you sure you want to progress the release to PROD - build ${env_value} for ${env.JOB_NAME}, Build (${env.BUILD_NUMBER}) using TAG $git_tag_id for Image ${WORDPRESS}?"
        break
